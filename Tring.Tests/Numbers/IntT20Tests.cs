@@ -284,10 +284,14 @@ public class IntT20Tests
     public void Parse_WithCulture_ShouldWorkCorrectly()
     {
         // German culture uses period as thousand separator
+        var germanCulture = new System.Globalization.CultureInfo("de-DE");
+        Thread.CurrentThread.CurrentCulture = germanCulture;
         IntT20 result = IntT20.Parse("1.000", NumberStyles.AllowThousands);
         result.Should().Be((IntT20)1000);
 
         // US culture uses comma as thousand separator
+        var usCulture = new System.Globalization.CultureInfo("en-US");
+        Thread.CurrentThread.CurrentCulture = usCulture;
         result = IntT20.Parse("1,000", NumberStyles.AllowThousands);
         result.Should().Be((IntT20)1000);
     }

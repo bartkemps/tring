@@ -1,6 +1,7 @@
 // ReSharper disable CompareOfFloatsByEqualityOperator
 // ReSharper disable IntVariableOverflowInUncheckedContext
 // ReSharper disable SuspiciousTypeConversion.Global
+
 namespace Tring.Numbers;
 
 using System.Globalization;
@@ -10,21 +11,24 @@ using System.Diagnostics.CodeAnalysis;
 /// <summary>
 /// Represents a 20-trit signed integer, modeled after the <see cref="int"/> (Int32) type.
 /// </summary>
-public readonly struct IntT20 : 
+public readonly struct IntT20 :
     IConvertible,
     IBinaryInteger<IntT20>,
-    ISignedNumber<IntT20>
+    ISignedNumber<IntT20>,
+    ITernaryNumber<IntT20, int>
 {
     private readonly int value;
+
     /// <summary>
     ///  Represents the maximum value of an <see cref="IntT20"/>, expressed as an <see cref="int"/> This field is constant.
     /// </summary>
     public const int MaxValueConstant = 1743392200;
+
     /// <summary>
     /// Represents the minimum value of an <see cref="IntT20"/>, expressed as an <see cref="int"/> This field is constant.
     /// </summary>
     public const int MinValueConstant = -1743392200;
-    
+
     private const int Wrap = (int.MaxValue - MaxValueConstant) - (int.MinValue - MinValueConstant);
 
     /// <summary>
@@ -135,6 +139,8 @@ public readonly struct IntT20 :
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode() => value.GetHashCode();
 
+    #region Equality Operators
+
     /// <summary>
     /// Returns a value indicating whether two <see cref="IntT20"/> instances are equal.
     /// </summary>
@@ -166,44 +172,142 @@ public readonly struct IntT20 :
     /// <param name="right">The second instance to compare.</param>
     /// <returns><see langword="true"/> if the values of <paramref name="left"/> and <paramref name="right"/> are not equal; otherwise, <see langword="false"/>.</returns>
     public static bool operator !=(IntT20 left, IConvertible right) => !left.Equals(right);
-    
-    // Arithmetic operators
+
+    /// <summary>
+    /// Returns a value indicating whether two <see cref="IntT20"/> instances are equal.
+    /// </summary>
+    /// <param name="left">The first instance to compare.</param>
+    /// <param name="right">The second instance to compare.</param>
+    /// <returns><see langword="true"/> if the values of <paramref name="left"/> and <paramref name="right"/> are equal; otherwise, <see langword="false"/>.</returns>
+    public static bool operator ==(IntT20 left, IntT20 right) => left.value == right.value;
+
+    /// <summary>
+    /// Returns a value indicating whether two <see cref="IntT20"/> instances are not equal.
+    /// </summary>
+    /// <param name="left">The first instance to compare.</param>
+    /// <param name="right">The second instance to compare.</param>
+    /// <returns><see langword="true"/> if the values of <paramref name="left"/> and <paramref name="right"/> are not equal; otherwise, <see langword="false"/>.</returns>
+    public static bool operator !=(IntT20 left, IntT20 right) => left.value != right.value;
+
+    #endregion
+
+    #region Arithmetic Operators
+
+    /// <summary>
+    /// Adds two <see cref="IntT20"/> values and returns the result.
+    /// </summary>
+    /// <param name="left">The first value to add.</param>
+    /// <param name="right">The second value to add.</param>
+    /// <returns>The sum of <paramref name="left"/> and <paramref name="right"/>.</returns>
     public static IntT20 operator +(IntT20 left, IntT20 right) => new(left.value + right.value);
+
+    /// <summary>
+    /// Subtracts one <see cref="IntT20"/> value from another and returns the result.
+    /// </summary>
+    /// <param name="left">The value to subtract from (the minuend).</param>
+    /// <param name="right">The value to subtract (the subtrahend).</param>
+    /// <returns>The result of subtracting <paramref name="right"/> from <paramref name="left"/>.</returns>
     public static IntT20 operator -(IntT20 left, IntT20 right) => new(left.value - right.value);
+
+    /// <summary>
+    /// Multiplies two <see cref="IntT20"/> values and returns the result.
+    /// </summary>
+    /// <param name="left">The first value to multiply.</param>
+    /// <param name="right">The second value to multiply.</param>
+    /// <returns>The product of <paramref name="left"/> and <paramref name="right"/>.</returns>
     public static IntT20 operator *(IntT20 left, IntT20 right) => new(left.value * right.value);
+
+    /// <summary>
+    /// Divides one <see cref="IntT20"/> value by another and returns the result.
+    /// </summary>
+    /// <param name="left">The value to be divided (the dividend).</param>
+    /// <param name="right">The value to divide by (the divisor).</param>
+    /// <returns>The result of dividing <paramref name="left"/> by <paramref name="right"/>.</returns>
+    /// <exception cref="DivideByZeroException"><paramref name="right"/> is zero.</exception>
     public static IntT20 operator /(IntT20 left, IntT20 right) => new(left.value / right.value);
+
+    /// <summary>
+    /// Returns the remainder that results from dividing one <see cref="IntT20"/> value by another.
+    /// </summary>
+    /// <param name="left">The value to be divided (the dividend).</param>
+    /// <param name="right">The value to divide by (the divisor).</param>
+    /// <returns>The remainder that results from dividing <paramref name="left"/> by <paramref name="right"/>.</returns>
+    /// <exception cref="DivideByZeroException"><paramref name="right"/> is zero.</exception>
     public static IntT20 operator %(IntT20 left, IntT20 right) => new(left.value % right.value);
+
+    /// <summary>
+    /// Negates the specified <see cref="IntT20"/> value.
+    /// </summary>
+    /// <param name="value">The value to negate.</param>
+    /// <returns>The result of the value multiplied by negative one (-1).</returns>
     public static IntT20 operator -(IntT20 value) => new(-value.value);
+
+    /// <summary>
+    /// Returns the specified <see cref="IntT20"/> value; the sign of the value is unchanged.
+    /// </summary>
+    /// <param name="value">The value to return.</param>
+    /// <returns>The value of the <paramref name="value"/> parameter.</returns>
     public static IntT20 operator +(IntT20 value) => value;
 
     // Mixed-type arithmetic operators with int
     public static IntT20 operator +(IntT20 left, int right) => new(left.value + right);
     public static IntT20 operator +(int left, IntT20 right) => new(left + right.value);
-    
+
     public static IntT20 operator -(IntT20 left, int right) => new(left.value - right);
     public static IntT20 operator -(int left, IntT20 right) => new(left - right.value);
-    
+
     public static IntT20 operator *(IntT20 left, int right) => new(left.value * right);
     public static IntT20 operator *(int left, IntT20 right) => new(left * right.value);
-    
+
     public static IntT20 operator /(IntT20 left, int right) => new(left.value / right);
     public static IntT20 operator /(int left, IntT20 right) => new(left / right.value);
-    
+
     public static IntT20 operator %(IntT20 left, int right) => new(left.value % right);
     public static IntT20 operator %(int left, IntT20 right) => new(left % right.value);
 
+    #region Comparison Operators
+
     // Comparison operators with IntT20
+    /// <summary>
+    /// Returns a value indicating whether a specified <see cref="IntT20"/> value is greater than another specified <see cref="IntT20"/> value.
+    /// </summary>
+    /// <param name="left">The first value to compare.</param>
+    /// <param name="right">The second value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >(IntT20 left, IntT20 right) => left.value > right.value;
+
+    /// <summary>
+    /// Returns a value indicating whether a specified <see cref="IntT20"/> value is less than another specified <see cref="IntT20"/> value.
+    /// </summary>
+    /// <param name="left">The first value to compare.</param>
+    /// <param name="right">The second value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <(IntT20 left, IntT20 right) => left.value < right.value;
+
+    /// <summary>
+    /// Returns a value indicating whether a specified <see cref="IntT20"/> value is greater than or equal to another specified <see cref="IntT20"/> value.
+    /// </summary>
+    /// <param name="left">The first value to compare.</param>
+    /// <param name="right">The second value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >=(IntT20 left, IntT20 right) => left.value >= right.value;
+
+    /// <summary>
+    /// Returns a value indicating whether a specified <see cref="IntT20"/> value is less than or equal to another specified <see cref="IntT20"/> value.
+    /// </summary>
+    /// <param name="left">The first value to compare.</param>
+    /// <param name="right">The second value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <=(IntT20 left, IntT20 right) => left.value <= right.value;
+
+    #endregion
 
     // Comparison operators with int
     public static bool operator >(IntT20 left, int right) => left.value > right;
     public static bool operator <(IntT20 left, int right) => left.value < right;
     public static bool operator >=(IntT20 left, int right) => left.value >= right;
     public static bool operator <=(IntT20 left, int right) => left.value <= right;
-    
+
     public static bool operator >(int left, IntT20 right) => left > right.value;
     public static bool operator <(int left, IntT20 right) => left < right.value;
     public static bool operator >=(int left, IntT20 right) => left >= right.value;
@@ -214,7 +318,7 @@ public readonly struct IntT20 :
     public static bool operator <(IntT20 left, uint right) => left.CompareTo(right) < 0;
     public static bool operator >=(IntT20 left, uint right) => left.CompareTo(right) >= 0;
     public static bool operator <=(IntT20 left, uint right) => left.CompareTo(right) <= 0;
-    
+
     public static bool operator >(uint left, IntT20 right) => right.CompareTo(left) < 0;
     public static bool operator <(uint left, IntT20 right) => right.CompareTo(left) > 0;
     public static bool operator >=(uint left, IntT20 right) => right.CompareTo(left) <= 0;
@@ -225,7 +329,7 @@ public readonly struct IntT20 :
     public static bool operator <(IntT20 left, long right) => left.CompareTo(right) < 0;
     public static bool operator >=(IntT20 left, long right) => left.CompareTo(right) >= 0;
     public static bool operator <=(IntT20 left, long right) => left.CompareTo(right) <= 0;
-    
+
     public static bool operator >(long left, IntT20 right) => right.CompareTo(left) < 0;
     public static bool operator <(long left, IntT20 right) => right.CompareTo(left) > 0;
     public static bool operator >=(long left, IntT20 right) => right.CompareTo(left) <= 0;
@@ -236,7 +340,7 @@ public readonly struct IntT20 :
     public static bool operator <(IntT20 left, ulong right) => left.CompareTo(right) < 0;
     public static bool operator >=(IntT20 left, ulong right) => left.CompareTo(right) >= 0;
     public static bool operator <=(IntT20 left, ulong right) => left.CompareTo(right) <= 0;
-    
+
     public static bool operator >(ulong left, IntT20 right) => right.CompareTo(left) < 0;
     public static bool operator <(ulong left, IntT20 right) => right.CompareTo(left) > 0;
     public static bool operator >=(ulong left, IntT20 right) => right.CompareTo(left) <= 0;
@@ -247,7 +351,7 @@ public readonly struct IntT20 :
     public static bool operator <(IntT20 left, short right) => left.CompareTo(right) < 0;
     public static bool operator >=(IntT20 left, short right) => left.CompareTo(right) >= 0;
     public static bool operator <=(IntT20 left, short right) => left.CompareTo(right) <= 0;
-    
+
     public static bool operator >(short left, IntT20 right) => right.CompareTo(left) < 0;
     public static bool operator <(short left, IntT20 right) => right.CompareTo(left) > 0;
     public static bool operator >=(short left, IntT20 right) => right.CompareTo(left) <= 0;
@@ -258,7 +362,7 @@ public readonly struct IntT20 :
     public static bool operator <(IntT20 left, ushort right) => left.CompareTo(right) < 0;
     public static bool operator >=(IntT20 left, ushort right) => left.CompareTo(right) >= 0;
     public static bool operator <=(IntT20 left, ushort right) => left.CompareTo(right) <= 0;
-    
+
     public static bool operator >(ushort left, IntT20 right) => right.CompareTo(left) < 0;
     public static bool operator <(ushort left, IntT20 right) => right.CompareTo(left) > 0;
     public static bool operator >=(ushort left, IntT20 right) => right.CompareTo(left) <= 0;
@@ -269,7 +373,7 @@ public readonly struct IntT20 :
     public static bool operator <(IntT20 left, byte right) => left.CompareTo(right) < 0;
     public static bool operator >=(IntT20 left, byte right) => left.CompareTo(right) >= 0;
     public static bool operator <=(IntT20 left, byte right) => left.CompareTo(right) <= 0;
-    
+
     public static bool operator >(byte left, IntT20 right) => right.CompareTo(left) < 0;
     public static bool operator <(byte left, IntT20 right) => right.CompareTo(left) > 0;
     public static bool operator >=(byte left, IntT20 right) => right.CompareTo(left) <= 0;
@@ -280,12 +384,13 @@ public readonly struct IntT20 :
     public static bool operator <(IntT20 left, sbyte right) => left.CompareTo(right) < 0;
     public static bool operator >=(IntT20 left, sbyte right) => left.CompareTo(right) >= 0;
     public static bool operator <=(IntT20 left, sbyte right) => left.CompareTo(right) <= 0;
-    
+
     public static bool operator >(sbyte left, IntT20 right) => right.CompareTo(left) < 0;
     public static bool operator <(sbyte left, IntT20 right) => right.CompareTo(left) > 0;
     public static bool operator >=(sbyte left, IntT20 right) => right.CompareTo(left) <= 0;
     public static bool operator <=(sbyte left, IntT20 right) => right.CompareTo(left) >= 0;
 
+    #endregion
 
     // ToString implementation
     public override string ToString() => value.ToString();
@@ -346,48 +451,63 @@ public readonly struct IntT20 :
     {
         if (obj == null) return 1;
         if (obj is IntT20 other) return CompareTo(other);
-        
+
         // For large numeric types that exceed IntT20's range, return -1 if greater than MaxValue, 1 if less than MinValue
         try
         {
             if (obj is int int32) return value.CompareTo(int32);
             if (obj is long int64)
             {
-                if (int64 > MaxValueConstant) return -1;
-                if (int64 < MinValueConstant) return 1;
-                return value.CompareTo((int)int64);
+                return int64 switch
+                {
+                    > MaxValueConstant => -1,
+                    < MinValueConstant => 1,
+                    _ => value.CompareTo((int)int64)
+                };
             }
+
             if (obj is uint uint32)
             {
-                if (uint32 > MaxValueConstant) return -1;
-                return value.CompareTo((int)uint32);
+                return uint32 > MaxValueConstant ? -1 : value.CompareTo((int)uint32);
             }
+
             if (obj is ulong uint64)
             {
-                if (uint64 > MaxValueConstant) return -1;
-                return value.CompareTo((int)uint64);
+                return uint64 > MaxValueConstant ? -1 : value.CompareTo((int)uint64);
             }
+
             if (obj is short int16) return value.CompareTo(int16);
             if (obj is ushort uint16) return value.CompareTo(uint16);
             if (obj is byte byteVal) return value.CompareTo(byteVal);
             if (obj is sbyte sbyteVal) return value.CompareTo(sbyteVal);
             if (obj is float singleValue)
             {
-                if (singleValue > MaxValueConstant) return -1;
-                if (singleValue < MinValueConstant) return 1;
-                return value.CompareTo((int)singleValue);
+                return singleValue switch
+                {
+                    > MaxValueConstant => -1,
+                    < MinValueConstant => 1,
+                    _ => value.CompareTo((int)singleValue)
+                };
             }
+
             if (obj is double doubleValue)
             {
-                if (doubleValue > MaxValueConstant) return -1;
-                if (doubleValue < MinValueConstant) return 1;
-                return value.CompareTo((int)doubleValue);
+                return doubleValue switch
+                {
+                    > MaxValueConstant => -1,
+                    < MinValueConstant => 1,
+                    _ => value.CompareTo((int)doubleValue)
+                };
             }
+
             if (obj is decimal decimalValue)
             {
-                if (decimalValue > MaxValueConstant) return -1;
-                if (decimalValue < MinValueConstant) return 1;
-                return value.CompareTo((int)decimalValue);
+                return decimalValue switch
+                {
+                    > MaxValueConstant => -1,
+                    < MinValueConstant => 1,
+                    _ => value.CompareTo((int)decimalValue)
+                };
             }
 
             if (obj is IConvertible convertible)
@@ -409,7 +529,7 @@ public readonly struct IntT20 :
                         var int64Value = convertible.ToInt64(null);
                         if (int64Value > MaxValueConstant) return -1;
                         if (int64Value < MinValueConstant) return 1;
-                        return value.CompareTo((int)int64Value);
+                        return value.CompareTo((int64Value));
                     case TypeCode.UInt64:
                         var uint64Value = convertible.ToUInt64(null);
                         if (uint64Value > MaxValueConstant) return -1;
@@ -455,8 +575,9 @@ public readonly struct IntT20 :
     public int CompareTo(IntT20 other) => value.CompareTo(other.value);
 
     #region IConvertible Implementation
+
     public TypeCode GetTypeCode() => TypeCode.Int32;
-    
+
     bool IConvertible.ToBoolean(IFormatProvider? provider) => value != 0;
     char IConvertible.ToChar(IFormatProvider? provider) => Convert.ToChar(value);
     sbyte IConvertible.ToSByte(IFormatProvider? provider) => Convert.ToSByte(value);
@@ -472,11 +593,14 @@ public readonly struct IntT20 :
     decimal IConvertible.ToDecimal(IFormatProvider? provider) => value;
     DateTime IConvertible.ToDateTime(IFormatProvider? provider) => throw new InvalidCastException();
     string IConvertible.ToString(IFormatProvider? provider) => value.ToString(provider);
-    object IConvertible.ToType(Type conversionType, IFormatProvider? provider) => 
+
+    object IConvertible.ToType(Type conversionType, IFormatProvider? provider) =>
         Convert.ChangeType(value, conversionType, provider);
+
     #endregion
 
     #region IUtf8SpanFormattable Implementation
+
     bool IUtf8SpanFormattable.TryFormat(Span<byte> utf8Destination, out int bytesWritten, ReadOnlySpan<char> format, IFormatProvider? provider)
     {
         if (!value.TryFormat(stackalloc char[32], out int charsWritten, format, provider))
@@ -487,7 +611,7 @@ public readonly struct IntT20 :
 
         // Get UTF8 byte count for the character length
         var byteCount = System.Text.Encoding.UTF8.GetMaxByteCount(charsWritten);
-        
+
         if (utf8Destination.Length < byteCount)
         {
             bytesWritten = 0;
@@ -499,25 +623,28 @@ public readonly struct IntT20 :
         bytesWritten = System.Text.Encoding.UTF8.GetBytes(str, utf8Destination);
         return true;
     }
+
     #endregion
 
     #region IIncrementOperators/IDecrementOperators Implementation
+
     public static IntT20 operator ++(IntT20 value) => new(value.value + 1);
     public static IntT20 operator --(IntT20 value) => new(value.value - 1);
+
     #endregion
 
     static bool IEqualityOperators<IntT20, IntT20, bool>.operator ==(IntT20 left, IntT20 right) => left.value == right.value;
     static bool IEqualityOperators<IntT20, IntT20, bool>.operator !=(IntT20 left, IntT20 right) => left.value != right.value;
 
-    public static bool operator ==(IntT20 left, IntT20 right) => left.value == right.value;
-    public static bool operator !=(IntT20 left, IntT20 right) => left.value != right.value;
-
     #region Binary Operations
+
     public static IntT20 RotateLeft(IntT20 value, int rotateAmount) =>
         new((int)BitOperations.RotateLeft((ulong)value.value, rotateAmount));
+
     #endregion
 
     #region Interface Static Members
+
     static IntT20 ISignedNumber<IntT20>.NegativeOne => new(-1);
     static IntT20 INumberBase<IntT20>.One => new(1);
     static IntT20 INumberBase<IntT20>.Zero => new(0);
@@ -542,24 +669,27 @@ public readonly struct IntT20 :
     static bool INumberBase<IntT20>.IsSubnormal(IntT20 value) => false;
     static bool INumberBase<IntT20>.IsZero(IntT20 value) => value.value == 0;
 
-    static IntT20 INumberBase<IntT20>.MaxMagnitude(IntT20 x, IntT20 y) => 
+    static IntT20 INumberBase<IntT20>.MaxMagnitude(IntT20 x, IntT20 y) =>
         Math.Abs(x.value) > Math.Abs(y.value) ? x : y;
-    static IntT20 INumberBase<IntT20>.MaxMagnitudeNumber(IntT20 x, IntT20 y) => 
+
+    static IntT20 INumberBase<IntT20>.MaxMagnitudeNumber(IntT20 x, IntT20 y) =>
         Math.Abs(x.value) > Math.Abs(y.value) ? x : y;
-    static IntT20 INumberBase<IntT20>.MinMagnitude(IntT20 x, IntT20 y) => 
+
+    static IntT20 INumberBase<IntT20>.MinMagnitude(IntT20 x, IntT20 y) =>
         Math.Abs(x.value) < Math.Abs(y.value) ? x : y;
-    static IntT20 INumberBase<IntT20>.MinMagnitudeNumber(IntT20 x, IntT20 y) => 
+
+    static IntT20 INumberBase<IntT20>.MinMagnitudeNumber(IntT20 x, IntT20 y) =>
         Math.Abs(x.value) < Math.Abs(y.value) ? x : y;
 
     static int INumberBase<IntT20>.Radix => 2;
-    
-    static IntT20 INumberBase<IntT20>.Abs(IntT20 value) => 
+
+    static IntT20 INumberBase<IntT20>.Abs(IntT20 value) =>
         value.value < 0 ? new(-value.value) : value;
 
-    static IntT20 INumberBase<IntT20>.Parse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider) => 
+    static IntT20 INumberBase<IntT20>.Parse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider) =>
         new(int.Parse(s, style, provider));
 
-    static IntT20 INumberBase<IntT20>.Parse(string s, NumberStyles style, IFormatProvider? provider) => 
+    static IntT20 INumberBase<IntT20>.Parse(string s, NumberStyles style, IFormatProvider? provider) =>
         new(int.Parse(s, style, provider));
 
     static bool INumberBase<IntT20>.TryParse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider, out IntT20 result)
@@ -569,6 +699,7 @@ public readonly struct IntT20 :
             result = new(parsed);
             return true;
         }
+
         result = default;
         return false;
     }
@@ -580,25 +711,26 @@ public readonly struct IntT20 :
             result = new(parsed);
             return true;
         }
+
         result = default;
         return false;
     }
 
-    static bool IBinaryNumber<IntT20>.IsPow2(IntT20 value) => 
+    static bool IBinaryNumber<IntT20>.IsPow2(IntT20 value) =>
         value.value > 0 && (value.value & (value.value - 1)) == 0;
-        
-    static IntT20 IBinaryNumber<IntT20>.Log2(IntT20 value) => 
+
+    static IntT20 IBinaryNumber<IntT20>.Log2(IntT20 value) =>
         new(BitOperations.Log2((uint)value.value));
 
     int IBinaryInteger<IntT20>.GetByteCount() => sizeof(int);
-    
-    int IBinaryInteger<IntT20>.GetShortestBitLength() => 
+
+    int IBinaryInteger<IntT20>.GetShortestBitLength() =>
         value == 0 ? 1 : BitOperations.Log2((uint)Math.Abs(value)) + 1;
 
-    static IntT20 IBinaryInteger<IntT20>.PopCount(IntT20 value) => 
+    static IntT20 IBinaryInteger<IntT20>.PopCount(IntT20 value) =>
         new(BitOperations.PopCount((uint)value.value));
 
-    static IntT20 IBinaryInteger<IntT20>.TrailingZeroCount(IntT20 value) => 
+    static IntT20 IBinaryInteger<IntT20>.TrailingZeroCount(IntT20 value) =>
         new(BitOperations.TrailingZeroCount((uint)value.value));
 
     bool IBinaryInteger<IntT20>.TryWriteBigEndian(Span<byte> destination, out int bytesWritten)
@@ -641,7 +773,7 @@ public readonly struct IntT20 :
         var bytes = source.Slice(0, sizeof(int)).ToArray();
         if (BitConverter.IsLittleEndian)
             Array.Reverse(bytes);
-        
+
         result = new(BitConverter.ToInt32(bytes));
         return true;
     }
@@ -659,7 +791,8 @@ public readonly struct IntT20 :
     }
 
     #region ISpanFormattable/ISpanParsable Implementation
-    static IntT20 ISpanParsable<IntT20>.Parse(ReadOnlySpan<char> s, IFormatProvider? provider) => 
+
+    static IntT20 ISpanParsable<IntT20>.Parse(ReadOnlySpan<char> s, IFormatProvider? provider) =>
         new(int.Parse(s, NumberStyles.Integer, provider));
 
     static bool ISpanParsable<IntT20>.TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, out IntT20 result)
@@ -669,6 +802,7 @@ public readonly struct IntT20 :
             result = new(value);
             return true;
         }
+
         result = default;
         return false;
     }
@@ -676,7 +810,7 @@ public readonly struct IntT20 :
     bool ISpanFormattable.TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider? provider) =>
         value.TryFormat(destination, out charsWritten, format.ToString(), provider);
 
-    static IntT20 IParsable<IntT20>.Parse(string s, IFormatProvider? provider) => 
+    static IntT20 IParsable<IntT20>.Parse(string s, IFormatProvider? provider) =>
         new(int.Parse(s, NumberStyles.Integer, provider));
 
     static bool IParsable<IntT20>.TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, out IntT20 result)
@@ -686,31 +820,42 @@ public readonly struct IntT20 :
             result = new(value);
             return true;
         }
+
         result = default;
         return false;
     }
+
     #endregion
 
     #region Bit Operators
-    static IntT20 IBitwiseOperators<IntT20, IntT20, IntT20>.operator &(IntT20 left, IntT20 right) => 
+
+    static IntT20 IBitwiseOperators<IntT20, IntT20, IntT20>.operator &(IntT20 left, IntT20 right) =>
         new(left.value & right.value);
-    static IntT20 IBitwiseOperators<IntT20, IntT20, IntT20>.operator |(IntT20 left, IntT20 right) => 
+
+    static IntT20 IBitwiseOperators<IntT20, IntT20, IntT20>.operator |(IntT20 left, IntT20 right) =>
         new(left.value | right.value);
-    static IntT20 IBitwiseOperators<IntT20, IntT20, IntT20>.operator ^(IntT20 left, IntT20 right) => 
+
+    static IntT20 IBitwiseOperators<IntT20, IntT20, IntT20>.operator ^(IntT20 left, IntT20 right) =>
         new(left.value ^ right.value);
-    static IntT20 IBitwiseOperators<IntT20, IntT20, IntT20>.operator ~(IntT20 value) => 
+
+    static IntT20 IBitwiseOperators<IntT20, IntT20, IntT20>.operator ~(IntT20 value) =>
         new(~value.value);
 
-    static IntT20 IShiftOperators<IntT20, int, IntT20>.operator <<(IntT20 value, int shiftAmount) => 
+    static IntT20 IShiftOperators<IntT20, int, IntT20>.operator <<(IntT20 value, int shiftAmount) =>
         new(value.value << shiftAmount);
-    static IntT20 IShiftOperators<IntT20, int, IntT20>.operator >>(IntT20 value, int shiftAmount) => 
+
+    static IntT20 IShiftOperators<IntT20, int, IntT20>.operator >> (IntT20 value, int shiftAmount) =>
         new(value.value >> shiftAmount);
-    static IntT20 IShiftOperators<IntT20, int, IntT20>.operator >>>(IntT20 value, int shiftAmount) => 
+
+    static IntT20 IShiftOperators<IntT20, int, IntT20>.operator >>> (IntT20 value, int shiftAmount) =>
         new(int.CreateChecked(((uint)value.value) >> shiftAmount));
+
     #endregion
+
     #endregion
 
     #region Generic Conversions
+
     static bool INumberBase<IntT20>.TryConvertFromChecked<TOther>(TOther value, out IntT20 result)
     {
         if (value is IConvertible conv)
@@ -729,6 +874,7 @@ public readonly struct IntT20 :
                 // Fall through to default
             }
         }
+
         result = default;
         return false;
     }
@@ -748,6 +894,7 @@ public readonly struct IntT20 :
                 // Fall through to default
             }
         }
+
         result = default;
         return false;
     }
@@ -767,6 +914,7 @@ public readonly struct IntT20 :
                 // Fall through to default
             }
         }
+
         result = default;
         return false;
     }
@@ -779,6 +927,7 @@ public readonly struct IntT20 :
             result = (TOther)(object)value.value;
             return true;
         }
+
         result = default;
         return false;
     }
@@ -791,6 +940,7 @@ public readonly struct IntT20 :
             result = (TOther)(object)value.value;
             return true;
         }
+
         result = default;
         return false;
     }
@@ -803,8 +953,10 @@ public readonly struct IntT20 :
             result = (TOther)(object)value.value;
             return true;
         }
+
         result = default;
         return false;
     }
+
     #endregion
 }
