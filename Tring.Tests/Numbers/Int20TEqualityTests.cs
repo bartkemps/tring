@@ -6,7 +6,7 @@ using FluentAssertions;
 using System.Numerics;
 using Tring.Numbers;
 
-public class IntT20EqualityTests
+public class Int20TEqualityTests
 {
     [Theory]
     [InlineData(42)]
@@ -16,8 +16,8 @@ public class IntT20EqualityTests
     [InlineData(-1743392200)] // MinValue
     public void Equals_SameValue_ShouldBeEqual(int value)
     {
-        IntT20 a = value;
-        IntT20 b = value;
+        Int20T a = value;
+        Int20T b = value;
 
         // All equality checks
         a.Equals((object)b).Should().BeTrue();
@@ -41,8 +41,8 @@ public class IntT20EqualityTests
     [Fact]
     public void Equals_DifferentValues_ShouldNotBeEqual()
     {
-        IntT20 a = 42;
-        IntT20 b = 43;
+        Int20T a = 42;
+        Int20T b = 43;
         int intValue = 43;
 
         // All inequality checks
@@ -63,7 +63,7 @@ public class IntT20EqualityTests
     [Fact]
     public void Equals_ReturnsTrue_ForNumericTypesWithSameValues()
     {
-        IntT20 value = 42;
+        Int20T value = 42;
         value.Equals((object)(sbyte)42).Should().BeTrue();
         value.Equals((object)(byte)42).Should().BeTrue();
         value.Equals((object)(short)42).Should().BeTrue();
@@ -81,7 +81,7 @@ public class IntT20EqualityTests
     [Fact]
     public void Equals_ReturnsFalse_ForNumericTypesWithDifferentValues()
     {
-        IntT20 value = 42;
+        Int20T value = 42;
         value.Equals((object)(sbyte)43).Should().BeFalse();
         value.Equals((object)(byte)43).Should().BeFalse();
         value.Equals((object)(short)43).Should().BeFalse();
@@ -115,7 +115,7 @@ public class IntT20EqualityTests
     [Fact]
     public void Equals_ShouldReturnFalse_WithNonNumericTypes()
     {
-        IntT20 intT20 = 1;
+        Int20T intT20 = 1;
         intT20.Equals("1").Should().BeFalse();
         intT20.Equals(new object()).Should().BeFalse();
         intT20.Equals(new List<int> { 1 }).Should().BeFalse();
@@ -137,7 +137,7 @@ public class IntT20EqualityTests
     [InlineData((long)-2147483649)] // Below Int32.MinValue
     public void Equals_WithOutOfRangeValues_ShouldReturnFalse(object value)
     {
-        IntT20 intT20 = 42;
+        Int20T intT20 = 42;
         intT20.Equals((object)value).Should().BeFalse();
     }
 
@@ -154,7 +154,7 @@ public class IntT20EqualityTests
     [InlineData((int)-1743392200)] // Min allowed value
     public void Equals_WithValidBoundaryValues_ShouldReturnTrue(object value)
     {
-        IntT20 intT20 = Convert.ToInt32(value);
+        Int20T intT20 = Convert.ToInt32(value);
         intT20.Equals((object)value).Should().BeTrue();
     }
 
@@ -167,7 +167,7 @@ public class IntT20EqualityTests
     [InlineData(TypeCode.Boolean)]
     public void Equals_WithNonNumericTypeCode_ShouldReturnFalse(TypeCode typeCode)
     {
-        IntT20 value = 42;
+        Int20T value = 42;
         var convertible = new ConvertibleWithTypeCode(typeCode);
         value.Equals(convertible).Should().BeFalse();
     }
@@ -175,7 +175,7 @@ public class IntT20EqualityTests
     [Fact]
     public void Equals_WithEqualityOperatorOnIConvertible_ShouldCompareCorrectly()
     {
-        IntT20 value = 42;
+        Int20T value = 42;
         IConvertible convertible = new ConvertibleWithTypeCode(TypeCode.Int32, 42);
         (convertible == value).Should().BeTrue();
         (convertible != value).Should().BeFalse();

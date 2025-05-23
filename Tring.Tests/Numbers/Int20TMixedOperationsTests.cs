@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Tring.Tests.Numbers;
 
-public class IntT20MixedOperationsTests
+public class Int20TMixedOperationsTests
 {
     [Theory]
     [InlineData(5, 3, 8)]
@@ -15,14 +15,14 @@ public class IntT20MixedOperationsTests
     public void Addition_WithInt_ShouldReturnCorrectResult(int a, int b, int expected)
     {
         // IntT20 + int
-        IntT20 intT20 = a;
+        Int20T intT20 = a;
         int intValue = b;
-        IntT20 result1 = intT20 + intValue;
-        result1.Should().Be((IntT20)expected);
+        Int20T result1 = intT20 + intValue;
+        result1.Should().Be((Int20T)expected);
 
         // int + IntT20
         result1 = intValue + intT20;
-        result1.Should().Be((IntT20)expected);
+        result1.Should().Be((Int20T)expected);
     }
 
     [Theory]
@@ -36,14 +36,14 @@ public class IntT20MixedOperationsTests
     public void Subtraction_WithInt_ShouldReturnCorrectResult(int a, int b, int expected)
     {
         // IntT20 - int
-        IntT20 intT20 = a;
+        Int20T intT20 = a;
         int intValue = b;
-        IntT20 result1 = intT20 - intValue;
-        result1.Should().Be((IntT20)expected);
+        Int20T result1 = intT20 - intValue;
+        result1.Should().Be((Int20T)expected);
 
         // int - IntT20
         result1 = intValue - intT20;
-        result1.Should().Be((IntT20)(-expected)); // Reversed order inverts the sign
+        result1.Should().Be((Int20T)(-expected)); // Reversed order inverts the sign
     }
 
     [Theory]
@@ -57,14 +57,14 @@ public class IntT20MixedOperationsTests
     public void Multiplication_WithInt_ShouldReturnCorrectResult(int a, int b, int expected)
     {
         // IntT20 * int
-        IntT20 intT20 = a;
+        Int20T intT20 = a;
         int intValue = b;
-        IntT20 result1 = intT20 * intValue;
-        result1.Should().Be((IntT20)expected);
+        Int20T result1 = intT20 * intValue;
+        result1.Should().Be((Int20T)expected);
 
         // int * IntT20
         result1 = intValue * intT20;
-        result1.Should().Be((IntT20)expected);
+        result1.Should().Be((Int20T)expected);
     }
 
     [Theory]
@@ -77,16 +77,16 @@ public class IntT20MixedOperationsTests
     public void Division_WithInt_ShouldReturnCorrectResult(int a, int b, int expected)
     {
         // IntT20 / int
-        IntT20 intT20 = a;
+        Int20T intT20 = a;
         int intValue = b;
-        IntT20 result1 = intT20 / intValue;
-        result1.Should().Be((IntT20)expected);
+        Int20T result1 = intT20 / intValue;
+        result1.Should().Be((Int20T)expected);
 
         // int / IntT20
         if (a != 0) // Avoid divide by zero
         {
             result1 = intValue / intT20;
-            result1.Should().Be((IntT20)(intValue / a));
+            result1.Should().Be((Int20T)(intValue / a));
         }
     }
 
@@ -100,16 +100,16 @@ public class IntT20MixedOperationsTests
     public void Modulo_WithInt_ShouldReturnCorrectResult(int a, int b, int expected)
     {
         // IntT20 % int
-        IntT20 intT20 = a;
+        Int20T intT20 = a;
         int intValue = b;
-        IntT20 result1 = intT20 % intValue;
-        result1.Should().Be((IntT20)expected);
+        Int20T result1 = intT20 % intValue;
+        result1.Should().Be((Int20T)expected);
 
         // int % IntT20
         if (a != 0) // Avoid divide by zero
         {
             result1 = intValue % intT20;
-            result1.Should().Be((IntT20)(intValue % a));
+            result1.Should().Be((Int20T)(intValue % a));
         }
     }
 
@@ -117,12 +117,12 @@ public class IntT20MixedOperationsTests
     public void Division_WithZero_ShouldThrowDivideByZeroException()
     {
         // IntT20 / 0
-        IntT20 intT20 = 10;
+        Int20T intT20 = 10;
         Action action = () => _ = intT20 / 0;
         action.Should().Throw<DivideByZeroException>();
 
         // int / IntT20(0)
-        IntT20 zero = 0;
+        Int20T zero = 0;
         action = () => _ = 10 / zero;
         action.Should().Throw<DivideByZeroException>();
     }
@@ -131,12 +131,12 @@ public class IntT20MixedOperationsTests
     public void Modulo_WithZero_ShouldThrowDivideByZeroException()
     {
         // IntT20 % 0
-        IntT20 intT20 = 10;
+        Int20T intT20 = 10;
         Action action = () => _ = intT20 % 0;
         action.Should().Throw<DivideByZeroException>();
 
         // int % IntT20(0)
-        IntT20 zero = 0;
+        Int20T zero = 0;
         action = () => _ = 10 % zero;
         action.Should().Throw<DivideByZeroException>();
     }

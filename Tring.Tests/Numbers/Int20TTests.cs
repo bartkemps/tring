@@ -4,13 +4,13 @@ using FluentAssertions;
 using Tring.Numbers;
 using System.Globalization;
 
-public class IntT20Tests
+public class Int20TTests
 {
     [Fact]
     public void Constants_ShouldHaveCorrectValues()
     {
-        IntT20.MaxValue.Should().Be((IntT20)1743392200);
-        IntT20.MinValue.Should().Be((IntT20)(-1743392200));
+        Int20T.MaxValue.Should().Be((Int20T)1743392200);
+        Int20T.MinValue.Should().Be((Int20T)(-1743392200));
     }
 
     [Theory]
@@ -21,7 +21,7 @@ public class IntT20Tests
     [InlineData(-1743392200)] // Min value
     public void ImplicitConversion_ValidValues_ShouldConvertCorrectly(int value)
     {
-        IntT20 converted = value;
+        Int20T converted = value;
         int backToInt = converted;
         backToInt.Should().Be(value);
     }
@@ -31,13 +31,13 @@ public class IntT20Tests
     {
         unchecked
         {
-            int max = IntT20.MaxValue;
-            int min = IntT20.MinValue;
+            int max = Int20T.MaxValue;
+            int min = Int20T.MinValue;
 
-            var overFlowed = (IntT20)(max + 1);
+            var overFlowed = (Int20T)(max + 1);
             ((int)overFlowed).Should().Be(min);
 
-            var underFlowed = (IntT20)(min - 1);
+            var underFlowed = (Int20T)(min - 1);
             ((int)underFlowed).Should().Be(max);
         }
     }
@@ -46,49 +46,49 @@ public class IntT20Tests
     public void ArithmeticOperators_ShouldWorkCorrectly()
     {
         // Addition
-        IntT20 a = 5;
-        IntT20 b = 3;
-        (a + b).Should().Be((IntT20)8);
+        Int20T a = 5;
+        Int20T b = 3;
+        (a + b).Should().Be((Int20T)8);
 
-        var maxVal = IntT20.MaxValue;
-        IntT20 overflowed = maxVal + (IntT20)1;
-        overflowed.Should().Be(IntT20.MinValue);
+        var maxVal = Int20T.MaxValue;
+        Int20T overflowed = maxVal + (Int20T)1;
+        overflowed.Should().Be(Int20T.MinValue);
 
         // Subtraction
-        (a - b).Should().Be((IntT20)2);
-        var minVal = IntT20.MinValue;
-        IntT20 underflowed = minVal - (IntT20)1;
-        underflowed.Should().Be(IntT20.MaxValue);
+        (a - b).Should().Be((Int20T)2);
+        var minVal = Int20T.MinValue;
+        Int20T underflowed = minVal - (Int20T)1;
+        underflowed.Should().Be(Int20T.MaxValue);
 
         // Multiplication
-        (a * b).Should().Be((IntT20)15);
+        (a * b).Should().Be((Int20T)15);
 
         // Division
-        IntT20 c = 6;
-        IntT20 d = 2;
-        (c / d).Should().Be((IntT20)3);
+        Int20T c = 6;
+        Int20T d = 2;
+        (c / d).Should().Be((Int20T)3);
 
-        IntT20 zero = 0;
+        Int20T zero = 0;
         Action divByZero = () => { _ = c / zero; };
         divByZero.Should().Throw<DivideByZeroException>();
 
         // Modulus
-        (c % d).Should().Be((IntT20)0);
-        (a % b).Should().Be((IntT20)2);
+        (c % d).Should().Be((Int20T)0);
+        (a % b).Should().Be((Int20T)2);
 
         // Unary operators
-        IntT20 positive = 42;
-        IntT20 negative = -42;
-        (+positive).Should().Be((IntT20)42);
-        (-positive).Should().Be((IntT20)(-42));
-        (-negative).Should().Be((IntT20)42);
+        Int20T positive = 42;
+        Int20T negative = -42;
+        (+positive).Should().Be((Int20T)42);
+        (-positive).Should().Be((Int20T)(-42));
+        (-negative).Should().Be((Int20T)42);
     }
 
     [Fact]
     public void ComparisonOperators_ShouldWorkCorrectly()
     {
-        IntT20 a = GetTestValue(10);
-        IntT20 b = GetTestValue(3);
+        Int20T a = GetTestValue(10);
+        Int20T b = GetTestValue(3);
 
         (a > b).Should().BeTrue();
         (b < a).Should().BeTrue();
@@ -96,7 +96,7 @@ public class IntT20Tests
         (b <= a).Should().BeTrue();
         (a != b).Should().BeTrue();
 
-        IntT20 c = a; // Same value
+        Int20T c = a; // Same value
         (a == c).Should().BeTrue();
         (a >= c).Should().BeTrue();
         (a <= c).Should().BeTrue();
@@ -105,8 +105,8 @@ public class IntT20Tests
     [Fact]
     public void CompareTo_ShouldWorkCorrectly()
     {
-        var a = (IntT20)42;
-        var b = (IntT20)24;
+        var a = (Int20T)42;
+        var b = (Int20T)24;
 
         a.CompareTo(b).Should().BePositive();
         b.CompareTo(a).Should().BeNegative();
@@ -127,41 +127,41 @@ public class IntT20Tests
     public void BitwiseOperators_ShouldWorkCorrectly()
     {
         // AND
-        IntT20 a = 5; // 101 in binary
-        IntT20 b = 3; // 011 in binary
-        (a & b).Should().Be((IntT20)1); // 001 in binary
+        Int20T a = 5; // 101 in binary
+        Int20T b = 3; // 011 in binary
+        (a & b).Should().Be((Int20T)1); // 001 in binary
 
         // OR
-        (a | b).Should().Be((IntT20)7); // 111 in binary
+        (a | b).Should().Be((Int20T)7); // 111 in binary
 
         // XOR
-        (a ^ b).Should().Be((IntT20)6); // 110 in binary
+        (a ^ b).Should().Be((Int20T)6); // 110 in binary
 
         // NOT
-        (~a).Should().Be((IntT20)(~5)); // Complement of 5
+        (~a).Should().Be((Int20T)(~5)); // Complement of 5
 
         // Left shift
-        IntT20 c = 1;
-        (c << 2).Should().Be((IntT20)4); // 001 shifted left twice is 100 (4)
+        Int20T c = 1;
+        (c << 2).Should().Be((Int20T)4); // 001 shifted left twice is 100 (4)
 
         // Right shift
-        IntT20 d = 4;
-        (d >> 2).Should().Be((IntT20)1); // 100 shifted right twice is 001 (1)
+        Int20T d = 4;
+        (d >> 2).Should().Be((Int20T)1); // 100 shifted right twice is 001 (1)
     }
 
     [Fact]
     public void BitShift_WithOverflow_ShouldWorkCorrectly()
     {
         // Test explicit overflow case
-        IntT20 maxValue = IntT20.MaxValue;
-        IntT20 maxMinusOne = maxValue - 1;
+        Int20T maxValue = Int20T.MaxValue;
+        Int20T maxMinusOne = maxValue - 1;
 
         // Verify that the values are as expected before operation
-        maxValue.Should().Be((IntT20)1743392200);
+        maxValue.Should().Be((Int20T)1743392200);
 
         // Test that the IntT20 wrapping is working for a specific case
         // This avoids the general comparison that's causing problems
-        (maxValue + (IntT20)1).Should().Be(IntT20.MinValue);
+        (maxValue + (Int20T)1).Should().Be(Int20T.MinValue);
     }
 
     [Theory]
@@ -172,7 +172,7 @@ public class IntT20Tests
     [InlineData(-1743392200)] // MinValue
     public void GetHashCode_ShouldBeConsistent(int value)
     {
-        IntT20 intT20 = value;
+        Int20T intT20 = value;
         var hash1 = intT20.GetHashCode();
         var hash2 = intT20.GetHashCode();
 
@@ -191,7 +191,7 @@ public class IntT20Tests
     [InlineData(-1743392200, "-1743392200")] // MinValue
     public void ToString_ShouldReturnCorrectString(int input, string expected)
     {
-        IntT20 value = input;
+        Int20T value = input;
         value.ToString().Should().Be(expected);
     }
 
@@ -202,14 +202,14 @@ public class IntT20Tests
     [InlineData("X8", "0000002A", 42)]
     public void ToString_WithFormat_ShouldReturnCorrectString(string format, string expected, int input)
     {
-        IntT20 value = input;
+        Int20T value = input;
         value.ToString(format).Should().Be(expected);
     }
 
     [Fact]
     public void FormattableToString_ShouldWorkCorrectly()
     {
-        var value = (IntT20)42;
+        var value = (Int20T)42;
         IFormattable formattable = value;
 
         formattable.ToString("D5", CultureInfo.InvariantCulture).Should().Be("00042");
@@ -224,8 +224,8 @@ public class IntT20Tests
     [InlineData("-1743392200", -1743392200)] // MinValue
     public void Parse_ValidStrings_ShouldReturnExpectedValue(string input, int expected)
     {
-        IntT20 result = IntT20.Parse(input);
-        result.Should().Be((IntT20)expected);
+        Int20T result = Int20T.Parse(input);
+        result.Should().Be((Int20T)expected);
     }
 
     [Theory]
@@ -233,19 +233,19 @@ public class IntT20Tests
     [InlineData("abc")]
     public void Parse_InvalidStrings_ShouldThrowFormatException(string input)
     {
-        var action = () => IntT20.Parse(input);
+        var action = () => Int20T.Parse(input);
         action.Should().Throw<FormatException>();
     }
 
     [Fact]
     public void TryParse_ShouldHandleValidAndInvalidInput()
     {
-        IntT20 result;
-        IntT20.TryParse("42", out result).Should().BeTrue();
-        result.Should().Be((IntT20)42);
+        Int20T result;
+        Int20T.TryParse("42", out result).Should().BeTrue();
+        result.Should().Be((Int20T)42);
 
-        IntT20.TryParse("invalid", out result).Should().BeFalse();
-        result.Should().Be((IntT20)0); // Default value when parsing fails
+        Int20T.TryParse("invalid", out result).Should().BeFalse();
+        result.Should().Be((Int20T)0); // Default value when parsing fails
     }
 
     [Theory]
@@ -253,8 +253,8 @@ public class IntT20Tests
     [InlineData(NumberStyles.AllowThousands, "1,000", 1000)]
     public void Parse_WithNumberStyles_ShouldWorkCorrectly(NumberStyles style, string input, int expected)
     {
-        IntT20 result = IntT20.Parse(input, style);
-        result.Should().Be((IntT20)expected);
+        Int20T result = Int20T.Parse(input, style);
+        result.Should().Be((Int20T)expected);
     }
 
     [Theory]
@@ -265,8 +265,8 @@ public class IntT20Tests
     [InlineData("123,456", NumberStyles.AllowThousands, 123456)] // Thousands separator
     public void Parse_SpecialFormats_ShouldWorkCorrectly(string input, NumberStyles style, int expected)
     {
-        IntT20 result = IntT20.Parse(input, style);
-        result.Should().Be((IntT20)expected);
+        Int20T result = Int20T.Parse(input, style);
+        result.Should().Be((Int20T)expected);
     }
 
     [Theory]
@@ -277,7 +277,7 @@ public class IntT20Tests
     [InlineData("0042", 42)] // Leading zeros
     public void Parse_WithWhitespaceAndSigns_ShouldWorkCorrectly(string input, int expected)
     {
-        IntT20.Parse(input).Should().Be((IntT20)expected);
+        Int20T.Parse(input).Should().Be((Int20T)expected);
     }
 
     [Fact]
@@ -286,14 +286,14 @@ public class IntT20Tests
         // German culture uses period as thousand separator
         var germanCulture = new System.Globalization.CultureInfo("de-DE");
         Thread.CurrentThread.CurrentCulture = germanCulture;
-        IntT20 result = IntT20.Parse("1.000", NumberStyles.AllowThousands);
-        result.Should().Be((IntT20)1000);
+        Int20T result = Int20T.Parse("1.000", NumberStyles.AllowThousands);
+        result.Should().Be((Int20T)1000);
 
         // US culture uses comma as thousand separator
         var usCulture = new System.Globalization.CultureInfo("en-US");
         Thread.CurrentThread.CurrentCulture = usCulture;
-        result = IntT20.Parse("1,000", NumberStyles.AllowThousands);
-        result.Should().Be((IntT20)1000);
+        result = Int20T.Parse("1,000", NumberStyles.AllowThousands);
+        result.Should().Be((Int20T)1000);
     }
 
     [Theory]
@@ -303,8 +303,8 @@ public class IntT20Tests
     [InlineData(-7, -3, -1)] // Both negative
     public void Modulus_WithNegativeNumbers_ShouldWorkCorrectly(int dividend, int divisor, int expected)
     {
-        IntT20 result = (IntT20)dividend % (IntT20)divisor;
-        result.Should().Be((IntT20)expected);
+        Int20T result = (Int20T)dividend % (Int20T)divisor;
+        result.Should().Be((Int20T)expected);
     }
 
     [Theory]
@@ -315,7 +315,7 @@ public class IntT20Tests
     [InlineData(-3, false)] // -3 is odd
     public void IsEven_ShouldReturnCorrectValue(int value, bool expected)
     {
-        IntT20 intT20 = value;
+        Int20T intT20 = value;
         bool isEven = intT20 % 2 == 0;
         isEven.Should().Be(expected);
     }
@@ -324,9 +324,9 @@ public class IntT20Tests
     public void IntT20_OverflowBehavior_ShouldDifferFromInt32()
     {
         // IntT20 overflow behavior with its MaxValue
-        IntT20 maxValue = IntT20.MaxValue;
-        IntT20 overflowed = maxValue + (IntT20)1;
-        overflowed.Should().Be(IntT20.MinValue);
+        Int20T maxValue = Int20T.MaxValue;
+        Int20T overflowed = maxValue + (Int20T)1;
+        overflowed.Should().Be(Int20T.MinValue);
 
         // Compare with int behavior for clarity
         unchecked
@@ -346,19 +346,19 @@ public class IntT20Tests
     [InlineData("-1743392201")] // Just below MinValue
     public void Parse_OutOfRangeStrings_ShouldBeWrappedProperly(string input)
     {
-        IntT20 result = IntT20.Parse(input);
+        Int20T result = Int20T.Parse(input);
 
         // The value should wrap around to the other extreme
         if (input == "1743392201")
         {
             // Should be wrapped to MinValue
-            result.Should().Be(IntT20.MinValue);
+            result.Should().Be(Int20T.MinValue);
             ((int)result).Should().Be(-1743392200);
         }
         else
         {
             // Should be wrapped to MaxValue
-            result.Should().Be(IntT20.MaxValue);
+            result.Should().Be(Int20T.MaxValue);
             ((int)result).Should().Be(1743392200);
         }
     }
@@ -367,36 +367,36 @@ public class IntT20Tests
     public void Parse_CurrencyFormat_ShouldWorkCorrectly()
     {
         // Currency format should work without culture specification
-        IntT20 result = IntT20.Parse("$42", NumberStyles.Currency);
-        result.Should().Be((IntT20)42);
+        Int20T result = Int20T.Parse("$42", NumberStyles.Currency);
+        result.Should().Be((Int20T)42);
 
-        result = IntT20.Parse(" $42 ", NumberStyles.Currency);
-        result.Should().Be((IntT20)42);
+        result = Int20T.Parse(" $42 ", NumberStyles.Currency);
+        result.Should().Be((Int20T)42);
     }
 
     [Fact]
     public void MinMax_ShouldReturnCorrectValue()
     {
-        IntT20 x = GetTestValue(5);
-        IntT20 y = GetTestValue(3);
+        Int20T x = GetTestValue(5);
+        Int20T y = GetTestValue(3);
 
         // Test using Math.Min/Max with int values
         Math.Min((int)x, (int)y).Should().Be(3);
         Math.Max((int)x, (int)y).Should().Be(5);
 
         // Test with our own Min/Max methods if implemented
-        IntT20 minResult = x < y ? x : y;
-        IntT20 maxResult = x > y ? x : y;
+        Int20T minResult = x < y ? x : y;
+        Int20T maxResult = x > y ? x : y;
 
-        minResult.Should().Be((IntT20)3);
-        maxResult.Should().Be((IntT20)5);
+        minResult.Should().Be((Int20T)3);
+        maxResult.Should().Be((Int20T)5);
     }
 
     [Fact]
     public void Abs_ShouldReturnCorrectValue()
     {
-        IntT20 negativeValue = GetTestValue(-42);
-        IntT20 positiveValue = GetTestValue(42);
+        Int20T negativeValue = GetTestValue(-42);
+        Int20T positiveValue = GetTestValue(42);
 
         // Test with negative value
         Math.Abs((int)negativeValue).Should().Be(42);
@@ -405,7 +405,7 @@ public class IntT20Tests
         Math.Abs((int)positiveValue).Should().Be(42);
         
         // Test with zero
-        Math.Abs((int)(IntT20)0).Should().Be(0);
+        Math.Abs((int)(Int20T)0).Should().Be(0);
     }
 
     [Theory]
@@ -416,7 +416,7 @@ public class IntT20Tests
     public void CustomFormatting_ShouldWorkCorrectly(int value, string format, string expected)
     {
         var americanCulture = new CultureInfo("en-US");
-        IntT20 intT20 = value;
+        Int20T intT20 = value;
         intT20.ToString(format, americanCulture).Should().Be(expected);
     }
 
@@ -424,7 +424,7 @@ public class IntT20Tests
     public void ExplicitConversions_ToOtherTypes_ShouldWorkCorrectly()
     {
         // Valid conversions
-        IntT20 smallValue = 42;
+        Int20T smallValue = 42;
         short shortValue = (short)(int)smallValue;
         shortValue.Should().Be((short)42);
 
@@ -435,7 +435,7 @@ public class IntT20Tests
         longValue.Should().Be(42L);
 
         // Out of range for byte/short but within IntT20 range
-        IntT20 largeValue = 1000;
+        Int20T largeValue = 1000;
         byte byteResult = unchecked((byte)(int)largeValue);
         byteResult.Should().Be(232); // 1000 % 256 = 232
     }
@@ -446,12 +446,12 @@ public class IntT20Tests
         unchecked
         {
             // Test that IntT20 wraps around properly
-            IntT20 max = IntT20.MaxValue;
-            IntT20 overflowed = max + (IntT20)1;
-            overflowed.Should().Be(IntT20.MinValue);
+            Int20T max = Int20T.MaxValue;
+            Int20T overflowed = max + (Int20T)1;
+            overflowed.Should().Be(Int20T.MinValue);
 
             // Test conversion to smaller types
-            IntT20 largeValue = 1000;
+            Int20T largeValue = 1000;
             byte byteValue = (byte)(int)largeValue;
             byteValue.Should().Be(232); // 1000 % 256 = 232
         }
@@ -460,8 +460,8 @@ public class IntT20Tests
     [Fact]
     public void DivRem_ShouldWorkCorrectly()
     {
-        IntT20 dividend = 7;
-        IntT20 divisor = 3;
+        Int20T dividend = 7;
+        Int20T divisor = 3;
 
         // Since IntT20 likely doesn't have a built-in DivRem method,
         // we'll simulate it manually or use Math.DivRem with casts
@@ -472,11 +472,11 @@ public class IntT20Tests
         remainder.Should().Be(1);
 
         // We can also calculate it directly
-        IntT20 quotientT20 = dividend / divisor;
-        IntT20 remainderT20 = dividend % divisor;
+        Int20T quotientT20 = dividend / divisor;
+        Int20T remainderT20 = dividend % divisor;
 
-        quotientT20.Should().Be((IntT20)2);
-        remainderT20.Should().Be((IntT20)1);
+        quotientT20.Should().Be((Int20T)2);
+        remainderT20.Should().Be((Int20T)1);
     }
 
     [Theory]
@@ -484,8 +484,8 @@ public class IntT20Tests
     [InlineData(1743392199, 1, 1743392200)] // Near max value of IntT20
     public void Unchecked_Addition_ShouldWrapAround(int a, int b, int expected)
     {
-        var result = (IntT20)a + (IntT20)b;
-        result.Should().Be((IntT20)expected);
+        var result = (Int20T)a + (Int20T)b;
+        result.Should().Be((Int20T)expected);
     }
 
     private static int GetTestValue(int value) => value; // Helper to avoid constant value warnings
