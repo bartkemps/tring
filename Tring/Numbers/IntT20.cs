@@ -1,5 +1,6 @@
 // ReSharper disable CompareOfFloatsByEqualityOperator
 // ReSharper disable IntVariableOverflowInUncheckedContext
+// ReSharper disable SuspiciousTypeConversion.Global
 namespace Tring.Numbers;
 
 using System.Globalization;
@@ -135,7 +136,7 @@ public readonly struct IntT20 : IEquatable<IntT20>, IFormattable, IComparable, I
     /// <param name="left">The first instance to compare.</param>
     /// <param name="right">The second instance to compare.</param>
     /// <returns><see langword="true"/> if the values of <paramref name="left"/> and <paramref name="right"/> are equal; otherwise, <see langword="false"/>.</returns>
-    public static bool operator ==(IntT20 left, IntT20 right) => left.value == right.value;
+    public static bool operator ==(IConvertible left, IntT20 right) => right.Equals(left);
 
     /// <summary>
     /// Returns a value indicating whether two <see cref="IntT20"/> instances are not equal.
@@ -143,40 +144,142 @@ public readonly struct IntT20 : IEquatable<IntT20>, IFormattable, IComparable, I
     /// <param name="left">The first instance to compare.</param>
     /// <param name="right">The second instance to compare.</param>
     /// <returns><see langword="true"/> if the values of <paramref name="left"/> and <paramref name="right"/> are not equal; otherwise, <see langword="false"/>.</returns>
-    public static bool operator !=(IntT20 left, IntT20 right) => left.value != right.value;
-
-    public static bool operator ==(IntT20 left, int right) => left.value == right;
-    public static bool operator !=(IntT20 left, int right) => left.value != right;
-    public static bool operator ==(int left, IntT20 right) => left == right.value;
-    public static bool operator !=(int left, IntT20 right) => left != right.value;
-
-    // ReSharper disable SuspiciousTypeConversion.Global
-    public static bool operator ==(IConvertible left, IntT20 right) => right.Equals(left);
     public static bool operator !=(IConvertible left, IntT20 right) => !right.Equals(left);
-    public static bool operator ==(IntT20 left, IConvertible right) => left.Equals(right);
-    public static bool operator !=(IntT20 left, IConvertible right) => !left.Equals(right);
-    // ReSharper restore SuspiciousTypeConversion.Global
 
+    /// <summary>
+    /// Returns a value indicating whether two <see cref="IntT20"/> instances are equal.
+    /// </summary>
+    /// <param name="left">The first instance to compare.</param>
+    /// <param name="right">The second instance to compare.</param>
+    /// <returns><see langword="true"/> if the values of <paramref name="left"/> and <paramref name="right"/> are equal; otherwise, <see langword="false"/>.</returns>
+    public static bool operator ==(IntT20 left, IConvertible right) => left.Equals(right);
+
+    /// <summary>
+    /// Returns a value indicating whether two <see cref="IntT20"/> instances are not equal.
+    /// </summary>
+    /// <param name="left">The first instance to compare.</param>
+    /// <param name="right">The second instance to compare.</param>
+    /// <returns><see langword="true"/> if the values of <paramref name="left"/> and <paramref name="right"/> are not equal; otherwise, <see langword="false"/>.</returns>
+    public static bool operator !=(IntT20 left, IConvertible right) => !left.Equals(right);
+    
     // Arithmetic operators
     public static IntT20 operator +(IntT20 left, IntT20 right) => new(left.value + right.value);
     public static IntT20 operator -(IntT20 left, IntT20 right) => new(left.value - right.value);
     public static IntT20 operator *(IntT20 left, IntT20 right) => new(left.value * right.value);
-    public static IntT20 operator /(IntT20 left, IntT20 right) => 
-        right.value == 0 
-            ? throw new DivideByZeroException() 
-            : new(left.value / right.value);
-    public static IntT20 operator %(IntT20 left, IntT20 right) => 
-        right.value == 0 
-            ? throw new DivideByZeroException() 
-            : new(left.value % right.value);
+    public static IntT20 operator /(IntT20 left, IntT20 right) => new(left.value / right.value);
+    public static IntT20 operator %(IntT20 left, IntT20 right) => new(left.value % right.value);
     public static IntT20 operator -(IntT20 value) => new(-value.value);
     public static IntT20 operator +(IntT20 value) => value;
 
-    // Comparison operators
+    // Mixed-type arithmetic operators with int
+    public static IntT20 operator +(IntT20 left, int right) => new(left.value + right);
+    public static IntT20 operator +(int left, IntT20 right) => new(left + right.value);
+    
+    public static IntT20 operator -(IntT20 left, int right) => new(left.value - right);
+    public static IntT20 operator -(int left, IntT20 right) => new(left - right.value);
+    
+    public static IntT20 operator *(IntT20 left, int right) => new(left.value * right);
+    public static IntT20 operator *(int left, IntT20 right) => new(left * right.value);
+    
+    public static IntT20 operator /(IntT20 left, int right) => new(left.value / right);
+    public static IntT20 operator /(int left, IntT20 right) => new(left / right.value);
+    
+    public static IntT20 operator %(IntT20 left, int right) => new(left.value % right);
+    public static IntT20 operator %(int left, IntT20 right) => new(left % right.value);
+
+    // Comparison operators with IntT20
     public static bool operator >(IntT20 left, IntT20 right) => left.value > right.value;
     public static bool operator <(IntT20 left, IntT20 right) => left.value < right.value;
     public static bool operator >=(IntT20 left, IntT20 right) => left.value >= right.value;
     public static bool operator <=(IntT20 left, IntT20 right) => left.value <= right.value;
+
+    // Comparison operators with int
+    public static bool operator >(IntT20 left, int right) => left.value > right;
+    public static bool operator <(IntT20 left, int right) => left.value < right;
+    public static bool operator >=(IntT20 left, int right) => left.value >= right;
+    public static bool operator <=(IntT20 left, int right) => left.value <= right;
+    
+    public static bool operator >(int left, IntT20 right) => left > right.value;
+    public static bool operator <(int left, IntT20 right) => left < right.value;
+    public static bool operator >=(int left, IntT20 right) => left >= right.value;
+    public static bool operator <=(int left, IntT20 right) => left <= right.value;
+
+    // Comparison operators with uint
+    public static bool operator >(IntT20 left, uint right) => left.CompareTo(right) > 0;
+    public static bool operator <(IntT20 left, uint right) => left.CompareTo(right) < 0;
+    public static bool operator >=(IntT20 left, uint right) => left.CompareTo(right) >= 0;
+    public static bool operator <=(IntT20 left, uint right) => left.CompareTo(right) <= 0;
+    
+    public static bool operator >(uint left, IntT20 right) => right.CompareTo(left) < 0;
+    public static bool operator <(uint left, IntT20 right) => right.CompareTo(left) > 0;
+    public static bool operator >=(uint left, IntT20 right) => right.CompareTo(left) <= 0;
+    public static bool operator <=(uint left, IntT20 right) => right.CompareTo(left) >= 0;
+
+    // Comparison operators with long
+    public static bool operator >(IntT20 left, long right) => left.CompareTo(right) > 0;
+    public static bool operator <(IntT20 left, long right) => left.CompareTo(right) < 0;
+    public static bool operator >=(IntT20 left, long right) => left.CompareTo(right) >= 0;
+    public static bool operator <=(IntT20 left, long right) => left.CompareTo(right) <= 0;
+    
+    public static bool operator >(long left, IntT20 right) => right.CompareTo(left) < 0;
+    public static bool operator <(long left, IntT20 right) => right.CompareTo(left) > 0;
+    public static bool operator >=(long left, IntT20 right) => right.CompareTo(left) <= 0;
+    public static bool operator <=(long left, IntT20 right) => right.CompareTo(left) >= 0;
+
+    // Comparison operators with ulong
+    public static bool operator >(IntT20 left, ulong right) => left.CompareTo(right) > 0;
+    public static bool operator <(IntT20 left, ulong right) => left.CompareTo(right) < 0;
+    public static bool operator >=(IntT20 left, ulong right) => left.CompareTo(right) >= 0;
+    public static bool operator <=(IntT20 left, ulong right) => left.CompareTo(right) <= 0;
+    
+    public static bool operator >(ulong left, IntT20 right) => right.CompareTo(left) < 0;
+    public static bool operator <(ulong left, IntT20 right) => right.CompareTo(left) > 0;
+    public static bool operator >=(ulong left, IntT20 right) => right.CompareTo(left) <= 0;
+    public static bool operator <=(ulong left, IntT20 right) => right.CompareTo(left) >= 0;
+
+    // Comparison operators with short
+    public static bool operator >(IntT20 left, short right) => left.CompareTo(right) > 0;
+    public static bool operator <(IntT20 left, short right) => left.CompareTo(right) < 0;
+    public static bool operator >=(IntT20 left, short right) => left.CompareTo(right) >= 0;
+    public static bool operator <=(IntT20 left, short right) => left.CompareTo(right) <= 0;
+    
+    public static bool operator >(short left, IntT20 right) => right.CompareTo(left) < 0;
+    public static bool operator <(short left, IntT20 right) => right.CompareTo(left) > 0;
+    public static bool operator >=(short left, IntT20 right) => right.CompareTo(left) <= 0;
+    public static bool operator <=(short left, IntT20 right) => right.CompareTo(left) >= 0;
+
+    // Comparison operators with ushort
+    public static bool operator >(IntT20 left, ushort right) => left.CompareTo(right) > 0;
+    public static bool operator <(IntT20 left, ushort right) => left.CompareTo(right) < 0;
+    public static bool operator >=(IntT20 left, ushort right) => left.CompareTo(right) >= 0;
+    public static bool operator <=(IntT20 left, ushort right) => left.CompareTo(right) <= 0;
+    
+    public static bool operator >(ushort left, IntT20 right) => right.CompareTo(left) < 0;
+    public static bool operator <(ushort left, IntT20 right) => right.CompareTo(left) > 0;
+    public static bool operator >=(ushort left, IntT20 right) => right.CompareTo(left) <= 0;
+    public static bool operator <=(ushort left, IntT20 right) => right.CompareTo(left) >= 0;
+
+    // Comparison operators with byte
+    public static bool operator >(IntT20 left, byte right) => left.CompareTo(right) > 0;
+    public static bool operator <(IntT20 left, byte right) => left.CompareTo(right) < 0;
+    public static bool operator >=(IntT20 left, byte right) => left.CompareTo(right) >= 0;
+    public static bool operator <=(IntT20 left, byte right) => left.CompareTo(right) <= 0;
+    
+    public static bool operator >(byte left, IntT20 right) => right.CompareTo(left) < 0;
+    public static bool operator <(byte left, IntT20 right) => right.CompareTo(left) > 0;
+    public static bool operator >=(byte left, IntT20 right) => right.CompareTo(left) <= 0;
+    public static bool operator <=(byte left, IntT20 right) => right.CompareTo(left) >= 0;
+
+    // Comparison operators with sbyte
+    public static bool operator >(IntT20 left, sbyte right) => left.CompareTo(right) > 0;
+    public static bool operator <(IntT20 left, sbyte right) => left.CompareTo(right) < 0;
+    public static bool operator >=(IntT20 left, sbyte right) => left.CompareTo(right) >= 0;
+    public static bool operator <=(IntT20 left, sbyte right) => left.CompareTo(right) <= 0;
+    
+    public static bool operator >(sbyte left, IntT20 right) => right.CompareTo(left) < 0;
+    public static bool operator <(sbyte left, IntT20 right) => right.CompareTo(left) > 0;
+    public static bool operator >=(sbyte left, IntT20 right) => right.CompareTo(left) <= 0;
+    public static bool operator <=(sbyte left, IntT20 right) => right.CompareTo(left) >= 0;
 
     // Bitwise operators
     public static IntT20 operator &(IntT20 left, IntT20 right) => new(left.value & right.value);
@@ -286,67 +389,98 @@ public readonly struct IntT20 : IEquatable<IntT20>, IFormattable, IComparable, I
         if (obj == null) return 1;
         if (obj is IntT20 other) return CompareTo(other);
         
-        // Cast to primitive types and compare directly with the integer value
-        if (obj is int int32) return value.CompareTo(int32);
-        if (obj is long int64) return value.CompareTo((int)int64);
-        if (obj is short int16) return value.CompareTo(int16);
-        if (obj is byte byteVal) return value.CompareTo(byteVal);
-        if (obj is sbyte sbyteVal) return value.CompareTo(sbyteVal);
-        if (obj is uint uint32) return value.CompareTo((int)uint32);
-        if (obj is ulong uint64)
+        // For large numeric types that exceed IntT20's range, return -1 if greater than MaxValue, 1 if less than MinValue
+        try
         {
-            if (uint64 > int.MaxValue)
-                return -1; // This IntT20 is less than the ulong
-            return value.CompareTo((int)uint64);
-        }
-        if (obj is ushort uint16) return value.CompareTo(uint16);
-        if (obj is float singleValue) return value.CompareTo((int)singleValue);
-        if (obj is double doubleValue) return value.CompareTo((int)doubleValue);
-        if (obj is decimal decimalValue) return value.CompareTo((int)decimalValue);
-        if (obj is char charVal) return value.CompareTo(charVal);
-
-        if (obj is IConvertible convertible)
-        {
-            try
+            if (obj is int int32) return value.CompareTo(int32);
+            if (obj is long int64)
             {
-                // ReSharper disable once SwitchStatementHandlesSomeKnownEnumValuesWithDefault
+                if (int64 > MaxValueConstant) return -1;
+                if (int64 < MinValueConstant) return 1;
+                return value.CompareTo((int)int64);
+            }
+            if (obj is uint uint32)
+            {
+                if (uint32 > MaxValueConstant) return -1;
+                return value.CompareTo((int)uint32);
+            }
+            if (obj is ulong uint64)
+            {
+                if (uint64 > MaxValueConstant) return -1;
+                return value.CompareTo((int)uint64);
+            }
+            if (obj is short int16) return value.CompareTo(int16);
+            if (obj is ushort uint16) return value.CompareTo(uint16);
+            if (obj is byte byteVal) return value.CompareTo(byteVal);
+            if (obj is sbyte sbyteVal) return value.CompareTo(sbyteVal);
+            if (obj is float singleValue)
+            {
+                if (singleValue > MaxValueConstant) return -1;
+                if (singleValue < MinValueConstant) return 1;
+                return value.CompareTo((int)singleValue);
+            }
+            if (obj is double doubleValue)
+            {
+                if (doubleValue > MaxValueConstant) return -1;
+                if (doubleValue < MinValueConstant) return 1;
+                return value.CompareTo((int)doubleValue);
+            }
+            if (obj is decimal decimalValue)
+            {
+                if (decimalValue > MaxValueConstant) return -1;
+                if (decimalValue < MinValueConstant) return 1;
+                return value.CompareTo((int)decimalValue);
+            }
+
+            if (obj is IConvertible convertible)
+            {
                 switch (convertible.GetTypeCode())
                 {
-                    case TypeCode.Int16: return value.CompareTo(convertible.ToInt16(null));
-                    case TypeCode.UInt16: return value.CompareTo(convertible.ToUInt16(null));
-                    case TypeCode.Int32: return value.CompareTo(convertible.ToInt32(null));
+                    case TypeCode.Int16:
+                    case TypeCode.UInt16:
+                    case TypeCode.Byte:
+                    case TypeCode.SByte:
+                        return value.CompareTo(convertible.ToInt32(null));
+                    case TypeCode.Int32:
+                        return value.CompareTo(convertible.ToInt32(null));
                     case TypeCode.UInt32:
                         var uint32Value = convertible.ToUInt32(null);
-                        if (uint32Value > int.MaxValue)
-                            return -1; // This IntT20 is less than the uint32
+                        if (uint32Value > MaxValueConstant) return -1;
                         return value.CompareTo((int)uint32Value);
                     case TypeCode.Int64:
                         var int64Value = convertible.ToInt64(null);
-                        if (int64Value > int.MaxValue)
-                            return -1; // This IntT20 is less than the int64
-                        if (int64Value < int.MinValue)
-                            return 1; // This IntT20 is greater than the int64
+                        if (int64Value > MaxValueConstant) return -1;
+                        if (int64Value < MinValueConstant) return 1;
                         return value.CompareTo((int)int64Value);
                     case TypeCode.UInt64:
                         var uint64Value = convertible.ToUInt64(null);
-                        if (uint64Value > int.MaxValue)
-                            return -1; // This IntT20 is less than the uint64
+                        if (uint64Value > MaxValueConstant) return -1;
                         return value.CompareTo((int)uint64Value);
-                    case TypeCode.Byte: return value.CompareTo(convertible.ToByte(null));
-                    case TypeCode.SByte: return value.CompareTo(convertible.ToSByte(null));
-                    case TypeCode.Single: return value.CompareTo((int)convertible.ToSingle(null));
-                    case TypeCode.Double: return value.CompareTo((int)convertible.ToDouble(null));
-                    case TypeCode.Decimal: return value.CompareTo((int)convertible.ToDecimal(null));
-                    default: throw new ArgumentException("Object is not a valid type", nameof(obj));
+                    case TypeCode.Single:
+                        var singleVal = convertible.ToSingle(null);
+                        if (singleVal > MaxValueConstant) return -1;
+                        if (singleVal < MinValueConstant) return 1;
+                        return value.CompareTo((int)singleVal);
+                    case TypeCode.Double:
+                        var doubleVal = convertible.ToDouble(null);
+                        if (doubleVal > MaxValueConstant) return -1;
+                        if (doubleVal < MinValueConstant) return 1;
+                        return value.CompareTo((int)doubleVal);
+                    case TypeCode.Decimal:
+                        var decimalVal = convertible.ToDecimal(null);
+                        if (decimalVal > MaxValueConstant) return -1;
+                        if (decimalVal < MinValueConstant) return 1;
+                        return value.CompareTo((int)decimalVal);
                 }
             }
-            catch
-            {
-                throw new ArgumentException("Object is not a valid type", nameof(obj));
-            }
+        }
+        catch (OverflowException)
+        {
+            // If conversion fails due to overflow, we can assume the value is outside our range
+            return -1;
         }
 
-        throw new ArgumentException("Object is not a valid type", nameof(obj));
+        throw new ArgumentException("Object is not a valid type for comparison", nameof(obj));
     }
 
     /// <summary>

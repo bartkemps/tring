@@ -1,9 +1,8 @@
-# ...existing code...
+# .gitignore for Visual Studio and .NET
 
 # Build results
-bin/
-obj/
-out/
+[Bb]in/
+[Oo]bj/
 
 # User-specific files
 *.user
@@ -11,48 +10,24 @@ out/
 *.userosscache
 *.sln.docstates
 
-# OS generated files
-.DS_Store
-Thumbs.db
+# Auto-generated files
+*.log
+*.vspscc
+*.vssscc
 
-# Rider/JetBrains
+# Rider
 .idea/
+*.sln.iml
 
-# Visual Studio
-.vs/
+# Others
+*.DS_Store
 *.vscode/
 
-# ASP.NET Scaffolding
-ScaffoldingReadMe.txt
-
-# Dotnet tools
-*.dbmdl
+# Test results
+TestResults/
 
 # NuGet
 *.nupkg
-*.snupkg
-.nuget/
+# The packages folder can be ignored if you use PackageReference
 packages/
-project.lock.json
-project.fragment.lock.json
-artifacts/
 
-# Resharper
-_ReSharper*/
-*.[Rr]e[Ss]harper
-
-# DotCover
-*.dotCover
-
-# Coverage
-coverage/
-*.coverage
-*.coveragexml
-
-# Logs
-*.log
-
-# Git folder (should not be tracked inside repo)
-.git/
-
-# ...existing code...
