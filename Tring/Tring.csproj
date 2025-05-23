@@ -6,4 +6,19 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <None Update="Numbers\TernaryNumbers.tt">
+        <Generator>TextTemplatingFileGenerator</Generator>
+        <LastGenOutput>TernaryNumbers.cs</LastGenOutput>
+      </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Numbers\TernaryNumbers.cs">
+        <AutoGen>True</AutoGen>
+        <DesignTime>True</DesignTime>
+        <DependentUpon>TernaryNumbers.tt</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
 </Project>
