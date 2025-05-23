@@ -4,11 +4,16 @@
 namespace Tring.Numbers;
 
 using System.Globalization;
+using System.Numerics;
+using System.Diagnostics.CodeAnalysis;
 
 /// <summary>
 /// Represents a 20-trit signed integer, modeled after the <see cref="int"/> (Int32) type.
 /// </summary>
-public readonly struct IntT20 : IEquatable<IntT20>, IFormattable, IComparable, IComparable<IntT20>
+public readonly struct IntT20 : 
+    IConvertible,
+    IBinaryInteger<IntT20>,
+    ISignedNumber<IntT20>
 {
     private readonly int value;
     /// <summary>
@@ -281,13 +286,6 @@ public readonly struct IntT20 : IEquatable<IntT20>, IFormattable, IComparable, I
     public static bool operator >=(sbyte left, IntT20 right) => right.CompareTo(left) <= 0;
     public static bool operator <=(sbyte left, IntT20 right) => right.CompareTo(left) >= 0;
 
-    // Bitwise operators
-    public static IntT20 operator &(IntT20 left, IntT20 right) => new(left.value & right.value);
-    public static IntT20 operator |(IntT20 left, IntT20 right) => new(left.value | right.value);
-    public static IntT20 operator ^(IntT20 left, IntT20 right) => new(left.value ^ right.value);
-    public static IntT20 operator ~(IntT20 value) => new(~value.value);
-    public static IntT20 operator <<(IntT20 value, int shift) => new(value.value << shift);
-    public static IntT20 operator >> (IntT20 value, int shift) => new(value.value >> shift);
 
     // ToString implementation
     public override string ToString() => value.ToString();
@@ -320,30 +318,6 @@ public readonly struct IntT20 : IEquatable<IntT20>, IFormattable, IComparable, I
     public static IntT20 Parse(string s, NumberStyles style) => new(int.Parse(s, style));
 
     /// <summary>
-    /// Converts the string representation of a number in a specified culture-specific format to its <see cref="IntT20"/> equivalent.
-    /// </summary>
-    /// <param name="s">A string containing a number to convert.</param>
-    /// <param name="provider">An object that supplies culture-specific formatting information about <paramref name="s"/>.</param>
-    /// <returns>An <see cref="IntT20"/> equivalent to the number contained in <paramref name="s"/>.</returns>
-    /// <exception cref="ArgumentNullException"><paramref name="s"/> is <see langword="null"/>.</exception>
-    /// <exception cref="FormatException"><paramref name="s"/> is not in the correct format.</exception>
-    /// <exception cref="OverflowException"><paramref name="s"/> represents a number less than <see cref="IntT20.MinValue"/> or greater than <see cref="IntT20.MaxValue"/>.</exception>
-    public static IntT20 Parse(string s, IFormatProvider? provider) => new(int.Parse(s, provider));
-
-    /// <summary>
-    /// Converts the string representation of a number in a specified style and culture-specific format to its <see cref="IntT20"/> equivalent.
-    /// </summary>
-    /// <param name="s">A string containing a number to convert.</param>
-    /// <param name="style">A bitwise combination of enumeration values that indicate the style elements that can be present in <paramref name="s"/>.</param>
-    /// <param name="provider">An object that supplies culture-specific formatting information about <paramref name="s"/>.</param>
-    /// <returns>An <see cref="IntT20"/> equivalent to the number contained in <paramref name="s"/>.</returns>
-    /// <exception cref="ArgumentNullException"><paramref name="s"/> is <see langword="null"/>.</exception>
-    /// <exception cref="ArgumentException"><paramref name="style"/> is not a <see cref="NumberStyles"/> value or <paramref name="style"/> includes the <see cref="NumberStyles.AllowHexSpecifier"/> value.</exception>
-    /// <exception cref="FormatException"><paramref name="s"/> is not in a format compliant with <paramref name="style"/>.</exception>
-    /// <exception cref="OverflowException"><paramref name="s"/> represents a number less than <see cref="IntT20.MinValue"/> or greater than <see cref="IntT20.MaxValue"/>.</exception>
-    public static IntT20 Parse(string s, NumberStyles style, IFormatProvider? provider) => new(int.Parse(s, style, provider));
-
-    /// <summary>
     /// Tries to convert the string representation of a number to its <see cref="IntT20"/> equivalent, and returns a value that indicates whether the conversion succeeded.
     /// </summary>
     /// <param name="s">A string containing a number to convert.</param>
@@ -352,22 +326,6 @@ public readonly struct IntT20 : IEquatable<IntT20>, IFormattable, IComparable, I
     public static bool TryParse(string? s, out IntT20 result)
     {
         bool success = int.TryParse(s, out int value);
-        result = new IntT20(value);
-        return success;
-    }
-
-    /// <summary>
-    /// Tries to convert the string representation of a number in a specified style and culture-specific format to its <see cref="IntT20"/> equivalent, and returns a value that indicates whether the conversion succeeded.
-    /// </summary>
-    /// <param name="s">A string containing a number to convert.</param>
-    /// <param name="style">A bitwise combination of enumeration values that indicate the style elements that can be present in <paramref name="s"/>.</param>
-    /// <param name="provider">An object that supplies culture-specific formatting information about <paramref name="s"/>.</param>
-    /// <param name="result">When this method returns, contains the <see cref="IntT20"/> value equivalent to the number contained in <paramref name="s"/> if the conversion succeeded, or zero if the conversion failed. This parameter is passed uninitialized.</param>
-    /// <returns><see langword="true"/> if <paramref name="s"/> was converted successfully; otherwise, <see langword="false"/>.</returns>
-    /// <exception cref="ArgumentException"><paramref name="style"/> is not a <see cref="NumberStyles"/> value or <paramref name="style"/> includes the <see cref="NumberStyles.AllowHexSpecifier"/> value.</exception>
-    public static bool TryParse(string? s, NumberStyles style, IFormatProvider? provider, out IntT20 result)
-    {
-        bool success = int.TryParse(s, style, provider, out int value);
         result = new IntT20(value);
         return success;
     }
@@ -495,4 +453,358 @@ public readonly struct IntT20 : IEquatable<IntT20>, IFormattable, IComparable, I
     /// Greater than zero: This instance is greater than <paramref name="other"/>.
     /// </returns>
     public int CompareTo(IntT20 other) => value.CompareTo(other.value);
+
+    #region IConvertible Implementation
+    public TypeCode GetTypeCode() => TypeCode.Int32;
+    
+    bool IConvertible.ToBoolean(IFormatProvider? provider) => value != 0;
+    char IConvertible.ToChar(IFormatProvider? provider) => Convert.ToChar(value);
+    sbyte IConvertible.ToSByte(IFormatProvider? provider) => Convert.ToSByte(value);
+    byte IConvertible.ToByte(IFormatProvider? provider) => Convert.ToByte(value);
+    short IConvertible.ToInt16(IFormatProvider? provider) => Convert.ToInt16(value);
+    ushort IConvertible.ToUInt16(IFormatProvider? provider) => Convert.ToUInt16(value);
+    int IConvertible.ToInt32(IFormatProvider? provider) => value;
+    uint IConvertible.ToUInt32(IFormatProvider? provider) => Convert.ToUInt32(value);
+    long IConvertible.ToInt64(IFormatProvider? provider) => value;
+    ulong IConvertible.ToUInt64(IFormatProvider? provider) => Convert.ToUInt64(value);
+    float IConvertible.ToSingle(IFormatProvider? provider) => value;
+    double IConvertible.ToDouble(IFormatProvider? provider) => value;
+    decimal IConvertible.ToDecimal(IFormatProvider? provider) => value;
+    DateTime IConvertible.ToDateTime(IFormatProvider? provider) => throw new InvalidCastException();
+    string IConvertible.ToString(IFormatProvider? provider) => value.ToString(provider);
+    object IConvertible.ToType(Type conversionType, IFormatProvider? provider) => 
+        Convert.ChangeType(value, conversionType, provider);
+    #endregion
+
+    #region IUtf8SpanFormattable Implementation
+    bool IUtf8SpanFormattable.TryFormat(Span<byte> utf8Destination, out int bytesWritten, ReadOnlySpan<char> format, IFormatProvider? provider)
+    {
+        if (!value.TryFormat(stackalloc char[32], out int charsWritten, format, provider))
+        {
+            bytesWritten = 0;
+            return false;
+        }
+
+        // Get UTF8 byte count for the character length
+        var byteCount = System.Text.Encoding.UTF8.GetMaxByteCount(charsWritten);
+        
+        if (utf8Destination.Length < byteCount)
+        {
+            bytesWritten = 0;
+            return false;
+        }
+
+        // Convert to string since we can't go directly from ReadOnlySpan<char> to UTF8
+        var str = value.ToString(format.ToString(), provider);
+        bytesWritten = System.Text.Encoding.UTF8.GetBytes(str, utf8Destination);
+        return true;
+    }
+    #endregion
+
+    #region IIncrementOperators/IDecrementOperators Implementation
+    public static IntT20 operator ++(IntT20 value) => new(value.value + 1);
+    public static IntT20 operator --(IntT20 value) => new(value.value - 1);
+    #endregion
+
+    static bool IEqualityOperators<IntT20, IntT20, bool>.operator ==(IntT20 left, IntT20 right) => left.value == right.value;
+    static bool IEqualityOperators<IntT20, IntT20, bool>.operator !=(IntT20 left, IntT20 right) => left.value != right.value;
+
+    public static bool operator ==(IntT20 left, IntT20 right) => left.value == right.value;
+    public static bool operator !=(IntT20 left, IntT20 right) => left.value != right.value;
+
+    #region Binary Operations
+    public static IntT20 RotateLeft(IntT20 value, int rotateAmount) =>
+        new((int)BitOperations.RotateLeft((ulong)value.value, rotateAmount));
+    #endregion
+
+    #region Interface Static Members
+    static IntT20 ISignedNumber<IntT20>.NegativeOne => new(-1);
+    static IntT20 INumberBase<IntT20>.One => new(1);
+    static IntT20 INumberBase<IntT20>.Zero => new(0);
+    static IntT20 IAdditiveIdentity<IntT20, IntT20>.AdditiveIdentity => new(0);
+    static IntT20 IMultiplicativeIdentity<IntT20, IntT20>.MultiplicativeIdentity => new(1);
+
+    static bool INumberBase<IntT20>.IsCanonical(IntT20 value) => true;
+    static bool INumberBase<IntT20>.IsComplexNumber(IntT20 value) => false;
+    static bool INumberBase<IntT20>.IsEvenInteger(IntT20 value) => value.value % 2 == 0;
+    static bool INumberBase<IntT20>.IsFinite(IntT20 value) => true;
+    static bool INumberBase<IntT20>.IsImaginaryNumber(IntT20 value) => false;
+    static bool INumberBase<IntT20>.IsInfinity(IntT20 value) => false;
+    static bool INumberBase<IntT20>.IsInteger(IntT20 value) => true;
+    static bool INumberBase<IntT20>.IsNaN(IntT20 value) => false;
+    static bool INumberBase<IntT20>.IsNegative(IntT20 value) => value.value < 0;
+    static bool INumberBase<IntT20>.IsNegativeInfinity(IntT20 value) => false;
+    static bool INumberBase<IntT20>.IsNormal(IntT20 value) => value.value != 0;
+    static bool INumberBase<IntT20>.IsOddInteger(IntT20 value) => value.value % 2 != 0;
+    static bool INumberBase<IntT20>.IsPositive(IntT20 value) => value.value > 0;
+    static bool INumberBase<IntT20>.IsPositiveInfinity(IntT20 value) => false;
+    static bool INumberBase<IntT20>.IsRealNumber(IntT20 value) => true;
+    static bool INumberBase<IntT20>.IsSubnormal(IntT20 value) => false;
+    static bool INumberBase<IntT20>.IsZero(IntT20 value) => value.value == 0;
+
+    static IntT20 INumberBase<IntT20>.MaxMagnitude(IntT20 x, IntT20 y) => 
+        Math.Abs(x.value) > Math.Abs(y.value) ? x : y;
+    static IntT20 INumberBase<IntT20>.MaxMagnitudeNumber(IntT20 x, IntT20 y) => 
+        Math.Abs(x.value) > Math.Abs(y.value) ? x : y;
+    static IntT20 INumberBase<IntT20>.MinMagnitude(IntT20 x, IntT20 y) => 
+        Math.Abs(x.value) < Math.Abs(y.value) ? x : y;
+    static IntT20 INumberBase<IntT20>.MinMagnitudeNumber(IntT20 x, IntT20 y) => 
+        Math.Abs(x.value) < Math.Abs(y.value) ? x : y;
+
+    static int INumberBase<IntT20>.Radix => 2;
+    
+    static IntT20 INumberBase<IntT20>.Abs(IntT20 value) => 
+        value.value < 0 ? new(-value.value) : value;
+
+    static IntT20 INumberBase<IntT20>.Parse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider) => 
+        new(int.Parse(s, style, provider));
+
+    static IntT20 INumberBase<IntT20>.Parse(string s, NumberStyles style, IFormatProvider? provider) => 
+        new(int.Parse(s, style, provider));
+
+    static bool INumberBase<IntT20>.TryParse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider, out IntT20 result)
+    {
+        if (int.TryParse(s, style, provider, out var parsed))
+        {
+            result = new(parsed);
+            return true;
+        }
+        result = default;
+        return false;
+    }
+
+    static bool INumberBase<IntT20>.TryParse([NotNullWhen(true)] string? s, NumberStyles style, IFormatProvider? provider, out IntT20 result)
+    {
+        if (int.TryParse(s, style, provider, out var parsed))
+        {
+            result = new(parsed);
+            return true;
+        }
+        result = default;
+        return false;
+    }
+
+    static bool IBinaryNumber<IntT20>.IsPow2(IntT20 value) => 
+        value.value > 0 && (value.value & (value.value - 1)) == 0;
+        
+    static IntT20 IBinaryNumber<IntT20>.Log2(IntT20 value) => 
+        new(BitOperations.Log2((uint)value.value));
+
+    int IBinaryInteger<IntT20>.GetByteCount() => sizeof(int);
+    
+    int IBinaryInteger<IntT20>.GetShortestBitLength() => 
+        value == 0 ? 1 : BitOperations.Log2((uint)Math.Abs(value)) + 1;
+
+    static IntT20 IBinaryInteger<IntT20>.PopCount(IntT20 value) => 
+        new(BitOperations.PopCount((uint)value.value));
+
+    static IntT20 IBinaryInteger<IntT20>.TrailingZeroCount(IntT20 value) => 
+        new(BitOperations.TrailingZeroCount((uint)value.value));
+
+    bool IBinaryInteger<IntT20>.TryWriteBigEndian(Span<byte> destination, out int bytesWritten)
+    {
+        if (destination.Length < sizeof(int))
+        {
+            bytesWritten = 0;
+            return false;
+        }
+
+        var bytes = BitConverter.GetBytes(value);
+        if (BitConverter.IsLittleEndian)
+            Array.Reverse(bytes);
+        bytes.CopyTo(destination);
+        bytesWritten = sizeof(int);
+        return true;
+    }
+
+    bool IBinaryInteger<IntT20>.TryWriteLittleEndian(Span<byte> destination, out int bytesWritten)
+    {
+        if (destination.Length < sizeof(int))
+        {
+            bytesWritten = 0;
+            return false;
+        }
+
+        BitConverter.GetBytes(value).CopyTo(destination);
+        bytesWritten = sizeof(int);
+        return true;
+    }
+
+    static bool IBinaryInteger<IntT20>.TryReadBigEndian(ReadOnlySpan<byte> source, bool isUnsigned, out IntT20 result)
+    {
+        if (source.Length < sizeof(int))
+        {
+            result = default;
+            return false;
+        }
+
+        var bytes = source.Slice(0, sizeof(int)).ToArray();
+        if (BitConverter.IsLittleEndian)
+            Array.Reverse(bytes);
+        
+        result = new(BitConverter.ToInt32(bytes));
+        return true;
+    }
+
+    static bool IBinaryInteger<IntT20>.TryReadLittleEndian(ReadOnlySpan<byte> source, bool isUnsigned, out IntT20 result)
+    {
+        if (source.Length < sizeof(int))
+        {
+            result = default;
+            return false;
+        }
+
+        result = new(BitConverter.ToInt32(source));
+        return true;
+    }
+
+    #region ISpanFormattable/ISpanParsable Implementation
+    static IntT20 ISpanParsable<IntT20>.Parse(ReadOnlySpan<char> s, IFormatProvider? provider) => 
+        new(int.Parse(s, NumberStyles.Integer, provider));
+
+    static bool ISpanParsable<IntT20>.TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, out IntT20 result)
+    {
+        if (int.TryParse(s, NumberStyles.Integer, provider, out var value))
+        {
+            result = new(value);
+            return true;
+        }
+        result = default;
+        return false;
+    }
+
+    bool ISpanFormattable.TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider? provider) =>
+        value.TryFormat(destination, out charsWritten, format.ToString(), provider);
+
+    static IntT20 IParsable<IntT20>.Parse(string s, IFormatProvider? provider) => 
+        new(int.Parse(s, NumberStyles.Integer, provider));
+
+    static bool IParsable<IntT20>.TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, out IntT20 result)
+    {
+        if (int.TryParse(s, NumberStyles.Integer, provider, out var value))
+        {
+            result = new(value);
+            return true;
+        }
+        result = default;
+        return false;
+    }
+    #endregion
+
+    #region Bit Operators
+    static IntT20 IBitwiseOperators<IntT20, IntT20, IntT20>.operator &(IntT20 left, IntT20 right) => 
+        new(left.value & right.value);
+    static IntT20 IBitwiseOperators<IntT20, IntT20, IntT20>.operator |(IntT20 left, IntT20 right) => 
+        new(left.value | right.value);
+    static IntT20 IBitwiseOperators<IntT20, IntT20, IntT20>.operator ^(IntT20 left, IntT20 right) => 
+        new(left.value ^ right.value);
+    static IntT20 IBitwiseOperators<IntT20, IntT20, IntT20>.operator ~(IntT20 value) => 
+        new(~value.value);
+
+    static IntT20 IShiftOperators<IntT20, int, IntT20>.operator <<(IntT20 value, int shiftAmount) => 
+        new(value.value << shiftAmount);
+    static IntT20 IShiftOperators<IntT20, int, IntT20>.operator >>(IntT20 value, int shiftAmount) => 
+        new(value.value >> shiftAmount);
+    static IntT20 IShiftOperators<IntT20, int, IntT20>.operator >>>(IntT20 value, int shiftAmount) => 
+        new(int.CreateChecked(((uint)value.value) >> shiftAmount));
+    #endregion
+    #endregion
+
+    #region Generic Conversions
+    static bool INumberBase<IntT20>.TryConvertFromChecked<TOther>(TOther value, out IntT20 result)
+    {
+        if (value is IConvertible conv)
+        {
+            try
+            {
+                var intValue = conv.ToInt32(null);
+                if (intValue >= MinValueConstant && intValue <= MaxValueConstant)
+                {
+                    result = new(intValue);
+                    return true;
+                }
+            }
+            catch
+            {
+                // Fall through to default
+            }
+        }
+        result = default;
+        return false;
+    }
+
+    static bool INumberBase<IntT20>.TryConvertFromSaturating<TOther>(TOther value, out IntT20 result)
+    {
+        if (value is IConvertible conv)
+        {
+            try
+            {
+                var intValue = conv.ToInt32(null);
+                result = new(intValue);
+                return true;
+            }
+            catch
+            {
+                // Fall through to default
+            }
+        }
+        result = default;
+        return false;
+    }
+
+    static bool INumberBase<IntT20>.TryConvertFromTruncating<TOther>(TOther value, out IntT20 result)
+    {
+        if (value is IConvertible conv)
+        {
+            try
+            {
+                var intValue = conv.ToInt32(null);
+                result = new(intValue);
+                return true;
+            }
+            catch
+            {
+                // Fall through to default
+            }
+        }
+        result = default;
+        return false;
+    }
+
+    static bool INumberBase<IntT20>.TryConvertToChecked<TOther>(IntT20 value, [MaybeNullWhen(false)] out TOther result)
+        where TOther : default
+    {
+        if (typeof(TOther) == typeof(int))
+        {
+            result = (TOther)(object)value.value;
+            return true;
+        }
+        result = default;
+        return false;
+    }
+
+    static bool INumberBase<IntT20>.TryConvertToSaturating<TOther>(IntT20 value, [MaybeNullWhen(false)] out TOther result)
+        where TOther : default
+    {
+        if (typeof(TOther) == typeof(int))
+        {
+            result = (TOther)(object)value.value;
+            return true;
+        }
+        result = default;
+        return false;
+    }
+
+    static bool INumberBase<IntT20>.TryConvertToTruncating<TOther>(IntT20 value, [MaybeNullWhen(false)] out TOther result)
+        where TOther : default
+    {
+        if (typeof(TOther) == typeof(int))
+        {
+            result = (TOther)(object)value.value;
+            return true;
+        }
+        result = default;
+        return false;
+    }
+    #endregion
 }
