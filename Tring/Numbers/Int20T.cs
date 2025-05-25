@@ -13,9 +13,9 @@ using System.Numerics;
 using System.Diagnostics.CodeAnalysis;
 
 /// <summary>
-/// Represents a ternary number, modeled after the <see cref="Int32"/> type.
+/// Represents a 20-trit  signed integer, modeled after the <see cref="Int32"/> type.
 /// </summary>
-[GeneratedCode("T4",null)]
+[GeneratedCode("IntT.tt", null)]
 public readonly partial struct Int20T :
     IConvertible,
     IBinaryInteger<Int20T>,
@@ -37,12 +37,12 @@ public readonly partial struct Int20T :
     /// <summary>
     /// Represents the largest possible value of a <see cref="Int20T"/>. This field is constant.
     /// </summary>
-    public static Int20T MaxValue => new(MaxValueConstant);
+    public static readonly Int20T MaxValue = new(MaxValueConstant);
 
     /// <summary>
     /// Represents the smallest possible value of a <see cref="Int20T"/>. This field is constant.
     /// </summary>
-    public static Int20T MinValue => new(MinValueConstant);
+    public static readonly Int20T MinValue = new(MinValueConstant);
 
     private Int20T(Int32 value) => this.value = value;
     

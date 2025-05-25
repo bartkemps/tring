@@ -35,4 +35,5 @@ public class Int10TSpecificTests
         Int10T result = (Int10T)(intValue * (int)ternaryValue);
         result.Should().Be((Int10T)(intValue * 200));
     }
+    
 }

@@ -13,73 +13,73 @@ using System.Numerics;
 using System.Diagnostics.CodeAnalysis;
 
 /// <summary>
-/// Represents a 40-trit  signed integer, modeled after the <see cref="Int64"/> type.
+/// Represents a 27-trit  signed integer, modeled after the <see cref="Int64"/> type.
 /// </summary>
 [GeneratedCode("IntT.tt", null)]
-public readonly partial struct Int40T :
+public readonly partial struct Int27T :
     IConvertible,
-    IBinaryInteger<Int40T>,
-    ISignedNumber<Int40T>,
-    ITernaryInteger<Int40T>
+    IBinaryInteger<Int27T>,
+    ISignedNumber<Int27T>,
+    ITernaryInteger<Int27T>
 {
     private readonly Int64 value;
 
     /// <summary>
-    ///  Represents the maximum value of a <see cref="Int40T"/>, expressed as a <see cref="Int64"/> This field is constant.
+    ///  Represents the maximum value of a <see cref="Int27T"/>, expressed as a <see cref="Int64"/> This field is constant.
     /// </summary>
-    public const Int64 MaxValueConstant = 6078832729528464400;
+    public const Int64 MaxValueConstant = 3812798742493;
 
     /// <summary>
-    /// Represents the minimum value of a <see cref="Int40T"/>, expressed as a <see cref="Int64"/> This field is constant.
+    /// Represents the minimum value of a <see cref="Int27T"/>, expressed as a <see cref="Int64"/> This field is constant.
     /// </summary>
-    public const Int64 MinValueConstant = -6078832729528464400;
+    public const Int64 MinValueConstant = -3812798742493;
 
     /// <summary>
-    /// Represents the largest possible value of a <see cref="Int40T"/>. This field is constant.
+    /// Represents the largest possible value of a <see cref="Int27T"/>. This field is constant.
     /// </summary>
-    public static readonly Int40T MaxValue = new(MaxValueConstant);
+    public static readonly Int27T MaxValue = new(MaxValueConstant);
 
     /// <summary>
-    /// Represents the smallest possible value of a <see cref="Int40T"/>. This field is constant.
+    /// Represents the smallest possible value of a <see cref="Int27T"/>. This field is constant.
     /// </summary>
-    public static readonly Int40T MinValue = new(MinValueConstant);
+    public static readonly Int27T MinValue = new(MinValueConstant);
 
-    private Int40T(Int64 value) => this.value = value;
+    private Int27T(Int64 value) => this.value = value;
     
-     private static Int40T Create(Int32 value) => new(value);
-     private static Int40T Create(Int64 value) => new(value.BalancedModulo(MaxValueConstant));
+     private static Int27T Create(Int32 value) => new(value);
+     private static Int27T Create(Int64 value) => new(value.BalancedModulo(MaxValueConstant));
 
      /// <summary>
-/// Defines an implicit conversion of a Int64 to a <see cref="Int40T"/>.
+/// Defines an implicit conversion of a Int64 to a <see cref="Int27T"/>.
 /// </summary>
 /// <param name="value">The value to convert.</param>
-/// <returns>A <see cref="Int40T"/> that represents the converted value.</returns>
-public static implicit operator Int40T(Int64 value) => Create(value);
+/// <returns>A <see cref="Int27T"/> that represents the converted value.</returns>
+public static implicit operator Int27T(Int64 value) => Create(value);
      /// <summary>
-/// Defines an implicit conversion of a Int40T to a <see cref="Int64"/>.
+/// Defines an implicit conversion of a Int27T to a <see cref="Int64"/>.
 /// </summary>
 /// <param name="value">The value to convert.</param>
 /// <returns>A <see cref="Int64"/> that represents the converted value.</returns>
-public static implicit operator Int64(Int40T value) => (Int64)value.value;
+public static implicit operator Int64(Int27T value) => (Int64)value.value;
      /// <summary>
-/// Defines an implicit conversion of a Int32 to a <see cref="Int40T"/>.
+/// Defines an implicit conversion of a Int32 to a <see cref="Int27T"/>.
 /// </summary>
 /// <param name="value">The value to convert.</param>
-/// <returns>A <see cref="Int40T"/> that represents the converted value.</returns>
-public static implicit operator Int40T(Int32 value) => Create(value);
+/// <returns>A <see cref="Int27T"/> that represents the converted value.</returns>
+public static implicit operator Int27T(Int32 value) => Create(value);
      /// <summary>
-/// Defines an explicit conversion of a Int40T to a <see cref="Int32"/>.
+/// Defines an explicit conversion of a Int27T to a <see cref="Int32"/>.
 /// </summary>
 /// <param name="value">The value to convert.</param>
 /// <returns>A <see cref="Int32"/> that represents the converted value.</returns>
-public static explicit operator Int32(Int40T value) => (Int32)value.value;
+public static explicit operator Int32(Int27T value) => (Int32)value.value;
 
     /// <summary>
     /// Returns a value indicating whether this instance is equal to a specified object.
     /// </summary>
     /// <param name="obj">An object to compare with this instance.</param>
     /// <returns>
-    /// <see langword="true"/> if <paramref name="obj"/> is an instance of <see cref="Int40T"/> or a compatible numeric type
+    /// <see langword="true"/> if <paramref name="obj"/> is an instance of <see cref="Int27T"/> or a compatible numeric type
     /// and equals the value of this instance; otherwise, <see langword="false"/>.
     /// </returns>
     public override bool Equals(object? obj)
@@ -87,7 +87,7 @@ public static explicit operator Int32(Int40T value) => (Int32)value.value;
         switch (obj)
         {
             case null: return false;
-            case Int40T other: return value == other.value;
+            case Int27T other: return value == other.value;
             case int typed: return value == typed;
             case long int64: return value == int64;
             case short int16: return value == int16;
@@ -131,11 +131,11 @@ public static explicit operator Int32(Int40T value) => (Int32)value.value;
     }
 
     /// <summary>
-    /// Returns a value indicating whether this instance is equal to a specified <see cref="Int40T"/> value.
+    /// Returns a value indicating whether this instance is equal to a specified <see cref="Int27T"/> value.
     /// </summary>
-    /// <param name="other">A <see cref="Int40T"/> value to compare to this instance.</param>
+    /// <param name="other">A <see cref="Int27T"/> value to compare to this instance.</param>
     /// <returns><see langword="true"/> if <paramref name="other"/> has the same value as this instance; otherwise, <see langword="false"/>.</returns>
-    public bool Equals(Int40T other) => value == other.value;
+    public bool Equals(Int27T other) => value == other.value;
 
     /// <summary>
     /// Returns a value indicating whether this instance is equal to a specified <see cref="Int64"/> value.
@@ -153,269 +153,269 @@ public static explicit operator Int32(Int40T value) => (Int32)value.value;
     #region Equality Operators
 
     /// <summary>
-    /// Returns a value indicating whether two <see cref="Int40T"/> instances are equal.
+    /// Returns a value indicating whether two <see cref="Int27T"/> instances are equal.
     /// </summary>
     /// <param name="left">The first instance to compare.</param>
     /// <param name="right">The second instance to compare.</param>
     /// <returns><see langword="true"/> if the values of <paramref name="left"/> and <paramref name="right"/> are equal; otherwise, <see langword="false"/>.</returns>
-    public static bool operator ==(IConvertible left, Int40T right) => right.Equals(left);
+    public static bool operator ==(IConvertible left, Int27T right) => right.Equals(left);
 
     /// <summary>
-    /// Returns a value indicating whether two <see cref="Int40T"/> instances are not equal.
+    /// Returns a value indicating whether two <see cref="Int27T"/> instances are not equal.
     /// </summary>
     /// <param name="left">The first instance to compare.</param>
     /// <param name="right">The second instance to compare.</param>
     /// <returns><see langword="true"/> if the values of <paramref name="left"/> and <paramref name="right"/> are not equal; otherwise, <see langword="false"/>.</returns>
-    public static bool operator !=(IConvertible left, Int40T right) => !right.Equals(left);
+    public static bool operator !=(IConvertible left, Int27T right) => !right.Equals(left);
 
     /// <summary>
-    /// Returns a value indicating whether two <see cref="Int40T"/> instances are equal.
+    /// Returns a value indicating whether two <see cref="Int27T"/> instances are equal.
     /// </summary>
     /// <param name="left">The first instance to compare.</param>
     /// <param name="right">The second instance to compare.</param>
     /// <returns><see langword="true"/> if the values of <paramref name="left"/> and <paramref name="right"/> are equal; otherwise, <see langword="false"/>.</returns>
-    public static bool operator ==(Int40T left, IConvertible right) => left.Equals(right);
+    public static bool operator ==(Int27T left, IConvertible right) => left.Equals(right);
 
     /// <summary>
-    /// Returns a value indicating whether two <see cref="Int40T"/> instances are not equal.
+    /// Returns a value indicating whether two <see cref="Int27T"/> instances are not equal.
     /// </summary>
     /// <param name="left">The first instance to compare.</param>
     /// <param name="right">The second instance to compare.</param>
     /// <returns><see langword="true"/> if the values of <paramref name="left"/> and <paramref name="right"/> are not equal; otherwise, <see langword="false"/>.</returns>
-    public static bool operator !=(Int40T left, IConvertible right) => !left.Equals(right);
+    public static bool operator !=(Int27T left, IConvertible right) => !left.Equals(right);
 
     /// <summary>
-    /// Returns a value indicating whether two <see cref="Int40T"/> instances are equal.
+    /// Returns a value indicating whether two <see cref="Int27T"/> instances are equal.
     /// </summary>
     /// <param name="left">The first instance to compare.</param>
     /// <param name="right">The second instance to compare.</param>
     /// <returns><see langword="true"/> if the values of <paramref name="left"/> and <paramref name="right"/> are equal; otherwise, <see langword="false"/>.</returns>
-    public static bool operator ==(Int40T left, Int40T right) => left.value == right.value;
+    public static bool operator ==(Int27T left, Int27T right) => left.value == right.value;
 
     /// <summary>
-    /// Returns a value indicating whether two <see cref="Int40T"/> instances are not equal.
+    /// Returns a value indicating whether two <see cref="Int27T"/> instances are not equal.
     /// </summary>
     /// <param name="left">The first instance to compare.</param>
     /// <param name="right">The second instance to compare.</param>
     /// <returns><see langword="true"/> if the values of <paramref name="left"/> and <paramref name="right"/> are not equal; otherwise, <see langword="false"/>.</returns>
-    public static bool operator !=(Int40T left, Int40T right) => left.value != right.value;
+    public static bool operator !=(Int27T left, Int27T right) => left.value != right.value;
 
     #endregion
 
     #region Arithmetic Operators
 
     /// <summary>
-    /// Adds two <see cref="Int40T"/> values and returns the result.
+    /// Adds two <see cref="Int27T"/> values and returns the result.
     /// </summary>
     /// <param name="left">The first value to add.</param>
     /// <param name="right">The second value to add.</param>
     /// <returns>The sum of <paramref name="left"/> and <paramref name="right"/>.</returns>
-    public static Int40T operator +(Int40T left, Int40T right) => Create(left.value + right.value);
+    public static Int27T operator +(Int27T left, Int27T right) => Create(left.value + right.value);
 
     /// <summary>
-    /// Subtracts one <see cref="Int40T"/> value from another and returns the result.
+    /// Subtracts one <see cref="Int27T"/> value from another and returns the result.
     /// </summary>
     /// <param name="left">The value to subtract from (the minuend).</param>
     /// <param name="right">The value to subtract (the subtrahend).</param>
     /// <returns>The result of subtracting <paramref name="right"/> from <paramref name="left"/>.</returns>
-    public static Int40T operator -(Int40T left, Int40T right) => Create(left.value - right.value);
+    public static Int27T operator -(Int27T left, Int27T right) => Create(left.value - right.value);
 
     /// <summary>
-    /// Multiplies two <see cref="Int40T"/> values and returns the result.
+    /// Multiplies two <see cref="Int27T"/> values and returns the result.
     /// </summary>
     /// <param name="left">The first value to multiply.</param>
     /// <param name="right">The second value to multiply.</param>
     /// <returns>The product of <paramref name="left"/> and <paramref name="right"/>.</returns>
-    public static Int40T operator *(Int40T left, Int40T right) => Create(left.value * right.value);
+    public static Int27T operator *(Int27T left, Int27T right) => Create(left.value * right.value);
 
     /// <summary>
-    /// Divides one <see cref="Int40T"/> value by another and returns the result.
+    /// Divides one <see cref="Int27T"/> value by another and returns the result.
     /// </summary>
     /// <param name="left">The value to be divided (the dividend).</param>
     /// <param name="right">The value to divide by (the divisor).</param>
     /// <returns>The result of dividing <paramref name="left"/> by <paramref name="right"/>.</returns>
     /// <exception cref="DivideByZeroException"><paramref name="right"/> is zero.</exception>
-    public static Int40T operator /(Int40T left, Int40T right) => Create(left.value / right.value);
+    public static Int27T operator /(Int27T left, Int27T right) => Create(left.value / right.value);
 
     /// <summary>
-    /// Returns the remainder that results from dividing one <see cref="Int40T"/> value by another.
+    /// Returns the remainder that results from dividing one <see cref="Int27T"/> value by another.
     /// </summary>
     /// <param name="left">The value to be divided (the dividend).</param>
     /// <param name="right">The value to divide by (the divisor).</param>
     /// <returns>The remainder that results from dividing <paramref name="left"/> by <paramref name="right"/>.</returns>
     /// <exception cref="DivideByZeroException"><paramref name="right"/> is zero.</exception>
-    public static Int40T operator %(Int40T left, Int40T right) => Create(left.value % right.value);
+    public static Int27T operator %(Int27T left, Int27T right) => Create(left.value % right.value);
 
     /// <summary>
-    /// Negates the specified <see cref="Int40T"/> value.
+    /// Negates the specified <see cref="Int27T"/> value.
     /// </summary>
     /// <param name="value">The value to negate.</param>
     /// <returns>The result of the value multiplied by negative one (-1).</returns>
-    public static Int40T operator -(Int40T value) => Create(-value.value);
+    public static Int27T operator -(Int27T value) => Create(-value.value);
 
     /// <summary>
-    /// Returns the specified <see cref="Int40T"/> value; the sign of the value is unchanged.
+    /// Returns the specified <see cref="Int27T"/> value; the sign of the value is unchanged.
     /// </summary>
     /// <param name="value">The value to return.</param>
     /// <returns>The value of the <paramref name="value"/> parameter.</returns>
-    public static Int40T operator +(Int40T value) => value;
+    public static Int27T operator +(Int27T value) => value;
 
     // Mixed-type arithmetic operators with Int64
-    public static Int40T operator +(Int40T left, Int64 right) => Create(left.value + right);
-    public static Int40T operator +(Int64 left, Int40T right) => Create(left + right.value);
+    public static Int27T operator +(Int27T left, Int64 right) => Create(left.value + right);
+    public static Int27T operator +(Int64 left, Int27T right) => Create(left + right.value);
 
-    public static Int40T operator -(Int40T left, Int64 right) => Create(left.value - right);
-    public static Int40T operator -(Int64 left, Int40T right) => Create(left - right.value);
+    public static Int27T operator -(Int27T left, Int64 right) => Create(left.value - right);
+    public static Int27T operator -(Int64 left, Int27T right) => Create(left - right.value);
 
-    public static Int40T operator *(Int40T left, Int64 right) => Create(left.value * right);
-    public static Int40T operator *(Int64 left, Int40T right) => Create(left * right.value);
+    public static Int27T operator *(Int27T left, Int64 right) => Create(left.value * right);
+    public static Int27T operator *(Int64 left, Int27T right) => Create(left * right.value);
 
-    public static Int40T operator /(Int40T left, Int64 right) => Create(left.value / right);
-    public static Int40T operator /(Int64 left, Int40T right) => Create(left / right.value);
+    public static Int27T operator /(Int27T left, Int64 right) => Create(left.value / right);
+    public static Int27T operator /(Int64 left, Int27T right) => Create(left / right.value);
 
-    public static Int40T operator %(Int40T left, Int64 right) => Create(left.value % right);
-    public static Int40T operator %(Int64 left, Int40T right) => Create(left % right.value);
+    public static Int27T operator %(Int27T left, Int64 right) => Create(left.value % right);
+    public static Int27T operator %(Int64 left, Int27T right) => Create(left % right.value);
     #endregion
     
     #region Comparison Operators
 
-    // Comparison operators with Int40T
-    public static bool operator >(Int40T left, Int40T right) => left.value > right.value;
-    public static bool operator <(Int40T left, Int40T right) => left.value < right.value;
-    public static bool operator >=(Int40T left, Int40T right) => left.value >= right.value;
-    public static bool operator <=(Int40T left, Int40T right) => left.value <= right.value;
+    // Comparison operators with Int27T
+    public static bool operator >(Int27T left, Int27T right) => left.value > right.value;
+    public static bool operator <(Int27T left, Int27T right) => left.value < right.value;
+    public static bool operator >=(Int27T left, Int27T right) => left.value >= right.value;
+    public static bool operator <=(Int27T left, Int27T right) => left.value <= right.value;
     
     // Comparison operators with sbyte
-    public static bool operator >(Int40T left, sbyte right) => left.value > right;
-    public static bool operator <(Int40T left, sbyte right) => left.value < right;
-    public static bool operator >=(Int40T left, sbyte right) => left.value >= right;
-    public static bool operator <=(Int40T left, sbyte right) => left.value <= right;
+    public static bool operator >(Int27T left, sbyte right) => left.value > right;
+    public static bool operator <(Int27T left, sbyte right) => left.value < right;
+    public static bool operator >=(Int27T left, sbyte right) => left.value >= right;
+    public static bool operator <=(Int27T left, sbyte right) => left.value <= right;
 
-    public static bool operator >(sbyte left, Int40T right) => left > right.value;
-    public static bool operator <(sbyte left, Int40T right) => left < right.value;
-    public static bool operator >=(sbyte left, Int40T right) => left >= right.value;
-    public static bool operator <=(sbyte left, Int40T right) => left <= right.value;
+    public static bool operator >(sbyte left, Int27T right) => left > right.value;
+    public static bool operator <(sbyte left, Int27T right) => left < right.value;
+    public static bool operator >=(sbyte left, Int27T right) => left >= right.value;
+    public static bool operator <=(sbyte left, Int27T right) => left <= right.value;
     
     // Comparison operators with byte
-    public static bool operator >(Int40T left, byte right) => left.value > right;
-    public static bool operator <(Int40T left, byte right) => left.value < right;
-    public static bool operator >=(Int40T left, byte right) => left.value >= right;
-    public static bool operator <=(Int40T left, byte right) => left.value <= right;
+    public static bool operator >(Int27T left, byte right) => left.value > right;
+    public static bool operator <(Int27T left, byte right) => left.value < right;
+    public static bool operator >=(Int27T left, byte right) => left.value >= right;
+    public static bool operator <=(Int27T left, byte right) => left.value <= right;
 
-    public static bool operator >(byte left, Int40T right) => left > right.value;
-    public static bool operator <(byte left, Int40T right) => left < right.value;
-    public static bool operator >=(byte left, Int40T right) => left >= right.value;
-    public static bool operator <=(byte left, Int40T right) => left <= right.value;
+    public static bool operator >(byte left, Int27T right) => left > right.value;
+    public static bool operator <(byte left, Int27T right) => left < right.value;
+    public static bool operator >=(byte left, Int27T right) => left >= right.value;
+    public static bool operator <=(byte left, Int27T right) => left <= right.value;
     
     // Comparison operators with int
-    public static bool operator >(Int40T left, int right) => left.value > right;
-    public static bool operator <(Int40T left, int right) => left.value < right;
-    public static bool operator >=(Int40T left, int right) => left.value >= right;
-    public static bool operator <=(Int40T left, int right) => left.value <= right;
+    public static bool operator >(Int27T left, int right) => left.value > right;
+    public static bool operator <(Int27T left, int right) => left.value < right;
+    public static bool operator >=(Int27T left, int right) => left.value >= right;
+    public static bool operator <=(Int27T left, int right) => left.value <= right;
 
-    public static bool operator >(int left, Int40T right) => left > right.value;
-    public static bool operator <(int left, Int40T right) => left < right.value;
-    public static bool operator >=(int left, Int40T right) => left >= right.value;
-    public static bool operator <=(int left, Int40T right) => left <= right.value;
+    public static bool operator >(int left, Int27T right) => left > right.value;
+    public static bool operator <(int left, Int27T right) => left < right.value;
+    public static bool operator >=(int left, Int27T right) => left >= right.value;
+    public static bool operator <=(int left, Int27T right) => left <= right.value;
     
     // Comparison operators with uint
-    public static bool operator >(Int40T left, uint right) => left.value > right;
-    public static bool operator <(Int40T left, uint right) => left.value < right;
-    public static bool operator >=(Int40T left, uint right) => left.value >= right;
-    public static bool operator <=(Int40T left, uint right) => left.value <= right;
+    public static bool operator >(Int27T left, uint right) => left.value > right;
+    public static bool operator <(Int27T left, uint right) => left.value < right;
+    public static bool operator >=(Int27T left, uint right) => left.value >= right;
+    public static bool operator <=(Int27T left, uint right) => left.value <= right;
 
-    public static bool operator >(uint left, Int40T right) => left > right.value;
-    public static bool operator <(uint left, Int40T right) => left < right.value;
-    public static bool operator >=(uint left, Int40T right) => left >= right.value;
-    public static bool operator <=(uint left, Int40T right) => left <= right.value;
+    public static bool operator >(uint left, Int27T right) => left > right.value;
+    public static bool operator <(uint left, Int27T right) => left < right.value;
+    public static bool operator >=(uint left, Int27T right) => left >= right.value;
+    public static bool operator <=(uint left, Int27T right) => left <= right.value;
     
     // Comparison operators with short
-    public static bool operator >(Int40T left, short right) => left.value > right;
-    public static bool operator <(Int40T left, short right) => left.value < right;
-    public static bool operator >=(Int40T left, short right) => left.value >= right;
-    public static bool operator <=(Int40T left, short right) => left.value <= right;
+    public static bool operator >(Int27T left, short right) => left.value > right;
+    public static bool operator <(Int27T left, short right) => left.value < right;
+    public static bool operator >=(Int27T left, short right) => left.value >= right;
+    public static bool operator <=(Int27T left, short right) => left.value <= right;
 
-    public static bool operator >(short left, Int40T right) => left > right.value;
-    public static bool operator <(short left, Int40T right) => left < right.value;
-    public static bool operator >=(short left, Int40T right) => left >= right.value;
-    public static bool operator <=(short left, Int40T right) => left <= right.value;
+    public static bool operator >(short left, Int27T right) => left > right.value;
+    public static bool operator <(short left, Int27T right) => left < right.value;
+    public static bool operator >=(short left, Int27T right) => left >= right.value;
+    public static bool operator <=(short left, Int27T right) => left <= right.value;
     
     // Comparison operators with ushort
-    public static bool operator >(Int40T left, ushort right) => left.value > right;
-    public static bool operator <(Int40T left, ushort right) => left.value < right;
-    public static bool operator >=(Int40T left, ushort right) => left.value >= right;
-    public static bool operator <=(Int40T left, ushort right) => left.value <= right;
+    public static bool operator >(Int27T left, ushort right) => left.value > right;
+    public static bool operator <(Int27T left, ushort right) => left.value < right;
+    public static bool operator >=(Int27T left, ushort right) => left.value >= right;
+    public static bool operator <=(Int27T left, ushort right) => left.value <= right;
 
-    public static bool operator >(ushort left, Int40T right) => left > right.value;
-    public static bool operator <(ushort left, Int40T right) => left < right.value;
-    public static bool operator >=(ushort left, Int40T right) => left >= right.value;
-    public static bool operator <=(ushort left, Int40T right) => left <= right.value;
+    public static bool operator >(ushort left, Int27T right) => left > right.value;
+    public static bool operator <(ushort left, Int27T right) => left < right.value;
+    public static bool operator >=(ushort left, Int27T right) => left >= right.value;
+    public static bool operator <=(ushort left, Int27T right) => left <= right.value;
     
     // Comparison operators with long
-    public static bool operator >(Int40T left, long right) => left.value > right;
-    public static bool operator <(Int40T left, long right) => left.value < right;
-    public static bool operator >=(Int40T left, long right) => left.value >= right;
-    public static bool operator <=(Int40T left, long right) => left.value <= right;
+    public static bool operator >(Int27T left, long right) => left.value > right;
+    public static bool operator <(Int27T left, long right) => left.value < right;
+    public static bool operator >=(Int27T left, long right) => left.value >= right;
+    public static bool operator <=(Int27T left, long right) => left.value <= right;
 
-    public static bool operator >(long left, Int40T right) => left > right.value;
-    public static bool operator <(long left, Int40T right) => left < right.value;
-    public static bool operator >=(long left, Int40T right) => left >= right.value;
-    public static bool operator <=(long left, Int40T right) => left <= right.value;
+    public static bool operator >(long left, Int27T right) => left > right.value;
+    public static bool operator <(long left, Int27T right) => left < right.value;
+    public static bool operator >=(long left, Int27T right) => left >= right.value;
+    public static bool operator <=(long left, Int27T right) => left <= right.value;
     
     // Comparison operators with ulong
-    public static bool operator >(Int40T left, ulong right) => left.CompareTo(right) > 0;
-    public static bool operator <(Int40T left, ulong right) => left.CompareTo(right) < 0;
-    public static bool operator >=(Int40T left, ulong right) => left.CompareTo(right) >= 0;
-    public static bool operator <=(Int40T left, ulong right) => left.CompareTo(right) <= 0;
+    public static bool operator >(Int27T left, ulong right) => left.CompareTo(right) > 0;
+    public static bool operator <(Int27T left, ulong right) => left.CompareTo(right) < 0;
+    public static bool operator >=(Int27T left, ulong right) => left.CompareTo(right) >= 0;
+    public static bool operator <=(Int27T left, ulong right) => left.CompareTo(right) <= 0;
 
-    public static bool operator >(ulong left, Int40T right) => right.CompareTo(left) < 0;
-    public static bool operator <(ulong left, Int40T right) => right.CompareTo(left) > 0;
-    public static bool operator >=(ulong left, Int40T right) => right.CompareTo(left) <= 0;
-    public static bool operator <=(ulong left, Int40T right) => right.CompareTo(left) >= 0;
+    public static bool operator >(ulong left, Int27T right) => right.CompareTo(left) < 0;
+    public static bool operator <(ulong left, Int27T right) => right.CompareTo(left) > 0;
+    public static bool operator >=(ulong left, Int27T right) => right.CompareTo(left) <= 0;
+    public static bool operator <=(ulong left, Int27T right) => right.CompareTo(left) >= 0;
      
     // Comparison operators with float
-    public static bool operator >(Int40T left, float right) => left.value > right;
-    public static bool operator <(Int40T left, float right) => left.value < right;
-    public static bool operator >=(Int40T left, float right) => left.value >= right;
-    public static bool operator <=(Int40T left, float right) => left.value <= right;
+    public static bool operator >(Int27T left, float right) => left.value > right;
+    public static bool operator <(Int27T left, float right) => left.value < right;
+    public static bool operator >=(Int27T left, float right) => left.value >= right;
+    public static bool operator <=(Int27T left, float right) => left.value <= right;
 
-    public static bool operator >(float left, Int40T right) => left > right.value;
-    public static bool operator <(float left, Int40T right) => left < right.value;
-    public static bool operator >=(float left, Int40T right) => left >= right.value;
-    public static bool operator <=(float left, Int40T right) => left <= right.value;
+    public static bool operator >(float left, Int27T right) => left > right.value;
+    public static bool operator <(float left, Int27T right) => left < right.value;
+    public static bool operator >=(float left, Int27T right) => left >= right.value;
+    public static bool operator <=(float left, Int27T right) => left <= right.value;
      
     // Comparison operators with double
-    public static bool operator >(Int40T left, double right) => left.value > right;
-    public static bool operator <(Int40T left, double right) => left.value < right;
-    public static bool operator >=(Int40T left, double right) => left.value >= right;
-    public static bool operator <=(Int40T left, double right) => left.value <= right;
+    public static bool operator >(Int27T left, double right) => left.value > right;
+    public static bool operator <(Int27T left, double right) => left.value < right;
+    public static bool operator >=(Int27T left, double right) => left.value >= right;
+    public static bool operator <=(Int27T left, double right) => left.value <= right;
 
-    public static bool operator >(double left, Int40T right) => left > right.value;
-    public static bool operator <(double left, Int40T right) => left < right.value;
-    public static bool operator >=(double left, Int40T right) => left >= right.value;
-    public static bool operator <=(double left, Int40T right) => left <= right.value;
+    public static bool operator >(double left, Int27T right) => left > right.value;
+    public static bool operator <(double left, Int27T right) => left < right.value;
+    public static bool operator >=(double left, Int27T right) => left >= right.value;
+    public static bool operator <=(double left, Int27T right) => left <= right.value;
      
     // Comparison operators with decimal
-    public static bool operator >(Int40T left, decimal right) => left.value > right;
-    public static bool operator <(Int40T left, decimal right) => left.value < right;
-    public static bool operator >=(Int40T left, decimal right) => left.value >= right;
-    public static bool operator <=(Int40T left, decimal right) => left.value <= right;
+    public static bool operator >(Int27T left, decimal right) => left.value > right;
+    public static bool operator <(Int27T left, decimal right) => left.value < right;
+    public static bool operator >=(Int27T left, decimal right) => left.value >= right;
+    public static bool operator <=(Int27T left, decimal right) => left.value <= right;
 
-    public static bool operator >(decimal left, Int40T right) => left > right.value;
-    public static bool operator <(decimal left, Int40T right) => left < right.value;
-    public static bool operator >=(decimal left, Int40T right) => left >= right.value;
-    public static bool operator <=(decimal left, Int40T right) => left <= right.value;
+    public static bool operator >(decimal left, Int27T right) => left > right.value;
+    public static bool operator <(decimal left, Int27T right) => left < right.value;
+    public static bool operator >=(decimal left, Int27T right) => left >= right.value;
+    public static bool operator <=(decimal left, Int27T right) => left <= right.value;
      
     // Comparison operators with IComparable
-    public static bool operator >(Int40T left, IComparable right) => left.CompareTo(right) > 0;
-    public static bool operator <(Int40T left, IComparable right) => left.CompareTo(right) < 0;
-    public static bool operator >=(Int40T left, IComparable right) => left.CompareTo(right) >= 0;
-    public static bool operator <=(Int40T left, IComparable right) => left.CompareTo(right) <= 0;
+    public static bool operator >(Int27T left, IComparable right) => left.CompareTo(right) > 0;
+    public static bool operator <(Int27T left, IComparable right) => left.CompareTo(right) < 0;
+    public static bool operator >=(Int27T left, IComparable right) => left.CompareTo(right) >= 0;
+    public static bool operator <=(Int27T left, IComparable right) => left.CompareTo(right) <= 0;
 
-    public static bool operator >(IComparable left, Int40T right) => right.CompareTo(left) < 0;
-    public static bool operator <(IComparable left, Int40T right) => right.CompareTo(left) > 0;
-    public static bool operator >=(IComparable left, Int40T right) => right.CompareTo(left) <= 0;
-    public static bool operator <=(IComparable left, Int40T right) => right.CompareTo(left) >= 0;
+    public static bool operator >(IComparable left, Int27T right) => right.CompareTo(left) < 0;
+    public static bool operator <(IComparable left, Int27T right) => right.CompareTo(left) > 0;
+    public static bool operator >=(IComparable left, Int27T right) => right.CompareTo(left) <= 0;
+    public static bool operator <=(IComparable left, Int27T right) => right.CompareTo(left) >= 0;
 
     #endregion
 
@@ -428,37 +428,37 @@ public static explicit operator Int32(Int40T value) => (Int32)value.value;
     // Parsing methods
 
     /// <summary>
-    /// Converts the string representation of a number to its <see cref="Int40T"/> equivalent.
+    /// Converts the string representation of a number to its <see cref="Int27T"/> equivalent.
     /// </summary>
     /// <param name="s">A string containing a number to convert.</param>
-    /// <returns>A <see cref="Int40T"/> equivalent to the number contained in <paramref name="s"/>.</returns>
+    /// <returns>A <see cref="Int27T"/> equivalent to the number contained in <paramref name="s"/>.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="s"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException"><paramref name="s"/> is not in the correct format.</exception>
-    /// <exception cref="OverflowException"><paramref name="s"/> represents a number less than <see cref="Int40T.MinValue"/> or greater than <see cref="Int40T.MaxValue"/>.</exception>
-    public static Int40T Parse(string s) => Create(Int64.Parse(s));
+    /// <exception cref="OverflowException"><paramref name="s"/> represents a number less than <see cref="Int27T.MinValue"/> or greater than <see cref="Int27T.MaxValue"/>.</exception>
+    public static Int27T Parse(string s) => Create(Int64.Parse(s));
 
     /// <summary>
-    /// Converts the string representation of a number in a specified style to its <see cref="Int40T"/> equivalent.
+    /// Converts the string representation of a number in a specified style to its <see cref="Int27T"/> equivalent.
     /// </summary>
     /// <param name="s">A string containing a number to convert.</param>
     /// <param name="style">A bitwise combination of enumeration values that indicate the style elements that can be present in <paramref name="s"/>.</param>
-    /// <returns>A <see cref="Int40T"/> equivalent to the number contained in <paramref name="s"/>.</returns>
+    /// <returns>A <see cref="Int27T"/> equivalent to the number contained in <paramref name="s"/>.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="s"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException"><paramref name="style"/> is not a <see cref="NumberStyles"/> value or <paramref name="style"/> includes the <see cref="NumberStyles.AllowHexSpecifier"/> value.</exception>
     /// <exception cref="FormatException"><paramref name="s"/> is not in a format compliant with <paramref name="style"/>.</exception>
-    /// <exception cref="OverflowException"><paramref name="s"/> represents a number less than <see cref="Int40T.MinValue"/> or greater than <see cref="Int40T.MaxValue"/>.</exception>
-    public static Int40T Parse(string s, NumberStyles style) => Create(Int64.Parse(s, style));
+    /// <exception cref="OverflowException"><paramref name="s"/> represents a number less than <see cref="Int27T.MinValue"/> or greater than <see cref="Int27T.MaxValue"/>.</exception>
+    public static Int27T Parse(string s, NumberStyles style) => Create(Int64.Parse(s, style));
 
     /// <summary>
-    /// Tries to convert the string representation of a number to its <see cref="Int40T"/> equivalent, and returns a value that indicates whether the conversion succeeded.
+    /// Tries to convert the string representation of a number to its <see cref="Int27T"/> equivalent, and returns a value that indicates whether the conversion succeeded.
     /// </summary>
     /// <param name="s">A string containing a number to convert.</param>
-    /// <param name="result">When this method returns, contains the <see cref="Int40T"/> value equivalent to the number contained in <paramref name="s"/> if the conversion succeeded, or zero if the conversion failed. This parameter is passed uninitialized.</param>
+    /// <param name="result">When this method returns, contains the <see cref="Int27T"/> value equivalent to the number contained in <paramref name="s"/> if the conversion succeeded, or zero if the conversion failed. This parameter is passed uninitialized.</param>
     /// <returns><see langword="true"/> if <paramref name="s"/> was converted successfully; otherwise, <see langword="false"/>.</returns>
-    public static bool TryParse(string? s, out Int40T result)
+    public static bool TryParse(string? s, out Int27T result)
     {
         bool success = Int64.TryParse(s, out Int64 value);
-        result = new Int40T(value);
+        result = new Int27T(value);
         return success;
     }
 
@@ -473,13 +473,13 @@ public static explicit operator Int32(Int40T value) => (Int32)value.value;
     /// Zero: This instance is equal to <paramref name="obj"/>.
     /// Greater than zero: This instance is greater than <paramref name="obj"/> or <paramref name="obj"/> is <see langword="null"/>.
     /// </returns>
-    /// <exception cref="ArgumentException"><paramref name="obj"/> is not a <see cref="Int40T"/> or a type that can be converted to an integer.</exception>
+    /// <exception cref="ArgumentException"><paramref name="obj"/> is not a <see cref="Int27T"/> or a type that can be converted to an integer.</exception>
     public int CompareTo(object? obj)
     {
         if (obj == null) return 1;
-        if (obj is Int40T other) return CompareTo(other);
+        if (obj is Int27T other) return CompareTo(other);
 
-        // For large numeric types that exceed Int40T's range, return -1 if greater than MaxValue, 1 if less than MinValue
+        // For large numeric types that exceed Int27T's range, return -1 if greater than MaxValue, 1 if less than MinValue
         try
         {
             if (obj is Int64 typed) return value.CompareTo(typed);
@@ -589,9 +589,9 @@ public static explicit operator Int32(Int40T value) => (Int32)value.value;
     }
 
     /// <summary>
-    /// Compares this instance to a specified <see cref="Int40T"/> object and returns an indication of their relative values.
+    /// Compares this instance to a specified <see cref="Int27T"/> object and returns an indication of their relative values.
     /// </summary>
-    /// <param name="other">An <see cref="Int40T"/> object to compare.</param>
+    /// <param name="other">An <see cref="Int27T"/> object to compare.</param>
     /// <returns>
     /// A signed number indicating the relative values of this instance and <paramref name="other"/>.
     /// Return Value Description:
@@ -599,7 +599,7 @@ public static explicit operator Int32(Int40T value) => (Int32)value.value;
     /// Zero: This instance is equal to <paramref name="other"/>.
     /// Greater than zero: This instance is greater than <paramref name="other"/>.
     /// </returns>
-    public int CompareTo(Int40T other) => value.CompareTo(other.value);
+    public int CompareTo(Int27T other) => value.CompareTo(other.value);
 
     #region IConvertible Implementation
 
@@ -655,71 +655,71 @@ public static explicit operator Int32(Int40T value) => (Int32)value.value;
 
     #region IIncrementOperators/IDecrementOperators Implementation
 
-    public static Int40T operator ++(Int40T value) => Create(value.value + 1);
-    public static Int40T operator --(Int40T value) => Create(value.value - 1);
+    public static Int27T operator ++(Int27T value) => Create(value.value + 1);
+    public static Int27T operator --(Int27T value) => Create(value.value - 1);
 
     #endregion
 
-    static bool IEqualityOperators<Int40T, Int40T, bool>.operator ==(Int40T left, Int40T right) => left.value == right.value;
-    static bool IEqualityOperators<Int40T, Int40T, bool>.operator !=(Int40T left, Int40T right) => left.value != right.value;
+    static bool IEqualityOperators<Int27T, Int27T, bool>.operator ==(Int27T left, Int27T right) => left.value == right.value;
+    static bool IEqualityOperators<Int27T, Int27T, bool>.operator !=(Int27T left, Int27T right) => left.value != right.value;
 
     #region Binary Operations
 
-    public static Int40T RotateLeft(Int40T value, int rotateAmount) =>
+    public static Int27T RotateLeft(Int27T value, int rotateAmount) =>
         Create((Int64)BitOperations.RotateLeft((ulong)value.value, rotateAmount));
 
     #endregion
 
     #region Interface Static Members
 
-    static Int40T ISignedNumber<Int40T>.NegativeOne => new(-1);
-    static Int40T INumberBase<Int40T>.One => new(1);
-    static Int40T INumberBase<Int40T>.Zero => new(0);
-    static Int40T IAdditiveIdentity<Int40T, Int40T>.AdditiveIdentity => new(0);
-    static Int40T IMultiplicativeIdentity<Int40T, Int40T>.MultiplicativeIdentity => new(1);
+    static Int27T ISignedNumber<Int27T>.NegativeOne => new(-1);
+    static Int27T INumberBase<Int27T>.One => new(1);
+    static Int27T INumberBase<Int27T>.Zero => new(0);
+    static Int27T IAdditiveIdentity<Int27T, Int27T>.AdditiveIdentity => new(0);
+    static Int27T IMultiplicativeIdentity<Int27T, Int27T>.MultiplicativeIdentity => new(1);
 
-    static bool INumberBase<Int40T>.IsCanonical(Int40T value) => true;
-    static bool INumberBase<Int40T>.IsComplexNumber(Int40T value) => false;
-    static bool INumberBase<Int40T>.IsEvenInteger(Int40T value) => value.value % 2 == 0;
-    static bool INumberBase<Int40T>.IsFinite(Int40T value) => true;
-    static bool INumberBase<Int40T>.IsImaginaryNumber(Int40T value) => false;
-    static bool INumberBase<Int40T>.IsInfinity(Int40T value) => false;
-    static bool INumberBase<Int40T>.IsInteger(Int40T value) => true;
-    static bool INumberBase<Int40T>.IsNaN(Int40T value) => false;
-    static bool INumberBase<Int40T>.IsNegative(Int40T value) => value.value < 0;
-    static bool INumberBase<Int40T>.IsNegativeInfinity(Int40T value) => false;
-    static bool INumberBase<Int40T>.IsNormal(Int40T value) => value.value != 0;
-    static bool INumberBase<Int40T>.IsOddInteger(Int40T value) => value.value % 2 != 0;
-    static bool INumberBase<Int40T>.IsPositive(Int40T value) => value.value > 0;
-    static bool INumberBase<Int40T>.IsPositiveInfinity(Int40T value) => false;
-    static bool INumberBase<Int40T>.IsRealNumber(Int40T value) => true;
-    static bool INumberBase<Int40T>.IsSubnormal(Int40T value) => false;
-    static bool INumberBase<Int40T>.IsZero(Int40T value) => value.value == 0;
+    static bool INumberBase<Int27T>.IsCanonical(Int27T value) => true;
+    static bool INumberBase<Int27T>.IsComplexNumber(Int27T value) => false;
+    static bool INumberBase<Int27T>.IsEvenInteger(Int27T value) => value.value % 2 == 0;
+    static bool INumberBase<Int27T>.IsFinite(Int27T value) => true;
+    static bool INumberBase<Int27T>.IsImaginaryNumber(Int27T value) => false;
+    static bool INumberBase<Int27T>.IsInfinity(Int27T value) => false;
+    static bool INumberBase<Int27T>.IsInteger(Int27T value) => true;
+    static bool INumberBase<Int27T>.IsNaN(Int27T value) => false;
+    static bool INumberBase<Int27T>.IsNegative(Int27T value) => value.value < 0;
+    static bool INumberBase<Int27T>.IsNegativeInfinity(Int27T value) => false;
+    static bool INumberBase<Int27T>.IsNormal(Int27T value) => value.value != 0;
+    static bool INumberBase<Int27T>.IsOddInteger(Int27T value) => value.value % 2 != 0;
+    static bool INumberBase<Int27T>.IsPositive(Int27T value) => value.value > 0;
+    static bool INumberBase<Int27T>.IsPositiveInfinity(Int27T value) => false;
+    static bool INumberBase<Int27T>.IsRealNumber(Int27T value) => true;
+    static bool INumberBase<Int27T>.IsSubnormal(Int27T value) => false;
+    static bool INumberBase<Int27T>.IsZero(Int27T value) => value.value == 0;
 
-    static Int40T INumberBase<Int40T>.MaxMagnitude(Int40T x, Int40T y) =>
+    static Int27T INumberBase<Int27T>.MaxMagnitude(Int27T x, Int27T y) =>
         Math.Abs(x.value) > Math.Abs(y.value) ? x : y;
 
-    static Int40T INumberBase<Int40T>.MaxMagnitudeNumber(Int40T x, Int40T y) =>
+    static Int27T INumberBase<Int27T>.MaxMagnitudeNumber(Int27T x, Int27T y) =>
         Math.Abs(x.value) > Math.Abs(y.value) ? x : y;
 
-    static Int40T INumberBase<Int40T>.MinMagnitude(Int40T x, Int40T y) =>
+    static Int27T INumberBase<Int27T>.MinMagnitude(Int27T x, Int27T y) =>
         Math.Abs(x.value) < Math.Abs(y.value) ? x : y;
 
-    static Int40T INumberBase<Int40T>.MinMagnitudeNumber(Int40T x, Int40T y) =>
+    static Int27T INumberBase<Int27T>.MinMagnitudeNumber(Int27T x, Int27T y) =>
         Math.Abs(x.value) < Math.Abs(y.value) ? x : y;
 
-    static int INumberBase<Int40T>.Radix => 2;
+    static int INumberBase<Int27T>.Radix => 2;
 
-    static Int40T INumberBase<Int40T>.Abs(Int40T value) =>
+    static Int27T INumberBase<Int27T>.Abs(Int27T value) =>
         value.value < 0 ? new((Int64)(-value.value)) : value;
 
-    static Int40T INumberBase<Int40T>.Parse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider) =>
+    static Int27T INumberBase<Int27T>.Parse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider) =>
         Create(Int64.Parse(s, style, provider));
 
-    static Int40T INumberBase<Int40T>.Parse(string s, NumberStyles style, IFormatProvider? provider) =>
+    static Int27T INumberBase<Int27T>.Parse(string s, NumberStyles style, IFormatProvider? provider) =>
         Create(Int64.Parse(s, style, provider));
 
-    static bool INumberBase<Int40T>.TryParse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider, out Int40T result)
+    static bool INumberBase<Int27T>.TryParse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider, out Int27T result)
     {
         if (Int64.TryParse(s, style, provider, out var parsed))
         {
@@ -731,7 +731,7 @@ public static explicit operator Int32(Int40T value) => (Int32)value.value;
         return false;
     }
 
-    static bool INumberBase<Int40T>.TryParse([NotNullWhen(true)] string? s, NumberStyles style, IFormatProvider? provider, out Int40T result)
+    static bool INumberBase<Int27T>.TryParse([NotNullWhen(true)] string? s, NumberStyles style, IFormatProvider? provider, out Int27T result)
     {
         if (Int64.TryParse(s, style, provider, out var parsed))
         {
@@ -743,24 +743,24 @@ public static explicit operator Int32(Int40T value) => (Int32)value.value;
         return false;
     }
 
-    static bool IBinaryNumber<Int40T>.IsPow2(Int40T value) =>
+    static bool IBinaryNumber<Int27T>.IsPow2(Int27T value) =>
         value.value > 0 && (value.value & (value.value - 1)) == 0;
 
-    static Int40T IBinaryNumber<Int40T>.Log2(Int40T value) =>
+    static Int27T IBinaryNumber<Int27T>.Log2(Int27T value) =>
         Create(BitOperations.Log2((uint)value.value));
 
-    int IBinaryInteger<Int40T>.GetByteCount() => sizeof(Int64);
+    int IBinaryInteger<Int27T>.GetByteCount() => sizeof(Int64);
 
-    int IBinaryInteger<Int40T>.GetShortestBitLength() =>
+    int IBinaryInteger<Int27T>.GetShortestBitLength() =>
         value == 0 ? 1 : BitOperations.Log2((uint)Math.Abs(value)) + 1;
 
-    static Int40T IBinaryInteger<Int40T>.PopCount(Int40T value) =>
+    static Int27T IBinaryInteger<Int27T>.PopCount(Int27T value) =>
         Create(BitOperations.PopCount((uint)value.value));
 
-    static Int40T IBinaryInteger<Int40T>.TrailingZeroCount(Int40T value) =>
+    static Int27T IBinaryInteger<Int27T>.TrailingZeroCount(Int27T value) =>
         Create(BitOperations.TrailingZeroCount((uint)value.value));
 
-    bool IBinaryInteger<Int40T>.TryWriteBigEndian(Span<byte> destination, out int bytesWritten)
+    bool IBinaryInteger<Int27T>.TryWriteBigEndian(Span<byte> destination, out int bytesWritten)
     {
         if (destination.Length < sizeof(Int64))
         {
@@ -776,7 +776,7 @@ public static explicit operator Int32(Int40T value) => (Int32)value.value;
         return true;
     }
 
-    bool IBinaryInteger<Int40T>.TryWriteLittleEndian(Span<byte> destination, out int bytesWritten)
+    bool IBinaryInteger<Int27T>.TryWriteLittleEndian(Span<byte> destination, out int bytesWritten)
     {
         if (destination.Length < sizeof(Int64))
         {
@@ -789,7 +789,7 @@ public static explicit operator Int32(Int40T value) => (Int32)value.value;
         return true;
     }
 
-    static bool IBinaryInteger<Int40T>.TryReadBigEndian(ReadOnlySpan<byte> source, bool isUnsigned, out Int40T result)
+    static bool IBinaryInteger<Int27T>.TryReadBigEndian(ReadOnlySpan<byte> source, bool isUnsigned, out Int27T result)
     {
         if (source.Length < sizeof(Int64))
         {
@@ -805,7 +805,7 @@ public static explicit operator Int32(Int40T value) => (Int32)value.value;
         return true;
     }
 
-    static bool IBinaryInteger<Int40T>.TryReadLittleEndian(ReadOnlySpan<byte> source, bool isUnsigned, out Int40T result)
+    static bool IBinaryInteger<Int27T>.TryReadLittleEndian(ReadOnlySpan<byte> source, bool isUnsigned, out Int27T result)
     {
         if (source.Length < sizeof(Int64))
         {
@@ -819,10 +819,10 @@ public static explicit operator Int32(Int40T value) => (Int32)value.value;
 
     #region ISpanFormattable/ISpanParsable Implementation
 
-    static Int40T ISpanParsable<Int40T>.Parse(ReadOnlySpan<char> s, IFormatProvider? provider) =>
+    static Int27T ISpanParsable<Int27T>.Parse(ReadOnlySpan<char> s, IFormatProvider? provider) =>
         new(Int64.Parse(s, NumberStyles.Integer, provider));
 
-    static bool ISpanParsable<Int40T>.TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, out Int40T result)
+    static bool ISpanParsable<Int27T>.TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, out Int27T result)
     {
         if (Int64.TryParse(s, NumberStyles.Integer, provider, out var value))
         {
@@ -837,10 +837,10 @@ public static explicit operator Int32(Int40T value) => (Int32)value.value;
     bool ISpanFormattable.TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider? provider) =>
         value.TryFormat(destination, out charsWritten, format.ToString(), provider);
 
-    static Int40T IParsable<Int40T>.Parse(string s, IFormatProvider? provider) =>
+    static Int27T IParsable<Int27T>.Parse(string s, IFormatProvider? provider) =>
         new(Int64.Parse(s, NumberStyles.Integer, provider));
 
-    static bool IParsable<Int40T>.TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, out Int40T result)
+    static bool IParsable<Int27T>.TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, out Int27T result)
     {
         if (Int64.TryParse(s, NumberStyles.Integer, provider, out var value))
         {
@@ -856,25 +856,25 @@ public static explicit operator Int32(Int40T value) => (Int32)value.value;
 
     #region Bit Operators
 
-    static Int40T IBitwiseOperators<Int40T, Int40T, Int40T>.operator &(Int40T left, Int40T right) =>
+    static Int27T IBitwiseOperators<Int27T, Int27T, Int27T>.operator &(Int27T left, Int27T right) =>
         Create(left.value & right.value);
 
-    static Int40T IBitwiseOperators<Int40T, Int40T, Int40T>.operator |(Int40T left, Int40T right) =>
+    static Int27T IBitwiseOperators<Int27T, Int27T, Int27T>.operator |(Int27T left, Int27T right) =>
         Create(left.value | right.value);
 
-    static Int40T IBitwiseOperators<Int40T, Int40T, Int40T>.operator ^(Int40T left, Int40T right) =>
+    static Int27T IBitwiseOperators<Int27T, Int27T, Int27T>.operator ^(Int27T left, Int27T right) =>
         Create(left.value ^ right.value);
 
-    static Int40T IBitwiseOperators<Int40T, Int40T, Int40T>.operator ~(Int40T value) =>
+    static Int27T IBitwiseOperators<Int27T, Int27T, Int27T>.operator ~(Int27T value) =>
         Create(~value.value);
 
-    static Int40T IShiftOperators<Int40T, int, Int40T>.operator <<(Int40T value, int shiftAmount) =>
+    static Int27T IShiftOperators<Int27T, int, Int27T>.operator <<(Int27T value, int shiftAmount) =>
         Create(value.value << shiftAmount);
 
-    static Int40T IShiftOperators<Int40T, int, Int40T>.operator >> (Int40T value, int shiftAmount) =>
+    static Int27T IShiftOperators<Int27T, int, Int27T>.operator >> (Int27T value, int shiftAmount) =>
         Create(value.value >> shiftAmount);
 
-    static Int40T IShiftOperators<Int40T, int, Int40T>.operator >>> (Int40T value, int shiftAmount) =>
+    static Int27T IShiftOperators<Int27T, int, Int27T>.operator >>> (Int27T value, int shiftAmount) =>
         Create(Int64.CreateChecked(((uint)value.value) >> shiftAmount));
 
     #endregion
@@ -883,7 +883,7 @@ public static explicit operator Int32(Int40T value) => (Int32)value.value;
 
     #region Generic Conversions
 
-    static bool INumberBase<Int40T>.TryConvertFromChecked<TOther>(TOther value, out Int40T result)
+    static bool INumberBase<Int27T>.TryConvertFromChecked<TOther>(TOther value, out Int27T result)
     {
         if (value is IConvertible conv)
         {
@@ -906,7 +906,7 @@ public static explicit operator Int32(Int40T value) => (Int32)value.value;
         return false;
     }
 
-    static bool INumberBase<Int40T>.TryConvertFromSaturating<TOther>(TOther value, out Int40T result)
+    static bool INumberBase<Int27T>.TryConvertFromSaturating<TOther>(TOther value, out Int27T result)
     {
         if (value is IConvertible conv)
         {
@@ -926,7 +926,7 @@ public static explicit operator Int32(Int40T value) => (Int32)value.value;
         return false;
     }
 
-    static bool INumberBase<Int40T>.TryConvertFromTruncating<TOther>(TOther value, out Int40T result)
+    static bool INumberBase<Int27T>.TryConvertFromTruncating<TOther>(TOther value, out Int27T result)
     {
         if (value is IConvertible conv)
         {
@@ -946,7 +946,7 @@ public static explicit operator Int32(Int40T value) => (Int32)value.value;
         return false;
     }
 
-    static bool INumberBase<Int40T>.TryConvertToChecked<TOther>(Int40T value, [MaybeNullWhen(false)] out TOther result)
+    static bool INumberBase<Int27T>.TryConvertToChecked<TOther>(Int27T value, [MaybeNullWhen(false)] out TOther result)
         where TOther : default
     {
         if (typeof(TOther) == typeof(Int64))
@@ -959,7 +959,7 @@ public static explicit operator Int32(Int40T value) => (Int32)value.value;
         return false;
     }
 
-    static bool INumberBase<Int40T>.TryConvertToSaturating<TOther>(Int40T value, [MaybeNullWhen(false)] out TOther result)
+    static bool INumberBase<Int27T>.TryConvertToSaturating<TOther>(Int27T value, [MaybeNullWhen(false)] out TOther result)
         where TOther : default
     {
         if (typeof(TOther) == typeof(Int64))
@@ -972,7 +972,7 @@ public static explicit operator Int32(Int40T value) => (Int32)value.value;
         return false;
     }
 
-    static bool INumberBase<Int40T>.TryConvertToTruncating<TOther>(Int40T value, [MaybeNullWhen(false)] out TOther result)
+    static bool INumberBase<Int27T>.TryConvertToTruncating<TOther>(Int27T value, [MaybeNullWhen(false)] out TOther result)
         where TOther : default
     {
         if (typeof(TOther) == typeof(Int64))

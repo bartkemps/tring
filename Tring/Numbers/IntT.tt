@@ -8,10 +8,12 @@
     // Define the ternary number types to generate
             var ternaryTypes = new List<(string BackingType, int Trits, long BackingTypeMaxValue)>
             {
-                //("IntT3", "sbyte", "int", 13, sbyte.MaxValue),
-                //("IntT5", "sbyte", "int", 121),
+                //("SByte",3, sbyte.MaxValue),
+                //("SByte", 5, sbyte.MaxValue),
+                ("Int16", 9, short.MaxValue),
                 ("Int16", 10, short.MaxValue),
                 ("Int32", 20, int.MaxValue),
+                ("Int64", 27, long.MaxValue),
                 ("Int64", 40, long.MaxValue),
             };
 
@@ -82,9 +84,9 @@ internal static class TernaryNumberGenerator
            using System.Diagnostics.CodeAnalysis;
            
            /// <summary>
-           /// Represents a ternary number, modeled after the <see cref="{{backingType}}"/> type.
+           /// Represents a {{trits}}-trit  signed integer, modeled after the <see cref="{{backingType}}"/> type.
            /// </summary>
-           [GeneratedCode("T4",null)]
+           [GeneratedCode("IntT.tt", null)]
            public readonly partial struct {{name}} :
                IConvertible,
                IBinaryInteger<{{name}}>,
@@ -106,12 +108,12 @@ internal static class TernaryNumberGenerator
                /// <summary>
                /// Represents the largest possible value of a <see cref="{{name}}"/>. This field is constant.
                /// </summary>
-               public static {{name}} MaxValue => new(MaxValueConstant);
+               public static readonly {{name}} MaxValue = new(MaxValueConstant);
            
                /// <summary>
                /// Represents the smallest possible value of a <see cref="{{name}}"/>. This field is constant.
                /// </summary>
-               public static {{name}} MinValue => new(MinValueConstant);
+               public static readonly {{name}} MinValue = new(MinValueConstant);
            
                private {{name}}({{backingType}} value) => this.value = value;
                

@@ -17,7 +17,7 @@ public class IntTOverflowTests
         var actual = (Int10T)(factor * 59049 + 1000);
         actual.Should().Be(expected);
     }
-    
+
     [Theory]
     [InlineData(0)]
     [InlineData(1)]
@@ -30,7 +30,7 @@ public class IntTOverflowTests
         var actual = (Int20T)(factor * 3486784401 + 1000);
         actual.Should().Be(expected);
     }
-    
+
     [Fact]
     public void Overflow_OverflowsCorrectly_WhenUnchecked()
     {
@@ -45,5 +45,14 @@ public class IntTOverflowTests
             var underFlowed = (Int10T)(min - 1);
             ((short)underFlowed).Should().Be(max);
         }
+    }
+
+    [Fact]
+    public void Addition_OverflowsCorrectly()
+    {
+        (Int10T.MaxValue + Int10T.MaxValue).Should().Be((Int10T)(-1));
+        //(Int10T.MaxValue * (Int10T)3).Should().Be((Int10T)(-3));
+        //(Int20T.MaxValue + Int20T.MaxValue).Should().Be((Int20T)(-1));
+        //(Int40T.MaxValue + Int40T.MaxValue).Should().Be((Int40T)(-1));
     }
 }
