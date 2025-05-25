@@ -115,7 +115,7 @@ internal static class TernaryNumberGenerator
            
                private {{name}}({{backingType}} value) => this.value = value;
                
-                {{ string.Join("     ", CreateCreateMethods(name, backingType)) }}
+                {{ string.Join("\r\n     ", CreateCreateMethods(name, backingType)) }}
 
                /// <summary>
                /// Defines an implicit conversion of a {{backingType}} to a <see cref="{{name}}"/>.
@@ -963,8 +963,8 @@ internal static class TernaryNumberGenerator
         else
         {
             yield return $"private static {name} Create({backingType} value) => new(({backingType})((Int32)value).BalancedModulo((Int32)MaxValueConstant));";
-            yield return $"private static {name} Create(Int32 value) => new(({backingType})value.BalancedModulo((Int32)MaxValueConstant));";
-            yield return $"private static {name} Create(Int64 value) => new(({backingType})value.BalancedModulo((Int64)MaxValueConstant));";
+            yield return $"private static {name} Create(Int32 value) => new(({backingType})(value.BalancedModulo((Int32)MaxValueConstant)));";
+            yield return $"private static {name} Create(Int64 value) => new(({backingType})(value.BalancedModulo((Int64)MaxValueConstant)));";
         }
     }
 #>
