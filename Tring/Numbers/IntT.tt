@@ -2,17 +2,17 @@
 <#@ assembly name="System.Core" #>
 <#@ import namespace="System.IO" #>
 <#@ import namespace="System.Collections.Generic" #>
-<#@ import namespace="System.Linq" #>
 <#@ output extension=".cs" #>
+<#@ import namespace="System.Threading" #>
 <#
     // Define the ternary number types to generate
-            var ternaryTypes = new List<(string Name, string BackingType, string SecondaryConstructorType, long MaxValueConstant, long BackingTypeMaxValue)>
+            var ternaryTypes = new List<(string BackingType, int Trits, long BackingTypeMaxValue)>
             {
                 //("IntT3", "sbyte", "int", 13, sbyte.MaxValue),
                 //("IntT5", "sbyte", "int", 121),
-                ("Int10T", "Int16", "Int32", 29524, short.MaxValue),
-                ("Int20T", "Int32", null, 1743392200, int.MaxValue),
-                ("Int40T", "Int64", null, 6078832729528464400, long.MaxValue),
+                ("Int16", 10, short.MaxValue),
+                ("Int32", 20, int.MaxValue),
+                ("Int64", 40, long.MaxValue),
             };
 
             // Loop through each type and generate its file
@@ -20,15 +20,13 @@
             {
                 // Generate the file content
                 string fileContent = GenerateTernaryNumberClass(
-                    type.Name,
                     type.BackingType,
-                    type.SecondaryConstructorType,
-                    type.MaxValueConstant,
+                    type.Trits,
                     type.BackingTypeMaxValue
                     );
 
                 // Determine the output file path
-                string outputFilePath = Host.ResolvePath($"{type.Name}.cs");
+                string outputFilePath = Host.ResolvePath($"Int{type.Trits}T.cs");
 
                 // Write the content to the file
                 File.WriteAllText(outputFilePath, fileContent);
@@ -42,17 +40,31 @@ namespace Tring.Numbers;
 /// This file serves as a marker to indicate the T4 template has run successfully.
 /// Look for individual generated files for each ternary number type.
 /// </summary>
-public static class TernaryNumberGenerator
+internal static class TernaryNumberGenerator
 {
     public static readonly string LastGenerated = "<#= DateTime.Now.ToString() #>";
 }
 
 <#+
-// This method generates the code for a single ternary number struct
-    private string GenerateTernaryNumberClass(string name, string backingType, string secondaryConstructorType, long maxValueConstant, long backingTypeMaxValue)
+    public static long HalfPow3(long exponent)
     {
+        long result = 1;
+        while (--exponent > 0)
+        {
+            result *= 3;
+        }
+        return 1 + 3 * (result >>  1);
+    }
+
+// This method generates the code for a single ternary number struct
+    private string GenerateTernaryNumberClass(string backingType, int trits, long backingTypeMaxValue)
+    {
+        var name = $"Int{trits}T";
+        var maxValueConstant = HalfPow3(trits);
         // Check if MaxValueConstant is potentially too big for uint
         bool isTooLargeForUint32 = maxValueConstant > uint.MaxValue;
+        bool useLong = backingType == "Int64";
+        string calcType = useLong ? "Int64" : "Int32";
 
         return $$"""
            // ReSharper disable CompareOfFloatsByEqualityOperator
@@ -77,7 +89,7 @@ public static class TernaryNumberGenerator
                IConvertible,
                IBinaryInteger<{{name}}>,
                ISignedNumber<{{name}}>,
-               ITernaryNumber<{{name}}, {{backingType}}>
+               ITernaryInteger<{{name}}>
            {
                private readonly {{backingType}} value;
            
@@ -91,8 +103,6 @@ public static class TernaryNumberGenerator
                /// </summary>
                public const {{backingType}} MinValueConstant = {{-maxValueConstant}};
            
-               private const {{backingType}} Wrap = {{(backingTypeMaxValue - maxValueConstant-1)*2+1}};
-           
                /// <summary>
                /// Represents the largest possible value of a <see cref="{{name}}"/>. This field is constant.
                /// </summary>
@@ -103,22 +113,16 @@ public static class TernaryNumberGenerator
                /// </summary>
                public static {{name}} MinValue => new(MinValueConstant);
            
-               private {{name}}({{backingType}} value) =>
-                   this.value = value switch
-                   {
-                       > MaxValueConstant =>({{backingType}})(value + Wrap),
-                       < MinValueConstant => ({{backingType}})(value - Wrap),
-                       _ => value
-                   };
-
-              {{(secondaryConstructorType == null ? "" : $"private {name}(int value): this(({backingType})value){{}}")}}                   
+               private {{name}}({{backingType}} value) => this.value = value;
+               
+                {{ string.Join("     ", CreateCreateMethods(name, backingType)) }}
 
                /// <summary>
                /// Defines an implicit conversion of a {{backingType}} to a <see cref="{{name}}"/>.
                /// </summary>
                /// <param name="value">The value to convert.</param>
                /// <returns>A <see cref="{{name}}"/> that represents the converted value.</returns>
-               public static implicit operator {{name}}({{backingType}} value) => new(value);
+               public static implicit operator {{name}}({{backingType}} value) => Create(value);
            
                /// <summary>
                /// Defines an implicit conversion of a <see cref="{{name}}"/> to a {{backingType}}.
@@ -263,7 +267,7 @@ public static class TernaryNumberGenerator
                /// <param name="left">The first value to add.</param>
                /// <param name="right">The second value to add.</param>
                /// <returns>The sum of <paramref name="left"/> and <paramref name="right"/>.</returns>
-               public static {{name}} operator +({{name}} left, {{name}} right) => new(left.value + right.value);
+               public static {{name}} operator +({{name}} left, {{name}} right) => Create(left.value + right.value);
            
                /// <summary>
                /// Subtracts one <see cref="{{name}}"/> value from another and returns the result.
@@ -271,7 +275,7 @@ public static class TernaryNumberGenerator
                /// <param name="left">The value to subtract from (the minuend).</param>
                /// <param name="right">The value to subtract (the subtrahend).</param>
                /// <returns>The result of subtracting <paramref name="right"/> from <paramref name="left"/>.</returns>
-               public static {{name}} operator -({{name}} left, {{name}} right) => new(left.value - right.value);
+               public static {{name}} operator -({{name}} left, {{name}} right) => Create(left.value - right.value);
            
                /// <summary>
                /// Multiplies two <see cref="{{name}}"/> values and returns the result.
@@ -279,7 +283,7 @@ public static class TernaryNumberGenerator
                /// <param name="left">The first value to multiply.</param>
                /// <param name="right">The second value to multiply.</param>
                /// <returns>The product of <paramref name="left"/> and <paramref name="right"/>.</returns>
-               public static {{name}} operator *({{name}} left, {{name}} right) => new(left.value * right.value);
+               public static {{name}} operator *({{name}} left, {{name}} right) => Create(left.value * right.value);
            
                /// <summary>
                /// Divides one <see cref="{{name}}"/> value by another and returns the result.
@@ -288,7 +292,7 @@ public static class TernaryNumberGenerator
                /// <param name="right">The value to divide by (the divisor).</param>
                /// <returns>The result of dividing <paramref name="left"/> by <paramref name="right"/>.</returns>
                /// <exception cref="DivideByZeroException"><paramref name="right"/> is zero.</exception>
-               public static {{name}} operator /({{name}} left, {{name}} right) => new(left.value / right.value);
+               public static {{name}} operator /({{name}} left, {{name}} right) => Create(left.value / right.value);
            
                /// <summary>
                /// Returns the remainder that results from dividing one <see cref="{{name}}"/> value by another.
@@ -297,14 +301,14 @@ public static class TernaryNumberGenerator
                /// <param name="right">The value to divide by (the divisor).</param>
                /// <returns>The remainder that results from dividing <paramref name="left"/> by <paramref name="right"/>.</returns>
                /// <exception cref="DivideByZeroException"><paramref name="right"/> is zero.</exception>
-               public static {{name}} operator %({{name}} left, {{name}} right) => new(left.value % right.value);
+               public static {{name}} operator %({{name}} left, {{name}} right) => Create(left.value % right.value);
            
                /// <summary>
                /// Negates the specified <see cref="{{name}}"/> value.
                /// </summary>
                /// <param name="value">The value to negate.</param>
                /// <returns>The result of the value multiplied by negative one (-1).</returns>
-               public static {{name}} operator -({{name}} value) => new(-value.value);
+               public static {{name}} operator -({{name}} value) => Create(-value.value);
            
                /// <summary>
                /// Returns the specified <see cref="{{name}}"/> value; the sign of the value is unchanged.
@@ -314,20 +318,20 @@ public static class TernaryNumberGenerator
                public static {{name}} operator +({{name}} value) => value;
            
                // Mixed-type arithmetic operators with {{backingType}}
-               public static {{name}} operator +({{name}} left, {{backingType}} right) => new(left.value + right);
-               public static {{name}} operator +({{backingType}} left, {{name}} right) => new(left + right.value);
+               public static {{name}} operator +({{name}} left, {{backingType}} right) => Create(left.value + right);
+               public static {{name}} operator +({{backingType}} left, {{name}} right) => Create(left + right.value);
            
-               public static {{name}} operator -({{name}} left, {{backingType}} right) => new(left.value - right);
-               public static {{name}} operator -({{backingType}} left, {{name}} right) => new(left - right.value);
+               public static {{name}} operator -({{name}} left, {{backingType}} right) => Create(left.value - right);
+               public static {{name}} operator -({{backingType}} left, {{name}} right) => Create(left - right.value);
            
-               public static {{name}} operator *({{name}} left, {{backingType}} right) => new(left.value * right);
-               public static {{name}} operator *({{backingType}} left, {{name}} right) => new(left * right.value);
+               public static {{name}} operator *({{name}} left, {{backingType}} right) => Create(left.value * right);
+               public static {{name}} operator *({{backingType}} left, {{name}} right) => Create(left * right.value);
            
-               public static {{name}} operator /({{name}} left, {{backingType}} right) => new(left.value / right);
-               public static {{name}} operator /({{backingType}} left, {{name}} right) => new(left / right.value);
+               public static {{name}} operator /({{name}} left, {{backingType}} right) => Create(left.value / right);
+               public static {{name}} operator /({{backingType}} left, {{name}} right) => Create(left / right.value);
            
-               public static {{name}} operator %({{name}} left, {{backingType}} right) => new(left.value % right);
-               public static {{name}} operator %({{backingType}} left, {{name}} right) => new(left % right.value);
+               public static {{name}} operator %({{name}} left, {{backingType}} right) => Create(left.value % right);
+               public static {{name}} operator %({{backingType}} left, {{name}} right) => Create(left % right.value);
                #endregion
                
                #region Comparison Operators
@@ -368,7 +372,7 @@ public static class TernaryNumberGenerator
                /// <exception cref="ArgumentNullException"><paramref name="s"/> is <see langword="null"/>.</exception>
                /// <exception cref="FormatException"><paramref name="s"/> is not in the correct format.</exception>
                /// <exception cref="OverflowException"><paramref name="s"/> represents a number less than <see cref="{{name}}.MinValue"/> or greater than <see cref="{{name}}.MaxValue"/>.</exception>
-               public static {{name}} Parse(string s) => new({{backingType}}.Parse(s));
+               public static {{name}} Parse(string s) => Create({{backingType}}.Parse(s));
            
                /// <summary>
                /// Converts the string representation of a number in a specified style to its <see cref="{{name}}"/> equivalent.
@@ -380,7 +384,7 @@ public static class TernaryNumberGenerator
                /// <exception cref="ArgumentException"><paramref name="style"/> is not a <see cref="NumberStyles"/> value or <paramref name="style"/> includes the <see cref="NumberStyles.AllowHexSpecifier"/> value.</exception>
                /// <exception cref="FormatException"><paramref name="s"/> is not in a format compliant with <paramref name="style"/>.</exception>
                /// <exception cref="OverflowException"><paramref name="s"/> represents a number less than <see cref="{{name}}.MinValue"/> or greater than <see cref="{{name}}.MaxValue"/>.</exception>
-               public static {{name}} Parse(string s, NumberStyles style) => new({{backingType}}.Parse(s, style));
+               public static {{name}} Parse(string s, NumberStyles style) => Create({{backingType}}.Parse(s, style));
            
                /// <summary>
                /// Tries to convert the string representation of a number to its <see cref="{{name}}"/> equivalent, and returns a value that indicates whether the conversion succeeded.
@@ -429,8 +433,8 @@ public static class TernaryNumberGenerator
                        if (obj is uint uint32)
                        {
                            return {{(isTooLargeForUint32
-                                ?$"value.CompareTo(({backingType})uint32);"
-                                :$"uint32 > MaxValueConstant ? -1 : value.CompareTo(({backingType})uint32);")}}
+                               ? $"value.CompareTo(({backingType})uint32);"
+                               : $"uint32 > MaxValueConstant ? -1 : value.CompareTo(({backingType})uint32);")}}
                        }
            
                        if (obj is ulong uint64)
@@ -485,7 +489,7 @@ public static class TernaryNumberGenerator
                                    return value.CompareTo(convertible.ToInt32(null));
                                case TypeCode.UInt32:
                                    var uint32Value = convertible.ToUInt32(null);
-                                   {{( isTooLargeForUint32 ? "" : "if (uint32Value > MaxValueConstant) return -1;")}}
+                                   {{(isTooLargeForUint32 ? "" : "if (uint32Value > MaxValueConstant) return -1;")}}
                                    return value.CompareTo(({{backingType}})uint32Value);
                                case TypeCode.Int64:
                                    var int64Value = convertible.ToInt64(null);
@@ -590,8 +594,8 @@ public static class TernaryNumberGenerator
            
                #region IIncrementOperators/IDecrementOperators Implementation
            
-               public static {{name}} operator ++({{name}} value) => new(value.value + 1);
-               public static {{name}} operator --({{name}} value) => new(value.value - 1);
+               public static {{name}} operator ++({{name}} value) => Create(value.value + 1);
+               public static {{name}} operator --({{name}} value) => Create(value.value - 1);
            
                #endregion
            
@@ -601,7 +605,7 @@ public static class TernaryNumberGenerator
                #region Binary Operations
            
                public static {{name}} RotateLeft({{name}} value, int rotateAmount) =>
-                   new(({{backingType}})BitOperations.RotateLeft((ulong)value.value, rotateAmount));
+                   Create(({{backingType}})BitOperations.RotateLeft((ulong)value.value, rotateAmount));
            
                #endregion
            
@@ -646,19 +650,19 @@ public static class TernaryNumberGenerator
                static int INumberBase<{{name}}>.Radix => 2;
            
                static {{name}} INumberBase<{{name}}>.Abs({{name}} value) =>
-                   value.value < 0 ? new(-value.value) : value;
+                   value.value < 0 ? new(({{backingType}})(-value.value)) : value;
            
                static {{name}} INumberBase<{{name}}>.Parse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider) =>
-                   new({{backingType}}.Parse(s, style, provider));
+                   Create({{backingType}}.Parse(s, style, provider));
            
                static {{name}} INumberBase<{{name}}>.Parse(string s, NumberStyles style, IFormatProvider? provider) =>
-                   new({{backingType}}.Parse(s, style, provider));
+                   Create({{backingType}}.Parse(s, style, provider));
            
                static bool INumberBase<{{name}}>.TryParse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider, out {{name}} result)
                {
                    if ({{backingType}}.TryParse(s, style, provider, out var parsed))
                    {
-                       result = new(parsed);
+                       result = Create(parsed);
                        return true;
                    }
            
@@ -670,7 +674,7 @@ public static class TernaryNumberGenerator
                {
                    if ({{backingType}}.TryParse(s, style, provider, out var parsed))
                    {
-                       result = new(parsed);
+                       result = Create(parsed);
                        return true;
                    }
            
@@ -682,7 +686,7 @@ public static class TernaryNumberGenerator
                    value.value > 0 && (value.value & (value.value - 1)) == 0;
            
                static {{name}} IBinaryNumber<{{name}}>.Log2({{name}} value) =>
-                   new(BitOperations.Log2((uint)value.value));
+                   Create(BitOperations.Log2((uint)value.value));
            
                int IBinaryInteger<{{name}}>.GetByteCount() => sizeof({{backingType}});
            
@@ -690,10 +694,10 @@ public static class TernaryNumberGenerator
                    value == 0 ? 1 : BitOperations.Log2((uint)Math.Abs(value)) + 1;
            
                static {{name}} IBinaryInteger<{{name}}>.PopCount({{name}} value) =>
-                   new(BitOperations.PopCount((uint)value.value));
+                   Create(BitOperations.PopCount((uint)value.value));
            
                static {{name}} IBinaryInteger<{{name}}>.TrailingZeroCount({{name}} value) =>
-                   new(BitOperations.TrailingZeroCount((uint)value.value));
+                   Create(BitOperations.TrailingZeroCount((uint)value.value));
            
                bool IBinaryInteger<{{name}}>.TryWriteBigEndian(Span<byte> destination, out int bytesWritten)
                {
@@ -792,25 +796,25 @@ public static class TernaryNumberGenerator
                #region Bit Operators
            
                static {{name}} IBitwiseOperators<{{name}}, {{name}}, {{name}}>.operator &({{name}} left, {{name}} right) =>
-                   new(left.value & right.value);
+                   Create(left.value & right.value);
            
                static {{name}} IBitwiseOperators<{{name}}, {{name}}, {{name}}>.operator |({{name}} left, {{name}} right) =>
-                   new(left.value | right.value);
+                   Create(left.value | right.value);
            
                static {{name}} IBitwiseOperators<{{name}}, {{name}}, {{name}}>.operator ^({{name}} left, {{name}} right) =>
-                   new(left.value ^ right.value);
+                   Create(left.value ^ right.value);
            
                static {{name}} IBitwiseOperators<{{name}}, {{name}}, {{name}}>.operator ~({{name}} value) =>
-                   new(~value.value);
+                   Create(~value.value);
            
                static {{name}} IShiftOperators<{{name}}, int, {{name}}>.operator <<({{name}} value, int shiftAmount) =>
-                   new(value.value << shiftAmount);
+                   Create(value.value << shiftAmount);
            
                static {{name}} IShiftOperators<{{name}}, int, {{name}}>.operator >> ({{name}} value, int shiftAmount) =>
-                   new(value.value >> shiftAmount);
+                   Create(value.value >> shiftAmount);
            
                static {{name}} IShiftOperators<{{name}}, int, {{name}}>.operator >>> ({{name}} value, int shiftAmount) =>
-                   new({{backingType}}.CreateChecked(((uint)value.value) >> shiftAmount));
+                   Create({{backingType}}.CreateChecked(((uint)value.value) >> shiftAmount));
            
                #endregion
            
@@ -827,7 +831,7 @@ public static class TernaryNumberGenerator
                            var intValue = conv.To{{backingType}}(null);
                            if (intValue >= MinValueConstant && intValue <= MaxValueConstant)
                            {
-                               result = new(intValue);
+                               result = Create(intValue);
                                return true;
                            }
                        }
@@ -848,7 +852,7 @@ public static class TernaryNumberGenerator
                        try
                        {
                            var intValue = conv.To{{backingType}}(null);
-                           result = new(intValue);
+                           result = Create(intValue);
                            return true;
                        }
                        catch
@@ -868,7 +872,7 @@ public static class TernaryNumberGenerator
                        try
                        {
                            var intValue = conv.To{{backingType}}(null);
-                           result = new(intValue);
+                           result = Create(intValue);
                            return true;
                        }
                        catch
@@ -928,18 +932,39 @@ public static class TernaryNumberGenerator
 // This method generates comparison operators for a specific numeric type
     private string GenerateComparisonOperators(string name, string currentType, string backingType)
     {
+        var useDirectCompare = currentType != "ulong" && currentType != "IComparable";
         return $$"""
 
         // Comparison operators with {{currentType}}
-        public static bool operator >({{name}} left, {{currentType}} right) => {{(backingType == currentType ? "left.value > right" : "left.CompareTo(right) > 0")}};
-        public static bool operator <({{name}} left, {{currentType}} right) => {{(backingType == currentType ? "left.value < right" : "left.CompareTo(right) < 0")}};
-        public static bool operator >=({{name}} left, {{currentType}} right) => {{(backingType == currentType ? "left.value >= right" : "left.CompareTo(right) >= 0")}};
-        public static bool operator <=({{name}} left, {{currentType}} right) => {{(backingType == currentType ? "left.value <= right" : "left.CompareTo(right) <= 0")}};
+        public static bool operator >({{name}} left, {{currentType}} right) => {{(useDirectCompare ? "left.value > right" : "left.CompareTo(right) > 0")}};
+        public static bool operator <({{name}} left, {{currentType}} right) => {{(useDirectCompare ? "left.value < right" : "left.CompareTo(right) < 0")}};
+        public static bool operator >=({{name}} left, {{currentType}} right) => {{(useDirectCompare ? "left.value >= right" : "left.CompareTo(right) >= 0")}};
+        public static bool operator <=({{name}} left, {{currentType}} right) => {{(useDirectCompare ? "left.value <= right" : "left.CompareTo(right) <= 0")}};
 
-        public static bool operator >({{currentType}} left, {{name}} right) => {{(backingType == currentType ? "left > right.value" : "right.CompareTo(left) < 0")}};
-        public static bool operator <({{currentType}} left, {{name}} right) => {{(backingType == currentType ? "left < right.value" : "right.CompareTo(left) > 0")}};
-        public static bool operator >=({{currentType}} left, {{name}} right) => {{(backingType == currentType ? "left >= right.value" : "right.CompareTo(left) <= 0")}};
-        public static bool operator <=({{currentType}} left, {{name}} right) => {{(backingType == currentType ? "left <= right.value" : "right.CompareTo(left) >= 0")}};
+        public static bool operator >({{currentType}} left, {{name}} right) => {{(useDirectCompare ? "left > right.value" : "right.CompareTo(left) < 0")}};
+        public static bool operator <({{currentType}} left, {{name}} right) => {{(useDirectCompare ? "left < right.value" : "right.CompareTo(left) > 0")}};
+        public static bool operator >=({{currentType}} left, {{name}} right) => {{(useDirectCompare ? "left >= right.value" : "right.CompareTo(left) <= 0")}};
+        public static bool operator <=({{currentType}} left, {{name}} right) => {{(useDirectCompare ? "left <= right.value" : "right.CompareTo(left) >= 0")}};
     """;
+    }
+
+    private static IEnumerable<string> CreateCreateMethods(string name, string backingType)
+    {
+        if (backingType == "Int64")
+        {
+            yield return $"private static {name} Create(Int32 value) => new(value);";
+            yield return $"private static {name} Create(Int64 value) => new(value.BalancedModulo(MaxValueConstant));";
+        }
+        else if (backingType == "Int32")
+        {
+            yield return $"private static {name} Create(Int32 value) => new(value.BalancedModulo(MaxValueConstant));";
+            yield return $"private static {name} Create(Int64 value) => new((Int32)value.BalancedModulo((Int64)MaxValueConstant));";
+        }
+        else
+        {
+            yield return $"private static {name} Create({backingType} value) => new(({backingType})((Int32)value).BalancedModulo((Int32)MaxValueConstant));";
+            yield return $"private static {name} Create(Int32 value) => new(({backingType})value.BalancedModulo((Int32)MaxValueConstant));";
+            yield return $"private static {name} Create(Int64 value) => new(({backingType})value.BalancedModulo((Int64)MaxValueConstant));";
+        }
     }
 #>

@@ -6,8 +6,8 @@ namespace Tring.Numbers;
 /// This file serves as a marker to indicate the T4 template has run successfully.
 /// Look for individual generated files for each ternary number type.
 /// </summary>
-public static class TernaryNumberGenerator
+internal static class TernaryNumberGenerator
 {
-    public static readonly string LastGenerated = "2025-05-23 15:20:42";
+    public static readonly string LastGenerated = "2025-05-25 23:49:26";
 }
 

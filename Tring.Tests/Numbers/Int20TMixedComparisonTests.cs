@@ -19,7 +19,7 @@ public class Int20TMixedComparisonTests
     [Theory]
     [InlineData(0, 1)]  // 1 > 0
     [InlineData(-1, 0)] // 0 > -1
-    [InlineData(-2147483648, -1743392200)] // -1743392200 > int.MinValue
+    [InlineData(Int32.MinValue, Int20T.MinValueConstant)]
     public void GreaterThan_WithInt32_ShouldReturnCorrectResult(int int32, Int20T intT20)
     {
         (intT20 > int32).Should().BeTrue();

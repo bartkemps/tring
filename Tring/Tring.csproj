@@ -7,18 +7,24 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <None Update="Numbers\TernaryNumbers.tt">
+      <None Update="Numbers\IntT.tt">
         <Generator>TextTemplatingFileGenerator</Generator>
-        <LastGenOutput>TernaryNumbers.cs</LastGenOutput>
+        <LastGenOutput>IntT.cs</LastGenOutput>
       </None>
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="Numbers\TernaryNumbers.cs">
+      <Compile Update="Numbers\IntT.cs">
         <AutoGen>True</AutoGen>
         <DesignTime>True</DesignTime>
-        <DependentUpon>TernaryNumbers.tt</DependentUpon>
+        <DependentUpon>IntT.tt</DependentUpon>
       </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+            <_Parameter1>Tring.Tests</_Parameter1>
+        </AssemblyAttribute>
     </ItemGroup>
 
 </Project>
