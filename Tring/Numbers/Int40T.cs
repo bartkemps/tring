@@ -49,19 +49,30 @@ public readonly partial struct Int40T :
      private static Int40T Create(Int32 value) => new(value);
      private static Int40T Create(Int64 value) => new(value.BalancedModulo(MaxValueConstant));
 
-    /// <summary>
-    /// Defines an implicit conversion of a Int64 to a <see cref="Int40T"/>.
-    /// </summary>
-    /// <param name="value">The value to convert.</param>
-    /// <returns>A <see cref="Int40T"/> that represents the converted value.</returns>
-    public static implicit operator Int40T(Int64 value) => Create(value);
-
-    /// <summary>
-    /// Defines an implicit conversion of a <see cref="Int40T"/> to a Int64.
-    /// </summary>
-    /// <param name="value">The <see cref="Int40T"/> to convert.</param>
-    /// <returns>A Int64 that represents the converted <see cref="Int40T"/>.</returns>
-    public static implicit operator Int64(Int40T value) => value.value;
+     /// <summary>
+/// Defines an implicit conversion of a Int64 to a <see cref="Int40T"/>.
+/// </summary>
+/// <param name="value">The value to convert.</param>
+/// <returns>A <see cref="Int40T"/> that represents the converted value.</returns>
+public static implicit operator Int40T(Int64 value) => Create(value);
+     /// <summary>
+/// Defines an implicit conversion of a Int40T to a <see cref="Int64"/>.
+/// </summary>
+/// <param name="value">The value to convert.</param>
+/// <returns>A <see cref="Int64"/> that represents the converted value.</returns>
+public static implicit operator Int64(Int40T value) => (Int64)value.value;
+     /// <summary>
+/// Defines an implicit conversion of a Int32 to a <see cref="Int40T"/>.
+/// </summary>
+/// <param name="value">The value to convert.</param>
+/// <returns>A <see cref="Int40T"/> that represents the converted value.</returns>
+public static implicit operator Int40T(Int32 value) => Create(value);
+     /// <summary>
+/// Defines an explicit conversion of a Int40T to a <see cref="Int32"/>.
+/// </summary>
+/// <param name="value">The value to convert.</param>
+/// <returns>A <see cref="Int32"/> that represents the converted value.</returns>
+public static explicit operator Int32(Int40T value) => (Int32)value.value;
 
     /// <summary>
     /// Returns a value indicating whether this instance is equal to a specified object.

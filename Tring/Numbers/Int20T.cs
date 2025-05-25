@@ -49,19 +49,30 @@ public readonly partial struct Int20T :
      private static Int20T Create(Int32 value) => new(value.BalancedModulo(MaxValueConstant));
      private static Int20T Create(Int64 value) => new((Int32)value.BalancedModulo((Int64)MaxValueConstant));
 
-    /// <summary>
-    /// Defines an implicit conversion of a Int32 to a <see cref="Int20T"/>.
-    /// </summary>
-    /// <param name="value">The value to convert.</param>
-    /// <returns>A <see cref="Int20T"/> that represents the converted value.</returns>
-    public static implicit operator Int20T(Int32 value) => Create(value);
-
-    /// <summary>
-    /// Defines an implicit conversion of a <see cref="Int20T"/> to a Int32.
-    /// </summary>
-    /// <param name="value">The <see cref="Int20T"/> to convert.</param>
-    /// <returns>A Int32 that represents the converted <see cref="Int20T"/>.</returns>
-    public static implicit operator Int32(Int20T value) => value.value;
+     /// <summary>
+/// Defines an implicit conversion of a Int32 to a <see cref="Int20T"/>.
+/// </summary>
+/// <param name="value">The value to convert.</param>
+/// <returns>A <see cref="Int20T"/> that represents the converted value.</returns>
+public static implicit operator Int20T(Int32 value) => Create(value);
+     /// <summary>
+/// Defines an implicit conversion of a Int20T to a <see cref="Int32"/>.
+/// </summary>
+/// <param name="value">The value to convert.</param>
+/// <returns>A <see cref="Int32"/> that represents the converted value.</returns>
+public static implicit operator Int32(Int20T value) => (Int32)value.value;
+     /// <summary>
+/// Defines an explicit conversion of a Int64 to a <see cref="Int20T"/>.
+/// </summary>
+/// <param name="value">The value to convert.</param>
+/// <returns>A <see cref="Int20T"/> that represents the converted value.</returns>
+public static explicit operator Int20T(Int64 value) => Create(value);
+     /// <summary>
+/// Defines an implicit conversion of a Int20T to a <see cref="Int64"/>.
+/// </summary>
+/// <param name="value">The value to convert.</param>
+/// <returns>A <see cref="Int64"/> that represents the converted value.</returns>
+public static implicit operator Int64(Int20T value) => (Int64)value.value;
 
     /// <summary>
     /// Returns a value indicating whether this instance is equal to a specified object.

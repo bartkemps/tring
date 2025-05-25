@@ -50,19 +50,42 @@ public readonly partial struct Int10T :
      private static Int10T Create(Int32 value) => new((Int16)(value.BalancedModulo((Int32)MaxValueConstant)));
      private static Int10T Create(Int64 value) => new((Int16)(value.BalancedModulo((Int64)MaxValueConstant)));
 
-    /// <summary>
-    /// Defines an implicit conversion of a Int16 to a <see cref="Int10T"/>.
-    /// </summary>
-    /// <param name="value">The value to convert.</param>
-    /// <returns>A <see cref="Int10T"/> that represents the converted value.</returns>
-    public static implicit operator Int10T(Int16 value) => Create(value);
-
-    /// <summary>
-    /// Defines an implicit conversion of a <see cref="Int10T"/> to a Int16.
-    /// </summary>
-    /// <param name="value">The <see cref="Int10T"/> to convert.</param>
-    /// <returns>A Int16 that represents the converted <see cref="Int10T"/>.</returns>
-    public static implicit operator Int16(Int10T value) => value.value;
+     /// <summary>
+/// Defines an implicit conversion of a Int16 to a <see cref="Int10T"/>.
+/// </summary>
+/// <param name="value">The value to convert.</param>
+/// <returns>A <see cref="Int10T"/> that represents the converted value.</returns>
+public static implicit operator Int10T(Int16 value) => Create(value);
+     /// <summary>
+/// Defines an implicit conversion of a Int10T to a <see cref="Int16"/>.
+/// </summary>
+/// <param name="value">The value to convert.</param>
+/// <returns>A <see cref="Int16"/> that represents the converted value.</returns>
+public static implicit operator Int16(Int10T value) => (Int16)value.value;
+     /// <summary>
+/// Defines an explicit conversion of a Int32 to a <see cref="Int10T"/>.
+/// </summary>
+/// <param name="value">The value to convert.</param>
+/// <returns>A <see cref="Int10T"/> that represents the converted value.</returns>
+public static explicit operator Int10T(Int32 value) => Create(value);
+     /// <summary>
+/// Defines an implicit conversion of a Int10T to a <see cref="Int32"/>.
+/// </summary>
+/// <param name="value">The value to convert.</param>
+/// <returns>A <see cref="Int32"/> that represents the converted value.</returns>
+public static implicit operator Int32(Int10T value) => (Int32)value.value;
+     /// <summary>
+/// Defines an explicit conversion of a Int64 to a <see cref="Int10T"/>.
+/// </summary>
+/// <param name="value">The value to convert.</param>
+/// <returns>A <see cref="Int10T"/> that represents the converted value.</returns>
+public static explicit operator Int10T(Int64 value) => Create(value);
+     /// <summary>
+/// Defines an implicit conversion of a Int10T to a <see cref="Int64"/>.
+/// </summary>
+/// <param name="value">The value to convert.</param>
+/// <returns>A <see cref="Int64"/> that represents the converted value.</returns>
+public static implicit operator Int64(Int10T value) => (Int64)value.value;
 
     /// <summary>
     /// Returns a value indicating whether this instance is equal to a specified object.

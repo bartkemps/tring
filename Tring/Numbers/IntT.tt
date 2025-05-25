@@ -117,19 +117,7 @@ internal static class TernaryNumberGenerator
                
                 {{ string.Join("\r\n     ", CreateCreateMethods(name, backingType)) }}
 
-               /// <summary>
-               /// Defines an implicit conversion of a {{backingType}} to a <see cref="{{name}}"/>.
-               /// </summary>
-               /// <param name="value">The value to convert.</param>
-               /// <returns>A <see cref="{{name}}"/> that represents the converted value.</returns>
-               public static implicit operator {{name}}({{backingType}} value) => Create(value);
-           
-               /// <summary>
-               /// Defines an implicit conversion of a <see cref="{{name}}"/> to a {{backingType}}.
-               /// </summary>
-               /// <param name="value">The <see cref="{{name}}"/> to convert.</param>
-               /// <returns>A {{backingType}} that represents the converted <see cref="{{name}}"/>.</returns>
-               public static implicit operator {{backingType}}({{name}} value) => value.value;
+                {{ string.Join("\r\n     ", CreateOperators(name, backingType)) }}
            
                /// <summary>
                /// Returns a value indicating whether this instance is equal to a specified object.
@@ -927,6 +915,57 @@ internal static class TernaryNumberGenerator
                #endregion
            }
            """;
+    }
+
+    private IEnumerable<string> CreateOperators(string name, string backingType)
+    {
+        if (backingType == "Int64")
+        {
+            yield return CreateConversionOperatorIn("implicit", "Int64", name);
+            yield return CreateConversionOperatorOut("implicit", name, "Int64");
+            yield return CreateConversionOperatorIn("implicit", "Int32", name);
+            yield return CreateConversionOperatorOut("explicit", name, "Int32");
+        }
+        else if (backingType == "Int32")
+        {
+            yield return CreateConversionOperatorIn("implicit", "Int32", name);
+            yield return CreateConversionOperatorOut("implicit", name, "Int32");
+            yield return CreateConversionOperatorIn("explicit", "Int64", name);
+            yield return CreateConversionOperatorOut("implicit", name, "Int64");
+        }
+        else
+        {
+            yield return CreateConversionOperatorIn("implicit", backingType, name);
+            yield return CreateConversionOperatorOut("implicit", name, backingType);
+            yield return CreateConversionOperatorIn("explicit", "Int32", name);
+            yield return CreateConversionOperatorOut("implicit", name, "Int32");
+            yield return CreateConversionOperatorIn("explicit", "Int64", name);
+            yield return CreateConversionOperatorOut("implicit", name, "Int64");
+        }
+    }
+
+    private string CreateConversionOperatorIn(string type, string fromType, string toType)
+    {
+        return $"""
+        /// <summary>
+        /// Defines an {type} conversion of a {fromType} to a <see cref="{toType}"/>.
+        /// </summary>
+        /// <param name="value">The value to convert.</param>
+        /// <returns>A <see cref="{toType}"/> that represents the converted value.</returns>
+        public static {type} operator {toType}({fromType} value) => Create(value);
+        """;
+    }
+    
+    private string CreateConversionOperatorOut(string type, string fromType, string toType)
+    {
+        return $"""
+        /// <summary>
+        /// Defines an {type} conversion of a {fromType} to a <see cref="{toType}"/>.
+        /// </summary>
+        /// <param name="value">The value to convert.</param>
+        /// <returns>A <see cref="{toType}"/> that represents the converted value.</returns>
+        public static {type} operator {toType}({fromType} value) => ({toType})value.value;
+        """;
     }
 
 // This method generates comparison operators for a specific numeric type
