@@ -57,5 +57,12 @@ namespace Tring.Tests.Numbers
         {
             value.BalancedModulo(2).Should().Be(expected);
         }
+        
+        [Fact]
+        public void BalancedModulo_Long_Limits2()
+        {
+            var long1 = (long)Int40T.MaxValue;
+            long1.BalancedModuloAdd(long1, Int40T.MaxValueConstant).Should().Be(-1);
+        }
     }
 }
