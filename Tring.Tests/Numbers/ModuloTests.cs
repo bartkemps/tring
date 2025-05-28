@@ -64,5 +64,31 @@ namespace Tring.Tests.Numbers
             var long1 = (long)Int40T.MaxValue;
             long1.BalancedModuloAdd(long1, Int40T.MaxValueConstant).Should().Be(-1);
         }
+
+        [Theory]
+        [InlineData(10UL, 0, 10UL * 10UL)] 
+        [InlineData(4294967295UL, 0, 4294967295UL * 4294967295UL)] 
+        [InlineData(4294967296UL, 1, 0)] 
+        [InlineData(18446744073709551615UL, 18446744073709551614UL, 1)] 
+        public void Multiply_UInt64_ReturnExpectedValue(ulong value, ulong expectedHi, ulong expectedLo)
+        {
+            var (hi, lo) = value.Multiply(value);
+            hi.Should().Be(expectedHi);
+            lo.Should().Be(expectedLo);
+        }
+        
+        [Theory]
+        [InlineData(10L, 0, 10UL * 10UL)] 
+        [InlineData(4294967295L, 0, 4294967295L * 4294967295UL)] 
+        [InlineData(4294967296UL, 1, 0)] 
+        [InlineData(9223372036854775807L, 4611686018427387903L, 1)] 
+        [InlineData(9223372036854775807L, 4611686018427387903L, 1)] 
+        public void Multiply_Int64_ReturnExpectedValue(long value, ulong expectedHi, ulong expectedLo)
+        {
+            var (hi, lo) = value.Multiply(value);
+            hi.Should().Be(expectedHi);
+            lo.Should().Be(expectedLo);
+        }
     }
 }
+
