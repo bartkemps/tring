@@ -204,76 +204,22 @@ public static explicit operator Int32(Int27T value) => (Int32)value.value;
     #endregion
 
     #region Arithmetic Operators
-
-    /// <summary>
-    /// Adds two <see cref="Int27T"/> values and returns the result.
-    /// </summary>
-    /// <param name="left">The first value to add.</param>
-    /// <param name="right">The second value to add.</param>
-    /// <returns>The sum of <paramref name="left"/> and <paramref name="right"/>.</returns>
-    public static Int27T operator +(Int27T left, Int27T right) => Create(left.value + right.value);
-
-    /// <summary>
-    /// Subtracts one <see cref="Int27T"/> value from another and returns the result.
-    /// </summary>
-    /// <param name="left">The value to subtract from (the minuend).</param>
-    /// <param name="right">The value to subtract (the subtrahend).</param>
-    /// <returns>The result of subtracting <paramref name="right"/> from <paramref name="left"/>.</returns>
-    public static Int27T operator -(Int27T left, Int27T right) => Create(left.value - right.value);
-
-    /// <summary>
-    /// Multiplies two <see cref="Int27T"/> values and returns the result.
-    /// </summary>
-    /// <param name="left">The first value to multiply.</param>
-    /// <param name="right">The second value to multiply.</param>
-    /// <returns>The product of <paramref name="left"/> and <paramref name="right"/>.</returns>
-    public static Int27T operator *(Int27T left, Int27T right) => Create(left.value * right.value);
-
-    /// <summary>
-    /// Divides one <see cref="Int27T"/> value by another and returns the result.
-    /// </summary>
-    /// <param name="left">The value to be divided (the dividend).</param>
-    /// <param name="right">The value to divide by (the divisor).</param>
-    /// <returns>The result of dividing <paramref name="left"/> by <paramref name="right"/>.</returns>
-    /// <exception cref="DivideByZeroException"><paramref name="right"/> is zero.</exception>
+    
+    public static Int27T operator +(Int27T left, Int27T right) => Create((Int128)left.value + right.value);
+    public static Int27T operator -(Int27T left, Int27T right) => Create((Int128)left.value - right.value);
+    public static Int27T operator *(Int27T left, Int27T right) => Create((Int128)left.value * right.value);
     public static Int27T operator /(Int27T left, Int27T right) => Create(left.value / right.value);
-
-    /// <summary>
-    /// Returns the remainder that results from dividing one <see cref="Int27T"/> value by another.
-    /// </summary>
-    /// <param name="left">The value to be divided (the dividend).</param>
-    /// <param name="right">The value to divide by (the divisor).</param>
-    /// <returns>The remainder that results from dividing <paramref name="left"/> by <paramref name="right"/>.</returns>
-    /// <exception cref="DivideByZeroException"><paramref name="right"/> is zero.</exception>
     public static Int27T operator %(Int27T left, Int27T right) => Create(left.value % right.value);
-
-    /// <summary>
-    /// Negates the specified <see cref="Int27T"/> value.
-    /// </summary>
-    /// <param name="value">The value to negate.</param>
-    /// <returns>The result of the value multiplied by negative one (-1).</returns>
     public static Int27T operator -(Int27T value) => Create(-value.value);
-
-    /// <summary>
-    /// Returns the specified <see cref="Int27T"/> value; the sign of the value is unchanged.
-    /// </summary>
-    /// <param name="value">The value to return.</param>
-    /// <returns>The value of the <paramref name="value"/> parameter.</returns>
     public static Int27T operator +(Int27T value) => value;
-
-    // Mixed-type arithmetic operators with Int64
-    public static Int27T operator +(Int27T left, Int64 right) => Create(left.value + right);
-    public static Int27T operator +(Int64 left, Int27T right) => Create(left + right.value);
-
-    public static Int27T operator -(Int27T left, Int64 right) => Create(left.value - right);
-    public static Int27T operator -(Int64 left, Int27T right) => Create(left - right.value);
-
-    public static Int27T operator *(Int27T left, Int64 right) => Create(left.value * right);
-    public static Int27T operator *(Int64 left, Int27T right) => Create(left * right.value);
-
+    public static Int27T operator +(Int27T left, Int64 right) => Create((Int128)left.value + right);
+    public static Int27T operator +(Int64 left, Int27T right) => Create((Int128)left + right.value);
+    public static Int27T operator -(Int27T left, Int64 right) => Create((Int128)left.value - right);
+    public static Int27T operator -(Int64 left, Int27T right) => Create((Int128)left - right.value);
+    public static Int27T operator *(Int27T left, Int64 right) => Create((Int128)left.value * right);
+    public static Int27T operator *(Int64 left, Int27T right) => Create((Int128)left * right.value);
     public static Int27T operator /(Int27T left, Int64 right) => Create(left.value / right);
     public static Int27T operator /(Int64 left, Int27T right) => Create(left / right.value);
-
     public static Int27T operator %(Int27T left, Int64 right) => Create(left.value % right);
     public static Int27T operator %(Int64 left, Int27T right) => Create(left % right.value);
     #endregion

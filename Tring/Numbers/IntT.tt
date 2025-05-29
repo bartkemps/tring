@@ -250,78 +250,7 @@ internal static class TernaryNumberGenerator
                #endregion
            
                #region Arithmetic Operators
-           
-               /// <summary>
-               /// Adds two <see cref="{{name}}"/> values and returns the result.
-               /// </summary>
-               /// <param name="left">The first value to add.</param>
-               /// <param name="right">The second value to add.</param>
-               /// <returns>The sum of <paramref name="left"/> and <paramref name="right"/>.</returns>
-               public static {{name}} operator +({{name}} left, {{name}} right) => Create(left.value + right.value);
-           
-               /// <summary>
-               /// Subtracts one <see cref="{{name}}"/> value from another and returns the result.
-               /// </summary>
-               /// <param name="left">The value to subtract from (the minuend).</param>
-               /// <param name="right">The value to subtract (the subtrahend).</param>
-               /// <returns>The result of subtracting <paramref name="right"/> from <paramref name="left"/>.</returns>
-               public static {{name}} operator -({{name}} left, {{name}} right) => Create(left.value - right.value);
-           
-               /// <summary>
-               /// Multiplies two <see cref="{{name}}"/> values and returns the result.
-               /// </summary>
-               /// <param name="left">The first value to multiply.</param>
-               /// <param name="right">The second value to multiply.</param>
-               /// <returns>The product of <paramref name="left"/> and <paramref name="right"/>.</returns>
-               public static {{name}} operator *({{name}} left, {{name}} right) => Create(left.value * right.value);
-           
-               /// <summary>
-               /// Divides one <see cref="{{name}}"/> value by another and returns the result.
-               /// </summary>
-               /// <param name="left">The value to be divided (the dividend).</param>
-               /// <param name="right">The value to divide by (the divisor).</param>
-               /// <returns>The result of dividing <paramref name="left"/> by <paramref name="right"/>.</returns>
-               /// <exception cref="DivideByZeroException"><paramref name="right"/> is zero.</exception>
-               public static {{name}} operator /({{name}} left, {{name}} right) => Create(left.value / right.value);
-           
-               /// <summary>
-               /// Returns the remainder that results from dividing one <see cref="{{name}}"/> value by another.
-               /// </summary>
-               /// <param name="left">The value to be divided (the dividend).</param>
-               /// <param name="right">The value to divide by (the divisor).</param>
-               /// <returns>The remainder that results from dividing <paramref name="left"/> by <paramref name="right"/>.</returns>
-               /// <exception cref="DivideByZeroException"><paramref name="right"/> is zero.</exception>
-               public static {{name}} operator %({{name}} left, {{name}} right) => Create(left.value % right.value);
-           
-               /// <summary>
-               /// Negates the specified <see cref="{{name}}"/> value.
-               /// </summary>
-               /// <param name="value">The value to negate.</param>
-               /// <returns>The result of the value multiplied by negative one (-1).</returns>
-               public static {{name}} operator -({{name}} value) => Create(-value.value);
-           
-               /// <summary>
-               /// Returns the specified <see cref="{{name}}"/> value; the sign of the value is unchanged.
-               /// </summary>
-               /// <param name="value">The value to return.</param>
-               /// <returns>The value of the <paramref name="value"/> parameter.</returns>
-               public static {{name}} operator +({{name}} value) => value;
-           
-               // Mixed-type arithmetic operators with {{backingType}}
-               public static {{name}} operator +({{name}} left, {{backingType}} right) => Create(left.value + right);
-               public static {{name}} operator +({{backingType}} left, {{name}} right) => Create(left + right.value);
-           
-               public static {{name}} operator -({{name}} left, {{backingType}} right) => Create(left.value - right);
-               public static {{name}} operator -({{backingType}} left, {{name}} right) => Create(left - right.value);
-           
-               public static {{name}} operator *({{name}} left, {{backingType}} right) => Create(left.value * right);
-               public static {{name}} operator *({{backingType}} left, {{name}} right) => Create(left * right.value);
-           
-               public static {{name}} operator /({{name}} left, {{backingType}} right) => Create(left.value / right);
-               public static {{name}} operator /({{backingType}} left, {{name}} right) => Create(left / right.value);
-           
-               public static {{name}} operator %({{name}} left, {{backingType}} right) => Create(left.value % right);
-               public static {{name}} operator %({{backingType}} left, {{name}} right) => Create(left % right.value);
+               {{GenerateArithmeticOperators(name, backingType)}}
                #endregion
                
                #region Comparison Operators
@@ -1010,5 +939,36 @@ internal static class TernaryNumberGenerator
             yield return $"private static {name} Create(Int64 value) => new(({backingType})(value.BalancedModulo((Int64)MaxValueConstant)));";
             yield return $"private static {name} Create(Int128 value) => new(({backingType})value.BalancedModulo((Int64)MaxValueConstant));";
         }
+    }
+
+    private string GenerateArithmeticOperators(string name, string backingType)
+    {
+        var castType = backingType switch
+        {
+            "Int64" => "(Int128)",
+            "Int32" => "(Int64)",
+            _ => ""
+        };
+        
+        return $"""
+
+               public static {name} operator +({name} left, {name} right) => Create({castType}left.value + right.value);
+               public static {name} operator -({name} left, {name} right) => Create({castType}left.value - right.value);
+               public static {name} operator *({name} left, {name} right) => Create({castType}left.value * right.value);
+               public static {name} operator /({name} left, {name} right) => Create(left.value / right.value);
+               public static {name} operator %({name} left, {name} right) => Create(left.value % right.value);
+               public static {name} operator -({name} value) => Create(-value.value);
+               public static {name} operator +({name} value) => value;
+               public static {name} operator +({name} left, {backingType} right) => Create({castType}left.value + right);
+               public static {name} operator +({backingType} left, {name} right) => Create({castType}left + right.value);
+               public static {name} operator -({name} left, {backingType} right) => Create({castType}left.value - right);
+               public static {name} operator -({backingType} left, {name} right) => Create({castType}left - right.value);
+               public static {name} operator *({name} left, {backingType} right) => Create({castType}left.value * right);
+               public static {name} operator *({backingType} left, {name} right) => Create({castType}left * right.value);
+               public static {name} operator /({name} left, {backingType} right) => Create(left.value / right);
+               public static {name} operator /({backingType} left, {name} right) => Create(left / right.value);
+               public static {name} operator %({name} left, {backingType} right) => Create(left.value % right);
+               public static {name} operator %({backingType} left, {name} right) => Create(left % right.value);
+           """;
     }
 #>
