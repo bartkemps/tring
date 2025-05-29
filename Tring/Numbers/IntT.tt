@@ -87,11 +87,7 @@ internal static class TernaryNumberGenerator
            /// Represents a {{trits}}-trit  signed integer, modeled after the <see cref="{{backingType}}"/> type.
            /// </summary>
            [GeneratedCode("IntT.tt", null)]
-           public readonly partial struct {{name}} :
-               IConvertible,
-               IBinaryInteger<{{name}}>,
-               ISignedNumber<{{name}}>,
-               ITernaryInteger<{{name}}>
+           public readonly partial struct {{name}} : ITernaryInteger<{{name}}>
            {
                private readonly {{backingType}} value;
            
@@ -522,10 +518,9 @@ internal static class TernaryNumberGenerator
                static bool IEqualityOperators<{{name}}, {{name}}, bool>.operator !=({{name}} left, {{name}} right) => left.value != right.value;
            
                #region Binary Operations
-           
-               public static {{name}} RotateLeft({{name}} value, int rotateAmount) =>
-                   Create(({{backingType}})BitOperations.RotateLeft((ulong)value.value, rotateAmount));
-           
+
+               {{GenerateBinaryOperations(name, backingType)}}
+
                #endregion
            
                #region Interface Static Members
@@ -600,80 +595,8 @@ internal static class TernaryNumberGenerator
                    result = default;
                    return false;
                }
-           
-               static bool IBinaryNumber<{{name}}>.IsPow2({{name}} value) =>
-                   value.value > 0 && (value.value & (value.value - 1)) == 0;
-           
-               static {{name}} IBinaryNumber<{{name}}>.Log2({{name}} value) =>
-                   Create(BitOperations.Log2((uint)value.value));
-           
-               int IBinaryInteger<{{name}}>.GetByteCount() => sizeof({{backingType}});
-           
-               int IBinaryInteger<{{name}}>.GetShortestBitLength() =>
-                   value == 0 ? 1 : BitOperations.Log2((uint)Math.Abs(value)) + 1;
-           
-               static {{name}} IBinaryInteger<{{name}}>.PopCount({{name}} value) =>
-                   Create(BitOperations.PopCount((uint)value.value));
-           
-               static {{name}} IBinaryInteger<{{name}}>.TrailingZeroCount({{name}} value) =>
-                   Create(BitOperations.TrailingZeroCount((uint)value.value));
-           
-               bool IBinaryInteger<{{name}}>.TryWriteBigEndian(Span<byte> destination, out int bytesWritten)
-               {
-                   if (destination.Length < sizeof({{backingType}}))
-                   {
-                       bytesWritten = 0;
-                       return false;
-                   }
-           
-                   var bytes = BitConverter.GetBytes(value);
-                   if (BitConverter.IsLittleEndian)
-                       Array.Reverse(bytes);
-                   bytes.CopyTo(destination);
-                   bytesWritten = sizeof({{backingType}});
-                   return true;
-               }
-           
-               bool IBinaryInteger<{{name}}>.TryWriteLittleEndian(Span<byte> destination, out int bytesWritten)
-               {
-                   if (destination.Length < sizeof({{backingType}}))
-                   {
-                       bytesWritten = 0;
-                       return false;
-                   }
-           
-                   BitConverter.GetBytes(value).CopyTo(destination);
-                   bytesWritten = sizeof({{backingType}});
-                   return true;
-               }
-           
-               static bool IBinaryInteger<{{name}}>.TryReadBigEndian(ReadOnlySpan<byte> source, bool isUnsigned, out {{name}} result)
-               {
-                   if (source.Length < sizeof({{backingType}}))
-                   {
-                       result = default;
-                       return false;
-                   }
-           
-                   var bytes = source.Slice(0, sizeof({{backingType}})).ToArray();
-                   if (BitConverter.IsLittleEndian)
-                       Array.Reverse(bytes);
-           
-                   result = new(BitConverter.To{{backingType}}(bytes));
-                   return true;
-               }
-           
-               static bool IBinaryInteger<{{name}}>.TryReadLittleEndian(ReadOnlySpan<byte> source, bool isUnsigned, out {{name}} result)
-               {
-                   if (source.Length < sizeof({{backingType}}))
-                   {
-                       result = default;
-                       return false;
-                   }
-           
-                   result = new(BitConverter.To{{backingType}}(source));
-                   return true;
-               }
+         
+               #endregion
            
                #region ISpanFormattable/ISpanParsable Implementation
            
@@ -709,33 +632,6 @@ internal static class TernaryNumberGenerator
                    result = default;
                    return false;
                }
-           
-               #endregion
-           
-               #region Bit Operators
-           
-               static {{name}} IBitwiseOperators<{{name}}, {{name}}, {{name}}>.operator &({{name}} left, {{name}} right) =>
-                   Create(left.value & right.value);
-           
-               static {{name}} IBitwiseOperators<{{name}}, {{name}}, {{name}}>.operator |({{name}} left, {{name}} right) =>
-                   Create(left.value | right.value);
-           
-               static {{name}} IBitwiseOperators<{{name}}, {{name}}, {{name}}>.operator ^({{name}} left, {{name}} right) =>
-                   Create(left.value ^ right.value);
-           
-               static {{name}} IBitwiseOperators<{{name}}, {{name}}, {{name}}>.operator ~({{name}} value) =>
-                   Create(~value.value);
-           
-               static {{name}} IShiftOperators<{{name}}, int, {{name}}>.operator <<({{name}} value, int shiftAmount) =>
-                   Create(value.value << shiftAmount);
-           
-               static {{name}} IShiftOperators<{{name}}, int, {{name}}>.operator >> ({{name}} value, int shiftAmount) =>
-                   Create(value.value >> shiftAmount);
-           
-               static {{name}} IShiftOperators<{{name}}, int, {{name}}>.operator >>> ({{name}} value, int shiftAmount) =>
-                   Create({{backingType}}.CreateChecked(((uint)value.value) >> shiftAmount));
-           
-               #endregion
            
                #endregion
            
@@ -970,5 +866,19 @@ internal static class TernaryNumberGenerator
                public static {name} operator %({name} left, {backingType} right) => Create(left.value % right);
                public static {name} operator %({backingType} left, {name} right) => Create(left % right.value);
            """;
+    }
+
+    private string GenerateBinaryOperations(string name, string backingType)
+    {
+        return $$"""
+
+               static {{name}} ITritwiseOperators<{{name}}, {{name}}, {{name}}>.operator &({{name}} left, {{name}} right) => Create(left.value.And(right.value));
+               static {{name}} ITritwiseOperators<{{name}}, {{name}}, {{name}}>.operator |({{name}} left, {{name}} right) => Create(left.value.Or(right.value));
+               static {{name}} ITritwiseOperators<{{name}}, {{name}}, {{name}}>.operator ^({{name}} left, {{name}} right) => Create(left.value.Xor(right.value));
+               static {{name}} ITritwiseOperators<{{name}}, {{name}}, {{name}}>.operator ~({{name}} value) => Create(-value.value);
+               static {{name}} IShiftOperators<{{name}}, int, {{name}}>.operator <<({{name}} value, int shiftAmount) => Create(value.value.Shift(-shiftAmount));
+               static {{name}} IShiftOperators<{{name}}, int, {{name}}>.operator >> ({{name}} value, int shiftAmount) => Create(value.value.Shift(shiftAmount));
+               static {{name}} IShiftOperators<{{name}}, int, {{name}}>.operator >>> ({{name}} value, int shiftAmount) => Create(value.value.Shift(shiftAmount));
+               """;
     }
 #>

@@ -16,11 +16,7 @@ using System.Diagnostics.CodeAnalysis;
 /// Represents a 27-trit  signed integer, modeled after the <see cref="Int64"/> type.
 /// </summary>
 [GeneratedCode("IntT.tt", null)]
-public readonly partial struct Int27T :
-    IConvertible,
-    IBinaryInteger<Int27T>,
-    ISignedNumber<Int27T>,
-    ITernaryInteger<Int27T>
+public readonly partial struct Int27T : ITernaryInteger<Int27T>
 {
     private readonly Int64 value;
 
@@ -612,8 +608,14 @@ public static explicit operator Int32(Int27T value) => (Int32)value.value;
 
     #region Binary Operations
 
-    public static Int27T RotateLeft(Int27T value, int rotateAmount) =>
-        Create((Int64)BitOperations.RotateLeft((ulong)value.value, rotateAmount));
+    
+static Int27T ITritwiseOperators<Int27T, Int27T, Int27T>.operator &(Int27T left, Int27T right) => Create(left.value.And(right.value));
+static Int27T ITritwiseOperators<Int27T, Int27T, Int27T>.operator |(Int27T left, Int27T right) => Create(left.value.Or(right.value));
+static Int27T ITritwiseOperators<Int27T, Int27T, Int27T>.operator ^(Int27T left, Int27T right) => Create(left.value.Xor(right.value));
+static Int27T ITritwiseOperators<Int27T, Int27T, Int27T>.operator ~(Int27T value) => Create(-value.value);
+static Int27T IShiftOperators<Int27T, int, Int27T>.operator <<(Int27T value, int shiftAmount) => Create(value.value.Shift(-shiftAmount));
+static Int27T IShiftOperators<Int27T, int, Int27T>.operator >> (Int27T value, int shiftAmount) => Create(value.value.Shift(shiftAmount));
+static Int27T IShiftOperators<Int27T, int, Int27T>.operator >>> (Int27T value, int shiftAmount) => Create(value.value.Shift(shiftAmount));
 
     #endregion
 
@@ -690,79 +692,7 @@ public static explicit operator Int32(Int27T value) => (Int32)value.value;
         return false;
     }
 
-    static bool IBinaryNumber<Int27T>.IsPow2(Int27T value) =>
-        value.value > 0 && (value.value & (value.value - 1)) == 0;
-
-    static Int27T IBinaryNumber<Int27T>.Log2(Int27T value) =>
-        Create(BitOperations.Log2((uint)value.value));
-
-    int IBinaryInteger<Int27T>.GetByteCount() => sizeof(Int64);
-
-    int IBinaryInteger<Int27T>.GetShortestBitLength() =>
-        value == 0 ? 1 : BitOperations.Log2((uint)Math.Abs(value)) + 1;
-
-    static Int27T IBinaryInteger<Int27T>.PopCount(Int27T value) =>
-        Create(BitOperations.PopCount((uint)value.value));
-
-    static Int27T IBinaryInteger<Int27T>.TrailingZeroCount(Int27T value) =>
-        Create(BitOperations.TrailingZeroCount((uint)value.value));
-
-    bool IBinaryInteger<Int27T>.TryWriteBigEndian(Span<byte> destination, out int bytesWritten)
-    {
-        if (destination.Length < sizeof(Int64))
-        {
-            bytesWritten = 0;
-            return false;
-        }
-
-        var bytes = BitConverter.GetBytes(value);
-        if (BitConverter.IsLittleEndian)
-            Array.Reverse(bytes);
-        bytes.CopyTo(destination);
-        bytesWritten = sizeof(Int64);
-        return true;
-    }
-
-    bool IBinaryInteger<Int27T>.TryWriteLittleEndian(Span<byte> destination, out int bytesWritten)
-    {
-        if (destination.Length < sizeof(Int64))
-        {
-            bytesWritten = 0;
-            return false;
-        }
-
-        BitConverter.GetBytes(value).CopyTo(destination);
-        bytesWritten = sizeof(Int64);
-        return true;
-    }
-
-    static bool IBinaryInteger<Int27T>.TryReadBigEndian(ReadOnlySpan<byte> source, bool isUnsigned, out Int27T result)
-    {
-        if (source.Length < sizeof(Int64))
-        {
-            result = default;
-            return false;
-        }
-
-        var bytes = source.Slice(0, sizeof(Int64)).ToArray();
-        if (BitConverter.IsLittleEndian)
-            Array.Reverse(bytes);
-
-        result = new(BitConverter.ToInt64(bytes));
-        return true;
-    }
-
-    static bool IBinaryInteger<Int27T>.TryReadLittleEndian(ReadOnlySpan<byte> source, bool isUnsigned, out Int27T result)
-    {
-        if (source.Length < sizeof(Int64))
-        {
-            result = default;
-            return false;
-        }
-
-        result = new(BitConverter.ToInt64(source));
-        return true;
-    }
+    #endregion
 
     #region ISpanFormattable/ISpanParsable Implementation
 
@@ -798,33 +728,6 @@ public static explicit operator Int32(Int27T value) => (Int32)value.value;
         result = default;
         return false;
     }
-
-    #endregion
-
-    #region Bit Operators
-
-    static Int27T IBitwiseOperators<Int27T, Int27T, Int27T>.operator &(Int27T left, Int27T right) =>
-        Create(left.value & right.value);
-
-    static Int27T IBitwiseOperators<Int27T, Int27T, Int27T>.operator |(Int27T left, Int27T right) =>
-        Create(left.value | right.value);
-
-    static Int27T IBitwiseOperators<Int27T, Int27T, Int27T>.operator ^(Int27T left, Int27T right) =>
-        Create(left.value ^ right.value);
-
-    static Int27T IBitwiseOperators<Int27T, Int27T, Int27T>.operator ~(Int27T value) =>
-        Create(~value.value);
-
-    static Int27T IShiftOperators<Int27T, int, Int27T>.operator <<(Int27T value, int shiftAmount) =>
-        Create(value.value << shiftAmount);
-
-    static Int27T IShiftOperators<Int27T, int, Int27T>.operator >> (Int27T value, int shiftAmount) =>
-        Create(value.value >> shiftAmount);
-
-    static Int27T IShiftOperators<Int27T, int, Int27T>.operator >>> (Int27T value, int shiftAmount) =>
-        Create(Int64.CreateChecked(((uint)value.value) >> shiftAmount));
-
-    #endregion
 
     #endregion
 

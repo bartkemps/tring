@@ -16,11 +16,7 @@ using System.Diagnostics.CodeAnalysis;
 /// Represents a 10-trit  signed integer, modeled after the <see cref="Int16"/> type.
 /// </summary>
 [GeneratedCode("IntT.tt", null)]
-public readonly partial struct Int10T :
-    IConvertible,
-    IBinaryInteger<Int10T>,
-    ISignedNumber<Int10T>,
-    ITernaryInteger<Int10T>
+public readonly partial struct Int10T : ITernaryInteger<Int10T>
 {
     private readonly Int16 value;
 
@@ -625,8 +621,14 @@ public static implicit operator Int64(Int10T value) => (Int64)value.value;
 
     #region Binary Operations
 
-    public static Int10T RotateLeft(Int10T value, int rotateAmount) =>
-        Create((Int16)BitOperations.RotateLeft((ulong)value.value, rotateAmount));
+    
+static Int10T ITritwiseOperators<Int10T, Int10T, Int10T>.operator &(Int10T left, Int10T right) => Create(left.value.And(right.value));
+static Int10T ITritwiseOperators<Int10T, Int10T, Int10T>.operator |(Int10T left, Int10T right) => Create(left.value.Or(right.value));
+static Int10T ITritwiseOperators<Int10T, Int10T, Int10T>.operator ^(Int10T left, Int10T right) => Create(left.value.Xor(right.value));
+static Int10T ITritwiseOperators<Int10T, Int10T, Int10T>.operator ~(Int10T value) => Create(-value.value);
+static Int10T IShiftOperators<Int10T, int, Int10T>.operator <<(Int10T value, int shiftAmount) => Create(value.value.Shift(-shiftAmount));
+static Int10T IShiftOperators<Int10T, int, Int10T>.operator >> (Int10T value, int shiftAmount) => Create(value.value.Shift(shiftAmount));
+static Int10T IShiftOperators<Int10T, int, Int10T>.operator >>> (Int10T value, int shiftAmount) => Create(value.value.Shift(shiftAmount));
 
     #endregion
 
@@ -703,79 +705,7 @@ public static implicit operator Int64(Int10T value) => (Int64)value.value;
         return false;
     }
 
-    static bool IBinaryNumber<Int10T>.IsPow2(Int10T value) =>
-        value.value > 0 && (value.value & (value.value - 1)) == 0;
-
-    static Int10T IBinaryNumber<Int10T>.Log2(Int10T value) =>
-        Create(BitOperations.Log2((uint)value.value));
-
-    int IBinaryInteger<Int10T>.GetByteCount() => sizeof(Int16);
-
-    int IBinaryInteger<Int10T>.GetShortestBitLength() =>
-        value == 0 ? 1 : BitOperations.Log2((uint)Math.Abs(value)) + 1;
-
-    static Int10T IBinaryInteger<Int10T>.PopCount(Int10T value) =>
-        Create(BitOperations.PopCount((uint)value.value));
-
-    static Int10T IBinaryInteger<Int10T>.TrailingZeroCount(Int10T value) =>
-        Create(BitOperations.TrailingZeroCount((uint)value.value));
-
-    bool IBinaryInteger<Int10T>.TryWriteBigEndian(Span<byte> destination, out int bytesWritten)
-    {
-        if (destination.Length < sizeof(Int16))
-        {
-            bytesWritten = 0;
-            return false;
-        }
-
-        var bytes = BitConverter.GetBytes(value);
-        if (BitConverter.IsLittleEndian)
-            Array.Reverse(bytes);
-        bytes.CopyTo(destination);
-        bytesWritten = sizeof(Int16);
-        return true;
-    }
-
-    bool IBinaryInteger<Int10T>.TryWriteLittleEndian(Span<byte> destination, out int bytesWritten)
-    {
-        if (destination.Length < sizeof(Int16))
-        {
-            bytesWritten = 0;
-            return false;
-        }
-
-        BitConverter.GetBytes(value).CopyTo(destination);
-        bytesWritten = sizeof(Int16);
-        return true;
-    }
-
-    static bool IBinaryInteger<Int10T>.TryReadBigEndian(ReadOnlySpan<byte> source, bool isUnsigned, out Int10T result)
-    {
-        if (source.Length < sizeof(Int16))
-        {
-            result = default;
-            return false;
-        }
-
-        var bytes = source.Slice(0, sizeof(Int16)).ToArray();
-        if (BitConverter.IsLittleEndian)
-            Array.Reverse(bytes);
-
-        result = new(BitConverter.ToInt16(bytes));
-        return true;
-    }
-
-    static bool IBinaryInteger<Int10T>.TryReadLittleEndian(ReadOnlySpan<byte> source, bool isUnsigned, out Int10T result)
-    {
-        if (source.Length < sizeof(Int16))
-        {
-            result = default;
-            return false;
-        }
-
-        result = new(BitConverter.ToInt16(source));
-        return true;
-    }
+    #endregion
 
     #region ISpanFormattable/ISpanParsable Implementation
 
@@ -811,33 +741,6 @@ public static implicit operator Int64(Int10T value) => (Int64)value.value;
         result = default;
         return false;
     }
-
-    #endregion
-
-    #region Bit Operators
-
-    static Int10T IBitwiseOperators<Int10T, Int10T, Int10T>.operator &(Int10T left, Int10T right) =>
-        Create(left.value & right.value);
-
-    static Int10T IBitwiseOperators<Int10T, Int10T, Int10T>.operator |(Int10T left, Int10T right) =>
-        Create(left.value | right.value);
-
-    static Int10T IBitwiseOperators<Int10T, Int10T, Int10T>.operator ^(Int10T left, Int10T right) =>
-        Create(left.value ^ right.value);
-
-    static Int10T IBitwiseOperators<Int10T, Int10T, Int10T>.operator ~(Int10T value) =>
-        Create(~value.value);
-
-    static Int10T IShiftOperators<Int10T, int, Int10T>.operator <<(Int10T value, int shiftAmount) =>
-        Create(value.value << shiftAmount);
-
-    static Int10T IShiftOperators<Int10T, int, Int10T>.operator >> (Int10T value, int shiftAmount) =>
-        Create(value.value >> shiftAmount);
-
-    static Int10T IShiftOperators<Int10T, int, Int10T>.operator >>> (Int10T value, int shiftAmount) =>
-        Create(Int16.CreateChecked(((uint)value.value) >> shiftAmount));
-
-    #endregion
 
     #endregion
 

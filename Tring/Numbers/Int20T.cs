@@ -16,11 +16,7 @@ using System.Diagnostics.CodeAnalysis;
 /// Represents a 20-trit  signed integer, modeled after the <see cref="Int32"/> type.
 /// </summary>
 [GeneratedCode("IntT.tt", null)]
-public readonly partial struct Int20T :
-    IConvertible,
-    IBinaryInteger<Int20T>,
-    ISignedNumber<Int20T>,
-    ITernaryInteger<Int20T>
+public readonly partial struct Int20T : ITernaryInteger<Int20T>
 {
     private readonly Int32 value;
 
@@ -612,8 +608,14 @@ public static implicit operator Int64(Int20T value) => (Int64)value.value;
 
     #region Binary Operations
 
-    public static Int20T RotateLeft(Int20T value, int rotateAmount) =>
-        Create((Int32)BitOperations.RotateLeft((ulong)value.value, rotateAmount));
+    
+static Int20T ITritwiseOperators<Int20T, Int20T, Int20T>.operator &(Int20T left, Int20T right) => Create(left.value.And(right.value));
+static Int20T ITritwiseOperators<Int20T, Int20T, Int20T>.operator |(Int20T left, Int20T right) => Create(left.value.Or(right.value));
+static Int20T ITritwiseOperators<Int20T, Int20T, Int20T>.operator ^(Int20T left, Int20T right) => Create(left.value.Xor(right.value));
+static Int20T ITritwiseOperators<Int20T, Int20T, Int20T>.operator ~(Int20T value) => Create(-value.value);
+static Int20T IShiftOperators<Int20T, int, Int20T>.operator <<(Int20T value, int shiftAmount) => Create(value.value.Shift(-shiftAmount));
+static Int20T IShiftOperators<Int20T, int, Int20T>.operator >> (Int20T value, int shiftAmount) => Create(value.value.Shift(shiftAmount));
+static Int20T IShiftOperators<Int20T, int, Int20T>.operator >>> (Int20T value, int shiftAmount) => Create(value.value.Shift(shiftAmount));
 
     #endregion
 
@@ -690,79 +692,7 @@ public static implicit operator Int64(Int20T value) => (Int64)value.value;
         return false;
     }
 
-    static bool IBinaryNumber<Int20T>.IsPow2(Int20T value) =>
-        value.value > 0 && (value.value & (value.value - 1)) == 0;
-
-    static Int20T IBinaryNumber<Int20T>.Log2(Int20T value) =>
-        Create(BitOperations.Log2((uint)value.value));
-
-    int IBinaryInteger<Int20T>.GetByteCount() => sizeof(Int32);
-
-    int IBinaryInteger<Int20T>.GetShortestBitLength() =>
-        value == 0 ? 1 : BitOperations.Log2((uint)Math.Abs(value)) + 1;
-
-    static Int20T IBinaryInteger<Int20T>.PopCount(Int20T value) =>
-        Create(BitOperations.PopCount((uint)value.value));
-
-    static Int20T IBinaryInteger<Int20T>.TrailingZeroCount(Int20T value) =>
-        Create(BitOperations.TrailingZeroCount((uint)value.value));
-
-    bool IBinaryInteger<Int20T>.TryWriteBigEndian(Span<byte> destination, out int bytesWritten)
-    {
-        if (destination.Length < sizeof(Int32))
-        {
-            bytesWritten = 0;
-            return false;
-        }
-
-        var bytes = BitConverter.GetBytes(value);
-        if (BitConverter.IsLittleEndian)
-            Array.Reverse(bytes);
-        bytes.CopyTo(destination);
-        bytesWritten = sizeof(Int32);
-        return true;
-    }
-
-    bool IBinaryInteger<Int20T>.TryWriteLittleEndian(Span<byte> destination, out int bytesWritten)
-    {
-        if (destination.Length < sizeof(Int32))
-        {
-            bytesWritten = 0;
-            return false;
-        }
-
-        BitConverter.GetBytes(value).CopyTo(destination);
-        bytesWritten = sizeof(Int32);
-        return true;
-    }
-
-    static bool IBinaryInteger<Int20T>.TryReadBigEndian(ReadOnlySpan<byte> source, bool isUnsigned, out Int20T result)
-    {
-        if (source.Length < sizeof(Int32))
-        {
-            result = default;
-            return false;
-        }
-
-        var bytes = source.Slice(0, sizeof(Int32)).ToArray();
-        if (BitConverter.IsLittleEndian)
-            Array.Reverse(bytes);
-
-        result = new(BitConverter.ToInt32(bytes));
-        return true;
-    }
-
-    static bool IBinaryInteger<Int20T>.TryReadLittleEndian(ReadOnlySpan<byte> source, bool isUnsigned, out Int20T result)
-    {
-        if (source.Length < sizeof(Int32))
-        {
-            result = default;
-            return false;
-        }
-
-        result = new(BitConverter.ToInt32(source));
-        return true;
-    }
+    #endregion
 
     #region ISpanFormattable/ISpanParsable Implementation
 
@@ -798,33 +728,6 @@ public static implicit operator Int64(Int20T value) => (Int64)value.value;
         result = default;
         return false;
     }
-
-    #endregion
-
-    #region Bit Operators
-
-    static Int20T IBitwiseOperators<Int20T, Int20T, Int20T>.operator &(Int20T left, Int20T right) =>
-        Create(left.value & right.value);
-
-    static Int20T IBitwiseOperators<Int20T, Int20T, Int20T>.operator |(Int20T left, Int20T right) =>
-        Create(left.value | right.value);
-
-    static Int20T IBitwiseOperators<Int20T, Int20T, Int20T>.operator ^(Int20T left, Int20T right) =>
-        Create(left.value ^ right.value);
-
-    static Int20T IBitwiseOperators<Int20T, Int20T, Int20T>.operator ~(Int20T value) =>
-        Create(~value.value);
-
-    static Int20T IShiftOperators<Int20T, int, Int20T>.operator <<(Int20T value, int shiftAmount) =>
-        Create(value.value << shiftAmount);
-
-    static Int20T IShiftOperators<Int20T, int, Int20T>.operator >> (Int20T value, int shiftAmount) =>
-        Create(value.value >> shiftAmount);
-
-    static Int20T IShiftOperators<Int20T, int, Int20T>.operator >>> (Int20T value, int shiftAmount) =>
-        Create(Int32.CreateChecked(((uint)value.value) >> shiftAmount));
-
-    #endregion
 
     #endregion
 
