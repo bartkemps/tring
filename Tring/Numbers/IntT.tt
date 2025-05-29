@@ -995,17 +995,20 @@ internal static class TernaryNumberGenerator
         {
             yield return $"private static {name} Create(Int32 value) => new(value);";
             yield return $"private static {name} Create(Int64 value) => new(value.BalancedModulo(MaxValueConstant));";
+            yield return $"private static {name} Create(Int128 value) => new(value.BalancedModulo(MaxValueConstant));";
         }
         else if (backingType == "Int32")
         {
             yield return $"private static {name} Create(Int32 value) => new(value.BalancedModulo(MaxValueConstant));";
             yield return $"private static {name} Create(Int64 value) => new((Int32)value.BalancedModulo((Int64)MaxValueConstant));";
+            yield return $"private static {name} Create(Int128 value) => new((Int32)value.BalancedModulo((Int64)MaxValueConstant));";
         }
         else
         {
             yield return $"private static {name} Create({backingType} value) => new(({backingType})((Int32)value).BalancedModulo((Int32)MaxValueConstant));";
             yield return $"private static {name} Create(Int32 value) => new(({backingType})(value.BalancedModulo((Int32)MaxValueConstant)));";
             yield return $"private static {name} Create(Int64 value) => new(({backingType})(value.BalancedModulo((Int64)MaxValueConstant)));";
+            yield return $"private static {name} Create(Int128 value) => new(({backingType})value.BalancedModulo((Int64)MaxValueConstant));";
         }
     }
 #>

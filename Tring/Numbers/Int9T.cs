@@ -49,6 +49,7 @@ public readonly partial struct Int9T :
      private static Int9T Create(Int16 value) => new((Int16)((Int32)value).BalancedModulo((Int32)MaxValueConstant));
      private static Int9T Create(Int32 value) => new((Int16)(value.BalancedModulo((Int32)MaxValueConstant)));
      private static Int9T Create(Int64 value) => new((Int16)(value.BalancedModulo((Int64)MaxValueConstant)));
+     private static Int9T Create(Int128 value) => new((Int16)value.BalancedModulo((Int64)MaxValueConstant));
 
      /// <summary>
 /// Defines an implicit conversion of a Int16 to a <see cref="Int9T"/>.

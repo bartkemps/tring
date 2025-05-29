@@ -48,6 +48,7 @@ public readonly partial struct Int20T :
     
      private static Int20T Create(Int32 value) => new(value.BalancedModulo(MaxValueConstant));
      private static Int20T Create(Int64 value) => new((Int32)value.BalancedModulo((Int64)MaxValueConstant));
+     private static Int20T Create(Int128 value) => new((Int32)value.BalancedModulo((Int64)MaxValueConstant));
 
      /// <summary>
 /// Defines an implicit conversion of a Int32 to a <see cref="Int20T"/>.

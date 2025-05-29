@@ -48,6 +48,7 @@ public readonly partial struct Int27T :
     
      private static Int27T Create(Int32 value) => new(value);
      private static Int27T Create(Int64 value) => new(value.BalancedModulo(MaxValueConstant));
+     private static Int27T Create(Int128 value) => new(value.BalancedModulo(MaxValueConstant));
 
      /// <summary>
 /// Defines an implicit conversion of a Int64 to a <see cref="Int27T"/>.

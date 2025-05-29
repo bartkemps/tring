@@ -48,6 +48,7 @@ public readonly partial struct Int40T :
     
      private static Int40T Create(Int32 value) => new(value);
      private static Int40T Create(Int64 value) => new(value.BalancedModulo(MaxValueConstant));
+     private static Int40T Create(Int128 value) => new(value.BalancedModulo(MaxValueConstant));
 
      /// <summary>
 /// Defines an implicit conversion of a Int64 to a <see cref="Int40T"/>.
