@@ -63,7 +63,7 @@ internal static class Operations
     /// <summary>
     /// perform a trinary oparation (add by trit, modulo)
     ///    T  0  1
-    /// T|1 T T
+    /// T|1 T 0
     /// 0|T 0  1
     /// 1|0 1 T
     /// </summary>

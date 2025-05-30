@@ -8,8 +8,8 @@
     // Define the ternary number types to generate
             var ternaryTypes = new List<(string BackingType, int Trits, long BackingTypeMaxValue)>
             {
-                //("SByte",3, sbyte.MaxValue),
-                //("SByte", 5, sbyte.MaxValue),
+                ("SByte",3, sbyte.MaxValue),
+                ("SByte", 5, sbyte.MaxValue),
                 ("Int16", 9, short.MaxValue),
                 ("Int16", 10, short.MaxValue),
                 ("Int32", 20, int.MaxValue),
@@ -875,7 +875,6 @@ internal static class TernaryNumberGenerator
                static {{name}} ITritwiseOperators<{{name}}, {{name}}, {{name}}>.operator &({{name}} left, {{name}} right) => Create(left.value.And(right.value));
                static {{name}} ITritwiseOperators<{{name}}, {{name}}, {{name}}>.operator |({{name}} left, {{name}} right) => Create(left.value.Or(right.value));
                static {{name}} ITritwiseOperators<{{name}}, {{name}}, {{name}}>.operator ^({{name}} left, {{name}} right) => Create(left.value.Xor(right.value));
-               static {{name}} ITritwiseOperators<{{name}}, {{name}}, {{name}}>.operator ~({{name}} value) => Create(-value.value);
                static {{name}} IShiftOperators<{{name}}, int, {{name}}>.operator <<({{name}} value, int shiftAmount) => Create(value.value.Shift(-shiftAmount));
                static {{name}} IShiftOperators<{{name}}, int, {{name}}>.operator >> ({{name}} value, int shiftAmount) => Create(value.value.Shift(shiftAmount));
                static {{name}} IShiftOperators<{{name}}, int, {{name}}>.operator >>> ({{name}} value, int shiftAmount) => Create(value.value.Shift(shiftAmount));

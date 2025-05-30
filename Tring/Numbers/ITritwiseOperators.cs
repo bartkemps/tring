@@ -23,9 +23,4 @@ public interface ITritwiseOperators<TSelf, TOther, TResult> where TSelf : ITritw
     /// <param name="right">The value to xor with <paramref name="left" />.</param>
     /// <returns>The exclusive-or of <paramref name="left" /> and <paramref name="right" />.</returns>
     static abstract TResult operator ^(TSelf left, TOther right);
-
-    /// <summary>Computes the ones-complement representation of a given value.</summary>
-    /// <param name="value">The value for which to compute the ones-complement.</param>
-    /// <returns>The ones-complement of <paramref name="value" />.</returns>
-    static abstract TResult operator ~(TSelf value);
 }

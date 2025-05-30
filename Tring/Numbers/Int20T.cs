@@ -612,7 +612,6 @@ public static implicit operator Int64(Int20T value) => (Int64)value.value;
 static Int20T ITritwiseOperators<Int20T, Int20T, Int20T>.operator &(Int20T left, Int20T right) => Create(left.value.And(right.value));
 static Int20T ITritwiseOperators<Int20T, Int20T, Int20T>.operator |(Int20T left, Int20T right) => Create(left.value.Or(right.value));
 static Int20T ITritwiseOperators<Int20T, Int20T, Int20T>.operator ^(Int20T left, Int20T right) => Create(left.value.Xor(right.value));
-static Int20T ITritwiseOperators<Int20T, Int20T, Int20T>.operator ~(Int20T value) => Create(-value.value);
 static Int20T IShiftOperators<Int20T, int, Int20T>.operator <<(Int20T value, int shiftAmount) => Create(value.value.Shift(-shiftAmount));
 static Int20T IShiftOperators<Int20T, int, Int20T>.operator >> (Int20T value, int shiftAmount) => Create(value.value.Shift(shiftAmount));
 static Int20T IShiftOperators<Int20T, int, Int20T>.operator >>> (Int20T value, int shiftAmount) => Create(value.value.Shift(shiftAmount));
