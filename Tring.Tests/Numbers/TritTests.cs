@@ -1,12 +1,15 @@
-using System;
 using FluentAssertions;
 using Tring.Numbers;
-using Xunit;
 
 namespace Tring.Tests.Numbers;
 
-public class TritTests
+using Operators;
+using static Tring.Operators.Operation;
+
+public unsafe class TritTests
 {
+    private const sbyte T = -1;
+    
     [Fact]
     public void StaticValues_ShouldHaveCorrectUnderlyingValues()
     {
@@ -269,5 +272,97 @@ public class TritTests
         (Trit.Positive ^ Trit.Negative).Should().Be(Trit.Zero);
         (Trit.Positive ^ Trit.Zero).Should().Be(Trit.Positive);
         (Trit.Positive ^ Trit.Positive).Should().Be(Trit.Negative);
+    }
+
+    [Theory]
+    [InlineData(T, T, 1)] // Negative & Negative = Positive
+    [InlineData(T, 0, 0)] // Negative & Zero = Zero
+    [InlineData(T, 1, T)] // Negative & Positive = Negative
+    [InlineData(0, T, 0)] // Zero & Negative = Zero
+    [InlineData(0, 0, 0)] // Zero & Zero = Zero
+    [InlineData(0, 1, 0)] // Zero & Positive = Zero
+    [InlineData(1, T, T)] // Positive & Negative = Negative
+    [InlineData(1, 0, 0)] // Positive & Zero = Zero
+    [InlineData(1, 1, 1)] // Positive & Positive = Positive
+    public void PipeOperator_WithUnsafeMethodReference_ReturnsExpectedTrit(int left, int right, int expected)
+    {
+        var trit1 = (Trit)left;
+        var trit2 = (Trit)right;
+        var expectedResult = (Trit)expected;
+
+        var result = trit1 | &And | trit2;
+
+        result.Should().Be(expectedResult);
+    }
+
+    [Theory]
+    [InlineData(T, T, 1)] // Negative & Negative = Positive
+    [InlineData(T, 0, 0)] // Negative & Zero = Zero
+    [InlineData(T, 1, T)] // Negative & Positive = Negative
+    [InlineData(0, T, 0)] // Zero & Negative = Zero
+    [InlineData(0, 0, 0)] // Zero & Zero = Zero
+    [InlineData(0, 1, 0)] // Zero & Positive = Zero
+    [InlineData(1, T, T)] // Positive & Negative = Negative
+    [InlineData(1, 0, 0)] // Positive & Zero = Zero
+    [InlineData(1, 1, 1)] // Positive & Positive = Positive
+    public void PipeOperator_WithDelegateCall_ReturnsExpectedTrit(int left, int right, int expected)
+    {
+        var trit1 = (Trit)left;
+        var trit2 = (Trit)right;
+        var expectedResult = (Trit)expected;
+
+        var result = trit1 | And | trit2;
+
+        result.Should().Be(expectedResult);
+    }
+
+    [Fact]
+    public void PipeOperator_WithArrayLookupTritOperator_WorksCorrectly()
+    {
+        // Table for min(value)
+        // ---+----------
+        //  T | T  T  T
+        //  0 | T  0  0
+        //  1 | T  0  1
+        var min = new[,]
+        {
+            { Trit.Negative, Trit.Negative, Trit.Negative },
+            { Trit.Negative, Trit.Zero, Trit.Zero },
+            { Trit.Negative, Trit.Zero, Trit.Positive }
+        };
+
+        (Trit.Negative | min | Trit.Negative).Should().Be(Trit.Negative);
+        (Trit.Negative | min | Trit.Zero).Should().Be(Trit.Negative);
+        (Trit.Negative | min | Trit.Positive).Should().Be(Trit.Negative);
+        (Trit.Zero | min | Trit.Negative).Should().Be(Trit.Negative);
+        (Trit.Zero | min | Trit.Zero).Should().Be(Trit.Zero);
+        (Trit.Zero | min | Trit.Positive).Should().Be(Trit.Zero);
+        (Trit.Positive | min | Trit.Negative).Should().Be(Trit.Negative);
+        (Trit.Positive | min | Trit.Zero).Should().Be(Trit.Zero);
+        (Trit.Positive | min | Trit.Positive).Should().Be(Trit.Positive);
+    }
+
+    [Fact]
+    public void PipeOperator_WithLookupTritOperator_WorksCorrectly()
+    {
+        // Table for min(value)
+        // ---+----------
+        //  T | T  T  T
+        //  0 | T  0  0
+        //  1 | T  0  T
+        var min = new TritLookupTable(
+            Trit.Negative, Trit.Negative, Trit.Negative,
+            Trit.Negative, Trit.Zero, Trit.Zero,
+            Trit.Negative, Trit.Zero, Trit.Positive);
+
+        (Trit.Negative | min | Trit.Negative).Should().Be(Trit.Negative);
+        (Trit.Negative | min | Trit.Zero).Should().Be(Trit.Negative);
+        (Trit.Negative | min | Trit.Positive).Should().Be(Trit.Negative);
+        (Trit.Zero | min | Trit.Negative).Should().Be(Trit.Negative);
+        (Trit.Zero | min | Trit.Zero).Should().Be(Trit.Zero);
+        (Trit.Zero | min | Trit.Positive).Should().Be(Trit.Zero);
+        (Trit.Positive | min | Trit.Negative).Should().Be(Trit.Negative);
+        (Trit.Positive | min | Trit.Zero).Should().Be(Trit.Zero);
+        (Trit.Positive | min | Trit.Positive).Should().Be(Trit.Positive);
     }
 }

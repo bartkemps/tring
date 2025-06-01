@@ -7,6 +7,7 @@
 
 namespace Tring.Numbers;
 
+using Operators;
 using System.CodeDom.Compiler;
 using System.Globalization;
 using System.Numerics;
@@ -622,9 +623,9 @@ public static implicit operator Int64(Int3T value) => (Int64)value.value;
     #region Binary Operations
 
     
-static Int3T ITritwiseOperators<Int3T, Int3T, Int3T>.operator &(Int3T left, Int3T right) => Create(left.value.And(right.value));
-static Int3T ITritwiseOperators<Int3T, Int3T, Int3T>.operator |(Int3T left, Int3T right) => Create(left.value.Or(right.value));
-static Int3T ITritwiseOperators<Int3T, Int3T, Int3T>.operator ^(Int3T left, Int3T right) => Create(left.value.Xor(right.value));
+static Int3T ITritwiseOperators<Int3T, Int3T, Int3T>.operator &(Int3T left, Int3T right) => Create(Operation.And(left.value, right.value));
+static Int3T ITritwiseOperators<Int3T, Int3T, Int3T>.operator |(Int3T left, Int3T right) => Create(Operation.Or(left.value, right.value));
+static Int3T ITritwiseOperators<Int3T, Int3T, Int3T>.operator ^(Int3T left, Int3T right) => Create(Operation.Xor(left.value, right.value));
 static Int3T IShiftOperators<Int3T, int, Int3T>.operator <<(Int3T value, int shiftAmount) => Create(value.value.Shift(-shiftAmount));
 static Int3T IShiftOperators<Int3T, int, Int3T>.operator >> (Int3T value, int shiftAmount) => Create(value.value.Shift(shiftAmount));
 static Int3T IShiftOperators<Int3T, int, Int3T>.operator >>> (Int3T value, int shiftAmount) => Create(value.value.Shift(shiftAmount));
