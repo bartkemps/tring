@@ -1,0 +1,371 @@
+﻿using System;
+using System.Linq.Expressions; // Belangrijk: voor Expression Trees
+using System.Collections.Generic;
+using System.Linq;
+
+public static class TernaryLogicGenerator
+{
+    // De gekozen binaire codering voor gebalanceerde ternaire waarden:
+    // -1: 10 (Bit1=1, Bit0=0)
+    //  0: 00 (Bit1=0, Bit0=0)
+    // +1: 01 (Bit1=0, Bit0=1)
+    // Ongebruikt (Don't Care): 11
+
+    private static Dictionary<sbyte, Tuple<int, int>> TernaryToBinaryMap = new Dictionary<sbyte, Tuple<int, int>>
+    {
+        { -1, Tuple.Create(1, 0) }, // 10
+        { 0,  Tuple.Create(0, 0) }, // 00
+        { 1,  Tuple.Create(0, 1) }  // 01
+    };
+
+    // Helper om binaire bits terug te converteren naar ternaire sbyte
+    private static sbyte BinaryToTernary(int bit1, int bit0)
+    {
+        if (bit1 == 1 && bit0 == 0) return -1;
+        if (bit1 == 0 && bit0 == 0) return 0;
+        if (bit1 == 0 && bit0 == 1) return 1;
+        // Correctie: Gebruik sbyte.MinValue voor de ongeldige '11' codering
+        return sbyte.MinValue; // Ongeldige ternaire waarde voor 11, om overflow te voorkomen
+    }
+
+    /// <summary>
+    /// Genereert een Func<(ulong, ulong), (ulong, ulong)> delegate voor een unaire ternaire operatie.
+    /// De input is een tuple (MSB_word, LSB_word) van gepakte trits.
+    /// De output is ook een tuple (MSB_word, LSB_word) van de resultaten.
+    /// </summary>
+    /// <param name="unaryOperationTable">Een 1D array van 3 sbyte waarden (-1, 0, 1) die de uitkomsttabel definieert.
+    /// Index 0: resultaat voor input -1
+    /// Index 1: resultaat voor input 0
+    /// Index 2: resultaat voor input 1
+    /// </param>
+    /// <returns>Een delegate die de unaire operatie bit-parallel uitvoert.</returns>
+    public static Func<(ulong, ulong), (ulong, ulong)> GenerateUnaryOperator(sbyte unaryOperationTable) // Correctie: sbyte
+    {
+        if (unaryOperationTable == null |
+| unaryOperationTable.Length!= 3) // Correctie:.Length check
+        {
+            throw new ArgumentException("De unaire operatietabel moet precies 3 waarden bevatten (-1, 0, 1).");
+        }
+
+        // Stap 1: Ternaire waarheidstabel expanderen naar binaire waarheidstabellen (voor output Bit1 en Bit0)
+        // Inputs: T_in_b1, T_in_b0 (2 bits)
+        // Outputs: T_out_b1, T_out_b0 (2 bits)
+        var mintermsC1 = new List<int>(); // Input minterm index waar C1 = 1
+        var mintermsC0 = new List<int>(); // Input minterm index waar C0 = 1
+        var dontCares = new List<int>();  // Input minterm index waar output 'don't care' is
+
+        sbyte inputTernaryValues = { -1, 0, 1 };
+
+        for (int i = 0; i < 3; i++)
+        {
+            sbyte inputTernary = inputTernaryValues[i];
+            sbyte outputTernary = unaryOperationTable[i];
+
+            Tuple<int, int> inputBinary = TernaryToBinaryMap;
+            Tuple<int, int> outputBinary = TernaryToBinaryMap;
+
+            // Converteer binaire input (T_in_b1, T_in_b0) naar een decimale index (0-3)
+            // T_in_b1 is MSB, T_in_b0 is LSB
+            int inputIndex = (inputBinary.Item1 << 1) | inputBinary.Item2;
+
+            if (outputBinary.Item1 == 1) mintermsC1.Add(inputIndex);
+            if (outputBinary.Item2 == 1) mintermsC0.Add(inputIndex);
+        }
+
+        // Voeg de 'don't care' conditie toe: binaire input '11' (decimaal 3)
+        dontCares.Add(3); // Input 11 is altijd een don't care
+
+        // Stap 2: Logische Minimalisatie (conceptueel)
+        // Hier zou je een Quine-McCluskey of Espresso algoritme aanroepen
+        // om de minimale Booleaanse expressies voor T_out_b1 en T_out_b0 te krijgen.
+        // Voorbeeld:
+        // string minimizedExprC1 = QuineMcCluskey.Minimize(mintermsC1, dontCares);
+        // string minimizedExprC0 = QuineMcCluskey.Minimize(mintermsC0, dontCares);
+
+        // Voor dit voorbeeld gebruiken we placeholders voor de geminimaliseerde expressies.
+        // Je moet deze vervangen door de werkelijke output van je minimalisatie-algoritme.
+        // De expressies moeten C# bitwise syntax gebruiken, bijv. "input_b1_word & ~input_b0_word"
+        // De variabelen die beschikbaar zijn in de gegenereerde code zijn:
+        // 'input_b1_word' (voor alle MSB's van de input trits)
+        // 'input_b0_word' (voor alle LSB's van de input trits)
+
+        // Voorbeeld: Laten we aannemen dat de unaire operatie de identiteitsfunctie is:
+        // -1 -> -1 (10 -> 10)
+        //  0 ->  0 (00 -> 00)
+        // +1 -> +1 (01 -> 01)
+        // Dan zou de geminimaliseerde logica zijn:
+        // T_out_b1 = T_in_b1
+        // T_out_b0 = T_in_b0
+        string logicC1_str = "input_b1_word"; // Placeholder voor geminimaliseerde expressie voor output Bit1
+        string logicC0_str = "input_b0_word"; // Placeholder voor geminimaliseerde expressie voor output Bit0
+
+        // Stap 3: C# Expression Tree Generatie
+        ParameterExpression input_b1_word_param = Expression.Parameter(typeof(ulong), "input_b1_word");
+        ParameterExpression input_b0_word_param = Expression.Parameter(typeof(ulong), "input_b0_word");
+
+        // Map variabele namen naar hun Expression.Parameter objecten
+        var parametersMap = new Dictionary<string, ParameterExpression>
+        {
+            { "input_b1_word", input_b1_word_param },
+            { "input_b0_word", input_b0_word_param }
+        };
+
+        // Bouw de Expression Trees voor de output bits
+        Expression bodyC1 = ParseBooleanExpressionToExpressionTree(logicC1_str, parametersMap);
+        Expression bodyC0 = ParseBooleanExpressionToExpressionTree(logicC0_str, parametersMap);
+
+        // Creëer een Expression voor de ValueTuple return
+        var tupleConstructor = typeof(ValueTuple<ulong, ulong>).GetConstructor(new { typeof(ulong), typeof(ulong) });
+        if (tupleConstructor == null)
+        {
+            throw new InvalidOperationException("ValueTuple<ulong, ulong> constructor niet gevonden.");
+        }
+        NewExpression resultTuple = Expression.New(tupleConstructor, bodyC1, bodyC0);
+
+        // Creëer de Lambda Expression
+        var lambda = Expression.Lambda<Func<(ulong, ulong), (ulong, ulong)>>(
+            resultTuple,
+            input_b1_word_param,
+            input_b0_word_param
+        );
+
+        // Compileer de Expression Tree naar een delegate
+        return lambda.Compile();
+    }
+
+    /// <summary>
+    /// Genereert een Func<(ulong, ulong), (ulong, ulong), (ulong, ulong)> delegate voor een binaire ternaire operatie.
+    /// De inputs zijn tuples (MSB_word, LSB_word) van gepakte trits voor A en B.
+    /// De output is ook een tuple (MSB_word, LSB_word) van de resultaten.
+    /// </summary>
+    /// <param name="binaryOperationTable">Een 3x3 sbyte matrix (-1, 0, 1) die de uitkomsttabel definieert.
+    /// binaryOperationTable[row][col] = resultaat van (row, col)
+    /// row/col indices: 0 = -1, 1 = 0, 2 = 1
+    /// </param>
+    /// <returns>Een delegate die de binaire operatie bit-parallel uitvoert.</returns>
+    public static Func<(ulong, ulong), (ulong, ulong), (ulong, ulong)> GenerateBinaryOperator(sbyte[,] binaryOperationTable)
+    {
+        if (binaryOperationTable == null |
+| binaryOperationTable.GetLength(0)!= 3 |
+| binaryOperationTable.GetLength(1)!= 3)
+        {
+            throw new ArgumentException("De binaire operatietabel moet een 3x3 matrix zijn.");
+        }
+
+        // Stap 1: Ternaire waarheidstabel expanderen naar binaire waarheidstabellen (voor output C1 en C0)
+        // Inputs: A_b1, A_b0, B_b1, B_b0 (4 bits)
+        // Outputs: C_b1, C_b0 (2 bits)
+        var mintermsC1 = new List<int>(); // Input minterm index waar C1 = 1
+        var mintermsC0 = new List<int>(); // Input minterm index waar C0 = 1
+        var dontCares = new List<int>();  // Input minterm index waar output 'don't care' is
+
+        sbyte ternaryValues = { -1, 0, 1 };
+
+        for (int i = 0; i < 3; i++) // Input A
+        {
+            for (int j = 0; j < 3; j++) // Input B
+            {
+                sbyte inputA = ternaryValues[i];
+                sbyte inputB = ternaryValues[j];
+                sbyte outputC = binaryOperationTable[i, j];
+
+                Tuple<int, int> inputABinary = TernaryToBinaryMap[inputA];
+                Tuple<int, int> inputBBinary = TernaryToBinaryMap;
+                Tuple<int, int> outputCBinary = TernaryToBinaryMap[outputC];
+
+                // Converteer binaire inputs (A_b1, A_b0, B_b1, B_b0) naar een decimale index (0-15)
+                // A_b1 is MSB, B_b0 is LSB
+                int inputIndex = (inputABinary.Item1 << 3) | (inputABinary.Item2 << 2) | (inputBBinary.Item1 << 1) | inputBBinary.Item2;
+
+                if (outputCBinary.Item1 == 1) mintermsC1.Add(inputIndex);
+                if (outputCBinary.Item2 == 1) mintermsC0.Add(inputIndex);
+            }
+        }
+
+        // Voeg de 'don't care' condities toe voor alle ongeldige binaire inputcombinaties
+        // Er zijn 4^2 = 16 mogelijke binaire inputcombinaties (0-15)
+        // Slechts 3*3 = 9 zijn geldige ternaire combinaties.
+        // De overige 7 zijn don't cares.
+        for (int i = 0; i < 16; i++)
+        {
+            // Decodeer de binaire index terug naar A_b1, A_b0, B_b1, B_b0
+            int a_b1 = (i >> 3) & 1;
+            int a_b0 = (i >> 2) & 1;
+            int b_b1 = (i >> 1) & 1;
+            int b_b0 = i & 1;
+
+            // Controleer of de binaire codering van A of B '11' is
+            bool a_is_dont_care_encoding = (a_b1 == 1 && a_b0 == 1);
+            bool b_is_dont_care_encoding = (b_b1 == 1 && b_b0 == 1);
+
+            if (a_is_dont_care_encoding |
+| b_is_dont_care_encoding)
+            {
+                dontCares.Add(i);
+            }
+        }
+
+        // Stap 2: Logische Minimalisatie (conceptueel)
+        // Hier zou je een Quine-McCluskey of Espresso algoritme aanroepen
+        // om de minimale Booleaanse expressies voor C_b1 en C_b0 te krijgen.
+        // Voorbeeld:
+        // string minimizedExprC1 = QuineMcCluskey.Minimize(mintermsC1, dontCares);
+        // string minimizedExprC0 = QuineMcCluskey.Minimize(mintermsC0, dontCares);
+
+        // Voor dit voorbeeld gebruiken we placeholders voor de geminimaliseerde expressies.
+        // Je moet deze vervangen door de werkelijke output van je minimalisatie-algoritme.
+        // De expressies moeten C# bitwise syntax gebruiken, bijv. "(inputA_b1_word & ~inputB_b0_word)"
+        // De variabelen die beschikbaar zijn in de gegenereerde code zijn:
+        // 'inputA_b1_word', 'inputA_b0_word'
+        // 'inputB_b1_word', 'inputB_b0_word'
+
+        // Voorbeeld: Laten we de ternaire MIN-operatie implementeren:
+        // C1 = A1 | B1 | (A0 & B0)
+        // C0 = (A0 & B0) | (A0 & B1) | (A1 & B0)
+        string logicC1_str = "inputA_b1_word | inputB_b1_word | (inputA_b0_word & inputB_b0_word)"; // Placeholder
+        string logicC0_str = "(inputA_b0_word & inputB_b0_word) | (inputA_b0_word & inputB_b1_word) | (inputA_b1_word & inputB_b0_word)"; // Placeholder
+
+        // Stap 3: C# Expression Tree Generatie
+        ParameterExpression inputA_b1_word_param = Expression.Parameter(typeof(ulong), "inputA_b1_word");
+        ParameterExpression inputA_b0_word_param = Expression.Parameter(typeof(ulong), "inputA_b0_word");
+        ParameterExpression inputB_b1_word_param = Expression.Parameter(typeof(ulong), "inputB_b1_word");
+        ParameterExpression inputB_b0_word_param = Expression.Parameter(typeof(ulong), "inputB_b0_word");
+
+        // Map variabele namen naar hun Expression.Parameter objecten
+        var parametersMap = new Dictionary<string, ParameterExpression>
+        {
+            { "inputA_b1_word", inputA_b1_word_param },
+            { "inputA_b0_word", inputA_b0_word_param },
+            { "inputB_b1_word", inputB_b1_word_param },
+            { "inputB_b0_word", inputB_b0_word_param }
+        };
+
+        // Bouw de Expression Trees voor de output bits
+        Expression bodyC1 = ParseBooleanExpressionToExpressionTree(logicC1_str, parametersMap);
+        Expression bodyC0 = ParseBooleanExpressionToExpressionTree(logicC0_str, parametersMap);
+
+        // Creëer een Expression voor de ValueTuple return
+        var tupleConstructor = typeof(ValueTuple<ulong, ulong>).GetConstructor(new { typeof(ulong), typeof(ulong) });
+        if (tupleConstructor == null)
+        {
+            throw new InvalidOperationException("ValueTuple<ulong, ulong> constructor niet gevonden.");
+        }
+        NewExpression resultTuple = Expression.New(tupleConstructor, bodyC1, bodyC0);
+
+        // Creëer de Lambda Expression
+        var lambda = Expression.Lambda<Func<(ulong, ulong), (ulong, ulong), (ulong, ulong)>>(
+            resultTuple,
+            inputA_b1_word_param,
+            inputA_b0_word_param,
+            inputB_b1_word_param,
+            inputB_b0_word_param
+        );
+
+        // Compileer de Expression Tree naar een delegate
+        return lambda.Compile();
+    }
+
+    /// <summary>
+    /// Simpele helper om een Booleaanse expressie string om te zetten naar een Expression Tree.
+    /// Deze parser is zeer rudimentair en ondersteunt alleen AND (&), OR (|), NOT (~) en haakjes.
+    /// Variabelen moeten exact overeenkomen met de sleutels in de parametersMap.
+    /// Voor een robuuste oplossing is een volwaardige parser nodig.
+    /// </summary>
+    private static Expression ParseBooleanExpressionToExpressionTree(
+        string expressionString,
+        Dictionary<string, ParameterExpression> parametersMap)
+    {
+        // Deze parser is een vereenvoudigde implementatie.
+        // Een robuuste parser zou een lexer en een shunting-yard algoritme of vergelijkbaar gebruiken.
+        // Voor nu, een simpele aanpak die werkt voor de verwachte SOP-vormen.
+
+        // Verwijder spaties voor eenvoudigere parsing
+        expressionString = expressionString.Replace(" ", "");
+
+        // Splits op OR-operatoren op het hoogste niveau
+        var orTerms = SplitByOperator(expressionString, '|');
+        Expression resultExpression = null;
+
+        foreach (var orTerm in orTerms)
+        {
+            // Splits elke OR-term op AND-operatoren
+            var andTerms = SplitByOperator(orTerm, '&');
+            Expression currentAndExpression = null;
+
+            foreach (var andTerm in andTerms)
+            {
+                Expression currentFactor = null;
+                string factor = andTerm;
+
+                // Verwerk NOT-operator
+                if (factor.StartsWith("~"))
+                {
+                    string varName = factor.Substring(1);
+                    if (!parametersMap.TryGetValue(varName, out var paramExpr))
+                    {
+                        throw new ArgumentException($"Onbekende variabele in expressie: {varName}");
+                    }
+                    currentFactor = Expression.Not(paramExpr);
+                }
+                // Verwerk haakjes
+                else if (factor.StartsWith("(") && factor.EndsWith(")"))
+                {
+                    // Recursief parsen van de inhoud van de haakjes
+                    currentFactor = ParseBooleanExpressionToExpressionTree(factor.Substring(1, factor.Length - 2), parametersMap);
+                }
+                // Verwerk variabele
+                else
+                {
+                    if (!parametersMap.TryGetValue(factor, out var paramExpr))
+                    {
+                        throw new ArgumentException($"Onbekende variabele in expressie: {factor}");
+                    }
+                    currentFactor = paramExpr;
+                }
+
+                // Combineer met AND
+                if (currentAndExpression == null)
+                {
+                    currentAndExpression = currentFactor;
+                }
+                else
+                {
+                    currentAndExpression = Expression.And(currentAndExpression, currentFactor);
+                }
+            }
+
+            // Combineer met OR
+            if (resultExpression == null)
+            {
+                resultExpression = currentAndExpression;
+            }
+            else
+            {
+                resultExpression = Expression.Or(resultExpression, currentAndExpression);
+            }
+        }
+        return resultExpression;
+    }
+
+    // Helper om een string te splitsen op een operator, rekening houdend met haakjes
+    private static List<string> SplitByOperator(string expression, char op)
+    {
+        var parts = new List<string>();
+        int balance = 0;
+        int lastSplit = 0;
+
+        for (int i = 0; i < expression.Length; i++)
+        {
+            char c = expression[i];
+            if (c == '(') balance++;
+            else if (c == ')') balance--;
+            else if (c == op && balance == 0)
+            {
+                parts.Add(expression.Substring(lastSplit, i - lastSplit));
+                lastSplit = i + 1;
+            }
+        }
+        parts.Add(expression.Substring(lastSplit)); // Voeg het laatste deel toe
+        return parts;
+    }
+}

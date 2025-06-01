@@ -6,14 +6,19 @@ using static Tring.Operators.Operation;
 /// <summary>
 /// Represents a trinary (three-valued) logical value that can be Negative (-1), Zero (0), or Positive (1).
 /// </summary>
-public struct Trit
+public readonly struct Trit: IEquatable<Trit>
 {
+    // In this class, a trit is represented by a short representig its value (-1, 0 and 1)
+    // In other parts of this library, trits may be represented differently. 
+    
+    private const sbyte NegativeValue = -1;
+    private const sbyte ZeroValue = 0;
+    private const sbyte PositiveValue = 1;
+    
     internal readonly sbyte Value;
 
-    internal Trit(sbyte value)
-    {
-        Value = value;
-    }
+    internal Trit(sbyte value) => Value = value;
+    internal Trit(int value) => Value = (sbyte)value;
 
     /// <summary>
     /// Converts the specified nullable Boolean value to a Trit value.
@@ -55,8 +60,8 @@ public struct Trit
     /// </returns>
     public static implicit operator bool?(Trit trit) => trit.Value switch
     {
-        1 => true, // Positive
-        -1 => false, // Negative
+        PositiveValue => true, // Positive
+        NegativeValue => false, // Negative
         _ => null, // Zero
     };
 
@@ -101,17 +106,17 @@ public struct Trit
     /// <summary>
     /// Represents the Zero (0) value of the Trit.
     /// </summary>
-    public static readonly Trit Zero = new(0);
+    public static readonly Trit Zero = new(ZeroValue);
 
     /// <summary>
     /// Represents the Positive (1) value of the Trit.
     /// </summary>
-    public static readonly Trit Positive = new(1);
+    public static readonly Trit Positive = new(PositiveValue);
 
     /// <summary>
     /// Represents the Negative (-1) value of the Trit.
     /// </summary>
-    public static readonly Trit Negative = new(-1);
+    public static readonly Trit Negative = new(NegativeValue);
 
     /// <summary>
     /// Returns a string representation of the current Trit value.
@@ -119,8 +124,8 @@ public struct Trit
     /// <returns>"Positive" for 1, "Zero" for 0, and "Negative" for -1.</returns>
     public override string ToString() => Value switch
     {
-        1 => "Positive",
-        -1 => "Negative",
+        PositiveValue => "Positive",
+        NegativeValue => "Negative",
         _ => "Zero"
     };
 
@@ -129,21 +134,21 @@ public struct Trit
     /// </summary>
     /// <param name="trit">The Trit value to check.</param>
     /// <returns>True if the value is Positive (1), false otherwise.</returns>
-    public static bool operator true(Trit trit) => trit.Value == 1;
+    public static bool operator true(Trit trit) => trit.Value == PositiveValue;
 
     /// <summary>
     /// Returns true if the value is Negative (-1), false otherwise.
     /// </summary>
     /// <param name="trit">The Trit value to check.</param>
     /// <returns>True if the value is Negative (-1), false otherwise.</returns>
-    public static bool operator false(Trit trit) => trit.Value == -1;
+    public static bool operator false(Trit trit) => trit.Value == NegativeValue;
 
     /// <summary>
     /// Performs a logical NOT operation on a Trit value.
     /// </summary>
     /// <param name="trit">The Trit value to negate.</param>
     /// <returns>The logical negation: Positive becomes Negative, Negative becomes Positive, Zero remains Zero.</returns>
-    public static Trit operator !(Trit trit) => trit.Value == 0 ? Zero : new((sbyte)-trit.Value);
+    public static Trit operator !(Trit trit) => trit.Value == ZeroValue ? Zero : new((sbyte)-trit.Value);
 
     /// <summary>
     /// Determines if two Trit values are equal.
@@ -160,6 +165,8 @@ public struct Trit
     /// <param name="right">The second Trit to compare.</param>
     /// <returns>True if the Trits have different values, false otherwise.</returns>
     public static bool operator !=(Trit left, Trit right) => left.Value != right.Value;
+
+    public bool Equals(Trit other) => Value == other.Value;
 
     /// <summary>
     /// Returns a value indicating whether this instance is equal to a specified object.
