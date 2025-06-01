@@ -1,0 +1,321 @@
+﻿using System;
+using System.CodeDom;
+using System.CodeDom.Compiler;
+using System.Reflection;
+using System.Collections.Generic;
+using System.Linq;
+
+public static class TernaryLogicGenerator
+{
+    // De gekozen binaire codering voor gebalanceerde ternaire waarden:
+    // -1: 10 (Bit1=1, Bit0=0)
+    //  0: 00 (Bit1=0, Bit0=0)
+    // +1: 01 (Bit1=0, Bit0=1)
+    // Ongebruikt (Don't Care): 11
+
+    private static Dictionary<sbyte, Tuple<int, int>> TernaryToBinaryMap = new Dictionary<sbyte, Tuple<int, int>>
+    {
+        { -1, Tuple.Create(1, 0) }, // 10
+        { 0,  Tuple.Create(0, 0) }, // 00
+        { 1,  Tuple.Create(0, 1) }  // 01
+    };
+
+    /// <summary>
+    /// Genereert een Func<ulong, ulong> delegate voor een unaire ternaire operatie.
+    /// De input ulong bevat gepakte trits (2 bits per trit).
+    /// De output ulong bevat de resultaten, ook gepakt.
+    /// </summary>
+    /// <param name="unaryOperationTable">Een 1D array van 3 sbyte waarden (-1, 0, 1) die de uitkomsttabel definieert.
+    /// Index 0: resultaat voor input -1
+    /// Index 1: resultaat voor input 0
+    /// Index 2: resultaat voor input 1
+    /// </param>
+    /// <returns>Een delegate die de unaire operatie bit-parallel uitvoert.</returns>
+    public static Func<ulong, ulong> GenerateUnaryOperator(sbyte unaryOperationTable)
+    {
+        if (unaryOperationTable == null |
+| unaryOperationTable.Length!= 3)
+        {
+            throw new ArgumentException("De unaire operatietabel moet precies 3 waarden bevatten (-1, 0, 1).");
+        }
+
+        // Stap 1: Ternaire waarheidstabel expanderen naar binaire waarheidstabellen (voor output Bit1 en Bit0)
+        // Inputs: T_in_b1, T_in_b0 (2 bits)
+        // Outputs: T_out_b1, T_out_b0 (2 bits)
+        var mintermsC1 = new List<int>(); // Input minterm index waar C1 = 1
+        var mintermsC0 = new List<int>(); // Input minterm index waar C0 = 1
+        var dontCares = new List<int>();  // Input minterm index waar output 'don't care' is
+
+        sbyte inputTernaryValues = { -1, 0, 1 };
+
+        for (int i = 0; i < 3; i++)
+        {
+            sbyte inputTernary = inputTernaryValues[i];
+            sbyte outputTernary = unaryOperationTable[i];
+
+            var inputBinary = TernaryToBinaryMap;
+            var outputBinary = TernaryToBinaryMap;
+
+            // Converteer binaire input (T_in_b1, T_in_b0) naar een decimale index (0-3)
+            // T_in_b1 is MSB, T_in_b0 is LSB
+            int inputIndex = (inputBinary.Item1 << 1) | inputBinary.Item2;
+
+            if (outputBinary.Item1 == 1) mintermsC1.Add(inputIndex);
+            if (outputBinary.Item2 == 1) mintermsC0.Add(inputIndex);
+        }
+
+        // Voeg de 'don't care' conditie toe: binaire input '11' (decimaal 3)
+        dontCares.Add(3); // Input 11 is altijd een don't care
+
+        // Stap 2: Logische Minimalisatie (conceptueel)
+        // Dit is het meest complexe deel en vereist een externe bibliotheek of implementatie
+        // van een algoritme zoals Quine-McCluskey of Espresso.
+        // Voorbeeld:
+        // string minimizedExprC1 = QuineMcCluskey.Minimize(mintermsC1, dontCares);
+        // string minimizedExprC0 = QuineMcCluskey.Minimize(mintermsC0, dontCares);
+
+        // Voor dit voorbeeld gebruiken we placeholders voor de geminimaliseerde expressies.
+        // Je moet deze vervangen door de werkelijke output van je minimalisatie-algoritme.
+        // De expressies moeten C# bitwise syntax gebruiken, bijv. "input_b1_word & ~input_b0_word"
+        // De variabelen die beschikbaar zijn in de gegenereerde code zijn:
+        // 'input_b1_word' (voor alle MSB's van de input trits)
+        // 'input_b0_word' (voor alle LSB's van de input trits)
+
+        // Voorbeeld: Laten we aannemen dat de unaire operatie de identiteitsfunctie is:
+        // -1 -> -1 (10 -> 10)
+        //  0 ->  0 (00 -> 00)
+        // +1 -> +1 (01 -> 01)
+        // Dan zou de geminimaliseerde logica zijn:
+        // T_out_b1 = T_in_b1
+        // T_out_b0 = T_in_b0
+        string logicC1 = "input_b1_word"; // Placeholder voor geminimaliseerde expressie voor output Bit1
+        string logicC0 = "input_b0_word"; // Placeholder voor geminimaliseerde expressie voor output Bit0
+
+        // Als je bijvoorbeeld de ternaire NOT-operatie zou implementeren (0->-1, 1->0, -1->1):
+        // -1 (10) -> 1 (01)  => C1=0, C0=1
+        //  0 (00) -> -1 (10) => C1=1, C0=0
+        //  1 (01) -> 0 (00)  => C1=0, C0=0
+        // De minimalisatie zou dan complexere expressies opleveren.
+
+        // Stap 3: C# Code Generatie met CodeDom
+        var compileUnit = new CodeCompileUnit();
+        var ns = new CodeNamespace("DynamicTernaryOperations");
+        compileUnit.Namespaces.Add(ns);
+
+        var targetClass = new CodeTypeDeclaration("UnaryOperatorClass")
+        {
+            IsClass = true,
+            TypeAttributes = TypeAttributes.Public
+        };
+        ns.Types.Add(targetClass);
+
+        var generateMethod = new CodeMemberMethod
+        {
+            Name = "Execute",
+            ReturnType = new CodeTypeReference(typeof(ulong)),
+            Attributes = MemberAttributes.Public | MemberAttributes.Static
+        };
+        generateMethod.Parameters.Add(new CodeParameterDeclarationExpression(typeof(ulong), "packedInput"));
+        targetClass.Members.Add(generateMethod);
+
+        // Code voor uitpakken (unpacking)
+        // 0x5555... is een masker voor alle LSB's (010101...)
+        // (packedInput >> 1) & 0x5555... is een masker voor alle MSB's (001001...)
+        generateMethod.Statements.Add(new CodeSnippetStatement("            // Uitpakken van de input ulong in bit-sliced componenten"));
+        generateMethod.Statements.Add(new CodeSnippetStatement("            ulong input_b0_word = packedInput & 0x5555555555555555UL;"));
+        generateMethod.Statements.Add(new CodeSnippetStatement("            ulong input_b1_word = (packedInput >> 1) & 0x5555555555555555UL;"));
+
+        // Hier komen de geminimaliseerde Booleaanse expressies, vertaald naar C# bitwise operaties
+        generateMethod.Statements.Add(new CodeSnippetStatement($"            ulong output_b1_word = {logicC1};"));
+        generateMethod.Statements.Add(new CodeSnippetStatement($"            ulong output_b0_word = {logicC0};"));
+
+        // Code voor inpakken (repacking)
+        generateMethod.Statements.Add(new CodeSnippetStatement("            // Inpakken van de bit-sliced resultaten naar een enkele ulong"));
+        generateMethod.Statements.Add(new CodeSnippetStatement("            return (output_b1_word << 1) | output_b0_word;"));
+
+        // Compileren en de delegate ophalen
+        using (var provider = CodeDomProvider.CreateProvider("CSharp"))
+        {
+            var compilerParams = new CompilerParameters();
+            compilerParams.GenerateInMemory = true;
+            compilerParams.ReferencedAssemblies.Add("System.dll");
+
+            var results = provider.CompileAssemblyFromDom(compilerParams, compileUnit);
+
+            if (results.Errors.HasErrors)
+            {
+                var errorMessages = string.Join("\n", results.Errors.Cast<CompilerError>().Select(e => e.ToString()));
+                throw new InvalidOperationException($"Fout bij het compileren van dynamische code:\n{errorMessages}");
+            }
+
+            var compiledAssembly = results.CompiledAssembly;
+            var type = compiledAssembly.GetType("DynamicTernaryOperations.UnaryOperatorClass");
+            var method = type.GetMethod("Execute", BindingFlags.Public | BindingFlags.Static);
+
+            return (Func<ulong, ulong>)Delegate.CreateDelegate(typeof(Func<ulong, ulong>), method);
+        }
+    }
+
+    /// <summary>
+    /// Genereert een Func<ulong, ulong, ulong> delegate voor een binaire ternaire operatie.
+    /// De input ulongs bevatten gepakte trits (2 bits per trit) voor A en B.
+    /// De output ulong bevat de resultaten, ook gepakt.
+    /// </summary>
+    /// <param name="binaryOperationTable">Een 3x3 sbyte matrix (-1, 0, 1) die de uitkomsttabel definieert.
+    /// binaryOperationTable[row][col] = resultaat van (row, col)
+    /// row/col indices: 0 = -1, 1 = 0, 2 = 1
+    /// </param>
+    /// <returns>Een delegate die de binaire operatie bit-parallel uitvoert.</returns>
+    public static Func<ulong, ulong, ulong> GenerateBinaryOperator(sbyte[,] binaryOperationTable)
+    {
+        if (binaryOperationTable == null |
+| binaryOperationTable.GetLength(0)!= 3 |
+| binaryOperationTable.GetLength(1)!= 3)
+        {
+            throw new ArgumentException("De binaire operatietabel moet een 3x3 matrix zijn.");
+        }
+
+        // Stap 1: Ternaire waarheidstabel expanderen naar binaire waarheidstabellen (voor output C1 en C0)
+        // Inputs: A_b1, A_b0, B_b1, B_b0 (4 bits)
+        // Outputs: C_b1, C_b0 (2 bits)
+        var mintermsC1 = new List<int>(); // Input minterm index waar C1 = 1
+        var mintermsC0 = new List<int>(); // Input minterm index waar C0 = 1
+        var dontCares = new List<int>();  // Input minterm index waar output 'don't care' is
+
+        sbyte ternaryValues = { -1, 0, 1 };
+
+        for (int i = 0; i < 3; i++) // Input A
+        {
+            for (int j = 0; j < 3; j++) // Input B
+            {
+                sbyte inputA = ternaryValues[i];
+                sbyte inputB = ternaryValues[j];
+                sbyte outputC = binaryOperationTable[i, j];
+
+                var inputABinary = TernaryToBinaryMap[inputA];
+                var inputBBinary = TernaryToBinaryMap;
+                var outputCBinary = TernaryToBinaryMap[outputC];
+
+                // Converteer binaire inputs (A_b1, A_b0, B_b1, B_b0) naar een decimale index (0-15)
+                // A_b1 is MSB, B_b0 is LSB
+                int inputIndex = (inputABinary.Item1 << 3) | (inputABinary.Item2 << 2) | (inputBBinary.Item1 << 1) | inputBBinary.Item2;
+
+                if (outputCBinary.Item1 == 1) mintermsC1.Add(inputIndex);
+                if (outputCBinary.Item2 == 1) mintermsC0.Add(inputIndex);
+            }
+        }
+
+        // Voeg de 'don't care' condities toe voor alle ongeldige binaire inputcombinaties
+        // Er zijn 4^2 = 16 mogelijke binaire inputcombinaties (0-15)
+        // Slechts 3*3 = 9 zijn geldige ternaire combinaties.
+        // De overige 7 zijn don't cares.
+        for (int i = 0; i < 16; i++)
+        {
+            // Decodeer de binaire index terug naar A_b1, A_b0, B_b1, B_b0
+            int a_b1 = (i >> 3) & 1;
+            int a_b0 = (i >> 2) & 1;
+            int b_b1 = (i >> 1) & 1;
+            int b_b0 = i & 1;
+
+            // Controleer of de binaire codering van A of B '11' is
+            bool a_is_dont_care_encoding = (a_b1 == 1 && a_b0 == 1);
+            bool b_is_dont_care_encoding = (b_b1 == 1 && b_b0 == 1);
+
+            if (a_is_dont_care_encoding |
+| b_is_dont_care_encoding)
+            {
+                dontCares.Add(i);
+            }
+        }
+
+        // Stap 2: Logische Minimalisatie (conceptueel)
+        // Dit is het meest complexe deel en vereist een externe bibliotheek of implementatie
+        // van een algoritme zoals Quine-McCluskey of Espresso.
+        // Voorbeeld:
+        // string minimizedExprC1 = QuineMcCluskey.Minimize(mintermsC1, dontCares);
+        // string minimizedExprC0 = QuineMcCluskey.Minimize(mintermsC0, dontCares);
+
+        // Voor dit voorbeeld gebruiken we placeholders voor de geminimaliseerde expressies.
+        // Je moet deze vervangen door de werkelijke output van je minimalisatie-algoritme.
+        // De expressies moeten C# bitwise syntax gebruiken, bijv. "(inputA_b1_word & ~inputB_b0_word)"
+        // De variabelen die beschikbaar zijn in de gegenereerde code zijn:
+        // 'inputA_b1_word', 'inputA_b0_word'
+        // 'inputB_b1_word', 'inputB_b0_word'
+
+        // Voorbeeld: Laten we de ternaire MIN-operatie implementeren (AND in ternaire logica):
+        // MIN(-1, -1) = -1 (10,10 -> 10)
+        // MIN(-1,  0) = -1 (10,00 -> 10)
+        // MIN(-1, +1) = -1 (10,01 -> 10)
+        // MIN( 0, -1) = -1 (00,10 -> 10)
+        // MIN( 0,  0) =  0 (00,00 -> 00)
+        // MIN( 0, +1) =  0 (00,01 -> 00)
+        // MIN(+1, -1) = -1 (01,10 -> 10)
+        // MIN(+1,  0) =  0 (01,00 -> 00)
+        // MIN(+1, +1) = +1 (01,01 -> 01)
+        // De geminimaliseerde Booleaanse expressies voor deze specifieke MIN-operatie zouden zijn:
+        // C1 = A1 | B1 | (A0 & B0) (dit is een vereenvoudiging, de werkelijke kan complexer zijn)
+        // C0 = (A0 & B0) | (A0 & B1) | (A1 & B0) (dit is een vereenvoudiging, de werkelijke kan complexer zijn)
+
+        string logicC1 = "inputA_b1_word | inputB_b1_word | (inputA_b0_word & inputB_b0_word)"; // Placeholder
+        string logicC0 = "(inputA_b0_word & inputB_b0_word) | (inputA_b0_word & inputB_b1_word) | (inputA_b1_word & inputB_b0_word)"; // Placeholder
+
+        // Stap 3: C# Code Generatie met CodeDom
+        var compileUnit = new CodeCompileUnit();
+        var ns = new CodeNamespace("DynamicTernaryOperations");
+        compileUnit.Namespaces.Add(ns);
+
+        var targetClass = new CodeTypeDeclaration("BinaryOperatorClass")
+        {
+            IsClass = true,
+            TypeAttributes = TypeAttributes.Public
+        };
+        ns.Types.Add(targetClass);
+
+        var generateMethod = new CodeMemberMethod
+        {
+            Name = "Execute",
+            ReturnType = new CodeTypeReference(typeof(ulong)),
+            Attributes = MemberAttributes.Public | MemberAttributes.Static
+        };
+        generateMethod.Parameters.Add(new CodeParameterDeclarationExpression(typeof(ulong), "packedInputA"));
+        generateMethod.Parameters.Add(new CodeParameterDeclarationExpression(typeof(ulong), "packedInputB"));
+        targetClass.Members.Add(generateMethod);
+
+        // Code voor uitpakken (unpacking)
+        generateMethod.Statements.Add(new CodeSnippetStatement("            // Uitpakken van de input ulongs in bit-sliced componenten"));
+        generateMethod.Statements.Add(new CodeSnippetStatement("            ulong inputA_b0_word = packedInputA & 0x5555555555555555UL;"));
+        generateMethod.Statements.Add(new CodeSnippetStatement("            ulong inputA_b1_word = (packedInputA >> 1) & 0x5555555555555555UL;"));
+        generateMethod.Statements.Add(new CodeSnippetStatement("            ulong inputB_b0_word = packedInputB & 0x5555555555555555UL;"));
+        generateMethod.Statements.Add(new CodeSnippetStatement("            ulong inputB_b1_word = (packedInputB >> 1) & 0x5555555555555555UL;"));
+
+        // Hier komen de geminimaliseerde Booleaanse expressies, vertaald naar C# bitwise operaties
+        generateMethod.Statements.Add(new CodeSnippetStatement($"            ulong output_b1_word = {logicC1};"));
+        generateMethod.Statements.Add(new CodeSnippetStatement($"            ulong output_b0_word = {logicC0};"));
+
+        // Code voor inpakken (repacking)
+        generateMethod.Statements.Add(new CodeSnippetStatement("            // Inpakken van de bit-sliced resultaten naar een enkele ulong"));
+        generateMethod.Statements.Add(new CodeSnippetStatement("            return (output_b1_word << 1) | output_b0_word;"));
+
+        // Compileren en de delegate ophalen
+        using (var provider = CodeDomProvider.CreateProvider("CSharp"))
+        {
+            var compilerParams = new CompilerParameters();
+            compilerParams.GenerateInMemory = true;
+            compilerParams.ReferencedAssemblies.Add("System.dll");
+
+            var results = provider.CompileAssemblyFromDom(compilerParams, compileUnit);
+
+            if (results.Errors.HasErrors)
+            {
+                var errorMessages = string.Join("\n", results.Errors.Cast<CompilerError>().Select(e => e.ToString()));
+                throw new InvalidOperationException($"Fout bij het compileren van dynamische code:\n{errorMessages}");
+            }
+
+            var compiledAssembly = results.CompiledAssembly;
+            var type = compiledAssembly.GetType("DynamicTernaryOperations.BinaryOperatorClass");
+            var method = type.GetMethod("Execute", BindingFlags.Public | BindingFlags.Static);
+
+            return (Func<ulong, ulong, ulong>)Delegate.CreateDelegate(typeof(Func<ulong, ulong, ulong>), method);
+        }
+    }
+}

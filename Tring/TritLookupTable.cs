@@ -25,7 +25,7 @@ public struct TritLookupTable
     /// </summary>
     public TritLookupTable()
     {
-        data = 0;
+        data = 0b010101010101010101;
     }
 
     private TritLookupTable(int data)
