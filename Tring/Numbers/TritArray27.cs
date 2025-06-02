@@ -9,14 +9,14 @@ public class TritArray27 : ITritArray
 
     public TritArray27() { }
     
-    internal TritArray27(uint positive, uint negative)
+    internal TritArray27(uint negative, uint positive)
     {
         this.positive = positive;
         this.negative = negative;
     }
     
-    internal TritArray27((uint positive, uint negative) trits)
-        : this(trits.positive, trits.negative) { }
+    internal TritArray27((uint negative, uint positive) trits)
+        : this(trits.negative, trits.positive) { }
     
     public Trit this[int index]
     {

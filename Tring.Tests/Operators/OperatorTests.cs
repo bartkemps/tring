@@ -23,11 +23,11 @@ public class OperatorTests
         actual.Should().Be(expected);
 
         array[1] = trit;
-        var result = array | Operator.Negative;
-        result[1].Should().Be(expected);
+        var result = (array | Operator.Negative)[1];
+        result.Should().Be(expected);
 
         array[1] = trit;
-        result = array | UnaryOperation.Negative;
-        result[1].Should().Be(expected);
+        result = (array | UnaryOperation.Negative)[1];
+        result.Should().Be(expected);
     }
 }
