@@ -7,7 +7,7 @@ public interface ITritArray
     /// </summary>
     /// <param name="index">The index of the value to get.</param>
     /// <returns>The trit value at the specified index.</returns>
-    Trit this[int index] { get; set; }
+    Trit this[int index] { get; }
 
     /// <summary>
     /// Gets the length of the trit array.

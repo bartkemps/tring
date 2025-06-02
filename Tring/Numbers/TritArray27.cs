@@ -1,6 +1,7 @@
 ﻿namespace Tring.Numbers;
 
 using Operators;
+using TritArray;
 
 public struct TritArray27 : ITritArray
 {
@@ -25,7 +26,6 @@ public struct TritArray27 : ITritArray
             {
                 throw new ArgumentOutOfRangeException(nameof(index), "Index must be between 0 and 26.");
             }
-
             return TritConverter.GetTrit(ref positive, ref negative, index);
         }
         set
@@ -46,4 +46,36 @@ public struct TritArray27 : ITritArray
 
     public static TritArray27 operator |(TritArray27 array, Trit[] table)
         => new(UnaryOperation.Apply(array.negative, array.positive, table));
+
+    public static TritArray27 operator <<(TritArray27 array, int shift)
+    {
+        return shift switch
+        {
+            >= 27 => new(),
+            < 0 => array >> -shift,
+            _ => new() { positive = array.positive << shift, negative = array.negative << shift }
+        };
+    }
+
+    public static TritArray27 operator >> (TritArray27 array, int shift)
+    {
+        return shift switch
+        {
+            >= 27 => new(),
+            < 0 => array >> -shift,
+            _ => new() { positive = array.positive >> shift, negative = array.negative >> shift }
+        };
+    }
+
+    public static TritArray27 operator +(TritArray27 value1, TritArray27 value2)
+    {
+        Addition.AddBalancedTernary(value1.positive, value1.negative, value2.positive, value2.negative, out var positive, out var negative);    
+        return new () {negative = negative, positive = positive};
+    }
+    
+    public static TritArray27 operator -(TritArray27 value1, TritArray27 value2)
+    {
+        Addition.AddBalancedTernary(value1.positive, value1.negative, value2.negative, value2.positive, out var positive, out var negative);    
+        return new () {negative = negative, positive = positive};
+    }
 }
