@@ -2,22 +2,21 @@
 
 using Operators;
 
-public class TritArray27 : ITritArray
+public struct TritArray27 : ITritArray
 {
     private uint positive;
     private uint negative;
 
-    public TritArray27() { }
-    
-    internal TritArray27(uint negative, uint positive)
+    public TritArray27()
     {
-        this.positive = positive;
-        this.negative = negative;
     }
-    
-    internal TritArray27((uint negative, uint positive) trits)
-        : this(trits.negative, trits.positive) { }
-    
+
+    private TritArray27(UInt32Pair trits)
+    {
+        negative = trits.Negative;
+        positive = trits.Positive;
+    }
+
     public Trit this[int index]
     {
         get
@@ -26,6 +25,7 @@ public class TritArray27 : ITritArray
             {
                 throw new ArgumentOutOfRangeException(nameof(index), "Index must be between 0 and 26.");
             }
+
             return TritConverter.GetTrit(ref positive, ref negative, index);
         }
         set
@@ -34,17 +34,16 @@ public class TritArray27 : ITritArray
             {
                 throw new ArgumentOutOfRangeException(nameof(index), "Index must be between 0 and 26.");
             }
+
             TritConverter.SetTrit(ref positive, ref negative, index, value);
         }
     }
+
     public int Length => 27;
 
-    public static TritArray27 operator |(TritArray27 array, Func<Trit, Trit> operation) 
+    public static TritArray27 operator |(TritArray27 array, Func<Trit, Trit> operation)
         => new(UnaryOperation.Apply(array.negative, array.positive, operation));
-    
-    public static TritArray27 operator |(TritArray27 array, Trit[] table) 
+
+    public static TritArray27 operator |(TritArray27 array, Trit[] table)
         => new(UnaryOperation.Apply(array.negative, array.positive, table));
-    
-    public static TritArray27 operator |(TritArray27 array, Func<uint, uint, (uint, uint)> operation) 
-        => new(UnaryOperation.Apply(array.negative, array.positive, operation));
 }
