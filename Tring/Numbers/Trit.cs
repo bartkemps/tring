@@ -296,6 +296,20 @@ public readonly struct Trit: IEquatable<Trit>
     /// The table must be indexed from 0-2, with 0 corresponding to -1, 1 to 0, and 2 to +1 Trit values.
     /// </remarks>
     public static LookupTritOperator operator |(Trit left, TritLookupTable lookupTable) => new(left, lookupTable);
+    
+    /// <summary>
+    /// Performs a unary operation on a Trit value using a lookup table. 
+    /// </summary>
+    /// <param name="left">The operand</param>
+    /// <param name="operation">The operation, represented as a 3 trit array</param>
+    public static Trit operator |(Trit left, Trit[] operation) => UnaryOperation.Apply(left, operation);
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="left">The operand</param>
+    /// <param name="operation">The operation, represented as a function</param>
+    public static Trit operator |(Trit left, Func<Trit, Trit> operation) => operation(left);
 
     
     /// <summary>

@@ -19,111 +19,219 @@ public class UnaryOperation
         IsNotPositive, FloorIsNotPositive, Positive
     ];
 
-    // TTT [T, T, T]
+    /// <summary>
+    /// Negative value.
+    /// Negative for negative, zero and positive.
+    /// [T, T, T]
+    /// </summary>
     public static Trit Negative(Trit trit) => Trit.Negative;
     private static (uint, uint) Negative(uint negative, uint positive) => (uint.MaxValue, 0u);
 
-    // TT0 [T, T, 0]
+    /// <summary>
+    /// Decrement.
+    /// One less for every value greater than negative.
+    /// [T, T, 0]
+    /// </summary>
     public static Trit Decrement(Trit trit) => trit.Value == 1 ? Trit.Zero : Trit.Negative;
     private static (uint, uint) Decrement(uint negative, uint positive) => (negative | ~positive, 0u);
 
-    // TT1 [T, T, 1]
+    /// <summary>
+    /// Is the value positive?
+    /// Positive for positive, negative otherwise.
+    /// [T, T, 1]
+    /// </summary>
     public static Trit IsPositive(Trit trit) => trit.Value == 1 ? Trit.Positive : Trit.Negative;
     private static (uint, uint) IsPositive(uint negative, uint positive) => (negative | ~positive, positive);
 
-    // T0T [T, 0, T]
+    /// <summary>
+    /// Negate the Absolute Value.
+    /// Zero for zero, negative otherwise.
+    /// [T, 0, T]
+    /// </summary>
     public static Trit NegateAbsoluteValue(Trit trit) => trit.Value == 0 ? Trit.Zero : Trit.Negative;
     private static (uint, uint) NegateAbsoluteValue(uint negative, uint positive) => (negative | positive, 0u);
 
-    // T00 [T, 0, 0]
+    /// <summary>
+    /// Ceiling Zero.
+    /// Negative for negative, zero otherwise.
+    /// [T, 0, 0]
+    /// </summary>
     public static Trit Ceil(Trit trit) => trit.Value == -1 ? trit: Trit.Zero;
     private static (uint, uint) Ceil(uint negative, uint positive) => (negative, 0u);
 
-    // T01 [T, 0, 1]
+    /// <summary>
+    /// Identity.
+    /// Negative for negative, zero for zero, positive for positive.
+    /// [T, 0, 1]
+    /// </summary>
     public static Trit Identity(Trit trit) => trit;
     private static (uint, uint) Identity(uint negative, uint positive) => (negative, positive);
 
-    // T1T [T, 1, T]
+    /// <summary>
+    /// Is the value zero?
+    /// Positive for zero, negative otherwise.
+    /// [T, 1, T]
+    /// </summary>
     public static Trit IsZero(Trit trit) => trit.Value == 0 ? Trit.Positive : Trit.Negative;
     private static (uint, uint) IsZero(uint negative, uint positive) => (negative | positive, ~negative & ~positive);
 
-    // T10 [T, 1, 0]
+    /// <summary>
+    /// Keep the value unchanged if it is negative.
+    /// Zero for positive and vice versa.
+    /// [T, 1, 0]
+    /// </summary>
     public static Trit KeepNegative(Trit trit) => trit.Value == -1 ? trit : new(trit.Value ^ 1);
     private static (uint, uint) KeepNegative(uint negative, uint positive) => (negative, ~negative & ~positive);
     
-    // T11 [T, 1, 1]
+    /// <summary>
+    /// Is the value not negative?
+    /// Negative for negative, positive otherwise.
+    /// [T, 1, 1]
+    /// </summary>
     public static Trit IsNotNegative(Trit trit) => trit.Value == -1 ? trit : Trit.Positive;
     private static (uint, uint) IsNotNegative(uint negative, uint positive) => (negative, ~negative);
     
-    // 0TT [0, T, T]
+    /// <summary>
+    /// Ceiling Zero of Is Negative.
+    /// Zero for negative, negative otherwise.
+    /// [0, T, T]
+    /// </summary>
     public static Trit CeilIsNegative(Trit trit) => trit.Value == -1 ? Trit.Zero : Trit.Negative;
     private static (uint, uint) CeilIsNegative(uint negative, uint positive) => (~negative, 0u);
 
-    // 0T0 [0, T, 0]
+    /// <summary>
+    /// Is Not Zero, Ceiling Zero.
+    /// Zero for positive, negative otherwise.
+    /// [0, T, 0]
+    /// </summary>
     public static Trit IsNotZeroCeil(Trit trit) => trit.Value == -1 ? Trit.Zero : Trit.Negative;
     private static (uint, uint) IsNotZeroCeil(uint negative, uint positive) => (~positive & negative, 0u);
 
-    // 0T1 [0, T, 1]
+    /// <summary>
+    /// Keep Positive.
+    /// Positive for positive, negative otherwise.
+    /// [0, T, 1]
+    /// </summary>
     public static Trit KeepPositive(Trit trit) => trit.Value == -1 ? Trit.Positive : Trit.Negative;
     private static (uint, uint) KeepPositive(uint negative, uint positive) => (~positive & negative, positive);
 
-    // 00T [0, 0, T]
+    /// <summary>
+    /// Is Not Positive, Ceiling Zero.
+    /// Negative for positive, zero otherwise.
+    /// [0, 0, T]
+    /// </summary>
     public static Trit IsNotPositiveCeil(Trit trit) => trit.Value == 1 ? Trit.Negative : Trit.Zero;
     private static (uint, uint) IsNotPositiveCeil(uint negative, uint positive) => (0u, 0u);
 
-    // 000 [0, 0, 0]
+    /// <summary>
+    /// Zero.
+    /// Always zero.
+    /// [0, 0, 0]
+    /// </summary>
     public static Trit Zero(Trit _) => Trit.Zero;
     private static (uint, uint) Zero(uint negative, uint positive) => (0u, 0u);
 
-    // 001 [0, 0, 1]
+    /// <summary>
+    /// Floor.
+    /// Positive for positive, zero otherwise.
+    /// [0, 0, 1]
+    /// </summary>
     public static Trit Floor(Trit trit) => trit.Value == 1 ? Trit.Positive : Trit.Zero;
     private static (uint, uint) Floor(uint negative, uint positive) => (0u, positive & ~negative);
 
-    // 01T [0, 1, T]
+    /// <summary>
+    /// Cyclic Increment.
+    /// Positive for positive, negative otherwise.
+    /// [0, 1, T]
+    /// </summary>
     public static Trit CyclicIncrement(Trit trit) => trit.Value == -1 ? Trit.Negative : Trit.Positive;
     private static (uint, uint) CyclicIncrement(uint negative, uint positive) => (~positive, positive);
 
-    // 010 [0, 1, 0]
+    /// <summary>
+    /// Floor Is Zero.
+    /// Zero for zero, positive otherwise.
+    /// [0, 1, 0]
+    /// </summary>
     public static Trit FloorIsZero(Trit trit) => trit.Value == 0 ? Trit.Zero : Trit.Positive;
     private static (uint, uint) FloorIsZero(uint negative, uint positive) => (0u, positive);
 
-    // 011 [0, 1, 1]
+    /// <summary>
+    /// Increment.
+    /// Always positive.
+    /// [0, 1, 1]
+    /// </summary>
     public static Trit Increment(Trit _) => Trit.Positive;
     private static (uint, uint) Increment(uint negative, uint positive) => (0u, positive | ~negative);
 
-    // 1TT [1, T, T]
+    /// <summary>
+    /// Is the value negative?
+    /// Negative for negative, positive otherwise.
+    /// [1, T, T]
+    /// </summary>
     public static Trit IsNegative(Trit trit) => trit.Value == -1 ? Trit.Negative : Trit.Positive;
     private static (uint, uint) IsNegative(uint negative, uint positive) => (~positive, positive);
 
-    // 1T0 [1, T, 0]
+    /// <summary>
+    /// Cyclic Decrement.
+    /// Negative for positive, zero for zero, positive for negative.
+    /// [1, T, 0]
+    /// </summary>
     public static Trit CyclicDecrement(Trit trit) => trit.Value == 0 ? Trit.Zero : trit.Value == 1 ? Trit.Negative : Trit.Positive;
     private static (uint, uint) CyclicDecrement(uint negative, uint positive) => (~positive & negative, positive);
 
-    // 1T1 [1, T, 1]
+    /// <summary>
+    /// Is Not Zero.
+    /// Positive for negative and positive, negative for zero.
+    /// [1, T, 1]
+    /// </summary>
     public static Trit IsNotZero(Trit trit) => trit.Value == -1 ? Trit.Positive : trit.Value == 0 ? Trit.Negative : Trit.Positive;
     private static (uint, uint) IsNotZero(uint negative, uint positive) => (~positive & negative, positive | ~negative);
 
-    // 10T [1, 0, T]
+    /// <summary>
+    /// Negate.
+    /// Positive for negative, negative for positive.
+    /// [1, 0, T]
+    /// </summary>
     public static Trit Negate(Trit trit) => trit.Value == 1 ? Trit.Negative : Trit.Positive;
     private static (uint, uint) Negate(uint negative, uint positive) => (0u, positive);
 
-    // 100 [1, 0, 0]
+    /// <summary>
+    /// Floor Is Negative.
+    /// Zero for zero, positive otherwise.
+    /// [1, 0, 0]
+    /// </summary>
     public static Trit FloorIsNegative(Trit trit) => trit.Value == 0 ? Trit.Zero : Trit.Positive;
     private static (uint, uint) FloorIsNegative(uint negative, uint positive) => (0u, positive & ~negative);
 
-    // 101 [1, 0, 1]
+    /// <summary>
+    /// Absolute Value.
+    /// Always positive.
+    /// [1, 0, 1]
+    /// </summary>
     public static Trit AbsoluteValue(Trit _) => Trit.Positive;
     private static (uint, uint) AbsoluteValue(uint negative, uint positive) => (0u, positive | ~negative);
 
-    // 11T [1, 1, T]
+    /// <summary>
+    /// Is Not Positive.
+    /// Positive for negative and zero, negative for positive.
+    /// [1, 1, T]
+    /// </summary>
     public static Trit IsNotPositive(Trit trit) => trit.Value == 1 ? Trit.Negative : Trit.Positive;
     private static (uint, uint) IsNotPositive(uint negative, uint positive) => (0u, positive | ~negative);
 
-    // 110 [1, 1, 0]
+    /// <summary>
+    /// Floor Is Not Positive.
+    /// Zero for positive, positive otherwise.
+    /// [1, 1, 0]
+    /// </summary>
     public static Trit FloorIsNotPositive(Trit trit) => trit.Value == 1 ? Trit.Zero : Trit.Positive;
     private static (uint, uint) FloorIsNotPositive(uint negative, uint positive) => (0u, positive);
 
-    // 111 [1, 1, 1]
+    /// <summary>
+    /// Positive.
+    /// Always positive.
+    /// [1, 1, 1]
+    /// </summary>
     public static Trit Positive(Trit _) => Trit.Positive;
     private static (uint, uint) Positive(uint negative, uint positive) => (0u, uint.MaxValue);
 
@@ -138,5 +246,11 @@ public class UnaryOperation
     {
         if (table.Length != 3) throw new ArgumentException("Table must have exactly 3 elements.", nameof(table));
         return operations32[13 + table[0].Value + 3 * table[1].Value + 9 * table[2].Value](negative, positive);
+    }
+    
+    public static Trit Apply(Trit target, Trit[] table)
+    {
+        if (table.Length != 3) throw new ArgumentException("Table must have exactly 3 elements.", nameof(table));
+        return table[target.Value + 1];
     }
 }
