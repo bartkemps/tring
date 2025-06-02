@@ -102,7 +102,7 @@ public static class Operator
     /// Negative for zero, zero otherwise.
     /// [0, T, 0]
     /// </summary>
-    public static readonly Trit[] IsNotZeroCeil = [Trit.Zero, Trit.Negative, Trit.Zero];
+    public static readonly Trit[] CeilIsNotZero = [Trit.Zero, Trit.Negative, Trit.Zero];
 
     /// <summary>
     /// Keep the value unchanged if it is positive.
@@ -116,7 +116,7 @@ public static class Operator
     /// Negative for positive, zero otherwise.
     /// [0, 0, T]
     /// </summary>
-    public static readonly Trit[] IsNotPositiveCeil = [Trit.Zero, Trit.Zero, Trit.Negative];
+    public static readonly Trit[] CeilIsNotPositive = [Trit.Zero, Trit.Zero, Trit.Negative];
 
     /// <summary>
     /// Zero  value.

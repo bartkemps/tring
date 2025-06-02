@@ -102,13 +102,13 @@ public class OperatorTests
     [InlineData(-1, 0)]
     [InlineData(0, -1)]
     [InlineData(1, 0)]
-    public void IsNotZeroCeil_ExecutesCorrectly(sbyte input, sbyte expectedValue)
+    public void CeilIsNotZero_ExecutesCorrectly(sbyte input, sbyte expectedValue)
     {
-        OperationExecutesCorrectly(Operator.IsNotZeroCeil, UnaryOperation.IsNotZeroCeil, input, expectedValue);
+        OperationExecutesCorrectly(Operator.CeilIsNotZero, UnaryOperation.CeilIsNotZero, input, expectedValue);
     }
 
     [Theory]
-    [InlineData(-1, -1)]
+    [InlineData(-1, 0)]
     [InlineData(0, -1)]
     [InlineData(1, 1)]
     public void KeepPositive_ExecutesCorrectly(sbyte input, sbyte expectedValue)
@@ -120,9 +120,9 @@ public class OperatorTests
     [InlineData(-1, 0)]
     [InlineData(0, 0)]
     [InlineData(1, -1)]
-    public void IsNotPositiveCeil_ExecutesCorrectly(sbyte input, sbyte expectedValue)
+    public void CeilIsNotPositive_ExecutesCorrectly(sbyte input, sbyte expectedValue)
     {
-        OperationExecutesCorrectly(Operator.IsNotPositiveCeil, UnaryOperation.IsNotPositiveCeil, input, expectedValue);
+        OperationExecutesCorrectly(Operator.CeilIsNotPositive, UnaryOperation.CeilIsNotPositive, input, expectedValue);
     }
 
     [Theory]
@@ -144,25 +144,25 @@ public class OperatorTests
     }
 
     [Theory]
-    [InlineData(-1, -1)]
+    [InlineData(-1, 0)]
     [InlineData(0, 1)]
-    [InlineData(1, 1)]
+    [InlineData(1, -1)]
     public void CyclicIncrement_ExecutesCorrectly(sbyte input, sbyte expectedValue)
     {
         OperationExecutesCorrectly(Operator.CyclicIncrement, UnaryOperation.CyclicIncrement, input, expectedValue);
     }
 
     [Theory]
-    [InlineData(-1, 1)]
-    [InlineData(0, 0)]
-    [InlineData(1, 1)]
+    [InlineData(-1, 0)]
+    [InlineData(0, 1)]
+    [InlineData(1, 0)]
     public void FloorIsZero_ExecutesCorrectly(sbyte input, sbyte expectedValue)
     {
         OperationExecutesCorrectly(Operator.FloorIsZero, UnaryOperation.FloorIsZero, input, expectedValue);
     }
 
     [Theory]
-    [InlineData(-1, 1)]
+    [InlineData(-1, 0)]
     [InlineData(0, 1)]
     [InlineData(1, 1)]
     public void Increment_ExecutesCorrectly(sbyte input, sbyte expectedValue)
@@ -171,9 +171,9 @@ public class OperatorTests
     }
 
     [Theory]
-    [InlineData(-1, -1)]
-    [InlineData(0, 1)]
-    [InlineData(1, 1)]
+    [InlineData(-1, 1)]
+    [InlineData(0, -1)]
+    [InlineData(1, -1)]
     public void IsNegative_ExecutesCorrectly(sbyte input, sbyte expectedValue)
     {
         OperationExecutesCorrectly(Operator.IsNegative, UnaryOperation.IsNegative, input, expectedValue);
@@ -181,8 +181,8 @@ public class OperatorTests
 
     [Theory]
     [InlineData(-1, 1)]
-    [InlineData(0, 0)]
-    [InlineData(1, -1)]
+    [InlineData(0, -1)]
+    [InlineData(1, 0)]
     public void CyclicDecrement_ExecutesCorrectly(sbyte input, sbyte expectedValue)
     {
         OperationExecutesCorrectly(Operator.CyclicDecrement, UnaryOperation.CyclicDecrement, input, expectedValue);
@@ -209,7 +209,7 @@ public class OperatorTests
     [Theory]
     [InlineData(-1, 1)]
     [InlineData(0, 0)]
-    [InlineData(1, 1)]
+    [InlineData(1, 0)]
     public void FloorIsNegative_ExecutesCorrectly(sbyte input, sbyte expectedValue)
     {
         OperationExecutesCorrectly(Operator.FloorIsNegative, UnaryOperation.FloorIsNegative, input, expectedValue);
@@ -217,7 +217,7 @@ public class OperatorTests
 
     [Theory]
     [InlineData(-1, 1)]
-    [InlineData(0, 1)]
+    [InlineData(0, 0)]
     [InlineData(1, 1)]
     public void AbsoluteValue_ExecutesCorrectly(sbyte input, sbyte expectedValue)
     {
