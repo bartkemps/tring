@@ -251,6 +251,35 @@ public class OperatorTests
         OperationExecutesCorrectly(Operator.Positive, UnaryOperation.Positive, input, expectedValue);
     }
 
+    [Fact]
+    public void Notation()
+    {
+        Trit NotNegative(Trit t) => t != Trit.Negative;
+        var isNotNegativeResult1 = Trit.Positive | NotNegative;
+        var isNotNegativeResult2 = Trit.Positive | Operator.IsNotNegative; // or use ```static Import Tring.Operators.Operator;````
+        var isNotNegativeResult3 = Trit.Positive | [Trit.Negative, Trit.Positive, Trit.Positive];
+
+        Trit IsNotEqualTo(Trit t1, Trit t2) => t1 != t2; 
+        Trit[,] isNotEqualTo = new Trit[3, 3]
+        {
+            { false, true, true }, 
+            { true, false, true }, 
+            { true, true, false } 
+        };
+        var value1 = Trit.Negative;
+        var value2 = Trit.Positive;
+        var isEqualResult1 = Trit.Positive | IsNotEqualTo | Trit.Negative;
+        var isEqualResult2 = Trit.Positive | isNotEqualTo | Trit.Negative;
+        var isEqualResult3 = -(Trit.Positive|Operator.IsEqualTo | Trit.Negative); // or use ```static Import Tring.Operators.Operator;```.
+        
+        isNotNegativeResult1.Should().Be(Trit.Positive);
+        isNotNegativeResult2.Should().Be(Trit.Positive);
+        isNotNegativeResult3.Should().Be(Trit.Positive);
+        isEqualResult1.Should().Be(Trit.Positive);
+        isEqualResult2.Should().Be(Trit.Positive);
+        isEqualResult3.Should().Be(Trit.Positive);
+    }
+
     private void OperationExecutesCorrectly(Trit[] table, Func<Trit, Trit> operation, sbyte input, sbyte expectedValue)
     {
         var array = new TritArray27();

@@ -6,9 +6,9 @@ public static class Operator
 {
     public static readonly Trit[,] And = new Trit[3, 3]
     {
-        { Trit.Positive, Trit.Zero, Trit.Negative }, // Negative (-1) row
-        { Trit.Zero, Trit.Zero, Trit.Zero }, // Zero (0) row
-        { Trit.Negative, Trit.Zero, Trit.Positive } // Positive (1) row
+        { true, null, false }, // Negative (-1) row
+        { null, null, null }, // Zero (0) row
+        { false, null, true } // Positive (1) row
     };
 
     public static readonly Trit[,] Or = new Trit[3, 3]
@@ -23,6 +23,13 @@ public static class Operator
         { Trit.Positive, Trit.Negative, Trit.Zero }, // Negative (-1) row
         { Trit.Negative, Trit.Zero, Trit.Positive }, // Zero (0) row
         { Trit.Zero, Trit.Positive, Trit.Negative } // Positive (1) row
+    };
+    
+    public static Trit[,] IsEqualTo = new Trit[,]
+    {
+        { true, false, false }, 
+        { false, true, false }, 
+        { false, false, true } 
     };
 
     #region Unary Operations

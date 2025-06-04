@@ -8,7 +8,7 @@ using static Tring.Operators.Operation;
 /// </summary>
 public readonly struct Trit: IEquatable<Trit>
 {
-    // In this class, a trit is represented by a short representig its value (-1, 0 and 1)
+    // In this class, a trit is represented by a short representing its value (-1, 0 and 1)
     // In other parts of this library, trits may be represented differently. 
     
     private const sbyte NegativeValue = -1;
