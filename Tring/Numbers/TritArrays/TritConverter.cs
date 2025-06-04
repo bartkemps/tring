@@ -64,7 +64,7 @@ internal static class TritConverter
         }
     }
     
-    public static void ConvertTo64Trits(int value, out ulong negative, out ulong positive)
+    public static void ConvertTo32Trits(long value, out uint negative, out uint positive)
     {
         positive = 0;
         negative = 0;
@@ -81,10 +81,10 @@ internal static class TritConverter
                 case 0:
                     break;
                 case -1:
-                    positive |= 1ul << index;
+                    positive |= 1u << index;
                     break;
                 case -2:
-                    negative |= 1ul << index;
+                    negative |= 1u << index;
                     value--;
                     break;
             }
@@ -126,6 +126,36 @@ internal static class TritConverter
         }
     }
 
+    public static void ConvertTo64Trits(Int128 value, out ulong negative, out ulong positive)
+    {
+        positive = 0;
+        negative = 0;
+        if (value == 0) return;
+        var isNegative = value < 0;
+        if (value > 0) value = -value;
+        for(var index=0; value < 0 && index < 128; index++)
+        {
+            var remainder = (int)value % 3;
+            value /= 3;
+
+            switch (remainder)
+            {
+                case 0:
+                    break;
+                case -1:
+                    positive |= 1ul << index;
+                    break;
+                case -2:
+                    negative |= 1ul << index;
+                    value--;
+                    break;
+            }
+        }
+        if (isNegative)
+        {
+            (negative, positive) = (positive, negative);
+        }
+    }
 
     public static int TritsToInt32(uint negative, uint positive)
     {
@@ -167,6 +197,23 @@ internal static class TritConverter
         var power = 1L;
 
         for (var i = 0; i < 64; i++)
+        {
+            if ((positive & (1ul << i)) != 0)
+                result += power;
+            else if ((negative & (1ul << i)) != 0)
+                result -= power;
+            power *= 3;
+        }
+
+        return result;
+    }
+    
+    public static Int128 TritsToInt128(ulong negative, ulong positive)
+    {
+        Int128 result = 0;
+        Int128 power = 1;
+
+        for (var i = 0; i < 128; i++)
         {
             if ((positive & (1ul << i)) != 0)
                 result += power;

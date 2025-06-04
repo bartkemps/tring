@@ -70,13 +70,13 @@ public struct TritArray27 : ITritArray
 
     public static TritArray27 operator +(TritArray27 value1, TritArray27 value2)
     {
-        Calculator.AddBalancedTernary(value1.positive, value1.negative, value2.positive, value2.negative, out var positive, out var negative);    
+        Calculator.AddBalancedTernary(value1.negative, value1.positive, value2.negative, value2.positive, out var negative, out var positive);    
         return new () {negative = negative, positive = positive};
     }
     
     public static TritArray27 operator -(TritArray27 value1, TritArray27 value2)
     {
-        Calculator.AddBalancedTernary(value1.positive, value1.negative, value2.negative, value2.positive, out var positive, out var negative);    
+        Calculator.AddBalancedTernary(value1.negative, value1.positive, value2.positive, value2.negative, out var negative, out var positive);    
         return new () {negative = negative, positive = positive};
     }
 }
