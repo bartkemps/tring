@@ -1,5 +1,8 @@
 using FluentAssertions;
 using Tring.Numbers;
+// ReSharper disable EqualExpressionComparison
+#pragma warning disable CS8629  
+#pragma warning disable CS1718  
 
 namespace Tring.Tests.Numbers;
 

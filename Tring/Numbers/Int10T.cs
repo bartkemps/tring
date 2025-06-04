@@ -5,6 +5,7 @@
 // ReSharper disable MemberCanBePrivate.Global
 // ReSharper disable ConvertIfStatementToSwitchStatement
 // ReSharper disable BuiltInTypeReferenceStyle
+#nullable enable
 
 namespace Tring.Numbers;
 

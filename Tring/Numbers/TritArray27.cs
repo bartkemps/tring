@@ -2,6 +2,7 @@
 
 using Operators;
 using TritArray;
+using TritArrays;
 
 public struct TritArray27 : ITritArray
 {
