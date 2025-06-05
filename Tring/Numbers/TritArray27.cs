@@ -6,8 +6,8 @@ using TritArrays;
 
 public struct TritArray27 : ITritArray
 {
-    private uint positive;
-    private uint negative;
+    internal uint Positive;
+    internal uint Negative;
 
     public TritArray27()
     {
@@ -15,8 +15,8 @@ public struct TritArray27 : ITritArray
 
     private TritArray27(UInt32Pair trits)
     {
-        negative = trits.Negative;
-        positive = trits.Positive;
+        Negative = trits.Negative;
+        Positive = trits.Positive;
     }
 
     public Trit this[int index]
@@ -27,7 +27,7 @@ public struct TritArray27 : ITritArray
             {
                 throw new ArgumentOutOfRangeException(nameof(index), "Index must be between 0 and 26.");
             }
-            return TritConverter.GetTrit(ref positive, ref negative, index);
+            return TritConverter.GetTrit(ref Positive, ref Negative, index);
         }
         set
         {
@@ -36,17 +36,25 @@ public struct TritArray27 : ITritArray
                 throw new ArgumentOutOfRangeException(nameof(index), "Index must be between 0 and 26.");
             }
 
-            TritConverter.SetTrit(ref positive, ref negative, index, value);
+            TritConverter.SetTrit(ref Positive, ref Negative, index, value);
         }
     }
 
     public int Length => 27;
 
     public static TritArray27 operator |(TritArray27 array, Func<Trit, Trit> operation)
-        => new(UnaryOperation.Apply(array.negative, array.positive, operation));
+        => new(UnaryOperation.Apply(array.Negative, array.Positive, operation));
 
     public static TritArray27 operator |(TritArray27 array, Trit[] table)
-        => new(UnaryOperation.Apply(array.negative, array.positive, table));
+        => new(UnaryOperation.Apply(array.Negative, array.Positive, table));
+
+    public static LookupTritArray27Operator operator |(TritArray27 array, Func<Trit, Trit, Trit> operation)
+        => new LookupTritArray27Operator(array, operation);
+    public static LookupTritArray27Operator operator |(TritArray27 array, TritLookupTable table)
+        => new LookupTritArray27Operator(array, table);
+    public static LookupTritArray27Operator operator |(TritArray27 array, Trit[,] table)
+        => new LookupTritArray27Operator(array, table);
+    
 
     public static TritArray27 operator <<(TritArray27 array, int shift)
     {
@@ -54,7 +62,7 @@ public struct TritArray27 : ITritArray
         {
             >= 27 => new(),
             < 0 => array >> -shift,
-            _ => new() { positive = array.positive << shift, negative = array.negative << shift }
+            _ => new() { Positive = array.Positive << shift, Negative = array.Negative << shift }
         };
     }
 
@@ -64,19 +72,19 @@ public struct TritArray27 : ITritArray
         {
             >= 27 => new(),
             < 0 => array >> -shift,
-            _ => new() { positive = array.positive >> shift, negative = array.negative >> shift }
+            _ => new() { Positive = array.Positive >> shift, Negative = array.Negative >> shift }
         };
     }
 
     public static TritArray27 operator +(TritArray27 value1, TritArray27 value2)
     {
-        Calculator.AddBalancedTernary(value1.negative, value1.positive, value2.negative, value2.positive, out var negative, out var positive);    
-        return new () {negative = negative, positive = positive};
+        Calculator.AddBalancedTernary(value1.Negative, value1.Positive, value2.Negative, value2.Positive, out var negative, out var positive);    
+        return new () {Negative = negative, Positive = positive};
     }
     
     public static TritArray27 operator -(TritArray27 value1, TritArray27 value2)
     {
-        Calculator.AddBalancedTernary(value1.negative, value1.positive, value2.positive, value2.negative, out var negative, out var positive);    
-        return new () {negative = negative, positive = positive};
+        Calculator.AddBalancedTernary(value1.Negative, value1.Positive, value2.Positive, value2.Negative, out var negative, out var positive);    
+        return new () {Negative = negative, Positive = positive};
     }
 }

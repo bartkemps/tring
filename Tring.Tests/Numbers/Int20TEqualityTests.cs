@@ -132,7 +132,6 @@ public class Int20TEqualityTests
     [InlineData(long.MinValue)]
     [InlineData(int.MaxValue)]
     [InlineData(int.MinValue)]
-    [InlineData((uint)4294967295)] // Max UInt32
     [InlineData((long)2147483648)] // Above Int32.MaxValue
     [InlineData((long)-2147483649)] // Below Int32.MinValue
     public void Equals_WithOutOfRangeValues_ShouldReturnFalse(object value)

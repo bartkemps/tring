@@ -1,28 +1,24 @@
 namespace Tring.Operators.Operations;
 
 using Numbers;
+using System;
 using System.Linq.Expressions;
 
-internal class BinaryOperationBuilder
+internal class BinaryOperationBuilder<T> where T : struct
 {
-    private static LruCache<int, BinaryOperation> operationCache = new(1000);
+    private static readonly FifoCache<int, BinaryOperation> operationCache = new(64);
 
     private BinaryOperation? operation;
 
-    private readonly ParameterExpression negative1 = Expression.Parameter(typeof(uint), "negative1");
-    private readonly ParameterExpression positive1 = Expression.Parameter(typeof(uint), "positive1");
-    private readonly ParameterExpression negative2 = Expression.Parameter(typeof(uint), "negative2");
-    private readonly ParameterExpression positive2 = Expression.Parameter(typeof(uint), "positive2");
+    private readonly ParameterExpression negative1 = Expression.Parameter(typeof(T), "negative1");
+    private readonly ParameterExpression positive1 = Expression.Parameter(typeof(T), "positive1");
+    private readonly ParameterExpression negative2 = Expression.Parameter(typeof(T), "negative2");
+    private readonly ParameterExpression positive2 = Expression.Parameter(typeof(T), "positive2");
     private readonly Expression zero1;
     private readonly Expression zero2;
-    private readonly ParameterExpression negativeResult = Expression.Parameter(typeof(uint).MakeByRefType(), "negativeResult");
-    private readonly ParameterExpression positiveResult = Expression.Parameter(typeof(uint).MakeByRefType(), "positiveResult");
+    private readonly ParameterExpression negativeResult = Expression.Parameter(typeof(T).MakeByRefType(), "negativeResult");
+    private readonly ParameterExpression positiveResult = Expression.Parameter(typeof(T).MakeByRefType(), "positiveResult");
     private TritLookupTable operationTable1;
-
-    public BinaryOperationBuilder(Trit[] operationTable)
-        : this(new TritLookupTable(operationTable))
-    {
-    }
 
     public BinaryOperationBuilder(TritLookupTable operationTable)
     {
@@ -31,7 +27,7 @@ internal class BinaryOperationBuilder
         zero2 = Expression.Not(Expression.Or(negative2, positive2));
     }
 
-    public delegate void BinaryOperation(uint negative1, uint positive1, uint negative2, uint positive2, out uint negativeResult, out uint positiveResult);
+    public delegate void BinaryOperation(T negative1, T positive1, T negative2, T positive2, out T negativeResult, out T positiveResult);
 
     public BinaryOperation Build()
     {
@@ -101,8 +97,8 @@ internal class BinaryOperationBuilder
 
     private BinaryOperation CompileExpressionsToLambda(Expression positiveExpression, Expression negativeExpression)
     {
-        var negativeAssign = Expression.Assign(negativeResult, Expression.Convert(negativeExpression, typeof(uint)));
-        var positiveAssign = Expression.Assign(positiveResult, Expression.Convert(positiveExpression, typeof(uint)));
+        var negativeAssign = Expression.Assign(negativeResult, Expression.Convert(negativeExpression, typeof(T)));
+        var positiveAssign = Expression.Assign(positiveResult, Expression.Convert(positiveExpression, typeof(T)));
         var block = Expression.Block([negativeAssign, positiveAssign]);
         var lambda = Expression.Lambda<BinaryOperation>(
             block, negative1, positive1, negative2, positive2, negativeResult, positiveResult

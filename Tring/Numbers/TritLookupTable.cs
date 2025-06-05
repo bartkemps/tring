@@ -1,6 +1,7 @@
 namespace Tring;
 
 using Numbers;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
 /// <summary>
@@ -11,7 +12,8 @@ using System.Runtime.CompilerServices;
 /// uses 2 bits directly storing -1, 0, or 1. This eliminates the need for masking and
 /// value conversion at the cost of using more bits per trit (18 bits total).
 /// </remarks>
-public struct TritLookupTable: IEquatable<TritLookupTable>
+[DebuggerDisplay("{DebugView()}")]
+public struct TritLookupTable : IEquatable<TritLookupTable>
 {
     // Each Trit uses 2 bits storing the actual -1, 0, 1 value
     internal readonly int Value;
@@ -53,9 +55,23 @@ public struct TritLookupTable: IEquatable<TritLookupTable>
             ((trit10.Value + 1) << (7 * BitsPerTrit)) |
             ((trit11.Value + 1) << (8 * BitsPerTrit));
     }
-    private TritLookupTable(int data)
+
+    internal TritLookupTable(int data)
     {
-        this.Value = data;
+        Value = data;
+    }
+
+    internal TritLookupTable(Func<Trit, Trit, Trit> operation) : this(
+        operation(Trit.Negative, Trit.Negative),
+        operation(Trit.Negative, Trit.Zero),
+        operation(Trit.Negative, Trit.Positive),
+        operation(Trit.Zero, Trit.Negative),
+        operation(Trit.Zero, Trit.Zero),
+        operation(Trit.Zero, Trit.Positive),
+        operation(Trit.Positive, Trit.Negative),
+        operation(Trit.Positive, Trit.Zero),
+        operation(Trit.Positive, Trit.Positive))
+    {
     }
 
     /// <summary>
@@ -75,7 +91,7 @@ public struct TritLookupTable: IEquatable<TritLookupTable>
         {
             for (var col = 0; col < 3; col++)
             {
-                var position = (row * 3 + col) * BitsPerTrit;
+                var position = (row+ 3 * col) * BitsPerTrit;
                 Value |= (tableData[row, col].Value + 1) << position;
             }
         }
@@ -104,7 +120,7 @@ public struct TritLookupTable: IEquatable<TritLookupTable>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public readonly Trit GetTrit(Trit left, Trit right)
     {
-        var position = (left.Value * 3 + right.Value + 4) * BitsPerTrit;
+        var position = (left.Value + 3 * right.Value + 4) * BitsPerTrit;
         var bits = (Value >> position) & BitMask;
         return new((sbyte)(bits - 1));
     }
@@ -112,7 +128,7 @@ public struct TritLookupTable: IEquatable<TritLookupTable>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private TritLookupTable WithTrit(Trit left, Trit right, Trit value)
     {
-        var position = (left.Value * 3 + right.Value + 4) * BitsPerTrit;
+        var position = (left.Value + 3 * right.Value + 4) * BitsPerTrit;
         var bits = (value.Value + 1) & BitMask;
         var newData = (Value & ~(BitMask << position)) | (bits << position);
         return new(newData);
@@ -124,7 +140,7 @@ public struct TritLookupTable: IEquatable<TritLookupTable>
     public Trit this[Trit left, Trit right]
     {
         get => GetTrit(left, right);
-        set => this = WithTrit(left, right, value);
+        init => this = WithTrit(left, right, value);
     }
 
     /// <summary>
@@ -133,7 +149,7 @@ public struct TritLookupTable: IEquatable<TritLookupTable>
     /// <param name="tableData">A 3x3 array representing the lookup table.</param>
     /// <returns>A new TritLookupTable instance.</returns>
     public static implicit operator TritLookupTable(Trit[,] tableData) => new(tableData);
-    
+
     /// <summary>
     /// Determines whether the specified object is equal to the current TritLookupTable.
     /// </summary>
@@ -143,7 +159,7 @@ public struct TritLookupTable: IEquatable<TritLookupTable>
     {
         return obj is TritLookupTable table && Equals(table);
     }
-    
+
     /// <summary>
     /// Determines whether the specified TritLookupTable is equal to the current TritLookupTable.
     /// </summary>
@@ -172,4 +188,46 @@ public struct TritLookupTable: IEquatable<TritLookupTable>
     /// <param name="right">The second TritLookupTable to compare.</param>
     /// <returns>true if the value of left is different from the value of right; otherwise, false.</returns>
     public static bool operator !=(TritLookupTable left, TritLookupTable right) => left.Value != right.Value;
+
+    /// <summary>
+    /// Returns a string representation of the lookup table in a grid format.
+    /// </summary>
+    /// <returns>A formatted string showing the 3x3 lookup table.</returns>
+    public readonly string DebugView()
+    {
+        var value = Value;
+        return $"{T(0)} {T(3)} {T(6)} / {T(1)} {T(4)} {T(7)} / {T(2)} {T(5)} {T(8)}";
+
+        string T(int i) => ((value >> (i * BitsPerTrit)) & BitMask) switch
+        {
+            0 => "T",
+            1 => "0",
+            2 => "1",
+            _ => "?"
+        };
+    }
+
+    /// <summary>
+    /// Returns a string representation of the lookup table in a grid format.
+    /// </summary>
+    /// <returns>A formatted string showing the 3x3 lookup table.</returns>
+    public readonly override string ToString()
+    {
+        var value = Value;
+        return $"""
+                   | T 0 1
+                ---+-------
+                 T | {T(0)} {T(3)} {T(6)}
+                 0 | {T(1)} {T(4)} {T(7)}
+                 1 | {T(2)} {T(5)} {T(8)}
+                """;
+
+        string T(int i) => ((value >> (i * BitsPerTrit)) & BitMask) switch
+        {
+            0 => "T",
+            1 => "0",
+            2 => "1",
+            _ => "?"
+        };
+    }
 }

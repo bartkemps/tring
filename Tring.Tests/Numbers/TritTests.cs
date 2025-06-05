@@ -352,7 +352,7 @@ public unsafe class TritTests
         // ---+----------
         //  T | T  T  T
         //  0 | T  0  0
-        //  1 | T  0  T
+        //  1 | T  0  1
         var min = new TritLookupTable(
             Trit.Negative, Trit.Negative, Trit.Negative,
             Trit.Negative, Trit.Zero, Trit.Zero,

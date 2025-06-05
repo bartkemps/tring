@@ -184,18 +184,7 @@ public readonly struct Trit: IEquatable<Trit>
     /// <summary>
     /// Performs a logical AND operation on two Trit values.
     /// </summary>
-    /// <param name="left">The first Trit operand.</param>
-    /// <param name="right">The second Trit operand.</param>
-    /// <returns>
-    /// Truth table (T = Negative, 0 = Zero, 1 = Positive):
-    /// <code>
-    ///    &amp;  | T  0  1
-    ///    ---+--------
-    ///    T  | 1  0  T
-    ///    0  | 0  0  0
-    ///    1  | T  0  1
-    /// </code>
-    /// </returns>
+    /// <returns>A Trit value representing the logical AND operation, where Trit.Positive is treated as true.</returns>
     public static Trit operator &(Trit left, Trit right) => And(left, right);
 
     /// <summary>
@@ -203,7 +192,7 @@ public readonly struct Trit: IEquatable<Trit>
     /// </summary>
     /// <param name="left">The Boolean operand.</param>
     /// <param name="right">The Trit operand.</param>
-    /// <returns>A bool value representing the logical AND operation, where Trit.Positive is treated as true.</returns>
+    /// <returns>A Trit value representing the logical AND operation, where Trit.Positive is treated as true.</returns>
     public static Trit operator &(bool left, Trit right) => (Trit)left & right;
 
     /// <summary>
@@ -211,7 +200,7 @@ public readonly struct Trit: IEquatable<Trit>
     /// </summary>
     /// <param name="left">The Trit operand.</param>
     /// <param name="right">The Boolean operand.</param>
-    /// <returns>A bool value representing the logical AND operation, where Trit.Positive is treated as true.</returns>
+    /// <returns>A Trit value representing the logical AND operation, where Trit.Positive is treated as true.</returns>
     public static Trit operator &(Trit left, bool right) => left & (Trit)right;
 
     /// <summary>
@@ -219,16 +208,7 @@ public readonly struct Trit: IEquatable<Trit>
     /// </summary>
     /// <param name="left">The first Trit operand.</param>
     /// <param name="right">The second Trit operand.</param>
-    /// <returns>
-    /// Truth table (T = Negative, 0 = Zero, 1 = Positive):
-    /// <code>
-    ///    |  | T  0  1
-    ///    ---+--------
-    ///    T  | T  T  0
-    ///    0  | T  0  1
-    ///    1  | 0  1  1
-    /// </code>
-    /// </returns>
+    /// <returns>A Trit value representing the logical OR operation, where Trit.Positive is treated as true.</returns>
     public static Trit operator |(Trit left, Trit right) => Or(left, right);
 
     /// <summary>
@@ -236,7 +216,7 @@ public readonly struct Trit: IEquatable<Trit>
     /// </summary>
     /// <param name="left">The Boolean operand.</param>
     /// <param name="right">The Trit operand.</param>
-    /// <returns>A bool value representing the logical OR operation, where Trit.Positive is treated as true.</returns>
+    /// <returns>A Trit value representing the logical OR operation, where Trit.Positive is treated as true.</returns>
     public static Trit operator |(bool left, Trit right) => (Trit)left | right;
 
     /// <summary>
@@ -244,7 +224,7 @@ public readonly struct Trit: IEquatable<Trit>
     /// </summary>
     /// <param name="left">The Trit operand.</param>
     /// <param name="right">The Boolean operand.</param>
-    /// <returns>A bool value representing the logical OR operation, where Trit.Positive is treated as true.</returns>
+    /// <returns>A Trit value representing the logical OR operation, where Trit.Positive is treated as true.</returns>
     public static Trit operator |(Trit left, bool right) => left | (Trit)right;
 
     /// <summary>
@@ -317,16 +297,7 @@ public readonly struct Trit: IEquatable<Trit>
     /// </summary>
     /// <param name="left">The first Trit operand.</param>
     /// <param name="right">The second Trit operand.</param>
-    /// <returns>
-    /// Truth table (T = Negative, 0 = Zero, 1 = Positive):
-    /// <code>
-    ///    ^  | T  0  1
-    ///    ---+--------
-    ///    T  | 1  T  0
-    ///    0  | T  0  1
-    ///    1  | 0  1  T
-    /// </code>
-    /// </returns>
+    /// <returns>A Trit value representing the logical XOR operation.</returns>
     public static Trit operator ^(Trit left, Trit right) => Xor(left, right);
 
     /// <summary>
@@ -344,6 +315,8 @@ public readonly struct Trit: IEquatable<Trit>
     /// <param name="right">The Boolean operand.</param>
     /// <returns>A Trit value representing the logical XOR operation.</returns>
     public static Trit operator ^(Trit left, bool right) => right ? !left : left;
+    
+    public static Trit[] AllValues => [Negative, Zero, Positive];
 }
 
 

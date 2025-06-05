@@ -2,7 +2,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-internal class LruCache<TKey, TValue>(int capacity) where TKey : notnull
+internal class FifoCache<TKey, TValue>(int capacity) where TKey : notnull
 {
     private readonly Dictionary<TKey, TValue> cache = new();
     private readonly LinkedList<TKey> order = new();

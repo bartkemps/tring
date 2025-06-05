@@ -9,7 +9,15 @@ using System.Runtime.CompilerServices;
 internal static class TritConverter
 {
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static Trit GetTrit(ref byte positive, ref byte negative, int index)
+        => new((int)((positive >> index) & 1) - (int)((negative >> index) & 1));
+    
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Trit GetTrit(ref uint positive, ref uint negative, int index)
+        => new((int)((positive >> index) & 1) - (int)((negative >> index) & 1));
+    
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static Trit GetTrit(ref ulong positive, ref ulong negative, int index)
         => new((int)((positive >> index) & 1) - (int)((negative >> index) & 1));
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
