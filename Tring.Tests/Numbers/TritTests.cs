@@ -7,7 +7,7 @@ using Tring.Numbers;
 namespace Tring.Tests.Numbers;
 
 using Operators;
-using static Tring.Operators.Operation;
+using static Tring.Operators.Operations.Operation;
 
 public unsafe class TritTests
 {

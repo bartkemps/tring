@@ -3,7 +3,7 @@ namespace Tring.Operators;
 
 using System;
 using Numbers;
-public partial class UnaryOperation
+internal partial class UnaryOperation
 {
 
     private static readonly Func<UInt32, UInt32, UInt32Pair>[] operations32 =

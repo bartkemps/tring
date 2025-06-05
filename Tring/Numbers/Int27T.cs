@@ -10,6 +10,7 @@
 namespace Tring.Numbers;
 
 using Operators;
+using Operators.Operations;
 using System.CodeDom.Compiler;
 using System.Globalization;
 using System.Numerics;

@@ -5,7 +5,7 @@ namespace Tring.Operators;
 
 using System;
 using Numbers;
-public partial class UnaryOperation
+internal partial class UnaryOperation
 {
 <#
 var types = new[] {

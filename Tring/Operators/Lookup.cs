@@ -2,7 +2,7 @@ namespace Tring.Operators;
 
 using Numbers;
 
-public static class Operator
+public static class Lookup
 {
     public static readonly Trit[,] And = new Trit[3, 3]
     {

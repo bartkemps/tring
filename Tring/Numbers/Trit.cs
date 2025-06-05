@@ -1,7 +1,7 @@
 ﻿namespace Tring.Numbers;
 
 using Operators;
-using static Tring.Operators.Operation;
+using static Operators.Operations.Operation;
 
 /// <summary>
 /// Represents a trinary (three-valued) logical value that can be Negative (-1), Zero (0), or Positive (1).
@@ -302,7 +302,7 @@ public readonly struct Trit: IEquatable<Trit>
     /// </summary>
     /// <param name="left">The operand</param>
     /// <param name="operation">The operation, represented as a 3 trit array</param>
-    public static Trit operator |(Trit left, Trit[] operation) => UnaryOperation.Apply(left, operation);
+    public static Trit operator |(Trit left, Trit[] operation) => Unary.Apply(left, operation);
     
     /// <summary>
     /// 

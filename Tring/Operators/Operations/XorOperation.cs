@@ -1,4 +1,4 @@
-﻿namespace Tring.Operators;
+﻿namespace Tring.Operators.Operations;
 
 using Numbers;
 

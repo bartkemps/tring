@@ -14,7 +14,7 @@ using System.Runtime.CompilerServices;
 public struct TritLookupTable
 {
     // Each Trit uses 2 bits storing the actual -1, 0, 1 value
-    private readonly int data;
+    internal readonly int Value;
 
     // Number of bits used per trit value
     private const int BitsPerTrit = 2;
@@ -25,12 +25,37 @@ public struct TritLookupTable
     /// </summary>
     public TritLookupTable()
     {
-        data = 0b010101010101010101;
+        Value = 0b010101010101010101;
     }
 
+    /// <summary>
+    /// Creates a TritLookupTable from individual Trit values in row-major order.
+    /// </summary>
+    /// <remarks>
+    /// Parameters represent each cell in the 3x3 matrix, in row-major order:
+    /// tTT tT0 tT1
+    /// t0T t00 t01
+    /// t1T t10 t11
+    /// </remarks>
+    public TritLookupTable(
+        // ReSharper disable once InconsistentNaming
+        Trit tritTT, Trit tritT0, Trit tritT1, Trit trit0T, Trit trit00, Trit trit01, Trit trit1T, Trit trit10, Trit trit11
+    )
+    {
+        Value =
+            ((tritTT.Value + 1) << (0 * BitsPerTrit)) |
+            ((tritT0.Value + 1) << (1 * BitsPerTrit)) |
+            ((tritT1.Value + 1) << (2 * BitsPerTrit)) |
+            ((trit0T.Value + 1) << (3 * BitsPerTrit)) |
+            ((trit00.Value + 1) << (4 * BitsPerTrit)) |
+            ((trit01.Value + 1) << (5 * BitsPerTrit)) |
+            ((trit1T.Value + 1) << (6 * BitsPerTrit)) |
+            ((trit10.Value + 1) << (7 * BitsPerTrit)) |
+            ((trit11.Value + 1) << (8 * BitsPerTrit));
+    }
     private TritLookupTable(int data)
     {
-        this.data = data;
+        this.Value = data;
     }
 
     /// <summary>
@@ -45,13 +70,13 @@ public struct TritLookupTable
             throw new ArgumentException("Table must be a 3x3 matrix representing trinary operations.", nameof(tableData));
         }
 
-        data = 0;
+        Value = 0;
         for (var row = 0; row < 3; row++)
         {
             for (var col = 0; col < 3; col++)
             {
                 var position = (row * 3 + col) * BitsPerTrit;
-                data |= (tableData[row, col].Value + 1) << position;
+                Value |= (tableData[row, col].Value + 1) << position;
             }
         }
     }
@@ -68,11 +93,11 @@ public struct TritLookupTable
             throw new ArgumentException("Span must contain exactly 9 Trit values for a 3x3 matrix.", nameof(flatTable));
         }
 
-        data = 0;
+        Value = 0;
         for (var i = 0; i < 9; i++)
         {
             var position = i * BitsPerTrit;
-            data |= (flatTable[i].Value + 1) << position;
+            Value |= (flatTable[i].Value + 1) << position;
         }
     }
 
@@ -80,7 +105,7 @@ public struct TritLookupTable
     public readonly Trit GetTrit(Trit left, Trit right)
     {
         var position = (left.Value * 3 + right.Value + 4) * BitsPerTrit;
-        var bits = (data >> position) & BitMask;
+        var bits = (Value >> position) & BitMask;
         return new((sbyte)(bits - 1));
     }
 
@@ -89,7 +114,7 @@ public struct TritLookupTable
     {
         var position = (left.Value * 3 + right.Value + 4) * BitsPerTrit;
         var bits = (value.Value + 1) & BitMask;
-        var newData = (data & ~(BitMask << position)) | (bits << position);
+        var newData = (Value & ~(BitMask << position)) | (bits << position);
         return new(newData);
     }
 
@@ -108,30 +133,4 @@ public struct TritLookupTable
     /// <param name="tableData">A 3x3 array representing the lookup table.</param>
     /// <returns>A new TritLookupTable instance.</returns>
     public static implicit operator TritLookupTable(Trit[,] tableData) => new(tableData);
-
-    /// <summary>
-    /// Creates a TritLookupTable from individual Trit values in row-major order.
-    /// </summary>
-    /// <remarks>
-    /// Parameters represent each cell in the 3x3 matrix, in row-major order:
-    /// tTT tT0 tT1
-    /// t0T t00 t01
-    /// t1T t10 t11
-    /// </remarks>
-    public TritLookupTable(
-        // ReSharper disable once InconsistentNaming
-        Trit tritTT, Trit tritT0, Trit tritT1, Trit trit0T, Trit trit00, Trit trit01, Trit trit1T, Trit trit10, Trit trit11
-    )
-    {
-        data =
-            ((tritTT.Value + 1) << (0 * BitsPerTrit)) |
-            ((tritT0.Value + 1) << (1 * BitsPerTrit)) |
-            ((tritT1.Value + 1) << (2 * BitsPerTrit)) |
-            ((trit0T.Value + 1) << (3 * BitsPerTrit)) |
-            ((trit00.Value + 1) << (4 * BitsPerTrit)) |
-            ((trit01.Value + 1) << (5 * BitsPerTrit)) |
-            ((trit1T.Value + 1) << (6 * BitsPerTrit)) |
-            ((trit10.Value + 1) << (7 * BitsPerTrit)) |
-            ((trit11.Value + 1) << (8 * BitsPerTrit));
-    }
 }

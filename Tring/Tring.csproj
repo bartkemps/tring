@@ -12,7 +12,7 @@
         <Generator>TextTemplatingFileGenerator</Generator>
         <LastGenOutput>IntT.cs</LastGenOutput>
       </None>
-      <None Update="Operators\UnaryOperation.tt">
+      <None Update="Operators\Operations\UnaryOperation.tt">
         <Generator>TextTemplatingFileGenerator</Generator>
         <LastGenOutput>UnaryOperation.cs</LastGenOutput>
       </None>
@@ -23,9 +23,6 @@
         <AutoGen>True</AutoGen>
         <DesignTime>True</DesignTime>
         <DependentUpon>IntT.tt</DependentUpon>
-      </Compile>
-      <Compile Update="Operators\UnaryOperation.cs">
-        <DependentUpon>UnaryOperation.tt</DependentUpon>
       </Compile>
     </ItemGroup>
 

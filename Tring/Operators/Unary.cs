@@ -2,7 +2,7 @@
 
 using Numbers;
 
-public partial class UnaryOperation
+public class Unary
 {
     /// <summary>
     /// Apply a unary operation to a Trit value.
