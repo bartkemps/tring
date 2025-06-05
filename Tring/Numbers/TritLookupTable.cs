@@ -11,7 +11,7 @@ using System.Runtime.CompilerServices;
 /// uses 2 bits directly storing -1, 0, or 1. This eliminates the need for masking and
 /// value conversion at the cost of using more bits per trit (18 bits total).
 /// </remarks>
-public struct TritLookupTable
+public struct TritLookupTable: IEquatable<TritLookupTable>
 {
     // Each Trit uses 2 bits storing the actual -1, 0, 1 value
     internal readonly int Value;
@@ -133,4 +133,43 @@ public struct TritLookupTable
     /// <param name="tableData">A 3x3 array representing the lookup table.</param>
     /// <returns>A new TritLookupTable instance.</returns>
     public static implicit operator TritLookupTable(Trit[,] tableData) => new(tableData);
+    
+    /// <summary>
+    /// Determines whether the specified object is equal to the current TritLookupTable.
+    /// </summary>
+    /// <param name="obj">The object to compare with the current TritLookupTable.</param>
+    /// <returns>true if the objects are equal; otherwise, false.</returns>
+    public readonly override bool Equals(object? obj)
+    {
+        return obj is TritLookupTable table && Equals(table);
+    }
+    
+    /// <summary>
+    /// Determines whether the specified TritLookupTable is equal to the current TritLookupTable.
+    /// </summary>
+    /// <param name="other">The TritLookupTable to compare with the current TritLookupTable.</param>
+    /// <returns>true if the specified TritLookupTable is equal to the current TritLookupTable; otherwise, false.</returns>
+    public readonly bool Equals(TritLookupTable other) => Value == other.Value;
+
+    /// <summary>
+    /// Returns the hash code for this TritLookupTable.
+    /// </summary>
+    /// <returns>A 32-bit signed integer hash code.</returns>
+    public readonly override int GetHashCode() => Value.GetHashCode();
+
+    /// <summary>
+    /// Determines whether two specified TritLookupTable objects have the same value.
+    /// </summary>
+    /// <param name="left">The first TritLookupTable to compare.</param>
+    /// <param name="right">The second TritLookupTable to compare.</param>
+    /// <returns>true if the value of left is the same as the value of right; otherwise, false.</returns>
+    public static bool operator ==(TritLookupTable left, TritLookupTable right) => left.Value == right.Value;
+
+    /// <summary>
+    /// Determines whether two specified TritLookupTable objects have different values.
+    /// </summary>
+    /// <param name="left">The first TritLookupTable to compare.</param>
+    /// <param name="right">The second TritLookupTable to compare.</param>
+    /// <returns>true if the value of left is different from the value of right; otherwise, false.</returns>
+    public static bool operator !=(TritLookupTable left, TritLookupTable right) => left.Value != right.Value;
 }

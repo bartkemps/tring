@@ -5,6 +5,8 @@ using System.Linq.Expressions;
 
 internal class BinaryOperationBuilder
 {
+    private static LruCache<int, BinaryOperation> operationCache = new(1000);
+
     private BinaryOperation? operation;
 
     private readonly ParameterExpression negative1 = Expression.Parameter(typeof(uint), "negative1");
@@ -21,7 +23,7 @@ internal class BinaryOperationBuilder
         : this(new TritLookupTable(operationTable))
     {
     }
-    
+
     public BinaryOperationBuilder(TritLookupTable operationTable)
     {
         operationTable1 = operationTable;
@@ -33,11 +35,12 @@ internal class BinaryOperationBuilder
 
     public BinaryOperation Build()
     {
-        if (operation != null)
-        {
-            return operation;
-        }
+        if (operation != null) return operation;
+        return operation = operationCache.GetOrCreate(operationTable1.Value, _ => BuildInner());
+    }
 
+    private BinaryOperation BuildInner()
+    {
         List<(sbyte, sbyte)> negativePairs = new();
         List<(sbyte, sbyte)> positivePairs = new();
 
@@ -51,17 +54,16 @@ internal class BinaryOperationBuilder
                         negativePairs.Add((negative.Value, positive.Value));
                         break;
                     case 1:
-                        positivePairs.Add((negative.Value,positive.Value));
+                        positivePairs.Add((negative.Value, positive.Value));
                         break;
                 }
             }
         }
 
-        
+
         var negativeExpression = CreateExpression(negativePairs);
         var positiveExpression = CreateExpression(positivePairs);
-        operation = CompileExpressionsToLambda(positiveExpression, negativeExpression);
-        return operation;
+        return CompileExpressionsToLambda(positiveExpression, negativeExpression);
     }
 
     private Expression CreateExpression(List<(sbyte, sbyte)> pairs)
@@ -71,12 +73,14 @@ internal class BinaryOperationBuilder
         {
             return Expression.Constant(0);
         }
+
         var expression = GetExpression(enumerator.Current);
         while (enumerator.MoveNext())
         {
             var (p1, p2) = enumerator.Current;
             expression = Expression.Or(expression, GetExpression((p1, p2)));
         }
+
         return expression;
     }
 
