@@ -7,7 +7,7 @@ namespace Ternary3.Numbers
   /// <summary>Defines an integer type that is represented in a base-2 format.</summary>
   /// <typeparam name="TSelf">The type that implements the interface.</typeparam>
   public interface ITernaryInteger<TSelf>:
-    ITritwiseOperators<TSelf, TSelf, TSelf>,
+    ITritwiseOperator<TSelf, TSelf, TSelf>,
     IConvertible,
     ISignedNumber<TSelf>,
     INumber<TSelf>,
