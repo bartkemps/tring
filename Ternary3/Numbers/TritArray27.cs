@@ -165,6 +165,8 @@ public struct TritArray27 : ITritArray
     /// <returns>An Int27T representing the same value.</returns>
     public static implicit operator Int27T(TritArray27 array) => (Int64)TritConverter.TritsToInt64(array.Negative, array.Positive);
 
+
+
     internal string DebugView() => ToString();
 
     public override string ToString() => TritConverter.FormatTrits(Negative, Positive, NumberOfTrits);

@@ -150,6 +150,38 @@ public struct TritLookupTable : IEquatable<TritLookupTable>
     /// <returns>A new TritLookupTable instance.</returns>
     public static implicit operator TritLookupTable(Trit[,]? tableData) => tableData == null ? default : new(tableData);
 
+    
+    /// <summary>
+    /// Adds the pipe operator to <see cref="long"/>.
+    /// Overflows if the value exceeds the range of Int27T.
+    /// </summary>
+    /// <param name="value">The value to convert to trits</param>
+    /// <param name="table">The lookup table</param>
+    public static LookupTritArray27Operator operator |(long value, TritLookupTable table) => new((Int27T)value, table);
+
+    /// <summary>
+    /// Adds the pipe operator to <see cref="int"/>.
+    /// </summary>
+    /// <param name="value">The value to convert to trits</param>
+    /// <param name="table">The lookup table</param>
+    public static LookupTritArray27Operator operator |(int value, TritLookupTable table) => new((Int27T)value, table);
+
+    /// <summary>
+    /// Adds the pipe operator to <see cref="short"/>.
+    /// Overflows if the value exceeds the range of Int27T.
+    /// </summary>
+    /// <param name="value">The value to convert to trits</param>
+    /// <param name="table">The lookup table</param>
+    public static LookupTritArray9Operator operator |(short value, TritLookupTable table) => new((Int9T)value, table);
+
+    /// <summary>
+    /// Adds the pipe operator to <see cref="sbyte"/>.
+    /// Overflows if the value exceeds the range of Int27T.
+    /// </summary>
+    /// <param name="value">The value to convert to trits</param>
+    /// <param name="table">The lookup table</param>
+    public static LookupTritArray3Operator operator |(sbyte value, TritLookupTable table) => new((Int3T)value, table);
+    
     /// <summary>
     /// Determines whether the specified object is equal to the current TritLookupTable.
     /// </summary>
