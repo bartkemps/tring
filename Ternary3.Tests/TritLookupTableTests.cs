@@ -3,6 +3,8 @@ using Ternary3.Numbers;
 
 namespace Ternary3.Tests;
 
+using Ternary3.Operators;
+
 public class TritLookupTableTests
 {
     [Fact]

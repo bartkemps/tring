@@ -5,6 +5,8 @@ using Ternary3.Operators.Operations;
 
 namespace Ternary3.Tests.Operators.Operations;
 
+using Ternary3.Operators;
+
 public class BinaryOperationBuilderTests
 {
     [Theory]

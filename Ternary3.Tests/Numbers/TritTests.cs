@@ -7,6 +7,7 @@ using Ternary3.Numbers;
 namespace Ternary3.Tests.Numbers;
 
 using Operators;
+using Ternary3.Operators;
 
 public unsafe class TritTests
 {

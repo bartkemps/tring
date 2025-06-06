@@ -1,8 +1,8 @@
-namespace Ternary3;
+namespace Ternary3.Operators;
 
-using Numbers;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using Numbers;
 
 /// <summary>
 /// Represents a specialized 3x3 lookup table for Trit operations.
@@ -54,6 +54,20 @@ public struct TritLookupTable : IEquatable<TritLookupTable>
             ((trit1T.Value + 1) << (6 * BitsPerTrit)) |
             ((trit10.Value + 1) << (7 * BitsPerTrit)) |
             ((trit11.Value + 1) << (8 * BitsPerTrit));
+    }
+
+    /// <summary>
+    /// Creates a TritLookupTable from a <see cref="TritArray27"/>.
+    /// </summary>
+    /// <remarks>
+    /// Parameters represent each cell in the 3x3 matrix, in row-major order:
+    /// tTT tT0 tT1
+    /// t0T t00 t01
+    /// t1T t10 t11
+    /// </remarks>
+    public TritLookupTable(TritArray27 trits)
+        :this(trits[0], trits[1], trits[2], trits[3], trits[4], trits[5], trits[6], trits[7], trits[8])
+    {
     }
 
     internal TritLookupTable(int data)
