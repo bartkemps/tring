@@ -9,19 +9,19 @@ using System.Runtime.CompilerServices;
 internal static class TritConverter
 {
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Trit GetTrit(ref byte positive, ref byte negative, int index)
+    public static Trit GetTrit(ref byte negative, ref byte positive, int index)
         => new((int)((positive >> index) & 1) - (int)((negative >> index) & 1));
     
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Trit GetTrit(ref uint positive, ref uint negative, int index)
+    public static Trit GetTrit(ref uint negative, ref uint positive, int index)
         => new((int)((positive >> index) & 1) - (int)((negative >> index) & 1));
     
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Trit GetTrit(ref ulong positive, ref ulong negative, int index)
+    public static Trit GetTrit(ref ulong negative, ref ulong positive, int index)
         => new((int)((positive >> index) & 1) - (int)((negative >> index) & 1));
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void SetTrit(ref uint positive, ref uint negative, int index, Trit value)
+    public static void SetTrit(ref uint negative, ref uint positive, int index, Trit value)
     {
         var mask = 1u << index;
         switch (value.Value)

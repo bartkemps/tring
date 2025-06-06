@@ -39,7 +39,7 @@ public struct TritArray27 : ITritArray
             {
                 throw new ArgumentOutOfRangeException(nameof(index), "Index must be between 0 and 26.");
             }
-            return TritConverter.GetTrit(ref Positive, ref Negative, index);
+            return TritConverter.GetTrit(ref Negative, ref Positive, index);
         }
         set
         {
@@ -48,7 +48,7 @@ public struct TritArray27 : ITritArray
                 throw new ArgumentOutOfRangeException(nameof(index), "Index must be between 0 and 26.");
             }
 
-            TritConverter.SetTrit(ref Positive, ref Negative, index, value);
+            TritConverter.SetTrit(ref Negative, ref Positive, index, value);
         }
     }
 
