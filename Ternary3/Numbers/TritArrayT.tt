@@ -184,6 +184,19 @@ private string GenerateTritArrayClass(int trits, string backingType, string intB
                    return new() { Negative = ({{backingType}})negative, Positive = ({{backingType}})positive };
                }
            
+               #region Conversion Operators
+
+               /// <summary>
+               /// Creates a TritArray{{trits}} from an integer value.
+               /// </summary>
+               /// <param name="value">The integer value to convert.</param>
+               /// <returns>A new TritArray{{trits}} representing the value in balanced ternary.</returns>
+               private static TritArray{{trits}} Create(long value)
+               {
+                   TritConverter.ConvertTo32Trits(value, out var negative, out var positive);
+                   return new() { Negative = ({{backingType}})negative, Positive = ({{backingType}})positive };
+               }
+
                /// <summary>
                /// Defines an implicit conversion of an Int{{trits}}T to a TritArray{{trits}}.
                /// </summary>
@@ -202,11 +215,140 @@ private string GenerateTritArrayClass(int trits, string backingType, string intB
                /// <param name="array">The TritArray{{trits}} to convert.</param>
                /// <returns>An Int{{trits}}T representing the same value.</returns>
                public static implicit operator Int{{trits}}T(TritArray{{trits}} array) => ({{intBackingType}})TritConverter.TritsToInt{{(intBackingType=="Int64"?"64":"32")}}(array.Negative, array.Positive);
+               
+               {{ CreateConversionOperators(trits, intBackingType) }}
+
+               #endregion
            
                internal string DebugView() => ToString();
            
                public override string ToString() => TritConverter.FormatTrits(Negative, Positive, NumberOfTrits);
            }
            """;
+}
+
+private string CreateConversionOperators(int trits, string intBackingType)
+{
+    if (intBackingType == "SByte")
+    {
+        return $@"
+               /// <summary>
+               /// Defines an implicit conversion of a sbyte to a TritArray{trits}.
+               /// </summary>
+               /// <param name=""value"">The sbyte value to convert.</param>
+               /// <returns>A TritArray{trits} representing the same value.</returns>
+               public static implicit operator TritArray{trits}(sbyte value) => Create(value);
+
+               /// <summary>
+               /// Defines an implicit conversion of a TritArray{trits} to a sbyte.
+               /// </summary>
+               /// <param name=""array"">The TritArray{trits} to convert.</param>
+               /// <returns>A sbyte representing the same value.</returns>
+               public static implicit operator sbyte(TritArray{trits} array) => (sbyte)TritConverter.TritsToInt32(array.Negative, array.Positive);
+
+               /// <summary>
+               /// Defines an explicit conversion of an int to a TritArray{trits}.
+               /// </summary>
+               /// <param name=""value"">The int value to convert.</param>
+               /// <returns>A TritArray{trits} representing the same value.</returns>
+               public static explicit operator TritArray{trits}(int value) => Create(value);
+
+               /// <summary>
+               /// Defines an implicit conversion of a TritArray{trits} to an int.
+               /// </summary>
+               /// <param name=""array"">The TritArray{trits} to convert.</param>
+               /// <returns>An int representing the same value.</returns>
+               public static implicit operator int(TritArray{trits} array) => (int)TritConverter.TritsToInt32(array.Negative, array.Positive);
+
+               /// <summary>
+               /// Defines an explicit conversion of a long to a TritArray{trits}.
+               /// </summary>
+               /// <param name=""value"">The long value to convert.</param>
+               /// <returns>A TritArray{trits} representing the same value.</returns>
+               public static explicit operator TritArray{trits}(long value) => Create(value);
+
+               /// <summary>
+               /// Defines an implicit conversion of a TritArray{trits} to a long.
+               /// </summary>
+               /// <param name=""array"">The TritArray{trits} to convert.</param>
+               /// <returns>A long representing the same value.</returns>
+               public static implicit operator long(TritArray{trits} array) => TritConverter.TritsToInt64(array.Negative, array.Positive);";
+    }
+    else if (intBackingType == "Int16")
+    {
+        return $@"
+               /// <summary>
+               /// Defines an implicit conversion of a short to a TritArray{trits}.
+               /// </summary>
+               /// <param name=""value"">The short value to convert.</param>
+               /// <returns>A TritArray{trits} representing the same value.</returns>
+               public static implicit operator TritArray{trits}(short value) => Create(value);
+
+               /// <summary>
+               /// Defines an implicit conversion of a TritArray{trits} to a short.
+               /// </summary>
+               /// <param name=""array"">The TritArray{trits} to convert.</param>
+               /// <returns>A short representing the same value.</returns>
+               public static implicit operator short(TritArray{trits} array) => (short)TritConverter.TritsToInt32(array.Negative, array.Positive);
+
+               /// <summary>
+               /// Defines an explicit conversion of an int to a TritArray{trits}.
+               /// </summary>
+               /// <param name=""value"">The int value to convert.</param>
+               /// <returns>A TritArray{trits} representing the same value.</returns>
+               public static explicit operator TritArray{trits}(int value) => Create(value);
+
+               /// <summary>
+               /// Defines an implicit conversion of a TritArray{trits} to an int.
+               /// </summary>
+               /// <param name=""array"">The TritArray{trits} to convert.</param>
+               /// <returns>An int representing the same value.</returns>
+               public static implicit operator int(TritArray{trits} array) => (int)TritConverter.TritsToInt32(array.Negative, array.Positive);
+
+               /// <summary>
+               /// Defines an explicit conversion of a long to a TritArray{trits}.
+               /// </summary>
+               /// <param name=""value"">The long value to convert.</param>
+               /// <returns>A TritArray{trits} representing the same value.</returns>
+               public static explicit operator TritArray{trits}(long value) => Create(value);
+
+               /// <summary>
+               /// Defines an implicit conversion of a TritArray{trits} to a long.
+               /// </summary>
+               /// <param name=""array"">The TritArray{trits} to convert.</param>
+               /// <returns>A long representing the same value.</returns>
+               public static implicit operator long(TritArray{trits} array) => TritConverter.TritsToInt64(array.Negative, array.Positive);";
+    }
+    else // Int64
+    {
+        return $@"
+               /// <summary>
+               /// Defines an implicit conversion of an int to a TritArray{trits}.
+               /// </summary>
+               /// <param name=""value"">The int value to convert.</param>
+               /// <returns>A TritArray{trits} representing the same value.</returns>
+               public static implicit operator TritArray{trits}(int value) => Create(value);
+
+               /// <summary>
+               /// Defines an explicit conversion of a TritArray{trits} to an int.
+               /// </summary>
+               /// <param name=""array"">The TritArray{trits} to convert.</param>
+               /// <returns>An int representing the same value.</returns>
+               public static explicit operator int(TritArray{trits} array) => (int)TritConverter.TritsToInt64(array.Negative, array.Positive);
+
+               /// <summary>
+               /// Defines an implicit conversion of a long to a TritArray{trits}.
+               /// </summary>
+               /// <param name=""value"">The long value to convert.</param>
+               /// <returns>A TritArray{trits} representing the same value.</returns>
+               public static implicit operator TritArray{trits}(long value) => Create(value);
+
+               /// <summary>
+               /// Defines an implicit conversion of a TritArray{trits} to a long.
+               /// </summary>
+               /// <param name=""array"">The TritArray{trits} to convert.</param>
+               /// <returns>A long representing the same value.</returns>
+               public static implicit operator long(TritArray{trits} array) => TritConverter.TritsToInt64(array.Negative, array.Positive);";
+    }
 }
 #>

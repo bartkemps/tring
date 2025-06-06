@@ -146,6 +146,19 @@ public struct TritArray27 : ITritArray
         return new() { Negative = (UInt32)negative, Positive = (UInt32)positive };
     }
 
+    #region Conversion Operators
+
+    /// <summary>
+    /// Creates a TritArray27 from an integer value.
+    /// </summary>
+    /// <param name="value">The integer value to convert.</param>
+    /// <returns>A new TritArray27 representing the value in balanced ternary.</returns>
+    private static TritArray27 Create(long value)
+    {
+        TritConverter.ConvertTo32Trits(value, out var negative, out var positive);
+        return new() { Negative = (UInt32)negative, Positive = (UInt32)positive };
+    }
+
     /// <summary>
     /// Defines an implicit conversion of an Int27T to a TritArray27.
     /// </summary>
@@ -164,8 +177,37 @@ public struct TritArray27 : ITritArray
     /// <param name="array">The TritArray27 to convert.</param>
     /// <returns>An Int27T representing the same value.</returns>
     public static implicit operator Int27T(TritArray27 array) => (Int64)TritConverter.TritsToInt64(array.Negative, array.Positive);
+    
+    
+               /// <summary>
+               /// Defines an implicit conversion of an int to a TritArray27.
+               /// </summary>
+               /// <param name="value">The int value to convert.</param>
+               /// <returns>A TritArray27 representing the same value.</returns>
+               public static implicit operator TritArray27(int value) => Create(value);
 
+               /// <summary>
+               /// Defines an explicit conversion of a TritArray27 to an int.
+               /// </summary>
+               /// <param name="array">The TritArray27 to convert.</param>
+               /// <returns>An int representing the same value.</returns>
+               public static explicit operator int(TritArray27 array) => (int)TritConverter.TritsToInt64(array.Negative, array.Positive);
 
+               /// <summary>
+               /// Defines an implicit conversion of a long to a TritArray27.
+               /// </summary>
+               /// <param name="value">The long value to convert.</param>
+               /// <returns>A TritArray27 representing the same value.</returns>
+               public static implicit operator TritArray27(long value) => Create(value);
+
+               /// <summary>
+               /// Defines an implicit conversion of a TritArray27 to a long.
+               /// </summary>
+               /// <param name="array">The TritArray27 to convert.</param>
+               /// <returns>A long representing the same value.</returns>
+               public static implicit operator long(TritArray27 array) => TritConverter.TritsToInt64(array.Negative, array.Positive);
+
+    #endregion
 
     internal string DebugView() => ToString();
 
