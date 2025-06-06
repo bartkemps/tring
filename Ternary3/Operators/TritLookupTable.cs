@@ -66,7 +66,7 @@ public struct TritLookupTable : IEquatable<TritLookupTable>
     /// t1T t10 t11
     /// </remarks>
     public TritLookupTable(TritArray27 trits)
-        :this(trits[0], trits[1], trits[2], trits[3], trits[4], trits[5], trits[6], trits[7], trits[8])
+        : this(trits[0], trits[1], trits[2], trits[3], trits[4], trits[5], trits[6], trits[7], trits[8])
     {
     }
 
@@ -105,8 +105,37 @@ public struct TritLookupTable : IEquatable<TritLookupTable>
         {
             for (var col = 0; col < 3; col++)
             {
-                var position = (row+ 3 * col) * BitsPerTrit;
+                var position = (row + 3 * col) * BitsPerTrit;
                 Value |= (tableData[row, col].Value + 1) << position;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Creates a 3x3 TritLookupTable from a 3x3 array of integer values. Each integer must be -1, 0, or 1,
+    /// </summary>
+    /// <param name="tableData">A 3x3 array of integer values between -1 and 1, representing the operation lookup table.</param>
+    /// <exception cref="ArgumentException">Thrown if the input array is not a 3x3 matrix.</exception>
+    public TritLookupTable(int[][] table)
+    {
+        if (table.Length != 3)
+        {
+            throw new ArgumentException("Each row must contain exactly 3 elements.", nameof(table));
+        }
+        for (var row = 0; row < 3; row++)
+        {
+            if (table[row].Length != 3)
+            {
+                throw new ArgumentException("Each row must contain exactly 3 elements.", nameof(table));
+            }
+            for (var col = 0; col < 3; col++)
+            {
+                var value = table[row][col] + 1;
+                if ((uint)value > 2)
+                {
+                    throw new ArgumentException($"Invalid trit value {table[row][col]} at position [{row}, {col}]. Must be -1, 0, or 1.", nameof(table));
+                }
+                Value |= value << ((row + 3 * col) * BitsPerTrit);
             }
         }
     }
@@ -164,7 +193,7 @@ public struct TritLookupTable : IEquatable<TritLookupTable>
     /// <returns>A new TritLookupTable instance.</returns>
     public static implicit operator TritLookupTable(Trit[,]? tableData) => tableData == null ? default : new(tableData);
 
-    
+
     /// <summary>
     /// Adds the pipe operator to <see cref="long"/>.
     /// Overflows if the value exceeds the range of Int27T.
@@ -195,7 +224,7 @@ public struct TritLookupTable : IEquatable<TritLookupTable>
     /// <param name="value">The value to convert to trits</param>
     /// <param name="table">The lookup table</param>
     public static LookupTritArray3Operator operator |(sbyte value, TritLookupTable table) => new((Int3T)value, table);
-    
+
     /// <summary>
     /// Determines whether the specified object is equal to the current TritLookupTable.
     /// </summary>
