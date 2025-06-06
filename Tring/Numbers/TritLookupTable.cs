@@ -148,7 +148,7 @@ public struct TritLookupTable : IEquatable<TritLookupTable>
     /// </summary>
     /// <param name="tableData">A 3x3 array representing the lookup table.</param>
     /// <returns>A new TritLookupTable instance.</returns>
-    public static implicit operator TritLookupTable(Trit[,] tableData) => new(tableData);
+    public static implicit operator TritLookupTable(Trit[,]? tableData) => tableData == null ? default : new(tableData);
 
     /// <summary>
     /// Determines whether the specified object is equal to the current TritLookupTable.

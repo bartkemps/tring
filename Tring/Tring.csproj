@@ -10,20 +10,17 @@
     <ItemGroup>
       <None Update="Numbers\IntT.tt">
         <Generator>TextTemplatingFileGenerator</Generator>
-        <LastGenOutput>IntT.cs</LastGenOutput>
+        <LastGenOutput>IntT.txt</LastGenOutput>
       </None>
       <None Update="Operators\Operations\UnaryOperation.tt">
         <Generator>TextTemplatingFileGenerator</Generator>
         <LastGenOutput>UnaryOperation.cs</LastGenOutput>
       </None>
-    </ItemGroup>
-
-    <ItemGroup>
-      <Compile Update="Numbers\IntT.cs">
+      <None Update="Numbers\IntT.txt">
         <AutoGen>True</AutoGen>
         <DesignTime>True</DesignTime>
         <DependentUpon>IntT.tt</DependentUpon>
-      </Compile>
+      </None>
     </ItemGroup>
 
     <ItemGroup>
