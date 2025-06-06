@@ -9,15 +9,15 @@ using System.Runtime.CompilerServices;
 internal static class TritConverter
 {
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Trit GetTrit(ref byte negative, ref byte positive, int index)
+    public static Trit GetTrit(byte negative, byte positive, int index)
         => new((int)((positive >> index) & 1) - (int)((negative >> index) & 1));
-    
+
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Trit GetTrit(ref uint negative, ref uint positive, int index)
+    public static Trit GetTrit(uint negative, uint positive, int index)
         => new((int)((positive >> index) & 1) - (int)((negative >> index) & 1));
-    
+
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Trit GetTrit(ref ulong negative, ref ulong positive, int index)
+    public static Trit GetTrit(ulong negative, ulong positive, int index)
         => new((int)((positive >> index) & 1) - (int)((negative >> index) & 1));
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -48,7 +48,7 @@ internal static class TritConverter
         if (value == 0) return;
         var isNegative = value < 0;
         if (value > 0) value = -value;
-        for(var index=0; value < 0 && index < 32; index++)
+        for (var index = 0; value < 0 && index < 32; index++)
         {
             var remainder = value % 3;
             value /= 3;
@@ -66,12 +66,13 @@ internal static class TritConverter
                     break;
             }
         }
+
         if (isNegative)
         {
             (negative, positive) = (positive, negative);
         }
     }
-    
+
     public static void ConvertTo32Trits(long value, out uint negative, out uint positive)
     {
         positive = 0;
@@ -79,7 +80,7 @@ internal static class TritConverter
         if (value == 0) return;
         var isNegative = value < 0;
         if (value > 0) value = -value;
-        for(var index=0; value < 0 && index < 32; index++)
+        for (var index = 0; value < 0 && index < 32; index++)
         {
             var remainder = value % 3;
             value /= 3;
@@ -97,12 +98,13 @@ internal static class TritConverter
                     break;
             }
         }
+
         if (isNegative)
         {
             (negative, positive) = (positive, negative);
         }
     }
-    
+
     public static void ConvertTo64Trits(long value, out ulong negative, out ulong positive)
     {
         positive = 0;
@@ -110,7 +112,7 @@ internal static class TritConverter
         if (value == 0) return;
         var isNegative = value < 0;
         if (value > 0) value = -value;
-        for(var index=0; value < 0 && index < 64; index++)
+        for (var index = 0; value < 0 && index < 64; index++)
         {
             var remainder = value % 3;
             value /= 3;
@@ -128,6 +130,7 @@ internal static class TritConverter
                     break;
             }
         }
+
         if (isNegative)
         {
             (negative, positive) = (positive, negative);
@@ -141,7 +144,7 @@ internal static class TritConverter
         if (value == 0) return;
         var isNegative = value < 0;
         if (value > 0) value = -value;
-        for(var index=0; value < 0 && index < 128; index++)
+        for (var index = 0; value < 0 && index < 128; index++)
         {
             var remainder = (int)value % 3;
             value /= 3;
@@ -159,6 +162,7 @@ internal static class TritConverter
                     break;
             }
         }
+
         if (isNegative)
         {
             (negative, positive) = (positive, negative);
@@ -181,7 +185,7 @@ internal static class TritConverter
 
         return result;
     }
-    
+
     public static long TritsToInt64(uint negative, uint positive)
     {
         var result = 0L;
@@ -198,7 +202,7 @@ internal static class TritConverter
 
         return result;
     }
-    
+
     public static long TritsToInt64(ulong negative, ulong positive)
     {
         var result = 0L;
@@ -215,7 +219,7 @@ internal static class TritConverter
 
         return result;
     }
-    
+
     public static Int128 TritsToInt128(ulong negative, ulong positive)
     {
         Int128 result = 0;
@@ -231,5 +235,30 @@ internal static class TritConverter
         }
 
         return result;
+    }
+
+    public static string FormatTrits(ulong negative, ulong positive, int length)
+    {
+        var space = (length - 1) / 9;
+        var chars = new Span<char>(new char[length + space]);
+        for (var i = length + space - 10; i > 0; i -= 10)
+        {
+            chars[i] = ' ';
+        }
+
+        for (var i = 0; i < length; i++)
+        {
+            chars[space + length - i - 1] = ((negative >> i) & 1, (positive >> i) & 1) switch
+            {
+                (0, 0) => '0',
+                (0, 1) => '1',
+                (1, 0) => 'T',
+                _ => '?'
+            };
+            if (i % 9 == 8) space--;
+        }
+
+
+        return new(chars);
     }
 }

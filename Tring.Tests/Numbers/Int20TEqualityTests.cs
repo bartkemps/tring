@@ -43,7 +43,7 @@ public class Int20TEqualityTests
     {
         Int20T a = 42;
         Int20T b = 43;
-        int intValue = 43;
+        var intValue = 43;
 
         // All inequality checks
         a.Equals((object)b).Should().BeFalse();

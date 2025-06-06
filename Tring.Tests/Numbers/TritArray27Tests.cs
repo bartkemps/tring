@@ -12,7 +12,7 @@ namespace Tring.Tests.Numbers
         {
             var array = new TritArray27();
             // Set all to Zero, then set some to Positive and Negative
-            for (int i = 0; i < array.Length; i++)
+            for (var i = 0; i < array.Length; i++)
             {
                 array[i] = Trit.Zero;
             }
@@ -27,7 +27,7 @@ namespace Tring.Tests.Numbers
             Assert.Equal(Trit.Positive, array[2]);
             Assert.Equal(Trit.Negative, array[26]);
             // All others should be Zero
-            for (int i = 3; i < 26; i++)
+            for (var i = 3; i < 26; i++)
             {
                 Assert.Equal(Trit.Zero, array[i]);
             }
@@ -101,7 +101,7 @@ namespace Tring.Tests.Numbers
             var b = new TritArray27();
 
             // Set all positions to zero explicitly
-            for (int i = 0; i < 27; i++)
+            for (var i = 0; i < 27; i++)
             {
                 a[i] = Trit.Zero;
                 b[i] = Trit.Zero;
@@ -110,7 +110,7 @@ namespace Tring.Tests.Numbers
             var result = a + b;
 
             // Check all positions are still zero
-            for (int i = 0; i < 27; i++)
+            for (var i = 0; i < 27; i++)
             {
                 Assert.Equal(Trit.Zero, result[i]);
             }

@@ -193,7 +193,7 @@ public struct TritLookupTable : IEquatable<TritLookupTable>
     /// Returns a string representation of the lookup table in a grid format.
     /// </summary>
     /// <returns>A formatted string showing the 3x3 lookup table.</returns>
-    public readonly string DebugView()
+    internal readonly string DebugView()
     {
         var value = Value;
         return $"{T(0)} {T(3)} {T(6)} / {T(1)} {T(4)} {T(7)} / {T(2)} {T(5)} {T(8)}";

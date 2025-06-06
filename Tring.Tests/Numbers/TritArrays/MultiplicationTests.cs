@@ -18,7 +18,7 @@ public class MultiplicationTests
     {
         Calculator.MultiplyBalancedTernary(negative1,
             positive1, negative2,
-            positive2, out uint actualNegative, out uint actualPositive);
+            positive2, out var actualNegative, out var actualPositive);
 
         actualPositive.Should().Be(expectedPositive);
         actualNegative.Should().Be(expectedNegative);
@@ -48,7 +48,7 @@ public class MultiplicationTests
         // Test multiplying by zero
         Calculator.MultiplyBalancedTernary(0u, // zero
             0u, 0xFFFFFFFFu, // any number
-            0xFFFFFFFFu, out uint actualNegative, out uint actualPositive);
+            0xFFFFFFFFu, out var actualNegative, out var actualPositive);
 
         actualPositive.Should().Be(0);
         actualNegative.Should().Be(0);

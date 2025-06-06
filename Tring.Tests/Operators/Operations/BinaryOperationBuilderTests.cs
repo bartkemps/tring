@@ -34,9 +34,9 @@ public class BinaryOperationBuilderTests
         var negative2 = trit2Value == -1 ? 1u : 0u;
         var positive2 = trit2Value == 1 ? 1u : 0u;
 
-        operation(negative1, positive1, negative2, positive2, out uint negativeResult, out uint positiveResult);
+        operation(negative1, positive1, negative2, positive2, out var negativeResult, out var positiveResult);
 
-        var actual = TritConverter.GetTrit(ref negativeResult, ref positiveResult, 0);
+        var actual = TritConverter.GetTrit(negativeResult, positiveResult, 0);
         actual.Value.Should().Be(expected.Value, $"because {trit1} XOR {trit2} should equal {expected}");
     }
     
@@ -69,7 +69,7 @@ public class BinaryOperationBuilderTests
 
         operation(negative1, positive1, negative2, positive2, out var negativeResult, out var positiveResult);
 
-        var actual = TritConverter.GetTrit(ref negativeResult, ref positiveResult, 0);
+        var actual = TritConverter.GetTrit(negativeResult, positiveResult, 0);
         actual.Value.Should().Be(expected.Value, $"because {trit1} XOR {trit2} should equal {expected}");
     }
     
@@ -102,7 +102,7 @@ public class BinaryOperationBuilderTests
 
         operation(negative1, positive1, negative2, positive2, out var negativeResult, out var positiveResult);
 
-        var actual = TritConverter.GetTrit(ref negativeResult, ref positiveResult, 0);
+        var actual = TritConverter.GetTrit(negativeResult, positiveResult, 0);
         actual.Value.Should().Be(expected.Value, $"because {trit1} XOR {trit2} should equal {expected}");
     }
 }

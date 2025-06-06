@@ -31,8 +31,8 @@ public class Int10TSpecificTests
         (shortValue - ternaryValue).Should().Be((Int10T)(-100));
         
         // Using int operations but producing Int10T results
-        int intValue = 5000;
-        Int10T result = (Int10T)(intValue * (int)ternaryValue);
+        var intValue = 5000;
+        var result = (Int10T)(intValue * (int)ternaryValue);
         result.Should().Be((Int10T)(intValue * 200));
     }
     

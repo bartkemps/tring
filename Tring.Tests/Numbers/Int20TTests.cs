@@ -51,13 +51,13 @@ public class Int20TTests
         (a + b).Should().Be((Int20T)8);
 
         var maxVal = Int20T.MaxValue;
-        Int20T overflowed = maxVal + (Int20T)1;
+        var overflowed = maxVal + (Int20T)1;
         overflowed.Should().Be(Int20T.MinValue);
 
         // Subtraction
         (a - b).Should().Be((Int20T)2);
         var minVal = Int20T.MinValue;
-        Int20T underflowed = minVal - (Int20T)1;
+        var underflowed = minVal - (Int20T)1;
         underflowed.Should().Be(Int20T.MaxValue);
 
         // Multiplication
@@ -69,7 +69,7 @@ public class Int20TTests
         (c / d).Should().Be((Int20T)3);
 
         Int20T zero = 0;
-        Action divByZero = () => { _ = c / zero; };
+        var divByZero = () => { _ = c / zero; };
         divByZero.Should().Throw<DivideByZeroException>();
 
         // Modulus
@@ -96,7 +96,7 @@ public class Int20TTests
         (b <= a).Should().BeTrue();
         (a != b).Should().BeTrue();
 
-        Int20T c = a; // Same value
+        var c = a; // Same value
         (a == c).Should().BeTrue();
         (a >= c).Should().BeTrue();
         (a <= c).Should().BeTrue();
@@ -153,8 +153,8 @@ public class Int20TTests
     public void BitShift_WithOverflow_ShouldWorkCorrectly()
     {
         // Test explicit overflow case
-        Int20T maxValue = Int20T.MaxValue;
-        Int20T maxMinusOne = maxValue - 1;
+        var maxValue = Int20T.MaxValue;
+        var maxMinusOne = maxValue - 1;
 
         // Verify that the values are as expected before operation
         maxValue.Should().Be((Int20T)1743392200);
@@ -224,7 +224,7 @@ public class Int20TTests
     [InlineData("-1743392200", -1743392200)] // MinValue
     public void Parse_ValidStrings_ShouldReturnExpectedValue(string input, int expected)
     {
-        Int20T result = Int20T.Parse(input);
+        var result = Int20T.Parse(input);
         result.Should().Be((Int20T)expected);
     }
 
@@ -253,7 +253,7 @@ public class Int20TTests
     [InlineData(NumberStyles.AllowThousands, "1,000", 1000)]
     public void Parse_WithNumberStyles_ShouldWorkCorrectly(NumberStyles style, string input, int expected)
     {
-        Int20T result = Int20T.Parse(input, style);
+        var result = Int20T.Parse(input, style);
         result.Should().Be((Int20T)expected);
     }
 
@@ -265,7 +265,7 @@ public class Int20TTests
     [InlineData("123,456", NumberStyles.AllowThousands, 123456)] // Thousands separator
     public void Parse_SpecialFormats_ShouldWorkCorrectly(string input, NumberStyles style, int expected)
     {
-        Int20T result = Int20T.Parse(input, style);
+        var result = Int20T.Parse(input, style);
         result.Should().Be((Int20T)expected);
     }
 
@@ -286,7 +286,7 @@ public class Int20TTests
         // German culture uses period as thousand separator
         var germanCulture = new System.Globalization.CultureInfo("de-DE");
         Thread.CurrentThread.CurrentCulture = germanCulture;
-        Int20T result = Int20T.Parse("1.000", NumberStyles.AllowThousands);
+        var result = Int20T.Parse("1.000", NumberStyles.AllowThousands);
         result.Should().Be((Int20T)1000);
 
         // US culture uses comma as thousand separator
@@ -303,7 +303,7 @@ public class Int20TTests
     [InlineData(-7, -3, -1)] // Both negative
     public void Modulus_WithNegativeNumbers_ShouldWorkCorrectly(int dividend, int divisor, int expected)
     {
-        Int20T result = (Int20T)dividend % (Int20T)divisor;
+        var result = (Int20T)dividend % (Int20T)divisor;
         result.Should().Be((Int20T)expected);
     }
 
@@ -316,7 +316,7 @@ public class Int20TTests
     public void IsEven_ShouldReturnCorrectValue(int value, bool expected)
     {
         Int20T intT20 = value;
-        bool isEven = intT20 % 2 == 0;
+        var isEven = intT20 % 2 == 0;
         isEven.Should().Be(expected);
     }
 
@@ -324,15 +324,15 @@ public class Int20TTests
     public void IntT20_OverflowBehavior_ShouldDifferFromInt32()
     {
         // IntT20 overflow behavior with its MaxValue
-        Int20T maxValue = Int20T.MaxValue;
-        Int20T overflowed = maxValue + (Int20T)1;
+        var maxValue = Int20T.MaxValue;
+        var overflowed = maxValue + (Int20T)1;
         overflowed.Should().Be(Int20T.MinValue);
 
         // Compare with int behavior for clarity
         unchecked
         {
-            int intMax = int.MaxValue;
-            int intOverflowed = intMax + 1;
+            var intMax = int.MaxValue;
+            var intOverflowed = intMax + 1;
             intOverflowed.Should().Be(int.MinValue);
 
             // Verify our IntT20 wraps at different values than Int32
@@ -346,7 +346,7 @@ public class Int20TTests
     [InlineData("-1743392201")] // Just below MinValue
     public void Parse_OutOfRangeStrings_ShouldBeWrappedProperly(string input)
     {
-        Int20T result = Int20T.Parse(input);
+        var result = Int20T.Parse(input);
 
         // The value should wrap around to the other extreme
         if (input == "1743392201")
@@ -367,7 +367,7 @@ public class Int20TTests
     public void Parse_CurrencyFormat_ShouldWorkCorrectly()
     {
         // Currency format should work without culture specification
-        Int20T result = Int20T.Parse("$42", NumberStyles.Currency);
+        var result = Int20T.Parse("$42", NumberStyles.Currency);
         result.Should().Be((Int20T)42);
 
         result = Int20T.Parse(" $42 ", NumberStyles.Currency);
@@ -385,8 +385,8 @@ public class Int20TTests
         Math.Max((int)x, (int)y).Should().Be(5);
 
         // Test with our own Min/Max methods if implemented
-        Int20T minResult = x < y ? x : y;
-        Int20T maxResult = x > y ? x : y;
+        var minResult = x < y ? x : y;
+        var maxResult = x > y ? x : y;
 
         minResult.Should().Be((Int20T)3);
         maxResult.Should().Be((Int20T)5);
@@ -425,10 +425,10 @@ public class Int20TTests
     {
         // Valid conversions
         Int20T smallValue = 42;
-        short shortValue = (short)(int)smallValue;
+        var shortValue = (short)(int)smallValue;
         shortValue.Should().Be((short)42);
 
-        byte byteValue = (byte)(int)smallValue;
+        var byteValue = (byte)(int)smallValue;
         byteValue.Should().Be((byte)42);
 
         long longValue = (int)smallValue;
@@ -436,7 +436,7 @@ public class Int20TTests
 
         // Out of range for byte/short but within IntT20 range
         Int20T largeValue = 1000;
-        byte byteResult = unchecked((byte)(int)largeValue);
+        var byteResult = unchecked((byte)(int)largeValue);
         byteResult.Should().Be(232); // 1000 % 256 = 232
     }
 
@@ -446,13 +446,13 @@ public class Int20TTests
         unchecked
         {
             // Test that IntT20 wraps around properly
-            Int20T max = Int20T.MaxValue;
-            Int20T overflowed = max + (Int20T)1;
+            var max = Int20T.MaxValue;
+            var overflowed = max + (Int20T)1;
             overflowed.Should().Be(Int20T.MinValue);
 
             // Test conversion to smaller types
             Int20T largeValue = 1000;
-            byte byteValue = (byte)(int)largeValue;
+            var byteValue = (byte)(int)largeValue;
             byteValue.Should().Be(232); // 1000 % 256 = 232
         }
     }
@@ -466,14 +466,14 @@ public class Int20TTests
         // Since IntT20 likely doesn't have a built-in DivRem method,
         // we'll simulate it manually or use Math.DivRem with casts
         int remainder;
-        int quotient = Math.DivRem((int)dividend, (int)divisor, out remainder);
+        var quotient = Math.DivRem((int)dividend, (int)divisor, out remainder);
 
         quotient.Should().Be(2);
         remainder.Should().Be(1);
 
         // We can also calculate it directly
-        Int20T quotientT20 = dividend / divisor;
-        Int20T remainderT20 = dividend % divisor;
+        var quotientT20 = dividend / divisor;
+        var remainderT20 = dividend % divisor;
 
         quotientT20.Should().Be((Int20T)2);
         remainderT20.Should().Be((Int20T)1);

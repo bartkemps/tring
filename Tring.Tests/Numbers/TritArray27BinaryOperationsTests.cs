@@ -106,7 +106,7 @@ public class TritArray27BinaryOperationsTests
         result[2].Should().Be(expected2, "because it should match individual trit operation");
         
         // Check that all other positions remain Zero
-        for (int i = 3; i < array1.Length; i++)
+        for (var i = 3; i < array1.Length; i++)
         {
             result[i].Should().Be(Trit.Zero, $"because position {i} should remain Zero");
         }
@@ -120,7 +120,7 @@ public class TritArray27BinaryOperationsTests
         var operations = new[] { BinaryLookup.And, BinaryLookup.Or, BinaryLookup.Xor, BinaryLookup.Plus, BinaryLookup.Minus };
 
         // Set all positions with alternating values
-        for (int i = 0; i < array1.Length; i++)
+        for (var i = 0; i < array1.Length; i++)
         {
             array1[i] = i % 3 == 0 ? Trit.Positive : (i % 3 == 1 ? Trit.Zero : Trit.Negative);
             array2[i] = i % 3 == 0 ? Trit.Negative : (i % 3 == 1 ? Trit.Positive : Trit.Zero);
@@ -130,7 +130,7 @@ public class TritArray27BinaryOperationsTests
         {
             var result = array1 | operation | array2;
 
-            for (int i = 0; i < array1.Length; i++)
+            for (var i = 0; i < array1.Length; i++)
             {
                 var expected = array1[i] | operation | array2[i];
                 result[i].Should().Be(expected, 

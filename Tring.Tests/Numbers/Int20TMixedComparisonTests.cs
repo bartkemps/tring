@@ -124,7 +124,7 @@ public class Int20TMixedComparisonTests
         (valueAsIntT20 <= value).Should().BeTrue();
         (value >= valueAsIntT20).Should().BeTrue();
         
-        Int20T smallerValue = valueAsIntT20 - 1;
+        var smallerValue = valueAsIntT20 - 1;
         (smallerValue < value).Should().BeTrue();
         (value > smallerValue).Should().BeTrue();
         
@@ -135,12 +135,12 @@ public class Int20TMixedComparisonTests
     [InlineData(uint.MaxValue)]
     public void Comparison_WithUInt32_AboveBounds_ShouldWorkCorrectly(uint value)
     {
-        Int20T maxValue = Int20T.MaxValue;
+        var maxValue = Int20T.MaxValue;
         
         (maxValue <= value).Should().BeTrue();
         (value >= maxValue).Should().BeTrue();
         
-        Int20T smallerValue = maxValue - 1;
+        var smallerValue = maxValue - 1;
         (smallerValue < value).Should().BeTrue();
         (value > smallerValue).Should().BeTrue();
     }
@@ -150,12 +150,12 @@ public class Int20TMixedComparisonTests
     [InlineData(Int20T.MaxValueConstant + 1)]
     public void Comparison_WithInt64_AboveMaxValue_ShouldWorkCorrectly(long value)
     {
-        Int20T bounded = Int20T.MaxValue;
+        var bounded = Int20T.MaxValue;
         
         (bounded <= value).Should().BeTrue();
         (value >= bounded).Should().BeTrue();
         
-        Int20T smaller = bounded - 1;
+        var smaller = bounded - 1;
         (smaller < value).Should().BeTrue();
         (value > smaller).Should().BeTrue();
     }
@@ -165,12 +165,12 @@ public class Int20TMixedComparisonTests
     [InlineData(Int20T.MinValueConstant - 1)]
     public void Comparison_WithInt64_BelowMinValue_ShouldWorkCorrectly(long value)
     {
-        Int20T bounded = Int20T.MinValue;
+        var bounded = Int20T.MinValue;
         
         (bounded >= value).Should().BeTrue();
         (value <= bounded).Should().BeTrue();
         
-        Int20T larger = bounded + 1;
+        var larger = bounded + 1;
         (larger > value).Should().BeTrue();
         (value < larger).Should().BeTrue();
     }
@@ -181,13 +181,13 @@ public class Int20TMixedComparisonTests
     {
         Int20T bounded = (int)value;
         
-        Int20T smaller = bounded - 1;
+        var smaller = bounded - 1;
         (smaller < value).Should().BeTrue();
         (value > smaller).Should().BeTrue();
 
         (bounded.CompareTo(value)).Should().Be(0);
 
-        Int20T larger = bounded + 1;
+        var larger = bounded + 1;
         (larger > value).Should().BeTrue();
         (value < larger).Should().BeTrue();
     }
@@ -198,7 +198,7 @@ public class Int20TMixedComparisonTests
     {
         Int20T bounded = (int)value;
         
-        Int20T smaller = bounded - 1;
+        var smaller = bounded - 1;
         (smaller < value).Should().BeTrue();
         (value > smaller).Should().BeTrue();
 
@@ -213,7 +213,7 @@ public class Int20TMixedComparisonTests
         
         (bounded.CompareTo(value)).Should().Be(0);
 
-        Int20T larger = bounded + 1;
+        var larger = bounded + 1;
         (larger > value).Should().BeTrue();
         (value < larger).Should().BeTrue();
     }
@@ -223,12 +223,12 @@ public class Int20TMixedComparisonTests
     [InlineData((ulong)Int20T.MaxValueConstant + 1)]
     public void Comparison_WithUInt64_AboveMaxValue_ShouldWorkCorrectly(ulong value)
     {
-        Int20T bounded = Int20T.MaxValue;
+        var bounded = Int20T.MaxValue;
         
         (bounded <= value).Should().BeTrue();
         (value >= bounded).Should().BeTrue();
         
-        Int20T smaller = bounded - 1;
+        var smaller = bounded - 1;
         (smaller < value).Should().BeTrue();
         (value > smaller).Should().BeTrue();
     }
@@ -240,13 +240,13 @@ public class Int20TMixedComparisonTests
     {
         Int20T bounded = (int)value;
         
-        Int20T smaller = bounded - 1;
+        var smaller = bounded - 1;
         (smaller < value).Should().BeTrue();
         (value > smaller).Should().BeTrue();
 
         (bounded.CompareTo(value)).Should().Be(0);
 
-        Int20T larger = bounded + 1;
+        var larger = bounded + 1;
         (larger > value).Should().BeTrue();
         (value < larger).Should().BeTrue();
     }
@@ -257,7 +257,7 @@ public class Int20TMixedComparisonTests
     {
         Int20T bounded = (int)value;
         
-        Int20T smaller = bounded - 1;
+        var smaller = bounded - 1;
         (smaller < value).Should().BeTrue();
         (value > smaller).Should().BeTrue();
 

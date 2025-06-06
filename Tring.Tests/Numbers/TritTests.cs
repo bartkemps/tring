@@ -125,7 +125,7 @@ public unsafe class TritTests
     public void GetHashCode_ShouldBeConsistent()
     {
         // Same values should have same hash codes
-        Trit positiveClone = (Trit)1;
+        var positiveClone = (Trit)1;
         Trit.Positive.GetHashCode().Should().Be(positiveClone.GetHashCode());
 
         // Different values should have different hash codes
@@ -138,9 +138,9 @@ public unsafe class TritTests
     public void LogicalOperators_True_False_ShouldWorkCorrectly()
     {
         // Testing true operator (returns true if value is Positive/1)
-        bool isPositiveTrue = Trit.Positive ? true : false;
-        bool isNegativeTrue = Trit.Negative ? true : false;
-        bool isZeroTrue = Trit.Zero ? true : false;
+        var isPositiveTrue = Trit.Positive ? true : false;
+        var isNegativeTrue = Trit.Negative ? true : false;
+        var isZeroTrue = Trit.Zero ? true : false;
 
         isPositiveTrue.Should().BeTrue();
         isNegativeTrue.Should().BeFalse();

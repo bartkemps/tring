@@ -260,7 +260,7 @@ public class OperatorTests
         var isNotNegativeResult3 = Trit.Positive | [Trit.Negative, Trit.Positive, Trit.Positive];
 
         Trit IsNotEqualTo(Trit t1, Trit t2) => t1 != t2; 
-        Trit[,] isNotEqualTo = new Trit[3, 3]
+        var isNotEqualTo = new Trit[3, 3]
         {
             { false, true, true }, 
             { true, false, true }, 

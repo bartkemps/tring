@@ -68,24 +68,24 @@ public class Int32Tests
         // Addition
         (5 + 3).Should().Be(8);
         var maxVal = int.MaxValue;
-        Action overflow = () => { checked { var _ = maxVal + 1; } };
+        var overflow = () => { checked { var _ = maxVal + 1; } };
         overflow.Should().Throw<OverflowException>();
 
         // Subtraction
         (5 - 3).Should().Be(2);
         var minVal = int.MinValue;
-        Action underflow = () => { checked { var _ = minVal - 1; } };
+        var underflow = () => { checked { var _ = minVal - 1; } };
         underflow.Should().Throw<OverflowException>();
 
         // Multiplication
         (5 * 3).Should().Be(15);
-        Action mulOverflow = () => { checked { var _ = maxVal * 2; } };
+        var mulOverflow = () => { checked { var _ = maxVal * 2; } };
         mulOverflow.Should().Throw<OverflowException>();
 
         // Division
         (6 / 2).Should().Be(3);
-        int zero = 0;  // Using variable to avoid constant computation warning
-        Action divByZero = () => { _ = 5 / zero; };
+        var zero = 0;  // Using variable to avoid constant computation warning
+        var divByZero = () => { _ = 5 / zero; };
         divByZero.Should().Throw<DivideByZeroException>();
     }
 
@@ -93,8 +93,8 @@ public class Int32Tests
     public void ComparisonOperators_ShouldWorkCorrectly()
     {
         // Using variables that could change to avoid constant value warnings
-        int a = GetTestValue(10);
-        int b = GetTestValue(3);
+        var a = GetTestValue(10);
+        var b = GetTestValue(3);
         
         (a > b).Should().BeTrue();
         (b < a).Should().BeTrue();
@@ -102,7 +102,7 @@ public class Int32Tests
         (b <= a).Should().BeTrue();
         (a != b).Should().BeTrue();
         
-        int c = a;  // Testing equality with same value
+        var c = a;  // Testing equality with same value
         (a == c).Should().BeTrue();
     }
 
@@ -168,7 +168,7 @@ public class Int32Tests
     [InlineData(-42, true)] // -42 is even
     public void IsEven_ShouldReturnCorrectValue(int value, bool expected)
     {
-        bool isEven = value % 2 == 0;
+        var isEven = value % 2 == 0;
         isEven.Should().Be(expected);
     }
 
@@ -242,7 +242,7 @@ public class Int32Tests
     [Fact]
     public void ImplicitConversions_ToInt64_ShouldWorkCorrectly()
     {
-        int value = 42;
+        var value = 42;
         long longValue = value; // Implicit conversion to Int64
         longValue.Should().Be(42L);
 
@@ -263,19 +263,19 @@ public class Int32Tests
     public void ExplicitConversions_FromInt64_ShouldWorkCorrectly()
     {
         // Valid conversions
-        long withinRange = 42L;
-        int intValue = (int)withinRange;
+        var withinRange = 42L;
+        var intValue = (int)withinRange;
         intValue.Should().Be(42);
 
         // Overflow cases
         checked
         {
-            long tooLarge = long.MaxValue;
-            var largeConversion = () => { int _ = (int)tooLarge; };
+            var tooLarge = long.MaxValue;
+            var largeConversion = () => { var _ = (int)tooLarge; };
             largeConversion.Should().Throw<OverflowException>();
 
-            long tooSmall = long.MinValue;
-            var smallConversion = () => { int _ = (int)tooSmall; };
+            var tooSmall = long.MinValue;
+            var smallConversion = () => { var _ = (int)tooSmall; };
             smallConversion.Should().Throw<OverflowException>();
         }
     }
@@ -284,19 +284,19 @@ public class Int32Tests
     public void ExplicitConversions_ToInt16_ShouldWorkCorrectly()
     {
         // Valid conversions
-        int smallValue = 42;
-        short shortValue = (short)smallValue;
+        var smallValue = 42;
+        var shortValue = (short)smallValue;
         shortValue.Should().Be((short)42);
 
         // Overflow cases
         checked
         {
-            int tooLarge = 32768; // Greater than short.MaxValue
-            var largeConversion = () => { short _ = (short)tooLarge; };
+            var tooLarge = 32768; // Greater than short.MaxValue
+            var largeConversion = () => { var _ = (short)tooLarge; };
             largeConversion.Should().Throw<OverflowException>();
 
-            int tooSmall = -32769; // Less than short.MinValue
-            var smallConversion = () => { short _ = (short)tooSmall; };
+            var tooSmall = -32769; // Less than short.MinValue
+            var smallConversion = () => { var _ = (short)tooSmall; };
             smallConversion.Should().Throw<OverflowException>();
         }
     }
@@ -327,13 +327,13 @@ public class Int32Tests
         unchecked
         {
             // Int64 to Int32
-            long large = int.MaxValue + 1L;
-            int truncated = (int)large;
+            var large = int.MaxValue + 1L;
+            var truncated = (int)large;
             truncated.Should().Be(int.MinValue); // Wraps around to minimum value
 
             // Int32 to Int16
-            int tooBig = short.MaxValue + 1;
-            short truncatedShort = (short)tooBig;
+            var tooBig = short.MaxValue + 1;
+            var truncatedShort = (short)tooBig;
             truncatedShort.Should().Be(short.MinValue); // Wraps around to minimum value
         }
     }
@@ -344,13 +344,13 @@ public class Int32Tests
         checked
         {
             // Int64 to Int32
-            long tooLarge = (long)int.MaxValue + 1;
-            var largeAction = () => { int _ = (int)tooLarge; };
+            var tooLarge = (long)int.MaxValue + 1;
+            var largeAction = () => { var _ = (int)tooLarge; };
             largeAction.Should().Throw<OverflowException>();
 
             // Int32 to Int16
-            int tooBig = (int)short.MaxValue + 1;
-            var shortAction = () => { short _ = (short)tooBig; };
+            var tooBig = (int)short.MaxValue + 1;
+            var shortAction = () => { var _ = (short)tooBig; };
             shortAction.Should().Throw<OverflowException>();
         }
     }
@@ -361,13 +361,13 @@ public class Int32Tests
         unchecked
         {
             // Int64 to Int32
-            long tooLarge = (long)int.MaxValue + 1;
-            int truncated = (int)tooLarge;
+            var tooLarge = (long)int.MaxValue + 1;
+            var truncated = (int)tooLarge;
             truncated.Should().Be(int.MinValue); // Wraps around
 
             // Int32 to Int16
-            int tooBig = (int)short.MaxValue + 1;
-            short truncatedShort = (short)tooBig;
+            var tooBig = (int)short.MaxValue + 1;
+            var truncatedShort = (short)tooBig;
             truncatedShort.Should().Be(short.MinValue); // Wraps around
         }
     }
@@ -376,22 +376,22 @@ public class Int32Tests
     public void DefaultContext_ShouldBeUnchecked()
     {
         // By default, C# uses unchecked context for casts
-        long tooLarge = (long)int.MaxValue + 1;
-        int truncated = (int)tooLarge;
+        var tooLarge = (long)int.MaxValue + 1;
+        var truncated = (int)tooLarge;
         truncated.Should().Be(int.MinValue); // Should wrap around without throwing
 
-        int tooBig = (int)short.MaxValue + 1;
-        short truncatedShort = (short)tooBig;
+        var tooBig = (int)short.MaxValue + 1;
+        var truncatedShort = (short)tooBig;
         truncatedShort.Should().Be(short.MinValue); // Should wrap around without throwing
     }
 
     [Fact]
     public void DivRem_ShouldWorkCorrectly()
     {
-        int dividend = 7;
-        int divisor = 3;
+        var dividend = 7;
+        var divisor = 3;
         int remainder;
-        int quotient = Math.DivRem(dividend, divisor, out remainder);
+        var quotient = Math.DivRem(dividend, divisor, out remainder);
         
         quotient.Should().Be(2);
         remainder.Should().Be(1);

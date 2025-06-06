@@ -17,13 +17,13 @@ public class Int40TSpecificTests
     public void BackingType_ShouldBeInt64()
     {
         // Test implicit conversions with Int64 specifically
-        long value = 1000000000000L;
+        var value = 1000000000000L;
         Int40T converted = value;
         long backToLong = converted;
         backToLong.Should().Be(value);
         
         // Test with large values specific to Int64
-        long largeValue = 3000000000000L;
+        var largeValue = 3000000000000L;
         Int40T convertedLarge = largeValue;
         ((long)convertedLarge).Should().Be(largeValue);
     }
@@ -33,7 +33,7 @@ public class Int40TSpecificTests
     {
         // Verify that MaxValueConstant is indeed larger than uint.MaxValue
         long maxValueConstant = Int40T.MaxValue;
-        uint uintMaxValue = uint.MaxValue;
+        var uintMaxValue = uint.MaxValue;
         
         ((ulong)maxValueConstant).Should().BeGreaterThan(uintMaxValue);
     }
@@ -45,7 +45,7 @@ public class Int40TSpecificTests
         // since the MaxValueConstant exceeds uint.MaxValue
         
         // Test with a uint value (will use direct CompareTo)
-        uint uintValue = 2500000000; // Large value but still within uint range
+        var uintValue = 2500000000; // Large value but still within uint range
         Int40T int40Value = 3000000000L;
         
         // The comparison should work correctly without the "greater than MaxValueConstant" check
@@ -83,7 +83,7 @@ public class Int40TSpecificTests
     {
         // Test with an IConvertible that returns a uint through GetTypeCode
         // Create a custom IConvertible that returns UInt32 through GetTypeCode
-        UInt32Convertible convertible = new UInt32Convertible(3000000000); // Large uint value
+        var convertible = new UInt32Convertible(3000000000); // Large uint value
         
         Int40T int40Value = 4000000000L;
         int40Value.CompareTo(convertible).Should().BeGreaterThan(0);

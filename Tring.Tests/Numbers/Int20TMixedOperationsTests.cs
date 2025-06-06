@@ -16,8 +16,8 @@ public class Int20TMixedOperationsTests
     {
         // IntT20 + int
         Int20T intT20 = a;
-        int intValue = b;
-        Int20T result1 = intT20 + intValue;
+        var intValue = b;
+        var result1 = intT20 + intValue;
         result1.Should().Be((Int20T)expected);
 
         // int + IntT20
@@ -37,8 +37,8 @@ public class Int20TMixedOperationsTests
     {
         // IntT20 - int
         Int20T intT20 = a;
-        int intValue = b;
-        Int20T result1 = intT20 - intValue;
+        var intValue = b;
+        var result1 = intT20 - intValue;
         result1.Should().Be((Int20T)expected);
 
         // int - IntT20
@@ -58,8 +58,8 @@ public class Int20TMixedOperationsTests
     {
         // IntT20 * int
         Int20T intT20 = a;
-        int intValue = b;
-        Int20T result1 = intT20 * intValue;
+        var intValue = b;
+        var result1 = intT20 * intValue;
         result1.Should().Be((Int20T)expected);
 
         // int * IntT20
@@ -78,8 +78,8 @@ public class Int20TMixedOperationsTests
     {
         // IntT20 / int
         Int20T intT20 = a;
-        int intValue = b;
-        Int20T result1 = intT20 / intValue;
+        var intValue = b;
+        var result1 = intT20 / intValue;
         result1.Should().Be((Int20T)expected);
 
         // int / IntT20
@@ -101,8 +101,8 @@ public class Int20TMixedOperationsTests
     {
         // IntT20 % int
         Int20T intT20 = a;
-        int intValue = b;
-        Int20T result1 = intT20 % intValue;
+        var intValue = b;
+        var result1 = intT20 % intValue;
         result1.Should().Be((Int20T)expected);
 
         // int % IntT20

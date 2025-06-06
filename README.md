@@ -68,29 +68,63 @@ T → 1
 
 Here are some fundamental binary operations in balanced ternary:
 
-1. **AND** operation (similar to minimum):
+1. **Min** operation (similar to AND):
 
-| AND | **T** | **0** | **1** |
+| Min | **T** | **0** | **1** |
 |-----|-------|-------|-------|
 | **T** |  T   |   T   |   T   |
 | **0** |  T   |   0   |   0   |
 | **1** |  T   |   0   |   1   |
 
-2. **OR** operation (similar to maximum):
+2. **Max** operation (similar to OR):
 
-| OR  | **T** | **0** | **1** |
-|-----|-------|-------|-------|
-| **T** |  T   |   T   |   1   |
-| **0** |  T   |   0   |   1   |
-| **1** |  1   |   1   |   1   |
-
-3. **XOR** operation:
-
-| XOR | **T** | **0** | **1** |
+| Max | **T** | **0** | **1** |
 |-----|-------|-------|-------|
 | **T** |  T   |   0   |   1   |
-| **0** |  0   |   0   |   0   |
-| **1** |  1   |   0   |   T   |
+| **0** |  0   |   0   |   1   |
+| **1** |  1   |   1   |   1   |
+
+3. **Sum** operation (similar to XOR):
+
+| Sum | **T** | **0** | **1** |
+|-----|-------|-------|-------|
+| **T** |  T   |   T   |   0   |
+| **0** |  T   |   0   |   1   |
+| **1** |  0   |   1   |   1   |
+
+## Complete List of Unary Operations
+
+In ternary logic, there are 3³ = 27 possible unary operations. Here's a complete list with their names and truth tables:
+
+| Operation Name      | T    | 0    | 1    | Description |
+|---------------------|------|------|------|-------------|
+| Negative            | T    | T    | T    | Always outputs T (negative) |
+| Decrement           | T    | T    | 0    | One less for every value greater than negative |
+| IsPositive          | T    | T    | 1    | Positive for positive, negative otherwise |
+| NegateAbsoluteValue | T    | 0    | T    | Zero for zero, negative otherwise |
+| Ceil                | T    | 0    | 0    | Negative for negative, zero otherwise |
+| Identity            | T    | 0    | 1    | Keep the value unchanged |
+| IsZero              | T    | 1    | T    | Positive for zero, negative otherwise |
+| KeepNegative        | T    | 1    | 0    | Keep negative unchanged, zero for positive and vice versa |
+| IsNotNegative       | T    | 1    | 1    | Negative for negative, positive otherwise |
+| CeilIsNegative      | 0    | T    | T    | Zero for negative, negative otherwise |
+| CeilIsNotZero       | 0    | T    | 0    | Zero for non-zero values, negative for zero |
+| KeepPositive        | 0    | T    | 1    | Positive for positive, negative otherwise |
+| CeilIsNotPositive   | 0    | 0    | T    | Negative for positive, zero otherwise |
+| Zero                | 0    | 0    | 0    | Always outputs 0 |
+| Floor               | 0    | 0    | 1    | Positive for positive, zero otherwise |
+| CyclicIncrement     | 0    | 1    | T    | Cycles values: T→0→1→T |
+| FloorIsZero         | 0    | 1    | 0    | Zero for zero, positive otherwise |
+| Increment           | 0    | 1    | 1    | Zero for negative, positive otherwise |
+| IsNegative          | 1    | T    | T    | Positive for negative, negative otherwise |
+| CyclicDecrement     | 1    | T    | 0    | Cycles values: 1→0→T→1 |
+| IsNotZero           | 1    | T    | 1    | Positive for non-zero values, negative for zero |
+| Negate              | 1    | 0    | T    | Flips positive to negative and vice versa |
+| FloorIsNegative     | 1    | 0    | 0    | Positive for negative, zero otherwise |
+| AbsoluteValue       | 1    | 0    | 1    | Convert negative to positive, keep others |
+| IsNotPositive       | 1    | 1    | T    | Positive for non-positive values, negative for positive |
+| FloorIsNotPositive  | 1    | 1    | 0    | Positive for non-positive values, zero for positive |
+| Positive            | 1    | 1    | 1    | Always outputs 1 (positive) |
 
 ## Code Examples
 
@@ -99,166 +133,43 @@ Here are some fundamental binary operations in balanced ternary:
 Here's how to work with ternary numbers in Tring:
 
 ```csharp
-// Creating a trit (ternary digit)
-var positiveOne = new Trit(1);    // Represents 1
-var zero = new Trit(0);           // Represents 0
-var negativeOne = new Trit(-1);   // Represents T (or -1)
+// Creating ternary integers
+Int27T number = 42;
+Int27T negativeNumber = -15;
 
-// Converting from boolean
-var fromTrue = (Trit)true;        // Converts to 1
-var fromFalse = (Trit)false;      // Converts to T
-var fromNull = (Trit)(bool?)null; // Converts to 0
+// Creating and manipulating trit arrays
+TritArray27 array = new TritArray27();
+array[0] = Trit.Positive; // Set the first trit to positive (1)
+array[1] = Trit.Negative; // Set the second trit to negative (T)
+array[2] = false;         // Set the third trit to zero (0)
 
-// Working with larger numbers (20 trits)
-var number = new Int20T(42);      // Decimal 42 in balanced ternary
-var negated = -number;            // Negating is simple!
-var doubled = number + number;     // Arithmetic operations
+// Applying unary operations
+Trit trit = Trit.Positive;
+Trit inverted = trit | Trit.Negate; // Apply unary negate operation
+Trit absolute = trit | Trit.AbsoluteValue; // Get absolute value
+
+// Manipulating ternary integers
+Int27T result = number + negativeNumber; // Addition
+Int27T product = number * 3;            // Multiplication
+Int27T quotient = number / negativeNumber; // Division
 ```
 
-### Logical Operations
+### Advanced Operations
 
 ```csharp
-// Unary operations
-var trit = new Trit(1);
-var inverted = Unary.Invert(trit);           // T
-var absolute = Unary.AbsoluteValue(trit);    // 1
-var incremented = Unary.Increment(trit);     // 1 (saturates at 1)
+// Working with Int27T shifts
+Int27T x = 42;
+Int27T leftShifted = x << 2;  // Shift left by 2 trits
+Int27T rightShifted = x >> 1; // Shift right by 1 trit
 
-// Binary operations
-var a = new Trit(1);
-var b = new Trit(-1);
-var andResult = Binary.And[a, b];           // T
-var orResult = Binary.Or[a, b];            // 1
-var xorResult = Binary.Xor[a, b];          // 1
+// Working with TritArray27 shifts
+TritArray27 array = new TritArray27();
+// Set some initial values
+array[0] = Trit.Positive;
+array[1] = Trit.Negative;
+array[2] = Trit.Zero;
+
+// Shift operations on trit arrays
+TritArray27 leftShiftedArray = array << 2;  // Shift left by 2 positions
+TritArray27 rightShiftedArray = array >> 1; // Shift right by 1 position
 ```
-
-## Performance and Implementation
-
-Tring implements balanced ternary numbers efficiently using standard binary hardware. For example, Int20T uses a 32-bit integer internally to store 20 trits, with careful bit manipulation to perform operations correctly and efficiently.
-
-## Implemented Operations
-
-### Unary Operations
-
-Tring implements all 27 possible unary operations in balanced ternary logic. Some of the most commonly used operations include:
-
-1. **Identity** - Returns the original trit value unchanged
-2. **Invert/Negate** - Flips positive to negative and vice versa (T→1, 0→0, 1→T)
-3. **Absolute Value** - Returns the absolute value of a trit (T→1, 0→0, 1→1)
-4. **Zero** - Always returns zero regardless of input
-5. **Positive/Negative** - Always returns 1 or T respectively
-6. **Increment/Decrement** - Increases or decreases the trit value (with saturation)
-7. **IsPositive/IsNegative/IsZero** - Returns 1 if the condition is true, otherwise T
-
-### Binary Operations
-
-Tring implements key binary operations from the 19,683 possibilities in balanced ternary logic:
-
-1. **AND** - Similar to the minimum function (T,1→T)
-2. **OR** - Similar to the maximum function (T,1→1)
-3. **XOR** - Exclusive OR with interesting balanced properties
-4. **CONSENSUS** - Returns the consensus value if any, otherwise T
-5. **ACCEPT** - Returns first value if second is positive, otherwise T
-6. **Addition** - Balanced ternary addition with proper carry
-7. **Subtraction** - Balanced ternary subtraction
-8. **Multiplication** - Balanced ternary multiplication
-
-## Library Components
-
-### Trit
-
-The fundamental unit of balanced ternary logic is the `Trit`, which can have values of -1 (T), 0, or 1.
-
-```csharp
-// Ways to create Trits
-var positiveOne = new Trit(1);             // Directly from integer
-var zero = Trit.Zero;                      // Using static property
-var negativeOne = Trit.Negative;           // Using static property
-
-// Converting from boolean
-var fromTrue = (Trit)true;                 // Converts to 1
-var fromFalse = (Trit)false;               // Converts to T (negative)
-var fromNull = (Trit)(bool?)null;          // Converts to 0
-```
-
-### IntT Types
-
-Tring provides multiple balanced ternary integer implementations optimized for different sizes:
-
-- **Int3T** - 3-trit integer (-13 to 13)
-- **Int5T** - 5-trit integer (-121 to 121)
-- **Int9T** - 9-trit integer (-9,841 to 9,841)
-- **Int10T** - 10-trit integer (-29,524 to 29,524)
-- **Int20T** - 20-trit integer (approximately -3.5 billion to 3.5 billion)
-- **Int27T** - 27-trit integer (large range suitable for most applications)
-- **Int40T** - 40-trit integer (extremely large range exceeding standard 64-bit integers)
-
-Each IntT type supports full arithmetic operations, bit manipulation, and logical operations:
-
-```csharp
-// Working with ternary integers
-var number = new Int20T(42);            // Decimal 42 in balanced ternary
-var negated = -number;                  // Negation (flips all trits)
-var doubled = number + number;          // Addition
-var halved = number / new Int20T(2);    // Division
-var remainder = number % new Int20T(3); // Modulus
-```
-
-### TritArray27
-
-The `TritArray27` class represents a fixed-size array of 27 trits, optimized for performance using bitwise operations. It provides:
-
-- Individual trit access and manipulation
-- Bulk operations on all trits simultaneously
-- Support for the pipe operator for applying operations
-- Efficient storage using packed bits
-
-```csharp
-// Creating and working with TritArray27
-var array = new TritArray27();
-array.SetTrit(0, Trit.Positive);
-array.SetTrit(1, Trit.Zero);
-
-// Getting individual trits
-var firstTrit = array.GetTrit(0);
-```
-
-## The Pipe Operator
-
-Tring features a powerful pipe operator `|` that enables functional-style operation application. The pipe operator can be used with:
-
-1. **Delegate Functions** - Apply custom operations
-2. **Method References** - Call existing operations
-3. **Arrays** - Use lookup tables for operations
-4. **TritLookupTable** - Efficiently apply predefined operations
-
-### Using the Pipe Operator
-
-```csharp
-// With delegates
-var result1 = trit | (t => Trit.Invert(t));  // Apply unary inversion
-
-// With delegate binary operation
-var result2 = trit1 | ((a, b) => a.Value > 0 ? b : Trit.Zero) | trit2;
-
-// With TritLookupTable (most efficient)
-var andTable = new TritLookupTable(
-    Trit.Negative, Trit.Negative, Trit.Negative,
-    Trit.Negative, Trit.Zero, Trit.Zero,
-    Trit.Negative, Trit.Zero, Trit.Positive
-);
-var result3 = trit1 | andTable | trit2;
-
-// Alternative constructor with bool/null values
-var orTable = new TritLookupTable(
-    false, false, true,  // Row for T (negative)
-    false, null, true,   // Row for 0
-    true, true, true     // Row for 1 (positive)
-);
-var result4 = trit1 | orTable | trit2;
-
-// With TritArray27
-var arrayResult = tritArray | (t => Trit.Invert(t));  // Apply to every trit
-```
-
-The pipe operator creates a more readable and functional approach to applying operations, allowing for elegant chaining of operations and promoting code reusability.
