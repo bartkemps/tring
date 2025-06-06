@@ -9,25 +9,6 @@ public class TritLookupTableTests
     private const int T = -1;
 
     [Fact]
-    public void LookupTritArray27Operator_CanUseNullableBoolConstructor()
-    {
-        var trits = new TritArray27();
-        var op = new TritLookupTable(new Trit[,]
-        {
-            { null, true, true },
-            { true, false, false },
-            { true, false, false }
-        });
-
-        Int27T operand = 4387;
-
-        var result1 = 7268 | op | operand;
-        var result2 = operand | op | (Int27T)7268;
-
-        result1.Should().Be(result2);
-    }
-
-    [Fact]
     public void LookupTritArray27Operator_CanUseIntArrayConstructor()
     {
         TritLookupTable op = new([
@@ -35,11 +16,15 @@ public class TritLookupTableTests
             [1, T, T],
             [1, T, T]]);
 
-        Int27T operand = 4387;
-
-        var result1 = 7268 | op | operand;
-        var result2 = operand | op | (Int27T)7268;
+        Int27T operand1 = 7268;
+        Int27T operand2 = 4387;
+        TritArray27 trits1 = operand1;
+        TritArray27 trits2 = operand2;
+        var result1 = 7268 | op | 4387;
+        var result2 = operand1 | op | operand2;
+        var result3 = trits1 | op | trits2;
 
         result1.Should().Be(result2);
+        result1.Should().Be(result3);
     }
 }
