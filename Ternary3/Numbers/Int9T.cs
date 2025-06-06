@@ -624,6 +624,30 @@ static Int9T IShiftOperators<Int9T, int, Int9T>.operator <<(Int9T value, int shi
 static Int9T IShiftOperators<Int9T, int, Int9T>.operator >> (Int9T value, int shiftAmount) => Create(value.value.Shift(shiftAmount));
 static Int9T IShiftOperators<Int9T, int, Int9T>.operator >>> (Int9T value, int shiftAmount) => Create(value.value.Shift(shiftAmount));
 
+/// <summary>
+/// Applies a unary operation to each trit in this ternary number.
+/// </summary>
+/// <param name="value">The ternary number.</param>
+/// <param name="operation">The unary operation to apply to each trit.</param>
+/// <returns>A TritArray containing the result of applying the operation.</returns>
+public static TritArray9 operator |(Int9T value, Func<Trit, Trit> operation)
+{
+    TritArray9 array = value;
+    return array | operation;
+}
+
+/// <summary>
+/// Combines each trit in this ternary number with the corresponding trit in the provided array.
+/// </summary>
+/// <param name="value">The ternary number.</param>
+/// <param name="trits">The array of trits to combine with.</param>
+/// <returns>A TritArray containing the result of the operation.</returns>
+public static TritArray9 operator |(Int9T value, Trit[] trits)
+{
+    TritArray9 array = value;
+    return array | trits;
+}
+
     #endregion
 
     #region Interface Static Members
