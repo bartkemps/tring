@@ -126,6 +126,31 @@ In ternary logic, there are 3³ = 27 possible unary operations. Here's a complet
 | FloorIsNotPositive  | 1    | 1    | 0    | Positive for non-positive values, zero for positive |
 | Positive            | 1    | 1    | 1    | Always outputs 1 (positive) |
 
+## Ternary Integer and Array Types
+
+This library provides several core types for working with balanced ternary numbers:
+
+### Integer Types
+
+- **Int3T** (commonly named a Trybble)
+- **Int9T**
+- **Int27T** (commonly named a Tryte)
+
+These types are optimized for common arithmetic operations such as addition, multiplication, and trit shifting. They represent signed integers using 3, 9, or 27 trits, respectively. Each type provides efficient implementations for arithmetic and bitwise operations in balanced ternary. They can be cast to their corresponding array types for ternary logic operations.
+
+### Array Types
+
+- **TritArray3**
+- **TritArray9**
+- **TritArray27**
+
+These types represent fixed-size arrays of 3, 9, or 27 trits (ternary digits). They are optimized for ternary logic operations, such as applying unary or binary ternary logic operators across all trits. These types are especially useful for implementing ternary logic circuits or algorithms that require direct manipulation of trit values. They can be implicitly cast to and from their corresponding integer types.
+
+### Relationship and Casting
+
+- The integer types (**Int3T**, **Int9T**, **Int27T**) are optimized for arithmetic and shifting, while the array types (**TritArray3**, **TritArray9**, **TritArray27**) are optimized for ternary logic operations.
+- You can cast an integer type to its array counterpart to perform logic operations, and vice versa. The conversion is implicit, making it easy to switch between arithmetic and logic representations as needed.
+
 ## Code Examples
 
 ### Basic Usage

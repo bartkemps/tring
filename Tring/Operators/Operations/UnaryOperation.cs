@@ -6,6 +6,168 @@ using Numbers;
 internal partial class UnaryOperation
 {
 
+    private static readonly Func<Byte, Byte, BytePair>[] operationsByte =
+    [
+        Negative, Decrement, IsPositive,
+        NegateAbsoluteValue, Ceil, Identity,
+        IsZero, KeepNegative, IsNotNegative,
+        CeilIsNegative, CeilIsNotZero, KeepPositive,
+        CeilIsNotPositive, Zero, Floor,
+        CyclicIncrement, FloorIsZero, Increment,
+        IsNegative, CyclicDecrement, IsNotZero,
+        Negate, FloorIsNegative, AbsoluteValue,
+        IsNotPositive, FloorIsNotPositive, Positive
+    ];
+
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    internal static BytePair Apply(Byte negative, Byte positive, Func<Byte, Byte, BytePair> operation) => operation(negative, positive);
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static BytePair Negative(Byte negative, Byte positive) => new (255, 0);
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static BytePair Decrement(Byte negative, Byte positive) => new ((Byte)(negative | ~positive), 0);
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static BytePair IsPositive(Byte negative, Byte positive) => new ((Byte)(negative | ~positive), positive);
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static BytePair NegateAbsoluteValue(Byte negative, Byte positive) => new ((Byte)(negative | positive), 0);
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static BytePair Ceil(Byte negative, Byte positive) => new (negative, 0);
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static BytePair Identity(Byte negative, Byte positive) => new (negative, positive);
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static BytePair IsZero(Byte negative, Byte positive) => new ((Byte)(negative | positive), (Byte)(~negative & ~positive));
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static BytePair KeepNegative(Byte negative, Byte positive) => new (negative, (Byte)(~negative & ~positive));
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static BytePair IsNotNegative(Byte negative, Byte positive) => new (negative, (Byte)~negative);
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static BytePair CeilIsNegative(Byte negative, Byte positive) => new ((Byte)~negative, 0);
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static BytePair CeilIsNotZero(Byte negative, Byte positive) => new ((Byte)(~positive & ~negative), 0);
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static BytePair KeepPositive(Byte negative, Byte positive) => new ((Byte)(~positive & ~negative), positive);
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static BytePair CeilIsNotPositive(Byte negative, Byte positive) => new (positive, 0);
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static BytePair Zero(Byte negative, Byte positive) => new (0, 0);
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static BytePair Floor(Byte negative, Byte positive) => new (0, (Byte)(positive & ~negative));
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static BytePair CyclicIncrement(Byte negative, Byte positive) => new (positive, (Byte)(~negative & ~positive));
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static BytePair FloorIsZero(Byte negative, Byte positive) => new (0, (Byte)(~positive & ~negative));
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static BytePair Increment(Byte negative, Byte positive) => new (0, (Byte)(positive | ~negative));
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static BytePair IsNegative(Byte negative, Byte positive) => new ((Byte)~negative, negative);
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static BytePair CyclicDecrement(Byte negative, Byte positive) => new ((Byte)(~positive & ~negative), negative);
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static BytePair IsNotZero(Byte negative, Byte positive) => new ((Byte)(~negative & ~positive), (Byte)(negative | positive));
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static BytePair Negate(Byte negative, Byte positive) => new (positive, negative);
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static BytePair FloorIsNegative(Byte negative, Byte positive) => new (0, negative);
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static BytePair AbsoluteValue(Byte negative, Byte positive) => new (0, (Byte)(positive | negative));
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static BytePair IsNotPositive(Byte negative, Byte positive) => new (positive, (Byte)~positive);
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static BytePair FloorIsNotPositive(Byte negative, Byte positive) => new (0, (Byte)~positive);
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static BytePair Positive(Byte negative, Byte positive) => new (0, 255);
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    internal static BytePair Apply(Byte negative, Byte positive, Func<Trit, Trit> operation)
+    {
+        return operationsByte[13 + operation(Trit.Positive).Value + 3 * operation(Trit.Zero).Value + 9 * operation(Trit.Negative).Value](negative, positive);
+    }
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    internal static BytePair Apply(Byte negative, Byte positive, Trit[] table)
+    {
+        if (table.Length != 3) throw new ArgumentException("Table must have exactly 3 elements.", nameof(table));
+        return operationsByte[13 + table[2].Value + 3 * table[1].Value + 9 * table[0].Value](negative, positive);
+    }
+
+    private static readonly Func<UInt16, UInt16, UInt16Pair>[] operations16 =
+    [
+        Negative, Decrement, IsPositive,
+        NegateAbsoluteValue, Ceil, Identity,
+        IsZero, KeepNegative, IsNotNegative,
+        CeilIsNegative, CeilIsNotZero, KeepPositive,
+        CeilIsNotPositive, Zero, Floor,
+        CyclicIncrement, FloorIsZero, Increment,
+        IsNegative, CyclicDecrement, IsNotZero,
+        Negate, FloorIsNegative, AbsoluteValue,
+        IsNotPositive, FloorIsNotPositive, Positive
+    ];
+
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    internal static UInt16Pair Apply(UInt16 negative, UInt16 positive, Func<UInt16, UInt16, UInt16Pair> operation) => operation(negative, positive);
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static UInt16Pair Negative(UInt16 negative, UInt16 positive) => new (65535, 0);
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static UInt16Pair Decrement(UInt16 negative, UInt16 positive) => new ((UInt16)(negative | ~positive), 0);
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static UInt16Pair IsPositive(UInt16 negative, UInt16 positive) => new ((UInt16)(negative | ~positive), positive);
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static UInt16Pair NegateAbsoluteValue(UInt16 negative, UInt16 positive) => new ((UInt16)(negative | positive), 0);
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static UInt16Pair Ceil(UInt16 negative, UInt16 positive) => new (negative, 0);
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static UInt16Pair Identity(UInt16 negative, UInt16 positive) => new (negative, positive);
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static UInt16Pair IsZero(UInt16 negative, UInt16 positive) => new ((UInt16)(negative | positive), (UInt16)(~negative & ~positive));
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static UInt16Pair KeepNegative(UInt16 negative, UInt16 positive) => new (negative, (UInt16)(~negative & ~positive));
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static UInt16Pair IsNotNegative(UInt16 negative, UInt16 positive) => new (negative, (UInt16)~negative);
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static UInt16Pair CeilIsNegative(UInt16 negative, UInt16 positive) => new ((UInt16)~negative, 0);
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static UInt16Pair CeilIsNotZero(UInt16 negative, UInt16 positive) => new ((UInt16)(~positive & ~negative), 0);
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static UInt16Pair KeepPositive(UInt16 negative, UInt16 positive) => new ((UInt16)(~positive & ~negative), positive);
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static UInt16Pair CeilIsNotPositive(UInt16 negative, UInt16 positive) => new (positive, 0);
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static UInt16Pair Zero(UInt16 negative, UInt16 positive) => new (0, 0);
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static UInt16Pair Floor(UInt16 negative, UInt16 positive) => new (0, (UInt16)(positive & ~negative));
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static UInt16Pair CyclicIncrement(UInt16 negative, UInt16 positive) => new (positive, (UInt16)(~negative & ~positive));
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static UInt16Pair FloorIsZero(UInt16 negative, UInt16 positive) => new (0, (UInt16)(~positive & ~negative));
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static UInt16Pair Increment(UInt16 negative, UInt16 positive) => new (0, (UInt16)(positive | ~negative));
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static UInt16Pair IsNegative(UInt16 negative, UInt16 positive) => new ((UInt16)~negative, negative);
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static UInt16Pair CyclicDecrement(UInt16 negative, UInt16 positive) => new ((UInt16)(~positive & ~negative), negative);
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static UInt16Pair IsNotZero(UInt16 negative, UInt16 positive) => new ((UInt16)(~negative & ~positive), (UInt16)(negative | positive));
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static UInt16Pair Negate(UInt16 negative, UInt16 positive) => new (positive, negative);
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static UInt16Pair FloorIsNegative(UInt16 negative, UInt16 positive) => new (0, negative);
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static UInt16Pair AbsoluteValue(UInt16 negative, UInt16 positive) => new (0, (UInt16)(positive | negative));
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static UInt16Pair IsNotPositive(UInt16 negative, UInt16 positive) => new (positive, (UInt16)~positive);
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static UInt16Pair FloorIsNotPositive(UInt16 negative, UInt16 positive) => new (0, (UInt16)~positive);
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    private static UInt16Pair Positive(UInt16 negative, UInt16 positive) => new (0, 65535);
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    internal static UInt16Pair Apply(UInt16 negative, UInt16 positive, Func<Trit, Trit> operation)
+    {
+        return operations16[13 + operation(Trit.Positive).Value + 3 * operation(Trit.Zero).Value + 9 * operation(Trit.Negative).Value](negative, positive);
+    }
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    internal static UInt16Pair Apply(UInt16 negative, UInt16 positive, Trit[] table)
+    {
+        if (table.Length != 3) throw new ArgumentException("Table must have exactly 3 elements.", nameof(table));
+        return operations16[13 + table[2].Value + 3 * table[1].Value + 9 * table[0].Value](negative, positive);
+    }
+
     private static readonly Func<UInt32, UInt32, UInt32Pair>[] operations32 =
     [
         Negative, Decrement, IsPositive,
@@ -22,59 +184,59 @@ internal partial class UnaryOperation
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     internal static UInt32Pair Apply(UInt32 negative, UInt32 positive, Func<UInt32, UInt32, UInt32Pair> operation) => operation(negative, positive);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static UInt32Pair Negative(UInt32 negative, UInt32 positive) => new (UInt32.MaxValue, 0);
+    private static UInt32Pair Negative(UInt32 negative, UInt32 positive) => new (4294967295, 0);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static UInt32Pair Decrement(UInt32 negative, UInt32 positive) => new (negative | ~positive, 0);
+    private static UInt32Pair Decrement(UInt32 negative, UInt32 positive) => new ((UInt32)(negative | ~positive), 0);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static UInt32Pair IsPositive(UInt32 negative, UInt32 positive) => new (negative | ~positive, positive);
+    private static UInt32Pair IsPositive(UInt32 negative, UInt32 positive) => new ((UInt32)(negative | ~positive), positive);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static UInt32Pair NegateAbsoluteValue(UInt32 negative, UInt32 positive) => new (negative | positive, 0);
+    private static UInt32Pair NegateAbsoluteValue(UInt32 negative, UInt32 positive) => new ((UInt32)(negative | positive), 0);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     private static UInt32Pair Ceil(UInt32 negative, UInt32 positive) => new (negative, 0);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     private static UInt32Pair Identity(UInt32 negative, UInt32 positive) => new (negative, positive);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static UInt32Pair IsZero(UInt32 negative, UInt32 positive) => new (negative | positive, ~negative & ~positive);
+    private static UInt32Pair IsZero(UInt32 negative, UInt32 positive) => new ((UInt32)(negative | positive), (UInt32)(~negative & ~positive));
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static UInt32Pair KeepNegative(UInt32 negative, UInt32 positive) => new (negative, ~negative & ~positive);
+    private static UInt32Pair KeepNegative(UInt32 negative, UInt32 positive) => new (negative, (UInt32)(~negative & ~positive));
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static UInt32Pair IsNotNegative(UInt32 negative, UInt32 positive) => new (negative, ~negative);
+    private static UInt32Pair IsNotNegative(UInt32 negative, UInt32 positive) => new (negative, (UInt32)~negative);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static UInt32Pair CeilIsNegative(UInt32 negative, UInt32 positive) => new (~negative, 0);
+    private static UInt32Pair CeilIsNegative(UInt32 negative, UInt32 positive) => new ((UInt32)~negative, 0);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static UInt32Pair CeilIsNotZero(UInt32 negative, UInt32 positive) => new (~positive & ~negative, 0);
+    private static UInt32Pair CeilIsNotZero(UInt32 negative, UInt32 positive) => new ((UInt32)(~positive & ~negative), 0);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static UInt32Pair KeepPositive(UInt32 negative, UInt32 positive) => new (~positive & ~negative, positive);
+    private static UInt32Pair KeepPositive(UInt32 negative, UInt32 positive) => new ((UInt32)(~positive & ~negative), positive);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     private static UInt32Pair CeilIsNotPositive(UInt32 negative, UInt32 positive) => new (positive, 0);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     private static UInt32Pair Zero(UInt32 negative, UInt32 positive) => new (0, 0);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static UInt32Pair Floor(UInt32 negative, UInt32 positive) => new (0, positive & ~negative);
+    private static UInt32Pair Floor(UInt32 negative, UInt32 positive) => new (0, (UInt32)(positive & ~negative));
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static UInt32Pair CyclicIncrement(UInt32 negative, UInt32 positive) => new (positive, ~negative & ~positive);
+    private static UInt32Pair CyclicIncrement(UInt32 negative, UInt32 positive) => new (positive, (UInt32)(~negative & ~positive));
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static UInt32Pair FloorIsZero(UInt32 negative, UInt32 positive) => new (0, ~positive & ~negative);
+    private static UInt32Pair FloorIsZero(UInt32 negative, UInt32 positive) => new (0, (UInt32)(~positive & ~negative));
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static UInt32Pair Increment(UInt32 negative, UInt32 positive) => new (0, positive | ~negative);
+    private static UInt32Pair Increment(UInt32 negative, UInt32 positive) => new (0, (UInt32)(positive | ~negative));
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static UInt32Pair IsNegative(UInt32 negative, UInt32 positive) => new (~negative, negative);
+    private static UInt32Pair IsNegative(UInt32 negative, UInt32 positive) => new ((UInt32)~negative, negative);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static UInt32Pair CyclicDecrement(UInt32 negative, UInt32 positive) => new (~positive & ~negative, negative);
+    private static UInt32Pair CyclicDecrement(UInt32 negative, UInt32 positive) => new ((UInt32)(~positive & ~negative), negative);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static UInt32Pair IsNotZero(UInt32 negative, UInt32 positive) => new (~negative & ~positive, negative | positive);
+    private static UInt32Pair IsNotZero(UInt32 negative, UInt32 positive) => new ((UInt32)(~negative & ~positive), (UInt32)(negative | positive));
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     private static UInt32Pair Negate(UInt32 negative, UInt32 positive) => new (positive, negative);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     private static UInt32Pair FloorIsNegative(UInt32 negative, UInt32 positive) => new (0, negative);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static UInt32Pair AbsoluteValue(UInt32 negative, UInt32 positive) => new (0, positive | negative);
+    private static UInt32Pair AbsoluteValue(UInt32 negative, UInt32 positive) => new (0, (UInt32)(positive | negative));
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static UInt32Pair IsNotPositive(UInt32 negative, UInt32 positive) => new (positive, ~positive);
+    private static UInt32Pair IsNotPositive(UInt32 negative, UInt32 positive) => new (positive, (UInt32)~positive);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static UInt32Pair FloorIsNotPositive(UInt32 negative, UInt32 positive) => new (0, ~positive);
+    private static UInt32Pair FloorIsNotPositive(UInt32 negative, UInt32 positive) => new (0, (UInt32)~positive);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static UInt32Pair Positive(UInt32 negative, UInt32 positive) => new (0, UInt32.MaxValue);
+    private static UInt32Pair Positive(UInt32 negative, UInt32 positive) => new (0, 4294967295);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     internal static UInt32Pair Apply(UInt32 negative, UInt32 positive, Func<Trit, Trit> operation)
     {
@@ -103,59 +265,59 @@ internal partial class UnaryOperation
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     internal static UInt64Pair Apply(UInt64 negative, UInt64 positive, Func<UInt64, UInt64, UInt64Pair> operation) => operation(negative, positive);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static UInt64Pair Negative(UInt64 negative, UInt64 positive) => new (UInt64.MaxValue, 0);
+    private static UInt64Pair Negative(UInt64 negative, UInt64 positive) => new (18446744073709551615, 0);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static UInt64Pair Decrement(UInt64 negative, UInt64 positive) => new (negative | ~positive, 0);
+    private static UInt64Pair Decrement(UInt64 negative, UInt64 positive) => new ((UInt64)(negative | ~positive), 0);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static UInt64Pair IsPositive(UInt64 negative, UInt64 positive) => new (negative | ~positive, positive);
+    private static UInt64Pair IsPositive(UInt64 negative, UInt64 positive) => new ((UInt64)(negative | ~positive), positive);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static UInt64Pair NegateAbsoluteValue(UInt64 negative, UInt64 positive) => new (negative | positive, 0);
+    private static UInt64Pair NegateAbsoluteValue(UInt64 negative, UInt64 positive) => new ((UInt64)(negative | positive), 0);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     private static UInt64Pair Ceil(UInt64 negative, UInt64 positive) => new (negative, 0);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     private static UInt64Pair Identity(UInt64 negative, UInt64 positive) => new (negative, positive);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static UInt64Pair IsZero(UInt64 negative, UInt64 positive) => new (negative | positive, ~negative & ~positive);
+    private static UInt64Pair IsZero(UInt64 negative, UInt64 positive) => new ((UInt64)(negative | positive), (UInt64)(~negative & ~positive));
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static UInt64Pair KeepNegative(UInt64 negative, UInt64 positive) => new (negative, ~negative & ~positive);
+    private static UInt64Pair KeepNegative(UInt64 negative, UInt64 positive) => new (negative, (UInt64)(~negative & ~positive));
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static UInt64Pair IsNotNegative(UInt64 negative, UInt64 positive) => new (negative, ~negative);
+    private static UInt64Pair IsNotNegative(UInt64 negative, UInt64 positive) => new (negative, (UInt64)~negative);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static UInt64Pair CeilIsNegative(UInt64 negative, UInt64 positive) => new (~negative, 0);
+    private static UInt64Pair CeilIsNegative(UInt64 negative, UInt64 positive) => new ((UInt64)~negative, 0);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static UInt64Pair CeilIsNotZero(UInt64 negative, UInt64 positive) => new (~positive & ~negative, 0);
+    private static UInt64Pair CeilIsNotZero(UInt64 negative, UInt64 positive) => new ((UInt64)(~positive & ~negative), 0);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static UInt64Pair KeepPositive(UInt64 negative, UInt64 positive) => new (~positive & ~negative, positive);
+    private static UInt64Pair KeepPositive(UInt64 negative, UInt64 positive) => new ((UInt64)(~positive & ~negative), positive);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     private static UInt64Pair CeilIsNotPositive(UInt64 negative, UInt64 positive) => new (positive, 0);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     private static UInt64Pair Zero(UInt64 negative, UInt64 positive) => new (0, 0);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static UInt64Pair Floor(UInt64 negative, UInt64 positive) => new (0, positive & ~negative);
+    private static UInt64Pair Floor(UInt64 negative, UInt64 positive) => new (0, (UInt64)(positive & ~negative));
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static UInt64Pair CyclicIncrement(UInt64 negative, UInt64 positive) => new (positive, ~negative & ~positive);
+    private static UInt64Pair CyclicIncrement(UInt64 negative, UInt64 positive) => new (positive, (UInt64)(~negative & ~positive));
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static UInt64Pair FloorIsZero(UInt64 negative, UInt64 positive) => new (0, ~positive & ~negative);
+    private static UInt64Pair FloorIsZero(UInt64 negative, UInt64 positive) => new (0, (UInt64)(~positive & ~negative));
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static UInt64Pair Increment(UInt64 negative, UInt64 positive) => new (0, positive | ~negative);
+    private static UInt64Pair Increment(UInt64 negative, UInt64 positive) => new (0, (UInt64)(positive | ~negative));
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static UInt64Pair IsNegative(UInt64 negative, UInt64 positive) => new (~negative, negative);
+    private static UInt64Pair IsNegative(UInt64 negative, UInt64 positive) => new ((UInt64)~negative, negative);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static UInt64Pair CyclicDecrement(UInt64 negative, UInt64 positive) => new (~positive & ~negative, negative);
+    private static UInt64Pair CyclicDecrement(UInt64 negative, UInt64 positive) => new ((UInt64)(~positive & ~negative), negative);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static UInt64Pair IsNotZero(UInt64 negative, UInt64 positive) => new (~negative & ~positive, negative | positive);
+    private static UInt64Pair IsNotZero(UInt64 negative, UInt64 positive) => new ((UInt64)(~negative & ~positive), (UInt64)(negative | positive));
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     private static UInt64Pair Negate(UInt64 negative, UInt64 positive) => new (positive, negative);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     private static UInt64Pair FloorIsNegative(UInt64 negative, UInt64 positive) => new (0, negative);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static UInt64Pair AbsoluteValue(UInt64 negative, UInt64 positive) => new (0, positive | negative);
+    private static UInt64Pair AbsoluteValue(UInt64 negative, UInt64 positive) => new (0, (UInt64)(positive | negative));
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static UInt64Pair IsNotPositive(UInt64 negative, UInt64 positive) => new (positive, ~positive);
+    private static UInt64Pair IsNotPositive(UInt64 negative, UInt64 positive) => new (positive, (UInt64)~positive);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static UInt64Pair FloorIsNotPositive(UInt64 negative, UInt64 positive) => new (0, ~positive);
+    private static UInt64Pair FloorIsNotPositive(UInt64 negative, UInt64 positive) => new (0, (UInt64)~positive);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static UInt64Pair Positive(UInt64 negative, UInt64 positive) => new (0, UInt64.MaxValue);
+    private static UInt64Pair Positive(UInt64 negative, UInt64 positive) => new (0, 18446744073709551615);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     internal static UInt64Pair Apply(UInt64 negative, UInt64 positive, Func<Trit, Trit> operation)
     {

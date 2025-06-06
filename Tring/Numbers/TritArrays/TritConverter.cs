@@ -11,6 +11,10 @@ internal static class TritConverter
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Trit GetTrit(byte negative, byte positive, int index)
         => new((int)((positive >> index) & 1) - (int)((negative >> index) & 1));
+    
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static Trit GetTrit(ushort negative, ushort positive, int index)
+        => new((int)((positive >> index) & 1) - (int)((negative >> index) & 1));
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Trit GetTrit(uint negative, uint positive, int index)
@@ -20,6 +24,47 @@ internal static class TritConverter
     public static Trit GetTrit(ulong negative, ulong positive, int index)
         => new((int)((positive >> index) & 1) - (int)((negative >> index) & 1));
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static void SetTrit(ref byte negative, ref byte positive, int index, Trit value)
+    {
+        var mask = 1 << index;
+        switch (value.Value)
+        {
+            case 1:
+                positive |= (byte)mask;
+                negative &= (byte)~mask;
+                break;
+            case -1:
+                positive &= (byte)~mask;
+                negative |=(byte)mask;
+                break;
+            default: // case 0
+                positive &= (byte)~mask;
+                negative &= (byte)~mask;
+                break;
+        }
+    }
+    
+    public static void SetTrit(ref ushort negative, ref ushort positive, int index, Trit value)
+    {
+        var mask = 1 << index;
+        switch (value.Value)
+        {
+            case 1:
+                positive |= (ushort)mask;
+                negative &= (ushort)~mask;
+                break;
+            case -1:
+                positive &= (ushort)~mask;
+                negative |=(ushort)mask;
+                break;
+            default: // case 0
+                positive &= (ushort)~mask;
+                negative &= (ushort)~mask;
+                break;
+        }
+    }
+    
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void SetTrit(ref uint negative, ref uint positive, int index, Trit value)
     {

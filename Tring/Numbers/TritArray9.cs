@@ -7,24 +7,24 @@ using TritArray;
 using TritArrays;
 
 /// <summary>
-/// Represents a fixed-size array of 27 trits (ternary digits).
+/// Represents a fixed-size array of 9 trits (ternary digits).
 /// </summary>
 [DebuggerDisplay("{DebugView()}")]
-public struct TritArray27 : ITritArray
+public struct TritArray9 : ITritArray
 {
-    private const UInt32 BitMask = 0b111111111111111111111111111;
-    private const int NumberOfTrits = 27;
-    internal UInt32 Positive;
-    internal UInt32 Negative;
+    private const UInt16 BitMask = 0b111111111;
+    private const int NumberOfTrits = 9;
+    internal UInt16 Positive;
+    internal UInt16 Negative;
 
     /// <summary>
-    /// Initializes a new instance of the TritArray27 struct with all trits set to zero.
+    /// Initializes a new instance of the TritArray9 struct with all trits set to zero.
     /// </summary>
-    public TritArray27()
+    public TritArray9()
     {
     }
 
-    private TritArray27(UInt32Pair trits)
+    private TritArray9(UInt16Pair trits)
     {
         Negative = trits.Negative;
         Positive = trits.Positive;
@@ -33,9 +33,9 @@ public struct TritArray27 : ITritArray
     /// <summary>
     /// Gets or sets the trit at the specified index.
     /// </summary>
-    /// <param name="index">The zero-based index of the trit to get or set (must be between 0 and 26).</param>
+    /// <param name="index">The zero-based index of the trit to get or set (must be between 0 and 8).</param>
     /// <returns>The trit at the specified index.</returns>
-    /// <exception cref="ArgumentOutOfRangeException">Thrown when index is less than 0 or greater than 26.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">Thrown when index is less than 0 or greater than 8.</exception>
     public Trit this[int index]
     {
         get => index is >= 0 and < NumberOfTrits 
@@ -52,7 +52,7 @@ public struct TritArray27 : ITritArray
     }
 
     /// <summary>
-    /// Gets the length of the trit array, which is always 27.
+    /// Gets the length of the trit array, which is always 9.
     /// </summary>
     public int Length => NumberOfTrits;
 
@@ -61,8 +61,8 @@ public struct TritArray27 : ITritArray
     /// </summary>
     /// <param name="array">The source array.</param>
     /// <param name="operation">The unary operation to apply to each trit.</param>
-    /// <returns>A new TritArray27 with the operation applied to each trit.</returns>
-    public static TritArray27 operator |(TritArray27 array, Func<Trit, Trit> operation)
+    /// <returns>A new TritArray9 with the operation applied to each trit.</returns>
+    public static TritArray9 operator |(TritArray9 array, Func<Trit, Trit> operation)
         => new(UnaryOperation.Apply(array.Negative, array.Positive, operation));
 
     /// <summary>
@@ -70,8 +70,8 @@ public struct TritArray27 : ITritArray
     /// </summary>
     /// <param name="array">The source array.</param>
     /// <param name="table">The lookup table containing the transformation values.</param>
-    /// <returns>A new TritArray27 with the lookup operation applied to each trit.</returns>
-    public static TritArray27 operator |(TritArray27 array, Trit[] table)
+    /// <returns>A new TritArray9 with the lookup operation applied to each trit.</returns>
+    public static TritArray9 operator |(TritArray9 array, Trit[] table)
         => new(UnaryOperation.Apply(array.Negative, array.Positive, table));
 
     /// <summary>
@@ -79,15 +79,15 @@ public struct TritArray27 : ITritArray
     /// </summary>
     /// <param name="array">The source array.</param>
     /// <param name="operation">The binary operation to be applied.</param>
-    /// <returns>A LookupTritArray27Operator that can be used to apply the operation with another array.</returns>
-    public static LookupTritArray27Operator operator |(TritArray27 array, Func<Trit, Trit, Trit> operation)
-        => new LookupTritArray27Operator(array, operation);
+    /// <returns>A LookupTritArray9Operator that can be used to apply the operation with another array.</returns>
+    public static LookupTritArray9Operator operator |(TritArray9 array, Func<Trit, Trit, Trit> operation)
+        => new LookupTritArray9Operator(array, operation);
 
-    public static LookupTritArray27Operator operator |(TritArray27 array, TritLookupTable table)
-        => new LookupTritArray27Operator(array, table);
+    public static LookupTritArray9Operator operator |(TritArray9 array, TritLookupTable table)
+        => new LookupTritArray9Operator(array, table);
 
-    public static LookupTritArray27Operator operator |(TritArray27 array, Trit[,] table)
-        => new LookupTritArray27Operator(array, table);
+    public static LookupTritArray9Operator operator |(TritArray9 array, Trit[,] table)
+        => new LookupTritArray9Operator(array, table);
 
 
     /// <summary>
@@ -95,14 +95,14 @@ public struct TritArray27 : ITritArray
     /// </summary>
     /// <param name="array">The source array.</param>
     /// <param name="shift">The number of positions to shift.</param>
-    /// <returns>A new TritArray27 with the bits shifted to the left.</returns>
-    public static TritArray27 operator <<(TritArray27 array, int shift)
+    /// <returns>A new TritArray9 with the bits shifted to the left.</returns>
+    public static TritArray9 operator <<(TritArray9 array, int shift)
     {
         return shift switch
         {
             >= NumberOfTrits => new(),
             < 0 => array >> -shift,
-            _ => new() { Positive = (UInt32)((array.Positive << shift) & BitMask), Negative = (UInt32)((array.Negative << shift) & BitMask) }
+            _ => new() { Positive = (UInt16)((array.Positive << shift) & BitMask), Negative = (UInt16)((array.Negative << shift) & BitMask) }
         };
     }
 
@@ -111,59 +111,59 @@ public struct TritArray27 : ITritArray
     /// </summary>
     /// <param name="array">The source array.</param>
     /// <param name="shift">The number of positions to shift.</param>
-    /// <returns>A new TritArray27 with the bits shifted to the right.</returns>
-    public static TritArray27 operator >> (TritArray27 array, int shift)
+    /// <returns>A new TritArray9 with the bits shifted to the right.</returns>
+    public static TritArray9 operator >> (TritArray9 array, int shift)
     {
         return shift switch
         {
             >= NumberOfTrits => new(),
             < 0 => array << -shift,
-            _ => new() { Positive = (UInt32)(array.Positive >> shift), Negative = (UInt32)(array.Negative >> shift) }
+            _ => new() { Positive = (UInt16)(array.Positive >> shift), Negative = (UInt16)(array.Negative >> shift) }
         };
     }
 
     /// <summary>
-    /// Adds two TritArray27 values together.
+    /// Adds two TritArray9 values together.
     /// </summary>
     /// <param name="value1">The first value to add.</param>
     /// <param name="value2">The second value to add.</param>
-    /// <returns>A new TritArray27 representing the sum of the two values.</returns>
-    public static TritArray27 operator +(TritArray27 value1, TritArray27 value2)
+    /// <returns>A new TritArray9 representing the sum of the two values.</returns>
+    public static TritArray9 operator +(TritArray9 value1, TritArray9 value2)
     {
         Calculator.AddBalancedTernary(value1.Negative, value1.Positive, value2.Negative, value2.Positive, out var negative, out var positive);
-        return new() { Negative = (UInt32)negative, Positive = (UInt32)positive };
+        return new() { Negative = (UInt16)negative, Positive = (UInt16)positive };
     }
 
     /// <summary>
-    /// Subtracts one TritArray27 value from another.
+    /// Subtracts one TritArray9 value from another.
     /// </summary>
     /// <param name="value1">The value to subtract from.</param>
     /// <param name="value2">The value to subtract.</param>
-    /// <returns>A new TritArray27 representing the difference between the two values.</returns>
-    public static TritArray27 operator -(TritArray27 value1, TritArray27 value2)
+    /// <returns>A new TritArray9 representing the difference between the two values.</returns>
+    public static TritArray9 operator -(TritArray9 value1, TritArray9 value2)
     {
         Calculator.AddBalancedTernary(value1.Negative, value1.Positive, value2.Positive, value2.Negative, out var negative, out var positive);
-        return new() { Negative = (UInt32)negative, Positive = (UInt32)positive };
+        return new() { Negative = (UInt16)negative, Positive = (UInt16)positive };
     }
 
     /// <summary>
-    /// Defines an implicit conversion of an Int27T to a TritArray27.
+    /// Defines an implicit conversion of an Int9T to a TritArray9.
     /// </summary>
-    /// <param name="value">The Int27T value to convert.</param>
-    /// <returns>A TritArray27 representing the same value.</returns>
-    public static implicit operator TritArray27(Int27T value)
+    /// <param name="value">The Int9T value to convert.</param>
+    /// <returns>A TritArray9 representing the same value.</returns>
+    public static implicit operator TritArray9(Int9T value)
     {
         // Cast to long to get the numeric value instead of trying to access a non-existent Value property
         TritConverter.ConvertTo32Trits(value, out var negative, out var positive);
-        return new() { Negative = (UInt32)negative, Positive = (UInt32)positive };
+        return new() { Negative = (UInt16)negative, Positive = (UInt16)positive };
     }
 
     /// <summary>
-    /// Defines an implicit conversion of a TritArray27 to an Int27T.
+    /// Defines an implicit conversion of a TritArray9 to an Int9T.
     /// </summary>
-    /// <param name="array">The TritArray27 to convert.</param>
-    /// <returns>An Int27T representing the same value.</returns>
-    public static implicit operator Int27T(TritArray27 array) => (Int64)TritConverter.TritsToInt64(array.Negative, array.Positive);
+    /// <param name="array">The TritArray9 to convert.</param>
+    /// <returns>An Int9T representing the same value.</returns>
+    public static implicit operator Int9T(TritArray9 array) => (Int16)TritConverter.TritsToInt32(array.Negative, array.Positive);
 
     internal string DebugView() => ToString();
 

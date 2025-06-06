@@ -9,8 +9,10 @@ internal partial class UnaryOperation
 {
 <#
 var types = new[] {
-    new { BitsType = "UInt32", BitsTypeMaxValue = "UInt32.MaxValue" },
-    new { BitsType = "UInt64", BitsTypeMaxValue = "UInt64.MaxValue" }
+    new { BitsType = "Byte", BitsTypeMaxValue = byte.MaxValue.ToString() },
+    new { BitsType = "UInt16", BitsTypeMaxValue = ushort.MaxValue.ToString() },
+    new { BitsType = "UInt32", BitsTypeMaxValue = uint.MaxValue.ToString() },
+    new { BitsType = "UInt64", BitsTypeMaxValue = ulong.MaxValue.ToString() }
 };
 foreach (var t in types) {
 #>
@@ -33,55 +35,55 @@ foreach (var t in types) {
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     private static <#= t.BitsType #>Pair Negative(<#= t.BitsType #> negative, <#= t.BitsType #> positive) => new (<#= t.BitsTypeMaxValue #>, 0);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static <#= t.BitsType #>Pair Decrement(<#= t.BitsType #> negative, <#= t.BitsType #> positive) => new (negative | ~positive, 0);
+    private static <#= t.BitsType #>Pair Decrement(<#= t.BitsType #> negative, <#= t.BitsType #> positive) => new ((<#= t.BitsType #>)(negative | ~positive), 0);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static <#= t.BitsType #>Pair IsPositive(<#= t.BitsType #> negative, <#= t.BitsType #> positive) => new (negative | ~positive, positive);
+    private static <#= t.BitsType #>Pair IsPositive(<#= t.BitsType #> negative, <#= t.BitsType #> positive) => new ((<#= t.BitsType #>)(negative | ~positive), positive);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static <#= t.BitsType #>Pair NegateAbsoluteValue(<#= t.BitsType #> negative, <#= t.BitsType #> positive) => new (negative | positive, 0);
+    private static <#= t.BitsType #>Pair NegateAbsoluteValue(<#= t.BitsType #> negative, <#= t.BitsType #> positive) => new ((<#= t.BitsType #>)(negative | positive), 0);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     private static <#= t.BitsType #>Pair Ceil(<#= t.BitsType #> negative, <#= t.BitsType #> positive) => new (negative, 0);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     private static <#= t.BitsType #>Pair Identity(<#= t.BitsType #> negative, <#= t.BitsType #> positive) => new (negative, positive);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static <#= t.BitsType #>Pair IsZero(<#= t.BitsType #> negative, <#= t.BitsType #> positive) => new (negative | positive, ~negative & ~positive);
+    private static <#= t.BitsType #>Pair IsZero(<#= t.BitsType #> negative, <#= t.BitsType #> positive) => new ((<#= t.BitsType #>)(negative | positive), (<#= t.BitsType #>)(~negative & ~positive));
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static <#= t.BitsType #>Pair KeepNegative(<#= t.BitsType #> negative, <#= t.BitsType #> positive) => new (negative, ~negative & ~positive);
+    private static <#= t.BitsType #>Pair KeepNegative(<#= t.BitsType #> negative, <#= t.BitsType #> positive) => new (negative, (<#= t.BitsType #>)(~negative & ~positive));
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static <#= t.BitsType #>Pair IsNotNegative(<#= t.BitsType #> negative, <#= t.BitsType #> positive) => new (negative, ~negative);
+    private static <#= t.BitsType #>Pair IsNotNegative(<#= t.BitsType #> negative, <#= t.BitsType #> positive) => new (negative, (<#= t.BitsType #>)~negative);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static <#= t.BitsType #>Pair CeilIsNegative(<#= t.BitsType #> negative, <#= t.BitsType #> positive) => new (~negative, 0);
+    private static <#= t.BitsType #>Pair CeilIsNegative(<#= t.BitsType #> negative, <#= t.BitsType #> positive) => new ((<#= t.BitsType #>)~negative, 0);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static <#= t.BitsType #>Pair CeilIsNotZero(<#= t.BitsType #> negative, <#= t.BitsType #> positive) => new (~positive & ~negative, 0);
+    private static <#= t.BitsType #>Pair CeilIsNotZero(<#= t.BitsType #> negative, <#= t.BitsType #> positive) => new ((<#= t.BitsType #>)(~positive & ~negative), 0);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static <#= t.BitsType #>Pair KeepPositive(<#= t.BitsType #> negative, <#= t.BitsType #> positive) => new (~positive & ~negative, positive);
+    private static <#= t.BitsType #>Pair KeepPositive(<#= t.BitsType #> negative, <#= t.BitsType #> positive) => new ((<#= t.BitsType #>)(~positive & ~negative), positive);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     private static <#= t.BitsType #>Pair CeilIsNotPositive(<#= t.BitsType #> negative, <#= t.BitsType #> positive) => new (positive, 0);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     private static <#= t.BitsType #>Pair Zero(<#= t.BitsType #> negative, <#= t.BitsType #> positive) => new (0, 0);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static <#= t.BitsType #>Pair Floor(<#= t.BitsType #> negative, <#= t.BitsType #> positive) => new (0, positive & ~negative);
+    private static <#= t.BitsType #>Pair Floor(<#= t.BitsType #> negative, <#= t.BitsType #> positive) => new (0, (<#= t.BitsType #>)(positive & ~negative));
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static <#= t.BitsType #>Pair CyclicIncrement(<#= t.BitsType #> negative, <#= t.BitsType #> positive) => new (positive, ~negative & ~positive);
+    private static <#= t.BitsType #>Pair CyclicIncrement(<#= t.BitsType #> negative, <#= t.BitsType #> positive) => new (positive, (<#= t.BitsType #>)(~negative & ~positive));
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static <#= t.BitsType #>Pair FloorIsZero(<#= t.BitsType #> negative, <#= t.BitsType #> positive) => new (0, ~positive & ~negative);
+    private static <#= t.BitsType #>Pair FloorIsZero(<#= t.BitsType #> negative, <#= t.BitsType #> positive) => new (0, (<#= t.BitsType #>)(~positive & ~negative));
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static <#= t.BitsType #>Pair Increment(<#= t.BitsType #> negative, <#= t.BitsType #> positive) => new (0, positive | ~negative);
+    private static <#= t.BitsType #>Pair Increment(<#= t.BitsType #> negative, <#= t.BitsType #> positive) => new (0, (<#= t.BitsType #>)(positive | ~negative));
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static <#= t.BitsType #>Pair IsNegative(<#= t.BitsType #> negative, <#= t.BitsType #> positive) => new (~negative, negative);
+    private static <#= t.BitsType #>Pair IsNegative(<#= t.BitsType #> negative, <#= t.BitsType #> positive) => new ((<#= t.BitsType #>)~negative, negative);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static <#= t.BitsType #>Pair CyclicDecrement(<#= t.BitsType #> negative, <#= t.BitsType #> positive) => new (~positive & ~negative, negative);
+    private static <#= t.BitsType #>Pair CyclicDecrement(<#= t.BitsType #> negative, <#= t.BitsType #> positive) => new ((<#= t.BitsType #>)(~positive & ~negative), negative);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static <#= t.BitsType #>Pair IsNotZero(<#= t.BitsType #> negative, <#= t.BitsType #> positive) => new (~negative & ~positive, negative | positive);
+    private static <#= t.BitsType #>Pair IsNotZero(<#= t.BitsType #> negative, <#= t.BitsType #> positive) => new ((<#= t.BitsType #>)(~negative & ~positive), (<#= t.BitsType #>)(negative | positive));
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     private static <#= t.BitsType #>Pair Negate(<#= t.BitsType #> negative, <#= t.BitsType #> positive) => new (positive, negative);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     private static <#= t.BitsType #>Pair FloorIsNegative(<#= t.BitsType #> negative, <#= t.BitsType #> positive) => new (0, negative);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static <#= t.BitsType #>Pair AbsoluteValue(<#= t.BitsType #> negative, <#= t.BitsType #> positive) => new (0, positive | negative);
+    private static <#= t.BitsType #>Pair AbsoluteValue(<#= t.BitsType #> negative, <#= t.BitsType #> positive) => new (0, (<#= t.BitsType #>)(positive | negative));
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static <#= t.BitsType #>Pair IsNotPositive(<#= t.BitsType #> negative, <#= t.BitsType #> positive) => new (positive, ~positive);
+    private static <#= t.BitsType #>Pair IsNotPositive(<#= t.BitsType #> negative, <#= t.BitsType #> positive) => new (positive, (<#= t.BitsType #>)~positive);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-    private static <#= t.BitsType #>Pair FloorIsNotPositive(<#= t.BitsType #> negative, <#= t.BitsType #> positive) => new (0, ~positive);
+    private static <#= t.BitsType #>Pair FloorIsNotPositive(<#= t.BitsType #> negative, <#= t.BitsType #> positive) => new (0, (<#= t.BitsType #>)~positive);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     private static <#= t.BitsType #>Pair Positive(<#= t.BitsType #> negative, <#= t.BitsType #> positive) => new (0, <#= t.BitsTypeMaxValue #>);
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]

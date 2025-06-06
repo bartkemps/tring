@@ -1,8 +1,8 @@
 ﻿namespace Tring.Numbers;
 
-internal readonly struct UInt32Pair(long negative, long positive)
+internal readonly struct UInt32Pair(uint negative, uint positive)
 {
-    private readonly UInt128 packed = ((UInt128)(uint)negative << 64) | (uint)positive;
-    public uint Negative => (uint)(packed >> 64);
+    private readonly ulong packed = ((ulong)negative << 32) | positive;
+    public uint Negative => (uint)(packed >> 32);
     public uint Positive => (uint)packed;
 }
