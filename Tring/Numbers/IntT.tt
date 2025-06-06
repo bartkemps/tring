@@ -876,9 +876,6 @@ internal static class TernaryNumberGenerator
     {
         return $$"""
 
-               static {{name}} ITritwiseOperators<{{name}}, {{name}}, {{name}}>.operator &({{name}} left, {{name}} right) => Create(Operation.And(left.value, right.value));
-               static {{name}} ITritwiseOperators<{{name}}, {{name}}, {{name}}>.operator |({{name}} left, {{name}} right) => Create(Operation.Or(left.value, right.value));
-               static {{name}} ITritwiseOperators<{{name}}, {{name}}, {{name}}>.operator ^({{name}} left, {{name}} right) => Create(Operation.Xor(left.value, right.value));
                static {{name}} IShiftOperators<{{name}}, int, {{name}}>.operator <<({{name}} value, int shiftAmount) => Create(value.value.Shift(-shiftAmount));
                static {{name}} IShiftOperators<{{name}}, int, {{name}}>.operator >> ({{name}} value, int shiftAmount) => Create(value.value.Shift(shiftAmount));
                static {{name}} IShiftOperators<{{name}}, int, {{name}}>.operator >>> ({{name}} value, int shiftAmount) => Create(value.value.Shift(shiftAmount));

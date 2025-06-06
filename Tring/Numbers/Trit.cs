@@ -1,7 +1,6 @@
 ﻿namespace Tring.Numbers;
 
 using Operators;
-using static Operators.Operations.Operation;
 
 /// <summary>
 /// Represents a trinary (three-valued) logical value that can be Negative (-1), Zero (0), or Positive (1).
@@ -182,52 +181,6 @@ public readonly struct Trit: IEquatable<Trit>
     public override int GetHashCode() => Value.GetHashCode();
 
     /// <summary>
-    /// Performs a logical AND operation on two Trit values.
-    /// </summary>
-    /// <returns>A Trit value representing the logical AND operation, where Trit.Positive is treated as true.</returns>
-    public static Trit operator &(Trit left, Trit right) => And(left, right);
-
-    /// <summary>
-    /// Performs a logical AND operation between a Boolean and a Trit value.
-    /// </summary>
-    /// <param name="left">The Boolean operand.</param>
-    /// <param name="right">The Trit operand.</param>
-    /// <returns>A Trit value representing the logical AND operation, where Trit.Positive is treated as true.</returns>
-    public static Trit operator &(bool left, Trit right) => (Trit)left & right;
-
-    /// <summary>
-    /// Performs a logical AND operation between a Trit value and a Boolean.
-    /// </summary>
-    /// <param name="left">The Trit operand.</param>
-    /// <param name="right">The Boolean operand.</param>
-    /// <returns>A Trit value representing the logical AND operation, where Trit.Positive is treated as true.</returns>
-    public static Trit operator &(Trit left, bool right) => left & (Trit)right;
-
-    /// <summary>
-    /// perform a trinary operation (add by trit, no modulo)
-    /// </summary>
-    /// <param name="left">The first Trit operand.</param>
-    /// <param name="right">The second Trit operand.</param>
-    /// <returns>A Trit value representing the logical OR operation, where Trit.Positive is treated as true.</returns>
-    public static Trit operator |(Trit left, Trit right) => Or(left, right);
-
-    /// <summary>
-    /// Performs a logical OR operation between a Boolean and a Trit value.
-    /// </summary>
-    /// <param name="left">The Boolean operand.</param>
-    /// <param name="right">The Trit operand.</param>
-    /// <returns>A Trit value representing the logical OR operation, where Trit.Positive is treated as true.</returns>
-    public static Trit operator |(bool left, Trit right) => (Trit)left | right;
-
-    /// <summary>
-    /// Performs a logical OR operation between a Trit value and a Boolean.
-    /// </summary>
-    /// <param name="left">The Trit operand.</param>
-    /// <param name="right">The Boolean operand.</param>
-    /// <returns>A Trit value representing the logical OR operation, where Trit.Positive is treated as true.</returns>
-    public static Trit operator |(Trit left, bool right) => left | (Trit)right;
-
-    /// <summary>
     /// Creates an UnsafeTritOperator to enable custom operations using the pipe syntax.
     /// </summary>
     /// <param name="left">The left Trit operand that will be stored in the operator.</param>
@@ -290,15 +243,6 @@ public readonly struct Trit: IEquatable<Trit>
     /// <param name="left">The operand</param>
     /// <param name="operation">The operation, represented as a function</param>
     public static Trit operator |(Trit left, Func<Trit, Trit> operation) => operation(left);
-
-    
-    /// <summary>
-    /// perform a trinary oparation (add by trit, modulo)
-    /// </summary>
-    /// <param name="left">The first Trit operand.</param>
-    /// <param name="right">The second Trit operand.</param>
-    /// <returns>A Trit value representing the logical XOR operation.</returns>
-    public static Trit operator ^(Trit left, Trit right) => Xor(left, right);
 
     /// <summary>
     /// Performs a logical XOR operation between a Boolean and a Trit value.

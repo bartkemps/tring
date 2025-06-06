@@ -7,7 +7,6 @@ using Tring.Numbers;
 namespace Tring.Tests.Numbers;
 
 using Operators;
-using static Tring.Operators.Operations.Operation;
 
 public unsafe class TritTests
 {
@@ -190,103 +189,21 @@ public unsafe class TritTests
         (!Trit.Zero).Should().Be(Trit.Zero);
     }
 
-    [Fact]
-    public void LogicalAnd_ShouldFollowTruthTable()
+    private static Trit And(Trit left, Trit right)
     {
-        /* Truth table from Operations.cs:
-           &  | T  0  1
-           ---+--------
-           T  | 1  0  T
-           0  | 0  0  0
-           1  | T  0  1
-
-           Where T is Negative (-1), 0 is Zero, 1 is Positive
-        */
-
-        // Test all combinations based on truth table
-        (Trit.Negative & Trit.Negative).Should().Be(Trit.Positive);
-        (Trit.Negative & Trit.Zero).Should().Be(Trit.Zero);
-        (Trit.Negative & Trit.Positive).Should().Be(Trit.Negative);
-
-        (Trit.Zero & Trit.Negative).Should().Be(Trit.Zero);
-        (Trit.Zero & Trit.Zero).Should().Be(Trit.Zero);
-        (Trit.Zero & Trit.Positive).Should().Be(Trit.Zero);
-
-        (Trit.Positive & Trit.Negative).Should().Be(Trit.Negative);
-        (Trit.Positive & Trit.Zero).Should().Be(Trit.Zero);
-        (Trit.Positive & Trit.Positive).Should().Be(Trit.Positive);
+        return left |global::Tring.Operators.BinaryLookup.And| right;
     }
-
-    [Fact]
-    public void LogicalOr_ShouldFollowTruthTable()
-    {
-        /* Truth table from Operations.cs:
-           |  | T  0  1
-           ---+--------
-           T  | T  T  1
-           0  | T  0  1
-           1  | 0  1  1
-
-           Where T is Negative (-1), 0 is Zero, 1 is Positive
-        */
-
-        // Test all combinations based on truth table
-        (Trit.Negative | Trit.Negative).Should().Be(Trit.Negative);
-        (Trit.Negative | Trit.Zero).Should().Be(Trit.Negative);
-        (Trit.Negative | Trit.Positive).Should().Be(Trit.Zero);
-
-        (Trit.Zero | Trit.Negative).Should().Be(Trit.Negative);
-        (Trit.Zero | Trit.Zero).Should().Be(Trit.Zero);
-        (Trit.Zero | Trit.Positive).Should().Be(Trit.Positive);
-
-        (Trit.Positive | Trit.Negative).Should().Be(Trit.Zero);
-        (Trit.Positive | Trit.Zero).Should().Be(Trit.Positive);
-        (Trit.Positive | Trit.Positive).Should().Be(Trit.Positive);
-    }
-
-    [Fact]
-    public void LogicalXor_ShouldFollowTruthTable()
-    {
-        /* Truth table from Operations.cs:
-           ^  | T  0  1
-           ---+--------
-           T  | 1  T  T
-           0  | T  0  1
-           1  | 0  1  T
-
-           Where T is Negative (-1), 0 is Zero, 1 is Positive
-        */
-
-        // Check if XOR operator is implemented
-        Action xorAction = () => _ = Trit.Positive ^ Trit.Negative;
-
-        // If this doesn't throw, we should test according to the truth table
-        Trit result = Trit.Positive ^ Trit.Negative;
-
-        // Test all combinations based on truth table
-        (Trit.Negative ^ Trit.Negative).Should().Be(Trit.Positive);
-        (Trit.Negative ^ Trit.Zero).Should().Be(Trit.Negative);
-        (Trit.Negative ^ Trit.Positive).Should().Be(Trit.Zero);
-
-        (Trit.Zero ^ Trit.Negative).Should().Be(Trit.Negative);
-        (Trit.Zero ^ Trit.Zero).Should().Be(Trit.Zero);
-        (Trit.Zero ^ Trit.Positive).Should().Be(Trit.Positive);
-
-        (Trit.Positive ^ Trit.Negative).Should().Be(Trit.Zero);
-        (Trit.Positive ^ Trit.Zero).Should().Be(Trit.Positive);
-        (Trit.Positive ^ Trit.Positive).Should().Be(Trit.Negative);
-    }
-
+    
     [Theory]
-    [InlineData(T, T, 1)] // Negative & Negative = Positive
-    [InlineData(T, 0, 0)] // Negative & Zero = Zero
-    [InlineData(T, 1, T)] // Negative & Positive = Negative
-    [InlineData(0, T, 0)] // Zero & Negative = Zero
-    [InlineData(0, 0, 0)] // Zero & Zero = Zero
-    [InlineData(0, 1, 0)] // Zero & Positive = Zero
-    [InlineData(1, T, T)] // Positive & Negative = Negative
-    [InlineData(1, 0, 0)] // Positive & Zero = Zero
-    [InlineData(1, 1, 1)] // Positive & Positive = Positive
+    [InlineData(T, T, T)]
+    [InlineData(T, 0, T)]
+    [InlineData(T, 1, T)]
+    [InlineData(0, T, T)]
+    [InlineData(0, 0, 0)]
+    [InlineData(0, 1, 0)]
+    [InlineData(1, T, T)]
+    [InlineData(1, 0, 0)]
+    [InlineData(1, 1, 1)]
     public void PipeOperator_WithUnsafeMethodReference_ReturnsExpectedTrit(int left, int right, int expected)
     {
         var trit1 = (Trit)left;
@@ -299,15 +216,15 @@ public unsafe class TritTests
     }
 
     [Theory]
-    [InlineData(T, T, 1)] // Negative & Negative = Positive
-    [InlineData(T, 0, 0)] // Negative & Zero = Zero
-    [InlineData(T, 1, T)] // Negative & Positive = Negative
-    [InlineData(0, T, 0)] // Zero & Negative = Zero
-    [InlineData(0, 0, 0)] // Zero & Zero = Zero
-    [InlineData(0, 1, 0)] // Zero & Positive = Zero
-    [InlineData(1, T, T)] // Positive & Negative = Negative
-    [InlineData(1, 0, 0)] // Positive & Zero = Zero
-    [InlineData(1, 1, 1)] // Positive & Positive = Positive
+    [InlineData(T, T, T)]
+    [InlineData(T, 0, T)]
+    [InlineData(T, 1, T)]
+    [InlineData(0, T, T)]
+    [InlineData(0, 0, 0)]
+    [InlineData(0, 1, 0)]
+    [InlineData(1, T, T)]
+    [InlineData(1, 0, 0)]
+    [InlineData(1, 1, 1)]
     public void PipeOperator_WithDelegateCall_ReturnsExpectedTrit(int left, int right, int expected)
     {
         var trit1 = (Trit)left;

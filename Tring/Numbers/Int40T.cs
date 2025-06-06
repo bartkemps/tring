@@ -613,9 +613,6 @@ public static explicit operator Int32(Int40T value) => (Int32)value.value;
     #region Binary Operations
 
     
-static Int40T ITritwiseOperators<Int40T, Int40T, Int40T>.operator &(Int40T left, Int40T right) => Create(Operation.And(left.value, right.value));
-static Int40T ITritwiseOperators<Int40T, Int40T, Int40T>.operator |(Int40T left, Int40T right) => Create(Operation.Or(left.value, right.value));
-static Int40T ITritwiseOperators<Int40T, Int40T, Int40T>.operator ^(Int40T left, Int40T right) => Create(Operation.Xor(left.value, right.value));
 static Int40T IShiftOperators<Int40T, int, Int40T>.operator <<(Int40T value, int shiftAmount) => Create(value.value.Shift(-shiftAmount));
 static Int40T IShiftOperators<Int40T, int, Int40T>.operator >> (Int40T value, int shiftAmount) => Create(value.value.Shift(shiftAmount));
 static Int40T IShiftOperators<Int40T, int, Int40T>.operator >>> (Int40T value, int shiftAmount) => Create(value.value.Shift(shiftAmount));

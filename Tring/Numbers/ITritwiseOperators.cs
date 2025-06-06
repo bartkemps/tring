@@ -6,21 +6,5 @@
 /// <typeparam name="TResult">The type that contains the result of <typeparamref name="TSelf" /> op <typeparamref name="TOther" />.</typeparam>
 public interface ITritwiseOperators<TSelf, TOther, TResult> where TSelf : ITritwiseOperators<TSelf, TOther, TResult>?
 {
-    /// <summary>Computes the tritwise-and of two values.</summary>
-    /// <param name="left">The value to <see langword="and" /> with <paramref name="right" />.</param>
-    /// <param name="right">The value to <see langword="and" /> with <paramref name="left" />.</param>
-    /// <returns>The bitwise-and of <paramref name="left" /> and <paramref name="right" />.</returns>
-    static abstract TResult operator &(TSelf left, TOther right);
 
-    /// <summary>Computes the tritwise-or of two values.</summary>
-    /// <param name="left">The value to <see langword="or" /> with <paramref name="right" />.</param>
-    /// <param name="right">The value to <see langword="or" /> with <paramref name="left" />.</param>
-    /// <returns>The bitwise-or of <paramref name="left" /> and <paramref name="right" />.</returns>
-    static abstract TResult operator |(TSelf left, TOther right);
-
-    /// <summary>Computes the exclusive-or of two values.</summary>
-    /// <param name="left">The value to xor with <paramref name="right" />.</param>
-    /// <param name="right">The value to xor with <paramref name="left" />.</param>
-    /// <returns>The exclusive-or of <paramref name="left" /> and <paramref name="right" />.</returns>
-    static abstract TResult operator ^(TSelf left, TOther right);
 }
