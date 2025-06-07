@@ -3,6 +3,7 @@
 
 namespace Ternary3.Numbers;
 
+using Integers;
 using Operators;
 using Operators.Operations;
 using System.CodeDom.Compiler;

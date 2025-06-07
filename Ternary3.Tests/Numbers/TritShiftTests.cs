@@ -3,6 +3,8 @@ using Ternary3.Numbers;
 
 namespace Ternary3.Tests.Numbers;
 
+using Ternary3.Numbers.Integers;
+
 public class TritShiftTests
 {
     [Theory]
