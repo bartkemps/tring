@@ -38,7 +38,7 @@ internal static class TritShift
     public static int Shift(this int value, int shift)
     {
         if (value == 0 || shift == 0) return value;
-        if ((uint)(shift + 19) > 38) return 0;  /// if shift not between -19 and 19
+        if ((uint)(shift + 19) > 38) return 0;  // if shift not between -19 and 19
         return shift > 0 ? value / Pow3Cache[shift] : (int)((long)value * Pow3Cache[-shift]).BalancedModulo(1743392200);
     }
     
