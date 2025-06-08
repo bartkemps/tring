@@ -2,3 +2,4 @@
 
 UnaryDemo.Run();
 UnaryLookupDemo.Run();
+BinaryLookupDemo.Run();
