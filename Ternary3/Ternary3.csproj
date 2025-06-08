@@ -6,6 +6,9 @@
         <Nullable>enable</Nullable>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         
+        <!-- Make internals visible to test project -->
+        <InternalsVisibleTo>Ternary3.Tests</InternalsVisibleTo>
+        
         <!-- NuGet Package Metadata -->
         <PackageId>Ternary</PackageId>
         <Version>1.0.0-beta</Version>

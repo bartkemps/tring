@@ -29,7 +29,7 @@ public static class UnaryLookupDemo
         
         //TritArray input with TritArray27. Output is also TritArray27, // which can be explicitly converted to long.
         TritArray27 input4 = 123456789;
-        TritArray27 output4 = input4 | Negate;
+        var output4 = input4 | Negate;
         Console.WriteLine($"123456789 Negated = {output4} ({(int)output4})"); // Prints 000000000 T0011TT01 T1T010100 (-123456789)
         
         //Single Trit input
