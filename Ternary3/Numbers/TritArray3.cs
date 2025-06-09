@@ -18,6 +18,21 @@ public struct TritArray3 : ITritArray
     internal Byte Negative;
 
     /// <summary>
+    /// Represents the minimum value that a TritArray3 can have (all trits set to -1).
+    /// </summary>
+    public static readonly TritArray3 MinValue = new(BitMask, 0);
+
+    /// <summary>
+    /// Represents the maximum value that a TritArray3 can have (all trits set to 1).
+    /// </summary>
+    public static readonly TritArray3 MaxValue = new(0, BitMask);
+
+    /// <summary>
+    /// Represents a TritArray3 with all trits set to zero.
+    /// </summary>
+    public static readonly TritArray3 Zero = new();
+
+    /// <summary>
     /// Initializes a new instance of the TritArray3 struct with all trits set to zero.
     /// </summary>
     public TritArray3()
@@ -28,6 +43,17 @@ public struct TritArray3 : ITritArray
     {
         Negative = trits.Negative;
         Positive = trits.Positive;
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the TritArray3 struct with the specified negative and positive bits.
+    /// </summary>
+    /// <param name="negative">The negative bits representing the trits.</param>
+    /// <param name="positive">The positive bits representing the trits.</param>
+    internal TritArray3(Byte negative, Byte positive)
+    {
+        Negative = negative;
+        Positive = positive;
     }
 
     /// <summary>
@@ -100,7 +126,7 @@ public struct TritArray3 : ITritArray
     {
         return shift switch
         {
-            >= NumberOfTrits => new(),
+            >= NumberOfTrits => Zero,
             < 0 => array >> -shift,
             _ => new() { Positive = (Byte)((array.Positive << shift) & BitMask), Negative = (Byte)((array.Negative << shift) & BitMask) }
         };
@@ -116,7 +142,7 @@ public struct TritArray3 : ITritArray
     {
         return shift switch
         {
-            >= NumberOfTrits => new(),
+            >= NumberOfTrits => Zero,
             < 0 => array << -shift,
             _ => new() { Positive = (Byte)(array.Positive >> shift), Negative = (Byte)(array.Negative >> shift) }
         };

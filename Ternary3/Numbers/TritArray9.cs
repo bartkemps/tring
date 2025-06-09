@@ -18,6 +18,21 @@ public struct TritArray9 : ITritArray
     internal UInt16 Negative;
 
     /// <summary>
+    /// Represents the minimum value that a TritArray9 can have (all trits set to -1).
+    /// </summary>
+    public static readonly TritArray9 MinValue = new(BitMask, 0);
+
+    /// <summary>
+    /// Represents the maximum value that a TritArray9 can have (all trits set to 1).
+    /// </summary>
+    public static readonly TritArray9 MaxValue = new(0, BitMask);
+
+    /// <summary>
+    /// Represents a TritArray9 with all trits set to zero.
+    /// </summary>
+    public static readonly TritArray9 Zero = new();
+
+    /// <summary>
     /// Initializes a new instance of the TritArray9 struct with all trits set to zero.
     /// </summary>
     public TritArray9()
@@ -28,6 +43,17 @@ public struct TritArray9 : ITritArray
     {
         Negative = trits.Negative;
         Positive = trits.Positive;
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the TritArray9 struct with the specified negative and positive bits.
+    /// </summary>
+    /// <param name="negative">The negative bits representing the trits.</param>
+    /// <param name="positive">The positive bits representing the trits.</param>
+    internal TritArray9(UInt16 negative, UInt16 positive)
+    {
+        Negative = negative;
+        Positive = positive;
     }
 
     /// <summary>
@@ -100,7 +126,7 @@ public struct TritArray9 : ITritArray
     {
         return shift switch
         {
-            >= NumberOfTrits => new(),
+            >= NumberOfTrits => Zero,
             < 0 => array >> -shift,
             _ => new() { Positive = (UInt16)((array.Positive << shift) & BitMask), Negative = (UInt16)((array.Negative << shift) & BitMask) }
         };
@@ -116,7 +142,7 @@ public struct TritArray9 : ITritArray
     {
         return shift switch
         {
-            >= NumberOfTrits => new(),
+            >= NumberOfTrits => Zero,
             < 0 => array << -shift,
             _ => new() { Positive = (UInt16)(array.Positive >> shift), Negative = (UInt16)(array.Negative >> shift) }
         };

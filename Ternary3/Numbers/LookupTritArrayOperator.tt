@@ -69,14 +69,14 @@ private string GenerateLookupTritArrayOperator(int tritArraySize, string backing
                public static TritArray{{tritArraySize}} operator |(LookupTritArray{{tritArraySize}}Operator left, TritArray{{tritArraySize}} right)
                {
                    left.builder.Build()(left.trits.Negative, left.trits.Positive, right.Negative, right.Positive, out var negative, out var positive);
-                   return new() { Negative = negative, Positive = positive };
+                   return new(negative, positive);
                }
                
                public static TritArray{{tritArraySize}} operator |(LookupTritArray{{tritArraySize}}Operator left, Int{{tritArraySize}}T right)
                {
                    var tritArray = (TritArray{{tritArraySize}})right;
                    left.builder.Build()(left.trits.Negative, left.trits.Positive, tritArray.Negative, tritArray.Positive, out var negative, out var positive);
-                   return new() { Negative = negative, Positive = positive };
+                   return new(negative, positive);
                }
                {{string.Join("\r\n", types.Select(type => PipeToTypeOperator(tritArraySize, backingType, type)))}}
            }
@@ -91,7 +91,7 @@ private string PipeToTypeOperator(int tritArraySize, string backingType, string 
             {
                 TritConverter.ConvertTo32Trits(right, out var rightNegative, out var rightPositive);
                 left.builder.Build()(left.trits.Negative, left.trits.Positive, ({{backingType}})rightNegative, ({{backingType}})rightPositive, out var negative, out var positive);
-                return new() { Negative = negative, Positive = positive };
+                return new(negative, positive);
             }
         """;
 }

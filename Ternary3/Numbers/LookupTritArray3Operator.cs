@@ -34,20 +34,20 @@ public readonly struct LookupTritArray3Operator
     public static TritArray3 operator |(LookupTritArray3Operator left, TritArray3 right)
     {
         left.builder.Build()(left.trits.Negative, left.trits.Positive, right.Negative, right.Positive, out var negative, out var positive);
-        return new() { Negative = negative, Positive = positive };
+        return new(negative, positive);
     }
     
     public static TritArray3 operator |(LookupTritArray3Operator left, Int3T right)
     {
         var tritArray = (TritArray3)right;
         left.builder.Build()(left.trits.Negative, left.trits.Positive, tritArray.Negative, tritArray.Positive, out var negative, out var positive);
-        return new() { Negative = negative, Positive = positive };
+        return new(negative, positive);
     }
        
     public static TritArray3 operator |(LookupTritArray3Operator left, SByte right)
     {
         TritConverter.ConvertTo32Trits(right, out var rightNegative, out var rightPositive);
         left.builder.Build()(left.trits.Negative, left.trits.Positive, (Byte)rightNegative, (Byte)rightPositive, out var negative, out var positive);
-        return new() { Negative = negative, Positive = positive };
+        return new(negative, positive);
     }
 }
