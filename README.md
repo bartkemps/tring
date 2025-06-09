@@ -300,6 +300,131 @@ public static class OverflowDemo
 }
 ```
 
+## Examples
+
+### Basic Arithmetic Operations
+
+```csharp
+using Ternary3.Numbers;
+
+public class BasicArithmeticExample
+{
+    public static void Run()
+    {
+        // Create ternary numbers
+        var a = new Trit(5);  // 1TT in balanced ternary
+        var b = new Trit(7);  // 21T in balanced ternary
+        
+        // Addition
+        Console.WriteLine($"{a} + {b} = {a + b}");
+        
+        // Subtraction
+        Console.WriteLine($"{a} - {b} = {a - b}");
+        
+        // Multiplication
+        Console.WriteLine($"{a} * {b} = {a * b}");
+        
+        // Division
+        Console.WriteLine($"{a} / {b} = {a / b}");
+        
+        // Modulo
+        Console.WriteLine($"{a} % {b} = {a % b}");
+    }
+}
+```
+
+### Logical Operations
+
+```csharp
+using Ternary3.Numbers;
+using static Ternary3.Operators.BinaryLookup;
+
+public class LogicalOperationsExample
+{
+    public static void Run()
+    {
+        var x = new Trit(5);  // 1TT in balanced ternary
+        var y = new Trit(3);  // 10 in balanced ternary
+        
+        // Demonstrate logical AND operation
+        Console.WriteLine($"{x} AND {y} = {x | And | y}");
+        Console.WriteLine($"In decimal: 5 AND 3 = {(x | And | y).ToInt()}");
+        
+        // Demonstrate logical OR operation
+        Console.WriteLine($"{x} OR {y} = {x | Or | y}");
+        Console.WriteLine($"In decimal: 5 OR 3 = {(x | Or | y).ToInt()}");
+        
+        // Demonstrate logical XOR operation
+        Console.WriteLine($"{x} XOR {y} = {x | Xor | y}");
+        Console.WriteLine($"In decimal: 5 XOR 3 = {(x | Xor | y).ToInt()}");
+        
+        // Demonstrate more complex expressions
+        var z = new Trit(8);  // 1T1 in balanced ternary
+        var result = (x | And | y) | Xor | z;
+        Console.WriteLine($"(5 AND 3) XOR 8 = {result}");
+        Console.WriteLine($"In decimal: (5 AND 3) XOR 8 = {result.ToInt()}");
+    }
+}
+```
+
+### Unary Operations
+
+```csharp
+using Ternary3.Numbers;
+using static Ternary3.Operators.Unary;
+
+public class UnaryOperationsExample
+{
+    public static void Run()
+    {
+        var num = new Trit(8);  // 1T1
+        
+        // Floor operation
+        Console.WriteLine($"{num} | Floor = {num | Floor}");
+        
+        // Ceiling operation
+        Console.WriteLine($"{num} | Ceiling = {num | Ceiling}");
+        
+        // Negate operation
+        Console.WriteLine($"{num} | Negate = {num | Negate}");
+        
+        // Increment operation
+        Console.WriteLine($"{num} | Increment = {num | Increment}");
+        
+        // Decrement operation
+        Console.WriteLine($"{num} | Decrement = {num | Decrement}");
+    }
+}
+```
+
+### Conversion Example
+
+```csharp
+using Ternary3.Numbers;
+
+public class ConversionExample
+{
+    public static void Run()
+    {
+        // Convert from decimal to balanced ternary
+        int decimalValue = 42;
+        var ternaryValue = new Trit(decimalValue);
+        Console.WriteLine($"Decimal {decimalValue} in balanced ternary: {ternaryValue}");
+        
+        // Convert from balanced ternary to decimal
+        string ternaryString = "11T0T";
+        var parsedValue = Trit.Parse(ternaryString);
+        Console.WriteLine($"Balanced ternary {ternaryString} in decimal: {parsedValue.ToInt()}");
+        
+        // Convert from binary to balanced ternary
+        string binaryString = "10101";
+        var binaryValue = Convert.ToInt32(binaryString, 2);
+        var ternaryFromBinary = new Trit(binaryValue);
+        Console.WriteLine($"Binary {binaryString} in balanced ternary: {ternaryFromBinary}");
+    }
+}
+```
+
 ## Reference
 
 ### Index
@@ -629,143 +754,6 @@ namespace Ternary3.Numbers
 Represents a ternary integer type that implements various numeric interfaces.
 
 **Where T implements various numeric interfaces like INumber<T>, IAdditionOperators<T,T,T>, etc.**
-
-## Examples
-
-### Basic Arithmetic Operations
-
-```csharp
-using Ternary3.Numbers;
-
-public class BasicArithmeticExample
-{
-    public static void Run()
-    {
-        // Create ternary numbers
-        var a = new Trit(5);  // 1TT in balanced ternary
-        var b = new Trit(7);  // 21T in balanced ternary
-        
-        // Addition
-        Console.WriteLine($"{a} + {b} = {a + b}");
-        
-        // Subtraction
-        Console.WriteLine($"{a} - {b} = {a - b}");
-        
-        // Multiplication
-        Console.WriteLine($"{a} * {b} = {a * b}");
-        
-        // Division
-        Console.WriteLine($"{a} / {b} = {a / b}");
-        
-        // Modulo
-        Console.WriteLine($"{a} % {b} = {a % b}");
-    }
-}
-```
-
-### Logical Operations
-
-```csharp
-using Ternary3.Numbers;
-using static Ternary3.Operators.BinaryLookup;
-
-public class LogicalOperationsExample
-{
-    public static void Run()
-    {
-        var x = new Trit(5);  // 1TT in balanced ternary
-        var y = new Trit(3);  // 10 in balanced ternary
-        
-        // Demonstrate logical AND operation
-        Console.WriteLine($"{x} AND {y} = {x | And | y}");
-        Console.WriteLine($"In decimal: 5 AND 3 = {(x | And | y).ToInt()}");
-        
-        // Demonstrate logical OR operation
-        Console.WriteLine($"{x} OR {y} = {x | Or | y}");
-        Console.WriteLine($"In decimal: 5 OR 3 = {(x | Or | y).ToInt()}");
-        
-        // Demonstrate logical XOR operation
-        Console.WriteLine($"{x} XOR {y} = {x | Xor | y}");
-        Console.WriteLine($"In decimal: 5 XOR 3 = {(x | Xor | y).ToInt()}");
-        
-        // Demonstrate more complex expressions
-        var z = new Trit(8);  // 1T1 in balanced ternary
-        var result = (x | And | y) | Xor | z;
-        Console.WriteLine($"(5 AND 3) XOR 8 = {result}");
-        Console.WriteLine($"In decimal: (5 AND 3) XOR 8 = {result.ToInt()}");
-    }
-}
-```
-
-### Unary Operations
-
-```csharp
-using Ternary3.Numbers;
-using static Ternary3.Operators.Unary;
-
-public class UnaryOperationsExample
-{
-    public static void Run()
-    {
-        var num = new Trit(8);  // 1T1
-        
-        // Floor operation
-        Console.WriteLine($"{num} | Floor = {num | Floor}");
-        
-        // Ceiling operation
-        Console.WriteLine($"{num} | Ceiling = {num | Ceiling}");
-        
-        // Negate operation
-        Console.WriteLine($"{num} | Negate = {num | Negate}");
-        
-        // Increment operation
-        Console.WriteLine($"{num} | Increment = {num | Increment}");
-        
-        // Decrement operation
-        Console.WriteLine($"{num} | Decrement = {num | Decrement}");
-    }
-}
-```
-
-### Conversion Example
-
-```csharp
-using Ternary3.Numbers;
-
-public class ConversionExample
-{
-    public static void Run()
-    {
-        // Convert from decimal to balanced ternary
-        int decimalValue = 42;
-        var ternaryValue = new Trit(decimalValue);
-        Console.WriteLine($"Decimal {decimalValue} in balanced ternary: {ternaryValue}");
-        
-        // Convert from balanced ternary to decimal
-        string ternaryString = "11T0T";
-        var parsedValue = Trit.Parse(ternaryString);
-        Console.WriteLine($"Balanced ternary {ternaryString} in decimal: {parsedValue.ToInt()}");
-        
-        // Convert from binary to balanced ternary
-        string binaryString = "10101";
-        var binaryValue = Convert.ToInt32(binaryString, 2);
-        var ternaryFromBinary = new Trit(binaryValue);
-        Console.WriteLine($"Binary {binaryString} in balanced ternary: {ternaryFromBinary}");
-    }
-}
-```
-
-## Reference
-
-To provide an accurate reference of all public classes, structs, interfaces and their members with proper XML documentation, I would need to examine the actual source code files.
-
-The reference section should include:
-
-1. All public types (classes, structs, interfaces) organized by namespace
-2. The XML documentation comments for each type
-3. All public members of each type with their XML documentation comments
-
-Please provide access to the source code files or a list of public types and members with their documentation to complete this section accurately.
 
 ## Contributing
 

@@ -11,7 +11,7 @@
         
         <!-- NuGet Package Metadata -->
         <PackageId>Ternary</PackageId>
-        <Version>1.0.0-beta</Version>
+        <Version>1.0.0</Version>
         <Authors>Bart Kemps</Authors>
         <Company></Company>
         <Description>A C# library for working with balanced ternary number system. Includes fixed-size ternary integers and trit arrays with various operations.</Description>
@@ -30,7 +30,6 @@
         </AssemblyAttribute>
         
         <!-- Include README in the NuGet package -->
-        <None Include="..\README_old.md" Pack="true" PackagePath="\" />
     </ItemGroup>
     <ItemGroup>
       <None Update="Numbers\IntT.tt">
