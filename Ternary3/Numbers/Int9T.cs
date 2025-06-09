@@ -213,22 +213,138 @@ public static implicit operator Int64(Int9T value) => (Int64)value.value;
 
     #region Arithmetic Operators
     
+    /// <summary>
+    /// Adds two ternary numbers together, maintaining the original numeric type.
+    /// </summary>
+    /// <param name="left">The first ternary number.</param>
+    /// <param name="right">The second ternary number.</param>
+    /// <returns>A new ternary number of the same type containing the sum.</returns>
     public static Int9T operator +(Int9T left, Int9T right) => Create(left.value + right.value);
+
+    /// <summary>
+    /// Subtracts one ternary number from another, maintaining the original numeric type.
+    /// </summary>
+    /// <param name="left">The ternary number to subtract from.</param>
+    /// <param name="right">The ternary number to subtract.</param>
+    /// <returns>A new ternary number of the same type containing the difference.</returns>
     public static Int9T operator -(Int9T left, Int9T right) => Create(left.value - right.value);
+
+    /// <summary>
+    /// Multiplies two ternary numbers together, maintaining the original numeric type.
+    /// </summary>
+    /// <param name="left">The first ternary number.</param>
+    /// <param name="right">The second ternary number.</param>
+    /// <returns>A new ternary number of the same type containing the product.</returns>
     public static Int9T operator *(Int9T left, Int9T right) => Create(left.value * right.value);
+
+    /// <summary>
+    /// Divides one ternary number by another, maintaining the original numeric type.
+    /// </summary>
+    /// <param name="left">The ternary number to divide.</param>
+    /// <param name="right">The ternary number to divide by.</param>
+    /// <returns>A new ternary number of the same type containing the quotient.</returns>
     public static Int9T operator /(Int9T left, Int9T right) => Create(left.value / right.value);
+
+    /// <summary>
+    /// Computes the remainder after dividing one ternary number by another, maintaining the original numeric type.
+    /// </summary>
+    /// <param name="left">The ternary number to divide.</param>
+    /// <param name="right">The ternary number to divide by.</param>
+    /// <returns>A new ternary number of the same type containing the remainder.</returns>
     public static Int9T operator %(Int9T left, Int9T right) => Create(left.value % right.value);
+
+    /// <summary>
+    /// Returns the negation of a ternary number, maintaining the original numeric type.
+    /// </summary>
+    /// <param name="value">The ternary number to negate.</param>
+    /// <returns>A new ternary number of the same type containing the negated value.</returns>
     public static Int9T operator -(Int9T value) => Create(-value.value);
+
+    /// <summary>
+    /// Returns the same ternary number (unary plus operator), maintaining the original numeric type.
+    /// </summary>
+    /// <param name="value">The ternary number.</param>
+    /// <returns>The same ternary number.</returns>
     public static Int9T operator +(Int9T value) => value;
+
+    /// <summary>
+    /// Adds a ternary number and a native numeric value, maintaining the original ternary type.
+    /// </summary>
+    /// <param name="left">The ternary number.</param>
+    /// <param name="right">The native numeric value.</param>
+    /// <returns>A new ternary number of the same type containing the sum.</returns>
     public static Int9T operator +(Int9T left, Int16 right) => Create(left.value + right);
+
+    /// <summary>
+    /// Adds a native numeric value and a ternary number, maintaining the original ternary type.
+    /// </summary>
+    /// <param name="left">The native numeric value.</param>
+    /// <param name="right">The ternary number.</param>
+    /// <returns>A new ternary number containing the sum.</returns>
     public static Int9T operator +(Int16 left, Int9T right) => Create(left + right.value);
+
+    /// <summary>
+    /// Subtracts a native numeric value from a ternary number, maintaining the original ternary type.
+    /// </summary>
+    /// <param name="left">The ternary number.</param>
+    /// <param name="right">The native numeric value to subtract.</param>
+    /// <returns>A new ternary number of the same type containing the difference.</returns>
     public static Int9T operator -(Int9T left, Int16 right) => Create(left.value - right);
+
+    /// <summary>
+    /// Subtracts a ternary number from a native numeric value, maintaining the original ternary type.
+    /// </summary>
+    /// <param name="left">The native numeric value.</param>
+    /// <param name="right">The ternary number to subtract.</param>
+    /// <returns>A new ternary number containing the difference.</returns>
     public static Int9T operator -(Int16 left, Int9T right) => Create(left - right.value);
+
+    /// <summary>
+    /// Multiplies a ternary number by a native numeric value, maintaining the original ternary type.
+    /// </summary>
+    /// <param name="left">The ternary number.</param>
+    /// <param name="right">The native numeric value to multiply by.</param>
+    /// <returns>A new ternary number of the same type containing the product.</returns>
     public static Int9T operator *(Int9T left, Int16 right) => Create(left.value * right);
+
+    /// <summary>
+    /// Multiplies a native numeric value by a ternary number, maintaining the original ternary type.
+    /// </summary>
+    /// <param name="left">The native numeric value.</param>
+    /// <param name="right">The ternary number to multiply by.</param>
+    /// <returns>A new ternary number containing the product.</returns>
     public static Int9T operator *(Int16 left, Int9T right) => Create(left * right.value);
+
+    /// <summary>
+    /// Divides a ternary number by a native numeric value, maintaining the original ternary type.
+    /// </summary>
+    /// <param name="left">The ternary number to divide.</param>
+    /// <param name="right">The native numeric value to divide by.</param>
+    /// <returns>A new ternary number of the same type containing the quotient.</returns>
     public static Int9T operator /(Int9T left, Int16 right) => Create(left.value / right);
+
+    /// <summary>
+    /// Divides a native numeric value by a ternary number, maintaining the original ternary type.
+    /// </summary>
+    /// <param name="left">The native numeric value to divide.</param>
+    /// <param name="right">The ternary number to divide by.</param>
+    /// <returns>A new ternary number containing the quotient.</returns>
     public static Int9T operator /(Int16 left, Int9T right) => Create(left / right.value);
+
+    /// <summary>
+    /// Computes the remainder after dividing a ternary number by a native numeric value, maintaining the original ternary type.
+    /// </summary>
+    /// <param name="left">The ternary number to divide.</param>
+    /// <param name="right">The native numeric value to divide by.</param>
+    /// <returns>A new ternary number of the same type containing the remainder.</returns>
     public static Int9T operator %(Int9T left, Int16 right) => Create(left.value % right);
+
+    /// <summary>
+    /// Computes the remainder after dividing a native numeric value by a ternary number, maintaining the original ternary type.
+    /// </summary>
+    /// <param name="left">The native numeric value to divide.</param>
+    /// <param name="right">The ternary number to divide by.</param>
+    /// <returns>A new ternary number containing the remainder.</returns>
     public static Int9T operator %(Int16 left, Int9T right) => Create(left % right.value);
     #endregion
     
