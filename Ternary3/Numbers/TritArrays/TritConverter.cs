@@ -214,6 +214,8 @@ internal static class TritConverter
         }
     }
 
+    public static int TritsToInt32(int negative, int positive) => TritsToInt32((uint)negative, (uint)positive);
+    
     public static int TritsToInt32(uint negative, uint positive)
     {
         var result = 0;
@@ -231,6 +233,8 @@ internal static class TritConverter
         return result;
     }
 
+    public static int TritsToInt64(int negative, int positive) => TritsToInt32((uint)negative, (uint)positive);
+    
     public static long TritsToInt64(uint negative, uint positive)
     {
         var result = 0L;

@@ -862,9 +862,9 @@ LastGenerated = <#= DateTime.Now.ToString() #>
         
         return $$"""
 
-               static {{name}} IShiftOperators<{{name}}, int, {{name}}>.operator <<({{name}} value, int shiftAmount) => Create(value.value.Shift(-shiftAmount));
-               static {{name}} IShiftOperators<{{name}}, int, {{name}}>.operator >> ({{name}} value, int shiftAmount) => Create(value.value.Shift(shiftAmount));
-               static {{name}} IShiftOperators<{{name}}, int, {{name}}>.operator >>> ({{name}} value, int shiftAmount) => Create(value.value.Shift(shiftAmount));
+               public static {{name}} operator <<({{name}} value, int shiftAmount) => Create(value.value.Shift(-shiftAmount));
+               public static {{name}} operator >> ({{name}} value, int shiftAmount) => Create(value.value.Shift(shiftAmount));
+               public static {{name}} operator >>> ({{name}} value, int shiftAmount) => Create(value.value.Shift(shiftAmount));
 
                /// <summary>
                /// Applies a unary operation to each trit in this ternary number.

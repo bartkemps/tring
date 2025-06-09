@@ -621,9 +621,9 @@ public static implicit operator Int64(Int3T value) => (Int64)value.value;
     #region Binary Operations
 
     
-static Int3T IShiftOperators<Int3T, int, Int3T>.operator <<(Int3T value, int shiftAmount) => Create(value.value.Shift(-shiftAmount));
-static Int3T IShiftOperators<Int3T, int, Int3T>.operator >> (Int3T value, int shiftAmount) => Create(value.value.Shift(shiftAmount));
-static Int3T IShiftOperators<Int3T, int, Int3T>.operator >>> (Int3T value, int shiftAmount) => Create(value.value.Shift(shiftAmount));
+public static Int3T operator <<(Int3T value, int shiftAmount) => Create(value.value.Shift(-shiftAmount));
+public static Int3T operator >> (Int3T value, int shiftAmount) => Create(value.value.Shift(shiftAmount));
+public static Int3T operator >>> (Int3T value, int shiftAmount) => Create(value.value.Shift(shiftAmount));
 
 /// <summary>
 /// Applies a unary operation to each trit in this ternary number.

@@ -608,9 +608,9 @@ public static explicit operator Int32(Int27T value) => (Int32)value.value;
     #region Binary Operations
 
     
-static Int27T IShiftOperators<Int27T, int, Int27T>.operator <<(Int27T value, int shiftAmount) => Create(value.value.Shift(-shiftAmount));
-static Int27T IShiftOperators<Int27T, int, Int27T>.operator >> (Int27T value, int shiftAmount) => Create(value.value.Shift(shiftAmount));
-static Int27T IShiftOperators<Int27T, int, Int27T>.operator >>> (Int27T value, int shiftAmount) => Create(value.value.Shift(shiftAmount));
+public static Int27T operator <<(Int27T value, int shiftAmount) => Create(value.value.Shift(-shiftAmount));
+public static Int27T operator >> (Int27T value, int shiftAmount) => Create(value.value.Shift(shiftAmount));
+public static Int27T operator >>> (Int27T value, int shiftAmount) => Create(value.value.Shift(shiftAmount));
 
 /// <summary>
 /// Applies a unary operation to each trit in this ternary number.
