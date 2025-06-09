@@ -621,16 +621,38 @@ public static implicit operator Int64(Int3T value) => (Int64)value.value;
     #region Binary Operations
 
     
+/// <summary>
+/// Performs a left shift operation on the ternary number, maintaining the original numeric type.
+/// </summary>
+/// <param name="value">The ternary number to shift.</param>
+/// <param name="shiftAmount">The number of positions to shift left. Negative values result in a right shift.</param>
+/// <returns>A new ternary number of the same type containing the shifted value.</returns>
 public static Int3T operator <<(Int3T value, int shiftAmount) => Create(value.value.Shift(-shiftAmount));
+
+/// <summary>
+/// Performs a right shift operation on the ternary number, maintaining the original numeric type.
+/// </summary>
+/// <param name="value">The ternary number to shift.</param>
+/// <param name="shiftAmount">The number of positions to shift right. Negative values result in a left shift.</param>
+/// <returns>A new ternary number of the same type containing the shifted value.</returns>
 public static Int3T operator >> (Int3T value, int shiftAmount) => Create(value.value.Shift(shiftAmount));
+
+/// <summary>
+/// Performs an unsigned right shift operation on the ternary number, maintaining the original numeric type.
+/// In this implementation, it behaves the same as the signed right shift.
+/// </summary>
+/// <param name="value">The ternary number to shift.</param>
+/// <param name="shiftAmount">The number of positions to shift right. Negative values result in a left shift.</param>
+/// <returns>A new ternary number of the same type containing the shifted value.</returns>
 public static Int3T operator >>> (Int3T value, int shiftAmount) => Create(value.value.Shift(shiftAmount));
 
 /// <summary>
-/// Applies a unary operation to each trit in this ternary number.
+/// Applies a unary operation to each trit in this ternary number. This operation converts the number to a TritArray.
 /// </summary>
-/// <param name="value">The ternary number.</param>
+/// <param name="value">The ternary number to convert and operate on.</param>
 /// <param name="operation">The unary operation to apply to each trit.</param>
-/// <returns>A TritArray containing the result of applying the operation.</returns>
+/// <returns>A new TritArray containing the result of applying the operation.</returns>
+/// <remarks>This operation causes an implicit conversion to TritArray before applying the operation.</remarks>
 public static TritArray3 operator |(Int3T value, Func<Trit, Trit> operation)
 {
     TritArray3 array = value;
@@ -638,11 +660,12 @@ public static TritArray3 operator |(Int3T value, Func<Trit, Trit> operation)
 }
 
 /// <summary>
-/// Combines each trit in this ternary number with the corresponding trit in the provided array.
+/// Combines each trit in this ternary number with the corresponding trit in the provided array. This operation converts the number to a TritArray.
 /// </summary>
-/// <param name="value">The ternary number.</param>
+/// <param name="value">The ternary number to convert and combine.</param>
 /// <param name="trits">The array of trits to combine with.</param>
-/// <returns>A TritArray containing the result of the operation.</returns>
+/// <returns>A new TritArray containing the result of the operation.</returns>
+/// <remarks>This operation causes an implicit conversion to TritArray before combining with the provided trits.</remarks>
 public static TritArray3 operator |(Int3T value, Trit[] trits)
 {
     TritArray3 array = value;

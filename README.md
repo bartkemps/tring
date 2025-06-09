@@ -586,9 +586,21 @@ Represents a 3-trit signed integer, modeled after the SByte type.
 - `static readonly Int3T MaxValue` - Represents the largest possible value of a Int3T.
 - `static readonly Int3T MinValue` - Represents the smallest possible value of a Int3T.
 
-**Operators and Methods:**
-- Supports standard arithmetic, comparison, and conversion operators.
-- Implements various numeric interfaces like INumber<Int3T>.
+**Operators:**
+- `static Int3T operator <<(Int3T value, int shiftAmount)` - Performs a left shift operation on the ternary number, maintaining the original numeric type.
+- `static Int3T operator >>(Int3T value, int shiftAmount)` - Performs a right shift operation on the ternary number, maintaining the original numeric type.
+- `static Int3T operator >>>(Int3T value, int shiftAmount)` - Performs an unsigned right shift operation on the ternary number, maintaining the original numeric type. In this implementation, it behaves the same as the signed right shift.
+- `static TritArray3 operator |(Int3T value, Func<Trit, Trit> operation)` - Applies a unary operation to each trit in this ternary number. This operation converts the number to a TritArray.
+- `static TritArray3 operator |(Int3T value, Trit[] trits)` - Combines each trit in this ternary number with the corresponding trit in the provided array. This operation converts the number to a TritArray.
+- Standard arithmetic and comparison operators
+
+**Methods:**
+- `override string ToString()` - Returns a string representation of the trit value.
+- `bool Equals(Int3T other)` - Determines if this Int3T is equal to another Int3T.
+- `override bool Equals(object? obj)` - Returns a value indicating whether this instance is equal to a specified object.
+- `override int GetHashCode()` - Returns the hash code for this instance.
+
+Similarly for Int9T and Int27T:
 
 #### `Int9T` Struct
 
@@ -606,9 +618,19 @@ Represents a 9-trit signed integer, modeled after the Int16 type.
 - `static readonly Int9T MaxValue` - Represents the largest possible value of a Int9T.
 - `static readonly Int9T MinValue` - Represents the smallest possible value of a Int9T.
 
-**Operators and Methods:**
-- Supports standard arithmetic, comparison, and conversion operators.
-- Implements various numeric interfaces like INumber<Int9T>.
+**Operators:**
+- `static Int9T operator <<(Int9T value, int shiftAmount)` - Performs a left shift operation on the ternary number, maintaining the original numeric type.
+- `static Int9T operator >>(Int9T value, int shiftAmount)` - Performs a right shift operation on the ternary number, maintaining the original numeric type.
+- `static Int9T operator >>>(Int9T value, int shiftAmount)` - Performs an unsigned right shift operation on the ternary number, maintaining the original numeric type. In this implementation, it behaves the same as the signed right shift.
+- `static TritArray9 operator |(Int9T value, Func<Trit, Trit> operation)` - Applies a unary operation to each trit in this ternary number. This operation converts the number to a TritArray.
+- `static TritArray9 operator |(Int9T value, Trit[] trits)` - Combines each trit in this ternary number with the corresponding trit in the provided array. This operation converts the number to a TritArray.
+- Standard arithmetic and comparison operators
+
+**Methods:**
+- `override string ToString()` - Returns a string representation of the trit value.
+- `bool Equals(Int9T other)` - Determines if this Int9T is equal to another Int9T.
+- `override bool Equals(object? obj)` - Returns a value indicating whether this instance is equal to a specified object.
+- `override int GetHashCode()` - Returns the hash code for this instance.
 
 #### `Int27T` Struct
 
@@ -627,13 +649,18 @@ Represents a 27-trit signed integer, modeled after the Int64 type.
 - `static readonly Int27T MinValue` - Represents the smallest possible value of a Int27T.
 
 **Operators:**
-- `static implicit operator Int27T(Int64 value)` - Defines an implicit conversion from Int64 to Int27T.
-- `static implicit operator Int64(Int27T value)` - Defines an implicit conversion from Int27T to Int64.
-- `static implicit operator Int27T(Int32 value)` - Defines an implicit conversion from Int32 to Int27T.
-- Also supports full range of arithmetic, comparison, and conversion operators.
+- `static Int27T operator <<(Int27T value, int shiftAmount)` - Performs a left shift operation on the ternary number, maintaining the original numeric type.
+- `static Int27T operator >>(Int27T value, int shiftAmount)` - Performs a right shift operation on the ternary number, maintaining the original numeric type.
+- `static Int27T operator >>>(Int27T value, int shiftAmount)` - Performs an unsigned right shift operation on the ternary number, maintaining the original numeric type. In this implementation, it behaves the same as the signed right shift.
+- `static TritArray27 operator |(Int27T value, Func<Trit, Trit> operation)` - Applies a unary operation to each trit in this ternary number. This operation converts the number to a TritArray.
+- `static TritArray27 operator |(Int27T value, Trit[] trits)` - Combines each trit in this ternary number with the corresponding trit in the provided array. This operation converts the number to a TritArray.
+- Standard arithmetic and comparison operators
 
 **Methods:**
-- Implements various numeric interfaces like INumber<Int27T>, IAdditionOperators<Int27T,Int27T,Int27T>, etc.
+- `override string ToString()` - Returns a string representation of the trit value.
+- `bool Equals(Int27T other)` - Determines if this Int27T is equal to another Int27T.
+- `override bool Equals(object? obj)` - Returns a value indicating whether this instance is equal to a specified object.
+- `override int GetHashCode()` - Returns the hash code for this instance.
 
 ### Operator Classes
 
