@@ -1,5 +1,5 @@
 ﻿using Examples;
 
-UnaryDemo.Run();
-BinaryLookupDemo.Run();
+UnaryTritOperationDemo.Run();
+BinaryTritOperationDemo.Run();
 OverflowDemo.Run();

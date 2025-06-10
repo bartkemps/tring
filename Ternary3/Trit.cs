@@ -181,18 +181,6 @@ public readonly struct Trit : IEquatable<Trit>
     public override int GetHashCode() => Value.GetHashCode();
 
     /// <summary>
-    /// Creates an UnsafeTritOperator to enable custom operations using the pipe syntax.
-    /// </summary>
-    /// <param name="left">The left Trit operand that will be stored in the operator.</param>
-    /// <param name="operation">A function pointer to a method that accepts two Trit parameters and returns a Trit result.</param>
-    /// <returns>An UnsafeTritOperator that combines the left Trit with the operation function pointer.</returns>
-    /// <remarks>
-    /// This enables syntax like: <c>trit1 | &amp;Operation.Apply | trit2</c> to perform custom operations.
-    /// Requires unsafe code context due to the use of function pointers.
-    /// </remarks>
-    public static unsafe UnsafeTritOperator operator |(Trit left, delegate*<Trit, Trit, Trit> operation) => new(left, operation);
-
-    /// <summary>
     /// Creates a TritOperator to enable custom operations using the pipe syntax.
     /// </summary>
     /// <param name="left">The left Trit operand that will be stored in the operator.</param>

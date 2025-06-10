@@ -3,7 +3,6 @@
 <#@ import namespace="System.IO" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".txt" #>
-<#@ import namespace="System.Threading" #>
 <#
     // Define the ternary number types to generate
             var ternaryTypes = new List<(string BackingType, int Trits, long BackingTypeMaxValue)>

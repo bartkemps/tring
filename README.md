@@ -37,40 +37,71 @@ Or search for "Ternary" in the NuGet package manager in Visual Studio.
 
 Package URL: https://www.nuget.org/packages/Ternary
 
-## Examples
-
-### UnaryDemo - Function-Based Unary Operations
-
-Demonstrates how to apply function-based unary operations to ternary values of different types.
+Write a simple C# program to test the library:
 
 ```csharp
-namespace Ternary3.Examples;
+using static Ternary3.Operators.BinaryTritOperator;
+using static System.Console;
 
-using Numbers;
+WriteLine(-24 | Or | 4);
+```
 
+This will output a ternary number representing the result of the operation.
+
+## Examples
+
+### UnaryTritOperationDemo - Using Unary Operators
+
+Demonstrates how to apply unary operations to ternary values using the UnaryTritOperator structure.
+
+```csharp
+namespace Examples;
+
+using Ternary3;
+using Ternary3.Operators;
 // The class Operators.Unary contains static methods for unary operations on Trit values.
-using static Operators.Unary;
+using static Ternary3.Operators.UnaryTritOperator;
 // Common alias for 27-trit integers
-using Tryte = Numbers.Int27T;
+using Tryte = Ternary3.Int27T;
 
-public static class UnaryDemo
+public static class UnaryTritOperationDemo
 {
     public static void Run()
     {
+        Console.WriteLine($"\r\n\r\n{nameof(UnaryTritOperationDemo)}");
+        
         // Operation on Int3T outputs TritArray3
         Int3T input1 = 5; // 1TT
         var output1 = input1 | AbsoluteValue; // TritArray3 111
         Console.WriteLine($"Absolute value of {input1} ({(TritArray3)input1}) = {(Int3T)output1} ({output1})"); // Absolute value of 5 (1TT) = 13 (111)
 
         // Custom operation on Int9T outputs TritArray9, which can be implicitly converted to Int9T
-        Trit Echo(Trit trit) => trit; // Custom operation: Identity function for Trit
-        Int9T input2 = -10; // T0T
-        Int9T output2 = input2 | Echo; // T0T. Gets implicitly converted to Int9T
-        Console.WriteLine($"-10 Echoed = {output2}"); // Prints -10
+        Trit EchoA(Trit trit) => trit; // Custom operation: Identity function for Trit
+        Int9T input2A = -10; // T0T
+        Int9T output2A = input2A | EchoA; // T0T. Gets implicitly converted to Int9T
+        Console.WriteLine($"-10 Echoed = {output2A}"); // Prints -10
+        
+        // Custom operation on Int9T outputs TritArray9, which can be implicitly converted to Int9T
+        Trit[] echoB = [Trit.Negative, Trit.Zero, Trit.Positive];
+        Int9T input2B = -10; // T0T
+        Int9T output2B = input2B | echoB; // T0T. Gets implicitly converted to Int9T
+        Console.WriteLine($"-10 Echoed = {output2B}"); // Prints -10
+        
+        // Custom operation on Int9T outputs TritArray9, which can be implicitly converted to Int9T
+        var echoC = new UnaryTritOperator(false, null, true);
+        Int9T input2C = -10; // T0T
+        Int9T output2C = input2C | echoC; // T0T. Gets implicitly converted to Int9T
+        Console.WriteLine($"-10 Echoed = {output2C}"); // Prints -10
+        
+        // Custom operation on Int9T outputs TritArray9, which can be implicitly converted to Int9T
+        var echoD = new UnaryTritOperator(-1, 0, 1);
+        Int9T input2D = -10; // T0T
+        Int9T output2D = input2D | echoD; // T0T. Gets implicitly converted to Int9T
+        Console.WriteLine($"-10 Echoed = {output2D}"); // Prints -10
         
         // Using an alias for a Tryte (27-trit integer) and the full name for the operator
         Tryte input3 = 11; // 11T
-        long output3 = input3 | Ternary3.Operators.Unary.Negate; // TT1, using the full name for the operator. Result implicitly converted to long.
+        long output3 = input3 | Ternary3.Operators.UnaryTritOperator.Negate; // TT1, using the full name for the operator. Result implicitly converted to long.
         Console.WriteLine($"11 Negated = {output3}"); // 11 Negated = -11
         
         //TritArray input with TritArray27. Output is also TritArray27, // which can be explicitly converted to long.
@@ -82,79 +113,40 @@ public static class UnaryDemo
         var input5 = Trit.Negative; // T (negative)
         var output5 = input5 | IsPositive; // No. It is not positive. No translates to T (negative)
         Console.WriteLine($"Is {input5} positive? {output5}"); // Is Negative positive? Negative
+        
+        // integer input will be implicitly converted to the corresponding TritArray.
+        short input6 = -16; // T11T
+        var output6 = input6 | Floor; // All T become 0. 0110;
+        Console.WriteLine($"{input6} | {nameof(Floor)} becomes {output6}"); // -22 Floor becomes 000000110
     }
 }
 ```
 
-### UnaryLookupDemo - Table-Based Unary Operations
-
-Demonstrates how to apply lookup-table-based unary operations to ternary values, showing an alternative implementation approach.
-
-```csharp
-namespace Ternary3.Examples;
-
-using Numbers;
-
-// The class Operators.UnaryLookup contains lookup-tables for unary operations on Trit values.
-using static Operators.UnaryLookup;
-// Uncommon alias for 3-trit integers
-using Tribble = Numbers.Int3T;
-
-public static class UnaryLookupDemo
-{
-    public static void Run()
-    {
-        // Operation on Int3T outputs TritArray3
-        Tribble input1 = 5; // 1TT
-        var output1 = input1 | AbsoluteValue; // TritArray3 111
-        Console.WriteLine($"Absolute value of {input1} ({(TritArray3)input1}) = {(Tribble)output1} ({output1})"); // Absolute value of 5 (1TT) = 13 (111)
-
-        // Custom operation on Int9T outputs TritArray9, which can be implicitly converted to Int9T
-        var echo = new Trit[] { false, null, true };
-        Int9T input2 = -10; // T0T
-        Int9T output2 = input2 | echo; // T0T. Gets implicitly converted to Int9T
-        Console.WriteLine($"-10 Echoed = {output2}"); // Prints -10
-        
-        // Using an alias for a Tryte (27-trit integer) and the full name for the operator
-        Int27T input3 = 11; // 11T
-        long output3 = input3 | Ternary3.Operators.UnaryLookup.Negate; // TT1, using the full name for the operator. Result implicitly converted to long.
-        Console.WriteLine($"11 Negated = {output3}"); // 11 Negated = -11
-        
-        //TritArray input with TritArray27. Output is also TritArray27, // which can be explicitly converted to long.
-        TritArray27 input4 = 123456789;
-        var output4 = input4 | Negate;
-        Console.WriteLine($"123456789 Negated = {output4} ({(int)output4})"); // Prints 000000000 T0011TT01 T1T010100 (-123456789)
-        
-        //Single Trit input
-        var input5 = Trit.Negative; // T (negative)
-        var output5 = input5 | IsPositive; // No. It is not positive. No translates to T (negative)
-        Console.WriteLine($"Is {input5} positive? {output5}"); // Is Negative positive? Negative
-    }
-}
-```
-
-### BinaryLookupDemo - Operations on Trit Pairs
+### BinaryTritOperationDemo - Operations on Trit Pairs
 
 Demonstrates various binary operations on ternary values using lookup tables, showing how to work with built-in operations and create custom ones.
 
 ```csharp
-namespace Ternary3.Examples;
+namespace Examples;
 
-using Numbers;
-using Operators;
-using static Operators.BinaryLookup;
+using Ternary3;
+using Ternary3.Operators;
+using static Ternary3.Operators.BinaryTritOperator;
 
 /// <summary>
 /// Demonstrates various binary operations on ternary values using lookup tables.
 /// A binary operation takes two ternary inputs and produces a ternary output.
 /// </summary>
-public class BinaryLookupDemo
+public class BinaryTritOperationDemo
 {
     // Constant representing the negative trit (-1) for readability
     const int T = -1;
 
     public static void Run()
     {
+        Console.WriteLine($"\r\n\r\n{nameof(BinaryTritOperationDemo)}");
+
+        
         // EXAMPLE 1: Built-in AND operation on two sbytes
         // ---------------------------------------------
         // In ternary, AND returns the minimum value of each trit pair
@@ -164,7 +156,7 @@ public class BinaryLookupDemo
         // ( 1 AND -1) = -1, ( 1 AND 0) =  0, ( 1 AND 1) =  1
         sbyte input1A = 8; // 10T in balanced ternary (where T is -1)
         sbyte input1B = 9; // 100 in balanced ternary
-        TritArray3 result1 = input1A | And | input1B; // Uses the predefined AND operation
+        var result1 = input1A | And | input1B; // Uses the predefined AND operation
         Console.WriteLine($"BinaryLookup And: {input1A} {nameof(And)} {input1B} = {(sbyte)result1} ({result1})"); 
         // Output: 8 (10T) because:
         // 10T (input1A) AND 100 (input1B) = 10T
@@ -194,7 +186,7 @@ public class BinaryLookupDemo
         // - null means -1 (negative)
         // - false means 0 (zero)
         // - true means 1 (positive)
-        int input3A = 123456789; 
+        var input3A = 123456789; 
         long input3B = 987654321; 
         // This "decreaseBy" operation decreases the trit value based on specific combinations
         // The table is read as [first operand, second operand] → result
@@ -219,7 +211,7 @@ public class BinaryLookupDemo
             Trit.Zero, Trit.Zero, Trit.Zero,              // When first trit is 0, always return 0
             Trit.Negative, Trit.Negative, Trit.Negative   // When first trit is 1, always return -1
         );
-        TritArray27 result4 = input4A | invertFirstIgnoreSecond | input4B; 
+        var result4 = input4A | invertFirstIgnoreSecond | input4B; 
         Console.WriteLine($"Custom operation on int: {input4A} {nameof(invertFirstIgnoreSecond)} {input4B} = {result4} ({(int)result4})");
         // Each trit in input4A is inverted (1→-1, 0→0, -1→1) regardless of input4B's value
         
@@ -230,8 +222,8 @@ public class BinaryLookupDemo
         // (-1 OR -1) = -1, (-1 OR 0) = 0, (-1 OR 1) = 1
         // ( 0 OR -1) =  0, ( 0 OR 0) = 0, ( 0 OR 1) = 1
         // ( 1 OR -1) =  1, ( 1 OR 0) = 1, ( 1 OR 1) = 1
-        Trit input5A = Trit.Positive;  // Value 1
-        Trit input5B = Trit.Negative;  // Value -1
+        var input5A = Trit.Positive;  // Value 1
+        var input5B = Trit.Negative;  // Value -1
         var result5 = input5A | Or | input5B;  // 1 OR -1 = 1 (maximum value)
         Console.WriteLine($"Trit Or: {input5A} {nameof(Or)} {input5B} = {result5}");
     }
@@ -243,14 +235,16 @@ public class BinaryLookupDemo
 Demonstrates how ternary numbers behave during overflow situations and bit shifting operations, which differ from binary numbers.
 
 ```csharp
-namespace Ternary3.Examples;
+namespace Examples;
 
-using Numbers;
+using Ternary3;
 
 public static class OverflowDemo
 {
     public static void Run()
     {
+        Console.WriteLine($"\r\n\r\n{nameof(OverflowDemo)}");
+        
         // Addition and substraction may overflow and do so in a ternary way.
         // (so instead of cutting of "binary" bits, it cuts off "ternary" trits)
         Int3T input1A = 12; // 110
@@ -722,71 +716,16 @@ namespace Ternary3.Operators
 Provides a set of predefined binary operations implemented as lookup tables for Trit values.
 
 **Fields:**
-- `static readonly BinaryTritOperator And` - The logical AND operation.
-- `static readonly BinaryTritOperator Or` - The logical OR operation.
-- `static readonly BinaryTritOperator Xor` - The logical XOR operation.
-- `static readonly BinaryTritOperator Nand` - The logical NAND operation.
-- `static readonly BinaryTritOperator Nor` - The logical NOR operation.
-- `static readonly BinaryTritOperator Xnor` - The logical XNOR operation.
-- `static readonly BinaryTritOperator Implication` - The logical implication operation.
-- `static readonly BinaryTritOperator Consensus` - The consensus operation.
-- `static readonly BinaryTritOperator ConflictOrSame` - The conflict or same operation.
-- `static readonly BinaryTritOperator Min` - The minimum value operation.
-- `static readonly BinaryTritOperator Max` - The maximum value operation.
-- `static readonly BinaryTritOperator Sum` - The sum operation.
-- `static readonly BinaryTritOperator Product` - The product operation.
+- `static readonly BinaryTritOperator Positive` - A constant that returns Positive (1) for any trit combination.
+- `static readonly BinaryTritOperator Zero` - A constant that returns Zero (0) for any trit combination.
+- `static readonly BinaryTritOperator Negative` - A constant that returns Negative (-1) for any trit combination.
+- `static readonly BinaryTritOperator And` - The logical AND operation in three-valued logic.
+- `static readonly BinaryTritOperator Or` - The logical OR operation in three-valued logic.
+- `static readonly BinaryTritOperator Xor` - The logical XOR operation in three-valued logic.
+- `static readonly BinaryTritOperator Plus` - The addition operation in three-valued logic.
+- `static readonly BinaryTritOperator Minus` - The subtraction operation in three-valued logic.
+- `static readonly BinaryTritOperator Implicates` - The logical implication operation.
+- `static readonly BinaryTritOperator Is` - The equality check operation.
+- `static readonly BinaryTritOperator GreaterThan` - The greater than comparison operation.
+- `static readonly BinaryTritOperator LesserThan` - The less than comparison operation.
 
-#### `BinaryTritOperator` Class
-
-```csharp
-namespace Ternary3.Operators
-```
-
-Represents a lookup table for binary operations on Trit values.
-
-**Constructors:**
-- `BinaryTritOperator(Trit[,] values)` - Initializes a new instance with a 2D array of Trit values.
-- `BinaryTritOperator(Trit[] negativeRow, Trit[] zeroRow, Trit[] positiveRow)` - Initializes a new instance with three arrays representing rows.
-- Various other constructors supporting different parameter types.
-
-**Indexers:**
-- `Trit this[Trit row, Trit col]` - Gets the result of applying the operation to the specified trits.
-- `Trit this[int row, int col]` - Gets the result of applying the operation to the specified trit values.
-
-**Methods:**
-- `Trit Apply(Trit first, Trit second)` - Applies the binary operation to two Trit values.
-
-### Additional Types
-
-#### `ITritArray` Interface
-
-```csharp
-namespace Ternary3.Numbers
-```
-
-Defines the core functionality for a trit array.
-
-**Properties:**
-- `int Length` - Gets the length of the trit array.
-
-**Indexer:**
-- `Trit this[int index]` - Gets or sets the trit at the specified index.
-
-#### `ITernaryInteger<T>` Interface
-
-```csharp
-namespace Ternary3.Numbers
-```
-
-Represents a ternary integer type that implements various numeric interfaces.
-
-**Where T implements various numeric interfaces like INumber<T>, IAdditionOperators<T,T,T>, etc.**
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## License
-
-This library is licensed under the MIT License.  
-See the [LICENSE](LICENSE) file for details.

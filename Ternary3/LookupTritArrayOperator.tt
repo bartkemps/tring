@@ -40,6 +40,13 @@ private string GenerateLookupTritArrayOperator(int tritArraySize, string backing
            using Operators.Operations;
            using TritArrays;
            
+           /// <summary>
+           /// Represents an operator that combines a TritArray{{tritArraySize}} with a binary operation lookup table.
+           /// </summary>
+           /// <remarks>
+           /// Used to efficiently apply binary operations between TritArray{{tritArraySize}} instances by using optimized lookup tables.
+           /// The first operand is stored within the operator structure, and the second operand is provided via the pipe operator.
+           /// </remarks>
            public readonly struct LookupTritArray{{tritArraySize}}Operator
            {
                private readonly TritArray{{tritArraySize}} trits;
@@ -66,12 +73,24 @@ private string GenerateLookupTritArrayOperator(int tritArraySize, string backing
                {
                }
            
+               /// <summary>
+               /// Performs a binary operation between the stored left operand (TritArray{{tritArraySize}}) and the right operand using a lookup table.
+               /// </summary>
+               /// <param name="left">The LookupTritArray{{tritArraySize}}Operator containing the left operand and operation details.</param>
+               /// <param name="right">The right TritArray{{tritArraySize}} operand.</param>
+               /// <returns>A new TritArray{{tritArraySize}} representing the result of applying the binary operation to each corresponding pair of trits.</returns>
                public static TritArray{{tritArraySize}} operator |(LookupTritArray{{tritArraySize}}Operator left, TritArray{{tritArraySize}} right)
                {
                    left.builder.Build()(left.trits.Negative, left.trits.Positive, right.Negative, right.Positive, out var negative, out var positive);
                    return new(negative, positive);
                }
                
+               /// <summary>
+               /// Performs a binary operation between the stored left operand (TritArray{{tritArraySize}}) and an Int{{tritArraySize}}T right operand using a lookup table.
+               /// </summary>
+               /// <param name="left">The LookupTritArray{{tritArraySize}}Operator containing the left operand and operation details.</param>
+               /// <param name="right">The right Int{{tritArraySize}}T operand, which will be converted to a TritArray{{tritArraySize}}.</param>
+               /// <returns>A new TritArray{{tritArraySize}} representing the result of applying the binary operation to each corresponding pair of trits.</returns>
                public static TritArray{{tritArraySize}} operator |(LookupTritArray{{tritArraySize}}Operator left, Int{{tritArraySize}}T right)
                {
                    var tritArray = (TritArray{{tritArraySize}})right;
@@ -87,6 +106,12 @@ private string PipeToTypeOperator(int tritArraySize, string backingType, string 
 {
     return $$"""
            
+            /// <summary>
+            /// Performs a binary operation between the stored left operand (TritArray{{tritArraySize}}) and a {{type}} right operand using a lookup table.
+            /// </summary>
+            /// <param name="left">The LookupTritArray{{tritArraySize}}Operator containing the left operand and operation details.</param>
+            /// <param name="right">The right {{type}} operand, which will be converted to a TritArray{{tritArraySize}}.</param>
+            /// <returns>A new TritArray{{tritArraySize}} representing the result of applying the binary operation to each corresponding pair of trits.</returns>
             public static TritArray{{tritArraySize}} operator |(LookupTritArray{{tritArraySize}}Operator left, {{type}} right)
             {
                 TritConverter.ConvertTo32Trits(right, out var rightNegative, out var rightPositive);

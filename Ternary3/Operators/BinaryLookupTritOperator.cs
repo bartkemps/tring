@@ -27,5 +27,11 @@ public readonly struct BinaryLookupTritOperator
         this.table = table;
     }
 
+    /// <summary>
+    /// Performs a binary operation between the stored left operand (trit) and the right operand using the lookup table.
+    /// </summary>
+    /// <param name="left">The BinaryLookupTritOperator containing the left operand and the operation lookup table.</param>
+    /// <param name="right">The right operand.</param>
+    /// <returns>The result of applying the binary operation defined by the lookup table to the two trit operands.</returns>
     public static Trit operator |(BinaryLookupTritOperator left, Trit right) => left.table[left.trit, right];
 }

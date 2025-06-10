@@ -59,16 +59,16 @@ internal class ExpressionPattern
             (matrix, expr1, expr2) => Expression.Constant(1),
             // Mark Handled
             (matrix, handled) => {
-                for (int i = 0; i < 3; i++)
-                for (int j = 0; j < 3; j++)
+                for (var i = 0; i < 3; i++)
+                for (var j = 0; j < 3; j++)
                     handled[i, j] = true;
             }
         ));
             
         // Pattern 3: Complete row
-        for (int row = 0; row < 3; row++)
+        for (var row = 0; row < 3; row++)
         {
-            int capturedRow = row; // Capture for lambda
+            var capturedRow = row; // Capture for lambda
             patterns.Add(new ExpressionPattern(
                 // Matches
                 (matrix, firstCounts, secondCounts) => firstCounts[capturedRow] == 3,
@@ -76,16 +76,16 @@ internal class ExpressionPattern
                 (matrix, expr1, expr2) => expr1[capturedRow],
                 // Mark Handled
                 (matrix, handled) => {
-                    for (int j = 0; j < 3; j++)
+                    for (var j = 0; j < 3; j++)
                         handled[capturedRow, j] = true;
                 }
             ));
         }
             
         // Pattern 4: Complete column
-        for (int col = 0; col < 3; col++)
+        for (var col = 0; col < 3; col++)
         {
-            int capturedCol = col; // Capture for lambda
+            var capturedCol = col; // Capture for lambda
             patterns.Add(new ExpressionPattern(
                 // Matches
                 (matrix, firstCounts, secondCounts) => secondCounts[capturedCol] == 3,
@@ -93,16 +93,16 @@ internal class ExpressionPattern
                 (matrix, expr1, expr2) => expr2[capturedCol],
                 // Mark Handled
                 (matrix, handled) => {
-                    for (int i = 0; i < 3; i++)
+                    for (var i = 0; i < 3; i++)
                         handled[i, capturedCol] = true;
                 }
             ));
         }
             
         // Pattern 5: Row with exactly 2 true values (exclude handled)
-        for (int row = 0; row < 3; row++)
+        for (var row = 0; row < 3; row++)
         {
-            int capturedRow = row; // Capture for lambda
+            var capturedRow = row; // Capture for lambda
             patterns.Add(new ExpressionPattern(
                 // Matches
                 (matrix, firstCounts, secondCounts) => {
@@ -114,7 +114,7 @@ internal class ExpressionPattern
                     if (missingCol == 3) return false; // Should never happen if count is 2
                         
                     // Check if at least one of the cells is not already handled
-                    for (int j = 0; j < 3; j++)
+                    for (var j = 0; j < 3; j++)
                         if (j != missingCol && matrix[capturedRow, j]) 
                             return true;
                         
@@ -137,7 +137,7 @@ internal class ExpressionPattern
                     var missingCol = 0;
                     while (missingCol < 3 && matrix[capturedRow, missingCol]) missingCol++;
                         
-                    for (int j = 0; j < 3; j++)
+                    for (var j = 0; j < 3; j++)
                         if (j != missingCol)
                             handled[capturedRow, j] = true;
                 }
@@ -145,9 +145,9 @@ internal class ExpressionPattern
         }
             
         // Pattern 6: Column with exactly 2 true values (exclude handled)
-        for (int col = 0; col < 3; col++)
+        for (var col = 0; col < 3; col++)
         {
-            int capturedCol = col; // Capture for lambda
+            var capturedCol = col; // Capture for lambda
             patterns.Add(new ExpressionPattern(
                 // Matches
                 (matrix, firstCounts, secondCounts) => {
@@ -159,7 +159,7 @@ internal class ExpressionPattern
                     if (missingRow == 3) return false; // Should never happen if count is 2
                         
                     // Check if at least one of the cells is not already handled
-                    for (int i = 0; i < 3; i++)
+                    for (var i = 0; i < 3; i++)
                         if (i != missingRow && matrix[i, capturedCol]) 
                             return true;
                         
@@ -182,7 +182,7 @@ internal class ExpressionPattern
                     var missingRow = 0;
                     while (missingRow < 3 && matrix[missingRow, capturedCol]) missingRow++;
                         
-                    for (int i = 0; i < 3; i++)
+                    for (var i = 0; i < 3; i++)
                         if (i != missingRow)
                             handled[i, capturedCol] = true;
                 }
@@ -195,20 +195,20 @@ internal class ExpressionPattern
             (matrix, firstCounts, secondCounts) => {
                 // Check for the pattern where diagonal and anti-diagonal cells are true
                 // and everything else is false
-                bool diagonalPattern = 
+                var diagonalPattern = 
                     matrix[0, 0] && matrix[1, 1] && matrix[2, 2] && 
                     !matrix[0, 1] && !matrix[0, 2] && 
                     !matrix[1, 0] && !matrix[1, 2] && 
                     !matrix[2, 0] && !matrix[2, 1];
                         
-                bool antiDiagonalPattern =
+                var antiDiagonalPattern =
                     matrix[0, 2] && matrix[1, 1] && matrix[2, 0] && 
                     !matrix[0, 0] && !matrix[0, 1] && 
                     !matrix[1, 0] && !matrix[1, 2] && 
                     !matrix[2, 1] && !matrix[2, 2];
                     
                 // Checkerboard pattern (your example)
-                bool checkerboardPattern = 
+                var checkerboardPattern = 
                     matrix[0, 0] && !matrix[0, 1] && matrix[0, 2] &&
                     !matrix[1, 0] && matrix[1, 1] && !matrix[1, 2] &&
                     matrix[2, 0] && !matrix[2, 1] && matrix[2, 2];
@@ -272,8 +272,8 @@ internal class ExpressionPattern
             // Mark Handled
             (matrix, handled) => {
                 // Mark all cells as handled for this special pattern
-                for (int i = 0; i < 3; i++)
-                for (int j = 0; j < 3; j++)
+                for (var i = 0; i < 3; i++)
+                for (var j = 0; j < 3; j++)
                     if (matrix[i, j])
                         handled[i, j] = true;
             }

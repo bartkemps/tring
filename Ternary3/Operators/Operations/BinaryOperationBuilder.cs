@@ -1,6 +1,5 @@
 namespace Ternary3.Operators.Operations;
 
-using System;
 using System.Linq.Expressions;
 
 internal class BinaryOperationBuilder<T> where T : struct

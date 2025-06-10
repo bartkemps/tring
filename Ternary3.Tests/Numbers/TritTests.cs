@@ -6,7 +6,6 @@ using FluentAssertions;
 
 namespace Ternary3.Tests.Numbers;
 
-using Operators;
 using Ternary3.Operators;
 
 public unsafe class TritTests
@@ -193,27 +192,6 @@ public unsafe class TritTests
     private static Trit And(Trit left, Trit right)
     {
         return left |global::Ternary3.Operators.BinaryTritOperator.And| right;
-    }
-    
-    [Theory]
-    [InlineData(T, T, T)]
-    [InlineData(T, 0, T)]
-    [InlineData(T, 1, T)]
-    [InlineData(0, T, T)]
-    [InlineData(0, 0, 0)]
-    [InlineData(0, 1, 0)]
-    [InlineData(1, T, T)]
-    [InlineData(1, 0, 0)]
-    [InlineData(1, 1, 1)]
-    public void PipeOperator_WithUnsafeMethodReference_ReturnsExpectedTrit(int left, int right, int expected)
-    {
-        var trit1 = (Trit)left;
-        var trit2 = (Trit)right;
-        var expectedResult = (Trit)expected;
-
-        var result = trit1 | &And | trit2;
-
-        result.Should().Be(expectedResult);
     }
 
     [Theory]

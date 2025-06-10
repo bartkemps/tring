@@ -1,7 +1,5 @@
 using FluentAssertions;
-using Ternary3.Operators;
 using Ternary3.Operators.Operations;
-using Xunit;
 using static Ternary3.Operators.BinaryTritOperator;
 
 namespace Ternary3.Tests.Operators;

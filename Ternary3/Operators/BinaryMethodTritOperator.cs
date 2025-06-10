@@ -20,5 +20,11 @@ public readonly struct BinaryMethodTritOperator
         this.operation = operation;
     }
 
+    /// <summary>
+    /// Performs a binary operation between the stored left operand (trit) and the right operand using the operation function.
+    /// </summary>
+    /// <param name="left">The BinaryMethodTritOperator containing the left operand and the operation function.</param>
+    /// <param name="right">The right operand.</param>
+    /// <returns>The result of applying the binary operation to the two trit operands.</returns>
     public static Trit operator |(BinaryMethodTritOperator left, Trit right) => left.operation(left.trit, right);
 }

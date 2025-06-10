@@ -5,7 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 internal class FifoCache<TKey, TValue>(int capacity) where TKey : notnull
 {
     private readonly Dictionary<TKey, TValue> cache = new();
-    private readonly LinkedList<TKey> order = new();
+    private readonly LinkedList<TKey> order = [];
 
     public bool TryGetValue(TKey key, [MaybeNullWhen(false)] out TValue value)
     {

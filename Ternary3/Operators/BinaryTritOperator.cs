@@ -19,17 +19,27 @@ public partial struct BinaryTritOperator : IEquatable<BinaryTritOperator>
     internal TritArray9 Value;
 
     /// <summary>
-    /// Creates a 3x3 BinaryTritOperator 
+    /// Creates a new instance of the <see cref="BinaryTritOperator"/> structure with default values.
     /// </summary>
     public BinaryTritOperator()
     {
     }
 
+    /// <summary>
+    /// Creates a new instance of the <see cref="BinaryTritOperator"/> structure with specified negative and positive bit patterns.
+    /// </summary>
+    /// <param name="negative">The bit pattern for negative values.</param>
+    /// <param name="positive">The bit pattern for positive values.</param>
     internal BinaryTritOperator(ushort negative, ushort positive)
     {
         Value = new(negative, positive);
     }
 
+    /// <summary>
+    /// Creates a new instance of the <see cref="BinaryTritOperator"/> structure from a span of trits.
+    /// </summary>
+    /// <param name="trits">A span containing exactly 9 trits in row-major order.</param>
+    /// <exception cref="ArgumentException">Thrown when the span does not contain exactly 9 elements.</exception>
     public BinaryTritOperator(ReadOnlySpan<Trit> trits)
     {
         if (trits.Length != 9)
@@ -48,6 +58,15 @@ public partial struct BinaryTritOperator : IEquatable<BinaryTritOperator>
     /// <summary>
     /// Creates a BinaryTritOperator from individual Trit values in row-major order.
     /// </summary>
+    /// <param name="tritTT">The result when the first operand is Negative and the second operand is Negative.</param>
+    /// <param name="tritT0">The result when the first operand is Negative and the second operand is Zero.</param>
+    /// <param name="tritT1">The result when the first operand is Negative and the second operand is Positive.</param>
+    /// <param name="trit0T">The result when the first operand is Zero and the second operand is Negative.</param>
+    /// <param name="trit00">The result when the first operand is Zero and the second operand is Zero.</param>
+    /// <param name="trit01">The result when the first operand is Zero and the second operand is Positive.</param>
+    /// <param name="trit1T">The result when the first operand is Positive and the second operand is Negative.</param>
+    /// <param name="trit10">The result when the first operand is Positive and the second operand is Zero.</param>
+    /// <param name="trit11">The result when the first operand is Positive and the second operand is Positive.</param>
     /// <remarks>
     /// Parameters represent each cell in the 3x3 matrix, in row-major order:
     /// tTT tT0 tT1
@@ -71,8 +90,9 @@ public partial struct BinaryTritOperator : IEquatable<BinaryTritOperator>
     }
 
     /// <summary>
-    /// Creates a BinaryTritOperator from a <see cref="TritArray27"/>.
+    /// Creates a BinaryTritOperator from a <see cref="TritArray9"/> instance.
     /// </summary>
+    /// <param name="trits">A TritArray9 containing the operation results in row-major order.</param>
     /// <remarks>
     /// Parameters represent each cell in the 3x3 matrix, in row-major order:
     /// tTT tT0 tT1
@@ -84,6 +104,11 @@ public partial struct BinaryTritOperator : IEquatable<BinaryTritOperator>
         Value = trits;
     }
 
+    /// <summary>
+    /// Creates a BinaryTritOperator from a 3x3 array of Trit values.
+    /// </summary>
+    /// <param name="trits">A 3x3 array of Trit values containing the operation results.</param>
+    /// <exception cref="ArgumentException">Thrown when the array dimensions are not 3x3.</exception>
     public BinaryTritOperator(Trit[,] trits)
     {
         // check the dimension 
@@ -107,6 +132,11 @@ public partial struct BinaryTritOperator : IEquatable<BinaryTritOperator>
         Value[8] = trits[2, 2];
     }
 
+    /// <summary>
+    /// Creates a BinaryTritOperator from a jagged array of integer values.
+    /// </summary>
+    /// <param name="trits">A 3x3 jagged array of integers where values must be -1, 0, or 1.</param>
+    /// <exception cref="ArgumentException">Thrown when the array dimensions are not 3x3 or when any value is not -1, 0, or 1.</exception>
     public BinaryTritOperator(int[][] trits)
     {
         if (trits.Length != 3) throw new ArgumentException("Trit array must be a 3x3 matrix.", nameof(trits));
@@ -126,6 +156,10 @@ public partial struct BinaryTritOperator : IEquatable<BinaryTritOperator>
         }
     }
 
+    /// <summary>
+    /// Creates a BinaryTritOperator from a function that defines the operation between two Trits.
+    /// </summary>
+    /// <param name="operation">A function that takes two Trit values and returns the resulting Trit.</param>
     internal BinaryTritOperator(Func<Trit, Trit, Trit> operation) : this(
         operation(Trit.Negative, Trit.Negative),
         operation(Trit.Negative, Trit.Zero),

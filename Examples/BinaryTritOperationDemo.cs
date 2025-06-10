@@ -8,14 +8,14 @@ using static Ternary3.Operators.BinaryTritOperator;
 /// Demonstrates various binary operations on ternary values using lookup tables.
 /// A binary operation takes two ternary inputs and produces a ternary output.
 /// </summary>
-public class BinaryLookupDemo
+public class BinaryTritOperationDemo
 {
     // Constant representing the negative trit (-1) for readability
     const int T = -1;
 
     public static void Run()
     {
-        Console.WriteLine($"\r\n\r\n{nameof(BinaryLookupDemo)}");
+        Console.WriteLine($"\r\n\r\n{nameof(BinaryTritOperationDemo)}");
 
         
         // EXAMPLE 1: Built-in AND operation on two sbytes
@@ -27,7 +27,7 @@ public class BinaryLookupDemo
         // ( 1 AND -1) = -1, ( 1 AND 0) =  0, ( 1 AND 1) =  1
         sbyte input1A = 8; // 10T in balanced ternary (where T is -1)
         sbyte input1B = 9; // 100 in balanced ternary
-        TritArray3 result1 = input1A | And | input1B; // Uses the predefined AND operation
+        var result1 = input1A | And | input1B; // Uses the predefined AND operation
         Console.WriteLine($"BinaryLookup And: {input1A} {nameof(And)} {input1B} = {(sbyte)result1} ({result1})"); 
         // Output: 8 (10T) because:
         // 10T (input1A) AND 100 (input1B) = 10T
@@ -57,7 +57,7 @@ public class BinaryLookupDemo
         // - null means -1 (negative)
         // - false means 0 (zero)
         // - true means 1 (positive)
-        int input3A = 123456789; 
+        var input3A = 123456789; 
         long input3B = 987654321; 
         // This "decreaseBy" operation decreases the trit value based on specific combinations
         // The table is read as [first operand, second operand] → result
@@ -82,7 +82,7 @@ public class BinaryLookupDemo
             Trit.Zero, Trit.Zero, Trit.Zero,              // When first trit is 0, always return 0
             Trit.Negative, Trit.Negative, Trit.Negative   // When first trit is 1, always return -1
         );
-        TritArray27 result4 = input4A | invertFirstIgnoreSecond | input4B; 
+        var result4 = input4A | invertFirstIgnoreSecond | input4B; 
         Console.WriteLine($"Custom operation on int: {input4A} {nameof(invertFirstIgnoreSecond)} {input4B} = {result4} ({(int)result4})");
         // Each trit in input4A is inverted (1→-1, 0→0, -1→1) regardless of input4B's value
         
@@ -93,8 +93,8 @@ public class BinaryLookupDemo
         // (-1 OR -1) = -1, (-1 OR 0) = 0, (-1 OR 1) = 1
         // ( 0 OR -1) =  0, ( 0 OR 0) = 0, ( 0 OR 1) = 1
         // ( 1 OR -1) =  1, ( 1 OR 0) = 1, ( 1 OR 1) = 1
-        Trit input5A = Trit.Positive;  // Value 1
-        Trit input5B = Trit.Negative;  // Value -1
+        var input5A = Trit.Positive;  // Value 1
+        var input5B = Trit.Negative;  // Value -1
         var result5 = input5A | Or | input5B;  // 1 OR -1 = 1 (maximum value)
         Console.WriteLine($"Trit Or: {input5A} {nameof(Or)} {input5B} = {result5}");
     }
