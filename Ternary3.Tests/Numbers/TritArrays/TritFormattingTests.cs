@@ -1,9 +1,10 @@
 using FluentAssertions;
-using Ternary3.Numbers.TritArrays;
 using Xunit;
 
 namespace Ternary3.Tests.Numbers.TritArrays
 {
+    using Ternary3.TritArrays;
+
     public class TritFormattingTests
     {
         [Theory]

@@ -23,6 +23,40 @@
 
     <ItemGroup>
         <None Include="..\README.md" Pack="true" PackagePath="\" />
+        <None Update="TritArrays\Pair.tt">
+          <Generator>TextTemplatingFileGenerator</Generator>
+          <LastGenOutput>Pair.txt</LastGenOutput>
+        </None>
+        <None Update="IntT.tt">
+          <Generator>TextTemplatingFileGenerator</Generator>
+          <LastGenOutput>IntT.txt</LastGenOutput>
+        </None>
+        <None Update="IntT.txt">
+          <AutoGen>True</AutoGen>
+          <DesignTime>True</DesignTime>
+          <DependentUpon>IntT.tt</DependentUpon>
+        </None>
+        <None Update="LookupTritArrayOperator.tt">
+          <Generator>TextTemplatingFileGenerator</Generator>
+          <LastGenOutput>LookupTritArrayOperator.txt</LastGenOutput>
+        </None>
+        <None Update="LookupTritArrayOperator.txt">
+          <AutoGen>True</AutoGen>
+          <DesignTime>True</DesignTime>
+          <DependentUpon>LookupTritArrayOperator.tt</DependentUpon>
+        </None>
+        <None Update="TritArrayT.tt">
+          <Generator>TextTemplatingFileGenerator</Generator>
+          <LastGenOutput>TritArrayT.txt</LastGenOutput>
+        </None>
+        <None Update="TritArrayT.txt">
+          <AutoGen>True</AutoGen>
+          <DesignTime>True</DesignTime>
+          <DependentUpon>TritArrayT.tt</DependentUpon>
+        </None>
+        <None Update="TritArrays\Pair.txt">
+          <DependentUpon>Pair.tt</DependentUpon>
+        </None>
     </ItemGroup>
 
     <ItemGroup>
@@ -33,45 +67,9 @@
         <!-- Include README in the NuGet package -->
     </ItemGroup>
     <ItemGroup>
-      <None Update="Numbers\IntT.tt">
-        <Generator>TextTemplatingFileGenerator</Generator>
-        <LastGenOutput>IntT.txt</LastGenOutput>
-      </None>
       <None Update="Operators\Operations\UnaryOperation.tt">
         <Generator>TextTemplatingFileGenerator</Generator>
         <LastGenOutput>UnaryOperation.cs</LastGenOutput>
-      </None>
-      <None Update="Numbers\IntT.txt">
-        <AutoGen>True</AutoGen>
-        <DesignTime>True</DesignTime>
-        <DependentUpon>IntT.tt</DependentUpon>
-      </None>
-      <None Update="Numbers\LookupTritArrayOperator.tt">
-        <Generator>TextTemplatingFileGenerator</Generator>
-        <LastGenOutput>LookupTritArrayOperator.txt</LastGenOutput>
-      </None>
-      <None Update="Numbers\LookupTritArrayOperator.txt">
-        <AutoGen>True</AutoGen>
-        <DesignTime>True</DesignTime>
-        <DependentUpon>LookupTritArrayOperator.tt</DependentUpon>
-      </None>
-      <None Update="Numbers\TritArrayT.tt">
-        <Generator>TextTemplatingFileGenerator</Generator>
-        <LastGenOutput>TritArrayT.txt</LastGenOutput>
-      </None>
-      <None Update="Numbers\TritArrayT.txt">
-        <AutoGen>True</AutoGen>
-        <DesignTime>True</DesignTime>
-        <DependentUpon>TritArrayT.tt</DependentUpon>
-      </None>
-      <None Update="Numbers\TritArrays\Pair.tt">
-        <Generator>TextTemplatingFileGenerator</Generator>
-        <LastGenOutput>Pair.txt</LastGenOutput>
-      </None>
-      <None Update="Numbers\TritArrays\Pair.txt">
-        <AutoGen>True</AutoGen>
-        <DesignTime>True</DesignTime>
-        <DependentUpon>Pair.tt</DependentUpon>
       </None>
     </ItemGroup>
 

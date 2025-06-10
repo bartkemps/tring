@@ -1,5 +1,4 @@
 using FluentAssertions;
-using Ternary3.Numbers;
 using Ternary3.Operators;
 using Xunit;
 
@@ -26,8 +25,8 @@ public class TritArray27BinaryOperationsTests
         array1[0] = trit1;
         array2[0] = trit2;
 
-        var result = array1 | BinaryLookup.And | array2;
-        var expected = trit1 | BinaryLookup.And | trit2;
+        var result = array1 | BinaryTritOperator.And | array2;
+        var expected = trit1 | BinaryTritOperator.And | trit2;
 
         result[0].Should().Be(expected, $"because {trit1} AND {trit2} should equal {expected}");
     }
@@ -51,8 +50,8 @@ public class TritArray27BinaryOperationsTests
         array1[0] = trit1;
         array2[0] = trit2;
 
-        var result = array1 | BinaryLookup.Or | array2;
-        var expected = trit1 | BinaryLookup.Or | trit2;
+        var result = array1 | BinaryTritOperator.Or | array2;
+        var expected = trit1 | BinaryTritOperator.Or | trit2;
 
         result[0].Should().Be(expected, $"because {trit1} OR {trit2} should equal {expected}");
     }
@@ -76,8 +75,8 @@ public class TritArray27BinaryOperationsTests
         array1[0] = trit1;
         array2[0] = trit2;
 
-        var result = array1 | BinaryLookup.Xor | array2;
-        var expected = trit1 | BinaryLookup.Xor | trit2;
+        var result = array1 | BinaryTritOperator.Xor | array2;
+        var expected = trit1 | BinaryTritOperator.Xor | trit2;
 
         result[0].Should().Be(expected, $"because {trit1} XOR {trit2} should equal {expected}");
     }
@@ -94,14 +93,14 @@ public class TritArray27BinaryOperationsTests
         array2[1] = Trit.Negative;
         array2[2] = Trit.Zero;
 
-        var result = array1 | BinaryLookup.And | array2;
+        var result = array1 | BinaryTritOperator.And | array2;
 
         // Check position 0 (unset in both arrays)
         result[0].Should().Be(Trit.Zero, "because unset positions should remain Zero");
         
         // Check positions we set
-        var expected1 = array1[1] | BinaryLookup.And | array2[1];
-        var expected2 = array1[2] | BinaryLookup.And | array2[2];
+        var expected1 = array1[1] | BinaryTritOperator.And | array2[1];
+        var expected2 = array1[2] | BinaryTritOperator.And | array2[2];
         result[1].Should().Be(expected1, "because it should match individual trit operation");
         result[2].Should().Be(expected2, "because it should match individual trit operation");
         
@@ -117,7 +116,7 @@ public class TritArray27BinaryOperationsTests
     {
         var array1 = new TritArray27();
         var array2 = new TritArray27();
-        var operations = new[] { BinaryLookup.And, BinaryLookup.Or, BinaryLookup.Xor, BinaryLookup.Plus, BinaryLookup.Minus };
+        var operations = new[] { BinaryTritOperator.And, BinaryTritOperator.Or, BinaryTritOperator.Xor, BinaryTritOperator.Plus, BinaryTritOperator.Minus };
 
         // Set all positions with alternating values
         for (var i = 0; i < array1.Length; i++)

@@ -1,7 +1,5 @@
 namespace Ternary3.Operators;
 
-using Numbers;
-
 public static class UnaryLookup
 {
     /// <summary>

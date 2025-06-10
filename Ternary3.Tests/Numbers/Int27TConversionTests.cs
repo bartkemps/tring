@@ -1,4 +1,3 @@
-using Ternary3.Numbers;
 using FluentAssertions;
 
 namespace Ternary3.Tests.Numbers

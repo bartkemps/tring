@@ -1,9 +1,8 @@
 using FluentAssertions;
-using Ternary3.Numbers;
 
 namespace Ternary3.Tests.Numbers;
 
-using Ternary3.Numbers.Integers;
+using Integers;
 
 public class TritShiftTests
 {

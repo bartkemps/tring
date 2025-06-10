@@ -2,8 +2,7 @@ namespace Ternary3.Tests.Numbers.TritArrays;
 
 using Xunit;
 using FluentAssertions;
-using Ternary3.Numbers.TritArrays;
-using TritArray;
+using Ternary3.TritArrays;
 
 public class MultiplicationTests
 {

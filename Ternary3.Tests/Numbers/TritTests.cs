@@ -1,5 +1,5 @@
 using FluentAssertions;
-using Ternary3.Numbers;
+
 // ReSharper disable EqualExpressionComparison
 #pragma warning disable CS8629  
 #pragma warning disable CS1718  
@@ -192,7 +192,7 @@ public unsafe class TritTests
 
     private static Trit And(Trit left, Trit right)
     {
-        return left |global::Ternary3.Operators.BinaryLookup.And| right;
+        return left |global::Ternary3.Operators.BinaryTritOperator.And| right;
     }
     
     [Theory]
@@ -271,7 +271,7 @@ public unsafe class TritTests
         //  T | T  T  T
         //  0 | T  0  0
         //  1 | T  0  1
-        var min = new TritLookupTable(
+        var min = new BinaryTritOperator(
             Trit.Negative, Trit.Negative, Trit.Negative,
             Trit.Negative, Trit.Zero, Trit.Zero,
             Trit.Negative, Trit.Zero, Trit.Positive);

@@ -2,7 +2,6 @@
 
 using FluentAssertions;
 using System.Globalization;
-using Ternary3.Numbers;
 
 public class Int32Tests
 {

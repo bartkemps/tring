@@ -1,12 +1,12 @@
 using FluentAssertions;
-using Ternary3.Numbers;
 using Ternary3.Operators;
 using Ternary3.Operators.Operations;
-using Ternary3.Numbers.TritArrays;
 using Xunit;
-using static Ternary3.Operators.BinaryLookup;
+using static Ternary3.Operators.BinaryTritOperator;
 
 namespace Ternary3.Tests.Operators;
+
+using TritArrays;
 
 public class BinaryLookupTests
 {

@@ -1,7 +1,6 @@
 ﻿namespace Ternary3.Tests.Operators;
 
 using FluentAssertions;
-using Ternary3.Numbers;
 using Ternary3.Operators;
 
 public class OperatorTests
@@ -270,7 +269,7 @@ public class OperatorTests
         var value2 = Trit.Positive;
         var isEqualResult1 = Trit.Positive | IsNotEqualTo | Trit.Negative;
         var isEqualResult2 = Trit.Positive | isNotEqualTo | Trit.Negative;
-        var isEqualResult3 = -(Trit.Positive|BinaryLookup.Is | Trit.Negative); // or use ```static Import Ternary3.Operators.Operator;```.
+        var isEqualResult3 = -(Trit.Positive|BinaryTritOperator.Is | Trit.Negative); // or use ```static Import Ternary3.Operators.Operator;```.
         
         isNotNegativeResult1.Should().Be(Trit.Positive);
         isNotNegativeResult2.Should().Be(Trit.Positive);

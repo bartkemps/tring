@@ -1,6 +1,5 @@
 namespace Ternary3.Operators.Operations;
 
-using Numbers;
 using System;
 using System.Linq.Expressions;
 
@@ -18,9 +17,9 @@ internal class BinaryOperationBuilder<T> where T : struct
     private readonly Expression[] expressions2;
     private readonly ParameterExpression negativeResult = Expression.Parameter(typeof(T).MakeByRefType(), "negativeResult");
     private readonly ParameterExpression positiveResult = Expression.Parameter(typeof(T).MakeByRefType(), "positiveResult");
-    private TritLookupTable operationTable;
+    private BinaryTritOperator operationTable;
 
-    public BinaryOperationBuilder(TritLookupTable operationTable)
+    public BinaryOperationBuilder(BinaryTritOperator operationTable)
     {
         this.operationTable = operationTable;
         expressions1 = [negative1, Expression.Not(Expression.Or(negative1, positive1)), positive1];
@@ -32,7 +31,7 @@ internal class BinaryOperationBuilder<T> where T : struct
     public BinaryOperation Build()
     {
         if (operation != null) return operation;
-        return operation = operationCache.GetOrCreate(operationTable.Value, _ => BuildInner());
+        return operation = operationCache.GetOrCreate(operationTable.Value.Positive << 16 | operationTable.Value.Negative, _ => BuildInner());
     }
 
     private BinaryOperation BuildInner()

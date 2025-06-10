@@ -2,7 +2,7 @@
 namespace Ternary3.Operators;
 
 using System;
-using Numbers;
+
 internal static class UnaryOperation
 {
     private static readonly Func<Byte, Byte, BytePair>[] operationsByte =

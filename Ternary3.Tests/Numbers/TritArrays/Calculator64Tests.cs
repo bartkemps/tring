@@ -1,8 +1,7 @@
 namespace Ternary3.Tests.Numbers.TritArrays;
 
 using FluentAssertions;
-using Ternary3.TritArray;
-using Ternary3.Numbers.TritArrays;
+using Ternary3.TritArrays;
 
 public class Calculator64Tests
 {

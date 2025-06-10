@@ -79,7 +79,7 @@ public void Flip_FlipsCoin(
 [InlineData(1, 1)] 
 public void Build_GeneratesOperation_ForUInt32(sbyte trit1Value, sbyte trit2Value)
 {
-    var xor = new TritLookupTable(
+    var xor = new BinaryTritOperator(
         null, false, true,
         false, null, true,
         true, true, null

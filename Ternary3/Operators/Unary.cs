@@ -1,7 +1,5 @@
 ﻿namespace Ternary3.Operators;
 
-using Numbers;
-
 public class Unary
 {
     /// <summary>
@@ -10,7 +8,7 @@ public class Unary
     /// <param name="target">The trit value</param>
     /// <param name="table">The possible values</param>
     /// <exception cref="ArgumentException"></exception>
-    public static Trit Apply(Trit target, Trit[] table)
+    internal static Trit Apply(Trit target, Trit[] table)
     {
         if (table.Length != 3) throw new ArgumentException("Table must have exactly 3 elements.", nameof(table));
         return table[target.Value + 1];

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using FluentAssertions;
-using Ternary3.Numbers;
 using Ternary3.Operators.Operations;
 using Xunit;
 
@@ -60,7 +59,7 @@ namespace Ternary3.Tests.Operators.Operations
             int sc0, int sc1, int sc2,
             int expectedCount)
         {
-            var table = new Ternary3.Operators.TritLookupTable();
+            var table = new Ternary3.Operators.BinaryTritOperator();
             var builder = new BinaryOperationBuilder<uint>(table);
             var matrix = new[,]
             {

@@ -19,9 +19,9 @@ Balanced ternary has several interesting properties that make it unique among nu
 ### Documentation
 
 For more detailed documentation and mathematical background:
-- [Library API Documentation](https://your-api-docs-link.com)
+- [Library API Documentation](#Reference)
 - [Wikipedia: Balanced Ternary](https://en.wikipedia.org/wiki/Balanced_ternary)
-- [Source code repository](https://github.com/your-username/Ternary3)
+- [Source code repository](https://github.com/bartkemps/tring)
 
 ## Getting Started
 
@@ -170,16 +170,16 @@ public class BinaryLookupDemo
         // 10T (input1A) AND 100 (input1B) = 10T
         // Position by position: 1∧1=1, 0∧0=0, T∧0=T
 
-        // EXAMPLE 2: Custom operation on two shorts using a TritLookupTable
+        // EXAMPLE 2: Custom operation on two shorts using a BinaryTritOperator
         // ---------------------------------------------------------------
-        // A TritLookupTable defines the output for each of the 9 possible input trit combinations
+        // A BinaryTritOperator defines the output for each of the 9 possible input trit combinations
         short input2A = -6; // 000000T10 in balanced ternary
         short input2B = 13;  // 000000111 in balanced ternary
         // This lookup table defines a "mask" operation:
         // - Returns -1 only when both inputs are -1
         // - Returns 1 only when both inputs are 1
         // - Returns 0 in all other cases (including when inputs match as 0)
-        TritLookupTable mask = new([
+        BinaryTritOperator mask = new([
             [T, 0, 0],  // Row for when first input is -1 
             [0, 0, 0],  // Row for when first input is 0
             [0, 0, 1]   // Row for when first input is 1
@@ -190,7 +190,7 @@ public class BinaryLookupDemo
         
         // EXAMPLE 3: Complex custom operation on int and long
         // ------------------------------------------------
-        // The TritLookupTable can be initialized using nullable booleans:
+        // The BinaryTritOperator can be initialized using nullable booleans:
         // - null means -1 (negative)
         // - false means 0 (zero)
         // - true means 1 (positive)
@@ -198,7 +198,7 @@ public class BinaryLookupDemo
         long input3B = 987654321; 
         // This "decreaseBy" operation decreases the trit value based on specific combinations
         // The table is read as [first operand, second operand] → result
-        var decreaseBy = new TritLookupTable(
+        var decreaseBy = new BinaryTritOperator(
             null, true, false,   // When first trit is -1: [-1,-1]→-1, [-1,0]→1, [-1,1]→0
             false, null, true,   // When first trit is 0:  [0,-1]→0, [0,0]→-1, [0,1]→1
             true, false, null    // When first trit is 1:  [1,-1]→1, [1,0]→0, [1,1]→-1
@@ -214,7 +214,7 @@ public class BinaryLookupDemo
         TritArray27 input4B = 10;  // Will be ignored by this operation
         // This table inverts the first operand and ignores the second:
         // For any first trit value, the output is the same regardless of the second trit
-        var invertFirstIgnoreSecond = new TritLookupTable(
+        var invertFirstIgnoreSecond = new BinaryTritOperator(
             Trit.Positive, Trit.Positive, Trit.Positive,  // When first trit is -1, always return 1
             Trit.Zero, Trit.Zero, Trit.Zero,              // When first trit is 0, always return 0
             Trit.Negative, Trit.Negative, Trit.Negative   // When first trit is 1, always return -1
@@ -441,7 +441,7 @@ public class ConversionExample
   - [`Unary` Class](#unary-class) - A collection of all 27 unary operations for Trit values, as functions.
   - [`UnaryLookup` Class](#unarylookup-class) - A collection of all 27 unary operations for Trit values, as lookup-arrays.
   - [`BinaryLookup` Class](#binarylookup-class) - A collection of binary operations for Trit values, as lookup-arrays.
-  - [`TritLookupTable` Class](#tritlookuptable-class) - Defines  binary Trit operations using a lookup table.
+  - [`BinaryTritOperator` Class](#BinaryTritOperator-class) - Defines  binary Trit operations using a lookup table.
 - **Additional Types**
   - [`ITritArray` Interface](#itritarray-interface)
   - [`ITernaryInteger<T>` Interface](#iternaryintegert-interface)
@@ -476,7 +476,7 @@ Represents a trinary (three-valued) logical value that can be Negative (-1), Zer
 - `static bool operator !=(Trit left, Trit right)` - Determines if two Trit values are not equal.
 - `static unsafe UnsafeTritOperator operator |(Trit left, delegate*<Trit, Trit, Trit> operation)` - Creates an UnsafeTritOperator to enable custom operations using the pipe syntax.
 - `static TritOperator operator |(Trit left, Func<Trit, Trit, Trit> operation)` - Creates a TritOperator to enable custom operations using the pipe syntax.
-- `static LookupTritOperator operator |(Trit left, TritLookupTable table)` - Creates a LookupTritOperator to enable custom operations using the pipe syntax.
+- `static LookupTritOperator operator |(Trit left, BinaryTritOperator table)` - Creates a LookupTritOperator to enable custom operations using the pipe syntax.
 - `static LookupTritOperator operator |(Trit left, Trit[,] table)` - Creates a LookupTritOperator to enable custom operations using the pipe syntax.
 - `static Trit operator |(Trit left, Func<Trit, Trit> operation)` - Applies a unary operation function to the left Trit.
 - `static Trit operator |(Trit left, Trit[] table)` - Applies a unary operation lookup table to the left Trit.
@@ -510,7 +510,7 @@ Represents a fixed-size array of 3 trits (ternary digits).
 - `static TritArray3 operator |(TritArray3 array, Func<Trit, Trit> operation)` - Applies a unary operation to each trit in the array.
 - `static TritArray3 operator |(TritArray3 array, Trit[] table)` - Applies a lookup table operation to each trit in the array.
 - `static LookupTritArray3Operator operator |(TritArray3 array, Func<Trit, Trit, Trit> operation)` - Creates a binary operation context for this array.
-- `static LookupTritArray3Operator operator |(TritArray3 array, TritLookupTable table)` - Creates a binary operation context for this array.
+- `static LookupTritArray3Operator operator |(TritArray3 array, BinaryTritOperator table)` - Creates a binary operation context for this array.
 - `static LookupTritArray3Operator operator |(TritArray3 array, Trit[,] table)` - Creates a binary operation context for this array.
 - `static TritArray3 operator <<(TritArray3 array, int shift)` - Performs a left bitwise shift on the trit array.
 - `static TritArray3 operator >>(TritArray3 array, int shift)` - Performs a right bitwise shift on the trit array.
@@ -722,21 +722,21 @@ namespace Ternary3.Operators
 Provides a set of predefined binary operations implemented as lookup tables for Trit values.
 
 **Fields:**
-- `static readonly TritLookupTable And` - The logical AND operation.
-- `static readonly TritLookupTable Or` - The logical OR operation.
-- `static readonly TritLookupTable Xor` - The logical XOR operation.
-- `static readonly TritLookupTable Nand` - The logical NAND operation.
-- `static readonly TritLookupTable Nor` - The logical NOR operation.
-- `static readonly TritLookupTable Xnor` - The logical XNOR operation.
-- `static readonly TritLookupTable Implication` - The logical implication operation.
-- `static readonly TritLookupTable Consensus` - The consensus operation.
-- `static readonly TritLookupTable ConflictOrSame` - The conflict or same operation.
-- `static readonly TritLookupTable Min` - The minimum value operation.
-- `static readonly TritLookupTable Max` - The maximum value operation.
-- `static readonly TritLookupTable Sum` - The sum operation.
-- `static readonly TritLookupTable Product` - The product operation.
+- `static readonly BinaryTritOperator And` - The logical AND operation.
+- `static readonly BinaryTritOperator Or` - The logical OR operation.
+- `static readonly BinaryTritOperator Xor` - The logical XOR operation.
+- `static readonly BinaryTritOperator Nand` - The logical NAND operation.
+- `static readonly BinaryTritOperator Nor` - The logical NOR operation.
+- `static readonly BinaryTritOperator Xnor` - The logical XNOR operation.
+- `static readonly BinaryTritOperator Implication` - The logical implication operation.
+- `static readonly BinaryTritOperator Consensus` - The consensus operation.
+- `static readonly BinaryTritOperator ConflictOrSame` - The conflict or same operation.
+- `static readonly BinaryTritOperator Min` - The minimum value operation.
+- `static readonly BinaryTritOperator Max` - The maximum value operation.
+- `static readonly BinaryTritOperator Sum` - The sum operation.
+- `static readonly BinaryTritOperator Product` - The product operation.
 
-#### `TritLookupTable` Class
+#### `BinaryTritOperator` Class
 
 ```csharp
 namespace Ternary3.Operators
@@ -745,8 +745,8 @@ namespace Ternary3.Operators
 Represents a lookup table for binary operations on Trit values.
 
 **Constructors:**
-- `TritLookupTable(Trit[,] values)` - Initializes a new instance with a 2D array of Trit values.
-- `TritLookupTable(Trit[] negativeRow, Trit[] zeroRow, Trit[] positiveRow)` - Initializes a new instance with three arrays representing rows.
+- `BinaryTritOperator(Trit[,] values)` - Initializes a new instance with a 2D array of Trit values.
+- `BinaryTritOperator(Trit[] negativeRow, Trit[] zeroRow, Trit[] positiveRow)` - Initializes a new instance with three arrays representing rows.
 - Various other constructors supporting different parameter types.
 
 **Indexers:**
@@ -788,4 +788,5 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
-This library is licensed under [Your License]. See the LICENSE file for details.
+This library is licensed under the MIT License.  
+See the [LICENSE](LICENSE) file for details.

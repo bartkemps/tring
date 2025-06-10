@@ -1,7 +1,5 @@
 ﻿namespace Ternary3.Operators;
 
-using Numbers;
-
 /// <summary>
 /// Represents an operator that combines a Trit value with a function pointer to an operation.
 /// </summary>
