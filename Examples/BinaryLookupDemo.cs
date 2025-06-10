@@ -15,6 +15,9 @@ public class BinaryLookupDemo
 
     public static void Run()
     {
+        Console.WriteLine($"\r\n\r\n{nameof(BinaryLookupDemo)}");
+
+        
         // EXAMPLE 1: Built-in AND operation on two sbytes
         // ---------------------------------------------
         // In ternary, AND returns the minimum value of each trit pair

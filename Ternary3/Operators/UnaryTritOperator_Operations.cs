@@ -1,25 +1,13 @@
 ﻿namespace Ternary3.Operators;
 
-public class Unary
+public partial struct UnaryTritOperator
 {
-    /// <summary>
-    /// Apply a unary operation to a Trit value.
-    /// </summary>
-    /// <param name="target">The trit value</param>
-    /// <param name="table">The possible values</param>
-    /// <exception cref="ArgumentException"></exception>
-    internal static Trit Apply(Trit target, Trit[] table)
-    {
-        if (table.Length != 3) throw new ArgumentException("Table must have exactly 3 elements.", nameof(table));
-        return table[target.Value + 1];
-    }
-    
     /// <summary>
     /// Negative value.
     /// Negative for negative, zero and positive.
     /// [T, T, T]
     /// </summary>
-    public static Trit Negative(Trit trit) => Trit.Negative;
+    public static readonly UnaryTritOperator Negative = new(0);
 
 
     /// <summary>
@@ -27,7 +15,7 @@ public class Unary
     /// One less for every value greater than negative.
     /// [T, T, 0]
     /// </summary>
-    public static Trit Decrement(Trit trit) => trit.Value == 1 ? Trit.Zero : Trit.Negative;
+    public static readonly UnaryTritOperator Decrement = new(1);
 
 
     /// <summary>
@@ -35,14 +23,14 @@ public class Unary
     /// Positive for positive, negative otherwise.
     /// [T, T, 1]
     /// </summary>
-    public static Trit IsPositive(Trit trit) => trit.Value == 1 ? Trit.Positive : Trit.Negative;
+    public static readonly UnaryTritOperator IsPositive = new(2);
 
     /// <summary>
     /// Negate the Absolute Value.
     /// Zero for zero, negative otherwise.
     /// [T, 0, T]
     /// </summary>
-    public static Trit NegateAbsoluteValue(Trit trit) => trit.Value == 0 ? Trit.Zero : Trit.Negative;
+    public static readonly UnaryTritOperator NegateAbsoluteValue = new(3);
 
 
     /// <summary>
@@ -50,15 +38,14 @@ public class Unary
     /// Negative for negative, zero otherwise.
     /// [T, 0, 0]
     /// </summary>
-    public static Trit Ceil(Trit trit) => trit.Value == -1 ? trit : Trit.Zero;
-
+    public static readonly UnaryTritOperator Ceil = new(4);
 
     /// <summary>
     /// Identity.
     /// Negative for negative, zero for zero, positive for positive.
     /// [T, 0, 1]
     /// </summary>
-    public static Trit Identity(Trit trit) => trit;
+    public static readonly UnaryTritOperator Identity = new(5);
 
 
     /// <summary>
@@ -66,7 +53,7 @@ public class Unary
     /// Positive for zero, negative otherwise.
     /// [T, 1, T]
     /// </summary>
-    public static Trit IsZero(Trit trit) => trit.Value == 0 ? Trit.Positive : Trit.Negative;
+    public static readonly UnaryTritOperator IsZero = new(6);
 
 
     /// <summary>
@@ -74,7 +61,7 @@ public class Unary
     /// Zero for positive and vice versa.
     /// [T, 1, 0]
     /// </summary>
-    public static Trit KeepNegative(Trit trit) => trit.Value == -1 ? trit : new(trit.Value ^ 1);
+    public static readonly UnaryTritOperator KeepNegative = new(7);
 
 
     /// <summary>
@@ -82,7 +69,7 @@ public class Unary
     /// Negative for negative, positive otherwise.
     /// [T, 1, 1]
     /// </summary>
-    public static Trit IsNotNegative(Trit trit) => trit.Value == -1 ? trit : Trit.Positive;
+    public static readonly UnaryTritOperator IsNotNegative = new(8);
 
 
     /// <summary>
@@ -90,7 +77,7 @@ public class Unary
     /// Zero for negative, negative otherwise.
     /// [0, T, T]
     /// </summary>
-    public static Trit CeilIsNegative(Trit trit) => trit.Value == -1 ? Trit.Zero : Trit.Negative;
+    public static readonly UnaryTritOperator CeilIsNegative = new(9);
 
 
     /// <summary>
@@ -98,7 +85,7 @@ public class Unary
     /// Zero for positive, negative otherwise.
     /// [0, T, 0]
     /// </summary>
-    public static Trit CeilIsNotZero(Trit trit) => trit.Value != 0 ? Trit.Zero : Trit.Negative;
+    public static readonly UnaryTritOperator CeilIsNotZero = new(10);
 
 
     /// <summary>
@@ -106,7 +93,7 @@ public class Unary
     /// Positive for positive, negative otherwise.
     /// [0, T, 1]
     /// </summary>
-    public static Trit KeepPositive(Trit trit) => trit.Value == 1 ? Trit.Positive : new(-1 - trit.Value);
+    public static readonly UnaryTritOperator KeepPositive = new(11);
 
 
     /// <summary>
@@ -114,7 +101,7 @@ public class Unary
     /// Negative for positive, zero otherwise.
     /// [0, 0, T]
     /// </summary>
-    public static Trit CeilIsNotPositive(Trit trit) => trit.Value == 1 ? Trit.Negative : Trit.Zero;
+    public static readonly UnaryTritOperator CeilIsNotPositive = new(12);
 
 
     /// <summary>
@@ -122,7 +109,7 @@ public class Unary
     /// Always zero.
     /// [0, 0, 0]
     /// </summary>
-    public static Trit Zero(Trit _) => Trit.Zero;
+    public static readonly UnaryTritOperator Zero = new(13);
 
 
     /// <summary>
@@ -130,7 +117,14 @@ public class Unary
     /// Positive for positive, zero otherwise.
     /// [0, 0, 1]
     /// </summary>
-    public static Trit Floor(Trit trit) => trit.Value == 1 ? Trit.Positive : Trit.Zero;
+    public static readonly UnaryTritOperator Floor = new(14);
+    
+    /// <summary>
+    /// Alias for <see cref="Floor"/>.
+    /// Positive for positive, zero otherwise.
+    /// [0, 0, 1]
+    /// </summary>
+    public static readonly UnaryTritOperator FloorIsPositive = new(14);
 
 
     /// <summary>
@@ -138,7 +132,7 @@ public class Unary
     /// Positive for positive, negative otherwise.
     /// [0, 1, T]
     /// </summary>
-    public static Trit CyclicIncrement(Trit trit) => trit.Value == 1 ? Trit.Negative : new(trit.Value + 1);
+    public static readonly UnaryTritOperator CyclicIncrement = new(15);
 
 
     /// <summary>
@@ -146,7 +140,7 @@ public class Unary
     /// Zero for zero, positive otherwise.
     /// [0, 1, 0]
     /// </summary>
-    public static Trit FloorIsZero(Trit trit) => trit.Value == 0 ? Trit.Positive : Trit.Zero;
+    public static readonly UnaryTritOperator FloorIsZero = new(16);
 
 
     /// <summary>
@@ -154,7 +148,7 @@ public class Unary
     /// Zero for negative, positive otherwise.
     /// [0, 1, 1]
     /// </summary>
-    public static Trit Increment(Trit trit) => trit.Value == -1 ? Trit.Zero : Trit.Positive;
+    public static readonly UnaryTritOperator Increment = new(17);
 
 
     /// <summary>
@@ -162,7 +156,7 @@ public class Unary
     /// Negative for negative, positive otherwise.
     /// [1, T, T]
     /// </summary>
-    public static Trit IsNegative(Trit trit) => trit.Value == -1 ? Trit.Positive : Trit.Negative;
+    public static readonly UnaryTritOperator IsNegative = new(18);
 
 
     /// <summary>
@@ -170,7 +164,7 @@ public class Unary
     /// Negative for positive, zero for zero, positive for negative.
     /// [1, T, 0]
     /// </summary>
-    public static Trit CyclicDecrement(Trit trit) => trit.Value == -1 ? Trit.Positive : new(trit.Value - 1);
+    public static readonly UnaryTritOperator CyclicDecrement = new(19);
 
 
     /// <summary>
@@ -178,7 +172,7 @@ public class Unary
     /// Positive for negative and positive, negative for zero.
     /// [1, T, 1]
     /// </summary>
-    public static Trit IsNotZero(Trit trit) => trit.Value != 0 ? Trit.Positive : Trit.Negative;
+    public static readonly UnaryTritOperator IsNotZero = new(20);
 
 
     /// <summary>
@@ -186,7 +180,7 @@ public class Unary
     /// Positive for negative, negative for positive.
     /// [1, 0, T]
     /// </summary>
-    public static Trit Negate(Trit trit) => new(-trit.Value);
+    public static readonly UnaryTritOperator Negate = new(21);
 
 
     /// <summary>
@@ -194,7 +188,7 @@ public class Unary
     /// Zero for zero, positive otherwise.
     /// [1, 0, 0]
     /// </summary>
-    public static Trit FloorIsNegative(Trit trit) => trit.Value == -1 ? Trit.Positive : Trit.Zero;
+    public static readonly UnaryTritOperator FloorIsNegative = new(22);
 
 
     /// <summary>
@@ -202,7 +196,7 @@ public class Unary
     /// Always positive.
     /// [1, 0, 1]
     /// </summary>
-    public static Trit AbsoluteValue(Trit trit) => trit.Value == -1 ? Trit.Positive : trit;
+    public static readonly UnaryTritOperator AbsoluteValue = new(23);
 
 
     /// <summary>
@@ -210,7 +204,7 @@ public class Unary
     /// Positive for negative and zero, negative for positive.
     /// [1, 1, T]
     /// </summary>
-    public static Trit IsNotPositive(Trit trit) => trit.Value == 1 ? Trit.Negative : Trit.Positive;
+    public static readonly UnaryTritOperator IsNotPositive = new(24);
 
 
     /// <summary>
@@ -218,7 +212,7 @@ public class Unary
     /// Zero for positive, positive otherwise.
     /// [1, 1, 0]
     /// </summary>
-    public static Trit FloorIsNotPositive(Trit trit) => trit.Value == 1 ? Trit.Zero : Trit.Positive;
+    public static readonly UnaryTritOperator FloorIsNotPositive = new(25);
 
 
     /// <summary>
@@ -226,5 +220,5 @@ public class Unary
     /// Always positive.
     /// [1, 1, 1]
     /// </summary>
-    public static Trit Positive(Trit _) => Trit.Positive;
+    public static readonly UnaryTritOperator Positive = new(26);
 }

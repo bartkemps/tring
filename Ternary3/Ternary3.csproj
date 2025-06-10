@@ -11,7 +11,7 @@
         
         <!-- NuGet Package Metadata -->
         <PackageId>Ternary</PackageId>
-        <Version>1.0.0</Version>
+        <Version>2.0.0-beta</Version>
         <Authors>Bart Kemps</Authors>
         <Company></Company>
         <Description>A C# library for working with balanced ternary number system. Includes fixed-size ternary integers and trit arrays with various operations.</Description>

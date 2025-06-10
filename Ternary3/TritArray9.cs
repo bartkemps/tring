@@ -89,7 +89,7 @@ public struct TritArray9 : ITritArray<TritArray9>
     /// <param name="operation">The unary operation to apply to each trit.</param>
     /// <returns>A new TritArray9 with the operation applied to each trit.</returns>
     public static TritArray9 operator |(TritArray9 array, Func<Trit, Trit> operation)
-        => new(UnaryOperation.Apply(array.Negative, array.Positive, operation));
+        => array | new UnaryTritOperator(operation);
 
     /// <summary>
     /// Applies a lookup table operation to each trit in the array.
@@ -98,7 +98,7 @@ public struct TritArray9 : ITritArray<TritArray9>
     /// <param name="table">The lookup table containing the transformation values.</param>
     /// <returns>A new TritArray9 with the lookup operation applied to each trit.</returns>
     public static TritArray9 operator |(TritArray9 array, Trit[] table)
-        => new(UnaryOperation.Apply(array.Negative, array.Positive, table));
+        => array | new UnaryTritOperator(table);
 
     /// <summary>
     /// Creates a binary operation context for this array.

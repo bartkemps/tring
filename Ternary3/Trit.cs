@@ -5,15 +5,15 @@ using Operators;
 /// <summary>
 /// Represents a trinary (three-valued) logical value that can be Negative (-1), Zero (0), or Positive (1).
 /// </summary>
-public readonly struct Trit: IEquatable<Trit>
+public readonly struct Trit : IEquatable<Trit>
 {
     // In this class, a trit is represented by a short representing its value (-1, 0 and 1)
     // In other parts of this library, trits may be represented differently. 
-    
+
     private const sbyte NegativeValue = -1;
     private const sbyte ZeroValue = 0;
     private const sbyte PositiveValue = 1;
-    
+
     internal readonly sbyte Value;
 
     internal Trit(sbyte value) => Value = value;
@@ -215,7 +215,7 @@ public readonly struct Trit: IEquatable<Trit>
     /// Optimizes performance for custom operations by using direct table access instead of function calls.
     /// The table must be indexed from 0-2, with 0 corresponding to -1, 1 to 0, and 2 to +1 Trit values.
     /// </remarks>
-    public static BinaryLookupTritOperator operator |(Trit left, Trit[,]lookupTable) => new(left, lookupTable);
+    public static BinaryLookupTritOperator operator |(Trit left, Trit[,] lookupTable) => new(left, lookupTable);
 
     /// <summary>
     /// Creates a LookupTritOperator to enable custom operations using pre-computed lookup tables.
@@ -229,20 +229,23 @@ public readonly struct Trit: IEquatable<Trit>
     /// The table must be indexed from 0-2, with 0 corresponding to -1, 1 to 0, and 2 to +1 Trit values.
     /// </remarks>
     public static BinaryLookupTritOperator operator |(Trit left, BinaryTritOperator operation) => new(left, operation);
-    
+
     /// <summary>
     /// Performs a unary operation on a Trit value using a lookup table. 
     /// </summary>
     /// <param name="left">The operand</param>
     /// <param name="operation">The operation, represented as a 3 trit array</param>
-    public static Trit operator |(Trit left, Trit[] operation) => Unary.Apply(left, operation);
-    
+    public static Trit operator |(Trit left, Trit[] operation) => operation.Length == 3
+        ? operation[left.Value + 1]
+        : throw new ArgumentException("Operation must be a 3-element array representing the results for Negative, Zero, and Positive trits.", nameof(operation));
+
     /// <summary>
     /// 
     /// </summary>
     /// <param name="left">The operand</param>
     /// <param name="operation">The operation, represented as a function</param>
-    public static Trit operator |(Trit left, Func<Trit, Trit> operation) => operation(left);
+    public static Trit operator |(Trit left, Func<Trit, Trit> operation)
+        => operation?.Invoke(left) ?? throw new ArgumentNullException(nameof(operation), "Operation must not be null");
 
     /// <summary>
     /// Performs a logical XOR operation between a Boolean and a Trit value.
@@ -259,8 +262,6 @@ public readonly struct Trit: IEquatable<Trit>
     /// <param name="right">The Boolean operand.</param>
     /// <returns>A Trit value representing the logical XOR operation.</returns>
     public static Trit operator ^(Trit left, bool right) => right ? !left : left;
-    
+
     public static Trit[] AllValues => [Negative, Zero, Positive];
 }
-
-
