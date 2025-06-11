@@ -426,16 +426,14 @@ public class ConversionExample
 - **Core Types**
   - [`Trit` Struct](#trit-struct) - the ternary equivalent of a bit/bool
   - [`TritArray3` Struct](#tritarray3-struct) - a 3-trit number stored optimized for trit operation performance
-  - [`TritArray9` Struct](#tritarray9-struct) - a 39-trit number stored optimized for trit operation performance
+  - [`TritArray9` Struct](#tritarray9-struct) - a 9-trit number stored optimized for trit operation performance
   - [`TritArray27` Struct](#tritarray27-struct) - a 27-trit number stored optimized for trit operation performance
   - [`Int3T` Struct](#int3t-struct) - a 3-trit number stored optimized for arithmetic operations
   - [`Int9T` Struct](#int9t-struct) - a 9-trit number stored optimized for arithmetic operations
   - [`Int27T` Struct](#int27t-struct) - a 27-trit number stored optimized for arithmetic operations
-- **Operator Classes**
-  - [`Unary` Class](#unary-class) - A collection of all 27 unary operations for Trit values, as functions.
-  - [`UnaryLookup` Class](#unarylookup-class) - A collection of all 27 unary operations for Trit values, as lookup-arrays.
-  - [`BinaryLookup` Class](#binarylookup-class) - A collection of binary operations for Trit values, as lookup-arrays.
-  - [`BinaryTritOperator` Class](#BinaryTritOperator-class) - Defines  binary Trit operations using a lookup table.
+- **Operator Structs**
+  - [`UnaryTritOperator` Struct](#unarytritoperator-struct) - Defines unary Trit operations and provides standard operations
+  - [`BinaryTritOperator` Struct](#binarytritoperator-struct) - Defines binary Trit operations using a lookup table
 - **Additional Types**
   - [`ITritArray` Interface](#itritarray-interface)
   - [`ITernaryInteger<T>` Interface](#iternaryintegert-interface)
@@ -658,7 +656,7 @@ Represents a 27-trit signed integer, modeled after the Int64 type.
 
 ### Operator Classes
 
-#### `Unary` Class
+#### `UnaryTritOperator` Struct
 
 ```csharp
 namespace Ternary3.Operators
@@ -666,48 +664,37 @@ namespace Ternary3.Operators
 
 Provides a set of predefined unary operations for Trit values.
 
-**Methods:**
+**Static Properties and Methods:**
 - `static Trit Apply(Trit target, Trit[] table)` - Apply a unary operation to a Trit value.
-- `static Trit Negative(Trit trit)` - Negative value.
-- `static Trit Decrement(Trit trit)` - Decrement.
-- `static Trit IsPositive(Trit trit)` - Is the value positive?
-- `static Trit NegateAbsoluteValue(Trit trit)` - Negate the Absolute Value.
-- `static Trit Ceil(Trit trit)` - Ceiling Zero.
-- `static Trit Identity(Trit trit)` - Identity function.
-- `static Trit IsZero(Trit trit)` - Is the value zero?
-- `static Trit KeepNegative(Trit trit)` - Keep negative values.
-- `static Trit IsNotNegative(Trit trit)` - Is the value not negative?
-- `static Trit CeilIsNegative(Trit trit)` - Ceiling for negative values.
-- `static Trit CeilIsNotZero(Trit trit)` - Ceiling for non-zero values.
-- `static Trit KeepPositive(Trit trit)` - Keep positive values.
-- `static Trit CeilIsNotPositive(Trit trit)` - Ceiling for non-positive values.
-- `static Trit Zero(Trit trit)` - Zero value.
-- `static Trit Floor(Trit trit)` - Floor function.
-- `static Trit CyclicIncrement(Trit trit)` - Cycle increment.
-- `static Trit FloorIsZero(Trit trit)` - Floor for zero.
-- `static Trit Increment(Trit trit)` - Increment function.
-- `static Trit IsNegative(Trit trit)` - Is the value negative?
-- `static Trit CyclicDecrement(Trit trit)` - Cycle decrement.
-- `static Trit IsNotZero(Trit trit)` - Is the value not zero?
-- `static Trit Negate(Trit trit)` - Negate function.
-- `static Trit FloorIsNegative(Trit trit)` - Floor for negative values.
-- `static Trit AbsoluteValue(Trit trit)` - Absolute value.
-- `static Trit IsNotPositive(Trit trit)` - Is the value not positive?
-- `static Trit FloorIsNotPositive(Trit trit)` - Floor for non-positive values.
-- `static Trit Positive(Trit trit)` - Positive value.
+- `static readonly UnaryTritOperator Negative` - Negative value.
+- `static readonly UnaryTritOperator Decrement` - Decrement.
+- `static readonly UnaryTritOperator IsPositive` - Is the value positive?
+- `static readonly UnaryTritOperator NegateAbsoluteValue` - Negate the Absolute Value.
+- `static readonly UnaryTritOperator Ceil` - Ceiling Zero.
+- `static readonly UnaryTritOperator Identity` - Identity function.
+- `static readonly UnaryTritOperator IsZero` - Is the value zero?
+- `static readonly UnaryTritOperator KeepNegative` - Keep negative values.
+- `static readonly UnaryTritOperator IsNotNegative` - Is the value not negative?
+- `static readonly UnaryTritOperator CeilIsNegative` - Ceiling for negative values.
+- `static readonly UnaryTritOperator CeilIsNotZero` - Ceiling for non-zero values.
+- `static readonly UnaryTritOperator KeepPositive` - Keep positive values.
+- `static readonly UnaryTritOperator CeilIsNotPositive` - Ceiling for non-positive values.
+- `static readonly UnaryTritOperator Zero` - Zero value.
+- `static readonly UnaryTritOperator Floor` - Floor function.
+- `static readonly UnaryTritOperator CyclicIncrement` - Cycle increment.
+- `static readonly UnaryTritOperator FloorIsZero` - Floor for zero.
+- `static readonly UnaryTritOperator Increment` - Increment function.
+- `static readonly UnaryTritOperator IsNegative` - Is the value negative?
+- `static readonly UnaryTritOperator CyclicDecrement` - Cycle decrement.
+- `static readonly UnaryTritOperator IsNotZero` - Is the value not zero?
+- `static readonly UnaryTritOperator Negate` - Negate function.
+- `static readonly UnaryTritOperator FloorIsNegative` - Floor for negative values.
+- `static readonly UnaryTritOperator AbsoluteValue` - Absolute value.
+- `static readonly UnaryTritOperator IsNotPositive` - Is the value not positive?
+- `static readonly UnaryTritOperator FloorIsNotPositive` - Floor for non-positive values.
+- `static readonly UnaryTritOperator Positive` - Positive value.
 
-#### `UnaryLookup` Class
-
-```csharp
-namespace Ternary3.Operators
-```
-
-Provides a set of predefined unary operations implemented as lookup tables for Trit values.
-
-**Fields:**
-Similar operations as the Unary class, but implemented using lookup tables.
-
-#### `BinaryLookup` Class
+#### `BinaryTritOperator` Struct
 
 ```csharp
 namespace Ternary3.Operators
@@ -715,7 +702,7 @@ namespace Ternary3.Operators
 
 Provides a set of predefined binary operations implemented as lookup tables for Trit values.
 
-**Fields:**
+**Static Properties:**
 - `static readonly BinaryTritOperator Positive` - A constant that returns Positive (1) for any trit combination.
 - `static readonly BinaryTritOperator Zero` - A constant that returns Zero (0) for any trit combination.
 - `static readonly BinaryTritOperator Negative` - A constant that returns Negative (-1) for any trit combination.
@@ -728,4 +715,3 @@ Provides a set of predefined binary operations implemented as lookup tables for 
 - `static readonly BinaryTritOperator Is` - The equality check operation.
 - `static readonly BinaryTritOperator GreaterThan` - The greater than comparison operation.
 - `static readonly BinaryTritOperator LesserThan` - The less than comparison operation.
-

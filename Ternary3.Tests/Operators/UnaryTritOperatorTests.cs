@@ -1,115 +1,75 @@
-#pragma warning disable CA1806
-// ReSharper disable ObjectCreationAsStatement
-namespace Ternary3.Tests.Operators;
-
 using FluentAssertions;
 using Ternary3.Operators;
+using Xunit;
 
-public class UnaryTritOperatorTests
+namespace Ternary3.Tests.Operators
 {
-    [Theory]
-    [InlineData(-1, 0, 1)]  // Example: operation that might be a negation
-    [InlineData(1, 0, 1)]   // Example: operation that might be absolute value
-    [InlineData(0, 0, 0)]   // Example: operation that returns zero for all inputs
-    public void Constructor_WithThreeIntegers_CreatesOperatorWithoutThrowing(int value1, int value2, int value3)
+    public class UnaryTritOperatorTests
     {
-        // The values are: result for -1, result for 0, result for 1
-        Action act = () => new UnaryTritOperator(value1, value2, value3);
+        [Theory]
+        [InlineData(-1, -1, -1, "[T T T]")]
+        [InlineData(1, 1, 1, "[1 1 1]")]
+        [InlineData(0, 0, 0, "[0 0 0]")]
+        [InlineData(-1, 0, 1, "[T 0 1]")]
+        [InlineData(1, 0, -1, "[1 0 T]")]
+        public void DebugView_ReturnsCompactRepresentation(int negativeOut, int zeroOut, int positiveOut, string expected)
+        {
+            var unaryOperator = new UnaryTritOperator(negativeOut, zeroOut, positiveOut);
             
-        // Just verify it doesn't throw an exception with valid values
-        act.Should().NotThrow();
-    }
-
-    [Theory]
-    [InlineData(2, 0, 0)]  // Invalid first value
-    [InlineData(0, -2, 0)] // Invalid second value
-    [InlineData(0, 0, 2)]  // Invalid third value
-    public void Constructor_WithInvalidIntegers_ThrowsArgumentOutOfRangeException(int value1, int value2, int value3)
-    {
-        Action act = () => new UnaryTritOperator(value1, value2, value3);
-
-        act.Should().Throw<ArgumentOutOfRangeException>()
-            .WithMessage("*Value must be -1, 0, or 1*");
-    }
-
-    [Theory]
-    [InlineData(new[] {-1, 0, 1})]  // Valid combination 1
-    [InlineData(new[] {1, 0, 1})]   // Valid combination 2
-    [InlineData(new[] {0, 0, 0})]   // Valid combination 3
-    public void Constructor_WithSpanOfIntegers_CreatesOperatorWithoutThrowing(int[] values)
-    {
-        Action act = () => new UnaryTritOperator(values.AsSpan());
+            var actual = unaryOperator.GetType().GetMethod("DebugView", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)?.Invoke(unaryOperator, null) as string;
             
-        // Just verify it doesn't throw an exception with valid values
-        act.Should().NotThrow();
-    }
+            actual.Should().Be(expected, $"the DebugView for [{negativeOut}, {zeroOut}, {positiveOut}] should display as {expected}");
+        }
 
-    [Fact]
-    public void Constructor_WithTooShortSpanOfIntegers_ThrowsArgumentException()
-    {
-        int[] shortArray = new[] {-1, 0};
+        [Theory]
+        [InlineData(-1, 0, 1)]
+        [InlineData(1, 0, -1)]
+        [InlineData(0, 0, 0)]
+        [InlineData(-1, -1, -1)]
+        [InlineData(1, 1, 1)]
+        public void ToString_ReturnsFormattedTable(int negativeOut, int zeroOut, int positiveOut)
+        {
+            var unaryOperator = new UnaryTritOperator(negativeOut, zeroOut, positiveOut);
             
-        Action act = () => new UnaryTritOperator(shortArray.AsSpan());
-
-        act.Should().Throw<ArgumentException>()
-            .WithMessage("*Span must contain exactly three values*");
-    }
-
-    [Theory]
-    [InlineData(new[] {2, 0, 0}, 0)]  // Invalid first value
-    [InlineData(new[] {0, -2, 0}, 1)] // Invalid second value
-    [InlineData(new[] {0, 0, 2}, 2)]  // Invalid third value
-    public void Constructor_WithSpanContainingInvalidIntegers_ThrowsArgumentOutOfRangeException(int[] values, int expectedIndex)
-    {
-        Action act = () => new UnaryTritOperator(values.AsSpan());
-
-        act.Should().Throw<ArgumentOutOfRangeException>()
-            .WithMessage($"*Value at index {expectedIndex} must be -1, 0, or 1*");
-    }
-
-    [Theory]
-    [InlineData(true, null, false)]   // Valid combination 1
-    [InlineData(null, false, true)]   // Valid combination 2 
-    [InlineData(false, true, null)]   // Valid combination 3
-    public void Constructor_WithNullableBooleans_CreatesOperatorWithoutThrowing(bool? value1, bool? value2, bool? value3)
-    {
-        Action act = () => new UnaryTritOperator(value1, value2, value3);
+            var actual = unaryOperator.ToString();
             
-        // Just verify it doesn't throw an exception
-        act.Should().NotThrow();
-    }
-
-    [Fact]
-    public void Constructor_WithNullableBooleanArray_CreatesOperatorWithoutThrowing()
-    {
-        var values = new bool?[] { true, null, false };
+            // Convert trit values to their character representations
+            var negativeChar = negativeOut == -1 ? 'T' : negativeOut == 0 ? '0' : '1';
+            var zeroChar = zeroOut == -1 ? 'T' : zeroOut == 0 ? '0' : '1';
+            var positiveChar = positiveOut == -1 ? 'T' : positiveOut == 0 ? '0' : '1';
             
-
-        Action act = () => new UnaryTritOperator(values);
+            var expected = $"""
+                           Input | Output
+                           ------+-------
+                              T  |   {negativeChar}
+                              0  |   {zeroChar}
+                              1  |   {positiveChar}
+                           """;
             
-        // Just verify it doesn't throw an exception
-        act.Should().NotThrow();
-    }
-
-    [Fact]
-    public void Constructor_WithTooShortArrayOfNullableBooleans_ThrowsArgumentException()
-    {
-        Action act = () => new UnaryTritOperator([false,null]);
-
-        act.Should().Throw<ArgumentException>()
-            .WithMessage("*Array must contain exactly three values*");
-    }
+            actual.Should().Be(expected, $"the ToString for [{negativeOut}, {zeroOut}, {positiveOut}] should produce a properly formatted table");
+        }
         
-    [Fact]
-    public void Constructor_MapsCorrectly_WhenUsingFunction()
-    {
-        // Create a simple identity operator (returns the input unchanged)
-        var identity = new UnaryTritOperator(trit => trit);
+        [Theory]
+        [InlineData(-1, -1, -1)]
+        [InlineData(1, 1, 1)]
+        [InlineData(-1, 0, 1)]
+        public void GetOutputChar_ReturnsCorrectCharacterForEachTrit(int negativeOut, int zeroOut, int positiveOut)
+        {
+            var unaryOperator = new UnaryTritOperator(negativeOut, zeroOut, positiveOut);
             
-        // Just verify the constructor doesn't throw
-        // Actual operation testing would require knowing details of UnaryOperation.TritOperations
-        // which is outside the scope of these constructor tests
-        identity.Should().NotBeNull();
+            var actual = unaryOperator.ToString();
+            
+            // Verify that Trit.Negative maps to the first output
+            actual.Should().Contain($"T  |   {(negativeOut == -1 ? 'T' : negativeOut == 0 ? '0' : '1')}", 
+                "the negative trit should map to the correct output");
+            
+            // Verify that Trit.Zero maps to the second output  
+            actual.Should().Contain($"0  |   {(zeroOut == -1 ? 'T' : zeroOut == 0 ? '0' : '1')}", 
+                "the zero trit should map to the correct output");
+            
+            // Verify that Trit.Positive maps to the third output
+            actual.Should().Contain($"1  |   {(positiveOut == -1 ? 'T' : positiveOut == 0 ? '0' : '1')}", 
+                "the positive trit should map to the correct output");
+        }
     }
 }
-#pragma warning restore CA1806

@@ -1,19 +1,21 @@
 ﻿namespace Ternary3.Operators;
 
 using Operations;
+using System.Diagnostics;
 
 /// <summary>
 /// Represents a unary operator for trit operations.
 /// </summary>
+[DebuggerDisplay("{DebugView()}")]
 public partial struct UnaryTritOperator
 {
-    int operationIndex = 0;
+    byte operationIndex = 0;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="UnaryTritOperator"/> struct with the specified operation index.
     /// </summary>
     /// <param name="operationIndex">The index of the operation in the lookup table.</param>
-    private UnaryTritOperator(int operationIndex) => this.operationIndex = operationIndex;
+    private UnaryTritOperator(byte operationIndex) => this.operationIndex = operationIndex;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="UnaryTritOperator"/> struct with the specified operation function.
@@ -35,7 +37,7 @@ public partial struct UnaryTritOperator
     public UnaryTritOperator(Span<Trit> lookup)
     {
         if (lookup.Length != 3) throw new ArgumentException("Lookup must be Three trits long", nameof(lookup));
-        operationIndex = 13+lookup[0].Value + 3 * lookup[1].Value + 9 * lookup[2].Value;
+        operationIndex = (byte)(13 + lookup[0].Value + 3 * lookup[1].Value + 9 * lookup[2].Value);
     }
 
     /// <summary>
@@ -44,7 +46,7 @@ public partial struct UnaryTritOperator
     /// <param name="trit1">The result for Trit.Negative input.</param>
     /// <param name="trit2">The result for Trit.Zero input.</param>
     /// <param name="trit3">The result for Trit.Positive input.</param>
-    public UnaryTritOperator(Trit trit1, Trit trit2, Trit trit3) => operationIndex = 13+trit1.Value + 3 * trit2.Value + 9 * trit3.Value;
+    public UnaryTritOperator(Trit trit1, Trit trit2, Trit trit3) => operationIndex = (byte)(13 + trit1.Value + 3 * trit2.Value + 9 * trit3.Value);
 
     /// <summary>
     /// Initializes a new instance of the <see cref="UnaryTritOperator"/> struct with three integers representing trit values.
@@ -58,7 +60,7 @@ public partial struct UnaryTritOperator
         if (value1 is < -1 or > 1) throw new ArgumentOutOfRangeException(nameof(value1), "Value must be -1, 0, or 1");
         if (value2 is < -1 or > 1) throw new ArgumentOutOfRangeException(nameof(value2), "Value must be -1, 0, or 1");
         if (value3 is < -1 or > 1) throw new ArgumentOutOfRangeException(nameof(value3), "Value must be -1, 0, or 1");
-        operationIndex = 13+value1 + 3 * value2 + 9 * value3;
+        operationIndex = (byte)(13 + value1 + 3 * value2 + 9 * value3);
     }
 
     /// <summary>
@@ -76,7 +78,7 @@ public partial struct UnaryTritOperator
             if (values[i] is < -1 or > 1) throw new ArgumentOutOfRangeException(nameof(values), $"Value at index {i} must be -1, 0, or 1");
         }
 
-        operationIndex = 13+values[0] + 3 * values[1] + 9 * values[2];
+        operationIndex = (byte)(13 + values[0] + 3 * values[1] + 9 * values[2]);
     }
 
     /// <summary>
@@ -93,7 +95,7 @@ public partial struct UnaryTritOperator
         var trit2 = values[1] switch { true => 2, false => 0, _ => -1 };
         var trit3 = values[2] switch { true => 2, false => 0, _ => -1 };
 
-        operationIndex = trit1 + 3 * trit2 + 9 * trit3;
+        operationIndex = (byte)(trit1 + 3 * trit2 + 9 * trit3);
     }
 
     /// <summary>
@@ -195,4 +197,74 @@ public partial struct UnaryTritOperator
     /// <param name="unaryTritOperator">The operator to apply.</param>
     /// <returns>A new TritArray27 with the results of applying the operation.</returns>
     public static TritArray27 operator |(long trits, UnaryTritOperator unaryTritOperator) => ((TritArray27)trits) | unaryTritOperator;
+    
+    /// <summary>
+    /// Returns a string representation of the operation results in a compact format.
+    /// </summary>
+    /// <returns>A compact string showing operation results for inputs T, 0, and 1.</returns>
+    internal readonly string DebugView()
+    {
+        var chars = GetOutputChars();
+        return $"[{chars.Item1} {chars.Item2} {chars.Item3}]";
+    }
+
+    /// <summary>
+    /// Returns a string representation of the unary operation in a detailed format.
+    /// </summary>
+    /// <returns>A formatted string showing the operation results for each input value.</returns>
+    public readonly override string ToString()
+    {
+        var chars = GetOutputChars();
+        return $"""
+               Input | Output
+               ------+-------
+                  T  |   {chars.Item1}
+                  0  |   {chars.Item2}
+                  1  |   {chars.Item3}
+               """;
+    }
+    
+
+    private readonly (char,char,char) GetOutputChars()
+    {
+        Span<char> chars = stackalloc char[3];
+        var rest = operationIndex;
+        switch (rest)
+        {
+            case >= 18:
+                chars[0] = '1';
+                rest-= 18;
+                break;
+            case >= 9:
+                chars[0] = '0';
+                rest -= 9;
+                break;
+            default:
+                chars[0] = 'T';
+                break;
+        }
+        switch (rest)
+        {
+            case >= 6:
+                chars[1] = '1';
+                rest -= 6;
+                break;
+            case >= 3:
+                chars[1] = '0';
+                rest -= 3;
+                break;
+            default:
+                chars[1] = 'T';
+                break;
+        }
+        // Replace the switch expression with a traditional switch statement
+        if (rest >= 2)
+            chars[2] = '1';
+        else if (rest >= 1)
+            chars[2] = '0';
+        else
+            chars[2] = 'T';
+
+        return (chars[2], chars[1], chars[0]);
+    }
 }
