@@ -1,6 +1,5 @@
 using FluentAssertions;
 using Ternary3.Operators;
-using Xunit;
 
 namespace Ternary3.Tests.Operators
 {

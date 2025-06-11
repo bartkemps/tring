@@ -262,9 +262,9 @@ public class BinaryTritOperatorTests
     public void Equals_ShouldReturnFalse_WhenComparedWithNull()
     {
         var table = new BinaryTritOperator();
-        
+        object? o = null;
         table.Equals(null).Should().BeFalse();
-        table.Equals((object)null).Should().BeFalse();
+        table.Equals(o).Should().BeFalse();
     }
     
     [Fact]
