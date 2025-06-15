@@ -57,6 +57,10 @@
         <None Update="TritArrays\Pair.txt">
           <DependentUpon>Pair.tt</DependentUpon>
         </None>
+        <None Update="Operators\Operations\BinaryOperation.tt">
+          <Generator>TextTemplatingFileGenerator</Generator>
+          <LastGenOutput>BinaryOperation.cs</LastGenOutput>
+        </None>
     </ItemGroup>
 
     <ItemGroup>
@@ -84,6 +88,11 @@
         <AutoGen>True</AutoGen>
         <DesignTime>True</DesignTime>
         <DependentUpon>UnaryOperation.tt</DependentUpon>
+      </Compile>
+      <Compile Update="Operators\Operations\BinaryOperation.cs">
+        <AutoGen>True</AutoGen>
+        <DesignTime>True</DesignTime>
+        <DependentUpon>BinaryOperation.tt</DependentUpon>
       </Compile>
     </ItemGroup>
 

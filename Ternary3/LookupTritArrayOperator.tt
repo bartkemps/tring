@@ -50,12 +50,12 @@ private string GenerateLookupTritArrayOperator(int tritArraySize, string backing
            public readonly struct LookupTritArray{{tritArraySize}}Operator
            {
                private readonly TritArray{{tritArraySize}} trits;
-               private readonly BinaryOperationBuilder<{{backingType}}> builder;
+               private readonly BinaryTritOperator table;
            
                internal LookupTritArray{{tritArraySize}}Operator(TritArray{{tritArraySize}} trits, BinaryTritOperator table)
                {
                    this.trits = trits;
-                   this.builder = new(table);
+                   this.table = table;
                }
            
                internal LookupTritArray{{tritArraySize}}Operator(TritArray{{tritArraySize}} trits, Trit[,] table)
@@ -81,7 +81,7 @@ private string GenerateLookupTritArrayOperator(int tritArraySize, string backing
                /// <returns>A new TritArray{{tritArraySize}} representing the result of applying the binary operation to each corresponding pair of trits.</returns>
                public static TritArray{{tritArraySize}} operator |(LookupTritArray{{tritArraySize}}Operator left, TritArray{{tritArraySize}} right)
                {
-                   left.builder.Build()(left.trits.Negative, left.trits.Positive, right.Negative, right.Positive, out var negative, out var positive);
+                   left.table.Apply(left.trits.Negative, left.trits.Positive, right.Negative, right.Positive, out var negative, out var positive);
                    return new(negative, positive);
                }
                
@@ -94,7 +94,7 @@ private string GenerateLookupTritArrayOperator(int tritArraySize, string backing
                public static TritArray{{tritArraySize}} operator |(LookupTritArray{{tritArraySize}}Operator left, Int{{tritArraySize}}T right)
                {
                    var tritArray = (TritArray{{tritArraySize}})right;
-                   left.builder.Build()(left.trits.Negative, left.trits.Positive, tritArray.Negative, tritArray.Positive, out var negative, out var positive);
+                   left.table.Apply(left.trits.Negative, left.trits.Positive, tritArray.Negative, tritArray.Positive, out var negative, out var positive);
                    return new(negative, positive);
                }
                {{string.Join("\r\n", types.Select(type => PipeToTypeOperator(tritArraySize, backingType, type)))}}
@@ -115,7 +115,7 @@ private string PipeToTypeOperator(int tritArraySize, string backingType, string 
             public static TritArray{{tritArraySize}} operator |(LookupTritArray{{tritArraySize}}Operator left, {{type}} right)
             {
                 TritConverter.ConvertTo32Trits(right, out var rightNegative, out var rightPositive);
-                left.builder.Build()(left.trits.Negative, left.trits.Positive, ({{backingType}})rightNegative, ({{backingType}})rightPositive, out var negative, out var positive);
+                left.table.Apply(left.trits.Negative, left.trits.Positive, ({{backingType}})rightNegative, ({{backingType}})rightPositive, out var negative, out var positive);
                 return new(negative, positive);
             }
         """;

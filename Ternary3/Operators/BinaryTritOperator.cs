@@ -1,6 +1,8 @@
 namespace Ternary3.Operators;
 
+using Operations;
 using System.Diagnostics;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 
 /// <summary>
@@ -173,27 +175,6 @@ public partial struct BinaryTritOperator : IEquatable<BinaryTritOperator>
     {
     }
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private void SetTrit(int position, Trit value)
-    {
-        switch (value.Value)
-        {
-            case -1:
-                Value.Negative |= (ushort)(1 << position);
-                Value.Positive &= (ushort)~(1 << position);
-                return;
-            case 0:
-                Value.Negative &= (ushort)~(1 << position);
-                Value.Positive &= (ushort)~(1 << position);
-                return;
-            case 1:
-                Value.Positive |= (ushort)(1 << position);
-                Value.Negative &= (ushort)~(1 << position);
-                return;
-        }
-    }
-
-
     /// <summary>
     /// Accesses the lookup table to get the result for a pair of Trit values.
     /// </summary>
@@ -203,6 +184,13 @@ public partial struct BinaryTritOperator : IEquatable<BinaryTritOperator>
         get => Value[left.Value * 3 + right.Value + 4];
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         init => Value[left.Value * 3 + right.Value + 4] = value;
+    }
+
+    internal void Apply<T>(T negative1, T positive1, T negative2, T positive2, out T negativeResult, out T positiveResult)
+        where T : struct, IBinaryInteger<T>, IMinMaxValue<T>
+    {
+        negativeResult = BinaryOperation.GetTrits(Value.Negative, negative1, positive1, negative2, positive2);
+        positiveResult = BinaryOperation.GetTrits(Value.Positive, negative1, positive1, negative2, positive2);
     }
 
     /// <summary>

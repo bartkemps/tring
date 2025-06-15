@@ -15,12 +15,12 @@ using TritArrays;
 public readonly struct LookupTritArray9Operator
 {
     private readonly TritArray9 trits;
-    private readonly BinaryOperationBuilder<UInt16> builder;
+    private readonly BinaryTritOperator table;
 
     internal LookupTritArray9Operator(TritArray9 trits, BinaryTritOperator table)
     {
         this.trits = trits;
-        this.builder = new(table);
+        this.table = table;
     }
 
     internal LookupTritArray9Operator(TritArray9 trits, Trit[,] table)
@@ -46,7 +46,7 @@ public readonly struct LookupTritArray9Operator
     /// <returns>A new TritArray9 representing the result of applying the binary operation to each corresponding pair of trits.</returns>
     public static TritArray9 operator |(LookupTritArray9Operator left, TritArray9 right)
     {
-        left.builder.Build()(left.trits.Negative, left.trits.Positive, right.Negative, right.Positive, out var negative, out var positive);
+        left.table.Apply(left.trits.Negative, left.trits.Positive, right.Negative, right.Positive, out var negative, out var positive);
         return new(negative, positive);
     }
     
@@ -59,7 +59,7 @@ public readonly struct LookupTritArray9Operator
     public static TritArray9 operator |(LookupTritArray9Operator left, Int9T right)
     {
         var tritArray = (TritArray9)right;
-        left.builder.Build()(left.trits.Negative, left.trits.Positive, tritArray.Negative, tritArray.Positive, out var negative, out var positive);
+        left.table.Apply(left.trits.Negative, left.trits.Positive, tritArray.Negative, tritArray.Positive, out var negative, out var positive);
         return new(negative, positive);
     }
        
@@ -72,7 +72,7 @@ public readonly struct LookupTritArray9Operator
     public static TritArray9 operator |(LookupTritArray9Operator left, Int16 right)
     {
         TritConverter.ConvertTo32Trits(right, out var rightNegative, out var rightPositive);
-        left.builder.Build()(left.trits.Negative, left.trits.Positive, (UInt16)rightNegative, (UInt16)rightPositive, out var negative, out var positive);
+        left.table.Apply(left.trits.Negative, left.trits.Positive, (UInt16)rightNegative, (UInt16)rightPositive, out var negative, out var positive);
         return new(negative, positive);
     }
 }

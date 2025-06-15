@@ -15,12 +15,12 @@ using TritArrays;
 public readonly struct LookupTritArray27Operator
 {
     private readonly TritArray27 trits;
-    private readonly BinaryOperationBuilder<UInt32> builder;
+    private readonly BinaryTritOperator table;
 
     internal LookupTritArray27Operator(TritArray27 trits, BinaryTritOperator table)
     {
         this.trits = trits;
-        this.builder = new(table);
+        this.table = table;
     }
 
     internal LookupTritArray27Operator(TritArray27 trits, Trit[,] table)
@@ -46,7 +46,7 @@ public readonly struct LookupTritArray27Operator
     /// <returns>A new TritArray27 representing the result of applying the binary operation to each corresponding pair of trits.</returns>
     public static TritArray27 operator |(LookupTritArray27Operator left, TritArray27 right)
     {
-        left.builder.Build()(left.trits.Negative, left.trits.Positive, right.Negative, right.Positive, out var negative, out var positive);
+        left.table.Apply(left.trits.Negative, left.trits.Positive, right.Negative, right.Positive, out var negative, out var positive);
         return new(negative, positive);
     }
     
@@ -59,7 +59,7 @@ public readonly struct LookupTritArray27Operator
     public static TritArray27 operator |(LookupTritArray27Operator left, Int27T right)
     {
         var tritArray = (TritArray27)right;
-        left.builder.Build()(left.trits.Negative, left.trits.Positive, tritArray.Negative, tritArray.Positive, out var negative, out var positive);
+        left.table.Apply(left.trits.Negative, left.trits.Positive, tritArray.Negative, tritArray.Positive, out var negative, out var positive);
         return new(negative, positive);
     }
        
@@ -72,7 +72,7 @@ public readonly struct LookupTritArray27Operator
     public static TritArray27 operator |(LookupTritArray27Operator left, Int32 right)
     {
         TritConverter.ConvertTo32Trits(right, out var rightNegative, out var rightPositive);
-        left.builder.Build()(left.trits.Negative, left.trits.Positive, (UInt32)rightNegative, (UInt32)rightPositive, out var negative, out var positive);
+        left.table.Apply(left.trits.Negative, left.trits.Positive, (UInt32)rightNegative, (UInt32)rightPositive, out var negative, out var positive);
         return new(negative, positive);
     }
    
@@ -85,7 +85,7 @@ public readonly struct LookupTritArray27Operator
     public static TritArray27 operator |(LookupTritArray27Operator left, Int64 right)
     {
         TritConverter.ConvertTo32Trits(right, out var rightNegative, out var rightPositive);
-        left.builder.Build()(left.trits.Negative, left.trits.Positive, (UInt32)rightNegative, (UInt32)rightPositive, out var negative, out var positive);
+        left.table.Apply(left.trits.Negative, left.trits.Positive, (UInt32)rightNegative, (UInt32)rightPositive, out var negative, out var positive);
         return new(negative, positive);
     }
 }
