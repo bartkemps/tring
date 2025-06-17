@@ -17,14 +17,18 @@ namespace Ternary3.TritArrays;
 
 using System.Runtime.CompilerServices;
 
-internal static class Converter
+internal static class TritConverter
 {
-    public static void ToTrits(long value, out uint negative, out uint positive)
+<#
+    foreach (var(type,  backing) in new[] { ("Int32", "32"), ("Int64", "32"), ("Int64", "64") })
     {
-        if (value is > -364 and > 364)
+#>
+    public static void To<#=backing#>Trits(<#= type #> value, out UInt<#=backing#> negative, out UInt<#=backing#> positive)
+    {
+        if (value is > -364 and < 364)
         {
-            positive = Lookup(-(int)value);
-            negative = Lookup((int)value);
+            positive = LookupTrits(-(int)value);
+            negative = LookupTrits((int)value);
             return;
         }
         var swap = false;
@@ -37,7 +41,7 @@ internal static class Converter
         positive = 0;
         var index = 0;
         
-        while (value != 0 && index < 32)
+        while (value != 0 && index < <#=backing#>)
         {
             value = Math.DivRem(value, 729, out var remainder);
             if (remainder < -364)
@@ -45,18 +49,78 @@ internal static class Converter
                 remainder += 729;
                 value--;
             }
-            negative |= Lookup((int)remainder) << index;
-            positive |= Lookup(-(int)remainder) << index;
+            negative |= LookupTrits((int)remainder) << index;
+            positive |= LookupTrits(-(int)remainder) << index;
             index+=6;
         }
         if (swap) (positive, negative) = (negative, positive);
     }
 
+<# } #>
+    public static void To64Trits(Int128 value, out UInt64 negative, out UInt64 positive)
+    {
+        if (value > -364 && value < 364)
+        {
+            positive = LookupTrits(-(int)value);
+            negative = LookupTrits((int)value);
+            return;
+        }
+
+        var swap = false;
+        if (value > 0)
+        {
+            swap = true;
+            value = -value;
+        }
+
+        negative = 0;
+        positive = 0;
+        var index = 0;
+
+        while (value != 0 && index < 128)
+        {
+            var div = value / 729;
+            var remainder = value - (div * 729);
+            value = div;
+            if (remainder < -364)
+            {
+                remainder += 729;
+                value--;
+            }
+
+            negative |= LookupTrits((int)remainder) << index;
+            positive |= LookupTrits(-(int)remainder) << index;
+            index += 6;
+        }
+
+        if (swap) (positive, negative) = (negative, positive);
+    }
+<#
+    foreach (var(type,  backing) in new[] { ("Int32", "uint"), ("Int64", "uint"), ("Int64", "ulong"), ("Int128", "ulong") })
+    {
+#>
+    public static <#=type#> To<#=type#>(<#=backing#> negative, <#=backing#> positive)
+    {
+        <#=type#> result = 0;
+        <#=type#> pow = 1;
+        while (negative!= 0 || positive != 0)
+        {
+            result += (LookupValue((uint)positive&0xff) - LookupValue((uint)negative&0xff)) * pow;
+            negative >>= 8;
+            positive >>= 8;
+            pow *= 6561;
+        }
+        return result;
+    }
+<#
+    }
+#>
+
     /// <summary>
     /// Converts an index in the range of -364 to 364 to a trit array representation.
     /// call Lookup(index) for the negative and Lookup(index) for the positive part.
     /// </summary>
-    public static uint Lookup(int index) => index switch
+    public static uint LookupTrits(int index) => index switch
     {
 <#
     digits = [0,-1,1,1,1,1,1,1];
@@ -64,6 +128,28 @@ internal static class Converter
     {
         Increase(7);
         WriteLine($"        {i} => 0b{string.Concat(digits.Select(d => d == -1 ? '1' : '0'))},");
+    }
+#>
+        _ => throw new ArgumentOutOfRangeException(nameof(index))
+    };
+
+    /// <summary>
+    /// Converts the positive trit bytearray to the actual value.
+    /// </summary>
+    public static int LookupValue(uint index) => index switch
+    {
+<#
+    for (var i = 0; i <= 255; i++)
+    {
+        var result = (i&1)
+                     + ((i>>1)&1)*3
+                     + ((i>>2)&1)*3*3
+                     + ((i>>3)&1)*3*3*3
+                     + ((i>>4)&1)*3*3*3*3
+                     + ((i>>5)&1)*3*3*3*3*3
+                     + ((i>>6)&1)*3*3*3*3*3*3
+                     + ((i>>7)&1)*3*3*3*3*3*3*3;
+        WriteLine($"        {i} => {result},");
     }
 #>
         _ => throw new ArgumentOutOfRangeException(nameof(index))
@@ -146,5 +232,28 @@ internal static class Converter
                 negative &= ~mask;
                 break;
         }
+    }
+
+    public static string FormatTrits(ulong negative, ulong positive, int length)
+    {
+        var space = (length - 1) / 9;
+        var chars = new Span<char>(new char[length + space]);
+        for (var i = length + space - 10; i > 0; i -= 10)
+        {
+            chars[i] = ' ';
+        }
+
+        for (var i = 0; i < length; i++)
+        {
+            chars[space + length - i - 1] = ((negative >> i) & 1, (positive >> i) & 1) switch
+            {
+                (0, 0) => '0',
+                (0, 1) => '1',
+                (1, 0) => 'T',
+                _ => '?'
+            };
+            if (i % 9 == 8) space--;
+        }
+        return new(chars);
     }
 }

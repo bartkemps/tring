@@ -71,7 +71,7 @@ public readonly struct LookupTritArray9Operator
     /// <returns>A new TritArray9 representing the result of applying the binary operation to each corresponding pair of trits.</returns>
     public static TritArray9 operator |(LookupTritArray9Operator left, Int16 right)
     {
-        TritConverter.ConvertTo32Trits(right, out var rightNegative, out var rightPositive);
+        TritConverter.To32Trits(right, out var rightNegative, out var rightPositive);
         left.table.Apply(left.trits.Negative, left.trits.Positive, (UInt16)rightNegative, (UInt16)rightPositive, out var negative, out var positive);
         return new(negative, positive);
     }

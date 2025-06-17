@@ -219,7 +219,7 @@ LastGenerated = <#= DateTime.Now.ToString() #>
                /// <returns>A new TritArray{{trits}} representing the value in balanced ternary.</returns>
                private static TritArray{{trits}} Create(long value)
                {
-                   TritConverter.ConvertTo32Trits(value, out var negative, out var positive);
+                   TritConverter.To32Trits(value, out var negative, out var positive);
                    return new() { Negative = ({{backingType}})negative, Positive = ({{backingType}})positive };
                }
 
@@ -231,7 +231,7 @@ LastGenerated = <#= DateTime.Now.ToString() #>
                public static implicit operator TritArray{{trits}}(Int{{trits}}T value)
                {
                    // Cast to long to get the numeric value instead of trying to access a non-existent Value property
-                   TritConverter.ConvertTo32Trits(value, out var negative, out var positive);
+                   TritConverter.To32Trits(value, out var negative, out var positive);
                    return new() { Negative = ({{backingType}})negative, Positive = ({{backingType}})positive };
                }
            
@@ -240,7 +240,7 @@ LastGenerated = <#= DateTime.Now.ToString() #>
                /// </summary>
                /// <param name="array">The TritArray{{trits}} to convert.</param>
                /// <returns>An Int{{trits}}T representing the same value.</returns>
-               public static implicit operator Int{{trits}}T(TritArray{{trits}} array) => ({{intBackingType}})TritConverter.TritsToInt{{(intBackingType == "Int64" ? "64" : "32")}}(array.Negative, array.Positive);
+               public static implicit operator Int{{trits}}T(TritArray{{trits}} array) => ({{intBackingType}})TritConverter.ToInt{{(intBackingType == "Int64" ? "64" : "32")}}(array.Negative, array.Positive);
                
                {{CreateConversionOperators(trits, intBackingType)}}
 
@@ -280,7 +280,7 @@ LastGenerated = <#= DateTime.Now.ToString() #>
                       /// </summary>
                       /// <param name="array">The TritArray{trits} to convert.</param>
                       /// <returns>A sbyte representing the same value.</returns>
-                      public static implicit operator sbyte(TritArray{trits} array) => (sbyte)TritConverter.TritsToInt32(array.Negative & BitMask, array.Positive & BitMask);
+                      public static implicit operator sbyte(TritArray{trits} array) => (sbyte)TritConverter.ToInt32(array.Negative & BitMask, array.Positive & BitMask);
        
                       /// <summary>
                       /// Defines an explicit conversion of an int to a TritArray{trits}.
@@ -294,7 +294,7 @@ LastGenerated = <#= DateTime.Now.ToString() #>
                       /// </summary>
                       /// <param name="array">The TritArray{trits} to convert.</param>
                       /// <returns>An int representing the same value.</returns>
-                      public static implicit operator int(TritArray{trits} array) => (int)TritConverter.TritsToInt32(array.Negative & BitMask, array.Positive & BitMask);
+                      public static implicit operator int(TritArray{trits} array) => (int)TritConverter.ToInt32(array.Negative & BitMask, array.Positive & BitMask);
        
                       /// <summary>
                       /// Defines an explicit conversion of a long to a TritArray{trits}.
@@ -308,7 +308,7 @@ LastGenerated = <#= DateTime.Now.ToString() #>
                       /// </summary>
                       /// <param name="array">The TritArray{trits} to convert.</param>
                       /// <returns>A long representing the same value.</returns>
-                      public static implicit operator long(TritArray{trits} array) => TritConverter.TritsToInt64(array.Negative & BitMask, array.Positive & BitMask);
+                      public static implicit operator long(TritArray{trits} array) => TritConverter.ToInt64(array.Negative & BitMask, array.Positive & BitMask);
                """;
         }
         if (intBackingType == "Int16")
@@ -327,7 +327,7 @@ LastGenerated = <#= DateTime.Now.ToString() #>
                       /// </summary>
                       /// <param name="array">The TritArray{trits} to convert.</param>
                       /// <returns>A short representing the same value.</returns>
-                      public static implicit operator short(TritArray{trits} array) => (short)TritConverter.TritsToInt32(array.Negative & BitMask, array.Positive & BitMask);
+                      public static implicit operator short(TritArray{trits} array) => (short)TritConverter.ToInt32(array.Negative & BitMask, array.Positive & BitMask);
        
                       /// <summary>
                       /// Defines an explicit conversion of an int to a TritArray{trits}.
@@ -341,7 +341,7 @@ LastGenerated = <#= DateTime.Now.ToString() #>
                       /// </summary>
                       /// <param name="array">The TritArray{trits} to convert.</param>
                       /// <returns>An int representing the same value.</returns>
-                      public static implicit operator int(TritArray{trits} array) => (int)TritConverter.TritsToInt32(array.Negative & BitMask, array.Positive & BitMask);
+                      public static implicit operator int(TritArray{trits} array) => (int)TritConverter.ToInt32(array.Negative & BitMask, array.Positive & BitMask);
        
                       /// <summary>
                       /// Defines an explicit conversion of a long to a TritArray{trits}.
@@ -355,7 +355,7 @@ LastGenerated = <#= DateTime.Now.ToString() #>
                       /// </summary>
                       /// <param name="array">The TritArray{trits} to convert.</param>
                       /// <returns>A long representing the same value.</returns>
-                      public static implicit operator long(TritArray{trits} array) => TritConverter.TritsToInt64(array.Negative & BitMask, array.Positive & BitMask);
+                      public static implicit operator long(TritArray{trits} array) => TritConverter.ToInt64(array.Negative & BitMask, array.Positive & BitMask);
                """;
         }
         // Int64
@@ -373,7 +373,7 @@ LastGenerated = <#= DateTime.Now.ToString() #>
                       /// </summary>
                       /// <param name="array">The TritArray{trits} to convert.</param>
                       /// <returns>An int representing the same value.</returns>
-                      public static explicit operator int(TritArray{trits} array) => (int)TritConverter.TritsToInt64(array.Negative & BitMask, array.Positive & BitMask);
+                      public static explicit operator int(TritArray{trits} array) => (int)TritConverter.ToInt64(array.Negative & BitMask, array.Positive & BitMask);
        
                       /// <summary>
                       /// Defines an implicit conversion of a long to a TritArray{trits}.
@@ -387,7 +387,7 @@ LastGenerated = <#= DateTime.Now.ToString() #>
                       /// </summary>
                       /// <param name="array">The TritArray{trits} to convert.</param>
                       /// <returns>A long representing the same value.</returns>
-                      public static implicit operator long(TritArray{trits} array) => TritConverter.TritsToInt64(array.Negative & BitMask, array.Positive & BitMask);
+                      public static implicit operator long(TritArray{trits} array) => TritConverter.ToInt64(array.Negative & BitMask, array.Positive & BitMask);
                """;
     }
 #>

@@ -230,14 +230,14 @@ internal class Calculator
         out uint negativeResult, out uint positiveResult)
     {
         // Convert to binary integers (positive - negative)
-        var binary1 = TritConverter.TritsToInt32(negative1, positive1);
-        var binary2 = TritConverter.TritsToInt32(negative2, positive2);
+        var binary1 = TritConverter.ToInt32(negative1, positive1);
+        var binary2 = TritConverter.ToInt32(negative2, positive2);
 
         // Perform multiplication in binary
         var result = binary1 * binary2;
 
         // Convert back to balanced ternary
-        TritConverter.ConvertTo32Trits(result, out negativeResult, out positiveResult);
+        TritConverter.To32Trits(result, out negativeResult, out positiveResult);
     }
 
     private static void MultiplyByConversionToInt64(
@@ -246,14 +246,14 @@ internal class Calculator
         out uint negativeResult, out uint positiveResult)
     {
         // Convert to binary integers (positive - negative)
-        var binary1 = TritConverter.TritsToInt64(negative1, positive1);
-        var binary2 = TritConverter.TritsToInt64(negative2, positive2);
+        var binary1 = TritConverter.ToInt64(negative1, positive1);
+        var binary2 = TritConverter.ToInt64(negative2, positive2);
 
         // Perform multiplication in binary
         var result = binary1 * binary2;
 
         // Convert back to balanced ternary
-        TritConverter.ConvertTo32Trits(result, out negativeResult, out positiveResult);
+        TritConverter.To32Trits(result, out negativeResult, out positiveResult);
     }
     
     private static void MultiplyByConversionToInt64(
@@ -262,14 +262,14 @@ internal class Calculator
         out ulong negativeResult, out ulong positiveResult)
     {
         // Convert to binary integers (positive - negative)
-        var binary1 = TritConverter.TritsToInt64(negative1, positive1);
-        var binary2 = TritConverter.TritsToInt64(negative2, positive2);
+        var binary1 = TritConverter.ToInt64(negative1, positive1);
+        var binary2 = TritConverter.ToInt64(negative2, positive2);
 
         // Perform multiplication in binary
         var result = binary1 * binary2;
 
         // Convert back to balanced ternary
-        TritConverter.ConvertTo64Trits(result, out negativeResult, out positiveResult);
+        TritConverter.To64Trits(result, out negativeResult, out positiveResult);
     }
 
     private static void MultiplyByConversionToInt128(
@@ -278,14 +278,14 @@ internal class Calculator
         out ulong negativeResult, out ulong positiveResult)
     {
         // Convert to binary integers (positive - negative)
-        var binary1 = TritConverter.TritsToInt128(negative1, positive1);
-        var binary2 = TritConverter.TritsToInt128(negative2, positive2);
+        var binary1 = TritConverter.ToInt128(negative1, positive1);
+        var binary2 = TritConverter.ToInt128(negative2, positive2);
 
         // Perform multiplication in binary
         var result = binary1 * binary2;
 
         // Convert back to balanced ternary
-        TritConverter.ConvertTo64Trits(result, out negativeResult, out positiveResult);
+        TritConverter.To64Trits(result, out negativeResult, out positiveResult);
     }
 }
 

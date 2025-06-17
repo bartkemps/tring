@@ -104,10 +104,10 @@ public class TritConverterTests
     public void ConvertTo32Trits_Int32_RoundTripsCorrectly(int value)
     {
         // Convert to trits
-        TritConverter.ConvertTo32Trits(value, out var negative, out var positive);
+        TritConverter.To32Trits(value, out var negative, out var positive);
         
         // Convert back to int32
-        var roundTrip = TritConverter.TritsToInt32(negative, positive);
+        var roundTrip = TritConverter.ToInt32(negative, positive);
         
         // Verify the value is preserved
         roundTrip.Should().Be(value, $"because converting {value} to trits and back should preserve the value");
@@ -128,14 +128,16 @@ public class TritConverterTests
     public void ConvertTo32Trits_Int64_RoundTripsCorrectly(long value)
     {
         // Convert to trits
-        TritConverter.ConvertTo32Trits(value, out var negative, out var positive);
-        Converter.ToTrits(value, out var negative2, out var positive2);
+        TritConverter.To32Trits(value, out var negative, out var positive);
+        TritConverter.To32Trits(value, out var negative2, out var positive2);
         
         negative2.Should().Be(negative, "because ConvertToBalancedBase3 should produce the same negative bits as ConvertTo32Trits");
         positive2.Should().Be(positive, "because ConvertToBalancedBase3 should produce the same negative bits as ConvertTo32Trits");
         
         // Convert back to int64
-        var roundTrip = TritConverter.TritsToInt64(negative, positive);
+        var roundTrip = TritConverter.ToInt64(negative, positive);
+        var roundTrip2 = TritConverter.ToInt64(negative2, positive2);
+        roundTrip2.Should().Be(roundTrip, "because ToInt64 should produce the same value as TritsToInt64");
         
         // For very large values that exceed 32 trits capacity, we can't expect perfect roundtrip
         if (value > int.MaxValue || value < int.MinValue)

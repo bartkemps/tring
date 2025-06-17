@@ -61,9 +61,9 @@
           <Generator>TextTemplatingFileGenerator</Generator>
           <LastGenOutput>BinaryOperation.cs</LastGenOutput>
         </None>
-        <None Update="TritArrays\Converter.tt">
+        <None Update="TritArrays\TritConverter.tt">
           <Generator>TextTemplatingFileGenerator</Generator>
-          <LastGenOutput>Converter.cs</LastGenOutput>
+          <LastGenOutput>TritConverter.cs</LastGenOutput>
         </None>
     </ItemGroup>
 
@@ -98,10 +98,10 @@
         <DesignTime>True</DesignTime>
         <DependentUpon>BinaryOperation.tt</DependentUpon>
       </Compile>
-      <Compile Update="TritArrays\Converter.cs">
+      <Compile Update="TritArrays\TritConverter.cs">
         <AutoGen>True</AutoGen>
         <DesignTime>True</DesignTime>
-        <DependentUpon>Converter.tt</DependentUpon>
+        <DependentUpon>TritConverter.tt</DependentUpon>
       </Compile>
     </ItemGroup>
 

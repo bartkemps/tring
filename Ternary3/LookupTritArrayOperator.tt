@@ -114,7 +114,7 @@ private string PipeToTypeOperator(int tritArraySize, string backingType, string 
             /// <returns>A new TritArray{{tritArraySize}} representing the result of applying the binary operation to each corresponding pair of trits.</returns>
             public static TritArray{{tritArraySize}} operator |(LookupTritArray{{tritArraySize}}Operator left, {{type}} right)
             {
-                TritConverter.ConvertTo32Trits(right, out var rightNegative, out var rightPositive);
+                TritConverter.To32Trits(right, out var rightNegative, out var rightPositive);
                 left.table.Apply(left.trits.Negative, left.trits.Positive, ({{backingType}})rightNegative, ({{backingType}})rightPositive, out var negative, out var positive);
                 return new(negative, positive);
             }

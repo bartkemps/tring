@@ -17,7 +17,7 @@ public class ConversionTests
     [InlineData(int.MaxValue,738856, 1049045)]
     public void ConvertToTrits_ShouldProduceCorrectTrits(int value, uint expectedNegative, uint expectedPositive)
     {
-        TritConverter.ConvertTo32Trits(value, out var negative, out var positive);
+        TritConverter.To32Trits(value, out var negative, out var positive);
         negative.Should().Be(expectedNegative);
         positive.Should().Be(expectedPositive);
     }
@@ -38,7 +38,7 @@ public class ConversionTests
     [InlineData(long.MinValue,1498450313608UL, 687268435025UL)]
     public void ConvertTo64Trits_ShouldProduceCorrectTrits(long value, ulong expectedNegative, ulong expectedPositive)
     {
-        TritConverter.ConvertTo64Trits(value, out var negative, out var positive);
+        TritConverter.To64Trits(value, out var negative, out var positive);
         negative.Should().Be(expectedNegative);
         positive.Should().Be(expectedPositive);
     }
@@ -55,7 +55,7 @@ public class ConversionTests
     [InlineData(int.MaxValue,738856, 1049045)]
     public void ConvertToInt32_ShouldPreserveValue_ForUint32Input(int expected, uint negative, uint positive)
     {
-        var actual = TritConverter.TritsToInt32(negative, positive);
+        var actual = TritConverter.ToInt32(negative, positive);
         actual.Should().Be(expected);
     }
     
@@ -71,7 +71,7 @@ public class ConversionTests
     [InlineData(926510094425920L,0, uint.MaxValue)]
     public void ConvertToInt64_ShouldPreserveValue_ForUint32Input(long expectedValue, uint negative, uint positive)
     {
-        var actual = TritConverter.TritsToInt64(negative, positive);
+        var actual = TritConverter.ToInt64(negative, positive);
         actual.Should().Be(expectedValue);
     }
     
@@ -87,7 +87,7 @@ public class ConversionTests
     [InlineData(long.MinValue,1498450313608UL, 687268435025UL)]
     public void ConvertToInt64_ShouldPreserveValue_ForUint64Input(long expectedValue, ulong negative, ulong positive)
     {
-        var actual = TritConverter.TritsToInt64(negative, positive);
+        var actual = TritConverter.ToInt64(negative, positive);
         actual.Should().Be(expectedValue);
     }
 }

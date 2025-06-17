@@ -71,7 +71,7 @@ public readonly struct LookupTritArray27Operator
     /// <returns>A new TritArray27 representing the result of applying the binary operation to each corresponding pair of trits.</returns>
     public static TritArray27 operator |(LookupTritArray27Operator left, Int32 right)
     {
-        TritConverter.ConvertTo32Trits(right, out var rightNegative, out var rightPositive);
+        TritConverter.To32Trits(right, out var rightNegative, out var rightPositive);
         left.table.Apply(left.trits.Negative, left.trits.Positive, (UInt32)rightNegative, (UInt32)rightPositive, out var negative, out var positive);
         return new(negative, positive);
     }
@@ -84,7 +84,7 @@ public readonly struct LookupTritArray27Operator
     /// <returns>A new TritArray27 representing the result of applying the binary operation to each corresponding pair of trits.</returns>
     public static TritArray27 operator |(LookupTritArray27Operator left, Int64 right)
     {
-        TritConverter.ConvertTo32Trits(right, out var rightNegative, out var rightPositive);
+        TritConverter.To32Trits(right, out var rightNegative, out var rightPositive);
         left.table.Apply(left.trits.Negative, left.trits.Positive, (UInt32)rightNegative, (UInt32)rightPositive, out var negative, out var positive);
         return new(negative, positive);
     }

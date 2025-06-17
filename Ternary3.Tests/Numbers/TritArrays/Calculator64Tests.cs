@@ -47,13 +47,13 @@ public class Calculator64Tests
     public void MultiplyBalancedTernary_LargeNumbers_ShouldPreserveOriginalValueInRoundTrip(long value)
     {
         // Convert the value to balanced ternary
-        TritConverter.ConvertTo64Trits(value, out var neg1, out var pos1);
+        TritConverter.To64Trits(value, out var neg1, out var pos1);
         
         // Multiply by 1
         Calculator.MultiplyBalancedTernary(neg1, pos1, 0UL, 1UL, out var resultNeg, out var resultPos);
         
         // Convert back and verify
-        var result = TritConverter.TritsToInt64(resultNeg, resultPos);
+        var result = TritConverter.ToInt64(resultNeg, resultPos);
         result.Should().Be(value);
     }
 }

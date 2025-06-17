@@ -181,7 +181,7 @@ public struct TritArray9 : ITritArray<TritArray9>
     /// <returns>A new TritArray9 representing the value in balanced ternary.</returns>
     private static TritArray9 Create(long value)
     {
-        TritConverter.ConvertTo32Trits(value, out var negative, out var positive);
+        TritConverter.To32Trits(value, out var negative, out var positive);
         return new() { Negative = (UInt16)negative, Positive = (UInt16)positive };
     }
 
@@ -193,7 +193,7 @@ public struct TritArray9 : ITritArray<TritArray9>
     public static implicit operator TritArray9(Int9T value)
     {
         // Cast to long to get the numeric value instead of trying to access a non-existent Value property
-        TritConverter.ConvertTo32Trits(value, out var negative, out var positive);
+        TritConverter.To32Trits(value, out var negative, out var positive);
         return new() { Negative = (UInt16)negative, Positive = (UInt16)positive };
     }
 
@@ -202,7 +202,7 @@ public struct TritArray9 : ITritArray<TritArray9>
     /// </summary>
     /// <param name="array">The TritArray9 to convert.</param>
     /// <returns>An Int9T representing the same value.</returns>
-    public static implicit operator Int9T(TritArray9 array) => (Int16)TritConverter.TritsToInt32(array.Negative, array.Positive);
+    public static implicit operator Int9T(TritArray9 array) => (Int16)TritConverter.ToInt32(array.Negative, array.Positive);
     
     
        /// <summary>
@@ -217,7 +217,7 @@ public struct TritArray9 : ITritArray<TritArray9>
        /// </summary>
        /// <param name="array">The TritArray9 to convert.</param>
        /// <returns>A short representing the same value.</returns>
-       public static implicit operator short(TritArray9 array) => (short)TritConverter.TritsToInt32(array.Negative & BitMask, array.Positive & BitMask);
+       public static implicit operator short(TritArray9 array) => (short)TritConverter.ToInt32((uint)(array.Negative & BitMask), array.Positive & BitMask);
 
        /// <summary>
        /// Defines an explicit conversion of an int to a TritArray9.
@@ -231,7 +231,7 @@ public struct TritArray9 : ITritArray<TritArray9>
        /// </summary>
        /// <param name="array">The TritArray9 to convert.</param>
        /// <returns>An int representing the same value.</returns>
-       public static implicit operator int(TritArray9 array) => (int)TritConverter.TritsToInt32(array.Negative & BitMask, array.Positive & BitMask);
+       public static implicit operator int(TritArray9 array) => (int)TritConverter.ToInt32(array.Negative & BitMask, array.Positive & BitMask);
 
        /// <summary>
        /// Defines an explicit conversion of a long to a TritArray9.
@@ -245,7 +245,7 @@ public struct TritArray9 : ITritArray<TritArray9>
        /// </summary>
        /// <param name="array">The TritArray9 to convert.</param>
        /// <returns>A long representing the same value.</returns>
-       public static implicit operator long(TritArray9 array) => TritConverter.TritsToInt64(array.Negative & BitMask, array.Positive & BitMask);
+       public static implicit operator long(TritArray9 array) => TritConverter.ToInt64(array.Negative & BitMask, array.Positive & BitMask);
 
     #endregion
 
