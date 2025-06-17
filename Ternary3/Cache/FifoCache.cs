@@ -1,4 +1,4 @@
-﻿namespace Ternary3.Operators.Operations;
+﻿namespace Ternary3.Cache;
 
 using System.Diagnostics.CodeAnalysis;
 

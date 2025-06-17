@@ -10,11 +10,11 @@ internal static class TritConverter
 {
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Trit GetTrit(byte negative, byte positive, int index)
-        => new((int)((positive >> index) & 1) - (int)((negative >> index) & 1));
+        => new(((positive >> index) & 1) - ((negative >> index) & 1));
     
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Trit GetTrit(ushort negative, ushort positive, int index)
-        => new((int)((positive >> index) & 1) - (int)((negative >> index) & 1));
+        => new(((positive >> index) & 1) - ((negative >> index) & 1));
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Trit GetTrit(uint negative, uint positive, int index)
@@ -45,6 +45,7 @@ internal static class TritConverter
         }
     }
     
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void SetTrit(ref ushort negative, ref ushort positive, int index, Trit value)
     {
         var mask = 1 << index;

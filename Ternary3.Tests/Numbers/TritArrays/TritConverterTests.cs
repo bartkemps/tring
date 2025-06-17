@@ -121,12 +121,18 @@ public class TritConverterTests
     [InlineData(-42L)]         // Negative
     [InlineData(2147483647L)]  // Int32.MaxValue
     [InlineData(-2147483648L)] // Int32.MinValue
+    [InlineData(100000000000000000L)]  // Int64.MaxValue
+    [InlineData(-100000000000000000L)] // Int64.MinValue
     [InlineData(9223372036854775807L)]  // Int64.MaxValue
     [InlineData(-9223372036854775808L)] // Int64.MinValue
     public void ConvertTo32Trits_Int64_RoundTripsCorrectly(long value)
     {
         // Convert to trits
         TritConverter.ConvertTo32Trits(value, out var negative, out var positive);
+        Converter.ToTrits(value, out var negative2, out var positive2);
+        
+        negative2.Should().Be(negative, "because ConvertToBalancedBase3 should produce the same negative bits as ConvertTo32Trits");
+        positive2.Should().Be(positive, "because ConvertToBalancedBase3 should produce the same negative bits as ConvertTo32Trits");
         
         // Convert back to int64
         var roundTrip = TritConverter.TritsToInt64(negative, positive);

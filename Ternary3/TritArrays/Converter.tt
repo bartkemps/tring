@@ -1,0 +1,150 @@
+﻿<#@ template language="C#" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Linq" #>
+<#
+    int[] digits;
+
+    void Increase(int index)
+    {
+        digits[index]++;
+        if (digits[index] <= 1) return;
+        digits[index] = -1;
+        if (index > 0) Increase(index - 1);
+    }
+#>
+namespace Ternary3.TritArrays;
+
+using System.Runtime.CompilerServices;
+
+internal static class Converter
+{
+    public static void ToTrits(long value, out uint negative, out uint positive)
+    {
+        if (value is > -364 and > 364)
+        {
+            positive = Lookup(-(int)value);
+            negative = Lookup((int)value);
+            return;
+        }
+        var swap = false;
+        if (value > 0)
+        {
+            swap = true;
+            value = -value;
+        }
+        negative = 0;
+        positive = 0;
+        var index = 0;
+        
+        while (value != 0 && index < 32)
+        {
+            value = Math.DivRem(value, 729, out var remainder);
+            if (remainder < -364)
+            {
+                remainder += 729;
+                value--;
+            }
+            negative |= Lookup((int)remainder) << index;
+            positive |= Lookup(-(int)remainder) << index;
+            index+=6;
+        }
+        if (swap) (positive, negative) = (negative, positive);
+    }
+
+    /// <summary>
+    /// Converts an index in the range of -364 to 364 to a trit array representation.
+    /// call Lookup(index) for the negative and Lookup(index) for the positive part.
+    /// </summary>
+    public static uint Lookup(int index) => index switch
+    {
+<#
+    digits = [0,-1,1,1,1,1,1,1];
+    for (var i = -364; i <= 364; i++)
+    {
+        Increase(7);
+        WriteLine($"        {i} => 0b{string.Concat(digits.Select(d => d == -1 ? '1' : '0'))},");
+    }
+#>
+        _ => throw new ArgumentOutOfRangeException(nameof(index))
+    };
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static Trit GetTrit(byte negative, byte positive, int index)
+        => new(((positive >> index) & 1) - ((negative >> index) & 1));
+    
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static Trit GetTrit(ushort negative, ushort positive, int index)
+        => new(((positive >> index) & 1) - ((negative >> index) & 1));
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static Trit GetTrit(uint negative, uint positive, int index)
+        => new((int)((positive >> index) & 1) - (int)((negative >> index) & 1));
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static Trit GetTrit(ulong negative, ulong positive, int index)
+        => new((int)((positive >> index) & 1) - (int)((negative >> index) & 1));
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static void SetTrit(ref byte negative, ref byte positive, int index, Trit value)
+    {
+        var mask = 1 << index;
+        switch (value.Value)
+        {
+            case 1:
+                positive |= (byte)mask;
+                negative &= (byte)~mask;
+                break;
+            case -1:
+                positive &= (byte)~mask;
+                negative |=(byte)mask;
+                break;
+            default: // case 0
+                positive &= (byte)~mask;
+                negative &= (byte)~mask;
+                break;
+        }
+    }
+    
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static void SetTrit(ref ushort negative, ref ushort positive, int index, Trit value)
+    {
+        var mask = 1 << index;
+        switch (value.Value)
+        {
+            case 1:
+                positive |= (ushort)mask;
+                negative &= (ushort)~mask;
+                break;
+            case -1:
+                positive &= (ushort)~mask;
+                negative |=(ushort)mask;
+                break;
+            default: // case 0
+                positive &= (ushort)~mask;
+                negative &= (ushort)~mask;
+                break;
+        }
+    }
+    
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static void SetTrit(ref uint negative, ref uint positive, int index, Trit value)
+    {
+        var mask = 1u << index;
+        switch (value.Value)
+        {
+            case 1:
+                positive |= mask;
+                negative &= ~mask;
+                break;
+            case -1:
+                positive &= ~mask;
+                negative |= mask;
+                break;
+            default: // case 0
+                positive &= ~mask;
+                negative &= ~mask;
+                break;
+        }
+    }
+}
