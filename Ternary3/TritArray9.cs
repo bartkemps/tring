@@ -217,7 +217,7 @@ public struct TritArray9 : ITritArray<TritArray9>
        /// </summary>
        /// <param name="array">The TritArray9 to convert.</param>
        /// <returns>A short representing the same value.</returns>
-       public static implicit operator short(TritArray9 array) => (short)TritConverter.ToInt32((uint)(array.Negative & BitMask), array.Positive & BitMask);
+       public static implicit operator short(TritArray9 array) => (short)TritConverter.ToInt32(array.Negative & BitMask, array.Positive & BitMask);
 
        /// <summary>
        /// Defines an explicit conversion of an int to a TritArray9.

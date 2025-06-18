@@ -96,7 +96,7 @@ internal static class TritConverter
         if (swap) (positive, negative) = (negative, positive);
     }
 <#
-    foreach (var(type,  backing) in new[] { ("Int32", "uint"), ("Int64", "uint"), ("Int64", "ulong"), ("Int128", "ulong") })
+    foreach (var(type,  backing) in new[] { ("Int32", "uint"),  ("Int32", "int"), ("Int32", "ushort"), ("Int64", "uint"), ("Int64", "int"), ("Int64", "ulong"), ("Int64", "ushort"), ("Int128", "ulong") })
     {
 #>
     public static <#=type#> To<#=type#>(<#=backing#> negative, <#=backing#> positive)

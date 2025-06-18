@@ -154,6 +154,32 @@ internal static class TritConverter
         }
         return result;
     }
+    public static Int32 ToInt32(int negative, int positive)
+    {
+        Int32 result = 0;
+        Int32 pow = 1;
+        while (negative!= 0 || positive != 0)
+        {
+            result += (LookupValue((uint)positive&0xff) - LookupValue((uint)negative&0xff)) * pow;
+            negative >>= 8;
+            positive >>= 8;
+            pow *= 6561;
+        }
+        return result;
+    }
+    public static Int32 ToInt32(ushort negative, ushort positive)
+    {
+        Int32 result = 0;
+        Int32 pow = 1;
+        while (negative!= 0 || positive != 0)
+        {
+            result += (LookupValue((uint)positive&0xff) - LookupValue((uint)negative&0xff)) * pow;
+            negative >>= 8;
+            positive >>= 8;
+            pow *= 6561;
+        }
+        return result;
+    }
     public static Int64 ToInt64(uint negative, uint positive)
     {
         Int64 result = 0;
@@ -167,7 +193,33 @@ internal static class TritConverter
         }
         return result;
     }
+    public static Int64 ToInt64(int negative, int positive)
+    {
+        Int64 result = 0;
+        Int64 pow = 1;
+        while (negative!= 0 || positive != 0)
+        {
+            result += (LookupValue((uint)positive&0xff) - LookupValue((uint)negative&0xff)) * pow;
+            negative >>= 8;
+            positive >>= 8;
+            pow *= 6561;
+        }
+        return result;
+    }
     public static Int64 ToInt64(ulong negative, ulong positive)
+    {
+        Int64 result = 0;
+        Int64 pow = 1;
+        while (negative!= 0 || positive != 0)
+        {
+            result += (LookupValue((uint)positive&0xff) - LookupValue((uint)negative&0xff)) * pow;
+            negative >>= 8;
+            positive >>= 8;
+            pow *= 6561;
+        }
+        return result;
+    }
+    public static Int64 ToInt64(ushort negative, ushort positive)
     {
         Int64 result = 0;
         Int64 pow = 1;
