@@ -101,28 +101,5 @@ public class ConversionTests
         negative2.Should().Be(negative);
         positive2.Should().Be(positive);
     }
-
-    [Fact]
-    public void To64Trits_Roundtrip_BoundarySearch()
-    {
-        var value = long.MaxValue;
-        var step = long.MaxValue;
-        var ok = false;
-        
-        while (step > 0)
-        {
-            TritConverter.To64Trits(value, out var negative, out var positive);
-            var roundtrip = TritConverter.ToInt64(negative, positive);
-            if (ok == (value == roundtrip))
-            {
-                step /= 2;
-            }
-            else
-            {
-                step /= -2;
-                ok = !ok;
-            }
-            value -= step;
-        }
-    }
 }
+
