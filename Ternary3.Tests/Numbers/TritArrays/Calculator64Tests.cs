@@ -10,7 +10,8 @@ public class Calculator64Tests
     [InlineData(0UL, 1UL, 0UL, 1UL, 1UL, 2UL)]  // 1 + 1 = 2
     [InlineData(1UL, 0UL, 0UL, 1UL, 0UL, 0UL)]  // -1 + 1 = 0
     [InlineData(1UL, 0UL, 1UL, 0UL, 2UL, 1UL)]  // -1 + (-1) = -2
-    [InlineData(0UL, 3UL, 1UL, 0UL, 0UL, 2UL)]  // 4 + (-1) = 2
+    [InlineData(ulong.MaxValue, 0, 0, ulong.MaxValue, 0UL, 0UL)]  // 4 + (-1) = 2
+    [InlineData(0,ulong.MaxValue,  ulong.MaxValue,0, 0UL, 0UL)]  // 4 + (-1) = 2
     public void AddBalancedTernary_ShouldAddCorrectly(
         ulong neg1, ulong pos1, 
         ulong neg2, ulong pos2, 
@@ -44,6 +45,10 @@ public class Calculator64Tests
     [InlineData(-1L)]
     [InlineData(long.MaxValue)]
     [InlineData(long.MinValue)]
+    [InlineData(100L)]
+    [InlineData(-100L)]
+    [InlineData(int.MaxValue)]
+    [InlineData(int.MinValue)]
     public void MultiplyBalancedTernary_LargeNumbers_ShouldPreserveOriginalValueInRoundTrip(long value)
     {
         // Convert the value to balanced ternary

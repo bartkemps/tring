@@ -30,8 +30,8 @@ internal static class TritConverter
                 remainder += 729;
                 value--;
             }
-            negative |= LookupTrits((int)remainder) << index;
-            positive |= LookupTrits(-(int)remainder) << index;
+            negative |= (UInt32)LookupTrits((int)remainder) << index;
+            positive |= (UInt32)LookupTrits(-(int)remainder) << index;
             index+=6;
         }
         if (swap) (positive, negative) = (negative, positive);
@@ -63,8 +63,8 @@ internal static class TritConverter
                 remainder += 729;
                 value--;
             }
-            negative |= LookupTrits((int)remainder) << index;
-            positive |= LookupTrits(-(int)remainder) << index;
+            negative |= (UInt32)LookupTrits((int)remainder) << index;
+            positive |= (UInt32)LookupTrits(-(int)remainder) << index;
             index+=6;
         }
         if (swap) (positive, negative) = (negative, positive);
@@ -96,8 +96,8 @@ internal static class TritConverter
                 remainder += 729;
                 value--;
             }
-            negative |= LookupTrits((int)remainder) << index;
-            positive |= LookupTrits(-(int)remainder) << index;
+            negative |= (UInt64)LookupTrits((int)remainder) << index;
+            positive |= (UInt64)LookupTrits(-(int)remainder) << index;
             index+=6;
         }
         if (swap) (positive, negative) = (negative, positive);
@@ -134,8 +134,8 @@ internal static class TritConverter
                 value--;
             }
 
-            negative |= LookupTrits((int)remainder) << index;
-            positive |= LookupTrits(-(int)remainder) << index;
+            negative |= (uint)LookupTrits((int)remainder) << index;
+            positive |= (uint)LookupTrits(-(int)remainder) << index;
             index += 6;
         }
 

@@ -1,6 +1,4 @@
 ﻿<#@ template language="C#" #>
-<#@ import namespace="System.Text" #>
-<#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="System.Linq" #>
 <#
     int[] digits;
@@ -49,8 +47,8 @@ internal static class TritConverter
                 remainder += 729;
                 value--;
             }
-            negative |= LookupTrits((int)remainder) << index;
-            positive |= LookupTrits(-(int)remainder) << index;
+            negative |= (UInt<#=backing#>)LookupTrits((int)remainder) << index;
+            positive |= (UInt<#=backing#>)LookupTrits(-(int)remainder) << index;
             index+=6;
         }
         if (swap) (positive, negative) = (negative, positive);
@@ -88,8 +86,8 @@ internal static class TritConverter
                 value--;
             }
 
-            negative |= LookupTrits((int)remainder) << index;
-            positive |= LookupTrits(-(int)remainder) << index;
+            negative |= (uint)LookupTrits((int)remainder) << index;
+            positive |= (uint)LookupTrits(-(int)remainder) << index;
             index += 6;
         }
 

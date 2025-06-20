@@ -20,6 +20,7 @@ public class ConversionTests
         TritConverter.To32Trits(value, out var negative, out var positive);
         negative.Should().Be(expectedNegative);
         positive.Should().Be(expectedPositive);
+        TritConverter.ToInt32(negative, positive).Should().Be(value);
     }
 
     [Theory]
@@ -41,6 +42,7 @@ public class ConversionTests
         TritConverter.To64Trits(value, out var negative, out var positive);
         negative.Should().Be(expectedNegative);
         positive.Should().Be(expectedPositive);
+        TritConverter.ToInt64(negative, positive).Should().Be(value);
     }
 
     [Theory]
@@ -57,6 +59,9 @@ public class ConversionTests
     {
         var actual = TritConverter.ToInt32(negative, positive);
         actual.Should().Be(expected);
+        TritConverter.To64Trits(actual, out var negative2, out var positive2);
+        negative2.Should().Be(negative);
+        positive2.Should().Be(positive);
     }
     
     [Theory]
@@ -73,6 +78,9 @@ public class ConversionTests
     {
         var actual = TritConverter.ToInt64(negative, positive);
         actual.Should().Be(expectedValue);
+        TritConverter.To64Trits(actual, out var negative2, out var positive2);
+        negative2.Should().Be(negative);
+        positive2.Should().Be(positive);
     }
     
     [Theory]
@@ -89,5 +97,32 @@ public class ConversionTests
     {
         var actual = TritConverter.ToInt64(negative, positive);
         actual.Should().Be(expectedValue);
+        TritConverter.To64Trits(actual, out var negative2, out var positive2);
+        negative2.Should().Be(negative);
+        positive2.Should().Be(positive);
+    }
+
+    [Fact]
+    public void To64Trits_Roundtrip_BoundarySearch()
+    {
+        var value = long.MaxValue;
+        var step = long.MaxValue;
+        var ok = false;
+        
+        while (step > 0)
+        {
+            TritConverter.To64Trits(value, out var negative, out var positive);
+            var roundtrip = TritConverter.ToInt64(negative, positive);
+            if (ok == (value == roundtrip))
+            {
+                step /= 2;
+            }
+            else
+            {
+                step /= -2;
+                ok = !ok;
+            }
+            value -= step;
+        }
     }
 }
