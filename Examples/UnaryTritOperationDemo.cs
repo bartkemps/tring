@@ -44,7 +44,7 @@ public static class UnaryTritOperationDemo
         
         // Using an alias for a Tryte (27-trit integer) and the full name for the operator
         Tryte input3 = 11; // 11T
-        long output3 = input3 | Ternary3.Operators.UnaryTritOperator.Negate; // TT1, using the full name for the operator. Result implicitly converted to long.
+        long output3 = input3 | Negate; // TT1, using the full name for the operator. Result implicitly converted to long.
         Console.WriteLine($"11 Negated = {output3}"); // 11 Negated = -11
         
         //TritArray input with TritArray27. Output is also TritArray27, // which can be explicitly converted to long.

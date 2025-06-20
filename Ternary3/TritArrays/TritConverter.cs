@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 
 internal static class TritConverter
 {
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void To32Trits(Int32 value, out UInt32 negative, out UInt32 positive)
     {
         if (value is > -364 and < 364)
@@ -37,6 +38,7 @@ internal static class TritConverter
         if (swap) (positive, negative) = (negative, positive);
     }
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void To32Trits(Int64 value, out UInt32 negative, out UInt32 positive)
     {
         if (value is > -364 and < 364)
@@ -70,6 +72,7 @@ internal static class TritConverter
         if (swap) (positive, negative) = (negative, positive);
     }
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void To64Trits(Int64 value, out UInt64 negative, out UInt64 positive)
     {
         if (value is > -364 and < 364)
@@ -103,6 +106,7 @@ internal static class TritConverter
         if (swap) (positive, negative) = (negative, positive);
     }
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void To64Trits(Int128 value, out UInt64 negative, out UInt64 positive)
     {
         if (value > -364 && value < 364)
@@ -141,104 +145,112 @@ internal static class TritConverter
 
         if (swap) (positive, negative) = (negative, positive);
     }
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Int32 ToInt32(uint negative, uint positive)
     {
         Int32 result = 0;
         Int32 pow = 1;
         while (negative!= 0 || positive != 0)
         {
-            result += (LookupValue((uint)positive&0xff) - LookupValue((uint)negative&0xff)) * pow;
+            result += (LookupValue[positive&0xff] - LookupValue[negative&0xff]) * pow;
             negative >>= 8;
             positive >>= 8;
             pow *= 6561;
         }
         return result;
     }
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Int32 ToInt32(int negative, int positive)
     {
         Int32 result = 0;
         Int32 pow = 1;
         while (negative!= 0 || positive != 0)
         {
-            result += (LookupValue((uint)positive&0xff) - LookupValue((uint)negative&0xff)) * pow;
+            result += (LookupValue[positive&0xff] - LookupValue[negative&0xff]) * pow;
             negative >>= 8;
             positive >>= 8;
             pow *= 6561;
         }
         return result;
     }
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Int32 ToInt32(ushort negative, ushort positive)
     {
         Int32 result = 0;
         Int32 pow = 1;
         while (negative!= 0 || positive != 0)
         {
-            result += (LookupValue((uint)positive&0xff) - LookupValue((uint)negative&0xff)) * pow;
+            result += (LookupValue[positive&0xff] - LookupValue[negative&0xff]) * pow;
             negative >>= 8;
             positive >>= 8;
             pow *= 6561;
         }
         return result;
     }
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Int64 ToInt64(uint negative, uint positive)
     {
         Int64 result = 0;
         Int64 pow = 1;
         while (negative!= 0 || positive != 0)
         {
-            result += (LookupValue((uint)positive&0xff) - LookupValue((uint)negative&0xff)) * pow;
+            result += (LookupValue[positive&0xff] - LookupValue[negative&0xff]) * pow;
             negative >>= 8;
             positive >>= 8;
             pow *= 6561;
         }
         return result;
     }
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Int64 ToInt64(int negative, int positive)
     {
         Int64 result = 0;
         Int64 pow = 1;
         while (negative!= 0 || positive != 0)
         {
-            result += (LookupValue((uint)positive&0xff) - LookupValue((uint)negative&0xff)) * pow;
+            result += (LookupValue[positive&0xff] - LookupValue[negative&0xff]) * pow;
             negative >>= 8;
             positive >>= 8;
             pow *= 6561;
         }
         return result;
     }
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Int64 ToInt64(ulong negative, ulong positive)
     {
         Int64 result = 0;
         Int64 pow = 1;
         while (negative!= 0 || positive != 0)
         {
-            result += (LookupValue((uint)positive&0xff) - LookupValue((uint)negative&0xff)) * pow;
+            result += (LookupValue[positive&0xff] - LookupValue[negative&0xff]) * pow;
             negative >>= 8;
             positive >>= 8;
             pow *= 6561;
         }
         return result;
     }
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Int64 ToInt64(ushort negative, ushort positive)
     {
         Int64 result = 0;
         Int64 pow = 1;
         while (negative!= 0 || positive != 0)
         {
-            result += (LookupValue((uint)positive&0xff) - LookupValue((uint)negative&0xff)) * pow;
+            result += (LookupValue[positive&0xff] - LookupValue[negative&0xff]) * pow;
             negative >>= 8;
             positive >>= 8;
             pow *= 6561;
         }
         return result;
     }
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Int128 ToInt128(ulong negative, ulong positive)
     {
         Int128 result = 0;
         Int128 pow = 1;
         while (negative!= 0 || positive != 0)
         {
-            result += (LookupValue((uint)positive&0xff) - LookupValue((uint)negative&0xff)) * pow;
+            result += (LookupValue[positive&0xff] - LookupValue[negative&0xff]) * pow;
             negative >>= 8;
             positive >>= 8;
             pow *= 6561;
@@ -987,266 +999,263 @@ internal static class TritConverter
     /// <summary>
     /// Converts the positive trit bytearray to the actual value.
     /// </summary>
-    public static int LookupValue(uint index) => index switch
-    {
-        0 => 0,
-        1 => 1,
-        2 => 3,
-        3 => 4,
-        4 => 9,
-        5 => 10,
-        6 => 12,
-        7 => 13,
-        8 => 27,
-        9 => 28,
-        10 => 30,
-        11 => 31,
-        12 => 36,
-        13 => 37,
-        14 => 39,
-        15 => 40,
-        16 => 81,
-        17 => 82,
-        18 => 84,
-        19 => 85,
-        20 => 90,
-        21 => 91,
-        22 => 93,
-        23 => 94,
-        24 => 108,
-        25 => 109,
-        26 => 111,
-        27 => 112,
-        28 => 117,
-        29 => 118,
-        30 => 120,
-        31 => 121,
-        32 => 243,
-        33 => 244,
-        34 => 246,
-        35 => 247,
-        36 => 252,
-        37 => 253,
-        38 => 255,
-        39 => 256,
-        40 => 270,
-        41 => 271,
-        42 => 273,
-        43 => 274,
-        44 => 279,
-        45 => 280,
-        46 => 282,
-        47 => 283,
-        48 => 324,
-        49 => 325,
-        50 => 327,
-        51 => 328,
-        52 => 333,
-        53 => 334,
-        54 => 336,
-        55 => 337,
-        56 => 351,
-        57 => 352,
-        58 => 354,
-        59 => 355,
-        60 => 360,
-        61 => 361,
-        62 => 363,
-        63 => 364,
-        64 => 729,
-        65 => 730,
-        66 => 732,
-        67 => 733,
-        68 => 738,
-        69 => 739,
-        70 => 741,
-        71 => 742,
-        72 => 756,
-        73 => 757,
-        74 => 759,
-        75 => 760,
-        76 => 765,
-        77 => 766,
-        78 => 768,
-        79 => 769,
-        80 => 810,
-        81 => 811,
-        82 => 813,
-        83 => 814,
-        84 => 819,
-        85 => 820,
-        86 => 822,
-        87 => 823,
-        88 => 837,
-        89 => 838,
-        90 => 840,
-        91 => 841,
-        92 => 846,
-        93 => 847,
-        94 => 849,
-        95 => 850,
-        96 => 972,
-        97 => 973,
-        98 => 975,
-        99 => 976,
-        100 => 981,
-        101 => 982,
-        102 => 984,
-        103 => 985,
-        104 => 999,
-        105 => 1000,
-        106 => 1002,
-        107 => 1003,
-        108 => 1008,
-        109 => 1009,
-        110 => 1011,
-        111 => 1012,
-        112 => 1053,
-        113 => 1054,
-        114 => 1056,
-        115 => 1057,
-        116 => 1062,
-        117 => 1063,
-        118 => 1065,
-        119 => 1066,
-        120 => 1080,
-        121 => 1081,
-        122 => 1083,
-        123 => 1084,
-        124 => 1089,
-        125 => 1090,
-        126 => 1092,
-        127 => 1093,
-        128 => 2187,
-        129 => 2188,
-        130 => 2190,
-        131 => 2191,
-        132 => 2196,
-        133 => 2197,
-        134 => 2199,
-        135 => 2200,
-        136 => 2214,
-        137 => 2215,
-        138 => 2217,
-        139 => 2218,
-        140 => 2223,
-        141 => 2224,
-        142 => 2226,
-        143 => 2227,
-        144 => 2268,
-        145 => 2269,
-        146 => 2271,
-        147 => 2272,
-        148 => 2277,
-        149 => 2278,
-        150 => 2280,
-        151 => 2281,
-        152 => 2295,
-        153 => 2296,
-        154 => 2298,
-        155 => 2299,
-        156 => 2304,
-        157 => 2305,
-        158 => 2307,
-        159 => 2308,
-        160 => 2430,
-        161 => 2431,
-        162 => 2433,
-        163 => 2434,
-        164 => 2439,
-        165 => 2440,
-        166 => 2442,
-        167 => 2443,
-        168 => 2457,
-        169 => 2458,
-        170 => 2460,
-        171 => 2461,
-        172 => 2466,
-        173 => 2467,
-        174 => 2469,
-        175 => 2470,
-        176 => 2511,
-        177 => 2512,
-        178 => 2514,
-        179 => 2515,
-        180 => 2520,
-        181 => 2521,
-        182 => 2523,
-        183 => 2524,
-        184 => 2538,
-        185 => 2539,
-        186 => 2541,
-        187 => 2542,
-        188 => 2547,
-        189 => 2548,
-        190 => 2550,
-        191 => 2551,
-        192 => 2916,
-        193 => 2917,
-        194 => 2919,
-        195 => 2920,
-        196 => 2925,
-        197 => 2926,
-        198 => 2928,
-        199 => 2929,
-        200 => 2943,
-        201 => 2944,
-        202 => 2946,
-        203 => 2947,
-        204 => 2952,
-        205 => 2953,
-        206 => 2955,
-        207 => 2956,
-        208 => 2997,
-        209 => 2998,
-        210 => 3000,
-        211 => 3001,
-        212 => 3006,
-        213 => 3007,
-        214 => 3009,
-        215 => 3010,
-        216 => 3024,
-        217 => 3025,
-        218 => 3027,
-        219 => 3028,
-        220 => 3033,
-        221 => 3034,
-        222 => 3036,
-        223 => 3037,
-        224 => 3159,
-        225 => 3160,
-        226 => 3162,
-        227 => 3163,
-        228 => 3168,
-        229 => 3169,
-        230 => 3171,
-        231 => 3172,
-        232 => 3186,
-        233 => 3187,
-        234 => 3189,
-        235 => 3190,
-        236 => 3195,
-        237 => 3196,
-        238 => 3198,
-        239 => 3199,
-        240 => 3240,
-        241 => 3241,
-        242 => 3243,
-        243 => 3244,
-        244 => 3249,
-        245 => 3250,
-        246 => 3252,
-        247 => 3253,
-        248 => 3267,
-        249 => 3268,
-        250 => 3270,
-        251 => 3271,
-        252 => 3276,
-        253 => 3277,
-        254 => 3279,
-        255 => 3280,
-        _ => throw new ArgumentOutOfRangeException(nameof(index))
-    };
+    public static int[] LookupValue = [
+        0,
+        1,
+        3,
+        4,
+        9,
+        10,
+        12,
+        13,
+        27,
+        28,
+        30,
+        31,
+        36,
+        37,
+        39,
+        40,
+        81,
+        82,
+        84,
+        85,
+        90,
+        91,
+        93,
+        94,
+        108,
+        109,
+        111,
+        112,
+        117,
+        118,
+        120,
+        121,
+        243,
+        244,
+        246,
+        247,
+        252,
+        253,
+        255,
+        256,
+        270,
+        271,
+        273,
+        274,
+        279,
+        280,
+        282,
+        283,
+        324,
+        325,
+        327,
+        328,
+        333,
+        334,
+        336,
+        337,
+        351,
+        352,
+        354,
+        355,
+        360,
+        361,
+        363,
+        364,
+        729,
+        730,
+        732,
+        733,
+        738,
+        739,
+        741,
+        742,
+        756,
+        757,
+        759,
+        760,
+        765,
+        766,
+        768,
+        769,
+        810,
+        811,
+        813,
+        814,
+        819,
+        820,
+        822,
+        823,
+        837,
+        838,
+        840,
+        841,
+        846,
+        847,
+        849,
+        850,
+        972,
+        973,
+        975,
+        976,
+        981,
+        982,
+        984,
+        985,
+        999,
+        1000,
+        1002,
+        1003,
+        1008,
+        1009,
+        1011,
+        1012,
+        1053,
+        1054,
+        1056,
+        1057,
+        1062,
+        1063,
+        1065,
+        1066,
+        1080,
+        1081,
+        1083,
+        1084,
+        1089,
+        1090,
+        1092,
+        1093,
+        2187,
+        2188,
+        2190,
+        2191,
+        2196,
+        2197,
+        2199,
+        2200,
+        2214,
+        2215,
+        2217,
+        2218,
+        2223,
+        2224,
+        2226,
+        2227,
+        2268,
+        2269,
+        2271,
+        2272,
+        2277,
+        2278,
+        2280,
+        2281,
+        2295,
+        2296,
+        2298,
+        2299,
+        2304,
+        2305,
+        2307,
+        2308,
+        2430,
+        2431,
+        2433,
+        2434,
+        2439,
+        2440,
+        2442,
+        2443,
+        2457,
+        2458,
+        2460,
+        2461,
+        2466,
+        2467,
+        2469,
+        2470,
+        2511,
+        2512,
+        2514,
+        2515,
+        2520,
+        2521,
+        2523,
+        2524,
+        2538,
+        2539,
+        2541,
+        2542,
+        2547,
+        2548,
+        2550,
+        2551,
+        2916,
+        2917,
+        2919,
+        2920,
+        2925,
+        2926,
+        2928,
+        2929,
+        2943,
+        2944,
+        2946,
+        2947,
+        2952,
+        2953,
+        2955,
+        2956,
+        2997,
+        2998,
+        3000,
+        3001,
+        3006,
+        3007,
+        3009,
+        3010,
+        3024,
+        3025,
+        3027,
+        3028,
+        3033,
+        3034,
+        3036,
+        3037,
+        3159,
+        3160,
+        3162,
+        3163,
+        3168,
+        3169,
+        3171,
+        3172,
+        3186,
+        3187,
+        3189,
+        3190,
+        3195,
+        3196,
+        3198,
+        3199,
+        3240,
+        3241,
+        3243,
+        3244,
+        3249,
+        3250,
+        3252,
+        3253,
+        3267,
+        3268,
+        3270,
+        3271,
+        3276,
+        3277,
+        3279,
+        3280];
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Trit GetTrit(byte negative, byte positive, int index)

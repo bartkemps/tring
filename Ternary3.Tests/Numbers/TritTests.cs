@@ -191,7 +191,7 @@ public unsafe class TritTests
 
     private static Trit And(Trit left, Trit right)
     {
-        return left |global::Ternary3.Operators.BinaryTritOperator.And| right;
+        return left |BinaryTritOperator.And| right;
     }
 
     [Theory]

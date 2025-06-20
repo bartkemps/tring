@@ -74,7 +74,7 @@ internal class Calculator
         // Count the number of significant trits in each operand
         var bitCount1 = BitOperations.PopCount(negative1 | positive1);
         var bitCount2 = BitOperations.PopCount(negative2 | positive2);
-        const int maxNumberOfNonZeroBits = 7;
+        const int maxNumberOfNonZeroBits = 2;
 
         // If either operand is small or if the total complexity is low
         if (bitCount2 <= maxNumberOfNonZeroBits)
@@ -105,7 +105,7 @@ internal class Calculator
     {
         var bitCount1 = BitOperations.PopCount(negative1 | positive1);
         var bitCount2 = BitOperations.PopCount(negative2 | positive2);
-        const int maxNumberOfNonZeroBits = 10;
+        const int maxNumberOfNonZeroBits = 2;
 
         // If either operand is small or if the total complexity is low
         if (bitCount2 <= maxNumberOfNonZeroBits)
@@ -126,7 +126,7 @@ internal class Calculator
         }
     }
 
-    private static void MultiplyByAlgorithm(
+    internal static void MultiplyByAlgorithm(
         uint negative1, uint positive1,
         uint negative2, uint positive2,
         out uint negativeResult, out uint positiveResult)
@@ -175,7 +175,7 @@ internal class Calculator
         }
     }
 
-    private static void MultiplyByAlgorithm(
+    internal static void MultiplyByAlgorithm(
         ulong negative1, ulong positive1,
         ulong negative2, ulong positive2,
         out ulong negativeResult, out ulong positiveResult)
@@ -224,7 +224,7 @@ internal class Calculator
         }
     }
 
-    private static void MultiplyByConversionToInt32(
+    internal static void MultiplyByConversionToInt32(
         uint negative1, uint positive1,
         uint negative2, uint positive2,
         out uint negativeResult, out uint positiveResult)
@@ -256,7 +256,7 @@ internal class Calculator
         TritConverter.To32Trits(result, out negativeResult, out positiveResult);
     }
     
-    private static void MultiplyByConversionToInt64(
+    internal static void MultiplyByConversionToInt64(
         ulong negative1, ulong positive1,
         ulong negative2, ulong positive2,
         out ulong negativeResult, out ulong positiveResult)
@@ -272,7 +272,7 @@ internal class Calculator
         TritConverter.To64Trits(result, out negativeResult, out positiveResult);
     }
 
-    private static void MultiplyByConversionToInt128(
+    internal static void MultiplyByConversionToInt128(
         ulong negative1, ulong positive1,
         ulong negative2, ulong positive2,
         out ulong negativeResult, out ulong positiveResult)
@@ -288,4 +288,3 @@ internal class Calculator
         TritConverter.To64Trits(result, out negativeResult, out positiveResult);
     }
 }
-

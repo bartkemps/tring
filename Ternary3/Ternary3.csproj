@@ -7,6 +7,7 @@
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         
         <!-- Make internals visible to test project -->
+        <InternalsVisibleTo>Ternary3.Benchmarks</InternalsVisibleTo>
         <InternalsVisibleTo>Ternary3.Tests</InternalsVisibleTo>
         
         <!-- NuGet Package Metadata -->
@@ -83,7 +84,12 @@
 
     <ItemGroup>
         <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
-            <_Parameter1>Tring.Tests</_Parameter1>
+            <_Parameter1>Ternary3.Tests</_Parameter1>
+        </AssemblyAttribute>
+    </ItemGroup>
+    <ItemGroup>
+        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+            <_Parameter1>Ternary3.Benchmarks</_Parameter1>
         </AssemblyAttribute>
     </ItemGroup>
 
