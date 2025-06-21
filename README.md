@@ -419,6 +419,37 @@ public class ConversionExample
 }
 ```
 
+## Formatting and Display
+
+### Custom Formatting with ToString(ITernaryFormat)
+
+You can now format any trit array (implementing `ITritArray`) using a custom or built-in ternary format. Use the new `ToString(ITernaryFormat format)` overload to control digit symbols, grouping, separators, and padding:
+
+```csharp
+var trits = new TritArray27(...);
+var format = new Ternary3.Formatting.TernaryFormat()
+    .WithGroup(3, " ")
+    .WithGroup(3, "-");
+string formatted = trits.ToString(format); // e.g. "T01-T01-T01 - TTT-000-111"
+```
+
+This allows you to display ternary numbers in a way that matches your application's needs or user preferences.
+
+---
+
+## Ternary3.Formatting Namespace Overview
+
+The `Ternary3.Formatting` namespace provides flexible formatting for ternary numbers. Key types include:
+
+- **ITernaryFormat**: Interface for formatting options, including digit symbols, group definitions, decimal separator, and padding mode.
+- **TernaryFormat**: Default, fully customizable implementation of ITernaryFormat. Allows you to set digit characters, group sizes, separators, and padding. Includes fluent methods for group configuration.
+- **InvariantTernaryFormat**: A built-in, culture-invariant format with standard digit symbols (T, 0, 1) and default grouping.
+- **MinimalTernaryFormat**: (If present) A minimal format for compact ternary representations.
+- **TritGroupDefinition**: Defines a group for hierarchical formatting, specifying the separator and group size at each level.
+- **TernaryPadding**: Enum indicating how padding is applied (None, Group, or Full).
+
+These types allow you to control how ternary numbers are displayed, supporting multi-level grouping, custom digit symbols, and culture-specific formatting.
+
 ## Reference
 
 ### Index
@@ -715,3 +746,38 @@ Provides a set of predefined binary operations implemented as lookup tables for 
 - `static readonly BinaryTritOperator Is` - The equality check operation.
 - `static readonly BinaryTritOperator GreaterThan` - The greater than comparison operation.
 - `static readonly BinaryTritOperator LesserThan` - The less than comparison operation.
+
+### Ternary3.Formatting Namespace
+
+#### `TernaryFormat` Class
+
+Represents a customizable ternary format, allowing you to specify digit symbols, grouping, separators, and padding for formatting trit arrays.
+
+**Static Properties:**
+- `static readonly TernaryFormat.Invariant` — A built-in, culture-invariant ternary format with standard digit symbols and grouping.
+- `static readonly TernaryFormat.Minimal` — A built-in minimal ternary format for compact representations.
+
+**Constructors:**
+- `TernaryFormat()` — Initializes a new instance with the invariant format.
+- `TernaryFormat(ITernaryFormat other)` — Initializes a new instance by copying settings from another format.
+
+**Properties:**
+- `char NegativeTritDigit` — The character used to represent a negative trit (-1).
+- `char ZeroTritDigit` — The character used to represent a zero trit (0).
+- `char PositiveTritDigit` — The character used to represent a positive trit (+1).
+- `IList<TritGroupDefinition> Groups` — The list of group definitions, each specifying a separator and group size for hierarchical grouping.
+- `string DecimalSeparator` — The string used as a decimal separator (for future floating-point trit support).
+- `TernaryPadding TernaryPadding` — The padding mode for the formatted ternary string.
+
+**Methods:**
+- `TernaryFormat WithGroup(int size, string separator)` — Adds a group definition to the format and returns the current instance for chaining.
+- `TernaryFormat ClearGroups()` — Removes all group definitions from the format and returns the current instance for chaining.
+- `string ToString()` — Previews the format by creating a sample TritArray27 and formatting it.
+
+#### `TernaryPadding` Enum
+
+Specifies how padding is applied to the formatted ternary string.
+
+- `None` — No padding is applied.
+- `Group` — Padding is applied to fill the last group.
+- `Full` — Padding is applied to fill the entire formatted string to a fixed width.

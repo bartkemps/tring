@@ -50,7 +50,7 @@ public class MultiplicationStrategyBenchmarks
     private static (uint neg, uint pos) GenerateBalancedTernaryWithBits(int nonZeroBits, uint pattern)
     {
         uint neg = 0, pos = 0;
-        for (int i = 0; i < nonZeroBits; i++)
+        for (var i = 0; i < nonZeroBits; i++)
         {
             if (((pattern >> i) & 1) == 0)
                 neg |= (1u << i);
@@ -63,7 +63,7 @@ public class MultiplicationStrategyBenchmarks
     private static (ulong neg, ulong pos) GenerateBalancedTernaryWithBits64(int nonZeroBits, ulong pattern)
     {
         ulong neg = 0, pos = 0;
-        for (int i = 0; i < nonZeroBits; i++)
+        for (var i = 0; i < nonZeroBits; i++)
         {
             if (((pattern >> i) & 1) == 0)
                 neg |= (1UL << i);

@@ -148,8 +148,8 @@ internal static class TritConverter
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Int32 ToInt32(uint negative, uint positive)
     {
-        Int32 result = 0;
-        Int32 pow = 1;
+        var result = 0;
+        var pow = 1;
         while (negative!= 0 || positive != 0)
         {
             result += (LookupValue[positive&0xff] - LookupValue[negative&0xff]) * pow;
@@ -162,8 +162,8 @@ internal static class TritConverter
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Int32 ToInt32(int negative, int positive)
     {
-        Int32 result = 0;
-        Int32 pow = 1;
+        var result = 0;
+        var pow = 1;
         while (negative!= 0 || positive != 0)
         {
             result += (LookupValue[positive&0xff] - LookupValue[negative&0xff]) * pow;
@@ -176,8 +176,8 @@ internal static class TritConverter
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Int32 ToInt32(ushort negative, ushort positive)
     {
-        Int32 result = 0;
-        Int32 pow = 1;
+        var result = 0;
+        var pow = 1;
         while (negative!= 0 || positive != 0)
         {
             result += (LookupValue[positive&0xff] - LookupValue[negative&0xff]) * pow;

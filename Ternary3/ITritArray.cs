@@ -1,5 +1,8 @@
 ﻿namespace Ternary3;
 
+using Formatting;
+using TritArrays;
+
 public interface ITritArray
 {
     /// <summary>
@@ -13,6 +16,16 @@ public interface ITritArray
     /// Gets the length of the trit array.
     /// </summary>
     int Length { get; }
+    
+    /// <summary>
+    /// Converts the trit array to a string representation using the default format.
+    /// </summary>
+    public string ToString() => ToString(TernaryFormat.Invariant);
+
+    /// <summary>
+    /// Converts the trit array to a string representation using the specified format.
+    /// </summary>
+    public string ToString(ITernaryFormat format) => Formatter.Format(this, format);
 }
 
 public interface ITritArray<T> 

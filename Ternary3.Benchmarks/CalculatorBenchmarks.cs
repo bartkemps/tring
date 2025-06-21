@@ -30,13 +30,13 @@ public class CalculatorBenchmarks
         int64A = new long[Iterations];
         int64B = new long[Iterations];
         var rand = new Random(42);
-        for (int i = 0; i < Iterations; i++)
+        for (var i = 0; i < Iterations; i++)
         {
             // Use a mix of sparse and dense trit patterns
             int32A[i] = rand.Next(int.MinValue, int.MaxValue);
             int32B[i] = rand.Next(int.MinValue, int.MaxValue);
-            long lA = ((long)rand.Next(int.MinValue, int.MaxValue) << 32) | (uint)rand.Next();
-            long lB = ((long)rand.Next(int.MinValue, int.MaxValue) << 32) | (uint)rand.Next();
+            var lA = ((long)rand.Next(int.MinValue, int.MaxValue) << 32) | (uint)rand.Next();
+            var lB = ((long)rand.Next(int.MinValue, int.MaxValue) << 32) | (uint)rand.Next();
             int64A[i] = lA;
             int64B[i] = lB;
             TritConverter.To32Trits(int32A[i], out negs32A[i], out poss32A[i]);
@@ -49,7 +49,7 @@ public class CalculatorBenchmarks
     [Benchmark]
     public void AddBalancedTernary_UInt32()
     {
-        for (int i = 0; i < Iterations; i++)
+        for (var i = 0; i < Iterations; i++)
         {
             Calculator.AddBalancedTernary(negs32A[i], poss32A[i], negs32B[i], poss32B[i], out var n, out var p);
         }
@@ -58,7 +58,7 @@ public class CalculatorBenchmarks
     [Benchmark]
     public void AddBalancedTernary_UInt64()
     {
-        for (int i = 0; i < Iterations; i++)
+        for (var i = 0; i < Iterations; i++)
         {
             Calculator.AddBalancedTernary(negs64A[i], poss64A[i], negs64B[i], poss64B[i], out var n, out var p);
         }
@@ -67,7 +67,7 @@ public class CalculatorBenchmarks
     [Benchmark]
     public void AddViaConversion_Int32()
     {
-        for (int i = 0; i < Iterations; i++)
+        for (var i = 0; i < Iterations; i++)
         {
             var a = TritConverter.ToInt32(negs32A[i], poss32A[i]);
             var b = TritConverter.ToInt32(negs32B[i], poss32B[i]);
@@ -79,7 +79,7 @@ public class CalculatorBenchmarks
     [Benchmark]
     public void AddViaConversion_Int64()
     {
-        for (int i = 0; i < Iterations; i++)
+        for (var i = 0; i < Iterations; i++)
         {
             var a = TritConverter.ToInt64(negs64A[i], poss64A[i]);
             var b = TritConverter.ToInt64(negs64B[i], poss64B[i]);
