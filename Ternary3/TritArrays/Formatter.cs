@@ -4,69 +4,32 @@ using Formatting;
 
 internal static class Formatter
 {
-    public static string Format(ITritArray trits, ITernaryFormat format)
+    public static string Format(TritArray3 trits, string? format, IFormatProvider? provider = null)
     {
-        ArgumentNullException.ThrowIfNull(trits);
-        ArgumentNullException.ThrowIfNull(format);
-        if (trits.Length == 0) return string.Empty;
-
-        var lastIndex = trits.Length - 1;
-        if (format.TernaryPadding != TernaryPadding.Full)
+        if (provider is not null && provider.GetFormat(typeof(ICustomFormatter)) is ITernaryFormatter customFormatter)
         {
-            while (lastIndex > 0 && trits[lastIndex].Value == 0)
-            {
-                lastIndex--;
-            }
+            return customFormatter.Format(format, trits, provider);
         }
 
-        if (format.TernaryPadding == TernaryPadding.Group)
+        return ((Int3T)trits).ToString(format, new TernaryFormatProvider(provider));
+    }
+    
+    public static string Format(TritArray9 trits, string? format, IFormatProvider? provider = null)
+    {
+        if (provider is not null && provider.GetFormat(typeof(ICustomFormatter)) is ITernaryFormatter customFormatter)
         {
-            var firstGroupSize = format.Groups[0].Size;
-            if (lastIndex % firstGroupSize != firstGroupSize - 1)
-            {
-                lastIndex += firstGroupSize - (lastIndex % firstGroupSize) - 1;
-                if (lastIndex >= trits.Length)
-                {
-                    lastIndex = trits.Length - 1;
-                }
-            }
+            return customFormatter.Format(format, trits, provider);
         }
 
-        var groupCounts = new int[format.Groups.Count];
-        var result = new List<string>();
-        for (var i = 0; i <= lastIndex - 1; i++)
+        return ((Int9T)trits).ToString(format, new TernaryFormatProvider(provider));
+    }
+    
+    public static string Format(TritArray27 trits, string? format, IFormatProvider? provider = null)
+    {
+        if (provider is not null && provider.GetFormat(typeof(ICustomFormatter)) is ITernaryFormatter customFormatter)
         {
-            result.Insert(0, MapTrit(trits[i]).ToString());
-            groupCounts[0]++;
-            for (var level = 0; level < format.Groups.Count; level++)
-            {
-                if (groupCounts[level] == format.Groups[level].Size)
-                {
-                    groupCounts[level] = 0;
-                    if (level + 1 < format.Groups.Count)
-                    {
-                        groupCounts[level + 1]++;
-                    }
-                    if (level + 1 == format.Groups.Count || groupCounts[level + 1] < format.Groups[level + 1].Size)
-                    {
-                        result.Insert(0, format.Groups[level].Separator);
-                    }
-                }
-                else
-                {
-                    break;
-                }
-            }
+            return customFormatter.Format(format, trits, provider);
         }
-        result.Insert(0, MapTrit(trits[lastIndex]).ToString());
-        return string.Concat(result);
-
-        char MapTrit(Trit t) => t.Value switch
-        {
-            -1 => format.NegativeTritDigit,
-            0 => format.ZeroTritDigit,
-            1 => format.PositiveTritDigit,
-            _ => '?'
-        };
+        return ((Int27T)trits).ToString(format, new TernaryFormatProvider(provider));
     }
 }

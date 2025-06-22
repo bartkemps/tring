@@ -258,10 +258,7 @@ LastGenerated = <#= DateTime.Now.ToString() #>
                internal string DebugView() => ToString();
            
                /// <inheritdoc/>  
-               public override string ToString() => Formatter.Format(this, TernaryFormat.Invariant);
-               
-               /// <inheritdoc/>  
-               public string ToString(ITernaryFormat format) => Formatter.Format(this, format);
+               public string ToString(string? format = "ter", IFormatProvider? formatProvider = null) => Formatter.Format(this, format, formatProvider);
            }
            """;
     }
