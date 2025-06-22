@@ -38,7 +38,8 @@ public class TernaryFormat(ITernaryFormat other) : ITernaryFormat
     public char PositiveTritDigit { get; set; } = other.PositiveTritDigit;
 
     /// <inheritdoc/>
-    public IList<TritGroupDefinition> Groups { get; set; } = new List<TritGroupDefinition>(other.Groups);
+    public IList<TritGroupDefinition> Groups { get; set; } 
+        = new List<TritGroupDefinition>(other.Groups.Select(g=> new TritGroupDefinition(g.Separator, g.Size)));
 
     /// <inheritdoc/>
     public string DecimalSeparator { get; set; } = other.DecimalSeparator;

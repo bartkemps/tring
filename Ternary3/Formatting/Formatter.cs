@@ -4,15 +4,19 @@ namespace Ternary3.Formatting;
 
 internal static class Formatter
 {
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static string Format(ITritArray value, ITernaryFormat format) 
         => new TernaryFormatter(format).Format(value);
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static string Format(Int3T value, ITernaryFormat format) 
         => new TernaryFormatter(format).Format((TritArray3)value);
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static string Format(Int9T value, ITernaryFormat format) 
         => new TernaryFormatter(format).Format((TritArray9)value);
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static string Format(Int27T value, ITernaryFormat format) 
         => new TernaryFormatter(format).Format((TritArray27)value);
 
@@ -120,6 +124,4 @@ internal static class Formatter
         bytesWritten = str.Length;
         return true;
     }
-    
-    
 }
