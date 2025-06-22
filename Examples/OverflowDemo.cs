@@ -36,22 +36,22 @@ public static class OverflowDemo
         // Shifting trits two positions in essence multiplies or divides by 9 (3^2).
         var input6 = TritArray9.MaxValue; // 111111111
         var result6A = input5 << 6;
-        Console.WriteLine($"Shift: {input6} << 6 = {result6A} ({(int)result6A})"); // Shift: 111111111 << 6 = 111000000 (9477)
+        Console.WriteLine($"Shift: {input6:ter} << 6 = {result6A:ter} ({result6A})"); // Shift: 111111111 << 6 = 111000000 (9477)
         var result6B = input5 >> -6;
-        Console.WriteLine($"Shift: {input6} >> -6 = {result6B} ({(int)result6B})"); // Shift: 111111111 >> -6 = 111000000 (9477)
+        Console.WriteLine($"Shift: {input6:ter} >> -6 = {result6B:ter} ({result6B})"); // Shift: 111111111 >> -6 = 111000000 (9477)
         var result6C = input5 << -6;
-        Console.WriteLine($"Shift: {input6} << -6 = {result6C} ({(int)result6C})"); // Shift: 111111111 << -6 = 000000111 (13)
+        Console.WriteLine($"Shift: {input6:ter} << -6 = {result6C:ter} ({result6C})"); // Shift: 111111111 << -6 = 000000111 (13)
         var result6D = input5 >> 6;
-        Console.WriteLine($"Shift: {input6} >> 6 = {result6D} ({(int)result6D})"); // Shift: 111111111 >> 6 = 000000111 (13)
+        Console.WriteLine($"Shift: {input6:ter} >> 6 = {result6D:ter} ({result6D})"); // Shift: 111111111 >> 6 = 000000111 (13)
 
         var input7 = Int27T.MinValue; // TTTTTTTTT TTTTTTTTT TTTTTTTTT
         var result7A = input7 << 25;
-        Console.WriteLine($"Shift: {(TritArray27)input7} << 25 = {result7A} ({(TritArray27)result7A})"); // Shift: TTTT..TT << 25 = TT00...00 (-3389154437772)
+        Console.WriteLine($"Shift: {input7:ter} << 25 = {result7A:ter} ({result7A})"); // Shift: TTTT..TT << 25 = TT00...00 (-3389154437772)
         var result7B = input7 >> -25;
-        Console.WriteLine($"Shift: {(TritArray27)input7} >> -25 = {result7B} ({(TritArray27)result7B})"); // Shift: TTTT..TT >> -25 = TT00...00 (-3389154437772)
+        Console.WriteLine($"Shift: {input7:ter} >> -25 = {result7B:ter} ({result7B})"); // Shift: TTTT..TT >> -25 = TT00...00 (-3389154437772)
         var result7C = input7 << -25;
-        Console.WriteLine($"Shift: {(TritArray27)input7} << -25 = {result7C} ({(TritArray27)result7C})"); // Shift: TTTT..TT << -25 = 0000...TT (-4)
+        Console.WriteLine($"Shift: {input7:ter} << -25 = {result7C:ter} ({result7C})"); // Shift: TTTT..TT << -25 = 0000...TT (-4)
         var result7D = input7 >> 25;
-        Console.WriteLine($"Shift: {(TritArray27)input7} >> 25 = {result7D} ({(TritArray27)result7D})"); // Shift: 111111111 >> 25 = 0000..TT (-4)
+        Console.WriteLine($"Shift: {input7:ter} >> 25 = {result7D:ter} ({result7D})"); // Shift: 111111111 >> 25 = 0000..TT (-4)
     }
 }

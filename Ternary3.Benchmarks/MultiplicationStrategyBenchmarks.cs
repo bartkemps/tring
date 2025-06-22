@@ -1,7 +1,5 @@
-﻿using System;
-using BenchmarkDotNet.Attributes;
+﻿using BenchmarkDotNet.Attributes;
 using Ternary3.TritArrays;
-using System.Collections.Generic;
 
 [MemoryDiagnoser]
 [WarmupCount(1)]

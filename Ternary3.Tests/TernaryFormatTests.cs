@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using FluentAssertions;
-using Ternary3;
-using Xunit;
+﻿using FluentAssertions;
 
 namespace Ternary3.Tests;
 

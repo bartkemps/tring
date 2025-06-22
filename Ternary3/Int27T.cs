@@ -3,6 +3,7 @@
 namespace Ternary3;
 
 using Integers;
+using Formatting;
 using Operators;
 using Operators.Operations;
 using System.CodeDom.Compiler;
@@ -480,10 +481,26 @@ public static explicit operator Int32(Int27T value) => (Int32)value.value;
     #endregion
 
     // ToString implementation
-    public override string ToString() => value.ToString();
-    public string ToString(string? format) => value.ToString(format);
-    public string ToString(IFormatProvider? provider) => value.ToString(provider);
-    public string ToString(string? format, IFormatProvider? provider) => value.ToString(format, provider);
+    /// <summary>
+    /// Returns a string representation of this instance.
+    /// </summary>
+    public override string ToString() => Formatter.Format(this, null, null);
+    /// <summary>
+    /// Returns a string representation of this instance.
+    /// </summary>
+    public string ToString(string? format) =>Formatter.Format(this, format, null);
+    /// <summary>
+    /// Returns a string representation of this instance.
+    /// </summary>
+    public string ToString(IFormatProvider? provider) => Formatter.Format(this, null, provider);
+    /// <summary>
+    /// Returns a string representation of this instance.
+    /// </summary>
+    public string ToString(string? format, IFormatProvider? provider) =>Formatter.Format(this, format, provider);
+    /// <summary>
+    /// Returns a string representation of this instance, formatted balanced ternarily according to the specified format.
+    /// </summary>
+    public string ToString(ITernaryFormat format) => Formatter.Format(this, format);
 
     // Parsing methods
 
@@ -689,27 +706,7 @@ public static explicit operator Int32(Int27T value) => (Int32)value.value;
     #region IUtf8SpanFormattable Implementation
 
     bool IUtf8SpanFormattable.TryFormat(Span<byte> utf8Destination, out int bytesWritten, ReadOnlySpan<char> format, IFormatProvider? provider)
-    {
-        if (!value.TryFormat(stackalloc char[32], out int charsWritten, format, provider))
-        {
-            bytesWritten = 0;
-            return false;
-        }
-
-        // Get UTF8 byte count for the character length
-        var byteCount = System.Text.Encoding.UTF8.GetMaxByteCount(charsWritten);
-
-        if (utf8Destination.Length < byteCount)
-        {
-            bytesWritten = 0;
-            return false;
-        }
-
-        // Convert to string since we can't go directly from ReadOnlySpan<char> to UTF8
-        var str = value.ToString(format.ToString(), provider);
-        bytesWritten = System.Text.Encoding.UTF8.GetBytes(str, utf8Destination);
-        return true;
-    }
+         => Formatter.TryFormat(value, utf8Destination, out bytesWritten, format, provider);
 
     #endregion
 
@@ -871,10 +868,10 @@ public static TritArray27 operator |(Int27T value, Trit[] trits)
         return false;
     }
 
-    bool ISpanFormattable.TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider? provider) =>
-        value.TryFormat(destination, out charsWritten, format.ToString(), provider);
+    bool ISpanFormattable.TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider? provider) 
+        => Formatter.TryFormat(value, destination, out charsWritten, format, provider);
 
-    static Int27T IParsable<Int27T>.Parse(string s, IFormatProvider? provider) =>
+               static Int27T IParsable<Int27T>.Parse(string s, IFormatProvider? provider) =>
         new(Int64.Parse(s, NumberStyles.Integer, provider));
 
     static bool IParsable<Int27T>.TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, out Int27T result)
@@ -888,7 +885,6 @@ public static TritArray27 operator |(Int27T value, Trit[] trits)
         result = default;
         return false;
     }
-
     #endregion
 
     #region Generic Conversions

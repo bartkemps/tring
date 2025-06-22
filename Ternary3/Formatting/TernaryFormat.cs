@@ -8,12 +8,17 @@ public class TernaryFormat(ITernaryFormat other) : ITernaryFormat
     /// <summary>
     /// Gets a built-in, culture-invariant ternary format with standard digit symbols and grouping.
     /// </summary>
-    public static readonly InvariantTernaryFormat Invariant = new();
+    public static InvariantTernaryFormat Invariant { get; } = new();
 
     /// <summary>
     /// Gets a built-in minimal ternary format for compact representations.
     /// </summary>
-    public static readonly MinimalTernaryFormat Minimal = new();
+    public static MinimalTernaryFormat Minimal { get; } = new();
+
+    /// <summary>
+    /// The currently used ternary format, when not explicitly specified.
+    /// </summary>
+    public static TernaryFormat Current { get; set; } = new();
 
     /// <summary>
     /// Initializes a new instance of the <see cref="TernaryFormat"/> class using the specified format as a template.

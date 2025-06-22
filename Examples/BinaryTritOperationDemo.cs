@@ -48,7 +48,8 @@ public class BinaryTritOperationDemo
             [0, 0, 1]   // Row for when first input is 1
         ]);
         var result2 = input2A | mask | input2B; // Apply the mask operation
-        Console.WriteLine($"Custom operation on short: {(TritArray9)input2A} {nameof(mask)} {(TritArray9)input2B} = {result2}");
+        Console.WriteLine($"Custom operation on short: {input2A:ter} {nameof(mask)} {input2B:ter} = {result2:ter}");
+        Console.WriteLine($"Custom operation on short: {input2A} {nameof(mask)} {input2B} = {result2}");
         // Output: 000000010 - Only positions where both inputs have the same non-zero value are preserved
         
         // EXAMPLE 3: Complex custom operation on int and long
@@ -67,7 +68,7 @@ public class BinaryTritOperationDemo
             true, false, null    // When first trit is 1:  [1,-1]→1, [1,0]→0, [1,1]→-1
         );
         var result3 = input3A | decreaseBy | input3B;
-        Console.WriteLine($"Custom operation on int: {input3A} {nameof(decreaseBy)} {input3B} = {result3} ({(int)result3})");
+        Console.WriteLine($"Custom operation on int: {input3A:ter} ({input3A}) {nameof(decreaseBy)} {input3B:ter} ({input3B}) = {result3:ter} ({result3})");
         // The operation transforms each trit pair according to the lookup table
 
         // EXAMPLE 4: Inverting operation that ignores the second operand
@@ -83,7 +84,7 @@ public class BinaryTritOperationDemo
             Trit.Negative, Trit.Negative, Trit.Negative   // When first trit is 1, always return -1
         );
         var result4 = input4A | invertFirstIgnoreSecond | input4B; 
-        Console.WriteLine($"Custom operation on int: {input4A} {nameof(invertFirstIgnoreSecond)} {input4B} = {result4} ({(int)result4})");
+        Console.WriteLine($"Custom operation on int: {input4A:ter} {nameof(invertFirstIgnoreSecond)} {input4B:ter} = {result4:ter} ({result4})");
         // Each trit in input4A is inverted (1→-1, 0→0, -1→1) regardless of input4B's value
         
         // EXAMPLE 5: Built-in OR operation on individual trits

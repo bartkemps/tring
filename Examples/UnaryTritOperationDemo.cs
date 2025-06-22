@@ -50,7 +50,7 @@ public static class UnaryTritOperationDemo
         //TritArray input with TritArray27. Output is also TritArray27, // which can be explicitly converted to long.
         TritArray27 input4 = 123456789;
         var output4 = input4 | Negate;
-        Console.WriteLine($"123456789 Negated = {output4} ({(int)output4})"); // Prints 000000000 T0011TT01 T1T010100 (-123456789)
+        Console.WriteLine($"123456789 Negated = {output4:ter} ({output4})"); // Prints 000000000 T0011TT01 T1T010100 (-123456789)
         
         //Single Trit input
         var input5 = Trit.Negative; // T (negative)
@@ -60,6 +60,6 @@ public static class UnaryTritOperationDemo
         // integer input will be implicitly converted to the corresponding TritArray.
         short input6 = -16; // T11T
         var output6 = input6 | Floor; // All T become 0. 0110;
-        Console.WriteLine($"{input6} | {nameof(Floor)} becomes {output6}"); // -22 Floor becomes 000000110
+        Console.WriteLine($"{input6} | {nameof(Floor)} becomes {output6:ter} ({output6})"); // -22 Floor becomes 000000110
     }
 }

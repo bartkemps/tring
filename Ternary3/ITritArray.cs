@@ -1,8 +1,5 @@
 ﻿namespace Ternary3;
 
-using Formatting;
-using TritArrays;
-
 public interface ITritArray
 {
     /// <summary>

@@ -5,9 +5,9 @@ namespace Ternary3.Tests.Numbers;
 public class TritArray9ShiftAndConversionTests
 {
     [Theory]
-    [InlineData(6)]
-    [InlineData(-6)]
-    public void LeftShift_WithMaxValue_ConvertsToCorrectInt(int shiftAmount)
+    [InlineData(6, "111 000 000", 9477)]
+    [InlineData(-6, "000 000 111", 13)]
+    public void LeftShift_WithMaxValue_ConvertsToCorrectInt(int shiftAmount, string expectedTernary, int expectedInt)
     {
         // Arrange
         TritArray9 input = Int9T.MaxValue; // 111111111
@@ -17,24 +17,14 @@ public class TritArray9ShiftAndConversionTests
         var convertedValue = (int)shiftedLeft;
             
         // Assert
-        if (shiftAmount == 6)
-        {
-            // Expected: 111000000 = 3^8 + 3^7 + 6561 + 2187 + 729 = 9477
-            shiftedLeft.ToString().Should().Be("111 000 000");
-            convertedValue.Should().Be(9477, $"because 111000000 in balanced ternary converts to 9477 in decimal");
-        }
-        else if (shiftAmount == -6)
-        {
-            // Expected: 000000111 = 3^2 + 3^1 + 3^0 = 9 + 3 + 1 = 13
-            shiftedLeft.ToString().Should().Be("000 000 111");
-            convertedValue.Should().Be(13, $"because 000000111 in balanced ternary converts to 13 in decimal");
-        }
+        shiftedLeft.ToString("ter").Should().Be(expectedTernary);
+        convertedValue.Should().Be(expectedInt, $"because {expectedTernary.Replace(" ", "")} in balanced ternary converts to {expectedInt} in decimal");
     }
 
     [Theory]
-    [InlineData(6)]
-    [InlineData(-6)]
-    public void RightShift_WithMaxValue_ConvertsToCorrectInt(int shiftAmount)
+    [InlineData(6, "000 000 111", 13)]
+    [InlineData(-6, "111 000 000", 9477)]
+    public void RightShift_WithMaxValue_ConvertsToCorrectInt(int shiftAmount, string expectedTernary, int expectedInt)
     {
         // Arrange
         TritArray9 input = Int9T.MaxValue; // 111111111
@@ -44,18 +34,8 @@ public class TritArray9ShiftAndConversionTests
         var convertedValue = (int)shiftedRight;
             
         // Assert
-        if (shiftAmount == 6)
-        {
-            // Expected: 000000111 = 3^2 + 3^1 + 3^0 = 9 + 3 + 1 = 13
-            shiftedRight.ToString().Should().Be("000 000 111");
-            convertedValue.Should().Be(13, $"because 000000111 in balanced ternary converts to 13 in decimal");
-        }
-        else if (shiftAmount == -6)
-        {
-            // Expected: 111000000 = 3^8 + 3^7 + 6561 + 2187 + 729 = 9477
-            shiftedRight.ToString().Should().Be("111 000 000");
-            convertedValue.Should().Be(9477, $"because 111000000 in balanced ternary converts to 9477 in decimal");
-        }
+        shiftedRight.ToString("ter").Should().Be(expectedTernary);
+        convertedValue.Should().Be(expectedInt, $"because {expectedTernary.Replace(" ", "")} in balanced ternary converts to {expectedInt} in decimal");
     }
 
     [Fact]
@@ -87,10 +67,10 @@ public class TritArray9ShiftAndConversionTests
         var rightShift6 = input >> 6;     // 000000111
 
         // Assert that shift operations work correctly
-        leftShift6.ToString().Should().Be("111 000 000");
-        rightShiftNeg6.ToString().Should().Be("111 000 000");
-        leftShiftNeg6.ToString().Should().Be("000 000 111");
-        rightShift6.ToString().Should().Be("000 000 111");
+        leftShift6.ToString("ter").Should().Be("111 000 000");
+        rightShiftNeg6.ToString("ter").Should().Be("111 000 000");
+        leftShiftNeg6.ToString("ter").Should().Be("000 000 111");
+        rightShift6.ToString("ter").Should().Be("000 000 111");
             
         // Assert conversions to int
         ((int)leftShift6).Should().Be(9477);

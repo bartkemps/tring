@@ -2,6 +2,7 @@
 #nullable enable
 namespace Ternary3;
 
+using Formatting;
 using Operators;
 using System.Diagnostics;
 using TritArrays;
@@ -260,6 +261,25 @@ public struct TritArray3 : ITritArray<TritArray3>
     
     internal string DebugView() => ToString();
 
-    /// <inheritdoc/>  
-    public string ToString(string? format = "ter", IFormatProvider? formatProvider = null) => Formatter.Format(this, format, formatProvider);
+    // ToString implementation
+    /// <summary>
+    /// Returns a string representation of the TritArray3.
+    /// </summary>
+    public override string ToString() => Formatter.Format(this, null, null);
+    /// <summary>
+    /// Returns a string representation of the TritArray3.
+    /// </summary>
+    public string ToString(string? format) =>Formatter.Format(this, format, null);
+    /// <summary>
+    /// Returns a string representation of the TritArray3.
+    /// </summary>
+    public string ToString(IFormatProvider? provider) => Formatter.Format(this, null, provider);
+    /// <summary>
+    /// Returns a string representation of the TritArray3.
+    /// </summary>
+    public string ToString(string? format, IFormatProvider? provider) =>Formatter.Format(this, format, provider);
+    /// <summary>
+   /// Returns a string representation of this instance, formatted balanced ternarily according to the specified format.
+    /// </summary>
+    public string ToString(ITernaryFormat format) => Formatter.Format((ITritArray)this, format);
 }
