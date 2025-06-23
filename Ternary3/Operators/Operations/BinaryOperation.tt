@@ -158,6 +158,22 @@ internal static class BinaryOperation
             }
         }
         
+        // if one row is empty and one is full
+        for (var group = 0; group < 2; group++)
+        {
+            for (var i = 0; i < 3; i++)
+            {
+                if (all[group, i] && none[group, (i + 1) % 3])
+                {
+                    return $"{GetByValue(i, group)} | ({GetByValue((i+2)%3, group)} & {GetByBits2(groupings[group][(i + 2) % 3], 1-group)})";
+                }
+                if (all[group, i] && none[group, (i + 2) % 3])
+                {
+                    return $"{GetByValue(i, group)} | ({GetByValue((i+1)%3, group)} & {GetByBits2(groupings[group][(i + 1) % 3], 1-group)})";
+                }
+            }
+        }
+        
         // if two rows are the same
         // in one row is full
         // (or both)
@@ -196,6 +212,7 @@ internal static class BinaryOperation
             };
     }
     
+    // "5 - value" inverts.
     string GetByValue(int value, int g)
     {
         var x = $"{g + 1}";
