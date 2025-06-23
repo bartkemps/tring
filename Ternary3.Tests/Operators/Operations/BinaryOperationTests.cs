@@ -528,7 +528,7 @@ public class BinaryOperationTests
         const ushort n2 = 0b001001001;
         const ushort p2 = 0b100100100;
 
-        var actual = BinaryOperation.GetTrits(index, n1, p1, n2, p2) & 0b111111111;
+        var actual = BinaryOperation<int>.GetTrits(index, n1, p1, n2, p2) & 0b111111111;
 
         actual.Should().Be(expected, $"because operation index {index} should produce the expected result");
     }

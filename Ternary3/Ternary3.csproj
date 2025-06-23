@@ -101,15 +101,15 @@
         <DesignTime>True</DesignTime>
         <DependentUpon>UnaryOperation.tt</DependentUpon>
       </Compile>
-      <Compile Update="Operators\Operations\BinaryOperation.cs">
-        <AutoGen>True</AutoGen>
-        <DesignTime>True</DesignTime>
-        <DependentUpon>BinaryOperation.tt</DependentUpon>
-      </Compile>
       <Compile Update="TritArrays\TritConverter.cs">
         <AutoGen>True</AutoGen>
         <DesignTime>True</DesignTime>
         <DependentUpon>TritConverter.tt</DependentUpon>
+      </Compile>
+      <Compile Update="Operators\Operations\BinaryOperation.cs">
+        <AutoGen>True</AutoGen>
+        <DesignTime>True</DesignTime>
+        <DependentUpon>BinaryOperation.tt</DependentUpon>
       </Compile>
     </ItemGroup>
 

@@ -189,8 +189,8 @@ public partial struct BinaryTritOperator : IEquatable<BinaryTritOperator>
     internal void Apply<T>(T negative1, T positive1, T negative2, T positive2, out T negativeResult, out T positiveResult)
         where T : struct, IBinaryInteger<T>, IMinMaxValue<T>
     {
-        negativeResult = BinaryOperation.GetTrits(Value.Negative, negative1, positive1, negative2, positive2);
-        positiveResult = BinaryOperation.GetTrits(Value.Positive, negative1, positive1, negative2, positive2);
+        negativeResult = BinaryOperation<T>.GetTrits(Value.Negative, negative1, positive1, negative2, positive2);
+        positiveResult = BinaryOperation<T>.GetTrits(Value.Positive, negative1, positive1, negative2, positive2);
     }
 
     /// <summary>
