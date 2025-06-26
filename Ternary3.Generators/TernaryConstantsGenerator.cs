@@ -18,7 +18,7 @@ namespace Ternary3.Generators
 
         private class SyntaxReceiver : ISyntaxReceiver
         {
-            public List<ClassDeclarationSyntax> PartialClasses { get; } = new List<ClassDeclarationSyntax>();
+            public List<ClassDeclarationSyntax> PartialClasses { get; } = [];
 
             public void OnVisitSyntaxNode(SyntaxNode syntaxNode)
             {
@@ -44,13 +44,11 @@ namespace Ternary3.Generators
                 .Assembly
                 .GetAttributes()
                 .Any(attr => attr.AttributeClass?.Name == "GenerateTernaryConstantsAttribute");
-            if (!hasAttribute)
-                return;
+            if (!hasAttribute) return;
 
             // Get the syntax receiver with the collected partial classes
             var syntaxReceiver = (SyntaxReceiver)context.SyntaxReceiver;
-            if (syntaxReceiver == null)
-                return;
+            if (syntaxReceiver == null) return;
 
 
             foreach (var cls in syntaxReceiver.PartialClasses)
@@ -125,12 +123,11 @@ namespace Ternary3.Generators
             foreach (var name in constants)
             {
                 var value = Conversion.ToLong(name);
+                var type = value is < int.MinValue or > int.MaxValue ? "long" : "int";
                 sb.AppendLine($"    /// <summary>");
                 sb.AppendLine($"    /// Constant with value {value}.");
                 sb.AppendLine($"    /// </summary>");
-                sb.AppendLine(value is < int.MinValue or > int.MaxValue 
-                    ? $"    public const long {name} = {value};" 
-                    : $"    public const int {name} = {value};");
+                sb.AppendLine($"    private const {type} {name} = {value};");
             }
             sb.AppendLine("}");
             context.AddSource($"{className}_TernaryConstants.g.cs", sb.ToString());

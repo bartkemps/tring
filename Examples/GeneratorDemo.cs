@@ -5,7 +5,7 @@ namespace Examples;
 using Ternary3;
 public partial class GeneratorDemo
 {
-    public const int SimpleValue = ter111; // 13
+    private const int SimpleValue = ter111; // 13
     public static void Run()
     {
         Console.WriteLine($"\r\n\r\n{nameof(GeneratorDemo)}");
