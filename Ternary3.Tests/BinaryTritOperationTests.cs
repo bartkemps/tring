@@ -4,7 +4,7 @@ namespace Ternary3.Tests;
 
 using Ternary3.Operators;
 
-public class BinaryTritOperatorTests
+public partial class BinaryTritOperatorTests
 {
     [Fact]
     public void DefaultConstructor_ShouldCreateEmptyTable()

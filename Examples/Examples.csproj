@@ -11,4 +11,8 @@
       <ProjectReference Include="..\Ternary3\Ternary3.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+        <Analyzer Include="..\Ternary3.Generators\bin\Debug\netstandard2.0\Ternary3.Generators.dll" />
+    </ItemGroup>
+    
 </Project>
