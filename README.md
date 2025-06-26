@@ -48,6 +48,71 @@ WriteLine(-24 | Or | 4);
 
 This will output a ternary number representing the result of the operation.
 
+## Ternary Literals
+
+Ternary3 supports the use of ternary literals in your code, making it easy to work with constants in balanced ternary notation. 
+
+> **Note:** Ternary literals only work in partial classes. The source generator will only generate ternary constants for partial classes. If you want to use ternary literals, ensure your class is declared with the `partial` keyword.
+
+For example:
+
+```csharp
+partial class MyClass {
+    void Example() {
+        Int3T x = ter01T + terT10; // x will be -4
+    }
+}
+```
+
+Ternary literals are identifiers of the form `ter010T`, `terT01`, etc., where each character after `ter` is either `0`, `1`, or `T` (for -1). Like other C# literals, underscores are allowed between digits for clarity (e.g., `ter_01_T`). For example:
+
+```csharp
+// These are valid ternary literals:
+ter01T   // equivalent to decimal 2
+terT10   // equivalent to decimal -6
+ter0001  // equivalent to decimal 1
+ter000_000_01T // equivalent to decimal 2
+```
+
+### How it works
+
+When you reference a ternary literal in your code, the Ternary3 source generator automatically generates a constant with the correct value for you. This means you can use ternary literals as if they were predefined constants:
+
+```csharp
+int x = ter01T + terT10; // x will be -4
+```
+
+### Enabling/Disabling Ternary Literal Generation
+
+By default, ternary literal generation is enabled for all partial classes in your project. You can control this behavior using the `[assembly: Ternary3.GenerateTernaryConstants]` attribute:
+
+- To enable for all classes (default):
+  ```csharp
+  [assembly: Ternary3.GenerateTernaryConstants]
+  ```
+- To disable for all classes:
+  ```csharp
+  [assembly: Ternary3.GenerateTernaryConstants(false)]
+  ```
+- To enable for a specific class:
+  ```csharp
+  [Ternary3.GenerateTernaryConstants]
+  partial class MyClass { /* ... */ }
+  ```
+- To disable for a specific class:
+  ```csharp
+  [Ternary3.GenerateTernaryConstants(false)]
+  partial class MyClass { /* ... */ }
+  ```
+- To disable for all classes but re-enable for a specific class:
+  ```csharp
+  [assembly: Ternary3.GenerateTernaryConstants(false)]
+  [Ternary3.GenerateTernaryConstants]
+  partial class MyClass { /* ... */ }
+  ```
+
+See the source generator documentation for more advanced usage.
+
 ## Examples
 
 ### UnaryTritOperationDemo - Using Unary Operators
@@ -786,75 +851,3 @@ Provides a set of predefined binary operations implemented as lookup tables for 
 - `static readonly BinaryTritOperator GreaterThan` - The greater than comparison operation.
 - `static readonly BinaryTritOperator LesserThan` - The less than comparison operation.
 
-### Formatting Namespace
-
-#### `TernaryFormatter` Class
-
-```csharp
-namespace Ternary3.Formatting
-```
-A custom formatter for ternary types, supporting both ternary and standard numeric formatting.
-
-**Constructors:**
-- `TernaryFormatter(ITernaryFormat? ternaryFormat = null, IFormatProvider? inner = null)` — Creates a formatter with the specified ternary format and optional fallback provider.
-
-**Methods:**
-- `string Format(string? format, object? arg, IFormatProvider? formatProvider)` — Formats the value according to the format string. If the format string is a whitelisted ternary format (e.g., "ter"), formats as trits; otherwise, forwards to the default formatter.
-- `string Format(ITritArray trits)` — Formats a trit array using the formatter's settings.
-
-#### `TernaryFormat` Class
-
-```csharp
-namespace Ternary3.Formatting
-```
-Represents a customizable ternary format, allowing you to specify digit symbols, grouping, separators, and padding for formatting trit arrays.
-
-**Static Properties:**
-- `Invariant` — A built-in, culture-invariant ternary format with standard digit symbols and grouping.
-- `Minimal` — A built-in minimal ternary format for compact representations.
-- `Current` — The currently used ternary format, when not explicitly specified.
-
-**Properties:**
-- `char NegativeTritDigit` — The character used to represent a negative trit (-1).
-- `char ZeroTritDigit` — The character used to represent a zero trit (0).
-- `char PositiveTritDigit` — The character used to represent a positive trit (+1).
-- `IList<TritGroupDefinition> Groups` — The list of group definitions, each specifying a separator and group size for hierarchical grouping.
-- `string DecimalSeparator` — The string used as a decimal separator (for future floating-point trit support).
-- `TernaryPadding TernaryPadding` — The padding mode for the formatted ternary string.
-
-**Methods:**
-- `TernaryFormat WithGroup(int size, string separator)` — Adds a group definition to the format and returns the current instance for chaining.
-- `TernaryFormat ClearGroups()` — Removes all group definitions from the format and returns the current instance for chaining.
-- `string ToString()` — Previews the format by creating a sample TritArray27 and formatting it.
-
-#### `TernaryFormatProvider` Class
-
-```csharp
-namespace Ternary3.Formatting
-```
-Provides a format provider for ternary formatting, returning a TernaryFormatter for ternary types.
-
-**Constructors:**
-- `TernaryFormatProvider(ITernaryFormat? format = null, IFormatProvider? inner = null)` — Creates a provider with the specified ternary format and optional fallback provider.
-
-**Methods:**
-- `object? GetFormat(Type? formatType)` — Returns a TernaryFormatter if the requested type is ICustomFormatter or ITernaryFormatter; otherwise, delegates to the inner provider.
-
-#### `ITernaryFormat` Interface
-
-```csharp
-namespace Ternary3.Formatting
-```
-Provides formatting options for representing arrays of trits as strings, including digit symbols, grouping, separators, and padding.
-
-**Properties:**
-- `char NegativeTritDigit` — The character used to represent a negative trit (-1).
-- `char ZeroTritDigit` — The character used to represent a zero trit (0).
-- `char PositiveTritDigit` — The character used to represent a positive trit (+1).
-- `IList<TritGroupDefinition> Groups` — The list of group definitions, each specifying a separator and group size for hierarchical grouping.
-- `string DecimalSeparator` — The string used as a decimal separator (for future floating-point trit support).
-- `TernaryPadding TernaryPadding` — The padding mode for the formatted ternary string.
-
-**Methods:**
-- `TernaryFormat WithGroup(int size, string separator)` — Adds a group definition to the format and returns the current instance for chaining.
-- `TernaryFormat ClearGroups()` — Removes all group definitions from the format and returns the current instance for chaining.

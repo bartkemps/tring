@@ -40,19 +40,63 @@ namespace Ternary3.Generators
         public void Execute(GeneratorExecutionContext context)
         {
             // Check for [assembly: GenerateTernaryConstants]
-            var hasAttribute = context.Compilation
-                .Assembly
-                .GetAttributes()
-                .Any(attr => attr.AttributeClass?.Name == "GenerateTernaryConstantsAttribute");
-            if (!hasAttribute) return;
-
-            // Get the syntax receiver with the collected partial classes
+            var assemblyAttributes = context.Compilation.Assembly.GetAttributes();
+            var assemblyAttr = assemblyAttributes.FirstOrDefault(attr => attr.AttributeClass?.Name == "GenerateTernaryConstantsAttribute");
+            var assemblyEnabled = true;
+            if (assemblyAttr != null)
+            {
+                if (assemblyAttr.ConstructorArguments.Length == 1 &&
+                    assemblyAttr.ConstructorArguments[0].Kind == TypedConstantKind.Primitive &&
+                    assemblyAttr.ConstructorArguments[0].Value is bool)
+                {
+                    assemblyEnabled = (bool)assemblyAttr.ConstructorArguments[0].Value;
+                }
+            }
             var syntaxReceiver = (SyntaxReceiver)context.SyntaxReceiver;
             if (syntaxReceiver == null) return;
 
-
             foreach (var cls in syntaxReceiver.PartialClasses)
             {
+                // Check for class-level attribute
+                bool classHasAttribute = false;
+                bool classEnabled = false;
+                foreach (var attrList in cls.AttributeLists)
+                {
+                    foreach (var attr in attrList.Attributes)
+                    {
+                        var name = attr.Name.ToString();
+                        if (name.EndsWith("GenerateTernaryConstants") || name.EndsWith("GenerateTernaryConstantsAttribute"))
+                        {
+                            classHasAttribute = true;
+                            if (attr.ArgumentList == null || attr.ArgumentList.Arguments.Count == 0)
+                            {
+                                classEnabled = true;
+                            }
+                            else if (attr.ArgumentList.Arguments[0].Expression is LiteralExpressionSyntax literal && literal.IsKind(SyntaxKind.TrueLiteralExpression))
+                            {
+                                classEnabled = true;
+                            }
+                            else if (attr.ArgumentList.Arguments[0].Expression is LiteralExpressionSyntax literal2 && literal2.IsKind(SyntaxKind.FalseLiteralExpression))
+                            {
+                                classEnabled = false;
+                            }
+                        }
+                    }
+                }
+
+                bool shouldProcess = false;
+                if (assemblyAttr == null || assemblyEnabled)
+                {
+                    // Default or assembly enabled: process all unless class disables
+                    shouldProcess = !classHasAttribute || (classHasAttribute && classEnabled);
+                }
+                else
+                {
+                    // Assembly not enabled: only process if class enables
+                    shouldProcess = classHasAttribute && classEnabled;
+                }
+                if (!shouldProcess) continue;
+
                 // Try to get the semantic model - this might fail if there are compilation errors
                 INamedTypeSymbol classSymbol;
 
