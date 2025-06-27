@@ -24,7 +24,7 @@ partial class TritConverterTests
     [InlineData(6078832729528464401, 0b1111111111_1111111111_1111111111_1111111111, 0b1_0000000000_0000000000_0000000000_0000000000, 41)]
     [InlineData(long.MaxValue, 687268435026, 1498450313609, 41)]
     [InlineData(long.MinValue, 1498450313608, 687268435025, 41)]
-    public void ToTrits_ReturnsEmptyArrays_Max64Trits(long lo, ulong expectedNegative, ulong expectedPositive, int expectedLength)
+    public void ToTrits_ReturnsCorrectValue_Max64Trits(long lo, ulong expectedNegative, ulong expectedPositive, int expectedLength)
     {
         var value = new BigInteger(lo);
         TritConverter.ToTrits(value, out var negative, out var positive, out var length);
@@ -44,7 +44,7 @@ partial class TritConverterTests
     [InlineData("-5895092288869291585760436430706259332839105796137920554548480", ulong.MaxValue, 0, 128)]
     [InlineData("5895092288869291585760436430706259332839105796137920554548481", ulong.MaxValue, 0, 129)]
     [InlineData("-5895092288869291585760436430706259332839105796137920554548481", 0, ulong.MaxValue, 129)]
-    public void ToTrits_ReturnsEmptyArrays_MoreThan64Trits(string number, ulong expectedNegative, ulong expectedPositive, int expectedLength)
+    public void ToTrits_ReturnsCorrectValue_MoreThan64Trits(string number, ulong expectedNegative, ulong expectedPositive, int expectedLength)
     {
         var value = BigInteger.Parse(number);
         TritConverter.ToTrits(value, out var negative, out var positive, out var length);
@@ -53,5 +53,24 @@ partial class TritConverterTests
         positive[0].Should().Be(expectedPositive, "because the positive trit should match the expected value");
         length.Should().Be(expectedLength, "because the total length should equal the sum of negative and positive counts");
     }
+
+    [Theory]
+    [InlineData("0")]
+    [InlineData("3")]
+    [InlineData("6078832729528464401")]
+    [InlineData("5895092288869291585760436430706259332839105796137920554548480")]
+    [InlineData("-5895092288869291585760436430706259332839105796137920554548480")]
+    [InlineData("5895092288869291585760436430706259332839105796137920554548481")]
+    [InlineData("-5895092288869291585760436430706259332839105796137920554548481")]
+    public void ToBigInteger_InversesToTrits(string expected)
+    {
+        var expectedValue = BigInteger.Parse(expected);
+        TritConverter.ToTrits(expectedValue, out var negative, out var positive, out _);
+
+        var actual = TritConverter.ToBigInteger(negative, positive);
+
+        actual.Should().Be(BigInteger.Parse(expected), "because the conversion should yield the original value when trits are correctly formed");
+    }
+
 
 }

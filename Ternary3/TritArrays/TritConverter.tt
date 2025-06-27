@@ -178,6 +178,20 @@ internal static class TritConverter
 
         if (swap) (positive, negative) = (negative, positive);
     }
+
+    public static BigInteger ToBigInteger(List<ulong> negative, List<ulong> positive)
+    {
+        BigInteger result = 0;
+        BigInteger pow = 1;
+        for(var i = 0; i<negative.Count; i++)
+        {
+            result += pow * ToInt128(negative[i], positive[i]);
+            pow *= 1853020188851841;
+            pow *= 1853020188851841;
+        }
+        return result;
+    }
+
 <#
     foreach (var(type,  backing) in new[] { ("Int32", "uint"),  ("Int32", "int"), ("Int32", "ushort"), ("Int64", "uint"), ("Int64", "int"), ("Int64", "ulong"), ("Int64", "ushort"), ("Int128", "ulong") })
     {
