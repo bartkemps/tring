@@ -16,7 +16,7 @@ public partial class BinaryTritOperatorTests
         {
             for (var j = -1; j <= 1; j++)
             {
-                table[new Trit((sbyte)i), new Trit((sbyte)j)].Value.Should().Be(0);
+                table[new((sbyte)i), new((sbyte)j)].Value.Should().Be(0);
             }
         }
     }
@@ -91,11 +91,11 @@ public partial class BinaryTritOperatorTests
         var table = new BinaryTritOperator(sourceArray);
 
         // Test some specific combinations
-        table[new Trit(-1), new Trit(-1)].Should().Be(new Trit(1));
-        table[new Trit(0), new Trit(0)].Should().Be(new Trit(1));
-        table[new Trit(1), new Trit(1)].Should().Be(new Trit(1));
-        table[new Trit(-1), new Trit(1)].Should().Be(new Trit(-1));
-        table[new Trit(1), new Trit(-1)].Should().Be(new Trit(-1));
+        table[new(-1), new(-1)].Should().Be(new Trit(1));
+        table[new(0), new(0)].Should().Be(new Trit(1));
+        table[new(1), new(1)].Should().Be(new Trit(1));
+        table[new(-1), new(1)].Should().Be(new Trit(-1));
+        table[new(1), new(-1)].Should().Be(new Trit(-1));
     }
 
     [Theory]
@@ -111,7 +111,7 @@ public partial class BinaryTritOperatorTests
     public void Indexer_ShouldWorkWithAllTritCombinations(sbyte left, sbyte right, sbyte expected)
     {
         var table = new BinaryTritOperator(); // Default constructor creates table with all zeros
-        table[new Trit(left), new Trit(right)].Should().Be(new Trit(expected));
+        table[new(left), new(right)].Should().Be(new Trit(expected));
     }
 
     [Fact]
@@ -134,20 +134,20 @@ public partial class BinaryTritOperatorTests
     public void IndividualTritsConstructor_ShouldInitializeCorrectly()
     {
         var table = new BinaryTritOperator(
-            new Trit(1), new Trit(0), new Trit(-1),
-            new Trit(0), new Trit(1), new Trit(0),
-            new Trit(-1), new Trit(0), new Trit(1)
+            new(1), new(0), new(-1),
+            new(0), new(1), new(0),
+            new(-1), new(0), new(1)
         );
 
         // Check diagonal values
-        table[new Trit(-1), new Trit(-1)].Should().Be(new Trit(1));
-        table[new Trit(0), new Trit(0)].Should().Be(new Trit(1));
-        table[new Trit(1), new Trit(1)].Should().Be(new Trit(1));
+        table[new(-1), new(-1)].Should().Be(new Trit(1));
+        table[new(0), new(0)].Should().Be(new Trit(1));
+        table[new(1), new(1)].Should().Be(new Trit(1));
 
         // Check some off-diagonal values
-        table[new Trit(-1), new Trit(0)].Should().Be(new Trit(0));
-        table[new Trit(-1), new Trit(1)].Should().Be(new Trit(-1));
-        table[new Trit(0), new Trit(-1)].Should().Be(new Trit(0));
+        table[new(-1), new(0)].Should().Be(new Trit(0));
+        table[new(-1), new(1)].Should().Be(new Trit(-1));
+        table[new(0), new(-1)].Should().Be(new Trit(0));
     }
 
     [Fact]
@@ -158,7 +158,7 @@ public partial class BinaryTritOperatorTests
         {
             for (var j = 0; j < 3; j++)
             {
-                sourceArray[i, j] = new Trit((sbyte)((i + j) % 3 - 1));
+                sourceArray[i, j] = new((sbyte)((i + j) % 3 - 1));
             }
         }
 
@@ -169,7 +169,7 @@ public partial class BinaryTritOperatorTests
         {
             for (var j = 0; j < 3; j++)
             {
-                table[new Trit((sbyte)(i - 1)), new Trit((sbyte)(j - 1))]
+                table[new((sbyte)(i - 1)), new((sbyte)(j - 1))]
                     .Should().Be(sourceArray[i, j]);
             }
         }
@@ -181,37 +181,37 @@ public partial class BinaryTritOperatorTests
         // Define a simple XOR operation
         Trit XorOperation(Trit a, Trit b)
         {
-            if (a.Value == 0 || b.Value == 0) return new Trit(0);
-            return a.Value == b.Value ? new Trit(-1) : new Trit(1);
+            if (a.Value == 0 || b.Value == 0) return new(0);
+            return a.Value == b.Value ? new(-1) : new Trit(1);
         }
 
         var table = new BinaryTritOperator(XorOperation);
 
         // Test all combinations
-        table[new Trit(-1), new Trit(-1)].Should().Be(new Trit(-1));
-        table[new Trit(-1), new Trit(0)].Should().Be(new Trit(0));
-        table[new Trit(-1), new Trit(1)].Should().Be(new Trit(1));
-        table[new Trit(0), new Trit(-1)].Should().Be(new Trit(0));
-        table[new Trit(0), new Trit(0)].Should().Be(new Trit(0));
-        table[new Trit(0), new Trit(1)].Should().Be(new Trit(0));
-        table[new Trit(1), new Trit(-1)].Should().Be(new Trit(1));
-        table[new Trit(1), new Trit(0)].Should().Be(new Trit(0));
-        table[new Trit(1), new Trit(1)].Should().Be(new Trit(-1));
+        table[new(-1), new(-1)].Should().Be(new Trit(-1));
+        table[new(-1), new(0)].Should().Be(new Trit(0));
+        table[new(-1), new(1)].Should().Be(new Trit(1));
+        table[new(0), new(-1)].Should().Be(new Trit(0));
+        table[new(0), new(0)].Should().Be(new Trit(0));
+        table[new(0), new(1)].Should().Be(new Trit(0));
+        table[new(1), new(-1)].Should().Be(new Trit(1));
+        table[new(1), new(0)].Should().Be(new Trit(0));
+        table[new(1), new(1)].Should().Be(new Trit(-1));
     }
 
     [Fact]
     public void Equals_ShouldReturnTrue_WhenTablesAreTheSame()
     {
         var table1 = new BinaryTritOperator(
-            new Trit(1), new Trit(0), new Trit(-1),
-            new Trit(0), new Trit(1), new Trit(0),
-            new Trit(-1), new Trit(0), new Trit(1)
+            new(1), new(0), new(-1),
+            new(0), new(1), new(0),
+            new(-1), new(0), new(1)
         );
         
         var table2 = new BinaryTritOperator(
-            new Trit(1), new Trit(0), new Trit(-1),
-            new Trit(0), new Trit(1), new Trit(0),
-            new Trit(-1), new Trit(0), new Trit(1)
+            new(1), new(0), new(-1),
+            new(0), new(1), new(0),
+            new(-1), new(0), new(1)
         );
 
         // Object.Equals
@@ -234,15 +234,15 @@ public partial class BinaryTritOperatorTests
     public void Equals_ShouldReturnFalse_WhenTablesAreDifferent()
     {
         var table1 = new BinaryTritOperator(
-            new Trit(1), new Trit(0), new Trit(-1),
-            new Trit(0), new Trit(1), new Trit(0),
-            new Trit(-1), new Trit(0), new Trit(1)
+            new(1), new(0), new(-1),
+            new(0), new(1), new(0),
+            new(-1), new(0), new(1)
         );
         
         var table2 = new BinaryTritOperator(
-            new Trit(-1), new Trit(0), new Trit(1),
-            new Trit(0), new Trit(-1), new Trit(0),
-            new Trit(1), new Trit(0), new Trit(-1)
+            new(-1), new(0), new(1),
+            new(0), new(-1), new(0),
+            new(1), new(0), new(-1)
         );
 
         // Object.Equals
@@ -280,9 +280,9 @@ public partial class BinaryTritOperatorTests
     public void ToString_ShouldReturnFormattedTable()
     {
         var table = new BinaryTritOperator(
-            new Trit(-1), new Trit(0), new Trit(1),
-            new Trit(0), new Trit(-1), new Trit(0),
-            new Trit(1), new Trit(0), new Trit(-1)
+            new(-1), new(0), new(1),
+            new(0), new(-1), new(0),
+            new(1), new(0), new(-1)
         );
         
         var result = table.ToString();
@@ -297,9 +297,9 @@ public partial class BinaryTritOperatorTests
     public void DebugView_ShouldReturnCompactStringRepresentation()
     {
         var table = new BinaryTritOperator(
-            new Trit(-1), new Trit(0), new Trit(1),
-            new Trit(0), new Trit(-1), new Trit(0),
-            new Trit(1), new Trit(0), new Trit(-1)
+            new(-1), new(0), new(1),
+            new(0), new(-1), new(0),
+            new(1), new(0), new(-1)
         );
         
         // Using reflection to access the internal DebugView method

@@ -7,6 +7,7 @@ using Formatting;
 using Operators;
 using Operators.Operations;
 using System.CodeDom.Compiler;
+using System.Diagnostics;
 using System.Globalization;
 using System.Numerics;
 using System.Diagnostics.CodeAnalysis;
@@ -15,6 +16,7 @@ using System.Diagnostics.CodeAnalysis;
 /// Represents a 9-trit  signed integer, modeled after the <see cref="Int16"/> type.
 /// </summary>
 [GeneratedCode("IntT.tt", null)]
+[DebuggerDisplay("{DebugView()}")]
 public readonly partial struct Int9T : ITernaryInteger<Int9T>
 {
     private readonly Int16 value;
@@ -492,6 +494,8 @@ public static implicit operator Int64(Int9T value) => (Int64)value.value;
     public static bool operator <=(IComparable left, Int9T right) => right.CompareTo(left) >= 0;
 
     #endregion
+    
+    internal string DebugView() => $"{this} ({this:ter})";
 
     // ToString implementation
     /// <summary>

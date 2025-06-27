@@ -56,6 +56,12 @@ internal static class Formatter
         return GetFormatter(provider).Format(format, trits, provider);
     }
     
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static string Format(BigTritArray trits, string? format, IFormatProvider? provider)
+    {
+        return GetFormatter(provider).Format(format, trits, provider);
+    }
+    
     private static ICustomFormatter GetFormatter(IFormatProvider? provider)
     {
         var ternaryProvider = provider as TernaryFormatProvider ?? new TernaryFormatProvider(inner: provider);

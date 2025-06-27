@@ -11,10 +11,11 @@ public class Conversion
         foreach (var digit in digits.Reverse())
         {
             var i = "T01".IndexOf(digit);
-            if (i==-1) continue;
-            value += i * scale;
+            if (i == -1) continue;
+            value += (i - 1) * scale;
             scale *= 3;
         }
+
         return value;
     }
 }

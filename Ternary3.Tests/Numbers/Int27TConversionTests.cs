@@ -36,7 +36,7 @@ public class Int27TConversionTests
             
         for (var i = 0; i < tritValues.Length; i++)
         {
-            array[i] = new Trit(tritValues[i]);
+            array[i] = new(tritValues[i]);
             expectedValue += tritValues[i] * power;
             power *= 3;
         }

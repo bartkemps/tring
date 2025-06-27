@@ -58,8 +58,8 @@ namespace Ternary3.Generators
             foreach (var cls in syntaxReceiver.PartialClasses)
             {
                 // Check for class-level attribute
-                bool classHasAttribute = false;
-                bool classEnabled = false;
+                var classHasAttribute = false;
+                var classEnabled = false;
                 foreach (var attrList in cls.AttributeLists)
                 {
                     foreach (var attr in attrList.Attributes)
@@ -84,7 +84,7 @@ namespace Ternary3.Generators
                     }
                 }
 
-                bool shouldProcess = false;
+                var shouldProcess = false;
                 if (assemblyAttr == null || assemblyEnabled)
                 {
                     // Default or assembly enabled: process all unless class disables

@@ -66,6 +66,7 @@ LastGenerated = <#= DateTime.Now.ToString() #>
            using Operators;
            using Operators.Operations;
            using System.CodeDom.Compiler;
+           using System.Diagnostics;
            using System.Globalization;
            using System.Numerics;
            using System.Diagnostics.CodeAnalysis;
@@ -74,6 +75,7 @@ LastGenerated = <#= DateTime.Now.ToString() #>
            /// Represents a {{trits}}-trit  signed integer, modeled after the <see cref="{{backingType}}"/> type.
            /// </summary>
            [GeneratedCode("IntT.tt", null)]
+           [DebuggerDisplay("{DebugView()}")]
            public readonly partial struct {{name}} : ITernaryInteger<{{name}}>
            {
                private readonly {{backingType}} value;
@@ -257,6 +259,8 @@ LastGenerated = <#= DateTime.Now.ToString() #>
                 {{GenerateComparisonOperators(name, "IComparable", backingType)}}
            
                #endregion
+               
+               internal string DebugView() => $"{this} ({this:ter})";
            
                // ToString implementation
                /// <summary>

@@ -158,21 +158,6 @@ public class TritArray27Tests
         Assert.Equal(expected, result[0]);
     }
 
-    // [Fact]
-    // public void Negation_Works()
-    // {
-    //     var a = new TritArray27();
-    //     a[0] = Trit.Positive;
-    //     a[1] = Trit.Negative;
-    //     a[2] = Trit.Zero;
-    //
-    //     var result = -a;
-    //
-    //     Assert.Equal(Trit.Negative, result[0]);
-    //     Assert.Equal(Trit.Positive, result[1]);
-    //     Assert.Equal(Trit.Zero, result[2]);
-    // }
-
     [Fact]
     public void Subtraction_BasicOperations_WorkCorrectly()
     {
@@ -225,5 +210,78 @@ public class TritArray27Tests
         var result = arrayA - arrayB;
 
         Assert.Equal(expected, result[0]);
+    }
+
+    [Theory]
+    [InlineData(0)]
+    [InlineData(1)]
+    [InlineData(2)]
+    [InlineData(3)]
+    [InlineData(4)]
+    [InlineData(5)]
+    [InlineData(6)]
+    [InlineData(7)]
+    [InlineData(8)]
+    [InlineData(9)]
+    [InlineData(10)]
+    [InlineData(11)]
+    [InlineData(12)]
+    [InlineData(13)]
+    [InlineData(14)]
+    [InlineData(15)]
+    [InlineData(16)]
+    [InlineData(17)]
+    [InlineData(18)]
+    [InlineData(19)]
+    [InlineData(20)]
+    [InlineData(21)]
+    [InlineData(22)]
+    [InlineData(23)]
+    [InlineData(24)]
+    [InlineData(25)]
+    [InlineData(26)]
+    public void Indexer_IndexFromEnd_GetsCorrectTrit(int fromEnd)
+    {
+        var arr = new TritArray27();
+        for (var i = 0; i < arr.Length; i++)
+            arr[i] = new((sbyte)((i % 3) - 1));
+        var expected = arr[26 - fromEnd];
+        var actual = arr[^ (fromEnd + 1)];
+        actual.Should().Be(expected);
+    }
+
+    [Theory]
+    [InlineData(0, -1)]
+    [InlineData(1, 0)]
+    [InlineData(2, 1)]
+    [InlineData(3, -1)]
+    [InlineData(4, 0)]
+    [InlineData(5, 1)]
+    [InlineData(6, -1)]
+    [InlineData(7, 0)]
+    [InlineData(8, 1)]
+    [InlineData(9, -1)]
+    [InlineData(10, 0)]
+    [InlineData(11, 1)]
+    [InlineData(12, -1)]
+    [InlineData(13, 0)]
+    [InlineData(14, 1)]
+    [InlineData(15, -1)]
+    [InlineData(16, 0)]
+    [InlineData(17, 1)]
+    [InlineData(18, -1)]
+    [InlineData(19, 0)]
+    [InlineData(20, 1)]
+    [InlineData(21, -1)]
+    [InlineData(22, 0)]
+    [InlineData(23, 1)]
+    [InlineData(24, -1)]
+    [InlineData(25, 0)]
+    [InlineData(26, 1)]
+    public void Indexer_IndexFromEnd_SetsCorrectTrit(int fromEnd, sbyte tritValue)
+    {
+        var arr = new TritArray27();
+        arr[^ (fromEnd + 1)] = new(tritValue);
+        arr[^ (fromEnd + 1)].Value.Should().Be(tritValue);
     }
 }

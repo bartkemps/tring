@@ -1,3 +1,7 @@
+> **Perhaps the prettiest number system of all is the balanced ternary notation**
+>
+> -- *Donald Knuth, The art of computer programming*
+
 # Ternary3 - C# Balanced Ternary Number Library
 
 ## Basics
@@ -850,4 +854,3 @@ Provides a set of predefined binary operations implemented as lookup tables for 
 - `static readonly BinaryTritOperator Is` - The equality check operation.
 - `static readonly BinaryTritOperator GreaterThan` - The greater than comparison operation.
 - `static readonly BinaryTritOperator LesserThan` - The less than comparison operation.
-

@@ -17,7 +17,7 @@ public class TritArray27ShiftOperationsTests
         var array = new TritArray27();
         for (var i = 0; i < array.Length; i++)
         {
-            array[i] = new Trit((sbyte)((i % 3) - 1)); // Values -1, 0, 1 repeating
+            array[i] = new((sbyte)((i % 3) - 1)); // Values -1, 0, 1 repeating
         }
 
         var result = array << shiftAmount;
@@ -66,7 +66,7 @@ public class TritArray27ShiftOperationsTests
         var array = new TritArray27();
         for (var i = 0; i < array.Length; i++)
         {
-            array[i] = new Trit((sbyte)((i % 3) - 1)); // Values -1, 0, 1 repeating
+            array[i] = new((sbyte)((i % 3) - 1)); // Values -1, 0, 1 repeating
         }
 
         var result = array >> shiftAmount;
@@ -113,7 +113,7 @@ public class TritArray27ShiftOperationsTests
         var array = new TritArray27();
         for (var i = 0; i < array.Length; i++)
         {
-            array[i] = new Trit((sbyte)((i % 3) - 1)); // Values -1, 0, 1 repeating
+            array[i] = new((sbyte)((i % 3) - 1)); // Values -1, 0, 1 repeating
         }
 
         var resultWithNegativeShift = array << negativeShiftAmount;
@@ -138,7 +138,7 @@ public class TritArray27ShiftOperationsTests
         var array = new TritArray27();
         for (var i = 0; i < array.Length; i++)
         {
-            array[i] = new Trit((sbyte)((i % 3) - 1)); // Values -1, 0, 1 repeating
+            array[i] = new((sbyte)((i % 3) - 1)); // Values -1, 0, 1 repeating
         }
 
         var resultWithNegativeShift = array >> negativeShiftAmount;
@@ -159,7 +159,7 @@ public class TritArray27ShiftOperationsTests
     public void LeftShift_PreservesTrits_WhenShiftingSimpleTrit(sbyte tritValue, int shiftAmount)
     {
         var array = new TritArray27();
-        array[0] = new Trit(tritValue);
+        array[0] = new(tritValue);
         
         var result = array << shiftAmount;
         
@@ -185,7 +185,7 @@ public class TritArray27ShiftOperationsTests
     {
         var array = new TritArray27();
         var initialPosition = shiftAmount + 1; // Position to set the initial trit
-        array[initialPosition] = new Trit(tritValue);
+        array[initialPosition] = new(tritValue);
         
         var result = array >> shiftAmount;
         

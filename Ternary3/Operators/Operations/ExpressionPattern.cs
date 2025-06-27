@@ -40,7 +40,7 @@ internal class ExpressionPattern
         var patterns = new List<ExpressionPattern>();
             
         // Pattern 1: Empty matrix (all false)
-        patterns.Add(new ExpressionPattern(
+        patterns.Add(new(
             // Matches
             (matrix, firstCounts, secondCounts) => 
                 firstCounts[0] == 0 && firstCounts[1] == 0 && firstCounts[2] == 0,
@@ -51,7 +51,7 @@ internal class ExpressionPattern
         ));
             
         // Pattern 2: Full matrix (all true)
-        patterns.Add(new ExpressionPattern(
+        patterns.Add(new(
             // Matches
             (matrix, firstCounts, secondCounts) => 
                 firstCounts[0] == 3 && firstCounts[1] == 3 && firstCounts[2] == 3,
@@ -69,7 +69,7 @@ internal class ExpressionPattern
         for (var row = 0; row < 3; row++)
         {
             var capturedRow = row; // Capture for lambda
-            patterns.Add(new ExpressionPattern(
+            patterns.Add(new(
                 // Matches
                 (matrix, firstCounts, secondCounts) => firstCounts[capturedRow] == 3,
                 // Create Expression
@@ -86,7 +86,7 @@ internal class ExpressionPattern
         for (var col = 0; col < 3; col++)
         {
             var capturedCol = col; // Capture for lambda
-            patterns.Add(new ExpressionPattern(
+            patterns.Add(new(
                 // Matches
                 (matrix, firstCounts, secondCounts) => secondCounts[capturedCol] == 3,
                 // Create Expression
@@ -103,7 +103,7 @@ internal class ExpressionPattern
         for (var row = 0; row < 3; row++)
         {
             var capturedRow = row; // Capture for lambda
-            patterns.Add(new ExpressionPattern(
+            patterns.Add(new(
                 // Matches
                 (matrix, firstCounts, secondCounts) => {
                     if (firstCounts[capturedRow] != 2) return false;
@@ -148,7 +148,7 @@ internal class ExpressionPattern
         for (var col = 0; col < 3; col++)
         {
             var capturedCol = col; // Capture for lambda
-            patterns.Add(new ExpressionPattern(
+            patterns.Add(new(
                 // Matches
                 (matrix, firstCounts, secondCounts) => {
                     if (secondCounts[capturedCol] != 2) return false;
@@ -190,7 +190,7 @@ internal class ExpressionPattern
         }
             
         // Pattern 7: Checkerboard pattern (like in your example)
-        patterns.Add(new ExpressionPattern(
+        patterns.Add(new(
             // Matches
             (matrix, firstCounts, secondCounts) => {
                 // Check for the pattern where diagonal and anti-diagonal cells are true

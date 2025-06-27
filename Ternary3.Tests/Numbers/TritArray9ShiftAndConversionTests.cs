@@ -78,4 +78,41 @@ public class TritArray9ShiftAndConversionTests
         ((int)leftShiftNeg6).Should().Be(13);
         ((int)rightShift6).Should().Be(13);
     }
+
+    [Theory]
+    [InlineData(0)]
+    [InlineData(1)]
+    [InlineData(2)]
+    [InlineData(3)]
+    [InlineData(4)]
+    [InlineData(5)]
+    [InlineData(6)]
+    [InlineData(7)]
+    [InlineData(8)]
+    public void Indexer_IndexFromEnd_GetsCorrectTrit(int fromEnd)
+    {
+        var arr = new TritArray9();
+        for (var i = 0; i < arr.Length; i++)
+            arr[i] = new((sbyte)((i % 3) - 1));
+        var expected = arr[8 - fromEnd];
+        var actual = arr[^ (fromEnd + 1)];
+        actual.Should().Be(expected);
+    }
+
+    [Theory]
+    [InlineData(0, -1)]
+    [InlineData(1, 0)]
+    [InlineData(2, 1)]
+    [InlineData(3, -1)]
+    [InlineData(4, 0)]
+    [InlineData(5, 1)]
+    [InlineData(6, -1)]
+    [InlineData(7, 0)]
+    [InlineData(8, 1)]
+    public void Indexer_IndexFromEnd_SetsCorrectTrit(int fromEnd, sbyte tritValue)
+    {
+        var arr = new TritArray9();
+        arr[^ (fromEnd + 1)] = new(tritValue);
+        arr[^ (fromEnd + 1)].Value.Should().Be(tritValue);
+    }
 }

@@ -7,6 +7,7 @@ using Formatting;
 using Operators;
 using Operators.Operations;
 using System.CodeDom.Compiler;
+using System.Diagnostics;
 using System.Globalization;
 using System.Numerics;
 using System.Diagnostics.CodeAnalysis;
@@ -15,6 +16,7 @@ using System.Diagnostics.CodeAnalysis;
 /// Represents a 3-trit  signed integer, modeled after the <see cref="SByte"/> type.
 /// </summary>
 [GeneratedCode("IntT.tt", null)]
+[DebuggerDisplay("{DebugView()}")]
 public readonly partial struct Int3T : ITernaryInteger<Int3T>
 {
     private readonly SByte value;
@@ -492,6 +494,8 @@ public static implicit operator Int64(Int3T value) => (Int64)value.value;
     public static bool operator <=(IComparable left, Int3T right) => right.CompareTo(left) >= 0;
 
     #endregion
+    
+    internal string DebugView() => $"{this} ({this:ter})";
 
     // ToString implementation
     /// <summary>

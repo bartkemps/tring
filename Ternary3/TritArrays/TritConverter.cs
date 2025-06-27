@@ -1274,6 +1274,16 @@ internal static class TritConverter
         => new((int)((positive >> index) & 1) - (int)((negative >> index) & 1));
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static Trit GetTrit(List<ulong> negative, List<ulong> positive, int index)
+    {
+        var longIndex = index / 64;
+        var bitIndex = index % 64;
+        var pos = (positive[longIndex] & (1UL << bitIndex)) != 0;
+        var neg = (negative[longIndex] & (1UL << bitIndex)) != 0;
+        return (Trit)((pos ? 1 : 0) - (neg ? 1 : 0));
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void SetTrit(ref byte negative, ref byte positive, int index, Trit value)
     {
         var mask = 1 << index;
@@ -1332,6 +1342,28 @@ internal static class TritConverter
             default: // case 0
                 positive &= ~mask;
                 negative &= ~mask;
+                break;
+        }
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static void SetTrit(ref List<ulong> negative, ref List<ulong> positive, int index, Trit value)
+    {
+        var longIndex = index / 64;
+        var bitIndex = index % 64;
+        switch (value.Value)
+        {
+            case 1:
+                positive[longIndex] |= (1UL << bitIndex);
+                negative[longIndex] &= ~(1UL << bitIndex);
+                break;
+            case -1:
+                positive[longIndex] &= ~(1UL << bitIndex);
+                negative[longIndex] |= (1UL << bitIndex);
+                break;
+            default:
+                positive[longIndex] &= ~(1UL << bitIndex);
+                negative[longIndex] &= ~(1UL << bitIndex);
                 break;
         }
     }

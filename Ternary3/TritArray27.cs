@@ -77,6 +77,28 @@ public struct TritArray27 : ITritArray<TritArray27>
             TritConverter.SetTrit(ref Negative, ref Positive, index, value);
         }
     }
+    
+    /// <summary>
+    /// Gets or sets the trit at the specified index.
+    /// </summary>
+    /// <param name="index">The zero-based index of the trit to get or set (must be between 0 and 26).</param>
+    /// <returns>The trit at the specified index.</returns>
+    /// <exception cref="ArgumentOutOfRangeException">Thrown when index is less than 0 or greater than 26.</exception>
+    public Trit this[Index index]
+    {
+        get => index.IsFromEnd ? this[NumberOfTrits - index.Value] : this[index.Value];
+        set
+        {
+            if (index.IsFromEnd)
+            {
+                this[NumberOfTrits - index.Value] = value;
+            }
+            else
+            {
+                this[index.Value] = value;
+            }
+        }
+    }
 
     /// <summary>
     /// Gets the length of the trit array, which is always 27.
@@ -245,7 +267,7 @@ public struct TritArray27 : ITritArray<TritArray27>
     /// <inheritdoc/>  
     public bool Equals(TritArray27 other) => Negative == other.Negative && Positive == other.Positive;
     
-    internal string DebugView() => ToString();
+    internal string DebugView() => $"{this} ({this:ter})";
 
     // ToString implementation
     /// <summary>

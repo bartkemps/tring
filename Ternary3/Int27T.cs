@@ -7,6 +7,7 @@ using Formatting;
 using Operators;
 using Operators.Operations;
 using System.CodeDom.Compiler;
+using System.Diagnostics;
 using System.Globalization;
 using System.Numerics;
 using System.Diagnostics.CodeAnalysis;
@@ -15,6 +16,7 @@ using System.Diagnostics.CodeAnalysis;
 /// Represents a 27-trit  signed integer, modeled after the <see cref="Int64"/> type.
 /// </summary>
 [GeneratedCode("IntT.tt", null)]
+[DebuggerDisplay("{DebugView()}")]
 public readonly partial struct Int27T : ITernaryInteger<Int27T>
 {
     private readonly Int64 value;
@@ -479,6 +481,8 @@ public static explicit operator Int32(Int27T value) => (Int32)value.value;
     public static bool operator <=(IComparable left, Int27T right) => right.CompareTo(left) >= 0;
 
     #endregion
+    
+    internal string DebugView() => $"{this} ({this:ter})";
 
     // ToString implementation
     /// <summary>
