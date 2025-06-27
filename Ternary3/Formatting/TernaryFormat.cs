@@ -18,7 +18,7 @@ public class TernaryFormat(ITernaryFormat other) : ITernaryFormat
     /// <summary>
     /// The currently used ternary format, when not explicitly specified.
     /// </summary>
-    public static TernaryFormat Current { get; set; } = new();
+    public static ITernaryFormat Current { get; set; } = Invariant;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="TernaryFormat"/> class using the specified format as a template.

@@ -558,6 +558,7 @@ This allows for flexible formatting and display of ternary numbers, including cu
   - [`TritArray3` Struct](#tritarray3-struct) - a 3-trit number stored optimized for trit operation performance
   - [`TritArray9` Struct](#tritarray9-struct) - a 9-trit number stored optimized for trit operation performance
   - [`TritArray27` Struct](#tritarray27-struct) - a 27-trit number stored optimized for trit operation performance
+  - [`BigTritArray` Class](#bigtritarray-class) - a variable-sized trit array for arbitrary precision ternary operations
   - [`Int3T` Struct](#int3t-struct) - a 3-trit number stored optimized for arithmetic operations
   - [`Int9T` Struct](#int9t-struct) - a 9-trit number stored optimized for arithmetic operations
   - [`Int27T` Struct](#int27t-struct) - a 27-trit number stored optimized for arithmetic operations
@@ -657,7 +658,11 @@ Represents a fixed-size array of 3 trits (ternary digits).
 - `static implicit operator long(TritArray3 array)` - Defines an implicit conversion of a TritArray3 to a long.
 
 **Methods:**
-- `override string ToString()` - Returns a string representation of the trit array.
+- `override string ToString()` - Returns a string representation of the trit array using default formatting.
+- `string ToString(string? format)` - Returns a string representation using the specified format string.
+- `string ToString(IFormatProvider? provider)` - Returns a string representation using the specified format provider.
+- `string ToString(string? format, IFormatProvider? provider)` - Returns a string representation using both format string and provider.
+- `string ToString(ITernaryFormat format)` - Returns a string representation using a custom ternary format.
 
 #### `TritArray9` Struct
 
@@ -701,6 +706,45 @@ Represents a fixed-size array of 27 trits (ternary digits).
 
 **Similar operators and methods as TritArray3 but for 27 trits.**
 
+#### `BigTritArray` Class
+
+```csharp
+namespace Ternary3.Numbers
+```
+
+Represents a variable-sized array of trits (ternary digits) that can store arbitrary precision ternary numbers.
+
+**Properties:**
+- `int Length` - Gets the length of the trit array.
+
+**Indexer:**
+- `Trit this[int index]` - Gets or sets the trit at the specified index.
+
+**Constructors and Creation Methods:**
+- `BigTritArray(int length)` - Creates a new BigTritArray with the specified length, all trits initialized to 0.
+- `BigTritArray(IEnumerable<Trit> trits)` - Creates a new BigTritArray from a collection of Trits.
+- `static BigTritArray FromBigInteger(BigInteger value)` - Creates a new BigTritArray from a System.Numerics.BigInteger value.
+- `static BigTritArray Concat(ITritArray array1, ITritArray array2)` - Concatenates two trit arrays into a new BigTritArray.
+
+**Operators:**
+- `static BigTritArray operator |(BigTritArray array, Func<Trit, Trit> operation)` - Applies a unary operation to each trit in the array.
+- `static BigTritArray operator |(BigTritArray array, Trit[] table)` - Applies a lookup table operation to each trit in the array.
+- `static BigTritArray operator <<(BigTritArray array, int shift)` - Performs a left bitwise shift on the trit array.
+- `static BigTritArray operator >>(BigTritArray array, int shift)` - Performs a right bitwise shift on the trit array.
+- Standard arithmetic operators (+, -, *, etc.) are supported
+
+**Conversion Operators:**
+- `static implicit operator BigTritArray(TritArray3 array)` - Converts a TritArray3 to a BigTritArray.
+- `static implicit operator BigTritArray(TritArray9 array)` - Converts a TritArray9 to a BigTritArray.
+- `static implicit operator BigTritArray(TritArray27 array)` - Converts a TritArray27 to a BigTritArray.
+- `static implicit operator BigTritArray(BigInteger value)` - Converts a BigInteger to a BigTritArray.
+- `static explicit operator BigInteger(BigTritArray array)` - Converts a BigTritArray to a BigInteger.
+
+**Methods:**
+- `override string ToString()` - Returns a string representation of the trit array.
+- `string ToString(ITernaryFormat format)` - Returns a formatted string representation of the trit array.
+- Other methods similar to those in the fixed-size TritArray structs.
+
 #### `Int3T` Struct
 
 ```csharp
@@ -726,7 +770,11 @@ Represents a 3-trit signed integer, modeled after the SByte type.
 - Standard arithmetic and comparison operators
 
 **Methods:**
-- `override string ToString()` - Returns a string representation of the trit value.
+- `override string ToString()` - Returns a string representation of the trit value using default formatting.
+- `string ToString(string? format)` - Returns a string representation using the specified format string.
+- `string ToString(IFormatProvider? provider)` - Returns a string representation using the specified format provider.
+- `string ToString(string? format, IFormatProvider? provider)` - Returns a string representation using both format string and provider.
+- `string ToString(ITernaryFormat format)` - Returns a string representation using a custom ternary format.
 - `bool Equals(Int3T other)` - Determines if this Int3T is equal to another Int3T.
 - `override bool Equals(object? obj)` - Returns a value indicating whether this instance is equal to a specified object.
 - `override int GetHashCode()` - Returns the hash code for this instance.
@@ -758,7 +806,11 @@ Represents a 9-trit signed integer, modeled after the Int16 type.
 - Standard arithmetic and comparison operators
 
 **Methods:**
-- `override string ToString()` - Returns a string representation of the trit value.
+- `override string ToString()` - Returns a string representation of the trit value using default formatting.
+- `string ToString(string? format)` - Returns a string representation using the specified format string.
+- `string ToString(IFormatProvider? provider)` - Returns a string representation using the specified format provider.
+- `string ToString(string? format, IFormatProvider? provider)` - Returns a string representation using both format string and provider.
+- `string ToString(ITernaryFormat format)` - Returns a string representation using a custom ternary format.
 - `bool Equals(Int9T other)` - Determines if this Int9T is equal to another Int9T.
 - `override bool Equals(object? obj)` - Returns a value indicating whether this instance is equal to a specified object.
 - `override int GetHashCode()` - Returns the hash code for this instance.
@@ -788,7 +840,11 @@ Represents a 27-trit signed integer, modeled after the Int64 type.
 - Standard arithmetic and comparison operators
 
 **Methods:**
-- `override string ToString()` - Returns a string representation of the trit value.
+- `override string ToString()` - Returns a string representation of the trit value using default formatting.
+- `string ToString(string? format)` - Returns a string representation using the specified format string.
+- `string ToString(IFormatProvider? provider)` - Returns a string representation using the specified format provider.
+- `string ToString(string? format, IFormatProvider? provider)` - Returns a string representation using both format string and provider.
+- `string ToString(ITernaryFormat format)` - Returns a string representation using a custom ternary format.
 - `bool Equals(Int27T other)` - Determines if this Int27T is equal to another Int27T.
 - `override bool Equals(object? obj)` - Returns a value indicating whether this instance is equal to a specified object.
 - `override int GetHashCode()` - Returns the hash code for this instance.
