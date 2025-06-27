@@ -4,7 +4,7 @@ namespace Ternary3.Tests.Numbers.TritArrays;
 
 using Ternary3.TritArrays;
 
-public class TritConverterTests
+public partial class TritConverterTests
 {
     [Theory]
     [InlineData(0, 0, 0, 0)]        // Zero value, zero index
