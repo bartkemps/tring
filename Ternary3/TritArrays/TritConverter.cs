@@ -106,7 +106,7 @@ internal static class TritConverter
         negative = 0;
         positive = 0;
         var index = 0;
-
+        
         while (value != 0 && index < 32)
         {
             value = Math.DivRem(value, 729, out var remainder);
@@ -140,7 +140,7 @@ internal static class TritConverter
         negative = 0;
         positive = 0;
         var index = 0;
-
+        
         while (value != 0 && index < 32)
         {
             value = Math.DivRem(value, 729, out var remainder);
@@ -174,7 +174,7 @@ internal static class TritConverter
         negative = 0;
         positive = 0;
         var index = 0;
-
+        
         while (value != 0 && index < 64)
         {
             value = Math.DivRem(value, 729, out var remainder);
@@ -1344,7 +1344,7 @@ internal static class TritConverter
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Trit GetTrit(byte negative, byte positive, int index)
         => new(((positive >> index) & 1) - ((negative >> index) & 1));
-
+    
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Trit GetTrit(ushort negative, ushort positive, int index)
         => new(((positive >> index) & 1) - ((negative >> index) & 1));
@@ -1387,7 +1387,7 @@ internal static class TritConverter
                 break;
         }
     }
-
+    
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void SetTrit(ref ushort negative, ref ushort positive, int index, Trit value)
     {
@@ -1408,7 +1408,7 @@ internal static class TritConverter
                 break;
         }
     }
-
+    
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void SetTrit(ref uint negative, ref uint positive, int index, Trit value)
     {
