@@ -6,6 +6,89 @@ using System.Runtime.CompilerServices;
 internal static class TritConverter
 {
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static int GetLength(uint negative, uint positive)
+    {
+        var bits = negative | positive;
+        return bits == 0 ? 0 : BitOperations.Log2(bits) + 1;
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static void ToTrits(BigInteger value, out List<ulong> negative, out List<ulong> positive, out int length)
+    {
+        negative = [];
+        positive = [];
+        length = 0;
+        if (value == 0) return;
+        if (value > -364 && value < 364)
+        {
+            var pos = LookupTrits(-(int)value);
+            var neg = LookupTrits((int)value);
+            negative.Add(neg);
+            positive.Add(pos);
+            length = GetLength(neg, pos);
+            return;
+        }
+        (var swap, value) = value > 0 ? (true, -value) : (false, value);
+        ulong negWord = 0;
+        ulong posWord = 0;
+        var currentOffset = 0;
+        while (value != 0)
+        {
+            int remainder;
+            if (currentOffset < 60)
+            {
+                value = BigInteger.DivRem(value, 729, out var r);
+                remainder = (int)r;
+                if (remainder < -364)
+                {
+                    remainder += 729;
+                    value -= 1;
+                }
+                if (AddTritsAndCheckIfDone(ref negative, ref positive, ref length, remainder)) return;
+                length += 6;
+                currentOffset += 6;
+            }
+            else
+            {
+                value = BigInteger.DivRem(value, 81, out var r);
+                remainder = (int)r;
+                if (remainder < -40)
+                {
+                    remainder += 81;
+                    value -= 1;
+                }
+                if (AddTritsAndCheckIfDone(ref negative, ref positive, ref length, remainder)) return;
+                positive.Add(posWord);
+                negative.Add(negWord);
+                posWord = 0;
+                negWord = 0;
+                length += 4;
+                currentOffset = 0;
+            }
+        }
+        if (swap)
+        {
+            (negative, positive) = (positive, negative);
+        }
+
+        bool AddTritsAndCheckIfDone(ref List<ulong> negative, ref List<ulong> positive, ref int length, int remainder)
+        {
+            var negBits = LookupTrits(remainder);
+            var posBits = LookupTrits(-remainder);
+            negWord |= (ulong)negBits << currentOffset;
+            posWord |= (ulong)posBits << currentOffset;
+            if (value != 0) return false;
+            length += GetLength(negBits, posBits); ;
+            negative.Add(negWord);
+            positive.Add(posWord);
+            if (swap)
+            {
+                (negative, positive) = (positive, negative);
+            }
+            return true;
+        }
+    }
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void To32Trits(Int32 value, out UInt32 negative, out UInt32 positive)
     {
         if (value is > -364 and < 364)
@@ -14,14 +97,12 @@ internal static class TritConverter
             negative = LookupTrits((int)value);
             return;
         }
-
         var swap = false;
         if (value > 0)
         {
             swap = true;
             value = -value;
         }
-
         negative = 0;
         positive = 0;
         var index = 0;
@@ -34,12 +115,10 @@ internal static class TritConverter
                 remainder += 729;
                 value--;
             }
-
             negative |= (UInt32)LookupTrits((int)remainder) << index;
             positive |= (UInt32)LookupTrits(-(int)remainder) << index;
             index += 6;
         }
-
         if (swap) (positive, negative) = (negative, positive);
     }
 
@@ -52,14 +131,12 @@ internal static class TritConverter
             negative = LookupTrits((int)value);
             return;
         }
-
         var swap = false;
         if (value > 0)
         {
             swap = true;
             value = -value;
         }
-
         negative = 0;
         positive = 0;
         var index = 0;
@@ -72,12 +149,10 @@ internal static class TritConverter
                 remainder += 729;
                 value--;
             }
-
             negative |= (UInt32)LookupTrits((int)remainder) << index;
             positive |= (UInt32)LookupTrits(-(int)remainder) << index;
             index += 6;
         }
-
         if (swap) (positive, negative) = (negative, positive);
     }
 
@@ -90,14 +165,12 @@ internal static class TritConverter
             negative = LookupTrits((int)value);
             return;
         }
-
         var swap = false;
         if (value > 0)
         {
             swap = true;
             value = -value;
         }
-
         negative = 0;
         positive = 0;
         var index = 0;
@@ -110,12 +183,10 @@ internal static class TritConverter
                 remainder += 729;
                 value--;
             }
-
             negative |= (UInt64)LookupTrits((int)remainder) << index;
             positive |= (UInt64)LookupTrits(-(int)remainder) << index;
             index += 6;
         }
-
         if (swap) (positive, negative) = (negative, positive);
     }
 
@@ -158,109 +229,11 @@ internal static class TritConverter
 
         if (swap) (positive, negative) = (negative, positive);
     }
-
-    private static int GetLength(uint negative, uint positive)
-    {
-        var bits = negative | positive;
-        if (bits < 8)
-        {
-            if (bits < 1) return 0;
-            return bits < 4 ? 1 : 2;
-        }
-        if (bits < 64)
-        {
-            if (bits < 16) return 3;
-            return bits < 32 ? 4 : 5;
-        }
-        throw new ArgumentOutOfRangeException(nameof(negative), "Value exceeds 6 bits");
-    }
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void ToTrits(BigInteger value, out List<ulong> negative, out List<ulong> positive, out int length)
-    {
-        // Each long holds 64 trits, so we fill them as we go.
-        negative = [];
-        positive = [];
-        length = 0;
-
-        if (value == 0) return;
-
-        if (value > -364 && value < 364)
-        {
-            var pos = LookupTrits(-(int)value);
-            var neg = LookupTrits((int)value);
-            negative.Add(neg);
-            positive.Add(pos);
-            length = GetLength(neg, pos);
-            return;
-        }
-
-        (var swap, value) = value > 0 ? (true, -value) : (false, value);
-
-        ulong negWord = 0;
-        ulong posWord = 0;
-        var currentOffset = 0;
-
-        while (value != 0)
-        {
-            int remainder;
-            if (currentOffset < 60)
-            {
-                value = BigInteger.DivRem(value, 729, out var r);
-                remainder = (int)r;
-                if (remainder < -364)
-                {
-                    remainder += 729;
-                    value -= 1;
-                }
-
-                if (AddTritsAndCheckIfDone(ref negative, ref positive, ref length, remainder)) return;
-                currentOffset += 6;
-            }
-            else
-            {
-                value = BigInteger.DivRem(value, 81, out var r);
-                remainder = (int)r;
-                if (AddTritsAndCheckIfDone(ref negative, ref positive, ref length, remainder)) return;
-                positive.Add(posWord);
-                negative.Add(negWord);
-                posWord = 0;
-                negWord = 0;
-                currentOffset = 0;
-            }
-        }
-
-        if (swap)
-        {
-            (negative, positive) = (positive, negative);
-        }
-
-        bool AddTritsAndCheckIfDone(ref List<ulong> negative, ref List<ulong> positive, ref int length, int remainder)
-        {
-            var negBits = LookupTrits(remainder);
-            var posBits = LookupTrits(-remainder);
-
-            negWord |= (ulong)negBits << currentOffset;
-            posWord |= (ulong)posBits << currentOffset;
-            if (value != 0) return false;
-            length += GetLength(negBits, posBits);;
-            negative.Add(negWord);
-            positive.Add(posWord);
-            if (swap)
-            {
-                (negative, positive) = (positive, negative);
-            }
-
-            return true;
-        }
-    }
-
-
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Int32 ToInt32(uint negative, uint positive)
     {
-        var result = 0;
-        var pow = 1;
+        Int32 result = 0;
+        Int32 pow = 1;
         while (negative != 0 || positive != 0)
         {
             result += (LookupValue[positive & 0xff] - LookupValue[negative & 0xff]) * pow;
@@ -268,15 +241,13 @@ internal static class TritConverter
             positive >>= 8;
             pow *= 6561;
         }
-
         return result;
     }
-
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Int32 ToInt32(int negative, int positive)
     {
-        var result = 0;
-        var pow = 1;
+        Int32 result = 0;
+        Int32 pow = 1;
         while (negative != 0 || positive != 0)
         {
             result += (LookupValue[positive & 0xff] - LookupValue[negative & 0xff]) * pow;
@@ -284,15 +255,13 @@ internal static class TritConverter
             positive >>= 8;
             pow *= 6561;
         }
-
         return result;
     }
-
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Int32 ToInt32(ushort negative, ushort positive)
     {
-        var result = 0;
-        var pow = 1;
+        Int32 result = 0;
+        Int32 pow = 1;
         while (negative != 0 || positive != 0)
         {
             result += (LookupValue[positive & 0xff] - LookupValue[negative & 0xff]) * pow;
@@ -300,10 +269,8 @@ internal static class TritConverter
             positive >>= 8;
             pow *= 6561;
         }
-
         return result;
     }
-
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Int64 ToInt64(uint negative, uint positive)
     {
@@ -316,10 +283,8 @@ internal static class TritConverter
             positive >>= 8;
             pow *= 6561;
         }
-
         return result;
     }
-
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Int64 ToInt64(int negative, int positive)
     {
@@ -332,10 +297,8 @@ internal static class TritConverter
             positive >>= 8;
             pow *= 6561;
         }
-
         return result;
     }
-
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Int64 ToInt64(ulong negative, ulong positive)
     {
@@ -348,10 +311,8 @@ internal static class TritConverter
             positive >>= 8;
             pow *= 6561;
         }
-
         return result;
     }
-
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Int64 ToInt64(ushort negative, ushort positive)
     {
@@ -364,10 +325,8 @@ internal static class TritConverter
             positive >>= 8;
             pow *= 6561;
         }
-
         return result;
     }
-
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Int128 ToInt128(ulong negative, ulong positive)
     {
@@ -380,7 +339,6 @@ internal static class TritConverter
             positive >>= 8;
             pow *= 6561;
         }
-
         return result;
     }
 
@@ -1125,8 +1083,7 @@ internal static class TritConverter
     /// <summary>
     /// Converts the positive trit bytearray to the actual value.
     /// </summary>
-    public static int[] LookupValue =
-    [
+    public static int[] LookupValue = [
         0,
         1,
         3,
@@ -1382,8 +1339,7 @@ internal static class TritConverter
         3276,
         3277,
         3279,
-        3280
-    ];
+        3280];
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Trit GetTrit(byte negative, byte positive, int index)
@@ -1516,7 +1472,6 @@ internal static class TritConverter
             };
             if (i % 9 == 8) space--;
         }
-
         return new(chars);
     }
 }

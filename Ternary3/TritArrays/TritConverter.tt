@@ -1,5 +1,4 @@
 ﻿<#@ template language="C#" #>
-<#@ import namespace="System.Linq" #>
 <#
     int[] digits;
 
@@ -13,10 +12,99 @@
 #>
 namespace Ternary3.TritArrays;
 
+using System.Numerics;
 using System.Runtime.CompilerServices;
 
 internal static class TritConverter
 {
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static int GetLength(uint negative, uint positive)
+    {
+        var bits = negative | positive;
+        return bits == 0 ? 0 : BitOperations.Log2(bits) + 1;
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static void ToTrits(BigInteger value, out List<ulong> negative, out List<ulong> positive, out int length)
+    {
+        // Each long holds 64 trits, so we fill them as we go.
+        negative = [];
+        positive = [];
+        length = 0;
+
+        if (value == 0) return;
+
+        if (value > -364 && value < 364)
+        {
+            var pos = LookupTrits(-(int)value);
+            var neg = LookupTrits((int)value);
+            negative.Add(neg);
+            positive.Add(pos);
+            length = GetLength(neg, pos);
+            return;
+        }
+
+        (var swap, value) = value > 0 ? (true, -value) : (false, value);
+
+        ulong negWord = 0;
+        ulong posWord = 0;
+        var currentOffset = 0;
+
+        while (value != 0)
+        {
+            int remainder;
+            if (currentOffset < 60)
+            {
+                value = BigInteger.DivRem(value, 729, out var r);
+                remainder = (int)r;
+                if (remainder < -364)
+                {
+                    remainder += 729;
+                    value -= 1;
+                }
+
+                if (AddTritsAndCheckIfDone(ref negative, ref positive, ref length, remainder)) return;
+                length += 6;
+                currentOffset += 6;
+            }
+            else
+            {
+                value = BigInteger.DivRem(value, 81, out var r);
+                remainder = (int)r;
+                if (AddTritsAndCheckIfDone(ref negative, ref positive, ref length, remainder)) return;
+                positive.Add(posWord);
+                negative.Add(negWord);
+                posWord = 0;
+                negWord = 0;
+                length += 4;
+                currentOffset = 0;
+            }
+        }
+
+        if (swap)
+        {
+            (negative, positive) = (positive, negative);
+        }
+
+        bool AddTritsAndCheckIfDone(ref List<ulong> negative, ref List<ulong> positive, ref int length, int remainder)
+        {
+            var negBits = LookupTrits(remainder);
+            var posBits = LookupTrits(-remainder);
+
+            negWord |= (ulong)negBits << currentOffset;
+            posWord |= (ulong)posBits << currentOffset;
+            if (value != 0) return false;
+            length += GetLength(negBits, posBits);;
+            negative.Add(negWord);
+            positive.Add(posWord);
+            if (swap)
+            {
+                (negative, positive) = (positive, negative);
+            }
+
+            return true;
+        }
+    }
 <#
     foreach (var(type,  backing) in new[] { ("Int32", "32"), ("Int64", "32"), ("Int64", "64") })
     {
@@ -128,7 +216,12 @@ internal static class TritConverter
     for (var i = -364; i <= 364; i++)
     {
         Increase(7);
-        WriteLine($"        {i} => 0b{string.Concat(digits.Select(d => d == -1 ? '1' : '0'))},");
+        string binary = "";
+        foreach(var digit in digits)
+        {
+            binary += digit switch { -1 => "1", _ => "0" };
+        }
+        WriteLine($"        {i} => 0b{binary},");
     }
 #>
         _ => throw new ArgumentOutOfRangeException(nameof(index))
@@ -169,6 +262,16 @@ internal static class TritConverter
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Trit GetTrit(ulong negative, ulong positive, int index)
         => new((int)((positive >> index) & 1) - (int)((negative >> index) & 1));
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static Trit GetTrit(List<ulong> negative, List<ulong> positive, int index)
+    {
+        var longIndex = index / 64;
+        var bitIndex = index % 64;
+        var pos = (positive[longIndex] & (1UL << bitIndex)) != 0;
+        var neg = (negative[longIndex] & (1UL << bitIndex)) != 0;
+        return (Trit)((pos ? 1 : 0) - (neg ? 1 : 0));
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void SetTrit(ref byte negative, ref byte positive, int index, Trit value)
@@ -229,6 +332,28 @@ internal static class TritConverter
             default: // case 0
                 positive &= ~mask;
                 negative &= ~mask;
+                break;
+        }
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static void SetTrit(ref List<ulong> negative, ref List<ulong> positive, int index, Trit value)
+    {
+        var longIndex = index / 64;
+        var bitIndex = index % 64;
+        switch (value.Value)
+        {
+            case 1:
+                positive[longIndex] |= (1UL << bitIndex);
+                negative[longIndex] &= ~(1UL << bitIndex);
+                break;
+            case -1:
+                positive[longIndex] &= ~(1UL << bitIndex);
+                negative[longIndex] |= (1UL << bitIndex);
+                break;
+            default:
+                positive[longIndex] &= ~(1UL << bitIndex);
+                negative[longIndex] &= ~(1UL << bitIndex);
                 break;
         }
     }

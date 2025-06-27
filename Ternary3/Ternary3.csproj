@@ -101,15 +101,15 @@
         <DesignTime>True</DesignTime>
         <DependentUpon>UnaryOperation.tt</DependentUpon>
       </Compile>
-      <Compile Update="TritArrays\TritConverter.cs">
-        <AutoGen>True</AutoGen>
-        <DesignTime>True</DesignTime>
-        <DependentUpon>TritConverter.tt</DependentUpon>
-      </Compile>
       <Compile Update="Operators\Operations\BinaryOperation.cs">
         <AutoGen>True</AutoGen>
         <DesignTime>True</DesignTime>
         <DependentUpon>BinaryOperation.tt</DependentUpon>
+      </Compile>
+      <Compile Update="TritArrays\TritConverter.cs">
+        <AutoGen>True</AutoGen>
+        <DesignTime>True</DesignTime>
+        <DependentUpon>TritConverter.tt</DependentUpon>
       </Compile>
     </ItemGroup>
 
@@ -125,6 +125,10 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Ternary3.Generators\Ternary3.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
     </ItemGroup>
 
 </Project>

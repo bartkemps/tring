@@ -31,3 +31,4 @@ TestResults/
 # The packages folder can be ignored if you use PackageReference
 packages/
 
+/.vs
