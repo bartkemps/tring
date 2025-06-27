@@ -88,6 +88,24 @@ internal static class TritConverter
             return true;
         }
     }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static void ToTrits(long value, out List<ulong> negative, out List<ulong> positive, out int length)
+    {
+        negative = new List<ulong>(1);
+        positive = new List<ulong>(1);
+        if (value == 0)
+        {
+            length = 0;
+            return;
+        }
+        To64Trits(value, out var neg, out var pos);
+        negative.Add(neg);
+        positive.Add(pos);
+        var bits = neg | pos;
+        length = bits == 0 ? 0 : BitOperations.Log2(bits) + 1;
+    }
+
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void To32Trits(Int32 value, out UInt32 negative, out UInt32 positive)
     {
@@ -230,6 +248,7 @@ internal static class TritConverter
         if (swap) (positive, negative) = (negative, positive);
     }
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static BigInteger ToBigInteger(List<ulong> negative, List<ulong> positive)
     {
         BigInteger result = 0;
@@ -241,6 +260,36 @@ internal static class TritConverter
             pow *= 1853020188851841;
         }
         return result;
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static int ToInt32(List<ulong> negative, List<ulong> positive, int length)
+    {
+        if (length == 0) return 0;
+        var neg = (uint)negative[0];
+        var pos = (uint)positive[0];
+        if (length < 32)
+        {
+            uint mask = (1U << length) - 1;
+            neg &= mask;
+            pos &= mask;
+        }
+        return ToInt32(neg, pos);
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static long ToInt64(List<ulong> negative, List<ulong> positive, int length)
+    {
+        if (length == 0) return 0;
+        var neg = negative[0];
+        var pos = positive[0];
+        if (length < 64)
+        {
+            ulong mask = (1UL << length) - 1;
+            neg &= mask;
+            pos &= mask;
+        }
+        return ToInt64(neg, pos);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]

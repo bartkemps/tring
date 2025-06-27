@@ -2,12 +2,20 @@
 
 using Formatting;
 using TritArrays;
+using System.Numerics;
 
 public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
 {
     internal List<ulong> Positive;
     internal List<ulong> Negative;
     public int Length { get; }
+
+    internal BigTritArray(List<ulong> negative, List<ulong> positive, int length)
+    {
+        Negative = negative;
+        Positive = positive;
+        Length = length;
+    }
 
     public BigTritArray(int length)
     {
@@ -145,7 +153,7 @@ public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
     /// <summary>
     /// Returns a string representation of this instance, formatted balanced ternarily according to the specified format.
     /// </summary>
-    public string ToString(ITernaryFormat format) => Formatter.Format((ITritArray)this, format);
+    public string ToString(ITernaryFormat format) => Formatter.Format(this, format);
 
     // todo: equal values (leading zeros) should be equal, even if they have different lengths
     public bool Equals(BigTritArray? other)
@@ -153,7 +161,15 @@ public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
         if (ReferenceEquals(this, other)) return true;
         if (other is null) return false;
         if (Length != other.Length) return false;
+        ApplyLength();
         return Positive.SequenceEqual(other.Positive) && Negative.SequenceEqual(other.Negative);
+    }
+
+    private void ApplyLength()
+    {
+        var mask = 1UL << Length % 64 - 1;
+        Positive[^1] &= mask;
+        Negative[^1] &= mask;
     }
 
     public override bool Equals(object? obj) => obj is BigTritArray other && Equals(other);
@@ -163,8 +179,54 @@ public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
         // Use HashCode.Combine for better hash distribution and simplicity
         return HashCode.Combine(
             Length,
-            Positive.Aggregate(0, (acc, val) => HashCode.Combine(acc, val)),
-            Negative.Aggregate(0, (acc, val) => HashCode.Combine(acc, val))
+            Positive.Aggregate(0, HashCode.Combine),
+            Negative.Aggregate(0, HashCode.Combine)
         );
     }
+
+    #region Conversion Operators
+
+    /// <summary>
+    /// Implicit conversion from BigInteger to BigTritArray.
+    /// </summary>
+    public static implicit operator BigTritArray(BigInteger value)
+    {
+        TritConverter.ToTrits(value, out var negative, out var positive, out var length);
+        return new (negative, positive, length);
+    }
+
+    /// <summary>
+    /// Implicit conversion from long to BigTritArray.
+    /// </summary>
+    public static implicit operator BigTritArray(long value)
+    {
+        TritConverter.ToTrits(value, out var negative, out var positive, out var length);
+        return new (negative, positive, length);
+    }
+
+    /// <summary>
+    /// Implicit conversion from int to BigTritArray.
+    /// </summary>
+    public static implicit operator BigTritArray(int value)
+    {
+        TritConverter.ToTrits(value, out var negative, out var positive, out var length);
+        return new (negative, positive, length);
+    }
+
+    /// <summary>
+    /// Implicit conversion from BigTritArray to BigInteger.
+    /// </summary>
+    public static implicit operator BigInteger(BigTritArray array) => TritConverter.ToBigInteger(array.Negative, array.Positive);
+
+    /// <summary>
+    /// Explicit conversion from BigTritArray to long.
+    /// </summary>
+    public static explicit operator long(BigTritArray array) => TritConverter.ToInt64(array.Negative, array.Positive, array.Length);
+
+    /// <summary>
+    /// Explicit conversion from BigTritArray to int.
+    /// </summary>
+    public static explicit operator int(BigTritArray array) => TritConverter.ToInt32(array.Negative, array.Positive, array.Length);
+
+    #endregion
 }

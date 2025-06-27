@@ -2,7 +2,7 @@
 
 using System.Numerics;
 
-internal class Calculator
+internal partial class Calculator
 {
     /// <summary>
     /// Adds two balanced ternary numbers represented as separate positive and negative bit arrays.

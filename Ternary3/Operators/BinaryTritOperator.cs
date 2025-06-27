@@ -192,6 +192,17 @@ public partial struct BinaryTritOperator : IEquatable<BinaryTritOperator>
         negativeResult = BinaryOperation<T>.GetTrits(Value.Negative, negative1, positive1, negative2, positive2);
         positiveResult = BinaryOperation<T>.GetTrits(Value.Positive, negative1, positive1, negative2, positive2);
     }
+    
+    internal void Apply(List<ulong> negative1, List<ulong> positive1, List<ulong> negative2, List<ulong> positive2, out List<ulong> negativeResult, out List<ulong> positiveResult)
+    {
+        negativeResult = new(negative1.Count);
+        positiveResult = new(negative1.Count);
+        for (var i=0; i<negative1.Count; i++)
+        {
+            negativeResult[i] = BinaryOperation<ulong>.GetTrits(Value.Negative, negative1[i], positive1[i], negative2[i], positive2[i]);
+            positiveResult[i] = BinaryOperation<ulong>.GetTrits(Value.Positive, negative1[i], positive1[i], negative2[i], positive2[i]);
+        }
+    }
 
     /// <summary>
     /// Adds the pipe operator to <see cref="long"/>.
