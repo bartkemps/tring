@@ -48,8 +48,7 @@ internal static class TritShift
         if ((uint)(shift + 39) > 78) return 0;  // if shift not between -39 and 39
         if (shift > 0)
             return value / pow3LongCache[shift];
-        else
-            return ((Int128)value * (Int128)pow3LongCache[-shift]).BalancedModulo(6078832729528464400);
+        return ((Int128)value * (Int128)pow3LongCache[-shift]).BalancedModulo(6078832729528464400);
     }
 }
 

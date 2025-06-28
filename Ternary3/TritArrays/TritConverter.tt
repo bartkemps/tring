@@ -274,7 +274,7 @@ internal static class TritConverter
     for (var i = -364; i <= 364; i++)
     {
         Increase(7);
-        string binary = "";
+        var binary = "";
         foreach(var digit in digits)
         {
             binary += digit switch { -1 => "1", _ => "0" };

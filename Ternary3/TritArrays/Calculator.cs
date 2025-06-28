@@ -63,6 +63,59 @@ internal partial class Calculator
         }
     }
 
+    public static void AddBalancedTernaryWithCarry(
+        ulong negative1,
+        ulong positive1,
+        ulong negative2,
+        ulong positive2,
+        ulong negative3,
+        ulong positive3,
+        out ulong negativeResult,
+        out ulong positiveResult,
+        out ulong negativeCarry,
+        out ulong positiveCarry
+    )
+    {
+        AddBalancedTernaryWithCarry(negative1, positive1, negative2, positive2, 
+            out var negResult, out var posResult, out var negCarry1, out var posCarry1);
+        AddBalancedTernaryWithCarry(negResult, posResult, negative3, positive3, 
+            out negativeResult, out positiveResult, out var negCarry2, out var posCarry2);
+        negativeCarry = negCarry1 | negCarry2;
+        positiveCarry = posCarry1 | posCarry2;
+    }
+    
+    public static void AddBalancedTernaryWithCarry(
+        ulong negative1,
+        ulong positive1,
+        ulong negative2,
+        ulong positive2,
+        out ulong negativeResult,
+        out ulong positiveResult,
+        out ulong negativeCarry,
+        out ulong positiveCarry
+    )
+    {
+        positiveResult = positive1;
+        negativeResult = negative1;
+        negativeCarry = 0;
+        positiveCarry = 0;
+        while (positive2 != 0 || negative2 != 0)
+        {
+            var bothPositive = positive1 & positive2;
+            var bothNegative = negative1 & negative2;
+            var onePositive = positive1 ^ positive2;
+            var oneNegative = negative1 ^ negative2;
+            positiveResult = (onePositive & ~negative1 & ~negative2) | (bothPositive & oneNegative) | (~positive1 & ~positive2 & bothNegative);
+            negativeResult = (oneNegative & ~positive1 & ~positive2) | (bothNegative & onePositive) | (~negative1 & ~negative2 & bothPositive);
+            positive1 = positiveResult;
+            negative1 = negativeResult;
+            negativeCarry |= bothNegative >> 63;
+            positiveCarry |= bothPositive >> 63;
+            positive2 = bothPositive << 1;
+            negative2 = bothNegative << 1;
+        }
+    }
+
     public static void MultiplyBalancedTernary(
         uint negative1,
         uint positive1,

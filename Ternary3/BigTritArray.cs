@@ -3,6 +3,7 @@
 using Formatting;
 using TritArrays;
 using System.Numerics;
+using Operators;
 
 public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
 {
@@ -183,6 +184,159 @@ public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
             Negative.Aggregate(0, HashCode.Combine)
         );
     }
+
+    #region Operators
+
+    /// <summary>
+    /// Applies a unary operation to each trit in the array.
+    /// </summary>
+    /// <param name="array">The source array.</param>
+    /// <param name="operation">The unary operation to apply to each trit.</param>
+    /// <returns>A new BigTritArray with the operation applied to each trit.</returns>
+    public static BigTritArray operator |(BigTritArray array, Func<Trit, Trit> operation)
+    {
+        var result = new BigTritArray(array.Length);
+        for (int i = 0; i < array.Length; i++)
+        {
+            result[i] = operation(array[i]);
+        }
+        return result;
+    }
+
+    /// <summary>
+    /// Applies a lookup table operation to each trit in the array.
+    /// </summary>
+    /// <param name="array">The source array.</param>
+    /// <param name="table">The lookup table containing the transformation values.</param>
+    /// <returns>A new BigTritArray with the lookup operation applied to each trit.</returns>
+    public static BigTritArray operator |(BigTritArray array, Trit[] table)
+    {
+        if (table.Length != 3)
+        {
+            throw new ArgumentException("Lookup table must have exactly 3 elements", nameof(table));
+        }
+
+        var result = new BigTritArray(array.Length);
+        for (int i = 0; i < array.Length; i++)
+        {
+            var trit = array[i];
+            result[i] = table[trit.Value + 1]; // +1 to map from [-1,0,1] to [0,1,2]
+        }
+        return result;
+    }
+
+    /// <summary>
+    /// Creates a binary operation context for this array.
+    /// </summary>
+    /// <param name="array">The source array.</param>
+    /// <param name="operation">The binary operation to be applied.</param>
+    /// <returns>A binary operation context that can be used with another array.</returns>
+    public static LookupBigTritArrayOperator operator |(BigTritArray array, Func<Trit, Trit, Trit> operation)
+    {
+        return new(array, new(operation));
+    }
+
+    /// <summary>
+    /// Creates a binary operation context for this array.
+    /// </summary>
+    /// <param name="array">The source array.</param>
+    /// <param name="table">The binary operation lookup table.</param>
+    /// <returns>A binary operation context that can be used with another array.</returns>
+    public static LookupBigTritArrayOperator operator |(BigTritArray array, BinaryTritOperator table)
+    {
+        return new(array, table);
+    }
+
+    /// <summary>
+    /// Creates a binary operation context for this array.
+    /// </summary>
+    /// <param name="array">The source array.</param>
+    /// <param name="table">The binary operation lookup table.</param>
+    /// <returns>A binary operation context that can be used with another array.</returns>
+    public static LookupBigTritArrayOperator operator |(BigTritArray array, Trit[,] table)
+    {
+        return new(array, new(table));
+    }
+
+    /// <summary>
+    /// Performs a left bitwise shift on the trit array.
+    /// </summary>
+    /// <param name="array">The source array.</param>
+    /// <param name="shift">The number of positions to shift.</param>
+    /// <returns>A new BigTritArray with the bits shifted to the left.</returns>
+    public static BigTritArray operator <<(BigTritArray array, int shift)
+    {
+        Calculator.Shift(array.Negative, array.Positive, -shift, out var negativeResult, out var positiveResult);
+        var length = Calculator.TrimAndDetermineLength(negativeResult, positiveResult);
+        return new(negativeResult, positiveResult, length);
+    }
+
+    /// <summary>
+    /// Performs a right bitwise shift on the trit array.
+    /// </summary>
+    /// <param name="array">The source array.</param>
+    /// <param name="shift">The number of positions to shift.</param>
+    /// <returns>A new BigTritArray with the bits shifted to the right.</returns>
+    public static BigTritArray operator >>(BigTritArray array, int shift)
+    {
+        Calculator.Shift(array.Negative, array.Positive, shift, out var negativeResult, out var positiveResult);
+        var length = Calculator.TrimAndDetermineLength(negativeResult, positiveResult);
+        return new(negativeResult, positiveResult, length);
+    }
+
+    /// <summary>
+    /// Adds two BigTritArray values together.
+    /// </summary>
+    /// <param name="value1">The first value to add.</param>
+    /// <param name="value2">The second value to add.</param>
+    /// <returns>A new BigTritArray representing the sum of the two values.</returns>
+    public static BigTritArray operator +(BigTritArray value1, BigTritArray value2)
+    {
+        // Use the Calculator.AddBalancedTernary method for BigTritArray
+        Calculator.AddBalancedTernary(value1.Negative, value1.Positive, value2.Negative, value2.Positive, 
+            out var negativeResult, out var positiveResult);
+            
+        // Get the maximum possible length for the result
+        var length = Calculator.TrimAndDetermineLength(negativeResult, positiveResult);
+        
+        return new(negativeResult, positiveResult, length);
+    }
+
+    /// <summary>
+    /// Subtracts one BigTritArray value from another.
+    /// </summary>
+    /// <param name="value1">The value to subtract from.</param>
+    /// <param name="value2">The value to subtract.</param>
+    /// <returns>A new BigTritArray representing the difference between the two values.</returns>
+    public static BigTritArray operator -(BigTritArray value1, BigTritArray value2)
+    {
+        // Subtraction is addition with negated second operand (swap positive and negative)
+        Calculator.AddBalancedTernary(value1.Negative, value1.Positive, value2.Positive, value2.Negative, 
+            out var negativeResult, out var positiveResult);
+            
+        // Get the maximum possible length for the result
+        var length = Calculator.TrimAndDetermineLength(negativeResult, positiveResult);
+        
+        return new(negativeResult, positiveResult, length);
+    }
+    
+    /// <summary>
+    /// Multiplies one BigTritArray value from another.
+    /// </summary>
+    /// <param name="value1">The value to subtract from.</param>
+    /// <param name="value2">The value to subtract.</param>
+    /// <returns>A new BigTritArray representing the product between the two values.</returns>
+    public static BigTritArray operator *(BigTritArray value1, BigTritArray value2)
+    {
+        Calculator.MultiplyBalancedTernary(value1.Negative, value1.Positive, value2.Positive, value2.Negative, 
+            out var negativeResult, out var positiveResult);
+        var length = Calculator.TrimAndDetermineLength(negativeResult, positiveResult);
+        return new(negativeResult, positiveResult, length);
+    }
+    
+    #endregion
+
+
 
     #region Conversion Operators
 

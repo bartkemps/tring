@@ -1,5 +1,7 @@
 ﻿namespace Ternary3.Formatting;
 
+using System.Numerics;
+
 public class TernaryFormatter(ITernaryFormat? ternaryFormat = null, IFormatProvider? inner = null) : ITernaryFormatter
 {
     private readonly ITernaryFormat ternaryFormat = ternaryFormat ?? TernaryFormat.Current;
@@ -36,7 +38,7 @@ public class TernaryFormatter(ITernaryFormat? ternaryFormat = null, IFormatProvi
             TritArray27 value => ((long)(Int27T)value).ToString(format, inner),
             TritArray9 value => ((short)(Int9T)value).ToString(format, inner),
             TritArray3 value => ((sbyte)(Int3T)value).ToString(format, inner),
-            BigTritArray value => Format(value),
+            BigTritArray value => ((BigInteger)value).ToString(format, inner),
             Int27T value => ((long)value).ToString(format, inner),
             Int9T value => ((short)value).ToString(format, inner),
             Int3T value => ((sbyte)value).ToString(format, inner),
