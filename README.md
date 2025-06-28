@@ -133,45 +133,45 @@ using static Ternary3.Operators.UnaryTritOperator;
 // Common alias for 27-trit integers
 using Tryte = Ternary3.Int27T;
 
-public static class UnaryTritOperationDemo
+public static partial class UnaryTritOperationDemo
 {
     public static void Run()
     {
         Console.WriteLine($"\r\n\r\n{nameof(UnaryTritOperationDemo)}");
         
         // Operation on Int3T outputs TritArray3
-        Int3T input1 = 5; // 1TT
+        Int3T input1 = ter1TT; // 5 in decimal
         var output1 = input1 | AbsoluteValue; // TritArray3 111
         Console.WriteLine($"Absolute value of {input1} ({(TritArray3)input1}) = {(Int3T)output1} ({output1})"); // Absolute value of 5 (1TT) = 13 (111)
 
         // Custom operation on Int9T outputs TritArray9, which can be implicitly converted to Int9T
         Trit EchoA(Trit trit) => trit; // Custom operation: Identity function for Trit
-        Int9T input2A = -10; // T0T
+        Int9T input2A = terT0T; // -10 in decimal
         Int9T output2A = input2A | EchoA; // T0T. Gets implicitly converted to Int9T
-        Console.WriteLine($"-10 Echoed = {output2A}"); // Prints -10
+        Console.WriteLine($"terT0T Echoed = {output2A}"); // Prints -10
         
         // Custom operation on Int9T outputs TritArray9, which can be implicitly converted to Int9T
         Trit[] echoB = [Trit.Negative, Trit.Zero, Trit.Positive];
-        Int9T input2B = -10; // T0T
+        Int9T input2B = terT0T; // -10 in decimal
         Int9T output2B = input2B | echoB; // T0T. Gets implicitly converted to Int9T
-        Console.WriteLine($"-10 Echoed = {output2B}"); // Prints -10
+        Console.WriteLine($"terT0T Echoed = {output2B}"); // Prints -10
         
         // Custom operation on Int9T outputs TritArray9, which can be implicitly converted to Int9T
         var echoC = new UnaryTritOperator(false, null, true);
-        Int9T input2C = -10; // T0T
+        Int9T input2C = terT0T; // -10 in decimal
         Int9T output2C = input2C | echoC; // T0T. Gets implicitly converted to Int9T
-        Console.WriteLine($"-10 Echoed = {output2C}"); // Prints -10
+        Console.WriteLine($"terT0T Echoed = {output2C}"); // Prints -10
         
         // Custom operation on Int9T outputs TritArray9, which can be implicitly converted to Int9T
         var echoD = new UnaryTritOperator(-1, 0, 1);
-        Int9T input2D = -10; // T0T
+        Int9T input2D = terT0T; // -10 in decimal
         Int9T output2D = input2D | echoD; // T0T. Gets implicitly converted to Int9T
-        Console.WriteLine($"-10 Echoed = {output2D}"); // Prints -10
+        Console.WriteLine($"terT0T Echoed = {output2D}"); // Prints -10
         
         // Using an alias for a Tryte (27-trit integer) and the full name for the operator
-        Tryte input3 = 11; // 11T
+        Tryte input3 = ter11T; // 11 in decimal
         long output3 = input3 | Ternary3.Operators.UnaryTritOperator.Negate; // TT1, using the full name for the operator. Result implicitly converted to long.
-        Console.WriteLine($"11 Negated = {output3}"); // 11 Negated = -11
+        Console.WriteLine($"ter11T Negated = {output3}"); // ter11T Negated = -11
         
         //TritArray input with TritArray27. Output is also TritArray27, // which can be explicitly converted to long.
         TritArray27 input4 = 123456789;
@@ -206,7 +206,7 @@ using static Ternary3.Operators.BinaryTritOperator;
 /// Demonstrates various binary operations on ternary values using lookup tables.
 /// A binary operation takes two ternary inputs and produces a ternary output.
 /// </summary>
-public class BinaryTritOperationDemo
+public partial class BinaryTritOperationDemo
 {
     // Constant representing the negative trit (-1) for readability
     const int T = -1;
@@ -223,10 +223,10 @@ public class BinaryTritOperationDemo
         // (-1 AND -1) = -1, (-1 AND 0) = -1, (-1 AND 1) = -1
         // ( 0 AND -1) = -1, ( 0 AND 0) =  0, ( 0 AND 1) =  0
         // ( 1 AND -1) = -1, ( 1 AND 0) =  0, ( 1 AND 1) =  1
-        sbyte input1A = 8; // 10T in balanced ternary (where T is -1)
-        sbyte input1B = 9; // 100 in balanced ternary
+        Int3T input1A = ter10T;  // 8 in decimal (10T in balanced ternary)
+        Int3T input1B = ter100;  // 9 in decimal (100 in balanced ternary)
         var result1 = input1A | And | input1B; // Uses the predefined AND operation
-        Console.WriteLine($"BinaryLookup And: {input1A} {nameof(And)} {input1B} = {(sbyte)result1} ({result1})"); 
+        Console.WriteLine($"BinaryLookup And: {input1A} ({input1A:ter}) {nameof(And)} {input1B} ({input1B:ter}) = {(sbyte)result1} ({result1:ter})"); 
         // Output: 8 (10T) because:
         // 10T (input1A) AND 100 (input1B) = 10T
         // Position by position: 1∧1=1, 0∧0=0, T∧0=T
@@ -234,8 +234,8 @@ public class BinaryTritOperationDemo
         // EXAMPLE 2: Custom operation on two shorts using a BinaryTritOperator
         // ---------------------------------------------------------------
         // A BinaryTritOperator defines the output for each of the 9 possible input trit combinations
-        short input2A = -6; // 000000T10 in balanced ternary
-        short input2B = 13;  // 000000111 in balanced ternary
+        Int9T input2A = terT10; // -6 in decimal
+        Int9T input2B = ter111;  // 13 in decimal
         // This lookup table defines a "mask" operation:
         // - Returns -1 only when both inputs are -1
         // - Returns 1 only when both inputs are 1
@@ -271,8 +271,8 @@ public class BinaryTritOperationDemo
         // EXAMPLE 4: Inverting operation that ignores the second operand
         // -----------------------------------------------------------
         // This demonstrates how to create an operation that only depends on the first input
-        TritArray27 input4A = 5;   // Converts to balanced ternary
-        TritArray27 input4B = 10;  // Will be ignored by this operation
+        Int3T input4A = ter11T;   // 11 in decimal (11T in balanced ternary)
+        Int3T input4B = ter101;  // 10 in decimal (101 in balanced ternary)
         // This table inverts the first operand and ignores the second:
         // For any first trit value, the output is the same regardless of the second trit
         var invertFirstIgnoreSecond = new BinaryTritOperator(
@@ -281,7 +281,7 @@ public class BinaryTritOperationDemo
             Trit.Negative, Trit.Negative, Trit.Negative   // When first trit is 1, always return -1
         );
         var result4 = input4A | invertFirstIgnoreSecond | input4B; 
-        Console.WriteLine($"Custom operation on int: {input4A} {nameof(invertFirstIgnoreSecond)} {input4B} = {result4} ({(int)result4})");
+        Console.WriteLine($"Custom operation on int: {input4A:ter} {nameof(invertFirstIgnoreSecond)} {input4B:ter} = {result4} ({result4:ter})");
         // Each trit in input4A is inverted (1→-1, 0→0, -1→1) regardless of input4B's value
         
         // EXAMPLE 5: Built-in OR operation on individual trits
@@ -308,57 +308,57 @@ namespace Examples;
 
 using Ternary3;
 
-public static class OverflowDemo
+public static partial class OverflowDemo
 {
     public static void Run()
     {
         Console.WriteLine($"\r\n\r\n{nameof(OverflowDemo)}");
         
-        // Addition and substraction may overflow and do so in a ternary way.
-        // (so instead of cutting of "binary" bits, it cuts off "ternary" trits)
-        Int3T input1A = 12; // 110
-        Int3T input1B = 3; // 010
+        // Addition and subtraction may overflow and do so in a ternary way.
+        // (so instead of cutting off "binary" bits, it cuts off "ternary" trits)
+        Int3T input1A = ter110; // 12 in decimal
+        Int3T input1B = ter010; // 3 in decimal
         var result1 = input1A + input1B; // 110 + 010 = 1TT0. Int3T only keeps 3 trits, so TT0 = -12
-        Console.WriteLine($"Overflow: {input1A} + {input1B} = {result1}"); // Overflow: 110 + 010 = 1TT0
+        Console.WriteLine($"Overflow: {input1A} ({input1A:ter}) + {input1B} ({input1B:ter}) = {result1} ({result1:ter})"); // Overflow: 110 + 010 = 1TT0
 
-        Int3T input2A = 12; // 110
-        Int3T input2B = -12; // TT0
+        Int3T input2A = ter110; // 12 in decimal
+        Int3T input2B = terTT0; // -12 in decimal
         var result2 = input2A * input2B; // 110 * TT0 = 101T00 (144). Int3T only keeps 3 trits, so T00 = -9
-        Console.WriteLine($"Overflow: {input2A} * {input2B} = {result2}"); // Overflow: 110 * TT0 = 101T00
+        Console.WriteLine($"Overflow: {input2A} ({input2A:ter}) * {input2B} ({input2B:ter}) = {result2} ({result2:ter})"); // Overflow: 110 * TT0 = T00
 
-        // Addition and sumple multiplication of TritArray3 also may overflow.
+        // Addition and simple multiplication of TritArray3 also may overflow.
         // (Under the hood, these are often performed without conversion to binary)
-        TritArray3 input3A = 12; // 110
-        TritArray3 input3B = 3; // 010
-        var result3 = input3A * input3B; // 110 * TT0 = 101T00 (144). Int3T only keeps 3 trits, so T00 = -9     
-        Console.WriteLine($"Overflow: {input3A} * {input3B} = {result3} ({(int)result3})"); // Overflow: 110 * 010 = 101T00 (-9)
+        TritArray3 input3A = ter110; // 12 in decimal
+        TritArray3 input3B = ter010; // 3 in decimal
+        var result3 = input3A * input3B; // 110 * 010 = 11100 (36). TritArray3 only keeps 3 trits, so T00 = -9
+        Console.WriteLine($"Overflow: {input3A} ({input3A:ter}) * {input3B} ({input3B:ter}) = {result3} ({(int)result3})");
         
-        Int3T input4 = 25; // 10T1. trimmed to 3 trits = 0T1 or -8;
-        Console.WriteLine($"Overflow: 25 => {input4} ({(TritArray3)input4})"); // Overflow: 25 => -2 (0T1)
+        Int3T input4 = 25; // 10T1. trimmed to 3 trits = 0T1 or -2
+        Console.WriteLine($"Overflow: 25 => {input4} ({input4:ter})"); // Overflow: 25 => -2 (0T1)
 
-        TritArray3 input5 = 25; // 10T1. trimmed to 3 trits = 0T1 or -8;
-        Console.WriteLine($"Overflow: 25 => {input5} ({(int)input5})"); // Overflow: 25 => (0T1) (25)
+        TritArray3 input5 = 25; // 10T1. trimmed to 3 trits = 0T1 or -2
+        Console.WriteLine($"Overflow: 25 => {input5} ({input5:ter})"); // Overflow: 25 => (0T1) 
 
         // Shifting trits two positions in essence multiplies or divides by 9 (3^2).
         var input6 = TritArray9.MaxValue; // 111111111
         var result6A = input5 << 6;
-        Console.WriteLine($"Shift: {input6} << 6 = {result6A} ({(int)result6A})"); // Shift: 111111111 << 6 = 111000000 (9477)
+        Console.WriteLine($"Shift: {input6:ter} << 6 = {result6A} ({(int)result6A})"); // Shift: 111111111 << 6 = 111000000 (9477)
         var result6B = input5 >> -6;
-        Console.WriteLine($"Shift: {input6} >> -6 = {result6B} ({(int)result6B})"); // Shift: 111111111 >> -6 = 111000000 (9477)
+        Console.WriteLine($"Shift: {input6:ter} >> -6 = {result6B} ({(int)result6B})"); // Shift: 111111111 >> -6 = 111000000 (9477)
         var result6C = input5 << -6;
-        Console.WriteLine($"Shift: {input6} << -6 = {result6C} ({(int)result6C})"); // Shift: 111111111 << -6 = 000000111 (13)
+        Console.WriteLine($"Shift: {input6:ter} << -6 = {result6C} ({(int)result6C})"); // Shift: 111111111 << -6 = 000000111 (13)
         var result6D = input5 >> 6;
-        Console.WriteLine($"Shift: {input6} >> 6 = {result6D} ({(int)result6D})"); // Shift: 111111111 >> 6 = 000000111 (13)
+        Console.WriteLine($"Shift: {input6:ter} >> 6 = {result6D} ({(int)result6D})"); // Shift: 111111111 >> 6 = 000000111 (13)
 
         var input7 = Int27T.MinValue; // TTTTTTTTT TTTTTTTTT TTTTTTTTT
         var result7A = input7 << 25;
-        Console.WriteLine($"Shift: {(TritArray27)input7} << 25 = {result7A} ({(TritArray27)result7A})"); // Shift: TTTT..TT << 25 = TT00...00 (-3389154437772)
+        Console.WriteLine($"Shift: {(TritArray27)input7} << 25 = {result7A} ({(TritArray27)result7A:ter})"); // Shift: TTTT..TT << 25 = TT00...00
         var result7B = input7 >> -25;
-        Console.WriteLine($"Shift: {(TritArray27)input7} >> -25 = {result7B} ({(TritArray27)result7B})"); // Shift: TTTT..TT >> -25 = TT00...00 (-3389154437772)
+        Console.WriteLine($"Shift: {(TritArray27)input7} >> -25 = {result7B} ({(TritArray27)result7B:ter})"); // Shift: TTTT..TT >> -25 = TT00...00
         var result7C = input7 << -25;
-        Console.WriteLine($"Shift: {(TritArray27)input7} << -25 = {result7C} ({(TritArray27)result7C})"); // Shift: TTTT..TT << -25 = 0000...TT (-4)
+        Console.WriteLine($"Shift: {(TritArray27)input7} << -25 = {result7C} ({(TritArray27)result7C:ter})"); // Shift: TTTT..TT << -25 = 0000...TT
         var result7D = input7 >> 25;
-        Console.WriteLine($"Shift: {(TritArray27)input7} >> 25 = {result7D} ({(TritArray27)result7D})"); // Shift: 111111111 >> 25 = 0000..TT (-4)
+        Console.WriteLine($"Shift: {(TritArray27)input7} >> 25 = {result7D} ({(TritArray27)result7D:ter})"); // Shift: TTTT..TT >> 25 = 0000..TT
     }
 }
 ```
