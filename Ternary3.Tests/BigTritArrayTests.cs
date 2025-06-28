@@ -293,6 +293,15 @@ namespace Ternary3.Tests
         }
         
         [Fact]
+        public void Substraction_ShouldWork()
+        {
+            BigTritArray a = 350;
+            BigTritArray b = 200;
+            BigTritArray c = a - b;
+            c.ToString().Should().Be("150");
+        }
+        
+        [Fact]
         public void Substraction_ShouldWork_ForBigNumbers()
         {
             BigTritArray a = BigInteger.Parse("350000000000000000000000000000000000000000000000000");
