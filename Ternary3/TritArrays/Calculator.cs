@@ -54,8 +54,8 @@ internal partial class Calculator
             var bothNegative = negative1 & negative2;
             var onePositive = positive1 ^ positive2;
             var oneNegative = negative1 ^ negative2;
-            positiveResult = (onePositive & ~negative1 & ~negative2) | (bothPositive & oneNegative) | (~positive1 & ~positive2 & bothNegative);
-            negativeResult = (oneNegative & ~positive1 & ~positive2) | (bothNegative & onePositive) | (~negative1 & ~negative2 & bothPositive);
+            positiveResult = (onePositive & ~oneNegative) | bothNegative;
+            negativeResult = (oneNegative & ~onePositive) | bothPositive;
             positive1 = positiveResult;
             negative1 = negativeResult;
             positive2 = bothPositive << 1;
@@ -76,14 +76,16 @@ internal partial class Calculator
         out ulong positiveCarry
     )
     {
-        AddBalancedTernaryWithCarry(negative1, positive1, negative2, positive2, 
+        AddBalancedTernaryWithCarry(negative1, positive1, negative2, positive2,
             out var negResult, out var posResult, out var negCarry1, out var posCarry1);
-        AddBalancedTernaryWithCarry(negResult, posResult, negative3, positive3, 
+        AddBalancedTernaryWithCarry(negResult, posResult, negative3, positive3,
             out negativeResult, out positiveResult, out var negCarry2, out var posCarry2);
-        negativeCarry = negCarry1 | negCarry2;
-        positiveCarry = posCarry1 | posCarry2;
+        var nc =  negCarry1 | negCarry2;
+        var pc =  posCarry1 | posCarry2;
+        negativeCarry = nc & ~pc;
+        positiveCarry = pc & ~nc;
     }
-    
+
     public static void AddBalancedTernaryWithCarry(
         ulong negative1,
         ulong positive1,
@@ -97,7 +99,7 @@ internal partial class Calculator
     {
         positiveResult = positive1;
         negativeResult = negative1;
-        negativeCarry = 0;
+        negativeCarry  = 0;
         positiveCarry = 0;
         while (positive2 != 0 || negative2 != 0)
         {
@@ -105,14 +107,14 @@ internal partial class Calculator
             var bothNegative = negative1 & negative2;
             var onePositive = positive1 ^ positive2;
             var oneNegative = negative1 ^ negative2;
-            positiveResult = (onePositive & ~negative1 & ~negative2) | (bothPositive & oneNegative) | (~positive1 & ~positive2 & bothNegative);
-            negativeResult = (oneNegative & ~positive1 & ~positive2) | (bothNegative & onePositive) | (~negative1 & ~negative2 & bothPositive);
+            positiveResult = (onePositive & ~oneNegative) | bothNegative;
+            negativeResult = (oneNegative & ~onePositive) | bothPositive;
             positive1 = positiveResult;
             negative1 = negativeResult;
-            negativeCarry |= bothNegative >> 63;
-            positiveCarry |= bothPositive >> 63;
-            positive2 = bothPositive << 1;
+            negativeCarry = (negativeCarry | (bothNegative >> 63)) & ~positiveCarry;
+            positiveCarry = (positiveCarry | (bothPositive >> 63)) & ~negativeCarry;
             negative2 = bothNegative << 1;
+            positive2 = bothPositive << 1;
         }
     }
 
@@ -138,7 +140,7 @@ internal partial class Calculator
         {
             MultiplyByAlgorithm(negative2, positive2, negative1, positive1, out negativeResult, out positiveResult);
         }
-        else if ((ulong)(negative1 | positive1) * (negative2 | positive2) <= 1U<<20)
+        else if ((ulong)(negative1 | positive1) * (negative2 | positive2) <= 1U << 20)
         {
             MultiplyByConversionToInt32(negative1, positive1, negative2, positive2, out negativeResult, out positiveResult);
         }
@@ -169,7 +171,7 @@ internal partial class Calculator
         {
             MultiplyByAlgorithm(negative2, positive2, negative1, positive1, out negativeResult, out positiveResult);
         }
-        else if ((negative1 | positive1) * (negative2 | positive2) <= 1UL<<40)
+        else if ((negative1 | positive1) * (negative2 | positive2) <= 1UL << 40)
         {
             MultiplyByConversionToInt64(negative1, positive1, negative2, positive2, out negativeResult, out positiveResult);
         }
@@ -308,7 +310,7 @@ internal partial class Calculator
         // Convert back to balanced ternary
         TritConverter.To32Trits(result, out negativeResult, out positiveResult);
     }
-    
+
     internal static void MultiplyByConversionToInt64(
         ulong negative1, ulong positive1,
         ulong negative2, ulong positive2,

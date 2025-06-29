@@ -4,24 +4,29 @@ using Formatting;
 using TritArrays;
 using System.Numerics;
 using Operators;
+using System.Diagnostics.CodeAnalysis;
 
 public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
 {
     internal List<ulong> Positive;
     internal List<ulong> Negative;
     public int Length { get; }
+    public ulong Mask { get; }
+
 
     internal BigTritArray(List<ulong> negative, List<ulong> positive, int length)
     {
         Negative = negative;
         Positive = positive;
         Length = length;
+        Mask = (1UL << (length % 64)) - 1;
     }
 
     public BigTritArray(int length)
     {
         if (length < 0) throw new ArgumentOutOfRangeException(nameof(length));
         Length = length;
+        Mask = 1UL << (length % 64 - 1);
         var longsNeeded = (length + 63) / 64;
         Positive = [..new ulong[longsNeeded]];
         Negative = [..new ulong[longsNeeded]];
@@ -35,6 +40,8 @@ public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
             InitializeTritArray(arr, offset);
             offset += arr.Length;
         }
+        Length = offset;
+        Mask = 1UL << (offset % 64 - 1);
     }
 
     private void InitializeTritArray(ITritArray arr, int offset)
@@ -157,31 +164,35 @@ public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
     public string ToString(ITernaryFormat format) => Formatter.Format(this, format);
 
     // todo: equal values (leading zeros) should be equal, even if they have different lengths
+    
+    private BigTritArray ApplyLength()
+    {
+        Positive[^1] &= Mask;
+        Negative[^1] &= Mask;
+        return this;
+    }
+    
     public bool Equals(BigTritArray? other)
     {
         if (ReferenceEquals(this, other)) return true;
         if (other is null) return false;
-        if (Length != other.Length) return false;
-        ApplyLength();
-        return Positive.SequenceEqual(other.Positive) && Negative.SequenceEqual(other.Negative);
-    }
-
-    private void ApplyLength()
-    {
-        var mask = 1UL << Length % 64 - 1;
-        Positive[^1] &= mask;
-        Negative[^1] &= mask;
+        var n1 = Enumerable.Reverse(Negative).SkipWhile(x => x == 0);
+        var p1 = Enumerable.Reverse(Positive).SkipWhile(x => x == 0);
+        var n2 = Enumerable.Reverse(other.Negative).SkipWhile(x => x == 0);
+        var p2 = Enumerable.Reverse(other.Positive).SkipWhile(x => x == 0);
+        return n1.SequenceEqual(n2) && p1.SequenceEqual(p2);
     }
 
     public override bool Equals(object? obj) => obj is BigTritArray other && Equals(other);
 
+    [SuppressMessage("ReSharper", "NonReadonlyMemberInGetHashCode", Justification = "this is a mutable type, but we want to allow hash code calculation for equality checks")]
     public override int GetHashCode()
     {
-        // Use HashCode.Combine for better hash distribution and simplicity
+        if (Length == 0) return 0;
+        if (Negative.Count == 1) return HashCode.Combine(Negative[0], Positive[0]);
         return HashCode.Combine(
-            Length,
-            Positive.Aggregate(0, HashCode.Combine),
-            Negative.Aggregate(0, HashCode.Combine)
+            Enumerable.Reverse(Positive).SkipWhile(x => x == 0).Aggregate(0, HashCode.Combine),
+            Enumerable.Reverse(Negative).SkipWhile(x => x == 0).Aggregate(0, HashCode.Combine)
         );
     }
 
@@ -195,12 +206,7 @@ public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
     /// <returns>A new BigTritArray with the operation applied to each trit.</returns>
     public static BigTritArray operator |(BigTritArray array, Func<Trit, Trit> operation)
     {
-        var result = new BigTritArray(array.Length);
-        for (int i = 0; i < array.Length; i++)
-        {
-            result[i] = operation(array[i]);
-        }
-        return result;
+        throw new NotImplementedException();
     }
 
     /// <summary>
@@ -211,18 +217,7 @@ public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
     /// <returns>A new BigTritArray with the lookup operation applied to each trit.</returns>
     public static BigTritArray operator |(BigTritArray array, Trit[] table)
     {
-        if (table.Length != 3)
-        {
-            throw new ArgumentException("Lookup table must have exactly 3 elements", nameof(table));
-        }
-
-        var result = new BigTritArray(array.Length);
-        for (int i = 0; i < array.Length; i++)
-        {
-            var trit = array[i];
-            result[i] = table[trit.Value + 1]; // +1 to map from [-1,0,1] to [0,1,2]
-        }
-        return result;
+        throw new NotImplementedException();
     }
 
     /// <summary>
@@ -266,9 +261,8 @@ public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
     /// <returns>A new BigTritArray with the bits shifted to the left.</returns>
     public static BigTritArray operator <<(BigTritArray array, int shift)
     {
-        Calculator.Shift(array.Negative, array.Positive, -shift, out var negativeResult, out var positiveResult);
-        var length = Calculator.TrimAndDetermineLength(negativeResult, positiveResult);
-        return new(negativeResult, positiveResult, length);
+        Calculator.ShiftLeft(array.Negative, array.Positive, shift, out var negativeResult, out var positiveResult);
+        return new BigTritArray(negativeResult, positiveResult, array.Length).ApplyLength();
     }
 
     /// <summary>
@@ -279,9 +273,8 @@ public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
     /// <returns>A new BigTritArray with the bits shifted to the right.</returns>
     public static BigTritArray operator >>(BigTritArray array, int shift)
     {
-        Calculator.Shift(array.Negative, array.Positive, shift, out var negativeResult, out var positiveResult);
-        var length = Calculator.TrimAndDetermineLength(negativeResult, positiveResult);
-        return new(negativeResult, positiveResult, length);
+        Calculator.ShiftRight(array.Negative, array.Positive, shift, out var negativeResult, out var positiveResult);
+        return new BigTritArray(negativeResult, positiveResult, array.Length).ApplyLength();
     }
 
     /// <summary>
@@ -292,14 +285,9 @@ public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
     /// <returns>A new BigTritArray representing the sum of the two values.</returns>
     public static BigTritArray operator +(BigTritArray value1, BigTritArray value2)
     {
-        // Use the Calculator.AddBalancedTernary method for BigTritArray
-        Calculator.AddBalancedTernary(value1.Negative, value1.Positive, value2.Negative, value2.Positive, 
-            out var negativeResult, out var positiveResult);
-            
-        // Get the maximum possible length for the result
+        Calculator.AddBalancedTernary(value1.Negative, value1.Positive, value2.Negative, value2.Positive, out var negativeResult, out var positiveResult);
         var length = Calculator.TrimAndDetermineLength(negativeResult, positiveResult);
-        
-        return new(negativeResult, positiveResult, length);
+        return new BigTritArray(negativeResult, positiveResult, length).ApplyLength();
     }
 
     /// <summary>
@@ -310,14 +298,11 @@ public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
     /// <returns>A new BigTritArray representing the difference between the two values.</returns>
     public static BigTritArray operator -(BigTritArray value1, BigTritArray value2)
     {
-        // Subtraction is addition with negated second operand (swap positive and negative)
-        Calculator.AddBalancedTernary(value1.Negative, value1.Positive, value2.Positive, value2.Negative, 
-            out var negativeResult, out var positiveResult);
-            
-        // Get the maximum possible length for the result
+        value1.ApplyLength();
+        value2.ApplyLength();
+        Calculator.AddBalancedTernary(value1.Negative, value1.Positive, value2.Positive, value2.Negative, out var negativeResult, out var positiveResult);
         var length = Calculator.TrimAndDetermineLength(negativeResult, positiveResult);
-        
-        return new(negativeResult, positiveResult, length);
+        return new BigTritArray(negativeResult, positiveResult, length).ApplyLength();
     }
     
     /// <summary>
@@ -328,10 +313,12 @@ public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
     /// <returns>A new BigTritArray representing the product between the two values.</returns>
     public static BigTritArray operator *(BigTritArray value1, BigTritArray value2)
     {
+        value1.ApplyLength();
+        value2.ApplyLength();
         Calculator.MultiplyBalancedTernary(value1.Negative, value1.Positive, value2.Positive, value2.Negative, 
             out var negativeResult, out var positiveResult);
         var length = Calculator.TrimAndDetermineLength(negativeResult, positiveResult);
-        return new(negativeResult, positiveResult, length);
+        return new BigTritArray(negativeResult, positiveResult, length).ApplyLength();
     }
     
     #endregion
