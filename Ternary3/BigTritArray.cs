@@ -10,9 +10,44 @@ public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
 {
     internal List<ulong> Positive;
     internal List<ulong> Negative;
-    public int Length { get; }
-    private readonly ulong mask;
+    public int Length { get; set; }
+    private ulong mask;
 
+    /// <summary>
+    /// Resizes the BigTritArray to the specified length.
+    /// </summary>
+    /// <param name="length">The new length of the array. Must be non-negative.</param>
+    /// <remarks>
+    /// This method adjusts the underlying storage to accommodate the new length by either adding or removing
+    /// elements from the internal storage lists. If the new length is the same as the current length, no operation is performed.
+    /// </remarks>
+    /// <exception cref="ArgumentOutOfRangeException">Thrown if the specified length is negative.</exception>
+    public void Resize(int length)
+    {
+        ArgumentOutOfRangeException.ThrowIfNegative(length);
+        if (length == Length) return;
+        Length = length;
+        mask = (1UL << (length % 64)) - 1;
+        if (mask == 0) mask = ulong.MaxValue;
+        if (length == 0)
+        {
+            Negative.Clear();
+            Positive.Clear();
+            return;
+        }
+        var longsNeeded = (length + 63) / 64;
+        if (Positive.Count < longsNeeded)
+        {
+            Positive.AddRange(new ulong[longsNeeded - Positive.Count]);
+            Negative.AddRange(new ulong[longsNeeded - Negative.Count]);
+        }
+        else if (Positive.Count > longsNeeded)
+        {
+            Positive.RemoveRange(longsNeeded, Positive.Count - longsNeeded);
+            Negative.RemoveRange(longsNeeded, Negative.Count - longsNeeded);
+            ApplyLength();
+        }
+    }
 
     internal BigTritArray(List<ulong> negative, List<ulong> positive, int length)
     {
@@ -20,19 +55,21 @@ public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
         Positive = positive;
         Length = length;
         mask = (1UL << (length % 64)) - 1;
+        if (mask == 0) mask = ulong.MaxValue;
     }
 
     public BigTritArray(int length)
     {
         if (length < 0) throw new ArgumentOutOfRangeException(nameof(length));
         Length = length;
-        mask = 1UL << (length % 64 - 1);
+        mask = (1UL << (length % 64)) - 1;
+        if (mask == 0) mask = ulong.MaxValue;
         var longsNeeded = (length + 63) / 64;
-        Positive = [..new ulong[longsNeeded]];
-        Negative = [..new ulong[longsNeeded]];
+        Positive = [.. new ulong[longsNeeded]];
+        Negative = [.. new ulong[longsNeeded]];
     }
 
-    public BigTritArray(params ITritArray[] arrays): this ((arrays ?? throw new ArgumentNullException(nameof(arrays))).Sum(a=>a.Length))
+    public BigTritArray(params ITritArray[] arrays) : this((arrays ?? throw new ArgumentNullException(nameof(arrays))).Sum(a => a.Length))
     {
         var offset = 0;
         foreach (var arr in arrays)
@@ -49,25 +86,25 @@ public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
         switch (arr)
         {
             case TritArray27 value:
-            {
-                CopyRange(value.Negative, value.Positive, offset, value.Length);
-                return;
-            }
+                {
+                    CopyRange(value.Negative, value.Positive, offset, value.Length);
+                    return;
+                }
             case TritArray9 value:
-            {
-                CopyRange(value.Negative, value.Positive, offset, value.Length);
-                return;
-            }
+                {
+                    CopyRange(value.Negative, value.Positive, offset, value.Length);
+                    return;
+                }
             case TritArray3 value:
-            {
-                CopyRange(value.Negative, value.Positive, offset, value.Length);
-                return;
-            }
+                {
+                    CopyRange(value.Negative, value.Positive, offset, value.Length);
+                    return;
+                }
             default:
-            {
-                CopyRange(arr, offset);
-                return;
-            }
+                {
+                    CopyRange(arr, offset);
+                    return;
+                }
         }
     }
 
@@ -103,19 +140,19 @@ public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
 
     public Trit this[int index]
     {
-        get => index >= 0 && index < Length 
+        get => index >= 0 && index < Length
             ? TritConverter.GetTrit(Negative, Positive, index)
-            : throw new ArgumentOutOfRangeException(nameof(index), $"Index must be between 0 and {Length-1}.");
+            : throw new ArgumentOutOfRangeException(nameof(index), $"Index must be between 0 and {Length - 1}.");
         set
         {
             if (index < 0 || index >= Length)
             {
-                throw new ArgumentOutOfRangeException(nameof(index), $"Index must be between 0 and {Length-1}.");
+                throw new ArgumentOutOfRangeException(nameof(index), $"Index must be between 0 and {Length - 1}.");
             }
             TritConverter.SetTrit(ref Negative, ref Positive, index, value);
         }
     }
-    
+
     /// <summary>
     /// Gets or sets the trit at the specified index.
     /// </summary>
@@ -164,14 +201,14 @@ public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
     public string ToString(ITernaryFormat format) => Formatter.Format(this, format);
 
     // todo: equal values (leading zeros) should be equal, even if they have different lengths
-    
+
     private BigTritArray ApplyLength()
     {
         Positive[^1] &= mask;
         Negative[^1] &= mask;
         return this;
     }
-    
+
     public bool Equals(BigTritArray? other)
     {
         if (ReferenceEquals(this, other)) return true;
@@ -212,7 +249,18 @@ public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
     /// <param name="array">The source array.</param>
     /// <param name="table">The lookup table containing the transformation values.</param>
     /// <returns>A new BigTritArray with the lookup operation applied to each trit.</returns>
-    public static BigTritArray operator |(BigTritArray array, Trit[] table)=> array | new UnaryTritOperator(table);
+    public static BigTritArray operator |(BigTritArray array, Trit[] table)
+    {
+        if (table.Length != 3)
+            throw new ArgumentException("Table must contain exactly three elements for Negative, Zero, and Positive inputs", nameof(table));
+            
+        var result = new BigTritArray(array.Length);
+        for (var i = 0; i < array.Length; i++)
+        {
+            result[i] = array[i] | table;
+        }
+        return result;
+    }
 
     /// <summary>
     /// Creates a binary operation context for this array.
@@ -289,7 +337,7 @@ public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
         var length = Calculator.TrimAndDetermineLength(negativeResult, positiveResult);
         return new BigTritArray(negativeResult, positiveResult, length).ApplyLength();
     }
-    
+
     /// <summary>
     /// Multiplies one BigTritArray value from another.
     /// </summary>
@@ -300,12 +348,12 @@ public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
     {
         value1.ApplyLength();
         value2.ApplyLength();
-        Calculator.MultiplyBalancedTernary(value1.Negative, value1.Positive, value2.Positive, value2.Negative, 
+        Calculator.MultiplyBalancedTernary(value1.Negative, value1.Positive, value2.Positive, value2.Negative,
             out var negativeResult, out var positiveResult);
         var length = Calculator.TrimAndDetermineLength(negativeResult, positiveResult);
         return new BigTritArray(negativeResult, positiveResult, length).ApplyLength();
     }
-    
+
     #endregion
 
 
@@ -318,7 +366,7 @@ public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
     public static implicit operator BigTritArray(BigInteger value)
     {
         TritConverter.ToTrits(value, out var negative, out var positive, out var length);
-        return new (negative, positive, length);
+        return new(negative, positive, length);
     }
 
     /// <summary>
@@ -327,7 +375,7 @@ public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
     public static implicit operator BigTritArray(long value)
     {
         TritConverter.ToTrits(value, out var negative, out var positive, out var length);
-        return new (negative, positive, length);
+        return new(negative, positive, length);
     }
 
     /// <summary>
@@ -336,7 +384,7 @@ public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
     public static implicit operator BigTritArray(int value)
     {
         TritConverter.ToTrits(value, out var negative, out var positive, out var length);
-        return new (negative, positive, length);
+        return new(negative, positive, length);
     }
 
     /// <summary>

@@ -321,22 +321,29 @@ namespace Ternary3.Tests
         }
 
         [Theory]
-        [InlineData(null, true, false)]
-        [InlineData(null, true, null)]
-        [InlineData(null, true, true)]
+        [InlineData(null, null, null)]
+        [InlineData(true, true, true)]
+        [InlineData(false, false, false)]
+        [InlineData(true, false, true)]
+        [InlineData(false, true, false)]
+        [InlineData(false, null, true)]
         public void LookupTable_AppliesTableToEachTrit(bool? n, bool? z, bool? p)
         {
             var op = new[] { (Trit)n, (Trit)z, (Trit)p };
             var target = new BigTritArray(131)
             {
+                [0] = Trit.Negative,
+                [1] = Trit.Zero,
+                [2] = Trit.Positive,
                 [128] = Trit.Negative,
                 [129] = Trit.Zero,
                 [130] = Trit.Positive
             };
             target.Length.Should().Be(131);
             var actual = target | op;
-            actual[32].Should().Be(Trit.Zero | op);
-            actual[96].Should().Be(Trit.Zero | op);
+            actual[0].Should().Be(Trit.Negative | op);
+            actual[1].Should().Be(Trit.Zero | op);
+            actual[2].Should().Be(Trit.Positive | op);
             actual[128].Should().Be(Trit.Negative | op);
             actual[129].Should().Be(Trit.Zero | op);
             actual[130].Should().Be(Trit.Positive | op);

@@ -37,7 +37,7 @@ public partial struct UnaryTritOperator
     public UnaryTritOperator(Span<Trit> lookup)
     {
         if (lookup.Length != 3) throw new ArgumentException("Lookup must be Three trits long", nameof(lookup));
-        operationIndex = (byte)(13 + lookup[0].Value + 3 * lookup[1].Value + 9 * lookup[2].Value);
+        operationIndex = (byte)(13 + 9 * lookup[0].Value + 3 * lookup[1].Value + lookup[2].Value);
     }
 
     /// <summary>
@@ -91,11 +91,12 @@ public partial struct UnaryTritOperator
     {
         if (values.Length != 3) throw new ArgumentException("Array must contain exactly three values", nameof(values));
 
-        var trit1 = values[0] switch { true => 2, false => 0, _ => -1 };
-        var trit2 = values[1] switch { true => 2, false => 0, _ => -1 };
-        var trit3 = values[2] switch { true => 2, false => 0, _ => -1 };
+        // Fix the mapping to match Trit's implicit operator from bool?
+        var trit1 = values[0] switch { true => 1, false => -1, _ => 0 };
+        var trit2 = values[1] switch { true => 1, false => -1, _ => 0 };
+        var trit3 = values[2] switch { true => 1, false => -1, _ => 0 };
 
-        operationIndex = (byte)(trit1 + 3 * trit2 + 9 * trit3);
+        operationIndex = (byte)(13 + trit1 + 3 * trit2 + 9 * trit3);
     }
 
     /// <summary>
