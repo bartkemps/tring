@@ -47,7 +47,13 @@ Write a simple C# program to test the library:
 using static Ternary3.Operators.BinaryTritOperator;
 using static System.Console;
 
-WriteLine(-24 | Or | 4);
+public partial class Program
+{
+    public static void Main()
+    {
+         WriteLine(terT010 | Or | ter11);
+    }
+}
 ```
 
 This will output a ternary number representing the result of the operation.
