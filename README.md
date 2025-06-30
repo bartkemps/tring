@@ -639,7 +639,7 @@ This allows for flexible formatting and display of ternary numbers, including cu
     - [`TritArray3` Struct](#tritarray3-struct) - a 3-trit number stored optimized for trit operation performance
     - [`TritArray9` Struct](#tritarray9-struct) - a 9-trit number stored optimized for trit operation performance
     - [`TritArray27` Struct](#tritarray27-struct) - a 27-trit number stored optimized for trit operation performance
-    - [`TritArray` Class](#Tritarray-class) - a general purpose variable-sized trit array for arbitrary precision ternary operations
+    - [`TritArray` Class](#tritarray-class) - a general purpose variable-sized trit array for arbitrary precision ternary operations
     - [`Int3T` Struct](#int3t-struct) - a 3-trit number stored optimized for arithmetic operations
     - [`Int9T` Struct](#int9t-struct) - a 9-trit number stored optimized for arithmetic operations
     - [`Int27T` Struct](#int27t-struct) - a 27-trit number stored optimized for arithmetic operations
@@ -664,7 +664,7 @@ This allows for flexible formatting and display of ternary numbers, including cu
 #### `Trit` Struct
 
 ```csharp
-namespace Ternary3.Numbers
+namespace Ternary3
 ```
 
 Represents a trinary (three-valued) logical value that can be Negative (-1), Zero (0), or Positive (1).
@@ -703,7 +703,7 @@ Represents a trinary (three-valued) logical value that can be Negative (-1), Zer
 #### `TritArray3` Struct
 
 ```csharp
-namespace Ternary3.Numbers
+namespace Ternary3
 ```
 
 Represents a fixed-size array of 3 trits (ternary digits).
@@ -748,7 +748,7 @@ Represents a fixed-size array of 3 trits (ternary digits).
 #### `TritArray9` Struct
 
 ```csharp
-namespace Ternary3.Numbers
+namespace Ternary3
 ```
 
 Represents a fixed-size array of 9 trits (ternary digits).
@@ -769,7 +769,7 @@ Represents a fixed-size array of 9 trits (ternary digits).
 #### `TritArray27` Struct
 
 ```csharp
-namespace Ternary3.Numbers
+namespace Ternary3
 ```
 
 Represents a fixed-size array of 27 trits (ternary digits).
@@ -783,75 +783,65 @@ Represents a fixed-size array of 27 trits (ternary digits).
 - `int Length` - Gets the length of the trit array, which is always 27.
 
 **Indexer:**
-- `Trit this[int index]` - Gets or sets the trit at the specified index.
+- `Trit this[int index]` - Gets or sets the trit at the specified index using C# 8.0 Index syntax.
+- `TritArray this[Range range]` - Gets a slice of the array using C# 8.0 Range syntax.
 
 **Similar operators and methods as TritArray3 but for 27 trits.**
 
 #### `TritArray` Class
 
 ```csharp
-namespace Ternary3.Numbers
+namespace Ternary3
 ```
 
 Represents a variable-sized array of trits (ternary digits) that can store arbitrary precision ternary numbers.
 
 **Properties:**
-- `int Length` - Gets the length of the trit array.
+- `int Length` - Gets or sets the length of the trit array.
 
 **Indexer:**
-- `Trit this[int index]` - Gets or sets the trit at the specified index.
+- `Trit this[int index]` - Gets or sets the trit at the specified index using C# 8.0 Index syntax.
+- `TritArray this[Range range]` - Gets a slice of the array using C# 8.0 Range syntax.
 
-**Constructors and Creation Methods:**
+**Constructors and Methods:**
 - `TritArray(int length)` - Creates a new TritArray with the specified length, all trits initialized to 0.
-- `TritArray(IEnumerable<Trit> trits)` - Creates a new TritArray from a collection of Trits.
-- `static TritArray FromBigInteger(BigInteger value)` - Creates a new TritArray from a System.Numerics.BigInteger value.
-- `static TritArray Concat(ITritArray array1, ITritArray array2)` - Concatenates two trit arrays into a new TritArray.
+- `TritArray(params ITritArray[] arrays)` - Creates a new TritArray by concatenating multiple trit arrays.
+- `void Resize(int length)` - Resizes the TritArray to the specified length, preserving existing values.
+- `string ToString()` - Returns a string representation of the trit array.
+- `string ToString(ITernaryFormat format)` - Returns a formatted string representation of the trit array.
 
 **Operators:**
 - `static TritArray operator |(TritArray array, Func<Trit, Trit> operation)` - Applies a unary operation to each trit in the array.
 - `static TritArray operator |(TritArray array, Trit[] table)` - Applies a lookup table operation to each trit in the array.
 - `static TritArray operator <<(TritArray array, int shift)` - Performs a left bitwise shift on the trit array.
 - `static TritArray operator >>(TritArray array, int shift)` - Performs a right bitwise shift on the trit array.
-- Standard arithmetic operators (+, -, *, etc.) are supported
-
-**Conversion Operators:**
-- `static implicit operator TritArray(TritArray3 array)` - Converts a TritArray3 to a TritArray.
-- `static implicit operator TritArray(TritArray9 array)` - Converts a TritArray9 to a TritArray.
-- `static implicit operator TritArray(TritArray27 array)` - Converts a TritArray27 to a TritArray.
-- `static implicit operator TritArray(BigInteger value)` - Converts a BigInteger to a TritArray.
-- `static explicit operator BigInteger(TritArray array)` - Converts a TritArray to a BigInteger.
-
-**Methods:**
-- `override string ToString()` - Returns a string representation of the trit array.
-- `string ToString(ITernaryFormat format)` - Returns a formatted string representation of the trit array.
-- Other methods similar to those in the fixed-size TritArray structs.
 
 #### `Int3T` Struct
 
 ```csharp
-namespace Ternary3.Numbers
+namespace Ternary3
 ```
 
 Represents a 3-trit signed integer, modeled after the SByte type.
 
 **Constants:**
-- `const SByte MaxValueConstant` - Represents the maximum value of a Int3T, expressed as a SByte.
-- `const SByte MinValueConstant` - Represents the minimum value of a Int3T, expressed as a SByte.
+- `const SByte MaxValueConstant` - Represents the maximum value of an Int3T, expressed as a SByte.
+- `const SByte MinValueConstant` - Represents the minimum value of an Int3T, expressed as a SByte.
 
 **Static Properties:**
-- `static readonly Int3T MaxValue` - Represents the largest possible value of a Int3T.
-- `static readonly Int3T MinValue` - Represents the smallest possible value of a Int3T.
+- `static readonly Int3T MaxValue` - Represents the largest possible value of an Int3T.
+- `static readonly Int3T MinValue` - Represents the smallest possible value of an Int3T.
 
 **Operators:**
-- `static Int3T operator <<(Int3T value, int shiftAmount)` - Performs a left shift operation on the ternary number, maintaining the original numeric type.
-- `static Int3T operator >>(Int3T value, int shiftAmount)` - Performs a right shift operation on the ternary number, maintaining the original numeric type.
-- `static Int3T operator >>>(Int3T value, int shiftAmount)` - Performs an unsigned right shift operation on the ternary number, maintaining the original numeric type. In this implementation, it behaves the same as the signed right shift.
-- `static TritArray3 operator |(Int3T value, Func<Trit, Trit> operation)` - Applies a unary operation to each trit in this ternary number. This operation converts the number to a TritArray.
-- `static TritArray3 operator |(Int3T value, Trit[] trits)` - Combines each trit in this ternary number with the corresponding trit in the provided array. This operation converts the number to a TritArray.
-- Standard arithmetic and comparison operators
+- `static Int3T operator <<(Int3T value, int shiftAmount)` - Performs a left shift operation.
+- `static Int3T operator >>(Int3T value, int shiftAmount)` - Performs a right shift operation.
+- `static Int3T operator >>>(Int3T value, int shiftAmount)` - Performs an unsigned right shift operation.
+- `static TritArray3 operator |(Int3T value, Func<Trit, Trit> operation)` - Applies a unary operation to each trit.
+- `static TritArray3 operator |(Int3T value, Trit[] trits)` - Combines each trit with the corresponding trit in the provided array.
+- Standard arithmetic and comparison operators.
 
 **Methods:**
-- `override string ToString()` - Returns a string representation of the trit value using default formatting.
+- `override string ToString()` - Returns a string representation of the value.
 - `string ToString(string? format)` - Returns a string representation using the specified format string.
 - `string ToString(IFormatProvider? provider)` - Returns a string representation using the specified format provider.
 - `string ToString(string? format, IFormatProvider? provider)` - Returns a string representation using both format string and provider.
@@ -860,34 +850,32 @@ Represents a 3-trit signed integer, modeled after the SByte type.
 - `override bool Equals(object? obj)` - Returns a value indicating whether this instance is equal to a specified object.
 - `override int GetHashCode()` - Returns the hash code for this instance.
 
-Similarly for Int9T and Int27T:
-
 #### `Int9T` Struct
 
 ```csharp
-namespace Ternary3.Numbers
+namespace Ternary3
 ```
 
 Represents a 9-trit signed integer, modeled after the Int16 type.
 
 **Constants:**
-- `const Int16 MaxValueConstant` - Represents the maximum value of a Int9T, expressed as an Int16.
-- `const Int16 MinValueConstant` - Represents the minimum value of a Int9T, expressed as an Int16.
+- `const Int16 MaxValueConstant` - Represents the maximum value of an Int9T, expressed as an Int16.
+- `const Int16 MinValueConstant` - Represents the minimum value of an Int9T, expressed as an Int16.
 
 **Static Properties:**
-- `static readonly Int9T MaxValue` - Represents the largest possible value of a Int9T.
-- `static readonly Int9T MinValue` - Represents the smallest possible value of a Int9T.
+- `static readonly Int9T MaxValue` - Represents the largest possible value of an Int9T.
+- `static readonly Int9T MinValue` - Represents the smallest possible value of an Int9T.
 
 **Operators:**
-- `static Int9T operator <<(Int9T value, int shiftAmount)` - Performs a left shift operation on the ternary number, maintaining the original numeric type.
-- `static Int9T operator >>(Int9T value, int shiftAmount)` - Performs a right shift operation on the ternary number, maintaining the original numeric type.
-- `static Int9T operator >>>(Int9T value, int shiftAmount)` - Performs an unsigned right shift operation on the ternary number, maintaining the original numeric type. In this implementation, it behaves the same as the signed right shift.
-- `static TritArray9 operator |(Int9T value, Func<Trit, Trit> operation)` - Applies a unary operation to each trit in this ternary number. This operation converts the number to a TritArray.
-- `static TritArray9 operator |(Int9T value, Trit[] trits)` - Combines each trit in this ternary number with the corresponding trit in the provided array. This operation converts the number to a TritArray.
-- Standard arithmetic and comparison operators
+- `static Int9T operator <<(Int9T value, int shiftAmount)` - Performs a left shift operation.
+- `static Int9T operator >>(Int9T value, int shiftAmount)` - Performs a right shift operation.
+- `static Int9T operator >>>(Int9T value, int shiftAmount)` - Performs an unsigned right shift operation.
+- `static TritArray9 operator |(Int9T value, Func<Trit, Trit> operation)` - Applies a unary operation to each trit.
+- `static TritArray9 operator |(Int9T value, Trit[] trits)` - Combines each trit with the corresponding trit in the provided array.
+- Standard arithmetic and comparison operators.
 
 **Methods:**
-- `override string ToString()` - Returns a string representation of the trit value using default formatting.
+- `override string ToString()` - Returns a string representation of the value.
 - `string ToString(string? format)` - Returns a string representation using the specified format string.
 - `string ToString(IFormatProvider? provider)` - Returns a string representation using the specified format provider.
 - `string ToString(string? format, IFormatProvider? provider)` - Returns a string representation using both format string and provider.
@@ -899,29 +887,29 @@ Represents a 9-trit signed integer, modeled after the Int16 type.
 #### `Int27T` Struct
 
 ```csharp
-namespace Ternary3.Numbers
+namespace Ternary3
 ```
 
 Represents a 27-trit signed integer, modeled after the Int64 type.
 
 **Constants:**
-- `const Int64 MaxValueConstant` - Represents the maximum value of a Int27T, expressed as an Int64.
-- `const Int64 MinValueConstant` - Represents the minimum value of a Int27T, expressed as an Int64.
+- `const Int64 MaxValueConstant` - Represents the maximum value of an Int27T, expressed as an Int64.
+- `const Int64 MinValueConstant` - Represents the minimum value of an Int27T, expressed as an Int64.
 
 **Static Properties:**
-- `static readonly Int27T MaxValue` - Represents the largest possible value of a Int27T.
-- `static readonly Int27T MinValue` - Represents the smallest possible value of a Int27T.
+- `static readonly Int27T MaxValue` - Represents the largest possible value of an Int27T.
+- `static readonly Int27T MinValue` - Represents the smallest possible value of an Int27T.
 
 **Operators:**
-- `static Int27T operator <<(Int27T value, int shiftAmount)` - Performs a left shift operation on the ternary number, maintaining the original numeric type.
-- `static Int27T operator >>(Int27T value, int shiftAmount)` - Performs a right shift operation on the ternary number, maintaining the original numeric type.
-- `static Int27T operator >>>(Int27T value, int shiftAmount)` - Performs an unsigned right shift operation on the ternary number, maintaining the original numeric type. In this implementation, it behaves the same as the signed right shift.
-- `static TritArray27 operator |(Int27T value, Func<Trit, Trit> operation)` - Applies a unary operation to each trit in this ternary number. This operation converts the number to a TritArray.
-- `static TritArray27 operator |(Int27T value, Trit[] trits)` - Combines each trit in this ternary number with the corresponding trit in the provided array. This operation converts the number to a TritArray.
-- Standard arithmetic and comparison operators
+- `static Int27T operator <<(Int27T value, int shiftAmount)` - Performs a left shift operation.
+- `static Int27T operator >>(Int27T value, int shiftAmount)` - Performs a right shift operation.
+- `static Int27T operator >>>(Int27T value, int shiftAmount)` - Performs an unsigned right shift operation.
+- `static TritArray27 operator |(Int27T value, Func<Trit, Trit> operation)` - Applies a unary operation to each trit.
+- `static TritArray27 operator |(Int27T value, Trit[] trits)` - Combines each trit with the corresponding trit in the provided array.
+- Standard arithmetic and comparison operators.
 
 **Methods:**
-- `override string ToString()` - Returns a string representation of the trit value using default formatting.
+- `override string ToString()` - Returns a string representation of the value.
 - `string ToString(string? format)` - Returns a string representation using the specified format string.
 - `string ToString(IFormatProvider? provider)` - Returns a string representation using the specified format provider.
 - `string ToString(string? format, IFormatProvider? provider)` - Returns a string representation using both format string and provider.
@@ -930,7 +918,7 @@ Represents a 27-trit signed integer, modeled after the Int64 type.
 - `override bool Equals(object? obj)` - Returns a value indicating whether this instance is equal to a specified object.
 - `override int GetHashCode()` - Returns the hash code for this instance.
 
-### Operator Classes
+### Operator Structs
 
 #### `UnaryTritOperator` Struct
 
@@ -940,35 +928,30 @@ namespace Ternary3.Operators
 
 Provides a set of predefined unary operations for Trit values.
 
-**Static Properties and Methods:**
-- `static Trit Apply(Trit target, Trit[] table)` - Apply a unary operation to a Trit value.
-- `static readonly UnaryTritOperator Negative` - Negative value.
-- `static readonly UnaryTritOperator Decrement` - Decrement.
-- `static readonly UnaryTritOperator IsPositive` - Is the value positive?
-- `static readonly UnaryTritOperator NegateAbsoluteValue` - Negate the Absolute Value.
-- `static readonly UnaryTritOperator Ceil` - Ceiling Zero.
+**Static Properties:**
 - `static readonly UnaryTritOperator Identity` - Identity function.
-- `static readonly UnaryTritOperator IsZero` - Is the value zero?
-- `static readonly UnaryTritOperator KeepNegative` - Keep negative values.
-- `static readonly UnaryTritOperator IsNotNegative` - Is the value not negative?
-- `static readonly UnaryTritOperator CeilIsNegative` - Ceiling for negative values.
-- `static readonly UnaryTritOperator CeilIsNotZero` - Ceiling for non-zero values.
-- `static readonly UnaryTritOperator KeepPositive` - Keep positive values.
-- `static readonly UnaryTritOperator CeilIsNotPositive` - Ceiling for non-positive values.
-- `static readonly UnaryTritOperator Zero` - Zero value.
-- `static readonly UnaryTritOperator Floor` - Floor function.
-- `static readonly UnaryTritOperator CyclicIncrement` - Cycle increment.
-- `static readonly UnaryTritOperator FloorIsZero` - Floor for zero.
-- `static readonly UnaryTritOperator Increment` - Increment function.
-- `static readonly UnaryTritOperator IsNegative` - Is the value negative?
-- `static readonly UnaryTritOperator CyclicDecrement` - Cycle decrement.
-- `static readonly UnaryTritOperator IsNotZero` - Is the value not zero?
 - `static readonly UnaryTritOperator Negate` - Negate function.
-- `static readonly UnaryTritOperator FloorIsNegative` - Floor for negative values.
 - `static readonly UnaryTritOperator AbsoluteValue` - Absolute value.
+- `static readonly UnaryTritOperator IsPositive` - Is the value positive?
+- `static readonly UnaryTritOperator IsNegative` - Is the value negative?
+- `static readonly UnaryTritOperator IsZero` - Is the value zero?
+- `static readonly UnaryTritOperator IsNotZero` - Is the value not zero?
 - `static readonly UnaryTritOperator IsNotPositive` - Is the value not positive?
-- `static readonly UnaryTritOperator FloorIsNotPositive` - Floor for non-positive values.
-- `static readonly UnaryTritOperator Positive` - Positive value.
+- `static readonly UnaryTritOperator IsNotNegative` - Is the value not negative?
+- `static readonly UnaryTritOperator Floor` - Floor function.
+- `static readonly UnaryTritOperator Ceil` - Ceiling function.
+- `static readonly UnaryTritOperator Increment` - Increment function.
+- `static readonly UnaryTritOperator Decrement` - Decrement function.
+- And many more predefined operations.
+
+**Constructors:**
+- `UnaryTritOperator(Trit negative, Trit zero, Trit positive)` - Creates a new unary trit operator with the specified output values.
+- `UnaryTritOperator(bool? negative, bool? zero, bool? positive)` - Creates a new unary trit operator with the specified nullable boolean output values.
+- `UnaryTritOperator(sbyte negative, sbyte zero, sbyte positive)` - Creates a new unary trit operator with the specified sbyte output values.
+- `UnaryTritOperator(int negative, int zero, int positive)` - Creates a new unary trit operator with the specified integer output values.
+
+**Methods:**
+- `Trit Apply(Trit trit)` - Applies the unary operation to the specified trit.
 
 #### `BinaryTritOperator` Struct
 
@@ -979,16 +962,176 @@ namespace Ternary3.Operators
 Provides a set of predefined binary operations implemented as lookup tables for Trit values.
 
 **Static Properties:**
-- `static readonly BinaryTritOperator Positive` - A constant that returns Positive (1) for any trit combination.
-- `static readonly BinaryTritOperator Zero` - A constant that returns Zero (0) for any trit combination.
-- `static readonly BinaryTritOperator Negative` - A constant that returns Negative (-1) for any trit combination.
-- `static readonly BinaryTritOperator And` - The logical AND operation in three-valued logic.
-- `static readonly BinaryTritOperator Or` - The logical OR operation in three-valued logic.
-- `static readonly BinaryTritOperator Xor` - The logical XOR operation in three-valued logic.
-- `static readonly BinaryTritOperator Plus` - The addition operation in three-valued logic.
-- `static readonly BinaryTritOperator Minus` - The subtraction operation in three-valued logic.
+- `static readonly BinaryTritOperator And` - The logical AND operation.
+- `static readonly BinaryTritOperator Or` - The logical OR operation.
+- `static readonly BinaryTritOperator Xor` - The logical XOR operation.
+- `static readonly BinaryTritOperator Plus` - The addition operation.
+- `static readonly BinaryTritOperator Minus` - The subtraction operation.
 - `static readonly BinaryTritOperator Implicates` - The logical implication operation.
 - `static readonly BinaryTritOperator Is` - The equality check operation.
 - `static readonly BinaryTritOperator GreaterThan` - The greater than comparison operation.
 - `static readonly BinaryTritOperator LesserThan` - The less than comparison operation.
+- `static readonly BinaryTritOperator Positive` - A constant that returns Positive (1).
+- `static readonly BinaryTritOperator Zero` - A constant that returns Zero (0).
+- `static readonly BinaryTritOperator Negative` - A constant that returns Negative (-1).
 
+**Constructors:**
+- `BinaryTritOperator(Trit[,] lookup)` - Creates a new binary trit operator with the specified 3x3 lookup table.
+- `BinaryTritOperator(Trit[][] lookup)` - Creates a new binary trit operator with the specified jagged array lookup table.
+- `BinaryTritOperator(bool?[,] lookup)` - Creates a new binary trit operator with the specified nullable boolean lookup table.
+- Various other constructors with different parameter types.
+
+**Methods:**
+- `Trit Apply(Trit a, Trit b)` - Applies the binary operation to the specified trits.
+
+### Additional Types
+
+#### `ITritArray` Interface
+
+```csharp
+namespace Ternary3
+```
+
+Defines the core functionality for a trit array.
+
+**Properties:**
+- `int Length { get; }` - Gets the length of the trit array.
+
+**Indexer:**
+- `Trit this[int index] { get; set; }` - Gets or sets the trit at the specified index.
+
+#### `ITernaryInteger<T>` Interface
+
+```csharp
+namespace Ternary3
+```
+
+Defines the common functionality for ternary integer types.
+
+**Type Parameters:**
+- `T` - The specific ternary integer type.
+
+**Properties:**
+- `T MaxValue { get; }` - Gets the maximum value for the ternary integer type.
+- `T MinValue { get; }` - Gets the minimum value for the ternary integer type.
+
+**Methods:**
+- Various arithmetic and comparison operations specific to ternary integers.
+
+### Formatting Namespace
+
+#### `TernaryFormatter` Class
+
+```csharp
+namespace Ternary3.Formatting
+```
+
+A custom formatter for ternary types, supporting both ternary and standard numeric formatting.
+
+**Methods:**
+- `string Format(string? format, object? arg, IFormatProvider? provider)` - Formats the specified object according to the specified format.
+- `string Format(ITernaryFormat format, ITritArray trits)` - Formats a trit array using a custom ternary format.
+
+#### `TernaryFormat` Class
+
+```csharp
+namespace Ternary3.Formatting
+```
+
+Represents a customizable ternary format, allowing you to specify digit symbols, grouping, separators, and padding for formatting trit arrays.
+
+**Properties:**
+- `string NegativeDigit` - Gets or sets the symbol used to represent negative trits (-1).
+- `string ZeroDigit` - Gets or sets the symbol used to represent zero trits (0).
+- `string PositiveDigit` - Gets or sets the symbol used to represent positive trits (1).
+- `IReadOnlyList<TritGroupDefinition> Groups` - Gets the group definitions used for hierarchical formatting.
+- `TernaryPadding Padding` - Gets or sets the padding options for the formatted output.
+- `bool PadToNextGroup` - Gets or sets a value indicating whether to pad the formatted output to the next group boundary.
+
+**Methods:**
+- `TernaryFormat WithDigits(string negativeDigit, string zeroDigit, string positiveDigit)` - Creates a new TernaryFormat with the specified digit symbols.
+- `TernaryFormat WithGroup(int size, string separator)` - Creates a new TernaryFormat with an additional group definition.
+- `TernaryFormat WithGroups(params TritGroupDefinition[] groups)` - Creates a new TernaryFormat with the specified group definitions.
+- `TernaryFormat WithPadding(TernaryPadding padding)` - Creates a new TernaryFormat with the specified padding options.
+- `TernaryFormat WithPadToNextGroup(bool padToNextGroup)` - Creates a new TernaryFormat with the specified pad-to-next-group option.
+
+#### `TernaryFormatProvider` Class
+
+```csharp
+namespace Ternary3.Formatting
+```
+
+Provides a format provider for ternary formatting, returning a TernaryFormatter for ternary types.
+
+**Methods:**
+- `object? GetFormat(Type? formatType)` - Returns an object that provides formatting services for the specified type.
+
+#### `ITernaryFormat` Interface
+
+```csharp
+namespace Ternary3.Formatting
+```
+
+Provides formatting options for representing arrays of trits as strings, including digit symbols, grouping, separators, and padding.
+
+**Properties:**
+- `string NegativeDigit` - Gets the symbol used to represent negative trits (-1).
+- `string ZeroDigit` - Gets the symbol used to represent zero trits (0).
+- `string PositiveDigit` - Gets the symbol used to represent positive trits (1).
+- `IReadOnlyList<TritGroupDefinition> Groups` - Gets the group definitions used for hierarchical formatting.
+- `TernaryPadding Padding` - Gets the padding options for the formatted output.
+- `bool PadToNextGroup` - Gets a value indicating whether to pad the formatted output to the next group boundary.
+
+#### `TritGroupDefinition` Class
+
+```csharp
+namespace Ternary3.Formatting
+```
+
+Defines a group for hierarchical trit formatting, specifying the separator and group size.
+
+**Properties:**
+- `int Size` - Gets the number of trits in the group.
+- `string Separator` - Gets the separator string to insert after each group.
+
+**Constructors:**
+- `TritGroupDefinition(int size, string separator)` - Creates a new TritGroupDefinition with the specified size and separator.
+
+#### `ITernaryFormatter` Interface
+
+```csharp
+namespace Ternary3.Formatting
+```
+
+A custom formatter that knows how to format trits.
+
+**Methods:**
+- `string Format(ITernaryFormat format, ITritArray trits)` - Formats a trit array using a custom ternary format.
+
+#### `InvariantTernaryFormat` Class
+
+```csharp
+namespace Ternary3.Formatting
+```
+
+A built-in, culture-invariant ternary format with standard digit symbols and grouping.
+
+**Static Properties:**
+- `static readonly InvariantTernaryFormat Instance` - Gets the singleton instance of the InvariantTernaryFormat.
+
+**Properties:**
+- Same as the ITernaryFormat interface, with pre-defined invariant values.
+
+#### `MinimalTernaryFormat` Class
+
+```csharp
+namespace Ternary3.Formatting
+```
+
+A built-in minimal ternary format for compact representations.
+
+**Static Properties:**
+- `static readonly MinimalTernaryFormat Instance` - Gets the singleton instance of the MinimalTernaryFormat.
+
+**Properties:**
+- Same as the ITernaryFormat interface, with pre-defined minimal values for compact representation.
