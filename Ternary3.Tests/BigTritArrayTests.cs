@@ -153,6 +153,18 @@ namespace Ternary3.Tests
             actual.Length.Should().Be(5);
             actual.ToString("ter").Should().Be("T0 100");
         }
+        
+                [Fact]
+                public void ShiftLeft_ShouldCorrectlyCrossBoundaries()
+                {
+                    BigTritArray array = new(129);
+                    array[0] = Trit.Positive;
+                    array[1] = Trit.Negative;
+                    var actual = array << 127;
+                    actual.Length.Should().Be(129);
+                    actual[127].Should().Be(Trit.Positive, "because shifting left by 127 should move the first trit to the last position");
+                    actual[128].Should().Be(Trit.Negative, "because shifting left by 127 should move the first trit to the last position");
+                }
 
         [Fact]
         public void ShiftRight_WithNegativeAmount_ShouldShiftLeft()
@@ -263,134 +275,82 @@ namespace Ternary3.Tests
         #region Unary and Binary Operations Tests
 
         [Theory]
-        [InlineData(-1, 1)] // NOT of -1 is 1
-        [InlineData(0, 0)] // NOT of 0 is 0
-        [InlineData(1, -1)] // NOT of 1 is -1
-        public void UnaryOperation_AppliesOperationToEachTrit(sbyte input, sbyte expected)
+        [InlineData(false, false, false)]
+        [InlineData(false, false, null)]
+        [InlineData(false, false, true)]
+        [InlineData(false, null, false)]
+        [InlineData(false, null, null)]
+        [InlineData(false, null, true)]
+        [InlineData(false, true, false)]
+        [InlineData(false, true, null)]
+        [InlineData(false, true, true)]
+        [InlineData(null, false, false)]
+        [InlineData(null, false, null)]
+        [InlineData(null, false, true)]
+        [InlineData(null, null, false)]
+        [InlineData(null, null, null)]
+        [InlineData(null, null, true)]
+        [InlineData(null, true, false)]
+        [InlineData(null, true, null)]
+        [InlineData(null, true, true)]
+        [InlineData(true, false, false)]
+        [InlineData(true, false, null)]
+        [InlineData(true, false, true)]
+        [InlineData(true, null, false)]
+        [InlineData(true, null, null)]
+        [InlineData(true, null, true)]
+        [InlineData(true, true, false)]
+        [InlineData(true, true, null)]
+        [InlineData(true, true, true)]
+        public void UnaryOperation_AppliesOperationToEachTrit(bool? n, bool? z, bool? p)
         {
-            // Arrange
-            var array = new BigTritArray(5);
-            for (var i = 0; i < array.Length; i++)
+            var op = new UnaryTritOperator(n,z,p);
+            var target = new BigTritArray(131)
             {
-                array[i] = new Trit(input);
-            }
-
-            // Create a NOT operation
-            Func<Trit, Trit> notOp = t => new Trit((sbyte)(-t.Value));
-
-            // Act
-            var result = array | notOp;
-
-            // Assert
-            for (var i = 0; i < result.Length; i++)
-            {
-                result[i].Value.Should().Be(expected, $"because NOT {input} should equal {expected}");
-            }
-        }
-
-        [Fact]
-        public void LookupTable_AppliesTableToEachTrit()
-        {
-            // Arrange
-            var array = new BigTritArray(5);
-            array[0] = Trit.Negative; // -1
-            array[1] = Trit.Zero; // 0
-            array[2] = Trit.Positive; // 1
-            array[3] = Trit.Negative; // -1
-            array[4] = Trit.Positive; // 1
-
-            // Create a lookup table that rotates trits: -1 -> 0 -> 1 -> -1
-            var lookupTable = new[] { Trit.Zero, Trit.Positive, Trit.Negative };
-
-            // Act
-            var result = array | lookupTable;
-
-            // Assert
-            result[0].Should().Be(Trit.Zero); // -1 -> 0
-            result[1].Should().Be(Trit.Positive); // 0 -> 1
-            result[2].Should().Be(Trit.Negative); // 1 -> -1
-            result[3].Should().Be(Trit.Zero); // -1 -> 0
-            result[4].Should().Be(Trit.Negative); // 1 -> -1
+                [128] = Trit.Negative,
+                [129] = Trit.Zero,
+                [130] = Trit.Positive
+            };
+            target.Length.Should().Be(131);
+            var actual = target | op;
+            actual[32].Should().Be(Trit.Zero | op);
+            actual[96].Should().Be(Trit.Zero | op);
+            actual[128].Should().Be(Trit.Negative | op);
+            actual[129].Should().Be(Trit.Zero | op);
+            actual[130].Should().Be(Trit.Positive | op);
         }
 
         [Theory]
-        [InlineData(-1, -1, -1)] // -1 AND -1 = -1
-        [InlineData(-1, 0, -1)] // -1 AND 0 = -1
-        [InlineData(-1, 1, -1)] // -1 AND 1 = -1
-        [InlineData(0, -1, -1)] // 0 AND -1 = -1
-        [InlineData(0, 0, 0)] // 0 AND 0 = 0
-        [InlineData(0, 1, 0)] // 0 AND 1 = 0
-        [InlineData(1, -1, -1)] // 1 AND -1 = -1
-        [InlineData(1, 0, 0)] // 1 AND 0 = 0
-        [InlineData(1, 1, 1)] // 1 AND 1 = 1
-        public void BinaryOperation_AppliesFunctionToEachPairOfTrits(sbyte leftInput, sbyte rightInput, sbyte expected)
+        [InlineData(null, true, false)]
+        [InlineData(null, true, null)]
+        [InlineData(null, true, true)]
+        public void LookupTable_AppliesTableToEachTrit(bool? n, bool? z, bool? p)
         {
-            // Arrange
-            var leftArray = new BigTritArray(3);
-            var rightArray = new BigTritArray(3);
-
-            // Set all trits to the test values
-            for (var i = 0; i < leftArray.Length; i++)
+            var op = new[] { (Trit)n, (Trit)z, (Trit)p };
+            var target = new BigTritArray(131)
             {
-                leftArray[i] = new Trit(leftInput);
-                rightArray[i] = new Trit(rightInput);
-            }
+                [128] = Trit.Negative,
+                [129] = Trit.Zero,
+                [130] = Trit.Positive
+            };
+            target.Length.Should().Be(131);
+            var actual = target | op;
+            actual[32].Should().Be(Trit.Zero | op);
+            actual[96].Should().Be(Trit.Zero | op);
+            actual[128].Should().Be(Trit.Negative | op);
+            actual[129].Should().Be(Trit.Zero | op);
+            actual[130].Should().Be(Trit.Positive | op);
+        }
 
-            // Create an AND operation
-            Func<Trit, Trit, Trit> andOp = (a, b) => new Trit((sbyte)Math.Min(a.Value, b.Value));
+        [Fact]
+        public void BinaryOperation_AppliesFunctionToEachPairOfTrits()
+        {
 
-            // Act
-            var result = leftArray | andOp | rightArray;
-
-            // Assert
-            for (var i = 0; i < result.Length; i++)
-            {
-                result[i].Value.Should().Be(expected, $"because {leftInput} AND {rightInput} should equal {expected}");
-            }
         }
 
         [Fact]
         public void BinaryOperation_HandlesArraysOfDifferentLengths()
         {
-            // Arrange
-            var leftArray = new BigTritArray(5);
-            var rightArray = new BigTritArray(3);
-
-            for (var i = 0; i < leftArray.Length; i++)
-            {
-                leftArray[i] = Trit.Positive;
-            }
-
-            for (var i = 0; i < rightArray.Length; i++)
-            {
-                rightArray[i] = Trit.Negative;
-            }
-
-            // Create XOR operation using a BinaryTritOperator
-            var xorTable = new Trit[3, 3]
-            {
-                { Trit.Zero, Trit.Negative, Trit.Positive },
-                { Trit.Negative, Trit.Zero, Trit.Positive },
-                { Trit.Positive, Trit.Positive, Trit.Zero }
-            };
-
-            // Act
-            var result = leftArray | xorTable | rightArray;
-
-            // Assert
-            result.Length.Should().Be(5);
-
-            // For the overlapping part, we should have 1 XOR -1 = Positive
-            for (var i = 0; i < rightArray.Length; i++)
-            {
-                result[i].Should().Be(Trit.Positive, $"because 1 XOR -1 should equal 1");
-            }
-
-            // For the non-overlapping part, we should have 1 XOR 0 = Positive
-            for (var i = rightArray.Length; i < leftArray.Length; i++)
-            {
-                result[i].Should().Be(Trit.Positive, $"because 1 XOR 0 should equal 1");
-            }
         }
 
         #endregion

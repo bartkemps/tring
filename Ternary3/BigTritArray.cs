@@ -11,7 +11,7 @@ public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
     internal List<ulong> Positive;
     internal List<ulong> Negative;
     public int Length { get; }
-    public ulong Mask { get; }
+    private readonly ulong mask;
 
 
     internal BigTritArray(List<ulong> negative, List<ulong> positive, int length)
@@ -19,14 +19,14 @@ public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
         Negative = negative;
         Positive = positive;
         Length = length;
-        Mask = (1UL << (length % 64)) - 1;
+        mask = (1UL << (length % 64)) - 1;
     }
 
     public BigTritArray(int length)
     {
         if (length < 0) throw new ArgumentOutOfRangeException(nameof(length));
         Length = length;
-        Mask = 1UL << (length % 64 - 1);
+        mask = 1UL << (length % 64 - 1);
         var longsNeeded = (length + 63) / 64;
         Positive = [..new ulong[longsNeeded]];
         Negative = [..new ulong[longsNeeded]];
@@ -41,7 +41,7 @@ public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
             offset += arr.Length;
         }
         Length = offset;
-        Mask = 1UL << (offset % 64 - 1);
+        mask = 1UL << (offset % 64 - 1);
     }
 
     private void InitializeTritArray(ITritArray arr, int offset)
@@ -167,8 +167,8 @@ public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
     
     private BigTritArray ApplyLength()
     {
-        Positive[^1] &= Mask;
-        Negative[^1] &= Mask;
+        Positive[^1] &= mask;
+        Negative[^1] &= mask;
         return this;
     }
     
@@ -204,10 +204,7 @@ public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
     /// <param name="array">The source array.</param>
     /// <param name="operation">The unary operation to apply to each trit.</param>
     /// <returns>A new BigTritArray with the operation applied to each trit.</returns>
-    public static BigTritArray operator |(BigTritArray array, Func<Trit, Trit> operation)
-    {
-        throw new NotImplementedException();
-    }
+    public static BigTritArray operator |(BigTritArray array, Func<Trit, Trit> operation) => array | new UnaryTritOperator(operation);
 
     /// <summary>
     /// Applies a lookup table operation to each trit in the array.
@@ -215,10 +212,7 @@ public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
     /// <param name="array">The source array.</param>
     /// <param name="table">The lookup table containing the transformation values.</param>
     /// <returns>A new BigTritArray with the lookup operation applied to each trit.</returns>
-    public static BigTritArray operator |(BigTritArray array, Trit[] table)
-    {
-        throw new NotImplementedException();
-    }
+    public static BigTritArray operator |(BigTritArray array, Trit[] table)=> array | new UnaryTritOperator(table);
 
     /// <summary>
     /// Creates a binary operation context for this array.
@@ -226,10 +220,7 @@ public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
     /// <param name="array">The source array.</param>
     /// <param name="operation">The binary operation to be applied.</param>
     /// <returns>A binary operation context that can be used with another array.</returns>
-    public static LookupBigTritArrayOperator operator |(BigTritArray array, Func<Trit, Trit, Trit> operation)
-    {
-        return new(array, new(operation));
-    }
+    public static LookupBigTritArrayOperator operator |(BigTritArray array, Func<Trit, Trit, Trit> operation) => new(array, new(operation));
 
     /// <summary>
     /// Creates a binary operation context for this array.
@@ -237,10 +228,7 @@ public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
     /// <param name="array">The source array.</param>
     /// <param name="table">The binary operation lookup table.</param>
     /// <returns>A binary operation context that can be used with another array.</returns>
-    public static LookupBigTritArrayOperator operator |(BigTritArray array, BinaryTritOperator table)
-    {
-        return new(array, table);
-    }
+    public static LookupBigTritArrayOperator operator |(BigTritArray array, BinaryTritOperator table) => new(array, table);
 
     /// <summary>
     /// Creates a binary operation context for this array.
@@ -248,10 +236,7 @@ public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
     /// <param name="array">The source array.</param>
     /// <param name="table">The binary operation lookup table.</param>
     /// <returns>A binary operation context that can be used with another array.</returns>
-    public static LookupBigTritArrayOperator operator |(BigTritArray array, Trit[,] table)
-    {
-        return new(array, new(table));
-    }
+    public static LookupBigTritArrayOperator operator |(BigTritArray array, Trit[,] table) => new(array, new(table));
 
     /// <summary>
     /// Performs a left bitwise shift on the trit array.

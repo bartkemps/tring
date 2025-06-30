@@ -330,8 +330,8 @@ partial class Calculator
         }
 
         var bits = shift % 64;
-        negativeResult = new(new ulong[blockShift].Concat(negative.Select(n => n << bits)).Take(count - blockShift));
-        positiveResult = new(new ulong[blockShift].Concat(positive.Select(p => p << bits)).Take(count - blockShift));
+        negativeResult = new(new ulong[blockShift].Concat(negative.Select(n => n << bits)).Take(count));
+        positiveResult = new(new ulong[blockShift].Concat(positive.Select(p => p << bits)).Take(count));
         if (bits <= 0) return;
         for (var i = 0; i < count - blockShift - 1; i++)
         {
