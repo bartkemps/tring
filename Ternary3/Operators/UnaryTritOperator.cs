@@ -144,15 +144,15 @@ public partial struct UnaryTritOperator
     }
     
     /// <summary>
-    /// Applies the unary operation to a BigTritArray instance.
+    /// Applies the unary operation to a TritArray instance.
     /// </summary>
-    /// <param name="trits">The BigTritArray to operate on.</param>
+    /// <param name="trits">The TritArray to operate on.</param>
     /// <param name="unaryTritOperator">The operator to apply.</param>
-    /// <returns>A new BigTritArray with the results of applying the operation to each trit.</returns>
-    public static BigTritArray operator |(BigTritArray trits, UnaryTritOperator unaryTritOperator)
+    /// <returns>A new TritArray with the results of applying the operation to each trit.</returns>
+    public static TritArray operator |(TritArray trits, UnaryTritOperator unaryTritOperator)
     {
         var op = UnaryOperation.UInt64PairOperations[unaryTritOperator.operationIndex];
-        var result = new BigTritArray(trits.Length);
+        var result = new TritArray(trits.Length);
         for (var i=0; i < trits.Negative.Count; i++)
         {
             var pair = op(trits.Negative[i], trits.Positive[i]);

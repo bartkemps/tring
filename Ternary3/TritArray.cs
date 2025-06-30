@@ -6,15 +6,19 @@ using System.Numerics;
 using Operators;
 using System.Diagnostics.CodeAnalysis;
 
-public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
+public class TritArray : ITritArray, IEquatable<TritArray>, IFormattable
 {
     internal List<ulong> Positive;
     internal List<ulong> Negative;
     public int Length { get; set; }
+
+    public static readonly TritArray Zero = new TritArray(0);
+    public static readonly TritArray One = new TritArray([0],[1],1);
+
     private ulong mask;
 
     /// <summary>
-    /// Resizes the BigTritArray to the specified length.
+    /// Resizes the TritArray to the specified length.
     /// </summary>
     /// <param name="length">The new length of the array. Must be non-negative.</param>
     /// <remarks>
@@ -49,7 +53,7 @@ public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
         }
     }
 
-    internal BigTritArray(List<ulong> negative, List<ulong> positive, int length)
+    internal TritArray(List<ulong> negative, List<ulong> positive, int length)
     {
         Negative = negative;
         Positive = positive;
@@ -58,7 +62,7 @@ public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
         if (mask == 0) mask = ulong.MaxValue;
     }
 
-    public BigTritArray(int length)
+    public TritArray(int length)
     {
         if (length < 0) throw new ArgumentOutOfRangeException(nameof(length));
         Length = length;
@@ -69,7 +73,7 @@ public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
         Negative = [.. new ulong[longsNeeded]];
     }
 
-    public BigTritArray(params ITritArray[] arrays) : this((arrays ?? throw new ArgumentNullException(nameof(arrays))).Sum(a => a.Length))
+    public TritArray(params ITritArray[] arrays) : this((arrays ?? throw new ArgumentNullException(nameof(arrays))).Sum(a => a.Length))
     {
         var offset = 0;
         foreach (var arr in arrays)
@@ -137,7 +141,7 @@ public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
             this[offset + i] = arr[i];
         }
     }
-
+    
     public Trit this[int index]
     {
         get => index >= 0 && index < Length
@@ -176,22 +180,43 @@ public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
     }
 
     /// <summary>
-    /// Returns a string representation of the BigTritArray.
+    /// Gets or sets the trit at the specified index.
+    /// </summary>
+    /// <param name="range">
+   /// The range of indices to get or set trits from the array. The range must be valid within the bounds of the array.
+    /// </param>
+    /// <value>
+    /// The trit value at the specified index.
+    /// </value>
+    /// <exception cref="ArgumentOutOfRangeException">
+    /// Thrown if the index is outside the bounds of the array.
+    /// </exception>
+    public TritArray this[Range range]
+    {
+        get
+        {
+            Splicer.Splice(Negative, Positive, Length, range, out var negative, out var positive, out var length);
+            return new TritArray(negative, positive, length).ApplyLength();
+        }
+    }
+
+    /// <summary>
+    /// Returns a string representation of the TritArray.
     /// </summary>
     public override string ToString() => Formatter.Format(this, null, null);
 
     /// <summary>
-    /// Returns a string representation of the BigTritArray.
+    /// Returns a string representation of the TritArray.
     /// </summary>
     public string ToString(string? format) => Formatter.Format(this, format, null);
 
     /// <summary>
-    /// Returns a string representation of the BigTritArray.
+    /// Returns a string representation of the TritArray.
     /// </summary>
     public string ToString(IFormatProvider? provider) => Formatter.Format(this, null, provider);
 
     /// <summary>
-    /// Returns a string representation of the BigTritArray.
+    /// Returns a string representation of the TritArray.
     /// </summary>
     public string ToString(string? format, IFormatProvider? provider) => Formatter.Format(this, format, provider);
 
@@ -202,14 +227,17 @@ public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
 
     // todo: equal values (leading zeros) should be equal, even if they have different lengths
 
-    private BigTritArray ApplyLength()
+    internal TritArray ApplyLength()
     {
-        Positive[^1] &= mask;
-        Negative[^1] &= mask;
+        if (Length > 0)
+        {
+            Positive[^1] &= mask;
+            Negative[^1] &= mask;
+        }
         return this;
     }
 
-    public bool Equals(BigTritArray? other)
+    public bool Equals(TritArray? other)
     {
         if (ReferenceEquals(this, other)) return true;
         if (other is null) return false;
@@ -220,7 +248,7 @@ public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
         return n1.SequenceEqual(n2) && p1.SequenceEqual(p2);
     }
 
-    public override bool Equals(object? obj) => obj is BigTritArray other && Equals(other);
+    public override bool Equals(object? obj) => obj is TritArray other && Equals(other);
 
     [SuppressMessage("ReSharper", "NonReadonlyMemberInGetHashCode", Justification = "this is a mutable type, but we want to allow hash code calculation for equality checks")]
     public override int GetHashCode()
@@ -240,26 +268,26 @@ public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
     /// </summary>
     /// <param name="array">The source array.</param>
     /// <param name="operation">The unary operation to apply to each trit.</param>
-    /// <returns>A new BigTritArray with the operation applied to each trit.</returns>
-    public static BigTritArray operator |(BigTritArray array, Func<Trit, Trit> operation) => array | new UnaryTritOperator(operation);
+    /// <returns>A new TritArray with the operation applied to each trit.</returns>
+    public static TritArray operator |(TritArray array, Func<Trit, Trit> operation) => array | new UnaryTritOperator(operation);
 
     /// <summary>
     /// Applies a lookup table operation to each trit in the array.
     /// </summary>
     /// <param name="array">The source array.</param>
     /// <param name="table">The lookup table containing the transformation values.</param>
-    /// <returns>A new BigTritArray with the lookup operation applied to each trit.</returns>
-    public static BigTritArray operator |(BigTritArray array, Trit[] table)
+    /// <returns>A new TritArray with the lookup operation applied to each trit.</returns>
+    public static TritArray operator |(TritArray array, Trit[] table)
     {
         if (table.Length != 3)
             throw new ArgumentException("Table must contain exactly three elements for Negative, Zero, and Positive inputs", nameof(table));
             
-        var result = new BigTritArray(array.Length);
+        var result = new TritArray(array.Length);
         for (var i = 0; i < array.Length; i++)
         {
             result[i] = array[i] | table;
         }
-        return result;
+        return result.ApplyLength();
     }
 
     /// <summary>
@@ -268,7 +296,7 @@ public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
     /// <param name="array">The source array.</param>
     /// <param name="operation">The binary operation to be applied.</param>
     /// <returns>A binary operation context that can be used with another array.</returns>
-    public static LookupBigTritArrayOperator operator |(BigTritArray array, Func<Trit, Trit, Trit> operation) => new(array, new(operation));
+    public static LookupTritArrayOperator operator |(TritArray array, Func<Trit, Trit, Trit> operation) => new(array, new(operation));
 
     /// <summary>
     /// Creates a binary operation context for this array.
@@ -276,7 +304,7 @@ public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
     /// <param name="array">The source array.</param>
     /// <param name="table">The binary operation lookup table.</param>
     /// <returns>A binary operation context that can be used with another array.</returns>
-    public static LookupBigTritArrayOperator operator |(BigTritArray array, BinaryTritOperator table) => new(array, table);
+    public static LookupTritArrayOperator operator |(TritArray array, BinaryTritOperator table) => new(array, table);
 
     /// <summary>
     /// Creates a binary operation context for this array.
@@ -284,18 +312,18 @@ public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
     /// <param name="array">The source array.</param>
     /// <param name="table">The binary operation lookup table.</param>
     /// <returns>A binary operation context that can be used with another array.</returns>
-    public static LookupBigTritArrayOperator operator |(BigTritArray array, Trit[,] table) => new(array, new(table));
+    public static LookupTritArrayOperator operator |(TritArray array, Trit[,] table) => new(array, new(table));
 
     /// <summary>
     /// Performs a left bitwise shift on the trit array.
     /// </summary>
     /// <param name="array">The source array.</param>
     /// <param name="shift">The number of positions to shift.</param>
-    /// <returns>A new BigTritArray with the bits shifted to the left.</returns>
-    public static BigTritArray operator <<(BigTritArray array, int shift)
+    /// <returns>A new TritArray with the bits shifted to the left.</returns>
+    public static TritArray operator <<(TritArray array, int shift)
     {
         Calculator.ShiftLeft(array.Negative, array.Positive, shift, out var negativeResult, out var positiveResult);
-        return new BigTritArray(negativeResult, positiveResult, array.Length).ApplyLength();
+        return new TritArray(negativeResult, positiveResult, array.Length).ApplyLength();
     }
 
     /// <summary>
@@ -303,55 +331,55 @@ public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
     /// </summary>
     /// <param name="array">The source array.</param>
     /// <param name="shift">The number of positions to shift.</param>
-    /// <returns>A new BigTritArray with the bits shifted to the right.</returns>
-    public static BigTritArray operator >>(BigTritArray array, int shift)
+    /// <returns>A new TritArray with the bits shifted to the right.</returns>
+    public static TritArray operator >>(TritArray array, int shift)
     {
         Calculator.ShiftRight(array.Negative, array.Positive, shift, out var negativeResult, out var positiveResult);
-        return new BigTritArray(negativeResult, positiveResult, array.Length).ApplyLength();
+        return new TritArray(negativeResult, positiveResult, array.Length).ApplyLength();
     }
 
     /// <summary>
-    /// Adds two BigTritArray values together.
+    /// Adds two TritArray values together.
     /// </summary>
     /// <param name="value1">The first value to add.</param>
     /// <param name="value2">The second value to add.</param>
-    /// <returns>A new BigTritArray representing the sum of the two values.</returns>
-    public static BigTritArray operator +(BigTritArray value1, BigTritArray value2)
+    /// <returns>A new TritArray representing the sum of the two values.</returns>
+    public static TritArray operator +(TritArray value1, TritArray value2)
     {
         Calculator.AddBalancedTernary(value1.Negative, value1.Positive, value2.Negative, value2.Positive, out var negativeResult, out var positiveResult);
         var length = Calculator.TrimAndDetermineLength(negativeResult, positiveResult);
-        return new BigTritArray(negativeResult, positiveResult, length).ApplyLength();
+        return new TritArray(negativeResult, positiveResult, length).ApplyLength();
     }
 
     /// <summary>
-    /// Subtracts one BigTritArray value from another.
+    /// Subtracts one TritArray value from another.
     /// </summary>
     /// <param name="value1">The value to subtract from.</param>
     /// <param name="value2">The value to subtract.</param>
-    /// <returns>A new BigTritArray representing the difference between the two values.</returns>
-    public static BigTritArray operator -(BigTritArray value1, BigTritArray value2)
+    /// <returns>A new TritArray representing the difference between the two values.</returns>
+    public static TritArray operator -(TritArray value1, TritArray value2)
     {
         value1.ApplyLength();
         value2.ApplyLength();
         Calculator.AddBalancedTernary(value1.Negative, value1.Positive, value2.Positive, value2.Negative, out var negativeResult, out var positiveResult);
         var length = Calculator.TrimAndDetermineLength(negativeResult, positiveResult);
-        return new BigTritArray(negativeResult, positiveResult, length).ApplyLength();
+        return new TritArray(negativeResult, positiveResult, length).ApplyLength();
     }
 
     /// <summary>
-    /// Multiplies one BigTritArray value from another.
+    /// Multiplies one TritArray value from another.
     /// </summary>
     /// <param name="value1">The value to subtract from.</param>
     /// <param name="value2">The value to subtract.</param>
-    /// <returns>A new BigTritArray representing the product between the two values.</returns>
-    public static BigTritArray operator *(BigTritArray value1, BigTritArray value2)
+    /// <returns>A new TritArray representing the product between the two values.</returns>
+    public static TritArray operator *(TritArray value1, TritArray value2)
     {
         value1.ApplyLength();
         value2.ApplyLength();
         Calculator.MultiplyBalancedTernary(value1.Negative, value1.Positive, value2.Positive, value2.Negative,
             out var negativeResult, out var positiveResult);
         var length = Calculator.TrimAndDetermineLength(negativeResult, positiveResult);
-        return new BigTritArray(negativeResult, positiveResult, length).ApplyLength();
+        return new TritArray(negativeResult, positiveResult, length).ApplyLength();
     }
 
     #endregion
@@ -361,46 +389,46 @@ public class BigTritArray : ITritArray, IEquatable<BigTritArray>, IFormattable
     #region Conversion Operators
 
     /// <summary>
-    /// Implicit conversion from BigInteger to BigTritArray.
+    /// Implicit conversion from BigInteger to TritArray.
     /// </summary>
-    public static implicit operator BigTritArray(BigInteger value)
+    public static implicit operator TritArray(BigInteger value)
     {
         TritConverter.ToTrits(value, out var negative, out var positive, out var length);
         return new(negative, positive, length);
     }
 
     /// <summary>
-    /// Implicit conversion from long to BigTritArray.
+    /// Implicit conversion from long to TritArray.
     /// </summary>
-    public static implicit operator BigTritArray(long value)
+    public static implicit operator TritArray(long value)
     {
         TritConverter.ToTrits(value, out var negative, out var positive, out var length);
         return new(negative, positive, length);
     }
 
     /// <summary>
-    /// Implicit conversion from int to BigTritArray.
+    /// Implicit conversion from int to TritArray.
     /// </summary>
-    public static implicit operator BigTritArray(int value)
+    public static implicit operator TritArray(int value)
     {
         TritConverter.ToTrits(value, out var negative, out var positive, out var length);
         return new(negative, positive, length);
     }
 
     /// <summary>
-    /// Implicit conversion from BigTritArray to BigInteger.
+    /// Implicit conversion from TritArray to BigInteger.
     /// </summary>
-    public static implicit operator BigInteger(BigTritArray array) => TritConverter.ToBigInteger(array.Negative, array.Positive);
+    public static implicit operator BigInteger(TritArray array) => TritConverter.ToBigInteger(array.Negative, array.Positive);
 
     /// <summary>
-    /// Explicit conversion from BigTritArray to long.
+    /// Explicit conversion from TritArray to long.
     /// </summary>
-    public static explicit operator long(BigTritArray array) => TritConverter.ToInt64(array.Negative, array.Positive, array.Length);
+    public static explicit operator long(TritArray array) => TritConverter.ToInt64(array.Negative, array.Positive, array.Length);
 
     /// <summary>
-    /// Explicit conversion from BigTritArray to int.
+    /// Explicit conversion from TritArray to int.
     /// </summary>
-    public static explicit operator int(BigTritArray array) => TritConverter.ToInt32(array.Negative, array.Positive, array.Length);
+    public static explicit operator int(TritArray array) => TritConverter.ToInt32(array.Negative, array.Positive, array.Length);
 
     #endregion
 }

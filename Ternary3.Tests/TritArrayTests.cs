@@ -1,15 +1,16 @@
 ﻿using FluentAssertions;
 using Ternary3.Operators;
 using System.Numerics;
+using Ternary3.Operators.Operations;
 
 namespace Ternary3.Tests
 {
-    public partial class BigTritArrayTests
+    public partial class TritArrayTests
     {
         [Fact]
         public void Ctor_WithLength_SetsLengthAndZeroes()
         {
-            var arr = new BigTritArray(130);
+            var arr = new TritArray(130);
             arr.Length.Should().Be(130);
             for (var i = 0; i < arr.Length; i++)
                 arr[i].Should().Be(Trit.Zero);
@@ -18,7 +19,7 @@ namespace Ternary3.Tests
         [Fact]
         public void Ctor_WithNegativeLength_Throws()
         {
-            Action act = () => new BigTritArray(-1);
+            Action act = () => new TritArray(-1);
             act.Should().Throw<ArgumentOutOfRangeException>();
         }
 
@@ -27,7 +28,7 @@ namespace Ternary3.Tests
         {
             TritArray3 a = terT01;
             TritArray3 b = ter01T;
-            var arr = new BigTritArray(a, b);
+            var arr = new TritArray(a, b);
             arr.Length.Should().Be(6);
             arr[0].Should().Be(Trit.Positive);
             arr[1].Should().Be(Trit.Zero);
@@ -42,7 +43,7 @@ namespace Ternary3.Tests
         {
             TritArray3 a = ter001;
             TritArray27 b = terT00000000_000000000_000000001;
-            var arr = new BigTritArray(a, b);
+            var arr = new TritArray(a, b);
             arr.Length.Should().Be(30);
             arr[0].Should().Be(Trit.Positive);
             arr[3].Should().Be(Trit.Positive);
@@ -52,14 +53,14 @@ namespace Ternary3.Tests
         [Fact]
         public void Ctor_FromNullArray_Throws()
         {
-            Action act = () => new BigTritArray(null);
+            Action act = () => new TritArray(null);
             act.Should().Throw<ArgumentNullException>();
         }
 
         [Fact]
         public void Ctor_FromEmptyArray_Throws()
         {
-            var sut = new BigTritArray();
+            var sut = new TritArray();
             sut.Length.Should().Be(0);
         }
 
@@ -86,7 +87,7 @@ namespace Ternary3.Tests
         [InlineData(19)]
         public void Indexer_IndexFromEnd_GetsCorrectTrit(int fromEnd)
         {
-            var arr = new BigTritArray(20);
+            var arr = new TritArray(20);
             for (var i = 0; i < arr.Length; i++)
                 arr[i] = new((sbyte)((i % 3) - 1));
             var expected = arr[19 - fromEnd];
@@ -117,7 +118,7 @@ namespace Ternary3.Tests
         [InlineData(19, 0)]
         public void Indexer_IndexFromEnd_SetsCorrectTrit(int fromEnd, sbyte tritValue)
         {
-            var arr = new BigTritArray(20);
+            var arr = new TritArray(20);
             arr[^ (fromEnd + 1)] = new(tritValue);
             arr[^ (fromEnd + 1)].Value.Should().Be(tritValue);
         }
@@ -127,7 +128,7 @@ namespace Ternary3.Tests
         [Fact]
         public void ShiftRight_ShouldMoveTritsRightAndFillWithZeros()
         {
-            BigTritArray array = ter10T01;
+            TritArray array = ter10T01;
             array.Length.Should().Be(5);
             var actual = array >> 2;
             actual.Length.Should().Be(5);
@@ -137,7 +138,7 @@ namespace Ternary3.Tests
         [Fact]
         public void ShiftLeft_WithNegativeAmount_ShouldShiftRight()
         {
-            BigTritArray array = ter10T01;
+            TritArray array = ter10T01;
             array.Length.Should().Be(5);
             var actual = array << -2;
             actual.Length.Should().Be(5);
@@ -147,7 +148,7 @@ namespace Ternary3.Tests
         [Fact]
         public void ShiftLeft_ShouldMoveTritsRightAndFillWithZeros()
         {
-            BigTritArray array = ter10T01;
+            TritArray array = ter10T01;
             array.Length.Should().Be(5);
             var actual = array << 2;
             actual.Length.Should().Be(5);
@@ -157,7 +158,7 @@ namespace Ternary3.Tests
                 [Fact]
                 public void ShiftLeft_ShouldCorrectlyCrossBoundaries()
                 {
-                    BigTritArray array = new(129);
+                    TritArray array = new(129);
                     array[0] = Trit.Positive;
                     array[1] = Trit.Negative;
                     var actual = array << 127;
@@ -169,7 +170,7 @@ namespace Ternary3.Tests
         [Fact]
         public void ShiftRight_WithNegativeAmount_ShouldShiftLeft()
         {
-            BigTritArray array = ter10T01;
+            TritArray array = ter10T01;
             array.Length.Should().Be(5);
             var actual = array >> -2;
             actual.Length.Should().Be(5);
@@ -185,7 +186,7 @@ namespace Ternary3.Tests
         {
             TritArray9 a9 = 4;
             a9.ToString().Should().Be("4");
-            BigTritArray a = new([a9]);
+            TritArray a = new([a9]);
             a.ToString().Should().Be("4");
             a.ToString("ter").Should().Be("000 000 011");
         }
@@ -193,81 +194,54 @@ namespace Ternary3.Tests
         [Fact]
         public void Addition_ShouldWork()
         {
-            BigTritArray a = 150;
-            BigTritArray b = 200;
-            BigTritArray c = a + b;
+            TritArray a = 150;
+            TritArray b = 200;
+            var c = a + b;
             c.ToString().Should().Be("350");
         }
 
         [Fact]
         public void Addition_ShouldWork_ForBigNumbers()
         {
-            BigTritArray a = BigInteger.Parse("150000000000000000000000000000000000000000000000000");
+            TritArray a = BigInteger.Parse("150000000000000000000000000000000000000000000000000");
             a.ToString().Should().Be("150000000000000000000000000000000000000000000000000");
-            BigTritArray b = BigInteger.Parse("200000000000000000000000000000000000000000000000000");
+            TritArray b = BigInteger.Parse("200000000000000000000000000000000000000000000000000");
             b.ToString().Should().Be("200000000000000000000000000000000000000000000000000");
-            BigTritArray c = a + b;
+            var c = a + b;
             c.ToString().Should().Be("350000000000000000000000000000000000000000000000000");
         }
 
         [Fact]
         public void Substraction_ShouldWork()
         {
-            BigTritArray a = 350;
-            BigTritArray b = 200;
-            BigTritArray c = a - b;
+            TritArray a = 350;
+            TritArray b = 200;
+            var c = a - b;
             c.ToString().Should().Be("150");
         }
 
         [Fact]
         public void Substraction_ShouldWork_ForBigNumbers()
         {
-            BigTritArray a = BigInteger.Parse("350000000000000000000000000000000000000000000000000");
+            TritArray a = BigInteger.Parse("350000000000000000000000000000000000000000000000000");
             a.ToString().Should().Be("350000000000000000000000000000000000000000000000000");
-            BigTritArray b = BigInteger.Parse("200000000000000000000000000000000000000000000000000");
+            TritArray b = BigInteger.Parse("200000000000000000000000000000000000000000000000000");
             b.ToString().Should().Be("200000000000000000000000000000000000000000000000000");
-            BigTritArray c = a - b;
+            var c = a - b;
             c.ToString().Should().Be("150000000000000000000000000000000000000000000000000");
-        }
-
-        [Fact]
-        public void Addition_ShouldAddTwoArrays_WithCarry()
-        {
         }
 
         [Fact]
         public void Addition_ShouldHandleDifferentLengthArrays()
         {
-        }
-
-        [Fact]
-        public void Subtraction_ShouldSubtractArrays_SmallValues()
-        {
-        }
-
-        [Fact]
-        public void Subtraction_ShouldHandleNegativeResults()
-        {
-        }
-
-        [Fact]
-        public void Multiplication_ShouldMultiplyTwoArrays()
-        {
-        }
-
-        [Fact]
-        public void Multiplication_ShouldHandleZero()
-        {
-        }
-
-        [Fact]
-        public void Multiplication_ShouldHandleNegativeValues()
-        {
-        }
-
-        [Fact]
-        public void Multiplication_ShouldHandleLargeValues()
-        {
+            TritArray a = BigInteger.Parse("350000000000000000000000000000000000000000000000000");
+            a.ToString().Should().Be("350000000000000000000000000000000000000000000000000");
+            TritArray b = 5;
+            b.ToString().Should().Be("5");
+            var c = a + b;
+            c.ToString().Should().Be("350000000000000000000000000000000000000000000000005");
+            var d = a - b;
+            d.ToString().Should().Be("349999999999999999999999999999999999999999999999995");
         }
 
         #endregion
@@ -305,7 +279,7 @@ namespace Ternary3.Tests
         public void UnaryOperation_AppliesOperationToEachTrit(bool? n, bool? z, bool? p)
         {
             var op = new UnaryTritOperator(n,z,p);
-            var target = new BigTritArray(131)
+            var target = new TritArray(131)
             {
                 [128] = Trit.Negative,
                 [129] = Trit.Zero,
@@ -330,7 +304,7 @@ namespace Ternary3.Tests
         public void LookupTable_AppliesTableToEachTrit(bool? n, bool? z, bool? p)
         {
             var op = new[] { (Trit)n, (Trit)z, (Trit)p };
-            var target = new BigTritArray(131)
+            var target = new TritArray(131)
             {
                 [0] = Trit.Negative,
                 [1] = Trit.Zero,
@@ -352,12 +326,27 @@ namespace Ternary3.Tests
         [Fact]
         public void BinaryOperation_AppliesFunctionToEachPairOfTrits()
         {
-
+            TritArray a = terTTT000111;
+            TritArray b = terT01T01T01;
+            var actual = a | BinaryTritOperator.LesserThan | b;
+            actual[0].Should().Be(Trit.Positive | BinaryTritOperator.LesserThan | Trit.Positive);
+            actual[1].Should().Be(Trit.Positive | BinaryTritOperator.LesserThan | Trit.Zero);
+            actual[2].Should().Be(Trit.Positive | BinaryTritOperator.LesserThan | Trit.Negative);
+            actual[3].Should().Be(Trit.Zero | BinaryTritOperator.LesserThan | Trit.Positive);
+            actual[4].Should().Be(Trit.Zero | BinaryTritOperator.LesserThan | Trit.Zero);
+            actual[5].Should().Be(Trit.Zero | BinaryTritOperator.LesserThan | Trit.Negative);
+            actual[6].Should().Be(Trit.Negative | BinaryTritOperator.LesserThan | Trit.Positive);
+            actual[7].Should().Be(Trit.Negative | BinaryTritOperator.LesserThan | Trit.Zero);
+            actual[8].Should().Be(Trit.Negative | BinaryTritOperator.LesserThan | Trit.Negative);
         }
 
         [Fact]
-        public void BinaryOperation_HandlesArraysOfDifferentLengths()
+        public void BinaryOperation_GrowsToBiggestSize()
         {
+            TritArray a = ter111;
+            TritArray b = new(200);
+            (a | BinaryTritOperator.Or | b).Length.Should().Be(200, "because the result should be as long as the longest input array");
+            (b | BinaryTritOperator.Or |a).Length.Should().Be(200, "because the result should be as long as the longest input array");
         }
 
         #endregion

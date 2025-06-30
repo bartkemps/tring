@@ -3,14 +3,14 @@
 using Operators;
 
 /// <summary>
-/// Helper class to facilitate binary operations between two BigTritArray instances.
+/// Helper class to facilitate binary operations between two TritArray instances.
 /// </summary>
-public class LookupBigTritArrayOperator
+public class LookupTritArrayOperator
 {
-    private readonly BigTritArray trits;
+    private readonly TritArray trits;
     private readonly BinaryTritOperator table;
 
-    internal LookupBigTritArrayOperator(BigTritArray trits, BinaryTritOperator table)
+    internal LookupTritArrayOperator(TritArray trits, BinaryTritOperator table)
     {
         this.trits = trits;
         this.table = table;
@@ -21,11 +21,10 @@ public class LookupBigTritArrayOperator
     /// </summary>
     /// <param name="left">The binary operation context.</param>
     /// <param name="right">The right-hand operand.</param>
-    /// <returns>A new BigTritArray with the operation applied.</returns>
-    public static BigTritArray operator |(LookupBigTritArrayOperator left, BigTritArray right)
+    /// <returns>A new TritArray with the operation applied.</returns>
+    public static TritArray operator |(LookupTritArrayOperator left, TritArray right)
     {
-        if (right.Length != left.trits.Length) throw new NotImplementedException();
         left.table.Apply(left.trits.Negative, left.trits.Positive, right.Negative, right.Positive, out var negative, out var positive);
-        return new(negative, positive, right.Length);
+        return new TritArray(negative, positive, Math.Max(left.trits.Length, right.Length)).ApplyLength();
     }
 }

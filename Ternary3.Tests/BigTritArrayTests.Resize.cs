@@ -2,13 +2,13 @@
 {
     using FluentAssertions;
 
-    public partial class BigTritArrayTests
+    public partial class TritArrayTests
     {
         [Fact]
         public void Resize_ToSameLength_MakesNoChanges()
         {
             // Arrange
-            var array = new BigTritArray(10);
+            var array = new TritArray(10);
             for (var i = 0; i < array.Length; i++)
             {
                 array[i] = new Trit((sbyte)((i % 3) - 1)); // Sets -1, 0, 1 pattern
@@ -38,7 +38,7 @@
         public void Resize_ToSmallerLength_TruncatesData(int initialLength, int newLength)
         {
             // Arrange
-            var array = new BigTritArray(initialLength);
+            var array = new TritArray(initialLength);
             for (var i = 0; i < array.Length; i++)
             {
                 array[i] = new Trit((sbyte)((i % 3) - 1)); // Sets -1, 0, 1 pattern
@@ -56,7 +56,7 @@
             }
             
             // Verify that accessing beyond new length throws
-            Action accessBeyondLength = () => { var _ = array[newLength]; };
+            var accessBeyondLength = () => { var _ = array[newLength]; };
             accessBeyondLength.Should().Throw<ArgumentOutOfRangeException>();
         }
 
@@ -68,7 +68,7 @@
         public void Resize_ToLargerLength_ExtendsWithZeros(int initialLength, int newLength)
         {
             // Arrange
-            var array = new BigTritArray(initialLength);
+            var array = new TritArray(initialLength);
             for (var i = 0; i < array.Length; i++)
             {
                 array[i] = new Trit((sbyte)((i % 3) - 1)); // Sets -1, 0, 1 pattern
@@ -98,7 +98,7 @@
         public void Resize_ToZero_ClearsArray()
         {
             // Arrange
-            var array = new BigTritArray(100);
+            var array = new TritArray(100);
             for (var i = 0; i < array.Length; i++)
             {
                 array[i] = Trit.Positive;
@@ -109,7 +109,7 @@
 
             // Assert
             array.Length.Should().Be(0);
-            Action accessElement = () => { var _ = array[0]; };
+            var accessElement = () => { var _ = array[0]; };
             accessElement.Should().Throw<ArgumentOutOfRangeException>();
         }
 
@@ -117,10 +117,10 @@
         public void Resize_WithNegativeLength_Throws()
         {
             // Arrange
-            var array = new BigTritArray(10);
+            var array = new TritArray(10);
 
             // Act
-            Action resizeAction = () => array.Resize(-1);
+            var resizeAction = () => array.Resize(-1);
 
             // Assert
             resizeAction.Should().Throw<ArgumentOutOfRangeException>()
@@ -131,7 +131,7 @@
         public void Resize_PreservesDataWhenResizedUpAndBackDown()
         {
             // Arrange
-            var array = new BigTritArray(10);
+            var array = new TritArray(10);
             for (var i = 0; i < array.Length; i++)
             {
                 array[i] = new Trit((sbyte)((i % 3) - 1));

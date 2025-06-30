@@ -193,14 +193,22 @@ public partial struct BinaryTritOperator : IEquatable<BinaryTritOperator>
         positiveResult = BinaryOperation<T>.GetTrits(Value.Positive, negative1, positive1, negative2, positive2);
     }
     
-    internal void Apply(List<ulong> negative1, List<ulong> positive1, List<ulong> negative2, List<ulong> positive2, out List<ulong> negativeResult, out List<ulong> positiveResult)
+    internal void Apply(IEnumerable<ulong> negative1, IEnumerable<ulong> positive1, IEnumerable<ulong> negative2, IEnumerable<ulong> positive2, out List<ulong> negativeResult, out List<ulong> positiveResult)
     {
-        negativeResult = new(negative1.Count);
-        positiveResult = new(negative1.Count);
-        for (var i=0; i<negative1.Count; i++)
+        negativeResult = new();
+        positiveResult = new();
+        var n1e = negative1.GetEnumerator();
+        var n2e = negative2.GetEnumerator();
+        var p1e = positive1.GetEnumerator();
+        var p2e = positive2.GetEnumerator();
         {
-            negativeResult[i] = BinaryOperation<ulong>.GetTrits(Value.Negative, negative1[i], positive1[i], negative2[i], positive2[i]);
-            positiveResult[i] = BinaryOperation<ulong>.GetTrits(Value.Positive, negative1[i], positive1[i], negative2[i], positive2[i]);
+            while ( n1e.MoveNext() | n2e.MoveNext()) // don't replace by ||
+            {
+                (var n1, var p1) = p1e.MoveNext() ? (n1e.Current, p1e.Current) : (0, 0);
+                (var n2, var p2) = p2e.MoveNext() ? (n2e.Current, p2e.Current) : (0, 0);
+                negativeResult.Add(BinaryOperation<ulong>.GetTrits(Value.Negative, n1, p1, n2, p2));
+                positiveResult.Add(BinaryOperation<ulong>.GetTrits(Value.Positive, n1, p1, n2, p2));
+            }
         }
     }
 
