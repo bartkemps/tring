@@ -225,8 +225,6 @@ public class TritArray : ITritArray, IEquatable<TritArray>, IFormattable
     /// </summary>
     public string ToString(ITernaryFormat format) => Formatter.Format(this, format);
 
-    // todo: equal values (leading zeros) should be equal, even if they have different lengths
-
     internal TritArray ApplyLength()
     {
         if (Length > 0)
