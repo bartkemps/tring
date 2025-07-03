@@ -509,6 +509,20 @@ LastGenerated = <#= DateTime.Now.ToString() #>
                {{GenerateBinaryOperations(name, backingType)}}
 
                #endregion
+               
+               #region Indexers
+               
+               /// <summary>
+               /// Gets the trit at the specified index in this <see cref="{{name}}"/>.
+               /// </summary>
+               public Trit this[int index] => TritShift.Index(value, index, {{trits}});
+               
+               /// <summary>
+               /// Gets the trit at the specified index in this <see cref="{{name}}"/>.
+               /// </summary>
+               public Trit this[Index index] => TritShift.Index(value, index.GetOffset({{trits}}), {{trits}});
+               
+               #endregion
            
                #region Interface Static Members
            

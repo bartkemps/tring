@@ -792,6 +792,20 @@ public static TritArray9 operator |(Int9T value, Trit[] trits)
 }
 
     #endregion
+    
+    #region Indexers
+    
+    /// <summary>
+    /// Gets the trit at the specified index in this <see cref="Int9T"/>.
+    /// </summary>
+    public Trit this[int index] => TritShift.Index(value, index, 9);
+    
+    /// <summary>
+    /// Gets the trit at the specified index in this <see cref="Int9T"/>.
+    /// </summary>
+    public Trit this[Index index] => TritShift.Index(value, index.GetOffset(9), 9);
+    
+    #endregion
 
     #region Interface Static Members
 

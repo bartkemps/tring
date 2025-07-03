@@ -779,6 +779,20 @@ public static TritArray27 operator |(Int27T value, Trit[] trits)
 }
 
     #endregion
+    
+    #region Indexers
+    
+    /// <summary>
+    /// Gets the trit at the specified index in this <see cref="Int27T"/>.
+    /// </summary>
+    public Trit this[int index] => TritShift.Index(value, index, 27);
+    
+    /// <summary>
+    /// Gets the trit at the specified index in this <see cref="Int27T"/>.
+    /// </summary>
+    public Trit this[Index index] => TritShift.Index(value, index.GetOffset(27), 27);
+    
+    #endregion
 
     #region Interface Static Members
 

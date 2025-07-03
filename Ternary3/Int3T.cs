@@ -792,6 +792,20 @@ public static TritArray3 operator |(Int3T value, Trit[] trits)
 }
 
     #endregion
+    
+    #region Indexers
+    
+    /// <summary>
+    /// Gets the trit at the specified index in this <see cref="Int3T"/>.
+    /// </summary>
+    public Trit this[int index] => TritShift.Index(value, index, 3);
+    
+    /// <summary>
+    /// Gets the trit at the specified index in this <see cref="Int3T"/>.
+    /// </summary>
+    public Trit this[Index index] => TritShift.Index(value, index.GetOffset(3), 3);
+    
+    #endregion
 
     #region Interface Static Members
 
