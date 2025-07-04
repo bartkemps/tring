@@ -832,6 +832,10 @@ Represents a 3-trit signed integer, modeled after the SByte type.
 - `static readonly Int3T MaxValue` - Represents the largest possible value of an Int3T.
 - `static readonly Int3T MinValue` - Represents the smallest possible value of an Int3T.
 
+**Indexers:**
+- `Trit this[int index]` - Gets the trit at the specified index in this Int3T.
+- `Trit this[Index index]` - Gets the trit at the specified index in this Int3T using C# 8.0 Index syntax.
+
 **Operators:**
 - `static Int3T operator <<(Int3T value, int shiftAmount)` - Performs a left shift operation.
 - `static Int3T operator >>(Int3T value, int shiftAmount)` - Performs a right shift operation.
@@ -866,6 +870,10 @@ Represents a 9-trit signed integer, modeled after the Int16 type.
 - `static readonly Int9T MaxValue` - Represents the largest possible value of an Int9T.
 - `static readonly Int9T MinValue` - Represents the smallest possible value of an Int9T.
 
+**Indexers:**
+- `Trit this[int index]` - Gets the trit at the specified index in this Int9T.
+- `Trit this[Index index]` - Gets the trit at the specified index in this Int9T using C# 8.0 Index syntax.
+
 **Operators:**
 - `static Int9T operator <<(Int9T value, int shiftAmount)` - Performs a left shift operation.
 - `static Int9T operator >>(Int9T value, int shiftAmount)` - Performs a right shift operation.
@@ -899,6 +907,10 @@ Represents a 27-trit signed integer, modeled after the Int64 type.
 **Static Properties:**
 - `static readonly Int27T MaxValue` - Represents the largest possible value of an Int27T.
 - `static readonly Int27T MinValue` - Represents the smallest possible value of an Int27T.
+
+**Indexers:**
+- `Trit this[int index]` - Gets the trit at the specified index in this Int27T.
+- `Trit this[Index index]` - Gets the trit at the specified index in this Int27T using C# 8.0 Index syntax.
 
 **Operators:**
 - `static Int27T operator <<(Int27T value, int shiftAmount)` - Performs a left shift operation.
