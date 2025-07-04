@@ -11,7 +11,7 @@
             var array = new TritArray(10);
             for (var i = 0; i < array.Length; i++)
             {
-                array[i] = new Trit((sbyte)((i % 3) - 1)); // Sets -1, 0, 1 pattern
+                array[i] = new((sbyte)((i % 3) - 1)); // Sets -1, 0, 1 pattern
             }
             var expectedValues = new Trit[10];
             for (var i = 0; i < 10; i++)
@@ -41,7 +41,7 @@
             var array = new TritArray(initialLength);
             for (var i = 0; i < array.Length; i++)
             {
-                array[i] = new Trit((sbyte)((i % 3) - 1)); // Sets -1, 0, 1 pattern
+                array[i] = new((sbyte)((i % 3) - 1)); // Sets -1, 0, 1 pattern
             }
 
             // Act
@@ -71,7 +71,7 @@
             var array = new TritArray(initialLength);
             for (var i = 0; i < array.Length; i++)
             {
-                array[i] = new Trit((sbyte)((i % 3) - 1)); // Sets -1, 0, 1 pattern
+                array[i] = new((sbyte)((i % 3) - 1)); // Sets -1, 0, 1 pattern
             }
 
             // Act
@@ -134,7 +134,7 @@
             var array = new TritArray(10);
             for (var i = 0; i < array.Length; i++)
             {
-                array[i] = new Trit((sbyte)((i % 3) - 1));
+                array[i] = new((sbyte)((i % 3) - 1));
             }
             var expectedValues = new Trit[10];
             for (var i = 0; i < 10; i++)

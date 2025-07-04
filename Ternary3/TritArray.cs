@@ -12,8 +12,8 @@ public class TritArray : ITritArray, IEquatable<TritArray>, IFormattable
     internal List<ulong> Negative;
     public int Length { get; set; }
 
-    public static readonly TritArray Zero = new TritArray(0);
-    public static readonly TritArray One = new TritArray([0],[1],1);
+    public static readonly TritArray Zero = new(0);
+    public static readonly TritArray One = new([0],[1],1);
 
     private ulong mask;
 

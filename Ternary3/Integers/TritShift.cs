@@ -62,8 +62,8 @@ internal static class TritShift
         return value switch
         {
             0 => Trit.Zero,
-            < 0 => new Trit(((value - allOnes) / Pow3Cache[index]) % 3 + 1),
-            _ => new Trit(((value + allOnes) / Pow3Cache[index]) % 3 - 1)
+            < 0 => new((sbyte)((value - allOnes) / Pow3Cache[index] % 3 + 1)),
+            _ => new((sbyte)((value + allOnes) / Pow3Cache[index] % 3 - 1))
         };
     }
     
@@ -73,8 +73,8 @@ internal static class TritShift
         return value switch
         {
             0 => Trit.Zero,
-            < 0 => new Trit((short)((value - allOnesLong) / Pow3LongCache[index]) % 3 + 1),
-            _ => new Trit((short)((value + allOnesLong) / Pow3LongCache[index]) % 3 - 1)
+            < 0 => new((sbyte)((value - allOnesLong) / Pow3LongCache[index] % 3 + 1)),
+            _ => new((sbyte)((value + allOnesLong) / Pow3LongCache[index] % 3 - 1))
         };
     }
 }
