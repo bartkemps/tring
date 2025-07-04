@@ -2,9 +2,11 @@
 
 internal static class TritShift
 {
-    internal static readonly int[] Pow3Cache = new int[20];  // Cache for int-sized powers (20 trits max in 32 bits)
-    internal static readonly long[] Pow3LongCache = new long[40];  // Cache for long-sized powers
-
+    private static readonly int[] Pow3Cache = new int[20];  // Cache for int-sized powers (20 trits max in 32 bits)
+    private static readonly long[] Pow3LongCache = new long[40];  // Cache for long-sized powers
+    private static readonly int allOnes;  
+    private static readonly long allOnesLong;  
+    
     static TritShift()
     {
         Pow3Cache[0] = 1;
@@ -19,6 +21,9 @@ internal static class TritShift
         {
             Pow3LongCache[i] = Pow3LongCache[i - 1] * 3;
         }
+
+        allOnes = (int)(Pow3LongCache[20] / 2);
+        allOnesLong = Pow3LongCache[39] / 2 * 3 + 1;
     }
 
     public static sbyte Shift(this sbyte value, int shift)
@@ -57,8 +62,8 @@ internal static class TritShift
         return value switch
         {
             0 => Trit.Zero,
-            < 0 => new((sbyte)(((value / Pow3Cache[index]) -1 )% 3 + 1)),
-            _ => new((sbyte)(((value / Pow3Cache[index]) +1) % 3 - 1))
+            < 0 => new Trit(((value - allOnes) / Pow3Cache[index]) % 3 + 1),
+            _ => new Trit(((value + allOnes) / Pow3Cache[index]) % 3 - 1)
         };
     }
     
@@ -68,8 +73,8 @@ internal static class TritShift
         return value switch
         {
             0 => Trit.Zero,
-            < 0 => new((sbyte)(((value / Pow3LongCache[index]) -1 )% 3 + 1)),
-            _ => new((sbyte)(((value / Pow3LongCache[index]) +1) % 3 - 1))
+            < 0 => new Trit((short)((value - allOnesLong) / Pow3LongCache[index]) % 3 + 1),
+            _ => new Trit((short)((value + allOnesLong) / Pow3LongCache[index]) % 3 - 1)
         };
     }
 }

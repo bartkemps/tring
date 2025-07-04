@@ -142,8 +142,8 @@ namespace Ternary3.Tests
         }
 
         [Theory]
-        [InlineData(terTTT111001, "NNNPPPZZP")]  // Testing with values within Int27T range
-        [InlineData(ter111TTT00T, "PPPNNNZZN")]  // Testing with values within Int27T range
+        [InlineData(ter111_0T1_001, "PPPZNPZZP")]  // Testing with values within Int27T range
+        [InlineData(terTTT_01T_00T, "NNNZPNZZN")]  // Testing with values within Int27T range
         public void Int9T_IndexerReturnsCorrectTrit(int value, string expected)
         {
             var intValue = (Int9T)value;
