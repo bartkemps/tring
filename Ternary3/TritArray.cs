@@ -6,7 +6,7 @@ using System.Numerics;
 using Operators;
 using System.Diagnostics.CodeAnalysis;
 
-public class TritArray : ITritArray, IEquatable<TritArray>, IFormattable
+public class TritArray : ITritArray<TritArray>
 {
     internal List<ulong> Positive;
     internal List<ulong> Negative;
@@ -142,6 +142,7 @@ public class TritArray : ITritArray, IEquatable<TritArray>, IFormattable
         }
     }
     
+    /// <inheritdoc/>
     public Trit this[int index]
     {
         get => index >= 0 && index < Length
@@ -157,12 +158,7 @@ public class TritArray : ITritArray, IEquatable<TritArray>, IFormattable
         }
     }
 
-    /// <summary>
-    /// Gets or sets the trit at the specified index.
-    /// </summary>
-    /// <param name="index">The zero-based index of the trit to get or set (must be between 0 and 26).</param>
-    /// <returns>The trit at the specified index.</returns>
-    /// <exception cref="ArgumentOutOfRangeException">Thrown when index is less than 0 or greater than 26.</exception>
+    /// <inheritdoc/>
     public Trit this[Index index]
     {
         get => index.IsFromEnd ? this[Length - index.Value] : this[index.Value];
@@ -179,19 +175,8 @@ public class TritArray : ITritArray, IEquatable<TritArray>, IFormattable
         }
     }
 
-    /// <summary>
-    /// Gets or sets the trit at the specified index.
-    /// </summary>
-    /// <param name="range">
-   /// The range of indices to get or set trits from the array. The range must be valid within the bounds of the array.
-    /// </param>
-    /// <value>
-    /// The trit value at the specified index.
-    /// </value>
-    /// <exception cref="ArgumentOutOfRangeException">
-    /// Thrown if the index is outside the bounds of the array.
-    /// </exception>
-    public TritArray this[Range range]
+    /// <inheritdoc/>
+    public ITritArray this[Range range]
     {
         get
         {

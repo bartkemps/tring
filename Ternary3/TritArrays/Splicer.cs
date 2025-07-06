@@ -1,7 +1,29 @@
 ﻿namespace Ternary3.TritArrays;
 
+using System.Numerics;
+
 internal static class Splicer
 {
+    public static void Splice(ulong negative, ulong positive, int length, Range range,
+        out List<ulong> negativeResult, out List<ulong> positiveResult, out int resultLength)
+    {
+        var start = range.Start.GetOffset(length);
+        var end = range.End.GetOffset(length);
+        if (start < 0 || end > length || start >= end)
+        {
+            throw new ArgumentOutOfRangeException(nameof(range), "Invalid range for splicing.");
+        }
+        resultLength = end - start;
+        if (resultLength == 0)
+        {
+            negativeResult = [];
+            positiveResult = [];
+            return;
+        }
+        negativeResult = [negative >> start];
+        positiveResult = [positive >> start];
+    }
+    
     public static void Splice(List<ulong> negative, List<ulong> positive, int length, Range range,
         out List<ulong> negativeResult, out List<ulong> positiveResult, out int resultLength)
     {

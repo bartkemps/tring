@@ -57,12 +57,7 @@ public struct TritArray9 : ITritArray<TritArray9>
         Positive = positive;
     }
 
-    /// <summary>
-    /// Gets or sets the trit at the specified index.
-    /// </summary>
-    /// <param name="index">The zero-based index of the trit to get or set (must be between 0 and 8).</param>
-    /// <returns>The trit at the specified index.</returns>
-    /// <exception cref="ArgumentOutOfRangeException">Thrown when index is less than 0 or greater than 8.</exception>
+     /// <intheritdoc/>
     public Trit this[int index]
     {
         get => index is >= 0 and < NumberOfTrits 
@@ -75,6 +70,16 @@ public struct TritArray9 : ITritArray<TritArray9>
                 throw new ArgumentOutOfRangeException(nameof(index), $"Index must be between 0 and {NumberOfTrits-1}.");
             }
             TritConverter.SetTrit(ref Negative, ref Positive, index, value);
+        }
+    }
+    
+    /// <intheritdoc/>
+    public ITritArray this[Range range]
+    {
+        get
+        {
+            Splicer.Splice(Negative, Positive, Length, range, out var negative, out var positive, out var length);
+            return new TritArray(negative, positive, length).ApplyLength();
         }
     }
     

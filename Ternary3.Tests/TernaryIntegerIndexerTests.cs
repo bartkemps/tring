@@ -141,19 +141,138 @@ namespace Ternary3.Tests
             tritFromInt.Should().Be(tritFromArray, $"because Int9T({value})[{index}] should equal TritArray9({value})[{index}]");
         }
 
-        [Theory]
-        [InlineData(ter111_0T1_001, "PPPZNPZZP")]  // Testing with values within Int27T range
-        [InlineData(terTTT_01T_00T, "NNNZPNZZN")]  // Testing with values within Int27T range
-        public void Int9T_IndexerReturnsCorrectTrit(int value, string expected)
+        [Fact]
+        public void Int9T_IndexFromEnd1_ReturnsCorrectTrit()
         {
+            // Arrange
+            int value = -9841;
             var intValue = (Int9T)value;
-            var digits = "";
-            for(var i=0; i < 9; i++)
-            {
-                digits = intValue[i].ToString()[0] + digits;
-            }
+            var tritArray = (TritArray9)value;
+            var index = ^1; // Last trit
 
-            digits.Should().Be(expected);
+            // Act
+            var tritFromInt = intValue[index];
+            var tritFromArray = tritArray[index];
+
+            // Assert
+            tritFromInt.Should().Be(tritFromArray, $"because Int9T({value})[{index}] should equal TritArray9({value})[{index}]");
+        }
+
+        [Fact]
+        public void Int9T_IndexFromEnd5_ReturnsCorrectTrit()
+        {
+            // Arrange
+            int value = 4000;
+            var intValue = (Int9T)value;
+            var tritArray = (TritArray9)value;
+            var index = ^5; // Fifth trit from end
+
+            // Act
+            var tritFromInt = intValue[index];
+            var tritFromArray = tritArray[index];
+
+            // Assert
+            tritFromInt.Should().Be(tritFromArray, $"because Int9T({value})[{index}] should equal TritArray9({value})[{index}]");
+        }
+
+        [Fact]
+        public void Int9T_IndexFromEnd9_ReturnsCorrectTrit()
+        {
+            // Arrange
+            int value = 9841; // Max value
+            var intValue = (Int9T)value;
+            var tritArray = (TritArray9)value;
+            var index = ^9; // First trit (from end)
+
+            // Act
+            var tritFromInt = intValue[index];
+            var tritFromArray = tritArray[index];
+
+            // Assert
+            tritFromInt.Should().Be(tritFromArray, $"because Int9T({value})[{index}] should equal TritArray9({value})[{index}]");
+        }
+
+        [Theory]
+        [InlineData(-3812798742289, 0)]  // Testing with values within Int27T range
+        [InlineData(-1000000000, 0)]
+        [InlineData(-1, 0)]
+        [InlineData(0, 0)]
+        [InlineData(1, 0)]
+        [InlineData(1000000000, 0)]
+        [InlineData(3812798742289, 0)]
+        [InlineData(-3812798742289, 13)]
+        [InlineData(-1, 13)]
+        [InlineData(0, 13)]
+        [InlineData(1, 13)]
+        [InlineData(3812798742289, 13)]
+        [InlineData(-3812798742289, 26)]
+        [InlineData(-1, 26)]
+        [InlineData(0, 26)]
+        [InlineData(1, 26)]
+        [InlineData(3812798742289, 26)]
+        public void Int27T_IndexerReturnsCorrectTrit_WhenComparedToTritArray27(long value, int index)
+        {
+            // Arrange
+            var intValue = (Int27T)value;
+            var tritArray = (TritArray27)value;
+
+            // Act
+            var tritFromInt = intValue[index];
+            var tritFromArray = tritArray[index];
+
+            // Assert
+            tritFromInt.Should().Be(tritFromArray, $"because Int27T({value})[{index}] should equal TritArray27({value})[{index}]");
+        }
+
+        [Fact]
+        public void Int27T_IndexFromEnd1_ReturnsCorrectTrit()
+        {
+            // Arrange
+            long value = -3812798742289;
+            var intValue = (Int27T)value;
+            var tritArray = (TritArray27)value;
+            var index = ^1; // Last trit
+
+            // Act
+            var tritFromInt = intValue[index];
+            var tritFromArray = tritArray[index];
+
+            // Assert
+            tritFromInt.Should().Be(tritFromArray, $"because Int27T({value})[{index}] should equal TritArray27({value})[{index}]");
+        }
+
+        [Fact]
+        public void Int27T_IndexFromEnd14_ReturnsCorrectTrit()
+        {
+            // Arrange
+            long value = 1000000000;
+            var intValue = (Int27T)value;
+            var tritArray = (TritArray27)value;
+            var index = ^14; // 14th trit from end
+
+            // Act
+            var tritFromInt = intValue[index];
+            var tritFromArray = tritArray[index];
+
+            // Assert
+            tritFromInt.Should().Be(tritFromArray, $"because Int27T({value})[{index}] should equal TritArray27({value})[{index}]");
+        }
+
+        [Fact]
+        public void Int27T_IndexFromEnd27_ReturnsCorrectTrit()
+        {
+            // Arrange
+            long value = 3812798742289; // Max value
+            var intValue = (Int27T)value;
+            var tritArray = (TritArray27)value;
+            var index = ^27; // First trit (from end)
+
+            // Act
+            var tritFromInt = intValue[index];
+            var tritFromArray = tritArray[index];
+
+            // Assert
+            tritFromInt.Should().Be(tritFromArray, $"because Int27T({value})[{index}] should equal TritArray27({value})[{index}]");
         }
 
         [Theory]
@@ -166,7 +285,7 @@ namespace Ternary3.Tests
 
             // Act & Assert
             Action act = () => { var trit = intValue[index]; };
-            act.Should().Throw<Exception>($"because index {index} is outside the valid range for Int3T");
+            act.Should().Throw<ArgumentOutOfRangeException>($"because index {index} is outside the valid range for Int3T");
         }
 
         [Theory]
@@ -179,7 +298,7 @@ namespace Ternary3.Tests
 
             // Act & Assert
             Action act = () => { var trit = intValue[index]; };
-            act.Should().Throw<Exception>($"because index {index} is outside the valid range for Int9T");
+            act.Should().Throw<ArgumentOutOfRangeException>($"because index {index} is outside the valid range for Int9T");
         }
 
         [Theory]
@@ -192,7 +311,7 @@ namespace Ternary3.Tests
 
             // Act & Assert
             Action act = () => { var trit = intValue[index]; };
-            act.Should().Throw<Exception>($"because index {index} is outside the valid range for Int27T");
+            act.Should().Throw<ArgumentOutOfRangeException>($"because index {index} is outside the valid range for Int27T");
         }
     }
 }
