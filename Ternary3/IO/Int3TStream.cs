@@ -263,7 +263,7 @@ namespace Ternary3.IO
         /// Gets a value that determines whether the current stream can timeout.
         /// </summary>
         /// <value><see langword="true"/> if the stream can timeout; otherwise, <see langword="false"/>.</value>
-        public virtual bool CanTimeout { get { return false; } }
+        public virtual bool CanTimeout => false;
 
         /// <summary>
         /// Gets or sets a value, in milliseconds, that determines how long the stream will attempt to read before timing out.
