@@ -145,7 +145,7 @@ namespace Ternary3.Tests
         public void Int9T_IndexFromEnd1_ReturnsCorrectTrit()
         {
             // Arrange
-            int value = -9841;
+            var value = -9841;
             var intValue = (Int9T)value;
             var tritArray = (TritArray9)value;
             var index = ^1; // Last trit
@@ -162,7 +162,7 @@ namespace Ternary3.Tests
         public void Int9T_IndexFromEnd5_ReturnsCorrectTrit()
         {
             // Arrange
-            int value = 4000;
+            var value = 4000;
             var intValue = (Int9T)value;
             var tritArray = (TritArray9)value;
             var index = ^5; // Fifth trit from end
@@ -179,7 +179,7 @@ namespace Ternary3.Tests
         public void Int9T_IndexFromEnd9_ReturnsCorrectTrit()
         {
             // Arrange
-            int value = 9841; // Max value
+            var value = 9841; // Max value
             var intValue = (Int9T)value;
             var tritArray = (TritArray9)value;
             var index = ^9; // First trit (from end)
@@ -228,7 +228,7 @@ namespace Ternary3.Tests
         public void Int27T_IndexFromEnd1_ReturnsCorrectTrit()
         {
             // Arrange
-            long value = -3812798742289;
+            var value = -3812798742289;
             var intValue = (Int27T)value;
             var tritArray = (TritArray27)value;
             var index = ^1; // Last trit
@@ -262,7 +262,7 @@ namespace Ternary3.Tests
         public void Int27T_IndexFromEnd27_ReturnsCorrectTrit()
         {
             // Arrange
-            long value = 3812798742289; // Max value
+            var value = 3812798742289; // Max value
             var intValue = (Int27T)value;
             var tritArray = (TritArray27)value;
             var index = ^27; // First trit (from end)
@@ -284,7 +284,7 @@ namespace Ternary3.Tests
             var intValue = (Int3T)value;
 
             // Act & Assert
-            Action act = () => { var trit = intValue[index]; };
+            var act = () => { var trit = intValue[index]; };
             act.Should().Throw<ArgumentOutOfRangeException>($"because index {index} is outside the valid range for Int3T");
         }
 
@@ -297,7 +297,7 @@ namespace Ternary3.Tests
             var intValue = (Int9T)value;
 
             // Act & Assert
-            Action act = () => { var trit = intValue[index]; };
+            var act = () => { var trit = intValue[index]; };
             act.Should().Throw<ArgumentOutOfRangeException>($"because index {index} is outside the valid range for Int9T");
         }
 
@@ -310,7 +310,7 @@ namespace Ternary3.Tests
             var intValue = (Int27T)value;
 
             // Act & Assert
-            Action act = () => { var trit = intValue[index]; };
+            var act = () => { var trit = intValue[index]; };
             act.Should().Throw<ArgumentOutOfRangeException>($"because index {index} is outside the valid range for Int27T");
         }
     }

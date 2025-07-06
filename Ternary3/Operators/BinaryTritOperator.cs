@@ -197,15 +197,15 @@ public partial struct BinaryTritOperator : IEquatable<BinaryTritOperator>
     {
         negativeResult = new();
         positiveResult = new();
-        var n1e = negative1.GetEnumerator();
-        var n2e = negative2.GetEnumerator();
-        var p1e = positive1.GetEnumerator();
-        var p2e = positive2.GetEnumerator();
+        var n1E = negative1.GetEnumerator();
+        var n2E = negative2.GetEnumerator();
+        var p1E = positive1.GetEnumerator();
+        var p2E = positive2.GetEnumerator();
         {
-            while ( n1e.MoveNext() | n2e.MoveNext()) // don't replace by ||
+            while ( n1E.MoveNext() | n2E.MoveNext()) // don't replace by ||
             {
-                (var n1, var p1) = p1e.MoveNext() ? (n1e.Current, p1e.Current) : (0, 0);
-                (var n2, var p2) = p2e.MoveNext() ? (n2e.Current, p2e.Current) : (0, 0);
+                (var n1, var p1) = p1E.MoveNext() ? (n1E.Current, p1E.Current) : (0, 0);
+                (var n2, var p2) = p2E.MoveNext() ? (n2E.Current, p2E.Current) : (0, 0);
                 negativeResult.Add(BinaryOperation<ulong>.GetTrits(Value.Negative, n1, p1, n2, p2));
                 positiveResult.Add(BinaryOperation<ulong>.GetTrits(Value.Positive, n1, p1, n2, p2));
             }
