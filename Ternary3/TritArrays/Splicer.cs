@@ -1,7 +1,5 @@
 ﻿namespace Ternary3.TritArrays;
 
-using System.Numerics;
-
 internal static class Splicer
 {
     public static void Splice(ulong negative, ulong positive, int length, Range range,

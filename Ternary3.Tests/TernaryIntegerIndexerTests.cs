@@ -1,8 +1,6 @@
 ﻿// filepath: c:\Users\kempsb\source\repos\Ternary\Ternary3.Tests\TernaryIntegerIndexerTests.cs
-using System;
+
 using FluentAssertions;
-using Ternary3;
-using Xunit;
 
 namespace Ternary3.Tests
 {

@@ -1,8 +1,4 @@
 ﻿// filepath: C:\Users\kempsb\source\repos\Ternary\Ternary3\IO\Int3TStream.cs
-using System;
-using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Ternary3.IO
 {
@@ -16,6 +12,12 @@ namespace Ternary3.IO
     public abstract class Int3TStream : IAsyncDisposable
     {
         private bool disposed;
+
+        /// <summary>
+        /// Gets a value indicating whether the current stream has been disposed.
+        /// </summary>
+        /// <value><see langword="true"/> if the stream has been disposed; otherwise, <see langword="false"/>.</value>
+        protected bool Disposed => disposed;
 
         /// <summary>
         /// When overridden in a derived class, gets a value indicating whether the current stream supports reading.
@@ -238,6 +240,53 @@ namespace Ternary3.IO
                 return buffer;
             }
         }
+        
+        /// <summary>
+        /// Clears all buffers for this stream and causes any buffered data to be written to the underlying device.
+        /// </summary>
+        /// <remarks>
+        /// This is a synchronous method. Consider using <see cref="FlushAsync"/> instead for better performance.
+        /// </remarks>
+        /// <exception cref="IOException">An I/O error occurs.</exception>
+        public virtual void Flush() => FlushAsync().GetAwaiter().GetResult();
+
+        /// <summary>
+        /// Reads a sequence of Int3T values from the current stream and advances the position within the stream by the number of Int3T values read.
+        /// </summary>
+        /// <remarks>
+        /// This is a synchronous method. Consider using <see cref="ReadAsync"/> instead for better performance.
+        /// </remarks>
+        /// <param name="buffer">An array of Int3T values.</param>
+        /// <param name="offset">The zero-based Int3T offset in buffer at which to begin storing the data read from the current stream.</param>
+        /// <param name="count">The maximum number of Int3T values to be read from the current stream.</param>
+        /// <returns>The total number of Int3T values read into the buffer.</returns>
+        /// <exception cref="IOException">An I/O error occurs.</exception>
+        public virtual int Read(Int3T[] buffer, int offset, int count) => ReadAsync(buffer, offset, count).GetAwaiter().GetResult();
+
+        /// <summary>
+        /// Writes a sequence of Int3T values to the current stream and advances the current position within this stream by the number of Int3T values written.
+        /// </summary>
+        /// <remarks>
+        /// This is a synchronous method. Consider using <see cref="WriteAsync"/> instead for better performance.
+        /// </remarks>
+        /// <param name="buffer">An array of Int3T values.</param>
+        /// <param name="offset">The zero-based Int3T offset in buffer at which to begin copying Int3T values to the current stream.</param>
+        /// <param name="count">The number of Int3T values to be written to the current stream.</param>
+        /// <exception cref="IOException">An I/O error occurs.</exception>
+        public virtual void Write(Int3T[] buffer, int offset, int count) => WriteAsync(buffer, offset, count).GetAwaiter().GetResult();
+
+        /// <summary>
+        /// Sets the position within the current stream.
+        /// </summary>
+        /// <remarks>
+        /// This is a synchronous method. Consider using <see cref="SeekAsync"/> instead for better performance.
+        /// </remarks>
+        /// <param name="offset">A Int3T offset relative to the origin parameter.</param>
+        /// <param name="origin">A value of type SeekOrigin indicating the reference point used to obtain the new position.</param>
+        /// <returns>The new position within the current stream.</returns>
+        /// <exception cref="IOException">An I/O error occurs.</exception>
+        public virtual long Seek(long offset, SeekOrigin origin) => SeekAsync(offset, origin).GetAwaiter().GetResult();
+
 
         /// <summary>
         /// Asynchronously disposes the stream, releasing all resources used by it.
@@ -253,10 +302,21 @@ namespace Ternary3.IO
         /// Releases the unmanaged resources used by the Int3TStream and optionally releases the managed resources.
         /// </summary>
         /// <returns>A task that represents the asynchronous dispose operation.</returns>
-        protected virtual ValueTask DisposeAsyncCore()
+        protected virtual async ValueTask DisposeAsyncCore()
         {
+            // If the stream is writable, flush any buffered data before disposing
+            if (!disposed && CanWrite)
+            {
+                try
+                {
+                    await FlushAsync().ConfigureAwait(false);
+                }
+                catch (Exception)
+                {
+                    // Ignore exceptions during disposal
+                }
+            }
             disposed = true;
-            return ValueTask.CompletedTask;
         }
 
         /// <summary>

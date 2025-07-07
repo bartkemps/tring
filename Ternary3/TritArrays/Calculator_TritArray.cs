@@ -1,6 +1,5 @@
 ﻿namespace Ternary3.TritArrays;
 
-using Microsoft.VisualBasic;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 

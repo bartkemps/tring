@@ -1,10 +1,5 @@
-﻿using System;
-using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Ternary3.IO;
-using Xunit;
 
 namespace Ternary3.Tests.IO
 {
@@ -157,7 +152,7 @@ namespace Ternary3.Tests.IO
             var stream = new MemoryInt3TStream(sourceData);
             var buffer = new Int3T[sourceData.Length];
 
-            int bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length);
+            var bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length);
 
             bytesRead.Should().Be(sourceData.Length);
             buffer.Should().BeEquivalentTo(sourceData);
@@ -172,10 +167,10 @@ namespace Ternary3.Tests.IO
             var buffer = new Int3T[sourceData.Length + 2];
             var offset = 1;
 
-            int bytesRead = await stream.ReadAsync(buffer, offset, sourceData.Length);
+            var bytesRead = await stream.ReadAsync(buffer, offset, sourceData.Length);
 
             bytesRead.Should().Be(sourceData.Length);
-            for (int i = 0; i < sourceData.Length; i++)
+            for (var i = 0; i < sourceData.Length; i++)
             {
                 buffer[i + offset].Should().Be(sourceData[i]);
             }
@@ -190,10 +185,10 @@ namespace Ternary3.Tests.IO
             var buffer = new Int3T[sourceData.Length];
             var count = 3;
 
-            int bytesRead = await stream.ReadAsync(buffer, 0, count);
+            var bytesRead = await stream.ReadAsync(buffer, 0, count);
 
             bytesRead.Should().Be(count);
-            for (int i = 0; i < count; i++)
+            for (var i = 0; i < count; i++)
             {
                 buffer[i].Should().Be(sourceData[i]);
             }
@@ -209,10 +204,10 @@ namespace Ternary3.Tests.IO
             var initialPosition = 2;
             stream.Position = initialPosition;
 
-            int bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length);
+            var bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length);
 
             bytesRead.Should().Be(sourceData.Length - initialPosition);
-            for (int i = 0; i < bytesRead; i++)
+            for (var i = 0; i < bytesRead; i++)
             {
                 buffer[i].Should().Be(sourceData[i + initialPosition]);
             }
@@ -227,7 +222,7 @@ namespace Ternary3.Tests.IO
             var buffer = new Int3T[5];
             stream.Position = sourceData.Length;
 
-            int bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length);
+            var bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length);
 
             bytesRead.Should().Be(0);
             stream.Position.Should().Be(sourceData.Length);
@@ -239,7 +234,7 @@ namespace Ternary3.Tests.IO
             Int3T[] sourceData = [1, 0, -1];
             var stream = new MemoryInt3TStream(sourceData);
 
-            int value = await stream.ReadInt3TAsync();
+            var value = await stream.ReadInt3TAsync();
 
             value.Should().Be(1); // First Int3T value is 1
             stream.Position.Should().Be(1);
@@ -252,7 +247,7 @@ namespace Ternary3.Tests.IO
             var stream = new MemoryInt3TStream(sourceData);
             stream.Position = sourceData.Length;
 
-            int value = await stream.ReadInt3TAsync();
+            var value = await stream.ReadInt3TAsync();
 
             value.Should().Be(-1); // End of stream indicator
             stream.Position.Should().Be(sourceData.Length);
@@ -297,7 +292,7 @@ namespace Ternary3.Tests.IO
             stream.Position = 0;
             var readBuffer = new Int3T[count];
             await stream.ReadAsync(readBuffer, 0, readBuffer.Length);
-            for (int i = 0; i < count; i++)
+            for (var i = 0; i < count; i++)
             {
                 readBuffer[i].Should().Be(dataToWrite[i + offset]);
             }
@@ -321,12 +316,12 @@ namespace Ternary3.Tests.IO
             var readBuffer = new Int3T[initialData.Length + dataToAppend.Length];
             await stream.ReadAsync(readBuffer, 0, readBuffer.Length);
             
-            for (int i = 0; i < initialData.Length; i++)
+            for (var i = 0; i < initialData.Length; i++)
             {
                 readBuffer[i].Should().Be(initialData[i]);
             }
             
-            for (int i = 0; i < dataToAppend.Length; i++)
+            for (var i = 0; i < dataToAppend.Length; i++)
             {
                 readBuffer[i + initialData.Length].Should().Be(dataToAppend[i]);
             }
@@ -339,7 +334,7 @@ namespace Ternary3.Tests.IO
             var stream = new MemoryInt3TStream(buffer, false); // Read-only
             Int3T[] dataToWrite = [1, 1];
 
-            Func<Task> act = async () => await stream.WriteAsync(dataToWrite, 0, dataToWrite.Length);
+            var act = async () => await stream.WriteAsync(dataToWrite, 0, dataToWrite.Length);
 
             await act.Should().ThrowAsync<NotSupportedException>()
                 .WithMessage("*The stream does not support writing*");
@@ -370,7 +365,7 @@ namespace Ternary3.Tests.IO
             var stream = new MemoryInt3TStream();
             Int3T[] buffer = [1, 0];
 
-            Func<Task> act = async () => await stream.WriteAsync(buffer, -1, 1);
+            var act = async () => await stream.WriteAsync(buffer, -1, 1);
 
             await act.Should().ThrowAsync<ArgumentOutOfRangeException>()
                 .WithMessage("*Offset cannot be negative*");
@@ -382,7 +377,7 @@ namespace Ternary3.Tests.IO
             var stream = new MemoryInt3TStream();
             Int3T[] buffer = [1, 0];
 
-            Func<Task> act = async () => await stream.WriteAsync(buffer, 0, -1);
+            var act = async () => await stream.WriteAsync(buffer, 0, -1);
 
             await act.Should().ThrowAsync<ArgumentOutOfRangeException>()
                 .WithMessage("*Count cannot be negative*");
@@ -394,7 +389,7 @@ namespace Ternary3.Tests.IO
             var stream = new MemoryInt3TStream();
             Int3T[] buffer = [1, 0];
 
-            Func<Task> act = async () => await stream.WriteAsync(buffer, 1, 2);
+            var act = async () => await stream.WriteAsync(buffer, 1, 2);
 
             await act.Should().ThrowAsync<ArgumentException>()
                 .WithMessage("*Invalid buffer range*");
@@ -408,7 +403,7 @@ namespace Ternary3.Tests.IO
             var cts = new CancellationTokenSource();
             cts.Cancel();
 
-            Func<Task> act = async () => await stream.WriteAsync(buffer, 0, buffer.Length, cts.Token);
+            var act = async () => await stream.WriteAsync(buffer, 0, buffer.Length, cts.Token);
 
             await act.Should().ThrowAsync<TaskCanceledException>();
         }
@@ -420,7 +415,7 @@ namespace Ternary3.Tests.IO
             Int3T[] buffer = [1, 0];
             await stream.DisposeAsync();
 
-            Func<Task> act = async () => await stream.WriteAsync(buffer, 0, buffer.Length);
+            var act = async () => await stream.WriteAsync(buffer, 0, buffer.Length);
 
             await act.Should().ThrowAsync<ObjectDisposedException>();
         }
@@ -453,7 +448,7 @@ namespace Ternary3.Tests.IO
             var stream = new MemoryInt3TStream(buffer);
             var newPosition = 3;
 
-            long position = await stream.SeekAsync(newPosition, SeekOrigin.Begin);
+            var position = await stream.SeekAsync(newPosition, SeekOrigin.Begin);
 
             position.Should().Be(newPosition);
             stream.Position.Should().Be(newPosition);
@@ -467,7 +462,7 @@ namespace Ternary3.Tests.IO
             stream.Position = 2;
             var offset = 2;
 
-            long position = await stream.SeekAsync(offset, SeekOrigin.Current);
+            var position = await stream.SeekAsync(offset, SeekOrigin.Current);
 
             position.Should().Be(stream.Position);
             stream.Position.Should().Be(2 + offset);
@@ -480,7 +475,7 @@ namespace Ternary3.Tests.IO
             var stream = new MemoryInt3TStream(buffer);
             var offset = -2;
 
-            long position = await stream.SeekAsync(offset, SeekOrigin.End);
+            var position = await stream.SeekAsync(offset, SeekOrigin.End);
 
             position.Should().Be(stream.Position);
             stream.Position.Should().Be(buffer.Length + offset);
@@ -560,7 +555,7 @@ namespace Ternary3.Tests.IO
             var readBuffer = new Int3T[newLength];
             await stream.ReadAsync(readBuffer, 0, readBuffer.Length);
             
-            for (int i = 0; i < newLength; i++)
+            for (var i = 0; i < newLength; i++)
             {
                 readBuffer[i].Should().Be(initialData[i]);
             }
@@ -585,7 +580,7 @@ namespace Ternary3.Tests.IO
         {
             var stream = new MemoryInt3TStream();
 
-            Func<Task> act = async () => await stream.SetLengthAsync(-1);
+            var act = async () => await stream.SetLengthAsync(-1);
 
             await act.Should().ThrowAsync<ArgumentOutOfRangeException>()
                 .WithMessage("*Length must be non-negative*");
@@ -597,7 +592,7 @@ namespace Ternary3.Tests.IO
             Int3T[] buffer = [1, 0, -1];
             var stream = new MemoryInt3TStream(buffer, false); // Read-only
 
-            Func<Task> act = async () => await stream.SetLengthAsync(5);
+            var act = async () => await stream.SetLengthAsync(5);
 
             await act.Should().ThrowAsync<NotSupportedException>()
                 .WithMessage("*The stream does not support writing*");
@@ -610,7 +605,7 @@ namespace Ternary3.Tests.IO
             var cts = new CancellationTokenSource();
             cts.Cancel();
 
-            Func<Task> act = async () => await stream.SetLengthAsync(10, cts.Token);
+            var act = async () => await stream.SetLengthAsync(10, cts.Token);
 
             await act.Should().ThrowAsync<TaskCanceledException>();
         }
@@ -680,7 +675,7 @@ namespace Ternary3.Tests.IO
             var copy = stream.ToArray();
 
             copy.Length.Should().Be(count);
-            for (int i = 0; i < count; i++)
+            for (var i = 0; i < count; i++)
             {
                 copy[i].Should().Be(buffer[index + i]);
             }
@@ -706,7 +701,7 @@ namespace Ternary3.Tests.IO
             Int3T[] buffer = [1, 0, -1];
             var stream = new MemoryInt3TStream(buffer);
 
-            Action act = () => stream.SetCapacity(buffer.Length - 1);
+            var act = () => stream.SetCapacity(buffer.Length - 1);
 
             act.Should().Throw<ArgumentOutOfRangeException>()
                 .WithMessage("*Capacity cannot be smaller than the current length*");
@@ -733,7 +728,7 @@ namespace Ternary3.Tests.IO
         {
             var stream = new MemoryInt3TStream();
 
-            Func<Task> act = async () => await stream.FlushAsync();
+            var act = async () => await stream.FlushAsync();
 
             await act.Should().NotThrowAsync();
         }
@@ -744,7 +739,7 @@ namespace Ternary3.Tests.IO
             var stream = new MemoryInt3TStream();
             await stream.DisposeAsync();
 
-            Func<Task> act = async () => await stream.FlushAsync();
+            var act = async () => await stream.FlushAsync();
 
             await act.Should().ThrowAsync<ObjectDisposedException>();
         }
@@ -756,7 +751,7 @@ namespace Ternary3.Tests.IO
             var cts = new CancellationTokenSource();
             cts.Cancel();
 
-            Func<Task> act = async () => await stream.FlushAsync(cts.Token);
+            var act = async () => await stream.FlushAsync(cts.Token);
 
             await act.Should().ThrowAsync<TaskCanceledException>();
         }
@@ -784,7 +779,7 @@ namespace Ternary3.Tests.IO
             var stream = new MemoryInt3TStream();
             await stream.DisposeAsync();
 
-            Func<Task> act = async () => await stream.DisposeAsync();
+            var act = async () => await stream.DisposeAsync();
 
             await act.Should().NotThrowAsync();
         }
@@ -828,7 +823,7 @@ namespace Ternary3.Tests.IO
             var readBuffer = new Int3T[count];
             await destinationStream.ReadAsync(readBuffer, 0, readBuffer.Length);
             
-            for (int i = 0; i < count; i++)
+            for (var i = 0; i < count; i++)
             {
                 readBuffer[i].Should().Be(sourceData[i]);
             }

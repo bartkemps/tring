@@ -1,7 +1,5 @@
 ﻿namespace Ternary3;
 
-using System.Numerics;
-
 public interface ITritArray
 {
     /// <summary>

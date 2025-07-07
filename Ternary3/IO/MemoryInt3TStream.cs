@@ -1,8 +1,4 @@
 ﻿// filepath: C:\Users\kempsb\source\repos\Ternary\Ternary3\IO\MemoryInt3TStream.cs
-using System;
-using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Ternary3.IO
 {

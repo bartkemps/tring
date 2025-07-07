@@ -10,7 +10,7 @@ internal class BinaryTritEncoder(bool mustWriteMagicNumber = true)
     private int offset;
     private int workingValue;
 
-    public IEnumerable<byte> Encode(IEnumerable<Int3T> source)
+    public IEnumerable<byte> Encode(IEnumerable<Int3T> source, bool flush = false)
     {
         foreach (var int3T in source)
         {
@@ -23,7 +23,7 @@ internal class BinaryTritEncoder(bool mustWriteMagicNumber = true)
             if (mustWriteSectionHeader)
             {
                 yield return 244; // Magic number for the encoding format.
-                mustWriteMagicNumber = false;
+                mustWriteSectionHeader = false;
             }
 
             var val = (int)int3T + 13;
@@ -56,6 +56,7 @@ internal class BinaryTritEncoder(bool mustWriteMagicNumber = true)
                     break;
             }
         }
+        if (flush) foreach (var b in Flush()) yield return b;
     }
 
     public IEnumerable<byte> Flush()

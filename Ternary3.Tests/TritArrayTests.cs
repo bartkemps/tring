@@ -1,7 +1,6 @@
 ﻿using FluentAssertions;
 using Ternary3.Operators;
 using System.Numerics;
-using Ternary3.Operators.Operations;
 
 namespace Ternary3.Tests
 {

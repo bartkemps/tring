@@ -1,7 +1,4 @@
 ﻿using FluentAssertions;
-using System;
-using Ternary3;
-using Xunit;
 
 namespace Ternary3.Tests.Numbers
 {
