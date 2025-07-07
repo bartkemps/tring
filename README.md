@@ -152,7 +152,7 @@ arr.Resize(15);         // Resize to a larger array (preserving values)
 // Implicit casting from ternary literals
 TritArray arr2 = terT10_TTT_01T;  // Directly assign a ternary literal to TritArray
 TritArray3 arr3 = ter10T;         // Fixed-size array from literal
-TritArray9 arr4 = ter10T_101_T01; // 9-trit array from literal 
+TritArray9 arr4 = ter10T_101_T01; // 9-trit array from literal
 TritArray27 arr5 = ter10T_101_T01_11T_01T_T10_T11; // 27-trit array from literal
 ```
 
@@ -178,6 +178,118 @@ var arr = new TritArray(10);
 var result = LookupTritArrayOperator.Negate(arr);
 ```
 
+## IO
+
+The Ternary3 library provides stream-based IO utilities for working with ternary data.
+
+### Stream Classes
+
+```csharp
+using Ternary3;
+using Ternary3.IO;
+
+// Creating a memory-backed stream for ternary data
+var memoryStream = new MemoryInt3TStream();
+
+// Working with Int3T values
+var value = new Int3T(5);  // Create a value
+memoryStream.WriteAsync([value], 0, 1);  // Write to stream
+memoryStream.Position = 0;  // Reset position
+
+// Reading from the stream
+Int3T[] buffer = new Int3T[10];
+await memoryStream.ReadAsync(buffer, 0, 1);  // Read into buffer
+Console.WriteLine(buffer[0]);  // Display the value
+
+// Converting between byte streams and Int3T streams
+using (var fileStream = File.OpenRead("data.bin"))
+{
+    // Convert byte stream to Int3T stream
+    var int3tStream = new ByteToInt3TStream(fileStream);
+    
+    // Read ternary data
+    await int3tStream.ReadAsync(buffer, 0, 1);
+}
+
+// Converting from Int3T stream to byte stream
+using (var fileStream = File.Create("output.bin"))
+{
+    // Create a memory Int3T stream
+    var memStream = new MemoryInt3TStream();
+    await memStream.WriteAsync([new Int3T(7)], 0, 1);
+    memStream.Position = 0;
+    
+    // Convert to byte stream and write to file
+    var byteStream = new Int3TToByteStream(memStream);
+    await byteStream.CopyToAsync(fileStream);
+}
+```
+
+### BinaryTritEncoder
+
+The `BinaryTritEncoder` class handles conversion between binary and ternary data:
+
+```csharp
+using Ternary3.IO;
+
+// Encoding a series of Int3T values to bytes
+Int3T[] values = [new Int3T(5), new Int3T(-3), new Int3T(0)];
+byte[] bytes = BinaryTritEncoder.Encode(values);
+
+// Decoding bytes back to Int3T values
+Int3T[] decodedValues = BinaryTritEncoder.Decode(bytes);
+
+// Working with streams
+using (var memStream = new MemoryStream())
+{
+    // Write magic number and encode values to the stream
+    BinaryTritEncoder.WriteMagicNumber(memStream);
+    BinaryTritEncoder.Encode(values, memStream);
+    
+    // Reset position
+    memStream.Position = 0;
+    
+    // Validate and decode
+    if (BinaryTritEncoder.IsMagicNumberValid(memStream))
+    {
+        var decoded = BinaryTritEncoder.Decode(memStream, values.Length);
+        Console.WriteLine(string.Join(", ", decoded));
+    }
+}
+```
+
+### Working with Int3TStream
+
+The abstract `Int3TStream` class serves as the base for all ternary streams:
+
+```csharp
+// Custom stream implementation example
+public class CustomInt3TStream : Int3TStream
+{
+    // Implementation details...
+    
+    public override bool CanRead => true;
+    public override bool CanWrite => true;
+    public override bool CanSeek => true;
+    public override long Length => // implementation;
+    public override long Position { get; set; }
+    
+    public override Task<int> ReadAsync(Int3T[] buffer, int offset, int count, 
+        CancellationToken cancellationToken = default)
+    {
+        // Read implementation
+    }
+    
+    public override Task WriteAsync(Int3T[] buffer, int offset, int count, 
+        CancellationToken cancellationToken = default)
+    {
+        // Write implementation
+    }
+    
+    // Other required override methods...
+}
+```
+
 ## Examples
 
 ### UnaryTritOperationDemo - Using Unary Operators
@@ -199,7 +311,7 @@ public static partial class UnaryTritOperationDemo
     public static void Run()
     {
         Console.WriteLine($"\r\n\r\n{nameof(UnaryTritOperationDemo)}");
-        
+
         // Operation on Int3T outputs TritArray3
         Int3T input1 = ter1TT; // 5 in decimal
         var output1 = input1 | AbsoluteValue; // TritArray3 111
@@ -210,40 +322,40 @@ public static partial class UnaryTritOperationDemo
         Int9T input2A = terT0T; // -10 in decimal
         Int9T output2A = input2A | EchoA; // T0T. Gets implicitly converted to Int9T
         Console.WriteLine($"terT0T Echoed = {output2A}"); // Prints -10
-        
+
         // Custom operation on Int9T outputs TritArray9, which can be implicitly converted to Int9T
         Trit[] echoB = [Trit.Negative, Trit.Zero, Trit.Positive];
         Int9T input2B = terT0T; // -10 in decimal
         Int9T output2B = input2B | echoB; // T0T. Gets implicitly converted to Int9T
         Console.WriteLine($"terT0T Echoed = {output2B}"); // Prints -10
-        
+
         // Custom operation on Int9T outputs TritArray9, which can be implicitly converted to Int9T
         var echoC = new UnaryTritOperator(false, null, true);
         Int9T input2C = terT0T; // -10 in decimal
         Int9T output2C = input2C | echoC; // T0T. Gets implicitly converted to Int9T
         Console.WriteLine($"terT0T Echoed = {output2C}"); // Prints -10
-        
+
         // Custom operation on Int9T outputs TritArray9, which can be implicitly converted to Int9T
         var echoD = new UnaryTritOperator(-1, 0, 1);
         Int9T input2D = terT0T; // -10 in decimal
         Int9T output2D = input2D | echoD; // T0T. Gets implicitly converted to Int9T
         Console.WriteLine($"terT0T Echoed = {output2D}"); // Prints -10
-        
+
         // Using an alias for a Tryte (27-trit integer) and the full name for the operator
         Tryte input3 = ter11T; // 11 in decimal
         long output3 = input3 | Ternary3.Operators.UnaryTritOperator.Negate; // TT1, using the full name for the operator. Result implicitly converted to long.
         Console.WriteLine($"ter11T Negated = {output3}"); // ter11T Negated = -11
-        
+
         //TritArray input with TritArray27. Output is also TritArray27, // which can be explicitly converted to long.
         TritArray27 input4 = 123456789;
         var output4 = input4 | Negate;
         Console.WriteLine($"123456789 Negated = {output4} ({(int)output4})"); // Prints 000000000 T0011TT01 T1T010100 (-123456789)
-        
+
         //Single Trit input
         var input5 = Trit.Negative; // T (negative)
         var output5 = input5 | IsPositive; // No. It is not positive. No translates to T (negative)
         Console.WriteLine($"Is {input5} positive? {output5}"); // Is Negative positive? Negative
-        
+
         // integer input will be implicitly converted to the corresponding TritArray.
         short input6 = -16; // T11T
         var output6 = input6 | Floor; // All T become 0. 0110;
@@ -276,7 +388,7 @@ public partial class BinaryTritOperationDemo
     {
         Console.WriteLine($"\r\n\r\n{nameof(BinaryTritOperationDemo)}");
 
-        
+
         // EXAMPLE 1: Built-in AND operation on two sbytes
         // ---------------------------------------------
         // In ternary, AND returns the minimum value of each trit pair
@@ -287,7 +399,7 @@ public partial class BinaryTritOperationDemo
         Int3T input1A = ter10T;  // 8 in decimal (10T in balanced ternary)
         Int3T input1B = ter100;  // 9 in decimal (100 in balanced ternary)
         var result1 = input1A | And | input1B; // Uses the predefined AND operation
-        Console.WriteLine($"BinaryLookup And: {input1A} ({input1A:ter}) {nameof(And)} {input1B} ({input1B:ter}) = {(sbyte)result1} ({result1:ter})"); 
+        Console.WriteLine($"BinaryLookup And: {input1A} ({input1A:ter}) {nameof(And)} {input1B} ({input1B:ter}) = {(sbyte)result1} ({result1:ter})");
         // Output: 8 (10T) because:
         // 10T (input1A) AND 100 (input1B) = 10T
         // Position by position: 1∧1=1, 0∧0=0, T∧0=T
@@ -302,22 +414,22 @@ public partial class BinaryTritOperationDemo
         // - Returns 1 only when both inputs are 1
         // - Returns 0 in all other cases (including when inputs match as 0)
         BinaryTritOperator mask = new([
-            [T, 0, 0],  // Row for when first input is -1 
+            [T, 0, 0],  // Row for when first input is -1
             [0, 0, 0],  // Row for when first input is 0
             [0, 0, 1]   // Row for when first input is 1
         ]);
         var result2 = input2A | mask | input2B; // Apply the mask operation
         Console.WriteLine($"Custom operation on short: {(TritArray9)input2A} {nameof(mask)} {(TritArray9)input2B} = {result2}");
         // Output: 000000010 - Only positions where both inputs have the same non-zero value are preserved
-        
+
         // EXAMPLE 3: Complex custom operation on int and long
         // ------------------------------------------------
         // The BinaryTritOperator can be initialized using nullable booleans:
         // - null means -1 (negative)
         // - false means 0 (zero)
         // - true means 1 (positive)
-        var input3A = 123456789; 
-        long input3B = 987654321; 
+        var input3A = 123456789;
+        long input3B = 987654321;
         // This "decreaseBy" operation decreases the trit value based on specific combinations
         // The table is read as [first operand, second operand] → result
         var decreaseBy = new BinaryTritOperator(
@@ -341,10 +453,10 @@ public partial class BinaryTritOperationDemo
             Trit.Zero, Trit.Zero, Trit.Zero,              // When first trit is 0, always return 0
             Trit.Negative, Trit.Negative, Trit.Negative   // When first trit is 1, always return -1
         );
-        var result4 = input4A | invertFirstIgnoreSecond | input4B; 
+        var result4 = input4A | invertFirstIgnoreSecond | input4B;
         Console.WriteLine($"Custom operation on int: {input4A:ter} {nameof(invertFirstIgnoreSecond)} {input4B:ter} = {result4} ({result4:ter})");
         // Each trit in input4A is inverted (1→-1, 0→0, -1→1) regardless of input4B's value
-        
+
         // EXAMPLE 5: Built-in OR operation on individual trits
         // ------------------------------------------------
         // In balanced ternary, OR returns the maximum value of each trit pair
@@ -374,7 +486,7 @@ public static partial class OverflowDemo
     public static void Run()
     {
         Console.WriteLine($"\r\n\r\n{nameof(OverflowDemo)}");
-        
+
         // Addition and subtraction may overflow and do so in a ternary way.
         // (so instead of cutting off "binary" bits, it cuts off "ternary" trits)
         Int3T input1A = ter110; // 12 in decimal
@@ -393,12 +505,12 @@ public static partial class OverflowDemo
         TritArray3 input3B = ter010; // 3 in decimal
         var result3 = input3A * input3B; // 110 * 010 = 11100 (36). TritArray3 only keeps 3 trits, so T00 = -9
         Console.WriteLine($"Overflow: {input3A} ({input3A:ter}) * {input3B} ({input3B:ter}) = {result3} ({(int)result3})");
-        
+
         Int3T input4 = 25; // 10T1. trimmed to 3 trits = 0T1 or -2
         Console.WriteLine($"Overflow: 25 => {input4} ({input4:ter})"); // Overflow: 25 => -2 (0T1)
 
         TritArray3 input5 = 25; // 10T1. trimmed to 3 trits = 0T1 or -2
-        Console.WriteLine($"Overflow: 25 => {input5} ({input5:ter})"); // Overflow: 25 => (0T1) 
+        Console.WriteLine($"Overflow: 25 => {input5} ({input5:ter})"); // Overflow: 25 => (0T1)
 
         // Shifting trits two positions in essence multiplies or divides by 9 (3^2).
         var input6 = TritArray9.MaxValue; // 111111111
@@ -438,19 +550,19 @@ public class BasicArithmeticExample
         // Create ternary numbers
         var a = new Trit(5);  // 1TT in balanced ternary
         var b = new Trit(7);  // 21T in balanced ternary
-        
+
         // Addition
         Console.WriteLine($"{a} + {b} = {a + b}");
-        
+
         // Subtraction
         Console.WriteLine($"{a} - {b} = {a - b}");
-        
+
         // Multiplication
         Console.WriteLine($"{a} * {b} = {a * b}");
-        
+
         // Division
         Console.WriteLine($"{a} / {b} = {a / b}");
-        
+
         // Modulo
         Console.WriteLine($"{a} % {b} = {a % b}");
     }
@@ -469,19 +581,19 @@ public class LogicalOperationsExample
     {
         var x = new Trit(5);  // 1TT in balanced ternary
         var y = new Trit(3);  // 10 in balanced ternary
-        
+
         // Demonstrate logical AND operation
         Console.WriteLine($"{x} AND {y} = {x | And | y}");
         Console.WriteLine($"In decimal: 5 AND 3 = {(x | And | y).ToInt()}");
-        
+
         // Demonstrate logical OR operation
         Console.WriteLine($"{x} OR {y} = {x | Or | y}");
         Console.WriteLine($"In decimal: 5 OR 3 = {(x | Or | y).ToInt()}");
-        
+
         // Demonstrate logical XOR operation
         Console.WriteLine($"{x} XOR {y} = {x | Xor | y}");
         Console.WriteLine($"In decimal: 5 XOR 3 = {(x | Xor | y).ToInt()}");
-        
+
         // Demonstrate more complex expressions
         var z = new Trit(8);  // 1T1 in balanced ternary
         var result = (x | And | y) | Xor | z;
@@ -502,19 +614,19 @@ public class UnaryOperationsExample
     public static void Run()
     {
         var num = new Trit(8);  // 1T1
-        
+
         // Floor operation
         Console.WriteLine($"{num} | Floor = {num | Floor}");
-        
+
         // Ceiling operation
         Console.WriteLine($"{num} | Ceiling = {num | Ceiling}");
-        
+
         // Negate operation
         Console.WriteLine($"{num} | Negate = {num | Negate}");
-        
+
         // Increment operation
         Console.WriteLine($"{num} | Increment = {num | Increment}");
-        
+
         // Decrement operation
         Console.WriteLine($"{num} | Decrement = {num | Decrement}");
     }
@@ -534,12 +646,12 @@ public class ConversionExample
         int decimalValue = 42;
         var ternaryValue = new Trit(decimalValue);
         Console.WriteLine($"Decimal {decimalValue} in balanced ternary: {ternaryValue}");
-        
+
         // Convert from balanced ternary to decimal
         string ternaryString = "11T0T";
         var parsedValue = Trit.Parse(ternaryString);
         Console.WriteLine($"Balanced ternary {ternaryString} in decimal: {parsedValue.ToInt()}");
-        
+
         // Convert from binary to balanced ternary
         string binaryString = "10101";
         var binaryValue = Convert.ToInt32(binaryString, 2);
@@ -646,6 +758,11 @@ This allows for flexible formatting and display of ternary numbers, including cu
 - **Operator Structs**
     - [`UnaryTritOperator` Struct](#unarytritoperator-struct) - Defines unary Trit operations and provides standard operations
     - [`BinaryTritOperator` Struct](#binarytritoperator-struct) - Defines binary Trit operations using a lookup table
+- **IO Classes**
+    - [`Int3TStream` Class](#int3tstream-class) - Abstract base class for streams that work with Int3T values
+    - [`ByteToInt3TStream` Class](#bytetoint3tstream-class) - Converts a byte stream to an Int3T stream
+    - [`Int3TToByteStream` Class](#int3ttobytestream-class) - Converts an Int3T stream to a byte stream
+    - [`MemoryInt3TStream` Class](#memoryint3tstream-class) - Stream with memory backing store for Int3T values
 - **Additional Types**
     - [`ITritArray` Interface](#itritarray-interface)
     - [`ITernaryInteger<T>` Interface](#iternaryintegert-interface)
@@ -996,154 +1113,117 @@ Provides a set of predefined binary operations implemented as lookup tables for 
 **Methods:**
 - `Trit Apply(Trit a, Trit b)` - Applies the binary operation to the specified trits.
 
-### Additional Types
+### IO Classes
 
-#### `ITritArray` Interface
-
-```csharp
-namespace Ternary3
-```
-
-Defines the core functionality for a trit array.
-
-**Properties:**
-- `int Length { get; }` - Gets the length of the trit array.
-
-**Indexer:**
-- `Trit this[int index] { get; set; }` - Gets or sets the trit at the specified index.
-
-#### `ITernaryInteger<T>` Interface
+#### `Int3TStream` Class
 
 ```csharp
-namespace Ternary3
+namespace Ternary3.IO
 ```
 
-Defines the common functionality for ternary integer types.
-
-**Type Parameters:**
-- `T` - The specific ternary integer type.
+Provides an abstract base class for Int3T streams. It is the ternary equivalent of the binary System.IO.Stream that works with bytes.
 
 **Properties:**
-- `T MaxValue { get; }` - Gets the maximum value for the ternary integer type.
-- `T MinValue { get; }` - Gets the minimum value for the ternary integer type.
+- `protected bool Disposed { get; }` - Gets a value indicating whether the current stream has been disposed.
+- `abstract bool CanRead { get; }` - When overridden in a derived class, gets a value indicating whether the current stream supports reading.
+- `abstract bool CanWrite { get; }` - When overridden in a derived class, gets a value indicating whether the current stream supports writing.
+- `abstract bool CanSeek { get; }` - When overridden in a derived class, gets a value indicating whether the current stream supports seeking.
+- `abstract long Length { get; }` - When overridden in a derived class, gets the length in Int3T units of the stream.
+- `abstract long Position { get; set; }` - When overridden in a derived class, gets or sets the position within the current stream.
 
 **Methods:**
-- Various arithmetic and comparison operations specific to ternary integers.
+- `abstract Task<int> ReadAsync(Int3T[] buffer, int offset, int count, CancellationToken cancellationToken = default)` - When overridden in a derived class, reads a sequence of Int3T values from the current stream and advances the position within the stream by the number of Int3T values read.
+- `abstract Task WriteAsync(Int3T[] buffer, int offset, int count, CancellationToken cancellationToken = default)` - When overridden in a derived class, writes a sequence of Int3T values to the current stream and advances the current position within this stream by the number of Int3T values written.
+- `abstract Task<long> SeekAsync(long offset, SeekOrigin origin, CancellationToken cancellationToken = default)` - When overridden in a derived class, sets the position within the current stream.
+- `abstract Task SetLengthAsync(long value, CancellationToken cancellationToken = default)` - When overridden in a derived class, sets the length of the current stream.
+- `abstract Task FlushAsync(CancellationToken cancellationToken = default)` - When overridden in a derived class, clears all buffers for this stream and causes any buffered data to be written to the underlying device.
+- `virtual ValueTask DisposeAsync()` - Asynchronously releases the unmanaged resources used by the Int3TStream and optionally releases the managed resources.
 
-### Formatting Namespace
-
-#### `TernaryFormatter` Class
-
-```csharp
-namespace Ternary3.Formatting
-```
-
-A custom formatter for ternary types, supporting both ternary and standard numeric formatting.
-
-**Methods:**
-- `string Format(string? format, object? arg, IFormatProvider? provider)` - Formats the specified object according to the specified format.
-- `string Format(ITernaryFormat format, ITritArray trits)` - Formats a trit array using a custom ternary format.
-
-#### `TernaryFormat` Class
+#### `ByteToInt3TStream` Class
 
 ```csharp
-namespace Ternary3.Formatting
+namespace Ternary3.IO
 ```
 
-Represents a customizable ternary format, allowing you to specify digit symbols, grouping, separators, and padding for formatting trit arrays.
-
-**Properties:**
-- `string NegativeDigit` - Gets or sets the symbol used to represent negative trits (-1).
-- `string ZeroDigit` - Gets or sets the symbol used to represent zero trits (0).
-- `string PositiveDigit` - Gets or sets the symbol used to represent positive trits (1).
-- `IReadOnlyList<TritGroupDefinition> Groups` - Gets the group definitions used for hierarchical formatting.
-- `TernaryPadding Padding` - Gets or sets the padding options for the formatted output.
-- `bool PadToNextGroup` - Gets or sets a value indicating whether to pad the formatted output to the next group boundary.
-
-**Methods:**
-- `TernaryFormat WithDigits(string negativeDigit, string zeroDigit, string positiveDigit)` - Creates a new TernaryFormat with the specified digit symbols.
-- `TernaryFormat WithGroup(int size, string separator)` - Creates a new TernaryFormat with an additional group definition.
-- `TernaryFormat WithGroups(params TritGroupDefinition[] groups)` - Creates a new TernaryFormat with the specified group definitions.
-- `TernaryFormat WithPadding(TernaryPadding padding)` - Creates a new TernaryFormat with the specified padding options.
-- `TernaryFormat WithPadToNextGroup(bool padToNextGroup)` - Creates a new TernaryFormat with the specified pad-to-next-group option.
-
-#### `TernaryFormatProvider` Class
-
-```csharp
-namespace Ternary3.Formatting
-```
-
-Provides a format provider for ternary formatting, returning a TernaryFormatter for ternary types.
-
-**Methods:**
-- `object? GetFormat(Type? formatType)` - Returns an object that provides formatting services for the specified type.
-
-#### `ITernaryFormat` Interface
-
-```csharp
-namespace Ternary3.Formatting
-```
-
-Provides formatting options for representing arrays of trits as strings, including digit symbols, grouping, separators, and padding.
-
-**Properties:**
-- `string NegativeDigit` - Gets the symbol used to represent negative trits (-1).
-- `string ZeroDigit` - Gets the symbol used to represent zero trits (0).
-- `string PositiveDigit` - Gets the symbol used to represent positive trits (1).
-- `IReadOnlyList<TritGroupDefinition> Groups` - Gets the group definitions used for hierarchical formatting.
-- `TernaryPadding Padding` - Gets the padding options for the formatted output.
-- `bool PadToNextGroup` - Gets a value indicating whether to pad the formatted output to the next group boundary.
-
-#### `TritGroupDefinition` Class
-
-```csharp
-namespace Ternary3.Formatting
-```
-
-Defines a group for hierarchical trit formatting, specifying the separator and group size.
-
-**Properties:**
-- `int Size` - Gets the number of trits in the group.
-- `string Separator` - Gets the separator string to insert after each group.
+A stream that converts a byte stream to an Int3T stream. This stream reads bytes from the underlying byte stream and converts them to Int3T values using the BinaryTritEncoder.
 
 **Constructors:**
-- `TritGroupDefinition(int size, string separator)` - Creates a new TritGroupDefinition with the specified size and separator.
+- `public ByteToInt3TStream(Stream source, bool mustWriteMagicNumber = true, bool leaveOpen = false)` - Initializes a new instance of the ByteToInt3TStream class with the specified source stream, magic number behavior, and stream closing behavior.
 
-#### `ITernaryFormatter` Interface
-
-```csharp
-namespace Ternary3.Formatting
-```
-
-A custom formatter that knows how to format trits.
+**Properties:**
+- `public override bool CanRead { get; }` - Gets a value indicating whether the current stream supports reading.
+- `public override bool CanWrite { get; }` - Gets a value indicating whether the current stream supports writing.
+- `public override bool CanSeek { get; }` - Gets a value indicating whether the current stream supports seeking.
+- `public override long Length { get; }` - Gets the length in Int3T units of the stream.
+- `public override long Position { get; set; }` - Gets or sets the position within the current stream.
 
 **Methods:**
-- `string Format(ITernaryFormat format, ITritArray trits)` - Formats a trit array using a custom ternary format.
+- `public override Task<int> ReadAsync(Int3T[] buffer, int offset, int count, CancellationToken cancellationToken = default)` - Reads a sequence of Int3T values from the current stream and advances the position within the stream by the number of Int3T values read.
+- `public override Task WriteAsync(Int3T[] buffer, int offset, int count, CancellationToken cancellationToken = default)` - Writes a sequence of Int3T values to the current stream and advances the current position within this stream by the number of Int3T values written.
+- `public override Task FlushAsync(CancellationToken cancellationToken = default)` - Clears all buffers for this stream and causes any buffered data to be written to the underlying device.
+- `public override Task<long> SeekAsync(long offset, SeekOrigin origin, CancellationToken cancellationToken = default)` - Sets the position within the current stream.
+- `public override Task SetLengthAsync(long value, CancellationToken cancellationToken = default)` - Sets the length of the current stream.
+- `public override ValueTask DisposeAsync()` - Asynchronously releases the unmanaged resources used by the ByteToInt3TStream and optionally releases the managed resources.
 
-#### `InvariantTernaryFormat` Class
-
-```csharp
-namespace Ternary3.Formatting
-```
-
-A built-in, culture-invariant ternary format with standard digit symbols and grouping.
-
-**Static Properties:**
-- `static readonly InvariantTernaryFormat Instance` - Gets the singleton instance of the InvariantTernaryFormat.
-
-**Properties:**
-- Same as the ITernaryFormat interface, with pre-defined invariant values.
-
-#### `MinimalTernaryFormat` Class
+#### `Int3TToByteStream` Class
 
 ```csharp
-namespace Ternary3.Formatting
+namespace Ternary3.IO
 ```
 
-A built-in minimal ternary format for compact representations.
+A stream that converts an Int3T stream to a byte stream. This stream reads Int3T values from the underlying Int3T stream and converts them to bytes using the BinaryTritEncoder.
 
-**Static Properties:**
-- `static readonly MinimalTernaryFormat Instance` - Gets the singleton instance of the MinimalTernaryFormat.
+**Constructors:**
+- `public Int3TToByteStream(Int3TStream source, bool mustWriteMagicNumber = true, bool leaveOpen = false)` - Initializes a new instance of the Int3TToByteStream class with the specified source stream, magic number behavior, and stream closing behavior.
 
 **Properties:**
-- Same as the ITernaryFormat interface, with pre-defined minimal values for compact representation.
+- `public override bool CanRead { get; }` - Gets a value indicating whether the current stream supports reading.
+- `public override bool CanWrite { get; }` - Gets a value indicating whether the current stream supports writing.
+- `public override bool CanSeek { get; }` - Gets a value indicating whether the current stream supports seeking.
+- `public override long Length { get; }` - Gets the length in bytes of the stream.
+- `public override long Position { get; set; }` - Gets or sets the position within the current stream.
+
+**Methods:**
+- `public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)` - Reads a sequence of bytes from the current stream and advances the position within the stream by the number of bytes read.
+- `public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)` - Writes a sequence of bytes to the current stream and advances the current position within this stream by the number of bytes written.
+- `public override Task FlushAsync(CancellationToken cancellationToken)` - Clears all buffers for this stream and causes any buffered data to be written to the underlying device.
+- `public override void Flush()` - Clears all buffers for this stream and causes any buffered data to be written to the underlying device.
+- `public override int Read(byte[] buffer, int offset, int count)` - Reads a sequence of bytes from the current stream and advances the position within the stream by the number of bytes read.
+- `public override void Write(byte[] buffer, int offset, int count)` - Writes a sequence of bytes to the current stream and advances the current position within this stream by the number of bytes written.
+- `public override long Seek(long offset, SeekOrigin origin)` - Sets the position within the current stream.
+- `public override void SetLength(long value)` - Sets the length of the current stream.
+- `protected override void Dispose(bool disposing)` - Releases the unmanaged resources used by the Int3TToByteStream and optionally releases the managed resources.
+
+#### `MemoryInt3TStream` Class
+
+```csharp
+namespace Ternary3.IO
+```
+
+Creates a stream whose backing store is memory. This implementation uses Int3T as the basic unit instead of bytes.
+
+**Constructors:**
+- `public MemoryInt3TStream()` - Initializes a new instance of the MemoryInt3TStream class with an expandable capacity initialized to zero.
+- `public MemoryInt3TStream(int capacity)` - Initializes a new instance of the MemoryInt3TStream class with an expandable capacity initialized to the specified value.
+- `public MemoryInt3TStream(Int3T[] buffer)` - Initializes a new instance of the MemoryInt3TStream class with the specified Int3T array as a backing store.
+- `public MemoryInt3TStream(Int3T[] buffer, bool writable)` - Initializes a new instance of the MemoryInt3TStream class with the specified Int3T array as a backing store and a Boolean value indicating whether the stream can be written to.
+- `public MemoryInt3TStream(Int3T[] buffer, int index, int count)` - Initializes a new instance of the MemoryInt3TStream class with the specified Int3T array segment as a backing store.
+- `public MemoryInt3TStream(Int3T[] buffer, int index, int count, bool writable)` - Initializes a new instance of the MemoryInt3TStream class with the specified Int3T array segment as a backing store and a Boolean value indicating whether the stream can be written to.
+
+**Properties:**
+- `public override bool CanRead { get; }` - Gets a value indicating whether the current stream supports reading.
+- `public override bool CanSeek { get; }` - Gets a value indicating whether the current stream supports seeking.
+- `public override bool CanWrite { get; }` - Gets a value indicating whether the current stream supports writing.
+- `public override long Length { get; }` - Gets the length in Int3T units of the stream.
+- `public override long Position { get; set; }` - Gets or sets the position within the current stream.
+- `public int Capacity { get; set; }` - Gets or sets the number of Int3T values that the memory stream can hold.
+
+**Methods:**
+- `public override Task<int> ReadAsync(Int3T[] buffer, int offset, int count, CancellationToken cancellationToken = default)` - Reads a sequence of Int3T values from the current stream and advances the position within the stream by the number of Int3T values read.
+- `public override Task WriteAsync(Int3T[] buffer, int offset, int count, CancellationToken cancellationToken = default)` - Writes a sequence of Int3T values to the current stream and advances the current position within this stream by the number of Int3T values written.
+- `public override Task<long> SeekAsync(long offset, SeekOrigin origin, CancellationToken cancellationToken = default)` - Sets the position within the current stream.
+- `public override Task SetLengthAsync(long value, CancellationToken cancellationToken = default)` - Sets the length of the current stream.
+- `public override Task FlushAsync(CancellationToken cancellationToken = default)` - Clears all buffers for this stream and causes any buffered data to be written to the underlying device.
+- `public Int3T[] ToArray()` - Returns the array of Int3T values from the current stream.
+- `public void WriteTo(Int3TStream stream)` - Writes the entire contents of this memory stream to another stream.
+- `protected override void Dispose(bool disposing)` - Releases the unmanaged resources used by the MemoryInt3TStream and optionally releases the managed resources.
