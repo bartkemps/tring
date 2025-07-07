@@ -18,13 +18,13 @@ public sealed class Int3TToByteStream(Int3TStream source, bool mustWriteMagicNum
     private bool canWrite = source.CanWrite;
     private readonly BinaryTritEncoder encoder = new(mustWriteMagicNumber);
     private bool disposed;
-    
+
     public override async Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
     {
         if (disposed) throw new ObjectDisposedException(nameof(Int3TToByteStream));
         if (!CanRead) throw new NotSupportedException("The stream does not support reading.");
         canWrite = false;
-        
+
         if (buffer == null) throw new ArgumentNullException(nameof(buffer));
         if (offset < 0) throw new ArgumentOutOfRangeException(nameof(offset), "Offset cannot be negative.");
         if (count < 0) throw new ArgumentOutOfRangeException(nameof(count), "Count cannot be negative.");
@@ -33,29 +33,21 @@ public sealed class Int3TToByteStream(Int3TStream source, bool mustWriteMagicNum
         // No bytes to read
         if (count == 0) return 0;
 
-        // Read trits from the source stream
-        var trits = new List<Int3T>();
-        var tritBuffer = new Int3T[1024]; // Reasonable buffer size
+        var tritBufferSize = (count - (encoder.MustWriteMagicNumber ? 1 : 0) - (encoder.MustWriteSectionHeader ? 1 : 0)) * 5 / 3;
+        var tritBuffer = new Int3T[tritBufferSize]; // required buffer size
 
-        var tritsRead = await source.ReadAsync(tritBuffer, 0, tritBuffer.Length, cancellationToken);
+        var tritsRead = await source.ReadAsync(tritBuffer, 0, tritBufferSize, cancellationToken);
 
         // No trits available
         if (tritsRead == 0) return 0;
-        
-        // Add the trits we read to our list
-        for (var i = 0; i < tritsRead; i++)
-        {
-            trits.Add(tritBuffer[i]);
-        }
 
         // Encode the trits to bytes
-        var bytes = encoder.Encode(trits, true).ToArray();
-        
+        var bytes = encoder.Encode(tritBuffer[..tritsRead], true).ToArray();
+
         // Copy to the output buffer
-        var bytesToCopy = Math.Min(count, bytes.Length);
-        Array.Copy(bytes, 0, buffer, offset, bytesToCopy);
-        
-        return bytesToCopy;
+        Array.Copy(bytes, 0, buffer, offset, bytes.Length);
+
+        return bytes.Length;
     }
 
     public override async Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
@@ -102,39 +94,39 @@ public sealed class Int3TToByteStream(Int3TStream source, bool mustWriteMagicNum
         canRead = false;
         await source.FlushAsync(cancellationToken);
     }
-    
+
     /// <inheritdoc />
     public override void Flush() => FlushAsync().GetAwaiter().GetResult();
-    
+
     /// <inheritdoc />
     public override int Read(byte[] buffer, int offset, int count) => ReadAsync(buffer, offset, count).GetAwaiter().GetResult();
-    
+
     /// <inheritdoc />
     public override void Write(byte[] buffer, int offset, int count) => WriteAsync(buffer, offset, count).GetAwaiter().GetResult();
-    
+
     /// <inheritdoc />
     public override long Seek(long offset, SeekOrigin origin)
     {
         if (disposed) throw new ObjectDisposedException(nameof(Int3TToByteStream));
         throw new NotSupportedException();
     }
-    
+
     /// <inheritdoc />
     public override void SetLength(long value)
     {
         if (disposed) throw new ObjectDisposedException(nameof(Int3TToByteStream));
         throw new NotSupportedException();
     }
-    
+
     /// <inheritdoc />
     public override bool CanRead => !disposed && canRead && source.CanRead;
-    
+
     /// <inheritdoc />
     public override bool CanWrite => !disposed && canWrite && source.CanWrite;
-    
+
     /// <inheritdoc />
     public override bool CanSeek => false;
-    
+
     /// <inheritdoc />
     public override long Length
     {
@@ -144,7 +136,7 @@ public sealed class Int3TToByteStream(Int3TStream source, bool mustWriteMagicNum
             throw new NotSupportedException("The stream does not support seeking.");
         }
     }
-    
+
     /// <inheritdoc />
     public override long Position
     {
@@ -194,10 +186,10 @@ public sealed class Int3TToByteStream(Int3TStream source, bool mustWriteMagicNum
             {
                 source.DisposeAsync().GetAwaiter().GetResult();
             }
-            
+
             disposed = true;
         }
-        
+
         base.Dispose(disposing);
     }
 
@@ -227,12 +219,12 @@ public sealed class Int3TToByteStream(Int3TStream source, bool mustWriteMagicNum
             {
                 await source.DisposeAsync().ConfigureAwait(false);
             }
-            
+
             disposed = true;
         }
-        
+
         await base.DisposeAsync().ConfigureAwait(false);
-        
+
         GC.SuppressFinalize(this);
     }
 }
