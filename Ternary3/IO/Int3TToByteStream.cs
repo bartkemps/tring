@@ -49,7 +49,7 @@ public sealed class Int3TToByteStream(Int3TStream source, bool mustWriteMagicNum
         }
 
         // Encode the trits to bytes
-        var bytes = encoder.Encode(trits).ToArray();
+        var bytes = encoder.Encode(trits, true).ToArray();
         
         // Copy to the output buffer
         var bytesToCopy = Math.Min(count, bytes.Length);

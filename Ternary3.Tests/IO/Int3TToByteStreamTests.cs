@@ -95,6 +95,7 @@ public class Int3TToByteStreamTests
     }
     
     [Theory]
+    [InlineData(new [] { 1, 2, 3, 4 })]
     [InlineData(new [] { 1, 10, 0, 0 })]
     [InlineData(new [] { 1, 10, 1, 0 })]
     [InlineData(new [] { 1, 10, 1, 11 })]
@@ -109,7 +110,7 @@ public class Int3TToByteStreamTests
         await inputStream.SeekAsync(0, SeekOrigin.Begin);
         var stream1 = new Int3TToByteStream(inputStream);
 
-        var buffer = new byte[200];
+        var buffer = new byte[10];
         
         var count = await stream1.ReadAsync(buffer, 0, buffer.Length);
         
@@ -121,39 +122,5 @@ public class Int3TToByteStreamTests
         
         // Assert
         outputBuffer.Take(tritsBuffer.Length).Should().BeEquivalentTo(tritsBuffer);
-    }
-    
-    private class MockReadOnlyInt3TStream : Int3TStream
-    {
-        public override bool CanRead => true;
-        public override bool CanWrite => false;
-        public override bool CanSeek => false;
-        public override long Length => throw new NotSupportedException();
-        public override long Position { get => throw new NotSupportedException(); set => throw new NotSupportedException(); }
-
-        public override Task<int> ReadAsync(Int3T[] buffer, int offset, int count, CancellationToken cancellationToken = default)
-        {
-            return Task.FromResult(0);
-        }
-
-        public override Task WriteAsync(Int3T[] buffer, int offset, int count, CancellationToken cancellationToken = default)
-        {
-            throw new NotSupportedException("The stream does not support writing.");
-        }
-
-        public override Task<long> SeekAsync(long offset, SeekOrigin origin, CancellationToken cancellationToken = default)
-        {
-            throw new NotSupportedException();
-        }
-
-        public override Task SetLengthAsync(long value, CancellationToken cancellationToken = default)
-        {
-            throw new NotSupportedException();
-        }
-
-        public override Task FlushAsync(CancellationToken cancellationToken = default)
-        {
-            throw new NotSupportedException();
-        }
     }
 }
