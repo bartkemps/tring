@@ -159,6 +159,5 @@ public class Int3TToByteStreamTests
         (count1 + count2 + count3).Should().BeGreaterThan(count4);
         actual1.Should().BeEquivalentTo(inputStream.ToArray());
         actual2.Should().BeEquivalentTo(inputStream.ToArray());
-
     }
 }
