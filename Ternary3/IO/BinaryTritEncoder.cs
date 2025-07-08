@@ -64,6 +64,7 @@ internal class BinaryTritEncoder(bool mustWriteMagicNumber = true)
         if (offset == 0) yield break;
         yield return offset < 3 ? (byte)(255 - workingValue) : (byte)workingValue;
         MustWriteSectionHeader = true;
+        offset = 0;
     }
 
     public IEnumerable<Int3T> Decode(IEnumerable<byte> source)

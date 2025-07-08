@@ -135,7 +135,7 @@ public class Int3TToByteStreamTests
     [Fact]
     public async Task WriteAsync_SupportsMultipleReads()
     {
-        var inputStream = new MemoryInt3TStream([-9,-6,-3,0,3,6,9]);
+        var inputStream = new MemoryInt3TStream([-13,-12,-11,-10,-9,-8,-7]);
         await inputStream.SeekAsync(0, SeekOrigin.Begin);
         var stream1 = new Int3TToByteStream(inputStream);
         var buffer1 = new byte[12];
