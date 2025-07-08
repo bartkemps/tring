@@ -168,23 +168,33 @@ public sealed class Int3TToByteStream(Int3TStream source, bool mustWriteMagicNum
     {
         if (!disposed)
         {
-            // Try to flush any pending data
-            if (CanWrite)
+            if (disposing)
             {
-                try
+                // Try to flush any pending data
+                if (CanWrite)
                 {
-                    Flush();
+                    try
+                    {
+                        Flush();
+                    }
+                    catch
+                    {
+                        // Ignore exceptions during disposal
+                    }
                 }
-                catch
-                {
-                    // Ignore exceptions during disposal
-                }
-            }
 
-            // Dispose the underlying stream
-            if (!leaveOpen)
-            {
-                source.DisposeAsync().GetAwaiter().GetResult();
+                // Dispose the underlying stream
+                if (!leaveOpen && source != null)
+                {
+                    try
+                    {
+                        source.DisposeAsync().GetAwaiter().GetResult();
+                    }
+                    catch
+                    {
+                        // Ignore exceptions during disposal
+                    }
+                }
             }
 
             disposed = true;
