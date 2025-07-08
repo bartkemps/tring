@@ -171,16 +171,16 @@ public sealed class Int3TToByteStream(Int3TStream source, bool mustWriteMagicNum
             if (disposing)
             {
                 // Try to flush any pending data
-                if (CanWrite)
+                try
                 {
-                    try
+                    if (CanWrite)
                     {
                         Flush();
                     }
-                    catch
-                    {
-                        // Ignore exceptions during disposal
-                    }
+                }
+                catch
+                {
+                    // Ignore exceptions during disposal
                 }
 
                 // Dispose the underlying stream
