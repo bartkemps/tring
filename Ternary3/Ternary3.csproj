@@ -12,7 +12,7 @@
         
         <!-- NuGet Package Metadata -->
         <PackageId>Ternary</PackageId>
-        <Version>2.1.0-beta-3</Version>
+        <Version>2.1.0-beta-4</Version>
         <Authors>Bart Kemps</Authors>
         <Company></Company>
         <Description>Ternary3: A C# library for working with balanced ternary number system. Includes fixed-size ternary integers and trit arrays with various operations.</Description>
@@ -20,6 +20,7 @@
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <RepositoryUrl>https://github.com/bartkemps/tring</RepositoryUrl>
+        <PackageIcon>T01.png</PackageIcon>
     </PropertyGroup>
 
     <ItemGroup>
@@ -68,6 +69,10 @@
         </None>
         <None Remove="lib\libz3_x86.dll" />
         <None Remove="lib\Microsoft.Z3.xml" />
+        <None Update="T01.png">
+          <Pack>True</Pack>
+          <PackagePath></PackagePath>
+        </None>
     </ItemGroup>
 
     <ItemGroup>

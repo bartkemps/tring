@@ -52,7 +52,7 @@ namespace Ternary3.Tests
         [Fact]
         public void Ctor_FromNullArray_Throws()
         {
-            Action act = () => new TritArray(null);
+            Action act = () => new TritArray(null!);
             act.Should().Throw<ArgumentNullException>();
         }
 

@@ -180,114 +180,76 @@ var result = LookupTritArrayOperator.Negate(arr);
 
 ## IO
 
-The Ternary3 library provides stream-based IO utilities for working with ternary data.
+The Ternary3.IO namespace provides stream classes for working with Int3T (ternary) data, similar to how System.IO.Stream works with bytes. These streams enable reading, writing, and converting between ternary and binary data formats.
 
-### Stream Classes
+### Int3TStream
+
+The `Int3TStream` is an abstract base class that represents a sequence of Int3T values (trybbles). It is the ternary equivalent of the binary `System.IO.Stream` that works with bytes.
+
+Key properties and methods:
+- `CanRead`, `CanWrite`, `CanSeek` - indicate stream capabilities
+- `Length`, `Position` - manage stream position and size
+- `ReadAsync()`, `WriteAsync()` - asynchronous read/write operations
+- `ReadInt3TAsync()`, `WriteInt3TAsync()` - read/write single Int3T values
+
+### MemoryInt3TStream
+
+A concrete implementation of `Int3TStream` that uses memory as its backing store, similar to `MemoryStream` for bytes.
 
 ```csharp
-using Ternary3;
 using Ternary3.IO;
 
-// Creating a memory-backed stream for ternary data
+// Create an expandable memory stream
+var stream = new MemoryInt3TStream();
+
+// Write some Int3T values
+await stream.WriteInt3TAsync(new Int3T(1));
+await stream.WriteInt3TAsync(new Int3T(-1));
+await stream.WriteInt3TAsync(new Int3T(0));
+
+// Reset position to read from beginning
+stream.Position = 0;
+
+// Read the values back
+var buffer = new Int3T[3];
+int bytesRead = await stream.ReadAsync(buffer, 0, 3);
+```
+
+### ByteToInt3TStream
+
+Converts a byte stream to an Int3T stream using the `BinaryTritEncoder`. This enables reading ternary data that has been encoded in binary format.
+
+```csharp
+using Ternary3.IO;
+
+// Convert bytes to Int3T stream
+using var fileStream = File.OpenRead("ternary_data.bin");
+using var int3tStream = new ByteToInt3TStream(fileStream);
+
+// Read ternary values
+var buffer = new Int3T[100];
+int tritsRead = await int3tStream.ReadAsync(buffer, 0, 100);
+```
+
+### Int3TToByteStream
+
+Converts an Int3T stream to a byte stream, allowing ternary data to be written in binary format for storage or transmission.
+
+```csharp
+using Ternary3.IO;
+
+// Create source ternary stream
 var memoryStream = new MemoryInt3TStream();
+await memoryStream.WriteInt3TAsync(new Int3T(1));
+await memoryStream.WriteInt3TAsync(new Int3T(-1));
 
-// Working with Int3T values
-var value = new Int3T(5);  // Create a value
-memoryStream.WriteAsync([value], 0, 1);  // Write to stream
-memoryStream.Position = 0;  // Reset position
+// Convert to bytes
+memoryStream.Position = 0;
+using var byteStream = new Int3TToByteStream(memoryStream);
 
-// Reading from the stream
-Int3T[] buffer = new Int3T[10];
-await memoryStream.ReadAsync(buffer, 0, 1);  // Read into buffer
-Console.WriteLine(buffer[0]);  // Display the value
-
-// Converting between byte streams and Int3T streams
-using (var fileStream = File.OpenRead("data.bin"))
-{
-    // Convert byte stream to Int3T stream
-    var int3tStream = new ByteToInt3TStream(fileStream);
-    
-    // Read ternary data
-    await int3tStream.ReadAsync(buffer, 0, 1);
-}
-
-// Converting from Int3T stream to byte stream
-using (var fileStream = File.Create("output.bin"))
-{
-    // Create a memory Int3T stream
-    var memStream = new MemoryInt3TStream();
-    await memStream.WriteAsync([new Int3T(7)], 0, 1);
-    memStream.Position = 0;
-    
-    // Convert to byte stream and write to file
-    var byteStream = new Int3TToByteStream(memStream);
-    await byteStream.CopyToAsync(fileStream);
-}
-```
-
-### BinaryTritEncoder
-
-The `BinaryTritEncoder` class handles conversion between binary and ternary data:
-
-```csharp
-using Ternary3.IO;
-
-// Encoding a series of Int3T values to bytes
-Int3T[] values = [new Int3T(5), new Int3T(-3), new Int3T(0)];
-byte[] bytes = BinaryTritEncoder.Encode(values);
-
-// Decoding bytes back to Int3T values
-Int3T[] decodedValues = BinaryTritEncoder.Decode(bytes);
-
-// Working with streams
-using (var memStream = new MemoryStream())
-{
-    // Write magic number and encode values to the stream
-    BinaryTritEncoder.WriteMagicNumber(memStream);
-    BinaryTritEncoder.Encode(values, memStream);
-    
-    // Reset position
-    memStream.Position = 0;
-    
-    // Validate and decode
-    if (BinaryTritEncoder.IsMagicNumberValid(memStream))
-    {
-        var decoded = BinaryTritEncoder.Decode(memStream, values.Length);
-        Console.WriteLine(string.Join(", ", decoded));
-    }
-}
-```
-
-### Working with Int3TStream
-
-The abstract `Int3TStream` class serves as the base for all ternary streams:
-
-```csharp
-// Custom stream implementation example
-public class CustomInt3TStream : Int3TStream
-{
-    // Implementation details...
-    
-    public override bool CanRead => true;
-    public override bool CanWrite => true;
-    public override bool CanSeek => true;
-    public override long Length => // implementation;
-    public override long Position { get; set; }
-    
-    public override Task<int> ReadAsync(Int3T[] buffer, int offset, int count, 
-        CancellationToken cancellationToken = default)
-    {
-        // Read implementation
-    }
-    
-    public override Task WriteAsync(Int3T[] buffer, int offset, int count, 
-        CancellationToken cancellationToken = default)
-    {
-        // Write implementation
-    }
-    
-    // Other required override methods...
-}
+// Write to file
+using var fileStream = File.Create("output.bin");
+await byteStream.CopyToAsync(fileStream);
 ```
 
 ## Examples
@@ -1171,7 +1133,7 @@ A stream that converts a byte stream to an Int3T stream. This stream reads bytes
 namespace Ternary3.IO
 ```
 
-A stream that converts an Int3T stream to a byte stream. This stream reads Int3T values from the underlying Int3T stream and converts them to bytes using the BinaryTritEncoder.
+A stream that converts an Int3T stream to a byte stream, allowing ternary data to be written in binary format for storage or transmission.
 
 **Constructors:**
 - `public Int3TToByteStream(Int3TStream source, bool mustWriteMagicNumber = true, bool leaveOpen = false)` - Initializes a new instance of the Int3TToByteStream class with the specified source stream, magic number behavior, and stream closing behavior.

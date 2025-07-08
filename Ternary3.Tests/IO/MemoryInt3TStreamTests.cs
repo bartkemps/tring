@@ -69,7 +69,7 @@ namespace Ternary3.Tests.IO
         [Fact]
         public void Constructor_WithNullBuffer_ThrowsArgumentNullException()
         {
-            Action act = () => new MemoryInt3TStream(null);
+            Action act = () => new MemoryInt3TStream(null!);
 
             act.Should().Throw<ArgumentNullException>();
         }
