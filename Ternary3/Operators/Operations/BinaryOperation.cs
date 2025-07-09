@@ -7,9 +7,7 @@ using System.Numerics;
 internal static class BinaryOperation<T>
     where T : struct, IBinaryInteger<T>, IMinMaxValue<T>
 {
-    public static T GetTrits(int index, T n1, T p1, T n2, T p2) => Getters[index](n1, p1, n2, p2);
-
-    private static Func<T,T,T,T,T>[] Getters = [
+    public static Func<T,T,T,T,T>[] Getters = [
         (n1, p1, n2, p2) => T.Zero,
         (n1, p1, n2, p2) => n1 & n2,  // 1
         (n1, p1, n2, p2) => n1 & ~(p2 | n2),  // 10

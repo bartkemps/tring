@@ -186,29 +186,31 @@ public partial struct BinaryTritOperator : IEquatable<BinaryTritOperator>
         init => Value[left.Value * 3 + right.Value + 4] = value;
     }
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal void Apply<T>(T negative1, T positive1, T negative2, T positive2, out T negativeResult, out T positiveResult)
         where T : struct, IBinaryInteger<T>, IMinMaxValue<T>
     {
-        negativeResult = BinaryOperation<T>.GetTrits(Value.Negative, negative1, positive1, negative2, positive2);
-        positiveResult = BinaryOperation<T>.GetTrits(Value.Positive, negative1, positive1, negative2, positive2);
+        negativeResult = BinaryOperation<T>.Getters[Value.Negative](negative1, positive1, negative2, positive2);
+        positiveResult = BinaryOperation<T>.Getters[Value.Positive](negative1, positive1, negative2, positive2);
     }
-    
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal void Apply(IEnumerable<ulong> negative1, IEnumerable<ulong> positive1, IEnumerable<ulong> negative2, IEnumerable<ulong> positive2, out List<ulong> negativeResult, out List<ulong> positiveResult)
     {
-        negativeResult = new();
-        positiveResult = new();
-        var n1E = negative1.GetEnumerator();
-        var n2E = negative2.GetEnumerator();
-        var p1E = positive1.GetEnumerator();
-        var p2E = positive2.GetEnumerator();
+        var negOp = BinaryOperation<ulong>.Getters[Value.Negative];
+        var posOp = BinaryOperation<ulong>.Getters[Value.Positive];
+        negativeResult = [];
+        positiveResult = [];
+        using var n1E = negative1.GetEnumerator();
+        using var n2E = negative2.GetEnumerator();
+        using var p1E = positive1.GetEnumerator();
+        using var p2E = positive2.GetEnumerator();
+        while (n1E.MoveNext() | n2E.MoveNext()) // don't replace by ||
         {
-            while ( n1E.MoveNext() | n2E.MoveNext()) // don't replace by ||
-            {
-                (var n1, var p1) = p1E.MoveNext() ? (n1E.Current, p1E.Current) : (0, 0);
-                (var n2, var p2) = p2E.MoveNext() ? (n2E.Current, p2E.Current) : (0, 0);
-                negativeResult.Add(BinaryOperation<ulong>.GetTrits(Value.Negative, n1, p1, n2, p2));
-                positiveResult.Add(BinaryOperation<ulong>.GetTrits(Value.Positive, n1, p1, n2, p2));
-            }
+            var (n1, p1) = p1E.MoveNext() ? (n1E.Current, p1E.Current) : (0, 0);
+            var (n2, p2) = p2E.MoveNext() ? (n2E.Current, p2E.Current) : (0, 0);
+            negativeResult.Add(negOp(n1, p1, n2, p2));
+            positiveResult.Add(posOp(n1, p1, n2, p2));
         }
     }
 
