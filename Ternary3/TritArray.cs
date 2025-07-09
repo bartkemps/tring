@@ -5,6 +5,7 @@ namespace Ternary3;
 using Formatting;
 using Operators;
 using System.Diagnostics;
+using System.Numerics;
 using TritArrays;
 
 /// <summary>
@@ -31,7 +32,7 @@ public struct TritArray : ITritArray<TritArray>
     /// <summary>
     /// Represents a TritArray with all trits set to zero.
     /// </summary>
-    public static readonly TritArray Zero = new();
+    public static readonly TritArray Zero = new(0,0,0);
 
     /// <summary>
     /// Initializes a new instance of the TritArray struct with all trits set to zero.
@@ -45,11 +46,12 @@ public struct TritArray : ITritArray<TritArray>
     /// </summary>
     /// <param name="negative">The negative bits representing the trits.</param>
     /// <param name="positive">The positive bits representing the trits.</param>
-    internal TritArray(ulong negative, ulong positive, byte numberOfTrits)
+    /// <param name="length">The length of the array.</param>
+    internal TritArray(ulong negative, ulong positive, byte length)
     {
         Negative = negative;
         Positive = positive;
-        NumberOfTrits = numberOfTrits;
+        NumberOfTrits = length;
     }
 
     /// <intheritdoc/>
@@ -178,7 +180,8 @@ public struct TritArray : ITritArray<TritArray>
     public static TritArray operator +(TritArray value1, TritArray value2)
     {
         Calculator.AddBalancedTernary(value1.Negative, value1.Positive, value2.Negative, value2.Positive, out var negative, out var positive);
-        return new() { Negative = (UInt32)negative, Positive = (UInt32)positive };
+        var length = 64-BitOperations.LeadingZeroCount(negative | positive);
+        return new(negative, positive, (byte)length);
     }
 
     /// <summary>
@@ -190,7 +193,8 @@ public struct TritArray : ITritArray<TritArray>
     public static TritArray operator -(TritArray value1, TritArray value2)
     {
         Calculator.AddBalancedTernary(value1.Negative, value1.Positive, value2.Positive, value2.Negative, out var negative, out var positive);
-        return new() { Negative = (UInt32)negative, Positive = (UInt32)positive };
+        var length = 64-BitOperations.LeadingZeroCount(negative | positive);
+        return new(negative, positive, (byte)length);
     }
 
     #region Conversion Operators
@@ -203,7 +207,8 @@ public struct TritArray : ITritArray<TritArray>
     private static TritArray Create(long value)
     {
         TritConverter.To32Trits(value, out var negative, out var positive);
-        return new() { Negative = (UInt32)negative, Positive = (UInt32)positive };
+        var length = 64-BitOperations.LeadingZeroCount(negative | positive);
+        return new(negative, positive, (byte)length);
     }
 
     /// <summary>
@@ -215,7 +220,8 @@ public struct TritArray : ITritArray<TritArray>
     {
         // Cast to long to get the numeric value instead of trying to access a non-existent Value property
         TritConverter.To32Trits(value, out var negative, out var positive);
-        return new() { Negative = (UInt32)negative, Positive = (UInt32)positive };
+        var length = 64-BitOperations.LeadingZeroCount(negative | positive);
+        return new(negative, positive, (byte)length);
     }
 
     /// <summary>
@@ -260,6 +266,17 @@ public struct TritArray : ITritArray<TritArray>
     {
         var bitMask = array.BitMask;
         return TritConverter.ToInt64(array.Negative & bitMask, array.Positive & bitMask);
+    }
+    
+    /// <summary>
+    /// Defines an implicit conversion of a TritArray to a long.
+    /// </summary>
+    /// <param name="array">The TritArray to convert.</param>
+    /// <returns>A long representing the same value.</returns>
+    public static explicit operator Int128(TritArray array)
+    {
+        var bitMask = array.BitMask;
+        return TritConverter.ToInt128(array.Negative & bitMask, array.Positive & bitMask);
     }
 
     #endregion
