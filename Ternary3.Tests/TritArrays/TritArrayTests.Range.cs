@@ -9,7 +9,7 @@ namespace Ternary3.Tests
         public void Range_ReturnsExpectedValues_ForFullRange()
         {
             // Create a TritArray with known values
-            var source = new TritArray(10);
+            var source = new BigTritArray(10);
             for (var i = 0; i < source.Length; i++)
             {
                 source[i] = (i % 3) switch
@@ -33,7 +33,7 @@ namespace Ternary3.Tests
         public void Range_ReturnsExpectedValues_ForPartialRange()
         {
             // Create a TritArray with known values
-            var source = new TritArray(10);
+            var source = new BigTritArray(10);
             for (var i = 0; i < source.Length; i++)
             {
                 source[i] = (i % 3) switch
@@ -57,7 +57,7 @@ namespace Ternary3.Tests
         public void Range_ReturnsExpectedValues_WhenCrossingWordBoundary()
         {
             // Create a large array to ensure we cross 64-bit word boundaries
-            var source = new TritArray(100);
+            var source = new BigTritArray(100);
             for (var i = 0; i < source.Length; i++)
             {
                 source[i] = (i % 3) switch
@@ -81,7 +81,7 @@ namespace Ternary3.Tests
         [Fact]
         public void Range_WithEndIndexFromEnd_ReturnsExpectedValues()
         {
-            var source = new TritArray(10);
+            var source = new BigTritArray(10);
             for (var i = 0; i < source.Length; i++)
             {
                 source[i] = (i % 3) switch
@@ -104,7 +104,7 @@ namespace Ternary3.Tests
         [Fact]
         public void Range_WithStartAndEndIndexFromEnd_ReturnsExpectedValues()
         {
-            var source = new TritArray(10);
+            var source = new BigTritArray(10);
             for (var i = 0; i < source.Length; i++)
             {
                 source[i] = (i % 3) switch
@@ -127,7 +127,7 @@ namespace Ternary3.Tests
         [Fact]
         public void Range_WithImplicitStart_ReturnsExpectedValues()
         {
-            var source = new TritArray(10);
+            var source = new BigTritArray(10);
             for (var i = 0; i < source.Length; i++)
             {
                 source[i] = (i % 3) switch
@@ -150,7 +150,7 @@ namespace Ternary3.Tests
         [Fact]
         public void Range_WithImplicitEnd_ReturnsExpectedValues()
         {
-            var source = new TritArray(10);
+            var source = new BigTritArray(10);
             for (var i = 0; i < source.Length; i++)
             {
                 source[i] = (i % 3) switch
@@ -173,7 +173,7 @@ namespace Ternary3.Tests
         [Fact]
         public void Range_WithInvalidRange_ThrowsArgumentOutOfRangeException()
         {
-            var source = new TritArray(10);
+            var source = new BigTritArray(10);
 
             // Start index greater than end index
             Action act1 = () => _ = source[8..5];
@@ -195,7 +195,7 @@ namespace Ternary3.Tests
         public void Range_WithNonZeroStartBit_HandlesAlignment()
         {
             // Create an array with a specific pattern
-            var source = new TritArray(20);
+            var source = new BigTritArray(20);
             for (var i = 0; i < source.Length; i++)
             {
                 source[i] = i % 2 == 0 ? Trit.Negative : Trit.Positive;

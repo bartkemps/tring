@@ -1,11 +1,10 @@
-﻿namespace Ternary3.Tests;
+﻿namespace Ternary3.Tests.Formatting;
 
 using System;
 using FluentAssertions;
 using Ternary3;
-using Formatting;
 using Xunit;
-
+using Ternary3.Formatting;
 
 public class TernaryFormatterIntegrationTests
 {

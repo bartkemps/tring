@@ -1,8 +1,8 @@
 ﻿using FluentAssertions;
 
-namespace Ternary3.Tests;
+namespace Ternary3.Tests.Formatting;
 
-using Formatting;
+using Ternary3.Formatting;
 
 public class TernaryFormatTests
 {

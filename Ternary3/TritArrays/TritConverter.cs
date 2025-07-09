@@ -6,11 +6,7 @@ using System.Runtime.CompilerServices;
 internal static class TritConverter
 {
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static int GetLength(uint negative, uint positive)
-    {
-        var bits = negative | positive;
-        return bits == 0 ? 0 : BitOperations.Log2(bits) + 1;
-    }
+    private static int GetLength(uint negative, uint positive) => 32 - BitOperations.LeadingZeroCount(negative | positive);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void ToTrits(BigInteger value, out List<ulong> negative, out List<ulong> positive, out int length)
@@ -92,8 +88,8 @@ internal static class TritConverter
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void ToTrits(long value, out List<ulong> negative, out List<ulong> positive, out int length)
     {
-        negative = new(1);
-        positive = new(1);
+        negative = new List<ulong>(1);
+        positive = new List<ulong>(1);
         if (value == 0)
         {
             length = 0;
@@ -102,8 +98,7 @@ internal static class TritConverter
         To64Trits(value, out var neg, out var pos);
         negative.Add(neg);
         positive.Add(pos);
-        var bits = neg | pos;
-        length = bits == 0 ? 0 : BitOperations.Log2(bits) + 1;
+        length = 64 - BitOperations.LeadingZeroCount(neg | pos);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -270,7 +265,7 @@ internal static class TritConverter
         var pos = (uint)positive[0];
         if (length < 32)
         {
-            var mask = (1U << length) - 1;
+            uint mask = (1U << length) - 1;
             neg &= mask;
             pos &= mask;
         }
@@ -285,7 +280,7 @@ internal static class TritConverter
         var pos = positive[0];
         if (length < 64)
         {
-            var mask = (1UL << length) - 1;
+            ulong mask = (1UL << length) - 1;
             neg &= mask;
             pos &= mask;
         }
@@ -295,8 +290,8 @@ internal static class TritConverter
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Int32 ToInt32(uint negative, uint positive)
     {
-        var result = 0;
-        var pow = 1;
+        Int32 result = 0;
+        Int32 pow = 1;
         while (negative != 0 || positive != 0)
         {
             result += (LookupValue[positive & 0xff] - LookupValue[negative & 0xff]) * pow;
@@ -309,8 +304,8 @@ internal static class TritConverter
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Int32 ToInt32(int negative, int positive)
     {
-        var result = 0;
-        var pow = 1;
+        Int32 result = 0;
+        Int32 pow = 1;
         while (negative != 0 || positive != 0)
         {
             result += (LookupValue[positive & 0xff] - LookupValue[negative & 0xff]) * pow;
@@ -323,8 +318,8 @@ internal static class TritConverter
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Int32 ToInt32(ushort negative, ushort positive)
     {
-        var result = 0;
-        var pow = 1;
+        Int32 result = 0;
+        Int32 pow = 1;
         while (negative != 0 || positive != 0)
         {
             result += (LookupValue[positive & 0xff] - LookupValue[negative & 0xff]) * pow;
@@ -1476,6 +1471,27 @@ internal static class TritConverter
     public static void SetTrit(ref uint negative, ref uint positive, int index, Trit value)
     {
         var mask = 1u << index;
+        switch (value.Value)
+        {
+            case 1:
+                positive |= mask;
+                negative &= ~mask;
+                break;
+            case -1:
+                positive &= ~mask;
+                negative |= mask;
+                break;
+            default: // case 0
+                positive &= ~mask;
+                negative &= ~mask;
+                break;
+        }
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static void SetTrit(ref ulong negative, ref ulong positive, int index, Trit value)
+    {
+        var mask = 1ul << index;
         switch (value.Value)
         {
             case 1:

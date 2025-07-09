@@ -1,6 +1,5 @@
 ﻿namespace Examples;
 
-using System.Text;
 using Ternary3;
 using Ternary3.IO;
 

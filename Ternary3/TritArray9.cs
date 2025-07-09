@@ -79,7 +79,7 @@ public struct TritArray9 : ITritArray<TritArray9>
         get
         {
             Splicer.Splice(Negative, Positive, Length, range, out var negative, out var positive, out var length);
-            return new TritArray(negative, positive, length).ApplyLength();
+            return new TritArray(negative, positive, (byte)length);
         }
     }
     

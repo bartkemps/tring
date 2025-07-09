@@ -3,7 +3,7 @@
 internal static class Splicer
 {
     public static void Splice(ulong negative, ulong positive, int length, Range range,
-        out List<ulong> negativeResult, out List<ulong> positiveResult, out int resultLength)
+        out ulong negativeResult, out ulong positiveResult, out int resultLength)
     {
         var start = range.Start.GetOffset(length);
         var end = range.End.GetOffset(length);
@@ -14,14 +14,15 @@ internal static class Splicer
         resultLength = end - start;
         if (resultLength == 0)
         {
-            negativeResult = [];
-            positiveResult = [];
+            negativeResult = 0;
+            positiveResult = 0;
             return;
         }
-        negativeResult = [negative >> start];
-        positiveResult = [positive >> start];
+        var mask = (1UL << resultLength) - 1;
+        negativeResult = (negative >> start) & mask;
+        positiveResult = (positive >> start) & mask;
     }
-    
+
     public static void Splice(List<ulong> negative, List<ulong> positive, int length, Range range,
         out List<ulong> negativeResult, out List<ulong> positiveResult, out int resultLength)
     {
@@ -41,8 +42,8 @@ internal static class Splicer
         }
 
         var resultWordsNeeded = (resultLength + 63) / 64;
-        negativeResult = new(new ulong[resultWordsNeeded]);
-        positiveResult = new(new ulong[resultWordsNeeded]);
+        negativeResult = [.. new ulong[resultWordsNeeded]];
+        positiveResult = [.. new ulong[resultWordsNeeded]];
         var sourceWordIdx = start / 64;
         var sourceBitOffset = start % 64;
         if (sourceBitOffset == 0)

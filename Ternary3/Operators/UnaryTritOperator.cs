@@ -142,7 +142,7 @@ public partial struct UnaryTritOperator
         var result = UnaryOperation.UInt32PairOperations[unaryTritOperator.operationIndex](trits.Negative, trits.Positive);
         return new(result.Negative, result.Positive);
     }
-    
+
     /// <summary>
     /// Applies the unary operation to a TritArray instance.
     /// </summary>
@@ -151,8 +151,20 @@ public partial struct UnaryTritOperator
     /// <returns>A new TritArray with the results of applying the operation to each trit.</returns>
     public static TritArray operator |(TritArray trits, UnaryTritOperator unaryTritOperator)
     {
+        var result = UnaryOperation.UInt64PairOperations[unaryTritOperator.operationIndex](trits.Negative, trits.Positive);
+        return new(result.Negative, result.Positive, trits.NumberOfTrits);
+    }
+
+    /// <summary>
+    /// Applies the unary operation to a TritArray instance.
+    /// </summary>
+    /// <param name="trits">The TritArray to operate on.</param>
+    /// <param name="unaryTritOperator">The operator to apply.</param>
+    /// <returns>A new TritArray with the results of applying the operation to each trit.</returns>
+    public static BigTritArray operator |(BigTritArray trits, UnaryTritOperator unaryTritOperator)
+    {
         var op = UnaryOperation.UInt64PairOperations[unaryTritOperator.operationIndex];
-        var result = new TritArray(trits.Length);
+        var result = new BigTritArray(trits.Length);
         for (var i=0; i < trits.Negative.Count; i++)
         {
             var pair = op(trits.Negative[i], trits.Positive[i]);

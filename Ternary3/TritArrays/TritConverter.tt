@@ -395,6 +395,27 @@ internal static class TritConverter
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static void SetTrit(ref ulong negative, ref ulong positive, int index, Trit value)
+    {
+        var mask = 1ul << index;
+        switch (value.Value)
+        {
+            case 1:
+                positive |= mask;
+                negative &= ~mask;
+                break;
+            case -1:
+                positive &= ~mask;
+                negative |= mask;
+                break;
+            default: // case 0
+                positive &= ~mask;
+                negative &= ~mask;
+                break;
+        }
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void SetTrit(ref List<ulong> negative, ref List<ulong> positive, int index, Trit value)
     {
         var longIndex = index / 64;
