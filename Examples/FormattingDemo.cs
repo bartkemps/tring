@@ -63,7 +63,6 @@ public static partial class FormattingDemo
 
         // EXAMPLE 6: TernaryFormatter with mixed types
         // ------------------------------------------
-        var formatter = new TernaryFormatter();
         var formatProvider = new TernaryFormatProvider();
         
         Console.WriteLine($"\nMixed type formatting:");
@@ -99,25 +98,5 @@ public static partial class FormattingDemo
         Console.WriteLine($"\nHierarchical grouping:");
         Console.WriteLine($"  {largeValue.ToString(hierarchicalFormat)}");
 
-        // EXAMPLE 9: Using TernaryFormatter directly
-        // ----------------------------------------
-        var directFormatter = new TernaryFormatter(TernaryFormat.Minimal);
-        
-        Console.WriteLine($"\nDirect formatter usage:");
-        Console.WriteLine($"  Formatted int: {directFormatter.Format("ter", 100, null)}");
-        Console.WriteLine($"  Formatted TritArray: {directFormatter.Format("ter", (TritArray9)256, null)}");
-        Console.WriteLine($"  Standard format: {directFormatter.Format("D", 100, null)}");
-
-        // EXAMPLE 10: Error handling
-        // -------------------------
-        try
-        {
-            // This will throw FormatException because string cannot be formatted as ternary
-            string result = directFormatter.Format("ter", "not a number", null);
-        }
-        catch (FormatException ex)
-        {
-            Console.WriteLine($"\nError handling: {ex.Message}");
-        }
     }
 }

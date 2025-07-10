@@ -1,5 +1,8 @@
 ﻿namespace Ternary3.Formatting;
 
+/// <summary>
+/// Provides a minimal format for ternary numbers using 't', '0', and '1' for negative, zero, and positive trits respectively.
+/// </summary>
 public class MinimalTernaryFormat : ITernaryFormat
 {
     /// <inheritdoc/>

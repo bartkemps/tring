@@ -19,6 +19,14 @@ public sealed class Int3TToByteStream(Int3TStream source, bool mustWriteMagicNum
     private readonly BinaryTritEncoder encoder = new(mustWriteMagicNumber);
     private bool disposed;
 
+    /// <summary>
+    /// Asynchronously reads a sequence of bytes from the current stream and advances the position within the stream by the number of bytes read.
+    /// </summary>
+    /// <param name="buffer">The buffer to write the data into.</param>
+    /// <param name="offset">The byte offset in buffer at which to begin writing data read from the stream.</param>
+    /// <param name="count">The maximum number of bytes to read.</param>
+    /// <param name="cancellationToken">A token to monitor for cancellation requests.</param>
+    /// <returns>A task that represents the asynchronous read operation. The value of the TResult parameter contains the total number of bytes read into the buffer.</returns>
     public override async Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
     {
         if (disposed) throw new ObjectDisposedException(nameof(Int3TToByteStream));
@@ -50,6 +58,14 @@ public sealed class Int3TToByteStream(Int3TStream source, bool mustWriteMagicNum
         return bytes.Length;
     }
 
+    /// <summary>
+    /// Asynchronously writes a sequence of bytes to the current stream and advances the current position within this stream by the number of bytes written.
+    /// </summary>
+    /// <param name="buffer">The buffer containing data to write to the stream.</param>
+    /// <param name="offset">The zero-based byte offset in buffer at which to begin copying bytes to the stream.</param>
+    /// <param name="count">The number of bytes to be written to the stream.</param>
+    /// <param name="cancellationToken">A token to monitor for cancellation requests.</param>
+    /// <returns>A task that represents the asynchronous write operation.</returns>
     public override async Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
     {
         if (disposed) throw new ObjectDisposedException(nameof(Int3TToByteStream));

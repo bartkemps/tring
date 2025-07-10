@@ -3,6 +3,7 @@
 /// <summary>
 /// Represents a customizable ternary format, allowing you to specify digit symbols, grouping, separators, and padding for formatting trit arrays.
 /// </summary>
+/// <param name="other">The format to copy settings from.</param>
 public class TernaryFormat(ITernaryFormat other) : ITernaryFormat
 {
     /// <summary>
@@ -23,7 +24,6 @@ public class TernaryFormat(ITernaryFormat other) : ITernaryFormat
     /// <summary>
     /// Initializes a new instance of the <see cref="TernaryFormat"/> class using the specified format as a template.
     /// </summary>
-    /// <param name="other">The format to copy settings from.</param>
     public TernaryFormat() : this(Invariant)
     {
     }
@@ -38,8 +38,8 @@ public class TernaryFormat(ITernaryFormat other) : ITernaryFormat
     public char PositiveTritDigit { get; set; } = other.PositiveTritDigit;
 
     /// <inheritdoc/>
-    public IList<TritGroupDefinition> Groups { get; set; } 
-        = new List<TritGroupDefinition>(other.Groups.Select(g=> new TritGroupDefinition(g.Separator, g.Size)));
+    public IList<TritGroupDefinition> Groups { get; set; }
+        = new List<TritGroupDefinition>(other.Groups.Select(g => new TritGroupDefinition(g.Separator, g.Size)));
 
     /// <inheritdoc/>
     public string DecimalSeparator { get; set; } = other.DecimalSeparator;
@@ -78,6 +78,7 @@ public class TernaryFormat(ITernaryFormat other) : ITernaryFormat
     /// <summary>
     /// Previews the format by creating a sample TritArray27 and formatting it.
     /// </summary>
+    /// <param name="trits">The trit array to format.</param>
     /// <returns>A string representation of a sample formatted trit array.</returns>
     public string ToString(TritArray27 trits)
     {

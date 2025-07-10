@@ -2,7 +2,7 @@
 
 using System.Numerics;
 
-public class TernaryFormatter(ITernaryFormat? ternaryFormat = null, IFormatProvider? inner = null) : ITernaryFormatter
+internal class TernaryFormatter(ITernaryFormat? ternaryFormat = null, IFormatProvider? inner = null) : ITernaryFormatter
 {
     private readonly ITernaryFormat ternaryFormat = ternaryFormat ?? TernaryFormat.Current;
     
@@ -22,13 +22,13 @@ public class TernaryFormatter(ITernaryFormat? ternaryFormat = null, IFormatProvi
                 Int27T value => Format((TritArray27)value),
                 Int9T value => Format((TritArray9)value),
                 Int3T value => Format((TritArray3)value),
-                long value => Format((TritArray27)value),
-                int value => Format((TritArray27)value),
-                uint value => Format((TritArray27)value),
-                short value => Format((TritArray27)value),
-                ushort value => Format((TritArray27)value),
-                sbyte value => Format((TritArray27)value),
-                byte value => Format((TritArray27)value),
+                long value => Format((TritArray)value),
+                int value => Format((TritArray)value),
+                uint value => Format((TritArray)value),
+                short value => Format((TritArray)value),
+                ushort value => Format((TritArray)value),
+                sbyte value => Format((TritArray)value),
+                byte value => Format((TritArray)value),
                 _ => throw new FormatException($"Cannot format {arg?.GetType().Name} as ternary.")
             };
         }
@@ -41,7 +41,7 @@ public class TernaryFormatter(ITernaryFormat? ternaryFormat = null, IFormatProvi
             TritArray3 value => ((sbyte)(Int3T)value).ToString(format, inner),
             BigTritArray value => ((BigInteger)value).ToString(format, inner),
             TritArray value => ((Int128)value).ToString(format, inner),
-            Int27T value => ((long)value).ToString(format, inner),
+            Int27T value => ((Int128)value).ToString(format, inner),
             Int9T value => ((short)value).ToString(format, inner),
             Int3T value => ((sbyte)value).ToString(format, inner),
             IFormattable formattable => formattable.ToString(format, inner),

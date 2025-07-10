@@ -165,6 +165,11 @@ public readonly struct Trit : IEquatable<Trit>
     /// <returns>True if the Trits have different values, false otherwise.</returns>
     public static bool operator !=(Trit left, Trit right) => left.Value != right.Value;
 
+    /// <summary>
+    /// Indicates whether the current Trit is equal to another Trit.
+    /// </summary>
+    /// <param name="other">A Trit to compare with this Trit.</param>
+    /// <returns>True if the value of the current Trit is equal to the value of the other Trit; otherwise, false.</returns>
     public bool Equals(Trit other) => Value == other.Value;
 
     /// <summary>
@@ -251,5 +256,8 @@ public readonly struct Trit : IEquatable<Trit>
     /// <returns>A Trit value representing the logical XOR operation.</returns>
     public static Trit operator ^(Trit left, bool right) => right ? !left : left;
 
+    /// <summary>
+    /// Gets an array containing all possible Trit values: Negative, Zero, and Positive.
+    /// </summary>
     public static Trit[] AllValues => [Negative, Zero, Positive];
 }

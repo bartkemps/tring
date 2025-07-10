@@ -175,9 +175,21 @@ LastGenerated = <#= DateTime.Now.ToString() #>
                public static LookupTritArray{{trits}}Operator operator |(TritArray{{trits}} array, Func<Trit, Trit, Trit> operation)
                    => new LookupTritArray{{trits}}Operator(array, operation);
            
+               /// <summary>
+               /// Creates a binary operation context for this array using a lookup table.
+               /// </summary>
+               /// <param name="array">The source array.</param>
+               /// <param name="table">The lookup table containing the transformation values.</param>
+               /// <returns>A LookupTritArray{{trits}}Operator that can be used to apply the operation with another array.</returns>
                public static LookupTritArray{{trits}}Operator operator |(TritArray{{trits}} array, BinaryTritOperator table)
                    => new LookupTritArray{{trits}}Operator(array, table);
-           
+
+               /// <summary>
+               /// Creates a binary operation context for this array using a 2D lookup table.
+               /// </summary>
+               /// <param name="array">The source array.</param>
+               /// <param name="table">The 2D lookup table containing the transformation values.</param>
+               /// <returns>A LookupTritArray{{trits}}Operator that can be used to apply the operation with another array.</returns>
                public static LookupTritArray{{trits}}Operator operator |(TritArray{{trits}} array, Trit[,] table)
                    => new LookupTritArray{{trits}}Operator(array, table);
            

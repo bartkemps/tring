@@ -1,19 +1,34 @@
 ﻿namespace Ternary3;
 
-using Formatting;
-using TritArrays;
 using System.Numerics;
-using Operators;
 using System.Diagnostics.CodeAnalysis;
+using Formatting;
+using Operators;
+using TritArrays;
 
+/// <summary>
+/// Represents a variable-length array of trits (ternary digits) backed by lists of ulongs.
+/// This class provides support for arbitrary-length balanced ternary numbers and operations.
+/// </summary>
 public class BigTritArray : ITritArray<BigTritArray>
 {
     internal List<ulong> Positive;
     internal List<ulong> Negative;
+
+    /// <summary>
+    /// Gets or sets the number of trits in this array.
+    /// </summary>
     public int Length { get; set; }
 
+    /// <summary>
+    /// Represents a BigTritArray with all trits set to zero.
+    /// </summary>
     public static readonly BigTritArray Zero = new(0);
-    public static readonly BigTritArray One = new([0],[1],1);
+
+    /// <summary>
+    /// Represents a BigTritArray with value of one (a single trit set to positive).
+    /// </summary>
+    public static readonly BigTritArray One = new([0], [1], 1);
 
     private ulong mask;
 
@@ -39,6 +54,7 @@ public class BigTritArray : ITritArray<BigTritArray>
             Positive.Clear();
             return;
         }
+
         var longsNeeded = (length + 63) / 64;
         if (Positive.Count < longsNeeded)
         {
@@ -62,6 +78,11 @@ public class BigTritArray : ITritArray<BigTritArray>
         if (mask == 0) mask = ulong.MaxValue;
     }
 
+    /// <summary>
+    /// Initializes a new instance of the BigTritArray class with a specified length.
+    /// </summary>
+    /// <param name="length">The length of the trit array. Must be non-negative.</param>
+    /// <exception cref="ArgumentOutOfRangeException">Thrown when length is negative.</exception>
     public BigTritArray(int length)
     {
         if (length < 0) throw new ArgumentOutOfRangeException(nameof(length));
@@ -73,6 +94,11 @@ public class BigTritArray : ITritArray<BigTritArray>
         Negative = [.. new ulong[longsNeeded]];
     }
 
+    /// <summary>
+    /// Initializes a new instance of the BigTritArray class by concatenating multiple trit arrays.
+    /// </summary>
+    /// <param name="arrays">The arrays to concatenate.</param>
+    /// <exception cref="ArgumentNullException">Thrown when arrays is null.</exception>
     public BigTritArray(params ITritArray[] arrays) : this((arrays ?? throw new ArgumentNullException(nameof(arrays))).Sum(a => a.Length))
     {
         var offset = 0;
@@ -81,6 +107,7 @@ public class BigTritArray : ITritArray<BigTritArray>
             InitializeTritArray(arr, offset);
             offset += arr.Length;
         }
+
         Length = offset;
         mask = 1UL << (offset % 64 - 1);
     }
@@ -90,33 +117,33 @@ public class BigTritArray : ITritArray<BigTritArray>
         switch (arr)
         {
             case TritArray27 value:
-                {
-                    CopyRange(value.Negative, value.Positive, offset, value.Length);
-                    return;
-                }
+            {
+                CopyRange(value.Negative, value.Positive, offset, value.Length);
+                return;
+            }
             case TritArray9 value:
-                {
-                    CopyRange(value.Negative, value.Positive, offset, value.Length);
-                    return;
-                }
+            {
+                CopyRange(value.Negative, value.Positive, offset, value.Length);
+                return;
+            }
             case TritArray3 value:
-                {
-                    CopyRange(value.Negative, value.Positive, offset, value.Length);
-                    return;
-                }
+            {
+                CopyRange(value.Negative, value.Positive, offset, value.Length);
+                return;
+            }
             default:
-                {
-                    CopyRange(arr, offset);
-                    return;
-                }
+            {
+                CopyRange(arr, offset);
+                return;
+            }
         }
     }
 
     private void CopyRange(ulong valueNegative, ulong valuePositive, int offset, int length)
     {
-        var mask = ((ulong)1 << length) - 1;
-        valueNegative &= mask;
-        valuePositive &= mask;
+        var bitMask = ((ulong)1 << length) - 1;
+        valueNegative &= bitMask;
+        valuePositive &= bitMask;
         var startLong = offset / 64;
         var startBit = offset % 64;
         // If the offset is aligned, just OR in the bits
@@ -126,6 +153,7 @@ public class BigTritArray : ITritArray<BigTritArray>
             Positive[startLong] |= valuePositive;
             return;
         }
+
         // The offset is unaligned 
         var bitsInFirst = Math.Min(64 - startBit, length);
         Negative[startLong] |= valueNegative << startBit;
@@ -134,6 +162,7 @@ public class BigTritArray : ITritArray<BigTritArray>
         Negative[startLong + 1] |= valueNegative >> bitsInFirst;
         Positive[startLong + 1] |= valuePositive >> bitsInFirst;
     }
+
     private void CopyRange(ITritArray arr, int offset)
     {
         for (var i = 0; i < arr.Length; i++)
@@ -141,7 +170,7 @@ public class BigTritArray : ITritArray<BigTritArray>
             this[offset + i] = arr[i];
         }
     }
-    
+
     /// <inheritdoc/>
     public Trit this[int index]
     {
@@ -154,6 +183,7 @@ public class BigTritArray : ITritArray<BigTritArray>
             {
                 throw new ArgumentOutOfRangeException(nameof(index), $"Index must be between 0 and {Length - 1}.");
             }
+
             TritConverter.SetTrit(ref Negative, ref Positive, index, value);
         }
     }
@@ -217,9 +247,15 @@ public class BigTritArray : ITritArray<BigTritArray>
             Positive[^1] &= mask;
             Negative[^1] &= mask;
         }
+
         return this;
     }
 
+    /// <summary>
+    /// Determines whether this instance and another BigTritArray are equal.
+    /// </summary>
+    /// <param name="other">The BigTritArray to compare with this instance.</param>
+    /// <returns>true if the specified BigTritArray is equal to this instance; otherwise, false.</returns>
     public bool Equals(BigTritArray? other)
     {
         if (ReferenceEquals(this, other)) return true;
@@ -231,8 +267,21 @@ public class BigTritArray : ITritArray<BigTritArray>
         return n1.SequenceEqual(n2) && p1.SequenceEqual(p2);
     }
 
+    /// <summary>
+    /// Determines whether this instance and a specified object are equal.
+    /// </summary>
+    /// <param name="obj">The object to compare with this instance.</param>
+    /// <returns>true if the specified object is equal to this instance; otherwise, false.</returns>
     public override bool Equals(object? obj) => obj is BigTritArray other && Equals(other);
 
+    /// <summary>
+    /// Returns a hash code for this instance.
+    /// </summary>
+    /// <returns>A hash code for the current BigTritArray.</returns>
+    /// <remarks>
+    /// This type is mutable, but hash code calculation is allowed for equality checks.
+    /// The hash code is computed based on the non-zero trits in the array.
+    /// </remarks>
     [SuppressMessage("ReSharper", "NonReadonlyMemberInGetHashCode", Justification = "this is a mutable type, but we want to allow hash code calculation for equality checks")]
     public override int GetHashCode()
     {
@@ -264,12 +313,13 @@ public class BigTritArray : ITritArray<BigTritArray>
     {
         if (table.Length != 3)
             throw new ArgumentException("Table must contain exactly three elements for Negative, Zero, and Positive inputs", nameof(table));
-            
+
         var result = new BigTritArray(array.Length);
         for (var i = 0; i < array.Length; i++)
         {
             result[i] = array[i] | table;
         }
+
         return result.ApplyLength();
     }
 
@@ -315,7 +365,7 @@ public class BigTritArray : ITritArray<BigTritArray>
     /// <param name="array">The source array.</param>
     /// <param name="shift">The number of positions to shift.</param>
     /// <returns>A new TritArray with the bits shifted to the right.</returns>
-    public static BigTritArray operator >>(BigTritArray array, int shift)
+    public static BigTritArray operator >> (BigTritArray array, int shift)
     {
         Calculator.ShiftRight(array.Negative, array.Positive, shift, out var negativeResult, out var positiveResult);
         return new BigTritArray(negativeResult, positiveResult, array.Length).ApplyLength();
@@ -366,7 +416,6 @@ public class BigTritArray : ITritArray<BigTritArray>
     }
 
     #endregion
-
 
 
     #region Conversion Operators

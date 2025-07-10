@@ -15,7 +15,7 @@ using System.Diagnostics.CodeAnalysis;
 /// <summary>
 /// Represents a 27-trit  signed integer, modeled after the <see cref="Int64"/> type.
 /// </summary>
-[GeneratedCode("IntT.tt", null)]
+[GeneratedCode("IntT.tt", "1.0.0.0")]
 [DebuggerDisplay("{DebugView()}")]
 public readonly partial struct Int27T : ITernaryInteger<Int27T>
 {
@@ -71,6 +71,18 @@ public static implicit operator Int27T(Int32 value) => Create(value);
 /// <param name="value">The value to convert.</param>
 /// <returns>A <see cref="Int32"/> that represents the converted value.</returns>
 public static explicit operator Int32(Int27T value) => (Int32)value.value;
+     /// <summary>
+/// Defines an explicit conversion of a Int128 to a <see cref="Int27T"/>.
+/// </summary>
+/// <param name="value">The value to convert.</param>
+/// <returns>A <see cref="Int27T"/> that represents the converted value.</returns>
+public static explicit operator Int27T(Int128 value) => Create(value);
+     /// <summary>
+/// Defines an implicit conversion of a Int27T to a <see cref="Int128"/>.
+/// </summary>
+/// <param name="value">The value to convert.</param>
+/// <returns>A <see cref="Int128"/> that represents the converted value.</returns>
+public static implicit operator Int128(Int27T value) => (Int128)value.value;
 
     /// <summary>
     /// Returns a value indicating whether this instance is equal to a specified object.
@@ -342,142 +354,816 @@ public static explicit operator Int32(Int27T value) => (Int32)value.value;
     
     #region Comparison Operators
 
-    // Comparison operators with Int27T
+    /// <summary>
+    /// Returns a value indicating whether one <see cref="Int27T"/> is greater than another.
+    /// </summary>
+    /// <param name="left">The first value to compare.</param>
+    /// <param name="right">The second value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >(Int27T left, Int27T right) => left.value > right.value;
+
+    /// <summary>
+    /// Returns a value indicating whether one <see cref="Int27T"/> is less than another.
+    /// </summary>
+    /// <param name="left">The first value to compare.</param>
+    /// <param name="right">The second value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <(Int27T left, Int27T right) => left.value < right.value;
+
+    /// <summary>
+    /// Returns a value indicating whether one <see cref="Int27T"/> is greater than or equal to another.
+    /// </summary>
+    /// <param name="left">The first value to compare.</param>
+    /// <param name="right">The second value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >=(Int27T left, Int27T right) => left.value >= right.value;
+
+    /// <summary>
+    /// Returns a value indicating whether one <see cref="Int27T"/> is less than or equal to another.
+    /// </summary>
+    /// <param name="left">The first value to compare.</param>
+    /// <param name="right">The second value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <=(Int27T left, Int27T right) => left.value <= right.value;
-    
+     
     // Comparison operators with sbyte
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="Int27T"/> value is greater than a <see cref="sbyte"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="Int27T"/> value to compare.</param>
+    /// <param name="right">The <see cref="sbyte"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >(Int27T left, sbyte right) => left.value > right;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="Int27T"/> value is less than a <see cref="sbyte"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="Int27T"/> value to compare.</param>
+    /// <param name="right">The <see cref="sbyte"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <(Int27T left, sbyte right) => left.value < right;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="Int27T"/> value is greater than or equal to a <see cref="sbyte"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="Int27T"/> value to compare.</param>
+    /// <param name="right">The <see cref="sbyte"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >=(Int27T left, sbyte right) => left.value >= right;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="Int27T"/> value is less than or equal to a <see cref="sbyte"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="Int27T"/> value to compare.</param>
+    /// <param name="right">The <see cref="sbyte"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <=(Int27T left, sbyte right) => left.value <= right;
 
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="sbyte"/> value is greater than a <see cref="Int27T"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="sbyte"/> value to compare.</param>
+    /// <param name="right">The <see cref="Int27T"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >(sbyte left, Int27T right) => left > right.value;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="sbyte"/> value is less than a <see cref="Int27T"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="sbyte"/> value to compare.</param>
+    /// <param name="right">The <see cref="Int27T"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <(sbyte left, Int27T right) => left < right.value;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="sbyte"/> value is greater than or equal to a <see cref="Int27T"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="sbyte"/> value to compare.</param>
+    /// <param name="right">The <see cref="Int27T"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >=(sbyte left, Int27T right) => left >= right.value;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="sbyte"/> value is less than or equal to a <see cref="Int27T"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="sbyte"/> value to compare.</param>
+    /// <param name="right">The <see cref="Int27T"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <=(sbyte left, Int27T right) => left <= right.value;
-    
+     
     // Comparison operators with byte
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="Int27T"/> value is greater than a <see cref="byte"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="Int27T"/> value to compare.</param>
+    /// <param name="right">The <see cref="byte"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >(Int27T left, byte right) => left.value > right;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="Int27T"/> value is less than a <see cref="byte"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="Int27T"/> value to compare.</param>
+    /// <param name="right">The <see cref="byte"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <(Int27T left, byte right) => left.value < right;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="Int27T"/> value is greater than or equal to a <see cref="byte"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="Int27T"/> value to compare.</param>
+    /// <param name="right">The <see cref="byte"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >=(Int27T left, byte right) => left.value >= right;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="Int27T"/> value is less than or equal to a <see cref="byte"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="Int27T"/> value to compare.</param>
+    /// <param name="right">The <see cref="byte"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <=(Int27T left, byte right) => left.value <= right;
 
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="byte"/> value is greater than a <see cref="Int27T"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="byte"/> value to compare.</param>
+    /// <param name="right">The <see cref="Int27T"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >(byte left, Int27T right) => left > right.value;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="byte"/> value is less than a <see cref="Int27T"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="byte"/> value to compare.</param>
+    /// <param name="right">The <see cref="Int27T"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <(byte left, Int27T right) => left < right.value;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="byte"/> value is greater than or equal to a <see cref="Int27T"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="byte"/> value to compare.</param>
+    /// <param name="right">The <see cref="Int27T"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >=(byte left, Int27T right) => left >= right.value;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="byte"/> value is less than or equal to a <see cref="Int27T"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="byte"/> value to compare.</param>
+    /// <param name="right">The <see cref="Int27T"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <=(byte left, Int27T right) => left <= right.value;
-    
+     
     // Comparison operators with int
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="Int27T"/> value is greater than a <see cref="int"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="Int27T"/> value to compare.</param>
+    /// <param name="right">The <see cref="int"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >(Int27T left, int right) => left.value > right;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="Int27T"/> value is less than a <see cref="int"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="Int27T"/> value to compare.</param>
+    /// <param name="right">The <see cref="int"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <(Int27T left, int right) => left.value < right;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="Int27T"/> value is greater than or equal to a <see cref="int"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="Int27T"/> value to compare.</param>
+    /// <param name="right">The <see cref="int"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >=(Int27T left, int right) => left.value >= right;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="Int27T"/> value is less than or equal to a <see cref="int"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="Int27T"/> value to compare.</param>
+    /// <param name="right">The <see cref="int"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <=(Int27T left, int right) => left.value <= right;
 
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="int"/> value is greater than a <see cref="Int27T"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="int"/> value to compare.</param>
+    /// <param name="right">The <see cref="Int27T"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >(int left, Int27T right) => left > right.value;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="int"/> value is less than a <see cref="Int27T"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="int"/> value to compare.</param>
+    /// <param name="right">The <see cref="Int27T"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <(int left, Int27T right) => left < right.value;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="int"/> value is greater than or equal to a <see cref="Int27T"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="int"/> value to compare.</param>
+    /// <param name="right">The <see cref="Int27T"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >=(int left, Int27T right) => left >= right.value;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="int"/> value is less than or equal to a <see cref="Int27T"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="int"/> value to compare.</param>
+    /// <param name="right">The <see cref="Int27T"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <=(int left, Int27T right) => left <= right.value;
-    
+     
     // Comparison operators with uint
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="Int27T"/> value is greater than a <see cref="uint"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="Int27T"/> value to compare.</param>
+    /// <param name="right">The <see cref="uint"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >(Int27T left, uint right) => left.value > right;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="Int27T"/> value is less than a <see cref="uint"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="Int27T"/> value to compare.</param>
+    /// <param name="right">The <see cref="uint"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <(Int27T left, uint right) => left.value < right;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="Int27T"/> value is greater than or equal to a <see cref="uint"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="Int27T"/> value to compare.</param>
+    /// <param name="right">The <see cref="uint"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >=(Int27T left, uint right) => left.value >= right;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="Int27T"/> value is less than or equal to a <see cref="uint"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="Int27T"/> value to compare.</param>
+    /// <param name="right">The <see cref="uint"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <=(Int27T left, uint right) => left.value <= right;
 
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="uint"/> value is greater than a <see cref="Int27T"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="uint"/> value to compare.</param>
+    /// <param name="right">The <see cref="Int27T"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >(uint left, Int27T right) => left > right.value;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="uint"/> value is less than a <see cref="Int27T"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="uint"/> value to compare.</param>
+    /// <param name="right">The <see cref="Int27T"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <(uint left, Int27T right) => left < right.value;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="uint"/> value is greater than or equal to a <see cref="Int27T"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="uint"/> value to compare.</param>
+    /// <param name="right">The <see cref="Int27T"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >=(uint left, Int27T right) => left >= right.value;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="uint"/> value is less than or equal to a <see cref="Int27T"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="uint"/> value to compare.</param>
+    /// <param name="right">The <see cref="Int27T"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <=(uint left, Int27T right) => left <= right.value;
-    
+     
     // Comparison operators with short
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="Int27T"/> value is greater than a <see cref="short"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="Int27T"/> value to compare.</param>
+    /// <param name="right">The <see cref="short"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >(Int27T left, short right) => left.value > right;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="Int27T"/> value is less than a <see cref="short"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="Int27T"/> value to compare.</param>
+    /// <param name="right">The <see cref="short"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <(Int27T left, short right) => left.value < right;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="Int27T"/> value is greater than or equal to a <see cref="short"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="Int27T"/> value to compare.</param>
+    /// <param name="right">The <see cref="short"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >=(Int27T left, short right) => left.value >= right;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="Int27T"/> value is less than or equal to a <see cref="short"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="Int27T"/> value to compare.</param>
+    /// <param name="right">The <see cref="short"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <=(Int27T left, short right) => left.value <= right;
 
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="short"/> value is greater than a <see cref="Int27T"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="short"/> value to compare.</param>
+    /// <param name="right">The <see cref="Int27T"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >(short left, Int27T right) => left > right.value;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="short"/> value is less than a <see cref="Int27T"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="short"/> value to compare.</param>
+    /// <param name="right">The <see cref="Int27T"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <(short left, Int27T right) => left < right.value;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="short"/> value is greater than or equal to a <see cref="Int27T"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="short"/> value to compare.</param>
+    /// <param name="right">The <see cref="Int27T"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >=(short left, Int27T right) => left >= right.value;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="short"/> value is less than or equal to a <see cref="Int27T"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="short"/> value to compare.</param>
+    /// <param name="right">The <see cref="Int27T"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <=(short left, Int27T right) => left <= right.value;
-    
+     
     // Comparison operators with ushort
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="Int27T"/> value is greater than a <see cref="ushort"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="Int27T"/> value to compare.</param>
+    /// <param name="right">The <see cref="ushort"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >(Int27T left, ushort right) => left.value > right;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="Int27T"/> value is less than a <see cref="ushort"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="Int27T"/> value to compare.</param>
+    /// <param name="right">The <see cref="ushort"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <(Int27T left, ushort right) => left.value < right;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="Int27T"/> value is greater than or equal to a <see cref="ushort"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="Int27T"/> value to compare.</param>
+    /// <param name="right">The <see cref="ushort"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >=(Int27T left, ushort right) => left.value >= right;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="Int27T"/> value is less than or equal to a <see cref="ushort"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="Int27T"/> value to compare.</param>
+    /// <param name="right">The <see cref="ushort"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <=(Int27T left, ushort right) => left.value <= right;
 
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="ushort"/> value is greater than a <see cref="Int27T"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="ushort"/> value to compare.</param>
+    /// <param name="right">The <see cref="Int27T"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >(ushort left, Int27T right) => left > right.value;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="ushort"/> value is less than a <see cref="Int27T"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="ushort"/> value to compare.</param>
+    /// <param name="right">The <see cref="Int27T"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <(ushort left, Int27T right) => left < right.value;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="ushort"/> value is greater than or equal to a <see cref="Int27T"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="ushort"/> value to compare.</param>
+    /// <param name="right">The <see cref="Int27T"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >=(ushort left, Int27T right) => left >= right.value;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="ushort"/> value is less than or equal to a <see cref="Int27T"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="ushort"/> value to compare.</param>
+    /// <param name="right">The <see cref="Int27T"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <=(ushort left, Int27T right) => left <= right.value;
-    
+     
     // Comparison operators with long
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="Int27T"/> value is greater than a <see cref="long"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="Int27T"/> value to compare.</param>
+    /// <param name="right">The <see cref="long"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >(Int27T left, long right) => left.value > right;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="Int27T"/> value is less than a <see cref="long"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="Int27T"/> value to compare.</param>
+    /// <param name="right">The <see cref="long"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <(Int27T left, long right) => left.value < right;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="Int27T"/> value is greater than or equal to a <see cref="long"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="Int27T"/> value to compare.</param>
+    /// <param name="right">The <see cref="long"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >=(Int27T left, long right) => left.value >= right;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="Int27T"/> value is less than or equal to a <see cref="long"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="Int27T"/> value to compare.</param>
+    /// <param name="right">The <see cref="long"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <=(Int27T left, long right) => left.value <= right;
 
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="long"/> value is greater than a <see cref="Int27T"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="long"/> value to compare.</param>
+    /// <param name="right">The <see cref="Int27T"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >(long left, Int27T right) => left > right.value;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="long"/> value is less than a <see cref="Int27T"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="long"/> value to compare.</param>
+    /// <param name="right">The <see cref="Int27T"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <(long left, Int27T right) => left < right.value;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="long"/> value is greater than or equal to a <see cref="Int27T"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="long"/> value to compare.</param>
+    /// <param name="right">The <see cref="Int27T"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >=(long left, Int27T right) => left >= right.value;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="long"/> value is less than or equal to a <see cref="Int27T"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="long"/> value to compare.</param>
+    /// <param name="right">The <see cref="Int27T"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <=(long left, Int27T right) => left <= right.value;
-    
+     
     // Comparison operators with ulong
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="Int27T"/> value is greater than a <see cref="ulong"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="Int27T"/> value to compare.</param>
+    /// <param name="right">The <see cref="ulong"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >(Int27T left, ulong right) => left.CompareTo(right) > 0;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="Int27T"/> value is less than a <see cref="ulong"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="Int27T"/> value to compare.</param>
+    /// <param name="right">The <see cref="ulong"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <(Int27T left, ulong right) => left.CompareTo(right) < 0;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="Int27T"/> value is greater than or equal to a <see cref="ulong"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="Int27T"/> value to compare.</param>
+    /// <param name="right">The <see cref="ulong"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >=(Int27T left, ulong right) => left.CompareTo(right) >= 0;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="Int27T"/> value is less than or equal to a <see cref="ulong"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="Int27T"/> value to compare.</param>
+    /// <param name="right">The <see cref="ulong"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <=(Int27T left, ulong right) => left.CompareTo(right) <= 0;
 
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="ulong"/> value is greater than a <see cref="Int27T"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="ulong"/> value to compare.</param>
+    /// <param name="right">The <see cref="Int27T"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >(ulong left, Int27T right) => right.CompareTo(left) < 0;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="ulong"/> value is less than a <see cref="Int27T"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="ulong"/> value to compare.</param>
+    /// <param name="right">The <see cref="Int27T"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <(ulong left, Int27T right) => right.CompareTo(left) > 0;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="ulong"/> value is greater than or equal to a <see cref="Int27T"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="ulong"/> value to compare.</param>
+    /// <param name="right">The <see cref="Int27T"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >=(ulong left, Int27T right) => right.CompareTo(left) <= 0;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="ulong"/> value is less than or equal to a <see cref="Int27T"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="ulong"/> value to compare.</param>
+    /// <param name="right">The <see cref="Int27T"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <=(ulong left, Int27T right) => right.CompareTo(left) >= 0;
      
     // Comparison operators with float
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="Int27T"/> value is greater than a <see cref="float"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="Int27T"/> value to compare.</param>
+    /// <param name="right">The <see cref="float"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >(Int27T left, float right) => left.value > right;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="Int27T"/> value is less than a <see cref="float"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="Int27T"/> value to compare.</param>
+    /// <param name="right">The <see cref="float"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <(Int27T left, float right) => left.value < right;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="Int27T"/> value is greater than or equal to a <see cref="float"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="Int27T"/> value to compare.</param>
+    /// <param name="right">The <see cref="float"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >=(Int27T left, float right) => left.value >= right;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="Int27T"/> value is less than or equal to a <see cref="float"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="Int27T"/> value to compare.</param>
+    /// <param name="right">The <see cref="float"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <=(Int27T left, float right) => left.value <= right;
 
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="float"/> value is greater than a <see cref="Int27T"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="float"/> value to compare.</param>
+    /// <param name="right">The <see cref="Int27T"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >(float left, Int27T right) => left > right.value;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="float"/> value is less than a <see cref="Int27T"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="float"/> value to compare.</param>
+    /// <param name="right">The <see cref="Int27T"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <(float left, Int27T right) => left < right.value;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="float"/> value is greater than or equal to a <see cref="Int27T"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="float"/> value to compare.</param>
+    /// <param name="right">The <see cref="Int27T"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >=(float left, Int27T right) => left >= right.value;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="float"/> value is less than or equal to a <see cref="Int27T"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="float"/> value to compare.</param>
+    /// <param name="right">The <see cref="Int27T"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <=(float left, Int27T right) => left <= right.value;
      
     // Comparison operators with double
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="Int27T"/> value is greater than a <see cref="double"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="Int27T"/> value to compare.</param>
+    /// <param name="right">The <see cref="double"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >(Int27T left, double right) => left.value > right;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="Int27T"/> value is less than a <see cref="double"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="Int27T"/> value to compare.</param>
+    /// <param name="right">The <see cref="double"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <(Int27T left, double right) => left.value < right;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="Int27T"/> value is greater than or equal to a <see cref="double"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="Int27T"/> value to compare.</param>
+    /// <param name="right">The <see cref="double"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >=(Int27T left, double right) => left.value >= right;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="Int27T"/> value is less than or equal to a <see cref="double"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="Int27T"/> value to compare.</param>
+    /// <param name="right">The <see cref="double"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <=(Int27T left, double right) => left.value <= right;
 
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="double"/> value is greater than a <see cref="Int27T"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="double"/> value to compare.</param>
+    /// <param name="right">The <see cref="Int27T"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >(double left, Int27T right) => left > right.value;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="double"/> value is less than a <see cref="Int27T"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="double"/> value to compare.</param>
+    /// <param name="right">The <see cref="Int27T"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <(double left, Int27T right) => left < right.value;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="double"/> value is greater than or equal to a <see cref="Int27T"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="double"/> value to compare.</param>
+    /// <param name="right">The <see cref="Int27T"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >=(double left, Int27T right) => left >= right.value;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="double"/> value is less than or equal to a <see cref="Int27T"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="double"/> value to compare.</param>
+    /// <param name="right">The <see cref="Int27T"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <=(double left, Int27T right) => left <= right.value;
      
     // Comparison operators with decimal
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="Int27T"/> value is greater than a <see cref="decimal"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="Int27T"/> value to compare.</param>
+    /// <param name="right">The <see cref="decimal"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >(Int27T left, decimal right) => left.value > right;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="Int27T"/> value is less than a <see cref="decimal"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="Int27T"/> value to compare.</param>
+    /// <param name="right">The <see cref="decimal"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <(Int27T left, decimal right) => left.value < right;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="Int27T"/> value is greater than or equal to a <see cref="decimal"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="Int27T"/> value to compare.</param>
+    /// <param name="right">The <see cref="decimal"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >=(Int27T left, decimal right) => left.value >= right;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="Int27T"/> value is less than or equal to a <see cref="decimal"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="Int27T"/> value to compare.</param>
+    /// <param name="right">The <see cref="decimal"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <=(Int27T left, decimal right) => left.value <= right;
 
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="decimal"/> value is greater than a <see cref="Int27T"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="decimal"/> value to compare.</param>
+    /// <param name="right">The <see cref="Int27T"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >(decimal left, Int27T right) => left > right.value;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="decimal"/> value is less than a <see cref="Int27T"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="decimal"/> value to compare.</param>
+    /// <param name="right">The <see cref="Int27T"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <(decimal left, Int27T right) => left < right.value;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="decimal"/> value is greater than or equal to a <see cref="Int27T"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="decimal"/> value to compare.</param>
+    /// <param name="right">The <see cref="Int27T"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >=(decimal left, Int27T right) => left >= right.value;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="decimal"/> value is less than or equal to a <see cref="Int27T"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="decimal"/> value to compare.</param>
+    /// <param name="right">The <see cref="Int27T"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <=(decimal left, Int27T right) => left <= right.value;
      
     // Comparison operators with IComparable
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="Int27T"/> value is greater than a <see cref="IComparable"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="Int27T"/> value to compare.</param>
+    /// <param name="right">The <see cref="IComparable"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >(Int27T left, IComparable right) => left.CompareTo(right) > 0;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="Int27T"/> value is less than a <see cref="IComparable"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="Int27T"/> value to compare.</param>
+    /// <param name="right">The <see cref="IComparable"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <(Int27T left, IComparable right) => left.CompareTo(right) < 0;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="Int27T"/> value is greater than or equal to a <see cref="IComparable"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="Int27T"/> value to compare.</param>
+    /// <param name="right">The <see cref="IComparable"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >=(Int27T left, IComparable right) => left.CompareTo(right) >= 0;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="Int27T"/> value is less than or equal to a <see cref="IComparable"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="Int27T"/> value to compare.</param>
+    /// <param name="right">The <see cref="IComparable"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <=(Int27T left, IComparable right) => left.CompareTo(right) <= 0;
 
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="IComparable"/> value is greater than a <see cref="Int27T"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="IComparable"/> value to compare.</param>
+    /// <param name="right">The <see cref="Int27T"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >(IComparable left, Int27T right) => right.CompareTo(left) < 0;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="IComparable"/> value is less than a <see cref="Int27T"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="IComparable"/> value to compare.</param>
+    /// <param name="right">The <see cref="Int27T"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <(IComparable left, Int27T right) => right.CompareTo(left) > 0;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="IComparable"/> value is greater than or equal to a <see cref="Int27T"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="IComparable"/> value to compare.</param>
+    /// <param name="right">The <see cref="Int27T"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is greater than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >=(IComparable left, Int27T right) => right.CompareTo(left) <= 0;
+
+    /// <summary>
+    /// Returns a value indicating whether a <see cref="IComparable"/> value is less than or equal to a <see cref="Int27T"/> value.
+    /// </summary>
+    /// <param name="left">The <see cref="IComparable"/> value to compare.</param>
+    /// <param name="right">The <see cref="Int27T"/> value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is less than or equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <=(IComparable left, Int27T right) => right.CompareTo(left) >= 0;
 
     #endregion
@@ -684,24 +1370,124 @@ public static explicit operator Int32(Int27T value) => (Int32)value.value;
 
     #region IConvertible Implementation
 
+    /// <summary>
+    /// Gets the <see cref="TypeCode"/> for this instance.
+    /// </summary>
+    /// <returns><see cref="TypeCode.Int32"/>.</returns>
     public TypeCode GetTypeCode() => TypeCode.Int32;
 
+    /// <summary>
+    /// Converts this instance to a <see cref="bool"/> value.
+    /// </summary>
+    /// <param name="provider">An object that supplies culture-specific formatting information.</param>
+    /// <returns><see langword="true"/> if the value is non-zero; otherwise, <see langword="false"/>.</returns>
     bool IConvertible.ToBoolean(IFormatProvider? provider) => value != 0;
+
+    /// <summary>
+    /// Converts this instance to a <see cref="char"/> value.
+    /// </summary>
+    /// <param name="provider">An object that supplies culture-specific formatting information.</param>
+    /// <returns>A <see cref="char"/> value equivalent to this instance.</returns>
     char IConvertible.ToChar(IFormatProvider? provider) => Convert.ToChar(value);
+
+    /// <summary>
+    /// Converts this instance to an <see cref="sbyte"/> value.
+    /// </summary>
+    /// <param name="provider">An object that supplies culture-specific formatting information.</param>
+    /// <returns>An <see cref="sbyte"/> value equivalent to this instance.</returns>
     sbyte IConvertible.ToSByte(IFormatProvider? provider) => Convert.ToSByte(value);
+
+    /// <summary>
+    /// Converts this instance to a <see cref="byte"/> value.
+    /// </summary>
+    /// <param name="provider">An object that supplies culture-specific formatting information.</param>
+    /// <returns>A <see cref="byte"/> value equivalent to this instance.</returns>
     byte IConvertible.ToByte(IFormatProvider? provider) => Convert.ToByte(value);
+
+    /// <summary>
+    /// Converts this instance to a <see cref="short"/> value.
+    /// </summary>
+    /// <param name="provider">An object that supplies culture-specific formatting information.</param>
+    /// <returns>A <see cref="short"/> value equivalent to this instance.</returns>
     short IConvertible.ToInt16(IFormatProvider? provider) => Convert.ToInt16(value);
+
+    /// <summary>
+    /// Converts this instance to a <see cref="ushort"/> value.
+    /// </summary>
+    /// <param name="provider">An object that supplies culture-specific formatting information.</param>
+    /// <returns>A <see cref="ushort"/> value equivalent to this instance.</returns>
     ushort IConvertible.ToUInt16(IFormatProvider? provider) => Convert.ToUInt16(value);
+
+    /// <summary>
+    /// Converts this instance to an <see cref="int"/> value.
+    /// </summary>
+    /// <param name="provider">An object that supplies culture-specific formatting information.</param>
+    /// <returns>An <see cref="int"/> value equivalent to this instance.</returns>
     int IConvertible.ToInt32(IFormatProvider? provider) => Convert.ToInt32(value);
+
+    /// <summary>
+    /// Converts this instance to a <see cref="uint"/> value.
+    /// </summary>
+    /// <param name="provider">An object that supplies culture-specific formatting information.</param>
+    /// <returns>A <see cref="uint"/> value equivalent to this instance.</returns>
     uint IConvertible.ToUInt32(IFormatProvider? provider) => Convert.ToUInt32(value);
+
+    /// <summary>
+    /// Converts this instance to a <see cref="long"/> value.
+    /// </summary>
+    /// <param name="provider">An object that supplies culture-specific formatting information.</param>
+    /// <returns>A <see cref="long"/> value equivalent to this instance.</returns>
     long IConvertible.ToInt64(IFormatProvider? provider) => Convert.ToInt64(value);
+
+    /// <summary>
+    /// Converts this instance to a <see cref="ulong"/> value.
+    /// </summary>
+    /// <param name="provider">An object that supplies culture-specific formatting information.</param>
+    /// <returns>A <see cref="ulong"/> value equivalent to this instance.</returns>
     ulong IConvertible.ToUInt64(IFormatProvider? provider) => Convert.ToUInt64(value);
+
+    /// <summary>
+    /// Converts this instance to a <see cref="float"/> value.
+    /// </summary>
+    /// <param name="provider">An object that supplies culture-specific formatting information.</param>
+    /// <returns>A <see cref="float"/> value equivalent to this instance.</returns>
     float IConvertible.ToSingle(IFormatProvider? provider) => Convert.ToSingle(value);
+
+    /// <summary>
+    /// Converts this instance to a <see cref="double"/> value.
+    /// </summary>
+    /// <param name="provider">An object that supplies culture-specific formatting information.</param>
+    /// <returns>A <see cref="double"/> value equivalent to this instance.</returns>
     double IConvertible.ToDouble(IFormatProvider? provider) => Convert.ToDouble(value);
+
+    /// <summary>
+    /// Converts this instance to a <see cref="decimal"/> value.
+    /// </summary>
+    /// <param name="provider">An object that supplies culture-specific formatting information.</param>
+    /// <returns>A <see cref="decimal"/> value equivalent to this instance.</returns>
     decimal IConvertible.ToDecimal(IFormatProvider? provider) => Convert.ToDecimal(value);
+
+    /// <summary>
+    /// This conversion is not supported and will always throw <see cref="InvalidCastException"/>.
+    /// </summary>
+    /// <param name="provider">An object that supplies culture-specific formatting information.</param>
+    /// <returns>This method never returns; it always throws <see cref="InvalidCastException"/>.</returns>
+    /// <exception cref="InvalidCastException">This conversion is not supported.</exception>
     DateTime IConvertible.ToDateTime(IFormatProvider? provider) => throw new InvalidCastException();
+
+    /// <summary>
+    /// Converts this instance to its string representation.
+    /// </summary>
+    /// <param name="provider">An object that supplies culture-specific formatting information.</param>
+    /// <returns>A string representation of this instance.</returns>
     string IConvertible.ToString(IFormatProvider? provider) => value.ToString(provider);
 
+    /// <summary>
+    /// Converts this instance to an object of the specified type.
+    /// </summary>
+    /// <param name="conversionType">The target type for the conversion.</param>
+    /// <param name="provider">An object that supplies culture-specific formatting information.</param>
+    /// <returns>An object whose type is <paramref name="conversionType"/> and whose value is equivalent to this instance.</returns>
     object IConvertible.ToType(Type conversionType, IFormatProvider? provider) =>
         Convert.ChangeType(value, conversionType, provider);
 
@@ -716,12 +1502,36 @@ public static explicit operator Int32(Int27T value) => (Int32)value.value;
 
     #region IIncrementOperators/IDecrementOperators Implementation
 
+    /// <summary>
+    /// Increments a ternary number by one, maintaining the original numeric type.
+    /// </summary>
+    /// <param name="value">The ternary number to increment.</param>
+    /// <returns>A new ternary number with a value one greater than <paramref name="value"/>.</returns>
     public static Int27T operator ++(Int27T value) => Create(value.value + 1);
+
+    /// <summary>
+    /// Decrements a ternary number by one, maintaining the original numeric type.
+    /// </summary>
+    /// <param name="value">The ternary number to decrement.</param>
+    /// <returns>A new ternary number with a value one less than <paramref name="value"/>.</returns>
     public static Int27T operator --(Int27T value) => Create(value.value - 1);
 
     #endregion
 
+    /// <summary>
+    /// Determines whether two <see cref="Int27T"/> values are equal.
+    /// </summary>
+    /// <param name="left">The first value to compare.</param>
+    /// <param name="right">The second value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     static bool IEqualityOperators<Int27T, Int27T, bool>.operator ==(Int27T left, Int27T right) => left.value == right.value;
+
+    /// <summary>
+    /// Determines whether two <see cref="Int27T"/> values are not equal.
+    /// </summary>
+    /// <param name="left">The first value to compare.</param>
+    /// <param name="right">The second value to compare.</param>
+    /// <returns><see langword="true"/> if <paramref name="left"/> is not equal to <paramref name="right"/>; otherwise, <see langword="false"/>.</returns>
     static bool IEqualityOperators<Int27T, Int27T, bool>.operator !=(Int27T left, Int27T right) => left.value != right.value;
 
     #region Binary Operations
@@ -796,44 +1606,148 @@ public static TritArray27 operator |(Int27T value, Trit[] trits)
 
     #region Interface Static Members
 
+    /// <summary>
+    /// Returns the value -1 as a <see cref="Int27T"/>.
+    /// </summary>
     static Int27T ISignedNumber<Int27T>.NegativeOne => new(-1);
+
+    /// <summary>
+    /// Returns the value 1 as a <see cref="Int27T"/>.
+    /// </summary>
     static Int27T INumberBase<Int27T>.One => new(1);
+
+    /// <summary>
+    /// Returns the value 0 as a <see cref="Int27T"/>.
+    /// </summary>
     static Int27T INumberBase<Int27T>.Zero => new(0);
+
+    /// <summary>
+    /// Returns the additive identity (0) for <see cref="Int27T"/>.
+    /// </summary>
     static Int27T IAdditiveIdentity<Int27T, Int27T>.AdditiveIdentity => new(0);
+
+    /// <summary>
+    /// Returns the multiplicative identity (1) for <see cref="Int27T"/>.
+    /// </summary>
     static Int27T IMultiplicativeIdentity<Int27T, Int27T>.MultiplicativeIdentity => new(1);
 
+    /// <summary>
+    /// Returns <see langword="true"/> as all <see cref="Int27T"/> values are canonical.
+    /// </summary>
     static bool INumberBase<Int27T>.IsCanonical(Int27T value) => true;
+
+    /// <summary>
+    /// Returns <see langword="false"/> as <see cref="Int27T"/> values are not complex numbers.
+    /// </summary>
     static bool INumberBase<Int27T>.IsComplexNumber(Int27T value) => false;
+
+    /// <summary>
+    /// Determines whether the specified value is an even integer.
+    /// </summary>
     static bool INumberBase<Int27T>.IsEvenInteger(Int27T value) => value.value % 2 == 0;
+
+    /// <summary>
+    /// Returns <see langword="true"/> as all <see cref="Int27T"/> values are finite.
+    /// </summary>
     static bool INumberBase<Int27T>.IsFinite(Int27T value) => true;
+
+    /// <summary>
+    /// Returns <see langword="false"/> as <see cref="Int27T"/> values are not imaginary numbers.
+    /// </summary>
     static bool INumberBase<Int27T>.IsImaginaryNumber(Int27T value) => false;
+
+    /// <summary>
+    /// Returns <see langword="false"/> as <see cref="Int27T"/> values cannot be infinite.
+    /// </summary>
     static bool INumberBase<Int27T>.IsInfinity(Int27T value) => false;
+
+    /// <summary>
+    /// Returns <see langword="true"/> as all <see cref="Int27T"/> values are integers.
+    /// </summary>
     static bool INumberBase<Int27T>.IsInteger(Int27T value) => true;
+
+    /// <summary>
+    /// Returns <see langword="false"/> as <see cref="Int27T"/> values cannot be NaN.
+    /// </summary>
     static bool INumberBase<Int27T>.IsNaN(Int27T value) => false;
+
+    /// <summary>
+    /// Returns <see langword="true"/> if the value is less than zero.
+    /// </summary>
     static bool INumberBase<Int27T>.IsNegative(Int27T value) => value.value < 0;
+
+    /// <summary>
+    /// Returns <see langword="false"/> as <see cref="Int27T"/> values cannot be negative infinity.
+    /// </summary>
     static bool INumberBase<Int27T>.IsNegativeInfinity(Int27T value) => false;
+
+    /// <summary>
+    /// Returns <see langword="true"/> if the value is non-zero.
+    /// </summary>
     static bool INumberBase<Int27T>.IsNormal(Int27T value) => value.value != 0;
+
+    /// <summary>
+    /// Determines whether the specified value is an odd integer.
+    /// </summary>
     static bool INumberBase<Int27T>.IsOddInteger(Int27T value) => value.value % 2 != 0;
+
+    /// <summary>
+    /// Returns <see langword="true"/> if the value is greater than zero.
+    /// </summary>
     static bool INumberBase<Int27T>.IsPositive(Int27T value) => value.value > 0;
+
+    /// <summary>
+    /// Returns <see langword="false"/> as <see cref="Int27T"/> values cannot be positive infinity.
+    /// </summary>
     static bool INumberBase<Int27T>.IsPositiveInfinity(Int27T value) => false;
+
+    /// <summary>
+    /// Returns <see langword="true"/> as all <see cref="Int27T"/> values are real numbers.
+    /// </summary>
     static bool INumberBase<Int27T>.IsRealNumber(Int27T value) => true;
+
+    /// <summary>
+    /// Returns <see langword="false"/> as <see cref="Int27T"/> values cannot be subnormal.
+    /// </summary>
     static bool INumberBase<Int27T>.IsSubnormal(Int27T value) => false;
+
+    /// <summary>
+    /// Returns <see langword="true"/> if the value is zero.
+    /// </summary>
     static bool INumberBase<Int27T>.IsZero(Int27T value) => value.value == 0;
 
+    /// <summary>
+    /// Returns the value with the greater absolute value.
+    /// </summary>
     static Int27T INumberBase<Int27T>.MaxMagnitude(Int27T x, Int27T y) =>
         Math.Abs(x.value) > Math.Abs(y.value) ? x : y;
 
+    /// <summary>
+    /// Returns the value with the greater absolute value.
+    /// </summary>
     static Int27T INumberBase<Int27T>.MaxMagnitudeNumber(Int27T x, Int27T y) =>
         Math.Abs(x.value) > Math.Abs(y.value) ? x : y;
 
+    /// <summary>
+    /// Returns the value with the lesser absolute value.
+    /// </summary>
     static Int27T INumberBase<Int27T>.MinMagnitude(Int27T x, Int27T y) =>
         Math.Abs(x.value) < Math.Abs(y.value) ? x : y;
 
+    /// <summary>
+    /// Returns the value with the lesser absolute value.
+    /// </summary>
     static Int27T INumberBase<Int27T>.MinMagnitudeNumber(Int27T x, Int27T y) =>
         Math.Abs(x.value) < Math.Abs(y.value) ? x : y;
 
+    /// <summary>
+    /// Gets the radix (base) for this numeric type.
+    /// </summary>
     static int INumberBase<Int27T>.Radix => 2;
 
+    /// <summary>
+    /// Returns the absolute value of the specified value.
+    /// </summary>
     static Int27T INumberBase<Int27T>.Abs(Int27T value) =>
         value.value < 0 ? new((Int64)(-value.value)) : value;
 
@@ -871,9 +1785,22 @@ public static TritArray27 operator |(Int27T value, Trit[] trits)
 
     #region ISpanFormattable/ISpanParsable Implementation
 
+    /// <summary>
+    /// Parses a ternary number from a character span.
+    /// </summary>
+    /// <param name="s">The span containing the characters to parse.</param>
+    /// <param name="provider">An object that supplies culture-specific formatting information.</param>
+    /// <returns>A <see cref="Int27T"/> that represents the parsed value.</returns>
     static Int27T ISpanParsable<Int27T>.Parse(ReadOnlySpan<char> s, IFormatProvider? provider) =>
         new(Int64.Parse(s, NumberStyles.Integer, provider));
 
+    /// <summary>
+    /// Attempts to parse a ternary number from a character span.
+    /// </summary>
+    /// <param name="s">The span containing the characters to parse.</param>
+    /// <param name="provider">An object that supplies culture-specific formatting information.</param>
+    /// <param name="result">When this method returns, contains the parsed value if successful; otherwise, the default value.</param>
+    /// <returns><see langword="true"/> if the parsing was successful; otherwise, <see langword="false"/>.</returns>
     static bool ISpanParsable<Int27T>.TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, out Int27T result)
     {
         if (Int64.TryParse(s, NumberStyles.Integer, provider, out var value))
@@ -886,12 +1813,33 @@ public static TritArray27 operator |(Int27T value, Trit[] trits)
         return false;
     }
 
+    /// <summary>
+    /// Tries to format the value of the current instance into the provided span of characters.
+    /// </summary>
+    /// <param name="destination">The span in which to write this instance's value formatted as a span of characters.</param>
+    /// <param name="charsWritten">When this method returns, contains the number of characters that were written in <paramref name="destination"/>.</param>
+    /// <param name="format">A span containing the characters that represent a standard or custom format string.</param>
+    /// <param name="provider">An object that supplies culture-specific formatting information.</param>
+    /// <returns><see langword="true"/> if the formatting was successful; otherwise, <see langword="false"/>.</returns>
     bool ISpanFormattable.TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider? provider) 
         => Formatter.TryFormat(value, destination, out charsWritten, format, provider);
 
-               static Int27T IParsable<Int27T>.Parse(string s, IFormatProvider? provider) =>
+    /// <summary>
+    /// Parses a string to a ternary number.
+    /// </summary>
+    /// <param name="s">The string to parse.</param>
+    /// <param name="provider">An object that supplies culture-specific formatting information.</param>
+    /// <returns>A <see cref="Int27T"/> that represents the parsed value.</returns>
+    static Int27T IParsable<Int27T>.Parse(string s, IFormatProvider? provider) =>
         new(Int64.Parse(s, NumberStyles.Integer, provider));
 
+    /// <summary>
+    /// Attempts to parse a string to a ternary number.
+    /// </summary>
+    /// <param name="s">The string to parse.</param>
+    /// <param name="provider">An object that supplies culture-specific formatting information.</param>
+    /// <param name="result">When this method returns, contains the parsed value if successful; otherwise, the default value.</param>
+    /// <returns><see langword="true"/> if the parsing was successful; otherwise, <see langword="false"/>.</returns>
     static bool IParsable<Int27T>.TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, out Int27T result)
     {
         if (Int64.TryParse(s, NumberStyles.Integer, provider, out var value))
@@ -903,10 +1851,18 @@ public static TritArray27 operator |(Int27T value, Trit[] trits)
         result = default;
         return false;
     }
+
     #endregion
 
     #region Generic Conversions
 
+    /// <summary>
+    /// Attempts to convert a value to a ternary number with overflow checking.
+    /// </summary>
+    /// <typeparam name="TOther">The type to convert from.</typeparam>
+    /// <param name="value">The value to convert.</param>
+    /// <param name="result">When this method returns, contains the converted value if successful; otherwise, the default value.</param>
+    /// <returns><see langword="true"/> if the conversion was successful; otherwise, <see langword="false"/>.</returns>
     static bool INumberBase<Int27T>.TryConvertFromChecked<TOther>(TOther value, out Int27T result)
     {
         if (value is IConvertible conv)
@@ -930,6 +1886,13 @@ public static TritArray27 operator |(Int27T value, Trit[] trits)
         return false;
     }
 
+    /// <summary>
+    /// Attempts to convert a value to a ternary number with saturation.
+    /// </summary>
+    /// <typeparam name="TOther">The type to convert from.</typeparam>
+    /// <param name="value">The value to convert.</param>
+    /// <param name="result">When this method returns, contains the converted value if successful; otherwise, the default value.</param>
+    /// <returns><see langword="true"/> if the conversion was successful; otherwise, <see langword="false"/>.</returns>
     static bool INumberBase<Int27T>.TryConvertFromSaturating<TOther>(TOther value, out Int27T result)
     {
         if (value is IConvertible conv)
@@ -950,6 +1913,13 @@ public static TritArray27 operator |(Int27T value, Trit[] trits)
         return false;
     }
 
+    /// <summary>
+    /// Attempts to convert a value to a ternary number with truncation.
+    /// </summary>
+    /// <typeparam name="TOther">The type to convert from.</typeparam>
+    /// <param name="value">The value to convert.</param>
+    /// <param name="result">When this method returns, contains the converted value if successful; otherwise, the default value.</param>
+    /// <returns><see langword="true"/> if the conversion was successful; otherwise, <see langword="false"/>.</returns>
     static bool INumberBase<Int27T>.TryConvertFromTruncating<TOther>(TOther value, out Int27T result)
     {
         if (value is IConvertible conv)
@@ -970,6 +1940,13 @@ public static TritArray27 operator |(Int27T value, Trit[] trits)
         return false;
     }
 
+    /// <summary>
+    /// Attempts to convert a ternary number to another type with overflow checking.
+    /// </summary>
+    /// <typeparam name="TOther">The type to convert to.</typeparam>
+    /// <param name="value">The value to convert.</param>
+    /// <param name="result">When this method returns, contains the converted value if successful; otherwise, the default value.</param>
+    /// <returns><see langword="true"/> if the conversion was successful; otherwise, <see langword="false"/>.</returns>
     static bool INumberBase<Int27T>.TryConvertToChecked<TOther>(Int27T value, [MaybeNullWhen(false)] out TOther result)
         where TOther : default
     {
@@ -983,6 +1960,13 @@ public static TritArray27 operator |(Int27T value, Trit[] trits)
         return false;
     }
 
+    /// <summary>
+    /// Attempts to convert a ternary number to another type with saturation.
+    /// </summary>
+    /// <typeparam name="TOther">The type to convert to.</typeparam>
+    /// <param name="value">The value to convert.</param>
+    /// <param name="result">When this method returns, contains the converted value if successful; otherwise, the default value.</param>
+    /// <returns><see langword="true"/> if the conversion was successful; otherwise, <see langword="false"/>.</returns>
     static bool INumberBase<Int27T>.TryConvertToSaturating<TOther>(Int27T value, [MaybeNullWhen(false)] out TOther result)
         where TOther : default
     {
@@ -996,6 +1980,13 @@ public static TritArray27 operator |(Int27T value, Trit[] trits)
         return false;
     }
 
+    /// <summary>
+    /// Attempts to convert a ternary number to another type with truncation.
+    /// </summary>
+    /// <typeparam name="TOther">The type to convert to.</typeparam>
+    /// <param name="value">The value to convert.</param>
+    /// <param name="result">When this method returns, contains the converted value if successful; otherwise, the default value.</param>
+    /// <returns><see langword="true"/> if the conversion was successful; otherwise, <see langword="false"/>.</returns>
     static bool INumberBase<Int27T>.TryConvertToTruncating<TOther>(Int27T value, [MaybeNullWhen(false)] out TOther result)
         where TOther : default
     {

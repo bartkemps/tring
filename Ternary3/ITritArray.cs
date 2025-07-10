@@ -1,5 +1,9 @@
 ﻿namespace Ternary3;
 
+/// <summary>
+/// Represents a basic interface for all trit array implementations, providing core functionality for working with ternary data.
+/// This generic interface enables fluent, strongly-typed operations on trit arrays with proper return type preservation.
+/// </summary>
 public interface ITritArray
 {
     /// <summary>
@@ -32,6 +36,10 @@ public interface ITritArray
     int Length { get; }
 }
 
+/// <summary>
+/// Represents a strongly-typed trit array that supports equality comparison and string formatting.
+/// </summary>
+/// <typeparam name="TSelf">The implementing type, enabling proper type preservation in operations.</typeparam>
 public interface ITritArray<TSelf> 
     : ITritArray, 
         IEquatable<TSelf>,

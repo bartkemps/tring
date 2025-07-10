@@ -137,9 +137,21 @@ public struct TritArray27 : ITritArray<TritArray27>
     public static LookupTritArray27Operator operator |(TritArray27 array, Func<Trit, Trit, Trit> operation)
         => new LookupTritArray27Operator(array, operation);
 
+    /// <summary>
+    /// Creates a binary operation context for this array using a lookup table.
+    /// </summary>
+    /// <param name="array">The source array.</param>
+    /// <param name="table">The lookup table containing the transformation values.</param>
+    /// <returns>A LookupTritArray27Operator that can be used to apply the operation with another array.</returns>
     public static LookupTritArray27Operator operator |(TritArray27 array, BinaryTritOperator table)
         => new LookupTritArray27Operator(array, table);
 
+    /// <summary>
+    /// Creates a binary operation context for this array using a 2D lookup table.
+    /// </summary>
+    /// <param name="array">The source array.</param>
+    /// <param name="table">The 2D lookup table containing the transformation values.</param>
+    /// <returns>A LookupTritArray27Operator that can be used to apply the operation with another array.</returns>
     public static LookupTritArray27Operator operator |(TritArray27 array, Trit[,] table)
         => new LookupTritArray27Operator(array, table);
 

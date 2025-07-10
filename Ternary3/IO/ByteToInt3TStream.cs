@@ -21,6 +21,21 @@ public sealed class ByteToInt3TStream(Stream source, bool mustWriteMagicNumber =
     private List<Int3T> tritBuffer = []; // Buffer for decoded trits
     private readonly byte[] byteBuffer = new byte[4096]; // Buffer for reading bytes
 
+    /// <summary>
+    /// Asynchronously reads a sequence of Int3T values from the stream.
+    /// </summary>
+    /// <param name="buffer">The buffer to write the data into.</param>
+    /// <param name="offset">The offset in the buffer at which to begin writing data.</param>
+    /// <param name="count">The maximum number of Int3T values to read.</param>
+    /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
+    /// <returns>
+    /// A task that represents the asynchronous read operation. The value is
+    /// the total number of Int3T values read into the buffer.
+    /// </returns>
+    /// <exception cref="ArgumentNullException">buffer is null.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">offset or count is negative.</exception>
+    /// <exception cref="NotSupportedException">The stream does not support reading.</exception>
+    /// <exception cref="ObjectDisposedException">The stream has been disposed.</exception>
     public override async Task<int> ReadAsync(Int3T[] buffer, int offset, int count, CancellationToken cancellationToken = default)
     {
         ObjectDisposedException.ThrowIf(Disposed, this);
@@ -71,6 +86,18 @@ public sealed class ByteToInt3TStream(Stream source, bool mustWriteMagicNumber =
         return tritsCopied;
     }
 
+    /// <summary>
+    /// Asynchronously writes a sequence of Int3T values to the stream.
+    /// </summary>
+    /// <param name="buffer">The buffer containing the data to write.</param>
+    /// <param name="offset">The offset in the buffer from which to begin writing data.</param>
+    /// <param name="count">The number of Int3T values to write.</param>
+    /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
+    /// <returns>A task that represents the asynchronous write operation.</returns>
+    /// <exception cref="ArgumentNullException">buffer is null.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">offset or count is negative.</exception>
+    /// <exception cref="NotSupportedException">The stream does not support writing.</exception>
+    /// <exception cref="ObjectDisposedException">The stream has been disposed.</exception>
     public override async Task WriteAsync(Int3T[] buffer, int offset, int count, CancellationToken cancellationToken = default)
     {
         ObjectDisposedException.ThrowIf(Disposed, this);
