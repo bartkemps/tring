@@ -27,7 +27,7 @@ public static partial class FormattingDemo
         // EXAMPLE 2: Using TernaryFormatProvider with string.Format
         // --------------------------------------------------------
         var provider = new TernaryFormatProvider();
-        string formatted = string.Format(provider, "Value: {0:ter}", value1);
+        var formatted = string.Format(provider, "Value: {0:ter}", value1);
         Console.WriteLine($"\nUsing TernaryFormatProvider: {formatted}");
 
         // EXAMPLE 3: Custom TernaryFormat with different digit symbols
@@ -69,8 +69,8 @@ public static partial class FormattingDemo
         var mixedValues = new object[] { value1, value2, value3, 42, -17 };
         foreach (var val in mixedValues)
         {
-            string standardFormat = string.Format(formatProvider, "{0}", val);
-            string ternaryFormat = string.Format(formatProvider, "{0:ter}", val);
+            var standardFormat = string.Format(formatProvider, "{0}", val);
+            var ternaryFormat = string.Format(formatProvider, "{0:ter}", val);
             Console.WriteLine($"  {val.GetType().Name}: {standardFormat} -> {ternaryFormat}");
         }
 

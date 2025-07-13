@@ -96,15 +96,15 @@ public class ByteToInt3TStreamTests
         var stream = new ByteToInt3TStream(memoryStream);
             
         // Act & Assert - Length
-        Action actLength = () => { var length = stream.Length; };
+        var actLength = () => { var length = stream.Length; };
         actLength.Should().Throw<NotSupportedException>();
             
         // Act & Assert - Position get
-        Action actPositionGet = () => { var position = stream.Position; };
+        var actPositionGet = () => { var position = stream.Position; };
         actPositionGet.Should().Throw<NotSupportedException>();
             
         // Act & Assert - Position set
-        Action actPositionSet = () => { stream.Position = 0; };
+        var actPositionSet = () => { stream.Position = 0; };
         actPositionSet.Should().Throw<NotSupportedException>();
     }
 }

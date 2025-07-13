@@ -56,6 +56,38 @@ public struct TritArray9 : ITritArray<TritArray9>
         Negative = negative;
         Positive = positive;
     }
+    
+    /// <summary>
+    /// Parses a string representation of a TritArray9.
+    /// </summary>
+    /// <param name="value">The string value to parse.</param>
+    /// <returns>A TritArray9 representing the parsed value.</returns>
+    public static TritArray9 Parse(string value) => Parser.ParseTritArray9(value);
+    
+    /// <summary>
+    /// Parses a string representation of a TritArray9.
+    /// </summary>
+    /// <param name="value">The string value to parse.</param>
+    /// <param name="format">The format to use for parsing.</param>
+    /// <returns>A TritArray9 representing the parsed value.</returns>
+    public static TritArray9 Parse(string value, ITernaryFormat format) => Parser.ParseTritArray9(value, format);
+    
+    /// <summary>
+    /// Parses a string representation of a TritArray9.
+    /// </summary>
+    /// <param name="value">The string value to parse.</param>
+    /// <param name="options">The options to use for parsing.</param>
+    /// <returns>A TritArray9 representing the parsed value.</returns>
+    public static TritArray9 Parse(string value, TritParseOptions options) => Parser.ParseTritArray9(value, null, options);
+    
+    /// <summary>
+    /// Parses a string representation of a TritArray9.
+    /// </summary>
+    /// <param name="value">The string value to parse.</param>
+    /// <param name="format">The format to use for parsing.</param>
+    /// <param name="options">The options to use for parsing.</param>
+    /// <returns>A TritArray9 representing the parsed value.</returns>
+    public static TritArray9 Parse(string value, ITernaryFormat format, TritParseOptions options) => Parser.ParseTritArray9(value, format, options);
 
      /// <intheritdoc/>
     public Trit this[int index]

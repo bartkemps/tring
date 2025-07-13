@@ -34,9 +34,9 @@ public static partial class IODemo
         
         // Read values back one by one
         Console.WriteLine("  Reading values back:");
-        for (int i = 0; i < 4; i++)
+        for (var i = 0; i < 4; i++)
         {
-            int value = await memoryStream.ReadInt3TAsync();
+            var value = await memoryStream.ReadInt3TAsync();
             Console.WriteLine($"    Position {i}: {value} (Int3T: {((Int3T)value):ter})");
         }
 
@@ -62,7 +62,7 @@ public static partial class IODemo
         // Read back into a new buffer
         bulkStream.Position = 0;
         var readBuffer = new Int3T[writeBuffer.Length];
-        int bytesRead = await bulkStream.ReadAsync(readBuffer, 0, readBuffer.Length);
+        var bytesRead = await bulkStream.ReadAsync(readBuffer, 0, readBuffer.Length);
         
         Console.WriteLine($"  Read {bytesRead} values: [{string.Join(", ", readBuffer.Select(v => $"{(int)v}"))}]");
         Console.WriteLine($"  Values match: {writeBuffer.SequenceEqual(readBuffer)}");
@@ -72,16 +72,16 @@ public static partial class IODemo
         Console.WriteLine("\nExample 3: Stream seeking and positioning");
         
         // Seek to middle of stream
-        long newPosition = await bulkStream.SeekAsync(2, SeekOrigin.Begin);
+        var newPosition = await bulkStream.SeekAsync(2, SeekOrigin.Begin);
         Console.WriteLine($"  Sought to position 2, actual position: {newPosition}");
         
         // Read from middle
-        int middleValue = await bulkStream.ReadInt3TAsync();
+        var middleValue = await bulkStream.ReadInt3TAsync();
         Console.WriteLine($"  Value at position 2: {middleValue} (Int3T: {((Int3T)middleValue):ter})");
         
         // Seek to end and read (should return -1 for end of stream)
         await bulkStream.SeekAsync(0, SeekOrigin.End);
-        int endValue = await bulkStream.ReadInt3TAsync();
+        var endValue = await bulkStream.ReadInt3TAsync();
         Console.WriteLine($"  Reading past end returns: {endValue}");
 
         // EXAMPLE 4: Converting ternary to binary and back
@@ -100,11 +100,11 @@ public static partial class IODemo
         using var byteStream = new Int3TToByteStream(sourceStream, true, true);
         var binaryData = new List<byte>();
         var buffer = new byte[1024];
-        int totalBytesRead = 0;
+        var totalBytesRead = 0;
         
         while (true)
         {
-            int bytesRead2 = await byteStream.ReadAsync(buffer, 0, buffer.Length);
+            var bytesRead2 = await byteStream.ReadAsync(buffer, 0, buffer.Length);
             if (bytesRead2 == 0) break;
             
             binaryData.AddRange(buffer.Take(bytesRead2));
@@ -118,7 +118,7 @@ public static partial class IODemo
         await using var backToTernaryStream = new ByteToInt3TStream(binaryMemoryStream, true, true);
         
         var recoveredData = new Int3T[ternaryData.Length];
-        int tritsRead = await backToTernaryStream.ReadAsync(recoveredData, 0, recoveredData.Length);
+        var tritsRead = await backToTernaryStream.ReadAsync(recoveredData, 0, recoveredData.Length);
         
         Console.WriteLine($"  Recovered {tritsRead} ternary values: [{string.Join(", ", recoveredData.Select(v => $"{(int)v} ({v:ter})"))}]");
         Console.WriteLine($"  Round-trip successful: {ternaryData.SequenceEqual(recoveredData)}");
@@ -127,7 +127,7 @@ public static partial class IODemo
         // ------------------------------------
         Console.WriteLine("\nExample 5: File I/O with ternary data");
         
-        string tempFileName = Path.GetTempFileName();
+        var tempFileName = Path.GetTempFileName();
         try
         {
             // Write ternary data to file
@@ -157,7 +157,7 @@ public static partial class IODemo
             {
                 await using var converter = new ByteToInt3TStream(fileStream, true, true);
                 var readFileData = new Int3T[fileData.Length];
-                int fileTritsRead = await converter.ReadAsync(readFileData, 0, readFileData.Length);
+                var fileTritsRead = await converter.ReadAsync(readFileData, 0, readFileData.Length);
                 
                 Console.WriteLine($"  Read {fileTritsRead} ternary values from file");
                 Console.WriteLine($"  Original: [{string.Join(", ", fileData.Select(v => $"{(int)v}"))}]");
@@ -210,9 +210,9 @@ public static partial class IODemo
         
         // Reading beyond stream length
         readOnlyStream.Position = 0;
-        for (int i = 0; i < 4; i++) // Try to read 4 values from 2-value stream
+        for (var i = 0; i < 4; i++) // Try to read 4 values from 2-value stream
         {
-            int value = await readOnlyStream.ReadInt3TAsync();
+            var value = await readOnlyStream.ReadInt3TAsync();
             if (value == -1)
             {
                 Console.WriteLine($"  Position {i}: End of stream reached (returned -1)");

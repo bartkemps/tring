@@ -8,7 +8,7 @@ internal class TernaryFormatter(ITernaryFormat? ternaryFormat = null, IFormatPro
     
     public string Format(string? format, object? arg, IFormatProvider? formatProvider)
     {
-        // Whitelisted ternary format strings
+        // Allowlisted ternary format strings
         if (format == "ter")
         {
             return arg switch
@@ -52,6 +52,10 @@ internal class TernaryFormatter(ITernaryFormat? ternaryFormat = null, IFormatPro
     // To do: optimized version for known trit types
     public string Format(ITritArray trits)
     {
+        if (!TernaryFormatValidator.Validate(ternaryFormat)) 
+        {
+            throw new FormatException("Invalid ternary format.");
+        }
         if (trits.Length == 0) return string.Empty;
 
         var lastIndex = trits.Length - 1;

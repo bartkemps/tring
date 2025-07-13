@@ -1195,14 +1195,36 @@ public static implicit operator Int128(Int27T value) => (Int128)value.value;
     // Parsing methods
 
     /// <summary>
-    /// Converts the string representation of a number to its <see cref="Int27T"/> equivalent.
+    /// Parses a string representation of a Int27T.
     /// </summary>
-    /// <param name="s">A string containing a number to convert.</param>
-    /// <returns>A <see cref="Int27T"/> equivalent to the number contained in <paramref name="s"/>.</returns>
-    /// <exception cref="ArgumentNullException"><paramref name="s"/> is <see langword="null"/>.</exception>
-    /// <exception cref="FormatException"><paramref name="s"/> is not in the correct format.</exception>
-    /// <exception cref="OverflowException"><paramref name="s"/> represents a number less than <see cref="Int27T.MinValue"/> or greater than <see cref="Int27T.MaxValue"/>.</exception>
-    public static Int27T Parse(string s) => Create(Int64.Parse(s));
+    /// <param name="value">The string value to parse.</param>
+    /// <returns>A Int27T representing the parsed value.</returns>
+    public static Int27T Parse(string value) => Parser.ParseInt27T(value);
+    
+    /// <summary>
+    /// Parses a string representation of a Int27T.
+    /// </summary>
+    /// <param name="value">The string value to parse.</param>
+    /// <param name="format">The format to use for parsing.</param>
+    /// <returns>A Int27T representing the parsed value.</returns>
+    public static Int27T Parse(string value, ITernaryFormat format) => Parser.ParseInt27T(value, format);
+    
+    /// <summary>
+    /// Parses a string representation of a Int27T.
+    /// </summary>
+    /// <param name="value">The string value to parse.</param>
+    /// <param name="options">The options to use for parsing.</param>
+    /// <returns>A Int27T representing the parsed value.</returns>
+    public static Int27T Parse(string value, TritParseOptions options) => Parser.ParseInt27T(value, null, options);
+    
+    /// <summary>
+    /// Parses a string representation of a Int27T.
+    /// </summary>
+    /// <param name="value">The string value to parse.</param>
+    /// <param name="format">The format to use for parsing.</param>
+    /// <param name="options">The options to use for parsing.</param>
+    /// <returns>A Int27T representing the parsed value.</returns>
+    public static Int27T Parse(string value, ITernaryFormat format, TritParseOptions options) => Parser.ParseInt27T(value, format, options);
 
     /// <summary>
     /// Converts the string representation of a number in a specified style to its <see cref="Int27T"/> equivalent.

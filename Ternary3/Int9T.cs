@@ -1208,14 +1208,36 @@ public static implicit operator Int128(Int9T value) => (Int128)value.value;
     // Parsing methods
 
     /// <summary>
-    /// Converts the string representation of a number to its <see cref="Int9T"/> equivalent.
+    /// Parses a string representation of a Int9T.
     /// </summary>
-    /// <param name="s">A string containing a number to convert.</param>
-    /// <returns>A <see cref="Int9T"/> equivalent to the number contained in <paramref name="s"/>.</returns>
-    /// <exception cref="ArgumentNullException"><paramref name="s"/> is <see langword="null"/>.</exception>
-    /// <exception cref="FormatException"><paramref name="s"/> is not in the correct format.</exception>
-    /// <exception cref="OverflowException"><paramref name="s"/> represents a number less than <see cref="Int9T.MinValue"/> or greater than <see cref="Int9T.MaxValue"/>.</exception>
-    public static Int9T Parse(string s) => Create(Int16.Parse(s));
+    /// <param name="value">The string value to parse.</param>
+    /// <returns>A Int9T representing the parsed value.</returns>
+    public static Int9T Parse(string value) => Parser.ParseInt9T(value);
+    
+    /// <summary>
+    /// Parses a string representation of a Int9T.
+    /// </summary>
+    /// <param name="value">The string value to parse.</param>
+    /// <param name="format">The format to use for parsing.</param>
+    /// <returns>A Int9T representing the parsed value.</returns>
+    public static Int9T Parse(string value, ITernaryFormat format) => Parser.ParseInt9T(value, format);
+    
+    /// <summary>
+    /// Parses a string representation of a Int9T.
+    /// </summary>
+    /// <param name="value">The string value to parse.</param>
+    /// <param name="options">The options to use for parsing.</param>
+    /// <returns>A Int9T representing the parsed value.</returns>
+    public static Int9T Parse(string value, TritParseOptions options) => Parser.ParseInt9T(value, null, options);
+    
+    /// <summary>
+    /// Parses a string representation of a Int9T.
+    /// </summary>
+    /// <param name="value">The string value to parse.</param>
+    /// <param name="format">The format to use for parsing.</param>
+    /// <param name="options">The options to use for parsing.</param>
+    /// <returns>A Int9T representing the parsed value.</returns>
+    public static Int9T Parse(string value, ITernaryFormat format, TritParseOptions options) => Parser.ParseInt9T(value, format, options);
 
     /// <summary>
     /// Converts the string representation of a number in a specified style to its <see cref="Int9T"/> equivalent.
