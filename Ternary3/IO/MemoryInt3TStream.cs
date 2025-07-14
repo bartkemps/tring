@@ -538,7 +538,7 @@ public class MemoryInt3TStream : Int3TStream
             }
             else
             {
-                buffer = new Int3T[0];
+                buffer = [];
                 offset = 0;
             }
             capacity = value;

@@ -194,7 +194,7 @@ public static partial class IODemo
         // ---------------------------------------
         Console.WriteLine("\nExample 7: Error handling and edge cases");
         
-        var readOnlyStream = new MemoryInt3TStream(new Int3T[] { ter001, ter010 }, false);
+        var readOnlyStream = new MemoryInt3TStream([ter001, ter010], false);
         Console.WriteLine($"  Created read-only stream with 2 values");
         Console.WriteLine($"  CanRead: {readOnlyStream.CanRead}, CanWrite: {readOnlyStream.CanWrite}");
         
