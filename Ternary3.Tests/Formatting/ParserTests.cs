@@ -109,4 +109,45 @@ public class ParserTests
         ex1?.GetType().Should().Be(ex2?.GetType());
         ex1?.Message.Should().Be(ex2?.Message);
     }
+    
+    [Theory]
+    [InlineData("", TritParseOptions.None, true)]
+    [InlineData("", TritParseOptions.AllowAbsenceOfDigits, false)]
+    [InlineData("X", TritParseOptions.None, true)]
+    [InlineData("X", TritParseOptions.AllowInvalidCharacters, true)]
+    [InlineData("X", TritParseOptions.AllowAbsenceOfDigits, true)]
+    [InlineData("X", TritParseOptions.AllowInvalidCharacters | TritParseOptions.AllowAbsenceOfDigits, false)]
+    [InlineData("0-0", TritParseOptions.None, true)]
+    [InlineData("0-0", TritParseOptions.AllowDashes, false)]
+    [InlineData("0-0", TritParseOptions.AllowGroupSerparators, false)]
+    [InlineData("0_0", TritParseOptions.None, true)]
+    [InlineData("0_0", TritParseOptions.AllowUnderscores, false)]
+    [InlineData("0 \t\r\n 0", TritParseOptions.None, true)]
+    [InlineData("0 \t\r\n 0", TritParseOptions.AllowWhitespace, false)]
+    [InlineData("0 0", TritParseOptions.None, true)]
+    [InlineData("0 0", TritParseOptions.AllowWhitespace, false)]
+    [InlineData("0 0", TritParseOptions.AllowGroupSerparators, false)]
+    [InlineData("0.0", TritParseOptions.None, true)]
+    [InlineData("0.0", TritParseOptions.AllowDecimal, false)]
+    [InlineData("0..0", TritParseOptions.AllowDecimal, true)]
+    [InlineData("0000", TritParseOptions.None, true)]
+    [InlineData("0000", TritParseOptions.AllowOverflow, false)]
+    [InlineData("tTt", TritParseOptions.None, true)]
+    [InlineData("tTt", TritParseOptions.CaseInsensitive, false)]
+    [InlineData("Apple juice!", TritParseOptions.AllowInvalidCharacters, true)]
+    [InlineData("Apple juice!", TritParseOptions.AllowAbsenceOfDigits, true)]
+    [InlineData("Apple juice!", TritParseOptions.AllowInvalidCharacters | TritParseOptions.AllowAbsenceOfDigits, false)]
+    public void Int3T_Parse_ThrowsException(string s, TritParseOptions options, bool expectedException)
+    {
+        var ok = !expectedException;
+        try
+        {
+            _ = Int3T.Parse(s, TernaryFormat.Invariant, options);
+        }
+        catch (Exception)
+        {
+            ok = !ok;
+        }
+        ok.Should().BeTrue();
+    }
 }
