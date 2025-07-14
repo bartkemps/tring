@@ -108,7 +108,7 @@ LastGenerated = <#= DateTime.Now.ToString() #>
                /// <param name="value">The string value to parse.</param>
                /// <param name="format">The format to use for parsing.</param>
                /// <returns>A TritArray{{trits}} representing the parsed value.</returns>
-               public static TritArray{{trits}} Parse(string value, ITernaryFormat format) => Parser.ParseTritArray{{trits}}(value, format);
+               public static TritArray{{trits}} Parse(string value, ITernaryFormat? format) => Parser.ParseTritArray{{trits}}(value, format);
                
                /// <summary>
                /// Parses a string representation of a TritArray{{trits}}.
@@ -125,7 +125,7 @@ LastGenerated = <#= DateTime.Now.ToString() #>
                /// <param name="format">The format to use for parsing.</param>
                /// <param name="options">The options to use for parsing.</param>
                /// <returns>A TritArray{{trits}} representing the parsed value.</returns>
-               public static TritArray{{trits}} Parse(string value, ITernaryFormat format, TritParseOptions options) => Parser.ParseTritArray{{trits}}(value, format, options);
+               public static TritArray{{trits}} Parse(string value, ITernaryFormat? format, TritParseOptions options) => Parser.ParseTritArray{{trits}}(value, format, options);
 
                 /// <intheritdoc/>
                public Trit this[int index]

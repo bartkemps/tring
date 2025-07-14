@@ -325,7 +325,7 @@ LastGenerated = <#= DateTime.Now.ToString() #>
                /// <param name="value">The string value to parse.</param>
                /// <param name="format">The format to use for parsing.</param>
                /// <returns>A {{name}} representing the parsed value.</returns>
-               public static {{name}} Parse(string value, ITernaryFormat format) => Parser.Parse{{name}}(value, format);
+               public static {{name}} Parse(string value, ITernaryFormat? format) => Parser.Parse{{name}}(value, format);
                
                /// <summary>
                /// Parses a string representation of a {{name}}.
@@ -342,7 +342,7 @@ LastGenerated = <#= DateTime.Now.ToString() #>
                /// <param name="format">The format to use for parsing.</param>
                /// <param name="options">The options to use for parsing.</param>
                /// <returns>A {{name}} representing the parsed value.</returns>
-               public static {{name}} Parse(string value, ITernaryFormat format, TritParseOptions options) => Parser.Parse{{name}}(value, format, options);
+               public static {{name}} Parse(string value, ITernaryFormat? format, TritParseOptions options) => Parser.Parse{{name}}(value, format, options);
            
                /// <summary>
                /// Converts the string representation of a number in a specified style to its <see cref="{{name}}"/> equivalent.

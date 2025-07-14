@@ -20,7 +20,7 @@ public class ParserTests
         TernaryPadding = TernaryPadding.Full
     };
 
-    public static object[][] ParseTestData =
+    public static object?[][] ParseTestData =
     [
         // Format: string, ITernaryFormat, TritParseOptions
         ["zzz", null, TritParseOptions.AllowInvalidCharacters],

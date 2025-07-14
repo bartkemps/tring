@@ -11,7 +11,8 @@ public interface ITernaryInteger<TSelf>:
   IConvertible,
   ISignedNumber<TSelf>,
   INumber<TSelf>,
-  IShiftOperators<TSelf, int, TSelf>
+  IShiftOperators<TSelf, int, TSelf>,
+  ITritParsable<TSelf>
   where TSelf : ITernaryInteger<TSelf>?
 {
   /// <summary>Computes the quotient and remainder of two values.</summary>

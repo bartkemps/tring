@@ -1,5 +1,7 @@
 ﻿namespace Ternary3.Integers;
 
+using System.Numerics;
+
 internal static class TritShift
 {
     private static readonly int[] Pow3Cache = new int[20];  // Cache for int-sized powers (20 trits max in 32 bits)
@@ -51,19 +53,41 @@ internal static class TritShift
         if (value == 0 || shift == 0) return value;
         if ((uint)(shift + 19) > 38) return 0;  // if shift not between -19 and 19
         if (shift < 0) return (int)((long)value * Pow3Cache[-shift]).BalancedModulo(1743392200);
-        return value > 0 
-            ? (value + Pow3Cache[shift] / 2) / Pow3Cache[shift]
-            : (value - Pow3Cache[shift] / 2) / Pow3Cache[shift];
+        if (value > 0)
+        {
+            var sum = value + Pow3Cache[shift] / 2;
+            // it might be possible to handle this without long conversion
+            if (sum < value) return (int)Shift((long)value, shift);
+            return sum / Pow3Cache[shift];
+        }
+        else
+        {
+            var sum = value - Pow3Cache[shift] / 2;
+            // it might be possible to handle this without long conversion
+            if (sum > value) return (int)Shift((long)value, shift);
+            return (value - Pow3Cache[shift] / 2) / Pow3Cache[shift];
+        }
     }
     
     public static long Shift(this long value, int shift)
     {
         if (value == 0 || shift == 0) return value;
-        if (shift + 39 > 78) return 0;  // if shift not between -39 and 39
+        if ((uint)(shift + 39) > 78) return 0;  // if shift not between -39 and 39
         if (shift < 0) return ((Int128)value * (Int128)Pow3LongCache[-shift]).BalancedModulo(6078832729528464400);
-        return value > 0 
-            ? (value + Pow3LongCache[shift] / 2) / Pow3LongCache[shift]
-            : (value - Pow3LongCache[shift] / 2) / Pow3LongCache[shift];
+        if (value > 0)
+        {
+            var sum = value + Pow3LongCache[shift] / 2;
+            // it might be possible to handle this without Int128 conversion
+            if (sum < value) return (long)(((Int128)value + Pow3LongCache[shift] / 2) / Pow3LongCache[shift]);
+            return sum / Pow3LongCache[shift];
+        }
+        else
+        {
+            var sum = value - Pow3LongCache[shift] / 2;
+            // it might be possible to handle this without Int128 conversion
+            if (sum > value) return (long)(((Int128)value - Pow3LongCache[shift] / 2) / Pow3LongCache[shift]);
+            return (value - Pow3LongCache[shift] / 2) / Pow3LongCache[shift];
+        }
     }
 
     public static Trit Index(this int value, int index, int maxIndex)

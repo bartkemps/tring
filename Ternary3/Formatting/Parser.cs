@@ -16,7 +16,6 @@ internal class Parser
         {
             throw new FormatException("Input string contains more than 64 trits, which is the maximum supported size.");
         }
-
         if (trits.Length == 0 && !options.HasFlag(TritParseOptions.AllowAbsenceOfDigits))
         {
             throw new FormatException("Input string contains no valid trit digits.");
@@ -24,6 +23,45 @@ internal class Parser
 
         TritsToTritArray<ulong>(trits, out var negative, out var positive);
         return new(negative, positive, (byte)trits.Length);
+    }
+    
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static BigTritArray ParseBigTritArray(string characters, ITernaryFormat? format = null, TritParseOptions options = TritParseOptions.Default)
+    {
+        var trits = GetNormalizedDigits(characters, format, options);
+        using var enumerator = trits.GetEnumerator();
+        List<ulong> negative = [];
+        List<ulong> positive = [];
+        var currentNegative = 0UL;
+        var currentPositive = 0UL;
+        var index = 0;
+        while (enumerator.MoveNext())
+        {
+            var trit = enumerator.Current;
+            if (trit == -1)
+            {
+                currentNegative |= 1UL << index;
+            }
+            else if (trit == 1)
+            {
+                currentPositive |= 1UL << index;
+            }
+            index++;
+            if (index == 64)
+            {
+                negative.Add(currentNegative);
+                positive.Add(currentPositive);
+                currentNegative = 0L;
+                currentPositive = 0L;
+                index = 0;
+            }
+        }
+        if (index > 0)
+        {
+            negative.Add(currentNegative);
+            positive.Add(currentPositive);
+        }
+        return new (negative, positive, (negative.Count - 1) * 64 + index - 64);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]

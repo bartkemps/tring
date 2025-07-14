@@ -43,6 +43,7 @@ public interface ITritArray
 public interface ITritArray<TSelf> 
     : ITritArray, 
         IEquatable<TSelf>,
-        IFormattable
+        IFormattable,
+        ITritParsable<TSelf>
 {
 }

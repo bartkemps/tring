@@ -14,6 +14,7 @@ public class BigTritArray : ITritArray<BigTritArray>
 {
     internal List<ulong> Positive;
     internal List<ulong> Negative;
+    private ulong mask;
 
     /// <summary>
     /// Gets or sets the number of trits in this array.
@@ -30,7 +31,6 @@ public class BigTritArray : ITritArray<BigTritArray>
     /// </summary>
     public static readonly BigTritArray One = new([0], [1], 1);
 
-    private ulong mask;
 
     /// <summary>
     /// Resizes the TritArray to the specified length.
@@ -111,6 +111,38 @@ public class BigTritArray : ITritArray<BigTritArray>
         Length = offset;
         mask = 1UL << (offset % 64 - 1);
     }
+    
+    /// <summary>
+    /// Parses a string representation of a BigTritArray.
+    /// </summary>
+    /// <param name="value">The string value to parse.</param>
+    /// <returns>A BigTritArray representing the parsed value.</returns>
+    public static BigTritArray Parse(string value) => Parser.ParseBigTritArray(value);
+    
+    /// <summary>
+    /// Parses a string representation of a BigTritArray.
+    /// </summary>
+    /// <param name="value">The string value to parse.</param>
+    /// <param name="format">The format to use for parsing.</param>
+    /// <returns>A BigTritArray representing the parsed value.</returns>
+    public static BigTritArray Parse(string value, ITernaryFormat format) => Parser.ParseBigTritArray(value, format);
+    
+    /// <summary>
+    /// Parses a string representation of a BigTritArray.
+    /// </summary>
+    /// <param name="value">The string value to parse.</param>
+    /// <param name="options">The options to use for parsing.</param>
+    /// <returns>A BigTritArray representing the parsed value.</returns>
+    public static BigTritArray Parse(string value, TritParseOptions options) => Parser.ParseBigTritArray(value, null, options);
+    
+    /// <summary>
+    /// Parses a string representation of a BigTritArray.
+    /// </summary>
+    /// <param name="value">The string value to parse.</param>
+    /// <param name="format">The format to use for parsing.</param>
+    /// <param name="options">The options to use for parsing.</param>
+    /// <returns>A BigTritArray representing the parsed value.</returns>
+    public static BigTritArray Parse(string value, ITernaryFormat format, TritParseOptions options) => Parser.ParseBigTritArray(value, format, options);
 
     private void InitializeTritArray(ITritArray arr, int offset)
     {
@@ -127,6 +159,11 @@ public class BigTritArray : ITritArray<BigTritArray>
                 return;
             }
             case TritArray3 value:
+            {
+                CopyRange(value.Negative, value.Positive, offset, value.Length);
+                return;
+            }
+            case TritArray value:
             {
                 CopyRange(value.Negative, value.Positive, offset, value.Length);
                 return;

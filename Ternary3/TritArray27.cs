@@ -70,7 +70,7 @@ public struct TritArray27 : ITritArray<TritArray27>
     /// <param name="value">The string value to parse.</param>
     /// <param name="format">The format to use for parsing.</param>
     /// <returns>A TritArray27 representing the parsed value.</returns>
-    public static TritArray27 Parse(string value, ITernaryFormat format) => Parser.ParseTritArray27(value, format);
+    public static TritArray27 Parse(string value, ITernaryFormat? format) => Parser.ParseTritArray27(value, format);
     
     /// <summary>
     /// Parses a string representation of a TritArray27.
@@ -87,7 +87,7 @@ public struct TritArray27 : ITritArray<TritArray27>
     /// <param name="format">The format to use for parsing.</param>
     /// <param name="options">The options to use for parsing.</param>
     /// <returns>A TritArray27 representing the parsed value.</returns>
-    public static TritArray27 Parse(string value, ITernaryFormat format, TritParseOptions options) => Parser.ParseTritArray27(value, format, options);
+    public static TritArray27 Parse(string value, ITernaryFormat? format, TritParseOptions options) => Parser.ParseTritArray27(value, format, options);
 
      /// <intheritdoc/>
     public Trit this[int index]

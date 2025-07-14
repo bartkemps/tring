@@ -1220,7 +1220,7 @@ public static implicit operator Int128(Int9T value) => (Int128)value.value;
     /// <param name="value">The string value to parse.</param>
     /// <param name="format">The format to use for parsing.</param>
     /// <returns>A Int9T representing the parsed value.</returns>
-    public static Int9T Parse(string value, ITernaryFormat format) => Parser.ParseInt9T(value, format);
+    public static Int9T Parse(string value, ITernaryFormat? format) => Parser.ParseInt9T(value, format);
     
     /// <summary>
     /// Parses a string representation of a Int9T.
@@ -1237,7 +1237,7 @@ public static implicit operator Int128(Int9T value) => (Int128)value.value;
     /// <param name="format">The format to use for parsing.</param>
     /// <param name="options">The options to use for parsing.</param>
     /// <returns>A Int9T representing the parsed value.</returns>
-    public static Int9T Parse(string value, ITernaryFormat format, TritParseOptions options) => Parser.ParseInt9T(value, format, options);
+    public static Int9T Parse(string value, ITernaryFormat? format, TritParseOptions options) => Parser.ParseInt9T(value, format, options);
 
     /// <summary>
     /// Converts the string representation of a number in a specified style to its <see cref="Int9T"/> equivalent.
