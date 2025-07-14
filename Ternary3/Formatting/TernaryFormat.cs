@@ -70,18 +70,18 @@ public class TernaryFormat(ITernaryFormat other) : ITernaryFormat
     }
 
     /// <summary>
-    /// Previews the format by creating a sample TritArray27 and formatting it.
+    /// Previews the format by creating a sample TernaryArray27 and formatting it.
     /// </summary>
     /// <returns>A string representation of a sample formatted trit array.</returns>
     public override string ToString() => ToString(new(0b000000000_100100100_111000000, 0b000000000_001001001_000000111));
 
     /// <summary>
-    /// Previews the format by creating a sample TritArray27 and formatting it.
+    /// Previews the format by creating a sample TernaryArray27 and formatting it.
     /// </summary>
-    /// <param name="trits">The trit array to format.</param>
+    /// <param name="ternaries">The trit array to format.</param>
     /// <returns>A string representation of a sample formatted trit array.</returns>
-    public string ToString(TritArray27 trits)
+    public string ToString(TernaryArray27 ternaries)
     {
-        return trits.ToString("ter");
+        return ternaries.ToString("ter");
     }
 }

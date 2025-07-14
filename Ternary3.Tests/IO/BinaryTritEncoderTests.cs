@@ -47,6 +47,6 @@ public class BinaryTritEncoderTests
             
         decoded.Should().BeEquivalentTo(originalTrits,
             options => options.WithStrictOrdering(),
-            "because all trits should be preserved in the encode-decode cycle");
+            "because all ternaries should be preserved in the encode-decode cycle");
     }
 }

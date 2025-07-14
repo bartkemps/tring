@@ -17,8 +17,8 @@ public class TritArray27BinaryOperationsTests
     [InlineData(1, 1)]
     public void And_SingleTrit_MatchesTritOperation(sbyte trit1Value, sbyte trit2Value)
     {
-        var array1 = new TritArray27();
-        var array2 = new TritArray27();
+        var array1 = new TernaryArray27();
+        var array2 = new TernaryArray27();
         var trit1 = new Trit(trit1Value);
         var trit2 = new Trit(trit2Value);
         array1[0] = trit1;
@@ -42,8 +42,8 @@ public class TritArray27BinaryOperationsTests
     [InlineData(1, 1)]
     public void Or_SingleTrit_MatchesTritOperation(sbyte trit1Value, sbyte trit2Value)
     {
-        var array1 = new TritArray27();
-        var array2 = new TritArray27();
+        var array1 = new TernaryArray27();
+        var array2 = new TernaryArray27();
         var trit1 = new Trit(trit1Value);
         var trit2 = new Trit(trit2Value);
         array1[0] = trit1;
@@ -67,8 +67,8 @@ public class TritArray27BinaryOperationsTests
     [InlineData(1, 1)]
     public void Xor_SingleTrit_MatchesTritOperation(sbyte trit1Value, sbyte trit2Value)
     {
-        var array1 = new TritArray27();
-        var array2 = new TritArray27();
+        var array1 = new TernaryArray27();
+        var array2 = new TernaryArray27();
         var trit1 = new Trit(trit1Value);
         var trit2 = new Trit(trit2Value);
         array1[0] = trit1;
@@ -83,8 +83,8 @@ public class TritArray27BinaryOperationsTests
     [Fact]
     public void BinaryOperations_PreserveOtherTrits()
     {
-        var array1 = new TritArray27();
-        var array2 = new TritArray27();
+        var array1 = new TernaryArray27();
+        var array2 = new TernaryArray27();
 
         // Set some test values
         array1[1] = Trit.Positive;
@@ -113,8 +113,8 @@ public class TritArray27BinaryOperationsTests
     [Fact]
     public void BinaryOperations_OperateOnAllPositions()
     {
-        var array1 = new TritArray27();
-        var array2 = new TritArray27();
+        var array1 = new TernaryArray27();
+        var array2 = new TernaryArray27();
         var operations = new[] { BinaryTritOperator.And, BinaryTritOperator.Or, BinaryTritOperator.Xor, BinaryTritOperator.Plus, BinaryTritOperator.Minus };
 
         // Set all positions with alternating values

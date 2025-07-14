@@ -74,8 +74,8 @@ public class BinaryTritOperationDemo
         // EXAMPLE 4: Inverting operation that ignores the second operand
         // -----------------------------------------------------------
         // This demonstrates how to create an operation that only depends on the first input
-        TritArray27 input4A = 5;   // Converts to balanced ternary
-        TritArray27 input4B = 10;  // Will be ignored by this operation
+        TernaryArray27 input4A = 5;   // Converts to balanced ternary
+        TernaryArray27 input4B = 10;  // Will be ignored by this operation
         // This table inverts the first operand and ignores the second:
         // For any first trit value, the output is the same regardless of the second trit
         var invertFirstIgnoreSecond = new BinaryTritOperator(

@@ -13,22 +13,22 @@ internal class TernaryFormatter(ITernaryFormat? ternaryFormat = null, IFormatPro
         {
             return arg switch
             {
-                TritArray27 value => Format(value),
-                TritArray9 value => Format(value),
-                TritArray3 value => Format(value),
-                TritArray value => Format(value),
-                BigTritArray value => Format(value),
+                TernaryArray27 value => Format(value),
+                TernaryArray9 value => Format(value),
+                TernaryArray3 value => Format(value),
+                TernaryArray value => Format(value),
+                BigTernaryArray value => Format(value),
                 ITritArray value => Format(value),
-                Int27T value => Format((TritArray27)value),
-                Int9T value => Format((TritArray9)value),
-                Int3T value => Format((TritArray3)value),
-                long value => Format((TritArray)value),
-                int value => Format((TritArray)value),
-                uint value => Format((TritArray)value),
-                short value => Format((TritArray)value),
-                ushort value => Format((TritArray)value),
-                sbyte value => Format((TritArray)value),
-                byte value => Format((TritArray)value),
+                Int27T value => Format((TernaryArray27)value),
+                Int9T value => Format((TernaryArray9)value),
+                Int3T value => Format((TernaryArray3)value),
+                long value => Format((TernaryArray)value),
+                int value => Format((TernaryArray)value),
+                uint value => Format((TernaryArray)value),
+                short value => Format((TernaryArray)value),
+                ushort value => Format((TernaryArray)value),
+                sbyte value => Format((TernaryArray)value),
+                byte value => Format((TernaryArray)value),
                 _ => throw new FormatException($"Cannot format {arg?.GetType().Name} as ternary.")
             };
         }
@@ -36,11 +36,11 @@ internal class TernaryFormatter(ITernaryFormat? ternaryFormat = null, IFormatPro
         // Forward to default formatters using a switch expression and avoid infinite recursion
         return arg switch
         {
-            TritArray27 value => ((long)(Int27T)value).ToString(format, inner),
-            TritArray9 value => ((short)(Int9T)value).ToString(format, inner),
-            TritArray3 value => ((sbyte)(Int3T)value).ToString(format, inner),
-            BigTritArray value => ((BigInteger)value).ToString(format, inner),
-            TritArray value => ((Int128)value).ToString(format, inner),
+            TernaryArray27 value => ((long)(Int27T)value).ToString(format, inner),
+            TernaryArray9 value => ((short)(Int9T)value).ToString(format, inner),
+            TernaryArray3 value => ((sbyte)(Int3T)value).ToString(format, inner),
+            BigTernaryArray value => ((BigInteger)value).ToString(format, inner),
+            TernaryArray value => ((Int128)value).ToString(format, inner),
             Int27T value => ((Int128)value).ToString(format, inner),
             Int9T value => ((short)value).ToString(format, inner),
             Int3T value => ((sbyte)value).ToString(format, inner),

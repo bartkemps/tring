@@ -108,66 +108,66 @@ public partial struct UnaryTritOperator
     public static Trit operator |(Trit trit, UnaryTritOperator unaryTritOperator) => UnaryOperation.TritOperations[unaryTritOperator.operationIndex](trit);
 
     /// <summary>
-    /// Applies the unary operation to a TritArray3 instance.
+    /// Applies the unary operation to a TernaryArray3 instance.
     /// </summary>
-    /// <param name="trits">The TritArray3 to operate on.</param>
+    /// <param name="ternaries">The TernaryArray3 to operate on.</param>
     /// <param name="unaryTritOperator">The operator to apply.</param>
-    /// <returns>A new TritArray3 with the results of applying the operation to each trit.</returns>
-    public static TritArray3 operator |(TritArray3 trits, UnaryTritOperator unaryTritOperator)
+    /// <returns>A new TernaryArray3 with the results of applying the operation to each trit.</returns>
+    public static TernaryArray3 operator |(TernaryArray3 ternaries, UnaryTritOperator unaryTritOperator)
     {
-        var result = UnaryOperation.BytePairOperations[unaryTritOperator.operationIndex](trits.Negative, trits.Positive);
+        var result = UnaryOperation.BytePairOperations[unaryTritOperator.operationIndex](ternaries.Negative, ternaries.Positive);
         return new(result.Negative, result.Positive);
     }
 
     /// <summary>
-    /// Applies the unary operation to a TritArray9 instance.
+    /// Applies the unary operation to a TernaryArray9 instance.
     /// </summary>
-    /// <param name="trits">The TritArray9 to operate on.</param>
+    /// <param name="ternaries">The TernaryArray9 to operate on.</param>
     /// <param name="unaryTritOperator">The operator to apply.</param>
-    /// <returns>A new TritArray9 with the results of applying the operation to each trit.</returns>
-    public static TritArray9 operator |(TritArray9 trits, UnaryTritOperator unaryTritOperator)
+    /// <returns>A new TernaryArray9 with the results of applying the operation to each trit.</returns>
+    public static TernaryArray9 operator |(TernaryArray9 ternaries, UnaryTritOperator unaryTritOperator)
     {
-        var result = UnaryOperation.UInt16PairOperations[unaryTritOperator.operationIndex](trits.Negative, trits.Positive);
+        var result = UnaryOperation.UInt16PairOperations[unaryTritOperator.operationIndex](ternaries.Negative, ternaries.Positive);
         return new(result.Negative, result.Positive);
     }
 
     /// <summary>
-    /// Applies the unary operation to a TritArray27 instance.
+    /// Applies the unary operation to a TernaryArray27 instance.
     /// </summary>
-    /// <param name="trits">The TritArray27 to operate on.</param>
+    /// <param name="ternaries">The TernaryArray27 to operate on.</param>
     /// <param name="unaryTritOperator">The operator to apply.</param>
-    /// <returns>A new TritArray27 with the results of applying the operation to each trit.</returns>
-    public static TritArray27 operator |(TritArray27 trits, UnaryTritOperator unaryTritOperator)
+    /// <returns>A new TernaryArray27 with the results of applying the operation to each trit.</returns>
+    public static TernaryArray27 operator |(TernaryArray27 ternaries, UnaryTritOperator unaryTritOperator)
     {
-        var result = UnaryOperation.UInt32PairOperations[unaryTritOperator.operationIndex](trits.Negative, trits.Positive);
+        var result = UnaryOperation.UInt32PairOperations[unaryTritOperator.operationIndex](ternaries.Negative, ternaries.Positive);
         return new(result.Negative, result.Positive);
     }
 
     /// <summary>
-    /// Applies the unary operation to a TritArray instance.
+    /// Applies the unary operation to a TernaryArray instance.
     /// </summary>
-    /// <param name="trits">The TritArray to operate on.</param>
+    /// <param name="ternaries">The TernaryArray to operate on.</param>
     /// <param name="unaryTritOperator">The operator to apply.</param>
-    /// <returns>A new TritArray with the results of applying the operation to each trit.</returns>
-    public static TritArray operator |(TritArray trits, UnaryTritOperator unaryTritOperator)
+    /// <returns>A new TernaryArray with the results of applying the operation to each trit.</returns>
+    public static TernaryArray operator |(TernaryArray ternaries, UnaryTritOperator unaryTritOperator)
     {
-        var result = UnaryOperation.UInt64PairOperations[unaryTritOperator.operationIndex](trits.Negative, trits.Positive);
-        return new(result.Negative, result.Positive, trits.NumberOfTrits);
+        var result = UnaryOperation.UInt64PairOperations[unaryTritOperator.operationIndex](ternaries.Negative, ternaries.Positive);
+        return new(result.Negative, result.Positive, ternaries.NumberOfTrits);
     }
 
     /// <summary>
-    /// Applies the unary operation to a TritArray instance.
+    /// Applies the unary operation to a TernaryArray instance.
     /// </summary>
-    /// <param name="trits">The TritArray to operate on.</param>
+    /// <param name="ternaries">The TernaryArray to operate on.</param>
     /// <param name="unaryTritOperator">The operator to apply.</param>
-    /// <returns>A new TritArray with the results of applying the operation to each trit.</returns>
-    public static BigTritArray operator |(BigTritArray trits, UnaryTritOperator unaryTritOperator)
+    /// <returns>A new TernaryArray with the results of applying the operation to each trit.</returns>
+    public static BigTernaryArray operator |(BigTernaryArray ternaries, UnaryTritOperator unaryTritOperator)
     {
         var op = UnaryOperation.UInt64PairOperations[unaryTritOperator.operationIndex];
-        var result = new BigTritArray(trits.Length);
-        for (var i=0; i < trits.Negative.Count; i++)
+        var result = new BigTernaryArray(ternaries.Length);
+        for (var i=0; i < ternaries.Negative.Count; i++)
         {
-            var pair = op(trits.Negative[i], trits.Positive[i]);
+            var pair = op(ternaries.Negative[i], ternaries.Positive[i]);
             result.Negative[i] = pair.Negative;
             result.Positive[i] = pair.Positive;
         }
@@ -176,60 +176,60 @@ public partial struct UnaryTritOperator
     }
 
     /// <summary>
-    /// Applies the unary operation to an Int3T instance by converting it to a TritArray3 first.
+    /// Applies the unary operation to an Int3T instance by converting it to a TernaryArray3 first.
     /// </summary>
     /// <param name="trits">The Int3T to operate on.</param>
     /// <param name="unaryTritOperator">The operator to apply.</param>
-    /// <returns>A new TritArray3 with the results of applying the operation.</returns>
-    public static TritArray3 operator |(Int3T trits, UnaryTritOperator unaryTritOperator) => ((TritArray3)trits) | unaryTritOperator;
+    /// <returns>A new TernaryArray3 with the results of applying the operation.</returns>
+    public static TernaryArray3 operator |(Int3T trits, UnaryTritOperator unaryTritOperator) => ((TernaryArray3)trits) | unaryTritOperator;
 
     /// <summary>
-    /// Applies the unary operation to an Int9T instance by converting it to a TritArray9 first.
+    /// Applies the unary operation to an Int9T instance by converting it to a TernaryArray9 first.
     /// </summary>
     /// <param name="trits">The Int9T to operate on.</param>
     /// <param name="unaryTritOperator">The operator to apply.</param>
-    /// <returns>A new TritArray9 with the results of applying the operation.</returns>
-    public static TritArray9 operator |(Int9T trits, UnaryTritOperator unaryTritOperator) => ((TritArray9)trits) | unaryTritOperator;
+    /// <returns>A new TernaryArray9 with the results of applying the operation.</returns>
+    public static TernaryArray9 operator |(Int9T trits, UnaryTritOperator unaryTritOperator) => ((TernaryArray9)trits) | unaryTritOperator;
 
     /// <summary>
-    /// Applies the unary operation to an Int27T instance by converting it to a TritArray27 first.
+    /// Applies the unary operation to an Int27T instance by converting it to a TernaryArray27 first.
     /// </summary>
     /// <param name="trits">The Int27T to operate on.</param>
     /// <param name="unaryTritOperator">The operator to apply.</param>
-    /// <returns>A new TritArray27 with the results of applying the operation.</returns>
-    public static TritArray27 operator |(Int27T trits, UnaryTritOperator unaryTritOperator) => ((TritArray27)trits) | unaryTritOperator;
+    /// <returns>A new TernaryArray27 with the results of applying the operation.</returns>
+    public static TernaryArray27 operator |(Int27T trits, UnaryTritOperator unaryTritOperator) => ((TernaryArray27)trits) | unaryTritOperator;
 
     /// <summary>
-    /// Applies the unary operation to an sbyte by converting it to a TritArray3 first.
+    /// Applies the unary operation to an sbyte by converting it to a TernaryArray3 first.
     /// </summary>
     /// <param name="trits">The sbyte to operate on.</param>
     /// <param name="unaryTritOperator">The operator to apply.</param>
-    /// <returns>A new TritArray3 with the results of applying the operation.</returns>
-    public static TritArray3 operator |(sbyte trits, UnaryTritOperator unaryTritOperator) => ((TritArray3)trits) | unaryTritOperator;
+    /// <returns>A new TernaryArray3 with the results of applying the operation.</returns>
+    public static TernaryArray3 operator |(sbyte trits, UnaryTritOperator unaryTritOperator) => ((TernaryArray3)trits) | unaryTritOperator;
 
     /// <summary>
-    /// Applies the unary operation to a short by converting it to a TritArray9 first.
+    /// Applies the unary operation to a short by converting it to a TernaryArray9 first.
     /// </summary>
     /// <param name="trits">The short to operate on.</param>
     /// <param name="unaryTritOperator">The operator to apply.</param>
-    /// <returns>A new TritArray9 with the results of applying the operation.</returns>
-    public static TritArray9 operator |(short trits, UnaryTritOperator unaryTritOperator) => ((TritArray9)trits) | unaryTritOperator;
+    /// <returns>A new TernaryArray9 with the results of applying the operation.</returns>
+    public static TernaryArray9 operator |(short trits, UnaryTritOperator unaryTritOperator) => ((TernaryArray9)trits) | unaryTritOperator;
 
     /// <summary>
-    /// Applies the unary operation to an int by converting it to a TritArray27 first.
+    /// Applies the unary operation to an int by converting it to a TernaryArray27 first.
     /// </summary>
     /// <param name="trits">The int to operate on.</param>
     /// <param name="unaryTritOperator">The operator to apply.</param>
-    /// <returns>A new TritArray27 with the results of applying the operation.</returns>
-    public static TritArray27 operator |(int trits, UnaryTritOperator unaryTritOperator) => ((TritArray27)trits) | unaryTritOperator;
+    /// <returns>A new TernaryArray27 with the results of applying the operation.</returns>
+    public static TernaryArray27 operator |(int trits, UnaryTritOperator unaryTritOperator) => ((TernaryArray27)trits) | unaryTritOperator;
 
     /// <summary>
-    /// Applies the unary operation to a long by converting it to a TritArray27 first.
+    /// Applies the unary operation to a long by converting it to a TernaryArray27 first.
     /// </summary>
     /// <param name="trits">The long to operate on.</param>
     /// <param name="unaryTritOperator">The operator to apply.</param>
-    /// <returns>A new TritArray27 with the results of applying the operation.</returns>
-    public static TritArray27 operator |(long trits, UnaryTritOperator unaryTritOperator) => ((TritArray27)trits) | unaryTritOperator;
+    /// <returns>A new TernaryArray27 with the results of applying the operation.</returns>
+    public static TernaryArray27 operator |(long trits, UnaryTritOperator unaryTritOperator) => ((TernaryArray27)trits) | unaryTritOperator;
     
     /// <summary>
     /// Returns a string representation of the operation results in a compact format.

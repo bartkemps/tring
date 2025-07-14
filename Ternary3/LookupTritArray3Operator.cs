@@ -6,73 +6,73 @@ using Operators.Operations;
 using TritArrays;
 
 /// <summary>
-/// Represents an operator that combines a TritArray3 with a binary operation lookup table.
+/// Represents an operator that combines a TernaryArray3 with a binary operation lookup table.
 /// </summary>
 /// <remarks>
-/// Used to efficiently apply binary operations between TritArray3 instances by using optimized lookup tables.
+/// Used to efficiently apply binary operations between TernaryArray3 instances by using optimized lookup tables.
 /// The first operand is stored within the operator structure, and the second operand is provided via the pipe operator.
 /// </remarks>
 public readonly struct LookupTritArray3Operator
 {
-    private readonly TritArray3 trits;
+    private readonly TernaryArray3 ternaries;
     private readonly BinaryTritOperator table;
 
-    internal LookupTritArray3Operator(TritArray3 trits, BinaryTritOperator table)
+    internal LookupTritArray3Operator(TernaryArray3 ternaries, BinaryTritOperator table)
     {
-        this.trits = trits;
+        this.ternaries = ternaries;
         this.table = table;
     }
 
-    internal LookupTritArray3Operator(TritArray3 trits, Trit[,] table)
-        : this(trits, new BinaryTritOperator(table))
+    internal LookupTritArray3Operator(TernaryArray3 ternaries, Trit[,] table)
+        : this(ternaries, new BinaryTritOperator(table))
     {
     }
 
-    internal LookupTritArray3Operator(TritArray3 trits, ReadOnlySpan<Trit> table)
-        : this(trits, new BinaryTritOperator(table))
+    internal LookupTritArray3Operator(TernaryArray3 ternaries, ReadOnlySpan<Trit> table)
+        : this(ternaries, new BinaryTritOperator(table))
     {
     }
 
-    internal LookupTritArray3Operator(TritArray3 trits, Func<Trit, Trit, Trit> operation)
-        : this(trits, new BinaryTritOperator(operation))
+    internal LookupTritArray3Operator(TernaryArray3 ternaries, Func<Trit, Trit, Trit> operation)
+        : this(ternaries, new BinaryTritOperator(operation))
     {
     }
 
     /// <summary>
-    /// Performs a binary operation between the stored left operand (TritArray3) and the right operand using a lookup table.
+    /// Performs a binary operation between the stored left operand (TernaryArray3) and the right operand using a lookup table.
     /// </summary>
     /// <param name="left">The LookupTritArray3Operator containing the left operand and operation details.</param>
-    /// <param name="right">The right TritArray3 operand.</param>
-    /// <returns>A new TritArray3 representing the result of applying the binary operation to each corresponding pair of trits.</returns>
-    public static TritArray3 operator |(LookupTritArray3Operator left, TritArray3 right)
+    /// <param name="right">The right TernaryArray3 operand.</param>
+    /// <returns>A new TernaryArray3 representing the result of applying the binary operation to each corresponding pair of ternaries.</returns>
+    public static TernaryArray3 operator |(LookupTritArray3Operator left, TernaryArray3 right)
     {
-        left.table.Apply(left.trits.Negative, left.trits.Positive, right.Negative, right.Positive, out var negative, out var positive);
+        left.table.Apply(left.ternaries.Negative, left.ternaries.Positive, right.Negative, right.Positive, out var negative, out var positive);
         return new(negative, positive);
     }
     
     /// <summary>
-    /// Performs a binary operation between the stored left operand (TritArray3) and an Int3T right operand using a lookup table.
+    /// Performs a binary operation between the stored left operand (TernaryArray3) and an Int3T right operand using a lookup table.
     /// </summary>
     /// <param name="left">The LookupTritArray3Operator containing the left operand and operation details.</param>
-    /// <param name="right">The right Int3T operand, which will be converted to a TritArray3.</param>
-    /// <returns>A new TritArray3 representing the result of applying the binary operation to each corresponding pair of trits.</returns>
-    public static TritArray3 operator |(LookupTritArray3Operator left, Int3T right)
+    /// <param name="right">The right Int3T operand, which will be converted to a TernaryArray3.</param>
+    /// <returns>A new TernaryArray3 representing the result of applying the binary operation to each corresponding pair of ternaries.</returns>
+    public static TernaryArray3 operator |(LookupTritArray3Operator left, Int3T right)
     {
-        var tritArray = (TritArray3)right;
-        left.table.Apply(left.trits.Negative, left.trits.Positive, tritArray.Negative, tritArray.Positive, out var negative, out var positive);
+        var tritArray = (TernaryArray3)right;
+        left.table.Apply(left.ternaries.Negative, left.ternaries.Positive, tritArray.Negative, tritArray.Positive, out var negative, out var positive);
         return new(negative, positive);
     }
        
     /// <summary>
-    /// Performs a binary operation between the stored left operand (TritArray3) and a SByte right operand using a lookup table.
+    /// Performs a binary operation between the stored left operand (TernaryArray3) and a SByte right operand using a lookup table.
     /// </summary>
     /// <param name="left">The LookupTritArray3Operator containing the left operand and operation details.</param>
-    /// <param name="right">The right SByte operand, which will be converted to a TritArray3.</param>
-    /// <returns>A new TritArray3 representing the result of applying the binary operation to each corresponding pair of trits.</returns>
-    public static TritArray3 operator |(LookupTritArray3Operator left, SByte right)
+    /// <param name="right">The right SByte operand, which will be converted to a TernaryArray3.</param>
+    /// <returns>A new TernaryArray3 representing the result of applying the binary operation to each corresponding pair of ternaries.</returns>
+    public static TernaryArray3 operator |(LookupTritArray3Operator left, SByte right)
     {
         TritConverter.To32Trits(right, out var rightNegative, out var rightPositive);
-        left.table.Apply(left.trits.Negative, left.trits.Positive, (Byte)rightNegative, (Byte)rightPositive, out var negative, out var positive);
+        left.table.Apply(left.ternaries.Negative, left.ternaries.Positive, (Byte)rightNegative, (Byte)rightPositive, out var negative, out var positive);
         return new(negative, positive);
     }
 }

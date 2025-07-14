@@ -40,10 +40,10 @@ public interface ITritArray
 /// Represents a strongly-typed trit array that supports equality comparison and string formatting.
 /// </summary>
 /// <typeparam name="TSelf">The implementing type, enabling proper type preservation in operations.</typeparam>
-public interface ITritArray<TSelf> 
+public interface ITernaryArray<TSelf> 
     : ITritArray, 
         IEquatable<TSelf>,
         IFormattable,
-        ITritParsable<TSelf>
+        ITernaryParsable<TSelf>
 {
 }

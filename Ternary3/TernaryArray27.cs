@@ -8,86 +8,86 @@ using System.Diagnostics;
 using TritArrays;
 
 /// <summary>
-/// Represents a fixed-size array of 3 trits (ternary digits).
+/// Represents a fixed-size array of 27 trits (ternary digits).
 /// </summary>
 [DebuggerDisplay("{DebugView()}")]
-public struct TritArray3 : ITritArray<TritArray3>
+public struct TernaryArray27 : ITernaryArray<TernaryArray27>
 {
-    private const Byte BitMask = 0b111;
-    private const int NumberOfTrits = 3;
-    internal Byte Positive;
-    internal Byte Negative;
+    private const UInt32 BitMask = 0b111111111111111111111111111;
+    private const int NumberOfTrits = 27;
+    internal UInt32 Positive;
+    internal UInt32 Negative;
 
     /// <summary>
-    /// Represents the minimum value that a TritArray3 can have (all trits set to -1).
+    /// Represents the minimum value that a TernaryArray27 can have (all trits set to -1).
     /// </summary>
-    public static readonly TritArray3 MinValue = new(BitMask, 0);
+    public static readonly TernaryArray27 MinValue = new(BitMask, 0);
 
     /// <summary>
-    /// Represents the maximum value that a TritArray3 can have (all trits set to 1).
+    /// Represents the maximum value that a TernaryArray27 can have (all trits set to 1).
     /// </summary>
-    public static readonly TritArray3 MaxValue = new(0, BitMask);
+    public static readonly TernaryArray27 MaxValue = new(0, BitMask);
 
     /// <summary>
-    /// Represents a TritArray3 with all trits set to zero.
+    /// Represents a TernaryArray27 with all trits set to zero.
     /// </summary>
-    public static readonly TritArray3 Zero = new();
+    public static readonly TernaryArray27 Zero = new();
 
     /// <summary>
-    /// Initializes a new instance of the TritArray3 struct with all trits set to zero.
+    /// Initializes a new instance of the TernaryArray27 struct with all trits set to zero.
     /// </summary>
-    public TritArray3()
+    public TernaryArray27()
     {
     }
 
-    private TritArray3(BytePair trits)
+    private TernaryArray27(UInt32Pair trits)
     {
         Negative = trits.Negative;
         Positive = trits.Positive;
     }
 
     /// <summary>
-    /// Initializes a new instance of the TritArray3 struct with the specified negative and positive bits.
+    /// Initializes a new instance of the TernaryArray27 struct with the specified negative and positive bits.
     /// </summary>
     /// <param name="negative">The negative bits representing the trits.</param>
     /// <param name="positive">The positive bits representing the trits.</param>
-    internal TritArray3(Byte negative, Byte positive)
+    internal TernaryArray27(UInt32 negative, UInt32 positive)
     {
         Negative = negative;
         Positive = positive;
     }
     
     /// <summary>
-    /// Parses a string representation of a TritArray3.
+    /// Parses a string representation of a TernaryArray27.
     /// </summary>
     /// <param name="value">The string value to parse.</param>
-    /// <returns>A TritArray3 representing the parsed value.</returns>
-    public static TritArray3 Parse(string value) => Parser.ParseTritArray3(value);
+    /// <returns>A TernaryArray27 representing the parsed value.</returns>
+    public static TernaryArray27 Parse(string value) => Parser.ParseTritArray27(value);
     
     /// <summary>
-    /// Parses a string representation of a TritArray3.
+    /// Parses a string representation of a TernaryArray27.
     /// </summary>
     /// <param name="value">The string value to parse.</param>
     /// <param name="format">The format to use for parsing.</param>
-    /// <returns>A TritArray3 representing the parsed value.</returns>
-    public static TritArray3 Parse(string value, ITernaryFormat? format) => Parser.ParseTritArray3(value, format);
+    /// <returns>A TernaryArray27 representing the parsed value.</returns>
+    public static TernaryArray27 Parse(string value, ITernaryFormat? format) => Parser.ParseTritArray27(value, format);
     
     /// <summary>
-    /// Parses a string representation of a TritArray3.
+    /// Parses a string representation of a TernaryArray27.
     /// </summary>
     /// <param name="value">The string value to parse.</param>
     /// <param name="options">The options to use for parsing.</param>
-    /// <returns>A TritArray3 representing the parsed value.</returns>
-    public static TritArray3 Parse(string value, TritParseOptions options) => Parser.ParseTritArray3(value, null, options);
+    /// <returns>A TernaryArray27 representing the parsed value.</returns>
+    public static TernaryArray27 Parse(string value, TritParseOptions options) => Parser.ParseTritArray27(value, null, options);
     
     /// <summary>
-    /// Parses a string representation of a TritArray3.
+    /// Parses a string representation of a TernaryArray27.
     /// </summary>
     /// <param name="value">The string value to parse.</param>
     /// <param name="format">The format to use for parsing.</param>
     /// <param name="options">The options to use for parsing.</param>
-    /// <returns>A TritArray3 representing the parsed value.</returns>
-    public static TritArray3 Parse(string value, ITernaryFormat? format, TritParseOptions options) => Parser.ParseTritArray3(value, format, options);
+    /// <returns>A TernaryArray27 representing the parsed value.</returns>
+    public static TernaryArray27 Parse(string value, ITernaryFormat? format, TritParseOptions options) => Parser.ParseTritArray27(value, format, options);
 
      /// <intheritdoc/>
     public Trit this[int index]
@@ -111,7 +111,7 @@ public struct TritArray3 : ITritArray<TritArray3>
         get
         {
             Splicer.Splice(Negative, Positive, Length, range, out var negative, out var positive, out var length);
-            return new TritArray(negative, positive, (byte)length);
+            return new TernaryArray(negative, positive, (byte)length);
         }
     }
     
@@ -138,7 +138,7 @@ public struct TritArray3 : ITritArray<TritArray3>
     }
 
     /// <summary>
-    /// Gets the length of the trit array, which is always 3.
+    /// Gets the length of the trit array, which is always 27.
     /// </summary>
     public int Length => NumberOfTrits;
 
@@ -147,8 +147,8 @@ public struct TritArray3 : ITritArray<TritArray3>
     /// </summary>
     /// <param name="array">The source array.</param>
     /// <param name="operation">The unary operation to apply to each trit.</param>
-    /// <returns>A new TritArray3 with the operation applied to each trit.</returns>
-    public static TritArray3 operator |(TritArray3 array, Func<Trit, Trit> operation)
+    /// <returns>A new TernaryArray27 with the operation applied to each trit.</returns>
+    public static TernaryArray27 operator |(TernaryArray27 array, Func<Trit, Trit> operation)
         => array | new UnaryTritOperator(operation);
 
     /// <summary>
@@ -156,8 +156,8 @@ public struct TritArray3 : ITritArray<TritArray3>
     /// </summary>
     /// <param name="array">The source array.</param>
     /// <param name="table">The lookup table containing the transformation values.</param>
-    /// <returns>A new TritArray3 with the lookup operation applied to each trit.</returns>
-    public static TritArray3 operator |(TritArray3 array, Trit[] table)
+    /// <returns>A new TernaryArray27 with the lookup operation applied to each trit.</returns>
+    public static TernaryArray27 operator |(TernaryArray27 array, Trit[] table)
         => array | new UnaryTritOperator(table);
 
     /// <summary>
@@ -165,27 +165,27 @@ public struct TritArray3 : ITritArray<TritArray3>
     /// </summary>
     /// <param name="array">The source array.</param>
     /// <param name="operation">The binary operation to be applied.</param>
-    /// <returns>A LookupTritArray3Operator that can be used to apply the operation with another array.</returns>
-    public static LookupTritArray3Operator operator |(TritArray3 array, Func<Trit, Trit, Trit> operation)
-        => new LookupTritArray3Operator(array, operation);
+    /// <returns>A LookupTritArray27Operator that can be used to apply the operation with another array.</returns>
+    public static LookupTritArray27Operator operator |(TernaryArray27 array, Func<Trit, Trit, Trit> operation)
+        => new LookupTritArray27Operator(array, operation);
 
     /// <summary>
     /// Creates a binary operation context for this array using a lookup table.
     /// </summary>
     /// <param name="array">The source array.</param>
     /// <param name="table">The lookup table containing the transformation values.</param>
-    /// <returns>A LookupTritArray3Operator that can be used to apply the operation with another array.</returns>
-    public static LookupTritArray3Operator operator |(TritArray3 array, BinaryTritOperator table)
-        => new LookupTritArray3Operator(array, table);
+    /// <returns>A LookupTritArray27Operator that can be used to apply the operation with another array.</returns>
+    public static LookupTritArray27Operator operator |(TernaryArray27 array, BinaryTritOperator table)
+        => new LookupTritArray27Operator(array, table);
 
     /// <summary>
     /// Creates a binary operation context for this array using a 2D lookup table.
     /// </summary>
     /// <param name="array">The source array.</param>
     /// <param name="table">The 2D lookup table containing the transformation values.</param>
-    /// <returns>A LookupTritArray3Operator that can be used to apply the operation with another array.</returns>
-    public static LookupTritArray3Operator operator |(TritArray3 array, Trit[,] table)
-        => new LookupTritArray3Operator(array, table);
+    /// <returns>A LookupTritArray27Operator that can be used to apply the operation with another array.</returns>
+    public static LookupTritArray27Operator operator |(TernaryArray27 array, Trit[,] table)
+        => new LookupTritArray27Operator(array, table);
 
 
     /// <summary>
@@ -193,14 +193,14 @@ public struct TritArray3 : ITritArray<TritArray3>
     /// </summary>
     /// <param name="array">The source array.</param>
     /// <param name="shift">The number of positions to shift.</param>
-    /// <returns>A new TritArray3 with the bits shifted to the left.</returns>
-    public static TritArray3 operator <<(TritArray3 array, int shift)
+    /// <returns>A new TernaryArray27 with the bits shifted to the left.</returns>
+    public static TernaryArray27 operator <<(TernaryArray27 array, int shift)
     {
         return shift switch
         {
             >= NumberOfTrits => Zero,
             < 0 => array >> -shift,
-            _ => new() { Positive = (Byte)((array.Positive << shift) & BitMask), Negative = (Byte)((array.Negative << shift) & BitMask) }
+            _ => new() { Positive = (UInt32)((array.Positive << shift) & BitMask), Negative = (UInt32)((array.Negative << shift) & BitMask) }
         };
     }
 
@@ -209,115 +209,101 @@ public struct TritArray3 : ITritArray<TritArray3>
     /// </summary>
     /// <param name="array">The source array.</param>
     /// <param name="shift">The number of positions to shift.</param>
-    /// <returns>A new TritArray3 with the bits shifted to the right.</returns>
-    public static TritArray3 operator >> (TritArray3 array, int shift)
+    /// <returns>A new TernaryArray27 with the bits shifted to the right.</returns>
+    public static TernaryArray27 operator >> (TernaryArray27 array, int shift)
     {
         return shift switch
         {
             >= NumberOfTrits => Zero,
             < 0 => array << -shift,
-            _ => new() { Positive = (Byte)(array.Positive >> shift), Negative = (Byte)(array.Negative >> shift) }
+            _ => new() { Positive = (UInt32)(array.Positive >> shift), Negative = (UInt32)(array.Negative >> shift) }
         };
     }
 
     /// <summary>
-    /// Adds two TritArray3 values together.
+    /// Adds two TernaryArray27 values together.
     /// </summary>
     /// <param name="value1">The first value to add.</param>
     /// <param name="value2">The second value to add.</param>
-    /// <returns>A new TritArray3 representing the sum of the two values.</returns>
-    public static TritArray3 operator +(TritArray3 value1, TritArray3 value2)
+    /// <returns>A new TernaryArray27 representing the sum of the two values.</returns>
+    public static TernaryArray27 operator +(TernaryArray27 value1, TernaryArray27 value2)
     {
         Calculator.AddBalancedTernary(value1.Negative, value1.Positive, value2.Negative, value2.Positive, out var negative, out var positive);
-        return new() { Negative = (Byte)negative, Positive = (Byte)positive };
+        return new() { Negative = (UInt32)negative, Positive = (UInt32)positive };
     }
 
     /// <summary>
-    /// Subtracts one TritArray3 value from another.
+    /// Subtracts one TernaryArray27 value from another.
     /// </summary>
     /// <param name="value1">The value to subtract from.</param>
     /// <param name="value2">The value to subtract.</param>
-    /// <returns>A new TritArray3 representing the difference between the two values.</returns>
-    public static TritArray3 operator -(TritArray3 value1, TritArray3 value2)
+    /// <returns>A new TernaryArray27 representing the difference between the two values.</returns>
+    public static TernaryArray27 operator -(TernaryArray27 value1, TernaryArray27 value2)
     {
         Calculator.AddBalancedTernary(value1.Negative, value1.Positive, value2.Positive, value2.Negative, out var negative, out var positive);
-        return new() { Negative = (Byte)negative, Positive = (Byte)positive };
+        return new() { Negative = (UInt32)negative, Positive = (UInt32)positive };
     }
 
     #region Conversion Operators
 
     /// <summary>
-    /// Creates a TritArray3 from an integer value.
+    /// Creates a TernaryArray27 from an integer value.
     /// </summary>
     /// <param name="value">The integer value to convert.</param>
-    /// <returns>A new TritArray3 representing the value in balanced ternary.</returns>
-    private static TritArray3 Create(long value)
+    /// <returns>A new TernaryArray27 representing the value in balanced ternary.</returns>
+    private static TernaryArray27 Create(long value)
     {
         TritConverter.To32Trits(value, out var negative, out var positive);
-        return new() { Negative = (Byte)negative, Positive = (Byte)positive };
+        return new() { Negative = (UInt32)negative, Positive = (UInt32)positive };
     }
 
     /// <summary>
-    /// Defines an implicit conversion of an Int3T to a TritArray3.
+    /// Defines an implicit conversion of an Int27T to a TernaryArray27.
     /// </summary>
-    /// <param name="value">The Int3T value to convert.</param>
-    /// <returns>A TritArray3 representing the same value.</returns>
-    public static implicit operator TritArray3(Int3T value)
+    /// <param name="value">The Int27T value to convert.</param>
+    /// <returns>A TernaryArray27 representing the same value.</returns>
+    public static implicit operator TernaryArray27(Int27T value)
     {
         // Cast to long to get the numeric value instead of trying to access a non-existent Value property
         TritConverter.To32Trits(value, out var negative, out var positive);
-        return new() { Negative = (Byte)negative, Positive = (Byte)positive };
+        return new() { Negative = (UInt32)negative, Positive = (UInt32)positive };
     }
 
     /// <summary>
-    /// Defines an implicit conversion of a TritArray3 to an Int3T.
+    /// Defines an implicit conversion of a TernaryArray27 to an Int27T.
     /// </summary>
-    /// <param name="array">The TritArray3 to convert.</param>
-    /// <returns>An Int3T representing the same value.</returns>
-    public static implicit operator Int3T(TritArray3 array) => (SByte)TritConverter.ToInt32(array.Negative, array.Positive);
+    /// <param name="array">The TernaryArray27 to convert.</param>
+    /// <returns>An Int27T representing the same value.</returns>
+    public static implicit operator Int27T(TernaryArray27 array) => (Int64)TritConverter.ToInt64(array.Negative, array.Positive);
     
     
        /// <summary>
-       /// Defines an implicit conversion of a sbyte to a TritArray3.
-       /// </summary>
-       /// <param name="value">The sbyte value to convert.</param>
-       /// <returns>A TritArray3 representing the same value.</returns>
-       public static implicit operator TritArray3(sbyte value) => Create(value);
-
-       /// <summary>
-       /// Defines an implicit conversion of a TritArray3 to a sbyte.
-       /// </summary>
-       /// <param name="array">The TritArray3 to convert.</param>
-       /// <returns>A sbyte representing the same value.</returns>
-       public static implicit operator sbyte(TritArray3 array) => (sbyte)TritConverter.ToInt32(array.Negative & BitMask, array.Positive & BitMask);
-
-       /// <summary>
-       /// Defines an explicit conversion of an int to a TritArray3.
+       /// Defines an implicit conversion of an int to a TernaryArray27.
        /// </summary>
        /// <param name="value">The int value to convert.</param>
-       /// <returns>A TritArray3 representing the same value.</returns>
-       public static explicit operator TritArray3(int value) => Create(value);
+       /// <returns>A TernaryArray27 representing the same value.</returns>
+       public static implicit operator TernaryArray27(int value) => Create(value);
 
        /// <summary>
-       /// Defines an implicit conversion of a TritArray3 to an int.
+       /// Defines an explicit conversion of a TernaryArray27 to an int.
        /// </summary>
-       /// <param name="array">The TritArray3 to convert.</param>
+       /// <param name="array">The TernaryArray27 to convert.</param>
        /// <returns>An int representing the same value.</returns>
-       public static implicit operator int(TritArray3 array) => (int)TritConverter.ToInt32(array.Negative & BitMask, array.Positive & BitMask);
+       public static explicit operator int(TernaryArray27 array) => (int)TritConverter.ToInt64(array.Negative & BitMask, array.Positive & BitMask);
 
        /// <summary>
-       /// Defines an explicit conversion of a long to a TritArray3.
+       /// Defines an implicit conversion of a long to a TernaryArray27.
        /// </summary>
        /// <param name="value">The long value to convert.</param>
-       /// <returns>A TritArray3 representing the same value.</returns>
-       public static explicit operator TritArray3(long value) => Create(value);
+       /// <returns>A TernaryArray27 representing the same value.</returns>
+       public static implicit operator TernaryArray27(long value) => Create(value);
 
        /// <summary>
-       /// Defines an implicit conversion of a TritArray3 to a long.
+       /// Defines an implicit conversion of a TernaryArray27 to a long.
        /// </summary>
-       /// <param name="array">The TritArray3 to convert.</param>
+       /// <param name="array">The TernaryArray27 to convert.</param>
        /// <returns>A long representing the same value.</returns>
-       public static implicit operator long(TritArray3 array) => TritConverter.ToInt64(array.Negative & BitMask, array.Positive & BitMask);
+       public static implicit operator long(TernaryArray27 array) => TritConverter.ToInt64(array.Negative & BitMask, array.Positive & BitMask);
 
     #endregion
 
@@ -325,28 +311,28 @@ public struct TritArray3 : ITritArray<TritArray3>
     public override int GetHashCode() => HashCode.Combine(Negative.GetHashCode(), Positive.GetHashCode());
     
     /// <inheritdoc/>  
-    public override bool Equals(object? obj) => obj is TritArray3 other && Equals(other); 
+    public override bool Equals(object? obj) => obj is TernaryArray27 other && Equals(other); 
     
     /// <inheritdoc/>  
-    public bool Equals(TritArray3 other) => Negative == other.Negative && Positive == other.Positive;
+    public bool Equals(TernaryArray27 other) => Negative == other.Negative && Positive == other.Positive;
     
     internal string DebugView() => $"{this} ({this:ter})";
 
     // ToString implementation
     /// <summary>
-    /// Returns a string representation of the TritArray3.
+    /// Returns a string representation of the TernaryArray27.
     /// </summary>
     public override string ToString() => Formatter.Format(this, null, null);
     /// <summary>
-    /// Returns a string representation of the TritArray3.
+    /// Returns a string representation of the TernaryArray27.
     /// </summary>
     public string ToString(string? format) =>Formatter.Format(this, format, null);
     /// <summary>
-    /// Returns a string representation of the TritArray3.
+    /// Returns a string representation of the TernaryArray27.
     /// </summary>
     public string ToString(IFormatProvider? provider) => Formatter.Format(this, null, provider);
     /// <summary>
-    /// Returns a string representation of the TritArray3.
+    /// Returns a string representation of the TernaryArray27.
     /// </summary>
     public string ToString(string? format, IFormatProvider? provider) =>Formatter.Format(this, format, provider);
     /// <summary>

@@ -12,9 +12,9 @@ partial class TritConverterTests
     {
         BigInteger value = 0;
         TritConverter.ToTrits(value, out var negative, out var positive, out var length);
-        negative.Should().BeEmpty("because zero has no trits");
-        positive.Should().BeEmpty("because zero has no trits");
-        length.Should().Be(0, "because zero has no trits");
+        negative.Should().BeEmpty("because zero has no ternaries");
+        positive.Should().BeEmpty("because zero has no ternaries");
+        length.Should().Be(0, "because zero has no ternaries");
     }
     
     [Theory]
@@ -69,7 +69,7 @@ partial class TritConverterTests
 
         var actual = TritConverter.ToBigInteger(negative, positive);
 
-        actual.Should().Be(BigInteger.Parse(expected), "because the conversion should yield the original value when trits are correctly formed");
+        actual.Should().Be(BigInteger.Parse(expected), "because the conversion should yield the original value when ternaries are correctly formed");
     }
 
 

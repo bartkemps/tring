@@ -18,7 +18,7 @@ public partial class GeneratorDemo
         Console.WriteLine($"{nameof(ter001)} + {nameof(ter001)} = {sum} ({sum:ter})");
         Int9T int9Value = terTTT000110;
         Console.Write($"The value of {nameof(terTTT000111)} is {int9Value} ({int9Value:ter})\r\n");
-        TritArray27 tritArrayValue = ter111111111_000000000_TTTTTTTTT;
-        Console.WriteLine($"The value of {nameof(ter111111111_000000000_TTTTTTTTT)} is {tritArrayValue} ({tritArrayValue:ter})");
+        TernaryArray27 ternaryArrayValue = ter111111111_000000000_TTTTTTTTT;
+        Console.WriteLine($"The value of {nameof(ter111111111_000000000_TTTTTTTTT)} is {ternaryArrayValue} ({ternaryArrayValue:ter})");
     }
 }

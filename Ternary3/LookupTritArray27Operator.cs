@@ -6,86 +6,86 @@ using Operators.Operations;
 using TritArrays;
 
 /// <summary>
-/// Represents an operator that combines a TritArray27 with a binary operation lookup table.
+/// Represents an operator that combines a TernaryArray27 with a binary operation lookup table.
 /// </summary>
 /// <remarks>
-/// Used to efficiently apply binary operations between TritArray27 instances by using optimized lookup tables.
+/// Used to efficiently apply binary operations between TernaryArray27 instances by using optimized lookup tables.
 /// The first operand is stored within the operator structure, and the second operand is provided via the pipe operator.
 /// </remarks>
 public readonly struct LookupTritArray27Operator
 {
-    private readonly TritArray27 trits;
+    private readonly TernaryArray27 ternaries;
     private readonly BinaryTritOperator table;
 
-    internal LookupTritArray27Operator(TritArray27 trits, BinaryTritOperator table)
+    internal LookupTritArray27Operator(TernaryArray27 ternaries, BinaryTritOperator table)
     {
-        this.trits = trits;
+        this.ternaries = ternaries;
         this.table = table;
     }
 
-    internal LookupTritArray27Operator(TritArray27 trits, Trit[,] table)
-        : this(trits, new BinaryTritOperator(table))
+    internal LookupTritArray27Operator(TernaryArray27 ternaries, Trit[,] table)
+        : this(ternaries, new BinaryTritOperator(table))
     {
     }
 
-    internal LookupTritArray27Operator(TritArray27 trits, ReadOnlySpan<Trit> table)
-        : this(trits, new BinaryTritOperator(table))
+    internal LookupTritArray27Operator(TernaryArray27 ternaries, ReadOnlySpan<Trit> table)
+        : this(ternaries, new BinaryTritOperator(table))
     {
     }
 
-    internal LookupTritArray27Operator(TritArray27 trits, Func<Trit, Trit, Trit> operation)
-        : this(trits, new BinaryTritOperator(operation))
+    internal LookupTritArray27Operator(TernaryArray27 ternaries, Func<Trit, Trit, Trit> operation)
+        : this(ternaries, new BinaryTritOperator(operation))
     {
     }
 
     /// <summary>
-    /// Performs a binary operation between the stored left operand (TritArray27) and the right operand using a lookup table.
+    /// Performs a binary operation between the stored left operand (TernaryArray27) and the right operand using a lookup table.
     /// </summary>
     /// <param name="left">The LookupTritArray27Operator containing the left operand and operation details.</param>
-    /// <param name="right">The right TritArray27 operand.</param>
-    /// <returns>A new TritArray27 representing the result of applying the binary operation to each corresponding pair of trits.</returns>
-    public static TritArray27 operator |(LookupTritArray27Operator left, TritArray27 right)
+    /// <param name="right">The right TernaryArray27 operand.</param>
+    /// <returns>A new TernaryArray27 representing the result of applying the binary operation to each corresponding pair of ternaries.</returns>
+    public static TernaryArray27 operator |(LookupTritArray27Operator left, TernaryArray27 right)
     {
-        left.table.Apply(left.trits.Negative, left.trits.Positive, right.Negative, right.Positive, out var negative, out var positive);
+        left.table.Apply(left.ternaries.Negative, left.ternaries.Positive, right.Negative, right.Positive, out var negative, out var positive);
         return new(negative, positive);
     }
     
     /// <summary>
-    /// Performs a binary operation between the stored left operand (TritArray27) and an Int27T right operand using a lookup table.
+    /// Performs a binary operation between the stored left operand (TernaryArray27) and an Int27T right operand using a lookup table.
     /// </summary>
     /// <param name="left">The LookupTritArray27Operator containing the left operand and operation details.</param>
-    /// <param name="right">The right Int27T operand, which will be converted to a TritArray27.</param>
-    /// <returns>A new TritArray27 representing the result of applying the binary operation to each corresponding pair of trits.</returns>
-    public static TritArray27 operator |(LookupTritArray27Operator left, Int27T right)
+    /// <param name="right">The right Int27T operand, which will be converted to a TernaryArray27.</param>
+    /// <returns>A new TernaryArray27 representing the result of applying the binary operation to each corresponding pair of ternaries.</returns>
+    public static TernaryArray27 operator |(LookupTritArray27Operator left, Int27T right)
     {
-        var tritArray = (TritArray27)right;
-        left.table.Apply(left.trits.Negative, left.trits.Positive, tritArray.Negative, tritArray.Positive, out var negative, out var positive);
+        var tritArray = (TernaryArray27)right;
+        left.table.Apply(left.ternaries.Negative, left.ternaries.Positive, tritArray.Negative, tritArray.Positive, out var negative, out var positive);
         return new(negative, positive);
     }
        
     /// <summary>
-    /// Performs a binary operation between the stored left operand (TritArray27) and a Int32 right operand using a lookup table.
+    /// Performs a binary operation between the stored left operand (TernaryArray27) and a Int32 right operand using a lookup table.
     /// </summary>
     /// <param name="left">The LookupTritArray27Operator containing the left operand and operation details.</param>
-    /// <param name="right">The right Int32 operand, which will be converted to a TritArray27.</param>
-    /// <returns>A new TritArray27 representing the result of applying the binary operation to each corresponding pair of trits.</returns>
-    public static TritArray27 operator |(LookupTritArray27Operator left, Int32 right)
+    /// <param name="right">The right Int32 operand, which will be converted to a TernaryArray27.</param>
+    /// <returns>A new TernaryArray27 representing the result of applying the binary operation to each corresponding pair of ternaries.</returns>
+    public static TernaryArray27 operator |(LookupTritArray27Operator left, Int32 right)
     {
         TritConverter.To32Trits(right, out var rightNegative, out var rightPositive);
-        left.table.Apply(left.trits.Negative, left.trits.Positive, (UInt32)rightNegative, (UInt32)rightPositive, out var negative, out var positive);
+        left.table.Apply(left.ternaries.Negative, left.ternaries.Positive, (UInt32)rightNegative, (UInt32)rightPositive, out var negative, out var positive);
         return new(negative, positive);
     }
    
     /// <summary>
-    /// Performs a binary operation between the stored left operand (TritArray27) and a Int64 right operand using a lookup table.
+    /// Performs a binary operation between the stored left operand (TernaryArray27) and a Int64 right operand using a lookup table.
     /// </summary>
     /// <param name="left">The LookupTritArray27Operator containing the left operand and operation details.</param>
-    /// <param name="right">The right Int64 operand, which will be converted to a TritArray27.</param>
-    /// <returns>A new TritArray27 representing the result of applying the binary operation to each corresponding pair of trits.</returns>
-    public static TritArray27 operator |(LookupTritArray27Operator left, Int64 right)
+    /// <param name="right">The right Int64 operand, which will be converted to a TernaryArray27.</param>
+    /// <returns>A new TernaryArray27 representing the result of applying the binary operation to each corresponding pair of ternaries.</returns>
+    public static TernaryArray27 operator |(LookupTritArray27Operator left, Int64 right)
     {
         TritConverter.To32Trits(right, out var rightNegative, out var rightPositive);
-        left.table.Apply(left.trits.Negative, left.trits.Positive, (UInt32)rightNegative, (UInt32)rightPositive, out var negative, out var positive);
+        left.table.Apply(left.ternaries.Negative, left.ternaries.Positive, (UInt32)rightNegative, (UInt32)rightPositive, out var negative, out var positive);
         return new(negative, positive);
     }
 }

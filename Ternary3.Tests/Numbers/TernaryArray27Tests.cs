@@ -2,12 +2,12 @@ namespace Ternary3.Tests.Numbers;
 
 using FluentAssertions;
 
-public class TritArray27Tests
+public class TernaryArray27Tests
 {
     [Fact]
     public void SetAndGetTritValues_WorksCorrectly()
     {
-        var array = new TritArray27();
+        var array = new TernaryArray27();
         // Set all to Zero, then set some to Positive and Negative
         for (var i = 0; i < array.Length; i++)
         {
@@ -33,8 +33,8 @@ public class TritArray27Tests
     [Fact]
     public void Addition_BasicOperations_WorkCorrectly()
     {
-        var a = new TritArray27();
-        var b = new TritArray27();
+        var a = new TernaryArray27();
+        var b = new TernaryArray27();
 
         // Test 1: 0 + 0 = 0
         var result = a + b;
@@ -72,8 +72,8 @@ public class TritArray27Tests
     [Fact]
     public void Addition_MultiplePositions_WorkCorrectly()
     {
-        var a = new TritArray27();
-        var b = new TritArray27();
+        var a = new TernaryArray27();
+        var b = new TernaryArray27();
 
         // Set values in multiple positions
         a[2] = Trit.Zero; // 0
@@ -94,8 +94,8 @@ public class TritArray27Tests
     [Fact]
     public void Addition_AllPositions_PreservesZero()
     {
-        var a = new TritArray27();
-        var b = new TritArray27();
+        var a = new TernaryArray27();
+        var b = new TernaryArray27();
 
         // Set all positions to zero explicitly
         for (var i = 0; i < 27; i++)
@@ -116,8 +116,8 @@ public class TritArray27Tests
     [Fact]
     public void Addition_LargeValues_WrapsCorrectly()
     {
-        var a = new TritArray27();
-        var b = new TritArray27();
+        var a = new TernaryArray27();
+        var b = new TernaryArray27();
 
         a[1] = Trit.Positive; 
         a[2] = Trit.Positive; 
@@ -147,8 +147,8 @@ public class TritArray27Tests
         var b = (Trit)bValue;
         var expected = (Trit)expectedValue;
 
-        var arrayA = new TritArray27();
-        var arrayB = new TritArray27();
+        var arrayA = new TernaryArray27();
+        var arrayB = new TernaryArray27();
 
         arrayA[0] = a;
         arrayB[0] = b;
@@ -161,8 +161,8 @@ public class TritArray27Tests
     [Fact]
     public void Subtraction_BasicOperations_WorkCorrectly()
     {
-        var a = new TritArray27();
-        var b = new TritArray27();
+        var a = new TernaryArray27();
+        var b = new TernaryArray27();
 
         // Test cases using subtraction
         a[0] = Trit.Positive;
@@ -200,9 +200,9 @@ public class TritArray27Tests
         var b = (Trit)bValue;
         var expected = (Trit)expectedValue;
 
-        // Create two TritArray27 instances
-        var arrayA = new TritArray27();
-        var arrayB = new TritArray27();
+        // Create two TernaryArray27 instances
+        var arrayA = new TernaryArray27();
+        var arrayB = new TernaryArray27();
 
         arrayA[0] = a;
         arrayB[0] = b;
@@ -242,7 +242,7 @@ public class TritArray27Tests
     [InlineData(26)]
     public void Indexer_IndexFromEnd_GetsCorrectTrit(int fromEnd)
     {
-        var arr = new TritArray27();
+        var arr = new TernaryArray27();
         for (var i = 0; i < arr.Length; i++)
             arr[i] = new((sbyte)((i % 3) - 1));
         var expected = arr[26 - fromEnd];
@@ -280,7 +280,7 @@ public class TritArray27Tests
     [InlineData(26, 1)]
     public void Indexer_IndexFromEnd_SetsCorrectTrit(int fromEnd, sbyte tritValue)
     {
-        var arr = new TritArray27();
+        var arr = new TernaryArray27();
         arr[^ (fromEnd + 1)] = new(tritValue);
         arr[^ (fromEnd + 1)].Value.Should().Be(tritValue);
     }

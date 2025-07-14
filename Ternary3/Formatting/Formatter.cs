@@ -10,32 +10,32 @@ internal static class Formatter
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static string Format(Int3T value, ITernaryFormat format) 
-        => new TernaryFormatter(format).Format((TritArray3)value);
+        => new TernaryFormatter(format).Format((TernaryArray3)value);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static string Format(Int9T value, ITernaryFormat format) 
-        => new TernaryFormatter(format).Format((TritArray9)value);
+        => new TernaryFormatter(format).Format((TernaryArray9)value);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static string Format(Int27T value, ITernaryFormat format) 
-        => new TernaryFormatter(format).Format((TritArray27)value);
+        => new TernaryFormatter(format).Format((TernaryArray27)value);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static string Format(TritArray3 trits, string? format, IFormatProvider? provider)
+    public static string Format(TernaryArray3 ternaries, string? format, IFormatProvider? provider)
     {
-        return GetFormatter(provider).Format(format, trits, provider);
+        return GetFormatter(provider).Format(format, ternaries, provider);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static string Format(TritArray9 trits, string? format, IFormatProvider? provider)
+    public static string Format(TernaryArray9 ternaries, string? format, IFormatProvider? provider)
     {
-        return GetFormatter(provider).Format(format, trits, provider);
+        return GetFormatter(provider).Format(format, ternaries, provider);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static string Format(TritArray27 trits, string? format, IFormatProvider? provider)
+    public static string Format(TernaryArray27 ternaries, string? format, IFormatProvider? provider)
     {
-        return GetFormatter(provider).Format(format, trits, provider);
+        return GetFormatter(provider).Format(format, ternaries, provider);
     }
     
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -57,15 +57,15 @@ internal static class Formatter
     }
     
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static string Format(TritArray trits, string? format, IFormatProvider? provider)
+    public static string Format(TernaryArray ternaries, string? format, IFormatProvider? provider)
     {
-        return GetFormatter(provider).Format(format, trits, provider);
+        return GetFormatter(provider).Format(format, ternaries, provider);
     }
     
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static string Format(BigTritArray trits, string? format, IFormatProvider? provider)
+    public static string Format(BigTernaryArray ternaries, string? format, IFormatProvider? provider)
     {
-        return GetFormatter(provider).Format(format, trits, provider);
+        return GetFormatter(provider).Format(format, ternaries, provider);
     }
     
     private static ICustomFormatter GetFormatter(IFormatProvider? provider)

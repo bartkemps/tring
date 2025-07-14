@@ -728,6 +728,7 @@ This allows for flexible formatting and display of ternary numbers, including cu
 - **Additional Types**
     - [`ITritArray` Interface](#itritarray-interface)
     - [`ITernaryInteger<T>` Interface](#iternaryintegert-interface)
+  - [`ITernaryParsable` Interface](#iternaryparsable-interface)
 - **Formatting Namespace**
     - [`TernaryFormatter` Class](#ternaryformatter-class) - A custom formatter for ternary types, supporting both ternary and standard numeric formatting.
     - [`TernaryFormat` Class](#ternaryformat-class) - Represents a customizable ternary format, allowing you to specify digit symbols, grouping, separators, and padding for formatting trit arrays.
@@ -962,6 +963,14 @@ Represents a 9-trit signed integer, modeled after the Int16 type.
 - Standard arithmetic and comparison operators.
 
 **Methods:**
+
+- `static Int3T Parse(ReadOnlySpan<char> s)` - Parses a span of characters into an Int3T value.
+- `static Int3T Parse(ReadOnlySpan<char> s, ITernaryFormat? format)` - Parses a span of characters using the specified
+  format.
+- `static Int3T Parse(ReadOnlySpan<char> s, TritParseOptions options)` - Parses a span of characters using the specified
+  options.
+- `static Int3T Parse(ReadOnlySpan<char> s, ITernaryFormat? format, TritParseOptions options)` - Parses using format and
+  options.
 - `override string ToString()` - Returns a string representation of the value.
 - `string ToString(string? format)` - Returns a string representation using the specified format string.
 - `string ToString(IFormatProvider? provider)` - Returns a string representation using the specified format provider.

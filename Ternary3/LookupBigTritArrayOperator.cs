@@ -3,16 +3,16 @@
 using Operators;
 
 /// <summary>
-/// Helper class to facilitate binary operations between two BigTritArray instances.
+/// Helper class to facilitate binary operations between two BigTernaryArray instances.
 /// </summary>
 public class LookupBigTritArrayOperator
 {
-    private readonly BigTritArray trits;
+    private readonly BigTernaryArray ternaries;
     private readonly BinaryTritOperator table;
 
-    internal LookupBigTritArrayOperator(BigTritArray trits, BinaryTritOperator table)
+    internal LookupBigTritArrayOperator(BigTernaryArray ternaries, BinaryTritOperator table)
     {
-        this.trits = trits;
+        this.ternaries = ternaries;
         this.table = table;
     }
 
@@ -21,11 +21,11 @@ public class LookupBigTritArrayOperator
     /// </summary>
     /// <param name="left">The binary operation context.</param>
     /// <param name="right">The right-hand operand.</param>
-    /// <returns>A new BigTritArray with the operation applied.</returns>
-    public static BigTritArray operator |(LookupBigTritArrayOperator left, BigTritArray right)
+    /// <returns>A new BigTernaryArray with the operation applied.</returns>
+    public static BigTernaryArray operator |(LookupBigTritArrayOperator left, BigTernaryArray right)
     {
-        left.table.Apply(left.trits.Negative, left.trits.Positive, right.Negative, right.Positive, out var negative, out var positive);
-        return new BigTritArray(negative, positive, Math.Max(left.trits.Length, right.Length)).ApplyLength();
+        left.table.Apply(left.ternaries.Negative, left.ternaries.Positive, right.Negative, right.Positive, out var negative, out var positive);
+        return new BigTernaryArray(negative, positive, Math.Max(left.ternaries.Length, right.Length)).ApplyLength();
     }
 
     /// <summary>
@@ -33,10 +33,10 @@ public class LookupBigTritArrayOperator
     /// </summary>
     /// <param name="left">The binary operation context.</param>
     /// <param name="right">The right-hand operand.</param>
-    /// <returns>A new BigTritArray with the operation applied.</returns>
-    public static BigTritArray operator |(LookupBigTritArrayOperator left, TritArray right)
+    /// <returns>A new BigTernaryArray with the operation applied.</returns>
+    public static BigTernaryArray operator |(LookupBigTritArrayOperator left, TernaryArray right)
     {
-        left.table.Apply(left.trits.Negative, left.trits.Positive, [right.Negative], [right.Positive], out var negative, out var positive);
-        return new BigTritArray(negative, positive, Math.Max(left.trits.Length, right.NumberOfTrits)).ApplyLength();
+        left.table.Apply(left.ternaries.Negative, left.ternaries.Positive, [right.Negative], [right.Positive], out var negative, out var positive);
+        return new BigTernaryArray(negative, positive, Math.Max(left.ternaries.Length, right.NumberOfTrits)).ApplyLength();
     }
 }

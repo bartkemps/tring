@@ -10,7 +10,7 @@ public class TritArray9ShiftAndConversionTests
     public void LeftShift_WithMaxValue_ConvertsToCorrectInt(int shiftAmount, string expectedTernary, int expectedInt)
     {
         // Arrange
-        TritArray9 input = Int9T.MaxValue; // 111111111
+        TernaryArray9 input = Int9T.MaxValue; // 111111111
             
         // Act
         var shiftedLeft = input << shiftAmount;
@@ -27,7 +27,7 @@ public class TritArray9ShiftAndConversionTests
     public void RightShift_WithMaxValue_ConvertsToCorrectInt(int shiftAmount, string expectedTernary, int expectedInt)
     {
         // Arrange
-        TritArray9 input = Int9T.MaxValue; // 111111111
+        TernaryArray9 input = Int9T.MaxValue; // 111111111
             
         // Act
         var shiftedRight = input >> shiftAmount;
@@ -42,7 +42,7 @@ public class TritArray9ShiftAndConversionTests
     public void MaxValue_ConvertsToCorrectDecimal()
     {
         // Arrange
-        TritArray9 maxValue = Int9T.MaxValue; // 111111111
+        TernaryArray9 maxValue = Int9T.MaxValue; // 111111111
             
         // Act
         var converted = (int)maxValue;
@@ -58,7 +58,7 @@ public class TritArray9ShiftAndConversionTests
     public void VerifyShiftedValues()
     {
         // Arrange
-        TritArray9 input = Int9T.MaxValue; // 111111111 in ternary
+        TernaryArray9 input = Int9T.MaxValue; // 111111111 in ternary
 
         // Act & Assert
         var leftShift6 = input << 6;     // 111000000
@@ -91,7 +91,7 @@ public class TritArray9ShiftAndConversionTests
     [InlineData(8)]
     public void Indexer_IndexFromEnd_GetsCorrectTrit(int fromEnd)
     {
-        var arr = new TritArray9();
+        var arr = new TernaryArray9();
         for (var i = 0; i < arr.Length; i++)
             arr[i] = new((sbyte)((i % 3) - 1));
         var expected = arr[8 - fromEnd];
@@ -111,7 +111,7 @@ public class TritArray9ShiftAndConversionTests
     [InlineData(8, 1)]
     public void Indexer_IndexFromEnd_SetsCorrectTrit(int fromEnd, sbyte tritValue)
     {
-        var arr = new TritArray9();
+        var arr = new TernaryArray9();
         arr[^ (fromEnd + 1)] = new(tritValue);
         arr[^ (fromEnd + 1)].Value.Should().Be(tritValue);
     }

@@ -17,15 +17,15 @@ public class TritArray27Int27TShiftConsistencyTests
     public void RightShift_YieldsSameValue_ForTritArray27AndInt27T(long value, int shift)
     {
         Int27T intValue = value;
-        TritArray27 tritArray = intValue;
+        TernaryArray27 ternaryArray = intValue;
 
-        var shiftedArray = tritArray >> shift;
+        var shiftedArray = ternaryArray >> shift;
         var shiftedInt = intValue >> shift;
-        TritArray27 shiftedArrayFromInt = shiftedInt;
+        TernaryArray27 shiftedArrayFromInt = shiftedInt;
 
         for (var i = 0; i < 27; i++)
         {
-            shiftedArray[i].Should().Be(shiftedArrayFromInt[i], $"because right shift of {value} by {shift} should yield the same trits for TritArray27 and Int27T");
+            shiftedArray[i].Should().Be(shiftedArrayFromInt[i], $"because right shift of {value} by {shift} should yield the same ternaries for TernaryArray27 and Int27T");
         }
     }
 }

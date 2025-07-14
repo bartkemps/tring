@@ -2,7 +2,7 @@
 
 namespace Ternary3.Tests.Numbers;
 
-public class TritArray3Tests
+public class TernaryArray3Tests
 {
     [Theory]
     [InlineData(0)]
@@ -10,7 +10,7 @@ public class TritArray3Tests
     [InlineData(2)]
     public void Indexer_IndexFromEnd_GetsCorrectTrit(int fromEnd)
     {
-        var arr = new TritArray3();
+        var arr = new TernaryArray3();
         arr[0] = Trit.Negative;
         arr[1] = Trit.Zero;
         arr[2] = Trit.Positive;
@@ -26,7 +26,7 @@ public class TritArray3Tests
     [InlineData(2, 1)]
     public void Indexer_IndexFromEnd_SetsCorrectTrit(int fromEnd, sbyte tritValue)
     {
-        var arr = new TritArray3();
+        var arr = new TernaryArray3();
         arr[^ (fromEnd + 1)] = new(tritValue);
         arr[^ (fromEnd + 1)].Value.Should().Be(tritValue);
     }

@@ -6,7 +6,7 @@ using Formatting;
 /// Defines a contract for types that can be parsed from a string representation in a ternary format.
 /// </summary>
 /// <typeparam name="TSelf">The type the string is parsed to</typeparam>
-public interface ITritParsable<out TSelf>
+public interface ITernaryParsable<out TSelf>
 {
     /// <summary>
     /// Parses a string representation

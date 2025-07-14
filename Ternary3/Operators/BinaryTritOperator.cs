@@ -18,7 +18,7 @@ using System.Runtime.CompilerServices;
 [DebuggerDisplay("{DebugView()}")]
 public partial struct BinaryTritOperator : IEquatable<BinaryTritOperator>
 {
-    internal TritArray9 Value;
+    internal TernaryArray9 Value;
 
     /// <summary>
     /// Creates a new instance of the <see cref="BinaryTritOperator"/> structure with default values.
@@ -92,18 +92,18 @@ public partial struct BinaryTritOperator : IEquatable<BinaryTritOperator>
     }
 
     /// <summary>
-    /// Creates a BinaryTritOperator from a <see cref="TritArray9"/> instance.
+    /// Creates a BinaryTritOperator from a <see cref="TernaryArray9"/> instance.
     /// </summary>
-    /// <param name="trits">A TritArray9 containing the operation results in row-major order.</param>
+    /// <param name="ternaries">A TernaryArray9 containing the operation results in row-major order.</param>
     /// <remarks>
     /// Parameters represent each cell in the 3x3 matrix, in row-major order:
     /// tTT tT0 tT1
     /// t0T t00 t01
     /// t1T t10 t11
     /// </remarks>
-    public BinaryTritOperator(TritArray9 trits)
+    public BinaryTritOperator(TernaryArray9 ternaries)
     {
-        Value = trits;
+        Value = ternaries;
     }
 
     /// <summary>

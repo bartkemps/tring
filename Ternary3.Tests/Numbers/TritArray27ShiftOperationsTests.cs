@@ -13,8 +13,8 @@ public class TritArray27ShiftOperationsTests
     [InlineData(100)] // Large shift beyond array length
     public void LeftShift_ShiftsTritsLeft_AndClearsRightSide(int shiftAmount)
     {
-        // Create a test array with alternating trits
-        var array = new TritArray27();
+        // Create a test array with alternating ternaries
+        var array = new TernaryArray27();
         for (var i = 0; i < array.Length; i++)
         {
             array[i] = new((sbyte)((i % 3) - 1)); // Values -1, 0, 1 repeating
@@ -25,10 +25,10 @@ public class TritArray27ShiftOperationsTests
         // Test expectations
         if (shiftAmount >= 27)
         {
-            // All trits should be zero when shift >= length
+            // All ternaries should be zero when shift >= length
             for (var i = 0; i < result.Length; i++)
             {
-                result[i].Should().Be(Trit.Zero, $"because a shift of {shiftAmount} should zero out all trits");
+                result[i].Should().Be(Trit.Zero, $"because a shift of {shiftAmount} should zero out all ternaries");
             }
         }
         else
@@ -62,8 +62,8 @@ public class TritArray27ShiftOperationsTests
     [InlineData(100)] // Large shift beyond array length
     public void RightShift_ShiftsTritsRight_AndClearsLeftSide(int shiftAmount)
     {
-        // Create a test array with alternating trits
-        var array = new TritArray27();
+        // Create a test array with alternating ternaries
+        var array = new TernaryArray27();
         for (var i = 0; i < array.Length; i++)
         {
             array[i] = new((sbyte)((i % 3) - 1)); // Values -1, 0, 1 repeating
@@ -74,10 +74,10 @@ public class TritArray27ShiftOperationsTests
         // Test expectations
         if (shiftAmount >= 27)
         {
-            // All trits should be zero when shift >= length
+            // All ternaries should be zero when shift >= length
             for (var i = 0; i < result.Length; i++)
             {
-                result[i].Should().Be(Trit.Zero, $"because a shift of {shiftAmount} should zero out all trits");
+                result[i].Should().Be(Trit.Zero, $"because a shift of {shiftAmount} should zero out all ternaries");
             }
         }
         else
@@ -110,7 +110,7 @@ public class TritArray27ShiftOperationsTests
     public void LeftShift_WithNegativeAmount_ConvertsToRightShift(int negativeShiftAmount)
     {
         // Create a test array
-        var array = new TritArray27();
+        var array = new TernaryArray27();
         for (var i = 0; i < array.Length; i++)
         {
             array[i] = new((sbyte)((i % 3) - 1)); // Values -1, 0, 1 repeating
@@ -135,7 +135,7 @@ public class TritArray27ShiftOperationsTests
     public void RightShift_WithNegativeAmount_ConvertsToLeftShift(int negativeShiftAmount)
     {
         // Create a test array
-        var array = new TritArray27();
+        var array = new TernaryArray27();
         for (var i = 0; i < array.Length; i++)
         {
             array[i] = new((sbyte)((i % 3) - 1)); // Values -1, 0, 1 repeating
@@ -158,7 +158,7 @@ public class TritArray27ShiftOperationsTests
     [InlineData(1, 1)]   // Positive trit
     public void LeftShift_PreservesTrits_WhenShiftingSimpleTrit(sbyte tritValue, int shiftAmount)
     {
-        var array = new TritArray27();
+        var array = new TernaryArray27();
         array[0] = new(tritValue);
         
         var result = array << shiftAmount;
@@ -183,7 +183,7 @@ public class TritArray27ShiftOperationsTests
     [InlineData(1, 1)]   // Positive trit
     public void RightShift_PreservesTrits_WhenShiftingSimpleTrit(sbyte tritValue, int shiftAmount)
     {
-        var array = new TritArray27();
+        var array = new TernaryArray27();
         var initialPosition = shiftAmount + 1; // Position to set the initial trit
         array[initialPosition] = new(tritValue);
         

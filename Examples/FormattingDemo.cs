@@ -41,7 +41,7 @@ public static partial class FormattingDemo
         
         Console.WriteLine($"\nCustom digit symbols:");
         Console.WriteLine($"  Standard: {value1:ter}");
-        Console.WriteLine($"  Custom:   {((TritArray27)value1).ToString(customFormat)}");
+        Console.WriteLine($"  Custom:   {((TernaryArray27)value1).ToString(customFormat)}");
 
         // EXAMPLE 4: Grouping trits for better readability
         // -----------------------------------------------
@@ -50,7 +50,7 @@ public static partial class FormattingDemo
         groupedFormat.Groups.Add(new TritGroupDefinition("_", 3)); // Group every 3 trits with underscore
         groupedFormat.Groups.Add(new TritGroupDefinition(" ", 9)); // Group every 9 trits with space
         
-        TritArray27 largeValue = 123456789;
+        TernaryArray27 largeValue = 123456789;
         Console.WriteLine($"\nGrouped formatting:");
         Console.WriteLine($"  No grouping: {largeValue:ter}");
         Console.WriteLine($"  Grouped:     {largeValue.ToString(groupedFormat)}");
@@ -58,8 +58,8 @@ public static partial class FormattingDemo
         // EXAMPLE 5: Using built-in formats
         // --------------------------------
         Console.WriteLine($"\nBuilt-in formats:");
-        Console.WriteLine($"  Invariant: {((TritArray27)value1).ToString(TernaryFormat.Invariant)}");
-        Console.WriteLine($"  Minimal:   {((TritArray27)value1).ToString(TernaryFormat.Minimal)}");
+        Console.WriteLine($"  Invariant: {((TernaryArray27)value1).ToString(TernaryFormat.Invariant)}");
+        Console.WriteLine($"  Minimal:   {((TernaryArray27)value1).ToString(TernaryFormat.Minimal)}");
 
         // EXAMPLE 6: TernaryFormatter with mixed types
         // ------------------------------------------
@@ -85,7 +85,7 @@ public static partial class FormattingDemo
         Int9T smallValue = ter101;
         Console.WriteLine($"\nPadded formatting:");
         Console.WriteLine($"  Unpadded: {smallValue:ter}");
-        Console.WriteLine($"  Padded:   {((TritArray9)smallValue).ToString(paddedFormat)}");
+        Console.WriteLine($"  Padded:   {((TernaryArray9)smallValue).ToString(paddedFormat)}");
 
         // EXAMPLE 8: Hierarchical grouping
         // -------------------------------

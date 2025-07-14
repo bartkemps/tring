@@ -20,21 +20,21 @@ public static class OverflowDemo
         var result2 = input2A * input2B; // 110 * TT0 = 101T00 (144). Int3T only keeps 3 trits, so T00 = -9
         Console.WriteLine($"Overflow: {input2A} * {input2B} = {result2}"); // Overflow: 110 * TT0 = 101T00
 
-        // Addition and sumple multiplication of TritArray3 also may overflow.
+        // Addition and sumple multiplication of TernaryArray3 also may overflow.
         // (Under the hood, these are often performed without conversion to binary)
-        TritArray3 input3A = 12; // 110
-        TritArray3 input3B = 3; // 010
+        TernaryArray3 input3A = 12; // 110
+        TernaryArray3 input3B = 3; // 010
         var result3 = input3A * input3B; // 110 * TT0 = 101T00 (144). Int3T only keeps 3 trits, so T00 = -9     
         Console.WriteLine($"Overflow: {input3A} * {input3B} = {result3} ({(int)result3})"); // Overflow: 110 * 010 = 101T00 (-9)
         
         Int3T input4 = 25; // 10T1. trimmed to 3 trits = 0T1 or -8;
-        Console.WriteLine($"Overflow: 25 => {input4} ({(TritArray3)input4})"); // Overflow: 25 => -2 (0T1)
+        Console.WriteLine($"Overflow: 25 => {input4} ({(TernaryArray3)input4})"); // Overflow: 25 => -2 (0T1)
 
-        TritArray3 input5 = 25; // 10T1. trimmed to 3 trits = 0T1 or -8;
+        TernaryArray3 input5 = 25; // 10T1. trimmed to 3 trits = 0T1 or -8;
         Console.WriteLine($"Overflow: 25 => {input5} ({(int)input5})"); // Overflow: 25 => (0T1) (25)
 
         // Shifting trits two positions in essence multiplies or divides by 9 (3^2).
-        var input6 = TritArray9.MaxValue; // 111111111
+        var input6 = TernaryArray9.MaxValue; // 111111111
         var result6A = input5 << 6;
         Console.WriteLine($"Shift: {input6:ter} << 6 = {result6A:ter} ({result6A})"); // Shift: 111111111 << 6 = 111000000 (9477)
         var result6B = input5 >> -6;

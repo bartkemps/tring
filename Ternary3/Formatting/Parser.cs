@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 internal class Parser
 {
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static TritArray ParseTritArray(string characters, ITernaryFormat? format = null, TritParseOptions options = TritParseOptions.Default)
+    public static TernaryArray ParseTritArray(string characters, ITernaryFormat? format = null, TritParseOptions options = TritParseOptions.Default)
     {
         var trits = GetNormalizedDigits(characters, format, options).Take(65).ToArray();
         if (trits.Length == 65)
@@ -26,7 +26,7 @@ internal class Parser
     }
     
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static BigTritArray ParseBigTritArray(string characters, ITernaryFormat? format = null, TritParseOptions options = TritParseOptions.Default)
+    public static BigTernaryArray ParseBigTritArray(string characters, ITernaryFormat? format = null, TritParseOptions options = TritParseOptions.Default)
     {
         var trits = GetNormalizedDigits(characters, format, options);
         using var enumerator = trits.GetEnumerator();
@@ -86,7 +86,7 @@ internal class Parser
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static TritArray3 ParseTritArray3(string characters, ITernaryFormat? format = null, TritParseOptions options = TritParseOptions.Default)
+    public static TernaryArray3 ParseTritArray3(string characters, ITernaryFormat? format = null, TritParseOptions options = TritParseOptions.Default)
     {
         var trits = GetNormalizedDigits(characters, format, options, 3);
         TritsToTritArray<byte>(trits, out var negative, out var positive);
@@ -94,7 +94,7 @@ internal class Parser
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static TritArray9 ParseTritArray9(string characters, ITernaryFormat? format = null, TritParseOptions options = TritParseOptions.Default)
+    public static TernaryArray9 ParseTritArray9(string characters, ITernaryFormat? format = null, TritParseOptions options = TritParseOptions.Default)
     {
         var trits = GetNormalizedDigits(characters, format, options, 9);
         TritsToTritArray<byte>(trits, out var negative, out var positive);
@@ -102,7 +102,7 @@ internal class Parser
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static TritArray27 ParseTritArray27(string characters, ITernaryFormat? format = null, TritParseOptions options = TritParseOptions.Default)
+    public static TernaryArray27 ParseTritArray27(string characters, ITernaryFormat? format = null, TritParseOptions options = TritParseOptions.Default)
     {
         var trits = GetNormalizedDigits(characters, format, options, 27);
         TritsToTritArray<byte>(trits, out var negative, out var positive);

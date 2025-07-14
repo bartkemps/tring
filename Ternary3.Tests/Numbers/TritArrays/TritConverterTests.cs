@@ -103,14 +103,14 @@ public partial class TritConverterTests
     [InlineData(-2147483648)] // Int32.MinValue
     public void ConvertTo32Trits_Int32_RoundTripsCorrectly(int value)
     {
-        // Convert to trits
+        // Convert to ternaries
         TritConverter.To32Trits(value, out var negative, out var positive);
         
         // Convert back to int32
         var roundTrip = TritConverter.ToInt32(negative, positive);
         
         // Verify the value is preserved
-        roundTrip.Should().Be(value, $"because converting {value} to trits and back should preserve the value");
+        roundTrip.Should().Be(value, $"because converting {value} to ternaries and back should preserve the value");
     }
 
     [Theory]
@@ -127,7 +127,7 @@ public partial class TritConverterTests
     [InlineData(-9223372036854775808L)] // Int64.MinValue
     public void ConvertTo32Trits_Int64_RoundTripsCorrectly(long value)
     {
-        // Convert to trits
+        // Convert to ternaries
         TritConverter.To32Trits(value, out var negative, out var positive);
         TritConverter.To32Trits(value, out var negative2, out var positive2);
         
@@ -139,7 +139,7 @@ public partial class TritConverterTests
         var roundTrip2 = TritConverter.ToInt64(negative2, positive2);
         roundTrip2.Should().Be(roundTrip, "because ToInt64 should produce the same value as TritsToInt64");
         
-        // For very large values that exceed 32 trits capacity, we can't expect perfect roundtrip
+        // For very large values that exceed 32 ternaries capacity, we can't expect perfect roundtrip
         if (value > int.MaxValue || value < int.MinValue)
         {
             // Just check that the conversion doesn't throw
@@ -148,7 +148,7 @@ public partial class TritConverterTests
         else
         {
             // For values in int range, verify the value is preserved exactly
-            roundTrip.Should().Be(value, $"because converting {value} to trits and back should preserve the value");
+            roundTrip.Should().Be(value, $"because converting {value} to ternaries and back should preserve the value");
         }
     }
 
@@ -161,7 +161,7 @@ public partial class TritConverterTests
     [InlineData(0xA, 0x5)] // Mixed pattern
     public void FormatTrits_GeneratesCorrectString(uint negative, uint positive)
     {
-        // Format only 4 trits for simplicity
+        // Format only 4 ternaries for simplicity
         var result = TritConverter.FormatTrits(negative, positive, 4);
         
         // Manually build expected string
@@ -179,6 +179,6 @@ public partial class TritConverterTests
         }
         
         result.Should().Be(expected, 
-            $"because formatting trits for negative={negative}, positive={positive} should produce '{expected}'");
+            $"because formatting ternaries for negative={negative}, positive={positive} should produce '{expected}'");
     }
 }

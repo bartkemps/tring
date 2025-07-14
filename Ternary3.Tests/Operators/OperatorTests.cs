@@ -281,7 +281,7 @@ public class OperatorTests
 
     private void OperationExecutesCorrectly(UnaryTritOperator operation, sbyte input, sbyte expectedValue)
     {
-        var array = new TritArray27();
+        var array = new TernaryArray27();
         var trit = (Trit)input;
         var expected = (Trit)expectedValue;
 

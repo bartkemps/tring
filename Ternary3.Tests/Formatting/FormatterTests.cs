@@ -10,7 +10,7 @@
 //
 // public class FormatterTests
 // {
-//     private class SimpleTritArray : ITritArray
+//     private class SimpleTritArray : ITernaryArray
 //     {
 //         private readonly Trit[] _trits;
 //         public SimpleTritArray(params sbyte[] values) => _trits = Array.ConvertAll(values, v => new Trit(v));
@@ -23,7 +23,7 @@
 //     [InlineData(new sbyte[] { -1, 0, 1 }, "1 0 X")]
 //     [InlineData(new sbyte[] { -1, -1, -1 }, "X X X")]
 //     [InlineData(new sbyte[] { 0, 0, 0, 1, 1, 1 }, "1 1 1 0 0 0")]
-//     public void Format_UsesDigitsAndGrouping(sbyte[] trits, string expected)
+//     public void Format_UsesDigitsAndGrouping(sbyte[] ternaries, string expected)
 //     {
 //         var format = new TernaryFormat
 //         {
@@ -33,7 +33,7 @@
 //             Groups = new List<TritGroupDefinition> { new(" ", 1) },
 //             TernaryPadding = TernaryPadding.None
 //         };
-//         var arr = new SimpleTritArray(trits);
+//         var arr = new SimpleTritArray(ternaries);
 //         var actual = Formatter.Format(arr, format);
 //         actual.Should().Be(expected);
 //     }

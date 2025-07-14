@@ -29,14 +29,14 @@ public partial class TernaryIntegerIndexerTests
     {
         // Arrange
         var intValue = (Int3T)value;
-        var tritArray = (TritArray3)value;
+        var tritArray = (TernaryArray3)value;
 
         // Act
         var tritFromInt = intValue[index];
         var tritFromArray = tritArray[index];
 
         // Assert
-        tritFromInt.Should().Be(tritFromArray, $"because Int3T({value})[{index}] should equal TritArray3({value})[{index}]");
+        tritFromInt.Should().Be(tritFromArray, $"because Int3T({value})[{index}] should equal TernaryArray3({value})[{index}]");
     }
 
     [Fact]
@@ -45,7 +45,7 @@ public partial class TernaryIntegerIndexerTests
         // Arrange
         sbyte value = -13;
         var intValue = (Int3T)value;
-        var tritArray = (TritArray3)value;
+        var tritArray = (TernaryArray3)value;
         var index = ^1; // Last trit
 
         // Act
@@ -53,7 +53,7 @@ public partial class TernaryIntegerIndexerTests
         var tritFromArray = tritArray[index];
 
         // Assert
-        tritFromInt.Should().Be(tritFromArray, $"because Int3T({value})[{index}] should equal TritArray3({value})[{index}]");
+        tritFromInt.Should().Be(tritFromArray, $"because Int3T({value})[{index}] should equal TernaryArray3({value})[{index}]");
     }
 
     [Fact]
@@ -62,7 +62,7 @@ public partial class TernaryIntegerIndexerTests
         // Arrange
         sbyte value = -1;
         var intValue = (Int3T)value;
-        var tritArray = (TritArray3)value;
+        var tritArray = (TernaryArray3)value;
         var index = ^2; // Second-to-last trit
 
         // Act
@@ -70,7 +70,7 @@ public partial class TernaryIntegerIndexerTests
         var tritFromArray = tritArray[index];
 
         // Assert
-        tritFromInt.Should().Be(tritFromArray, $"because Int3T({value})[{index}] should equal TritArray3({value})[{index}]");
+        tritFromInt.Should().Be(tritFromArray, $"because Int3T({value})[{index}] should equal TernaryArray3({value})[{index}]");
     }
 
     [Fact]
@@ -79,7 +79,7 @@ public partial class TernaryIntegerIndexerTests
         // Arrange
         sbyte value = 0;
         var intValue = (Int3T)value;
-        var tritArray = (TritArray3)value;
+        var tritArray = (TernaryArray3)value;
         var index = ^3; // First trit (from end)
 
         // Act
@@ -87,7 +87,7 @@ public partial class TernaryIntegerIndexerTests
         var tritFromArray = tritArray[index];
 
         // Assert
-        tritFromInt.Should().Be(tritFromArray, $"because Int3T({value})[{index}] should equal TritArray3({value})[{index}]");
+        tritFromInt.Should().Be(tritFromArray, $"because Int3T({value})[{index}] should equal TernaryArray3({value})[{index}]");
     }
 
     [Fact]
@@ -96,7 +96,7 @@ public partial class TernaryIntegerIndexerTests
         // Arrange
         sbyte value = 13;
         var intValue = (Int3T)value;
-        var tritArray = (TritArray3)value;
+        var tritArray = (TernaryArray3)value;
         var index = ^1; // Last trit
 
         // Act
@@ -104,7 +104,7 @@ public partial class TernaryIntegerIndexerTests
         var tritFromArray = tritArray[index];
 
         // Assert
-        tritFromInt.Should().Be(tritFromArray, $"because Int3T({value})[{index}] should equal TritArray3({value})[{index}]");
+        tritFromInt.Should().Be(tritFromArray, $"because Int3T({value})[{index}] should equal TernaryArray3({value})[{index}]");
     }
 
     [Theory]
@@ -129,14 +129,14 @@ public partial class TernaryIntegerIndexerTests
     {
         // Arrange
         var intValue = (Int9T)value;
-        var tritArray = (TritArray9)value;
+        var tritArray = (TernaryArray9)value;
 
         // Act
         var tritFromInt = intValue[index];
         var tritFromArray = tritArray[index];
 
         // Assert
-        tritFromInt.Should().Be(tritFromArray, $"because Int9T({value})[{index}] should equal TritArray9({value})[{index}]");
+        tritFromInt.Should().Be(tritFromArray, $"because Int9T({value})[{index}] should equal TernaryArray9({value})[{index}]");
     }
 
     [Fact]
@@ -145,7 +145,7 @@ public partial class TernaryIntegerIndexerTests
         // Arrange
         var value = -9841;
         var intValue = (Int9T)value;
-        var tritArray = (TritArray9)value;
+        var tritArray = (TernaryArray9)value;
         var index = ^1; // Last trit
 
         // Act
@@ -153,7 +153,7 @@ public partial class TernaryIntegerIndexerTests
         var tritFromArray = tritArray[index];
 
         // Assert
-        tritFromInt.Should().Be(tritFromArray, $"because Int9T({value})[{index}] should equal TritArray9({value})[{index}]");
+        tritFromInt.Should().Be(tritFromArray, $"because Int9T({value})[{index}] should equal TernaryArray9({value})[{index}]");
     }
 
     [Fact]
@@ -162,7 +162,7 @@ public partial class TernaryIntegerIndexerTests
         // Arrange
         var value = 4000;
         var intValue = (Int9T)value;
-        var tritArray = (TritArray9)value;
+        var tritArray = (TernaryArray9)value;
         var index = ^5; // Fifth trit from end
 
         // Act
@@ -170,7 +170,7 @@ public partial class TernaryIntegerIndexerTests
         var tritFromArray = tritArray[index];
 
         // Assert
-        tritFromInt.Should().Be(tritFromArray, $"because Int9T({value})[{index}] should equal TritArray9({value})[{index}]");
+        tritFromInt.Should().Be(tritFromArray, $"because Int9T({value})[{index}] should equal TernaryArray9({value})[{index}]");
     }
 
     [Fact]
@@ -179,7 +179,7 @@ public partial class TernaryIntegerIndexerTests
         // Arrange
         var value = 9841; // Max value
         var intValue = (Int9T)value;
-        var tritArray = (TritArray9)value;
+        var tritArray = (TernaryArray9)value;
         var index = ^9; // First trit (from end)
 
         // Act
@@ -187,7 +187,7 @@ public partial class TernaryIntegerIndexerTests
         var tritFromArray = tritArray[index];
 
         // Assert
-        tritFromInt.Should().Be(tritFromArray, $"because Int9T({value})[{index}] should equal TritArray9({value})[{index}]");
+        tritFromInt.Should().Be(tritFromArray, $"because Int9T({value})[{index}] should equal TernaryArray9({value})[{index}]");
     }
 
     [Theory]
@@ -212,14 +212,14 @@ public partial class TernaryIntegerIndexerTests
     {
         // Arrange
         var intValue = (Int27T)value;
-        var tritArray = (TritArray27)value;
+        var tritArray = (TernaryArray27)value;
 
         // Act
         var tritFromInt = intValue[index];
         var tritFromArray = tritArray[index];
 
         // Assert
-        tritFromInt.Should().Be(tritFromArray, $"because Int27T({value})[{index}] should equal TritArray27({value})[{index}]");
+        tritFromInt.Should().Be(tritFromArray, $"because Int27T({value})[{index}] should equal TernaryArray27({value})[{index}]");
     }
 
     [Fact]
@@ -228,7 +228,7 @@ public partial class TernaryIntegerIndexerTests
         // Arrange
         var value = -3812798742289;
         var intValue = (Int27T)value;
-        var tritArray = (TritArray27)value;
+        var tritArray = (TernaryArray27)value;
         var index = ^1; // Last trit
 
         // Act
@@ -236,7 +236,7 @@ public partial class TernaryIntegerIndexerTests
         var tritFromArray = tritArray[index];
 
         // Assert
-        tritFromInt.Should().Be(tritFromArray, $"because Int27T({value})[{index}] should equal TritArray27({value})[{index}]");
+        tritFromInt.Should().Be(tritFromArray, $"because Int27T({value})[{index}] should equal TernaryArray27({value})[{index}]");
     }
 
     [Fact]
@@ -245,7 +245,7 @@ public partial class TernaryIntegerIndexerTests
         // Arrange
         long value = 1000000000;
         var intValue = (Int27T)value;
-        var tritArray = (TritArray27)value;
+        var tritArray = (TernaryArray27)value;
         var index = ^14; // 14th trit from end
 
         // Act
@@ -253,7 +253,7 @@ public partial class TernaryIntegerIndexerTests
         var tritFromArray = tritArray[index];
 
         // Assert
-        tritFromInt.Should().Be(tritFromArray, $"because Int27T({value})[{index}] should equal TritArray27({value})[{index}]");
+        tritFromInt.Should().Be(tritFromArray, $"because Int27T({value})[{index}] should equal TernaryArray27({value})[{index}]");
     }
 
     [Fact]
@@ -262,7 +262,7 @@ public partial class TernaryIntegerIndexerTests
         // Arrange
         var value = 3812798742289; // Max value
         var intValue = (Int27T)value;
-        var tritArray = (TritArray27)value;
+        var tritArray = (TernaryArray27)value;
         var index = ^27; // First trit (from end)
 
         // Act
@@ -270,11 +270,11 @@ public partial class TernaryIntegerIndexerTests
         var tritFromArray = tritArray[index];
 
         // Assert
-        tritFromInt.Should().Be(tritFromArray, $"because Int27T({value})[{index}] should equal TritArray27({value})[{index}]");
+        tritFromInt.Should().Be(tritFromArray, $"because Int27T({value})[{index}] should equal TernaryArray27({value})[{index}]");
     }
 
     [Theory]
-    [InlineData(5, 0)]    // Out of range index (Int3T has 3 trits)
+    [InlineData(5, 0)]    // Out of range index (Int3T has 3 ternaries)
     [InlineData(-1, 0)]   // Negative index
     public void Int3T_IndexerThrowsException_WhenIndexIsOutOfRange(int index, sbyte value)
     {
@@ -287,7 +287,7 @@ public partial class TernaryIntegerIndexerTests
     }
 
     [Theory]
-    [InlineData(10, 0)]   // Out of range index (Int9T has 9 trits)
+    [InlineData(10, 0)]   // Out of range index (Int9T has 9 ternaries)
     [InlineData(-1, 0)]   // Negative index
     public void Int9T_IndexerThrowsException_WhenIndexIsOutOfRange(int index, int value)
     {
@@ -300,7 +300,7 @@ public partial class TernaryIntegerIndexerTests
     }
 
     [Theory]
-    [InlineData(28, 0)]   // Out of range index (Int27T has 27 trits)
+    [InlineData(28, 0)]   // Out of range index (Int27T has 27 ternaries)
     [InlineData(-1, 0)]   // Negative index
     public void Int27T_IndexerThrowsException_WhenIndexIsOutOfRange(int index, long value)
     {

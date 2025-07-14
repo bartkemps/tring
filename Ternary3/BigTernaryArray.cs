@@ -10,7 +10,7 @@ using TritArrays;
 /// Represents a variable-length array of trits (ternary digits) backed by lists of ulongs.
 /// This class provides support for arbitrary-length balanced ternary numbers and operations.
 /// </summary>
-public class BigTritArray : ITritArray<BigTritArray>
+public class BigTernaryArray : ITernaryArray<BigTernaryArray>
 {
     internal List<ulong> Positive;
     internal List<ulong> Negative;
@@ -22,18 +22,18 @@ public class BigTritArray : ITritArray<BigTritArray>
     public int Length { get; set; }
 
     /// <summary>
-    /// Represents a BigTritArray with all trits set to zero.
+    /// Represents a BigTernaryArray with all trits set to zero.
     /// </summary>
-    public static readonly BigTritArray Zero = new(0);
+    public static readonly BigTernaryArray Zero = new(0);
 
     /// <summary>
-    /// Represents a BigTritArray with value of one (a single trit set to positive).
+    /// Represents a BigTernaryArray with value of one (a single trit set to positive).
     /// </summary>
-    public static readonly BigTritArray One = new([0], [1], 1);
+    public static readonly BigTernaryArray One = new([0], [1], 1);
 
 
     /// <summary>
-    /// Resizes the TritArray to the specified length.
+    /// Resizes the TernaryArray to the specified length.
     /// </summary>
     /// <param name="length">The new length of the array. Must be non-negative.</param>
     /// <remarks>
@@ -69,7 +69,7 @@ public class BigTritArray : ITritArray<BigTritArray>
         }
     }
 
-    internal BigTritArray(List<ulong> negative, List<ulong> positive, int length)
+    internal BigTernaryArray(List<ulong> negative, List<ulong> positive, int length)
     {
         Negative = negative;
         Positive = positive;
@@ -79,11 +79,11 @@ public class BigTritArray : ITritArray<BigTritArray>
     }
 
     /// <summary>
-    /// Initializes a new instance of the BigTritArray class with a specified length.
+    /// Initializes a new instance of the BigTernaryArray class with a specified length.
     /// </summary>
     /// <param name="length">The length of the trit array. Must be non-negative.</param>
     /// <exception cref="ArgumentOutOfRangeException">Thrown when length is negative.</exception>
-    public BigTritArray(int length)
+    public BigTernaryArray(int length)
     {
         if (length < 0) throw new ArgumentOutOfRangeException(nameof(length));
         Length = length;
@@ -95,11 +95,11 @@ public class BigTritArray : ITritArray<BigTritArray>
     }
 
     /// <summary>
-    /// Initializes a new instance of the BigTritArray class by concatenating multiple trit arrays.
+    /// Initializes a new instance of the BigTernaryArray class by concatenating multiple trit arrays.
     /// </summary>
     /// <param name="arrays">The arrays to concatenate.</param>
     /// <exception cref="ArgumentNullException">Thrown when arrays is null.</exception>
-    public BigTritArray(params ITritArray[] arrays) : this((arrays ?? throw new ArgumentNullException(nameof(arrays))).Sum(a => a.Length))
+    public BigTernaryArray(params ITritArray[] arrays) : this((arrays ?? throw new ArgumentNullException(nameof(arrays))).Sum(a => a.Length))
     {
         var offset = 0;
         foreach (var arr in arrays)
@@ -113,57 +113,57 @@ public class BigTritArray : ITritArray<BigTritArray>
     }
     
     /// <summary>
-    /// Parses a string representation of a BigTritArray.
+    /// Parses a string representation of a BigTernaryArray.
     /// </summary>
     /// <param name="value">The string value to parse.</param>
-    /// <returns>A BigTritArray representing the parsed value.</returns>
-    public static BigTritArray Parse(string value) => Parser.ParseBigTritArray(value);
+    /// <returns>A BigTernaryArray representing the parsed value.</returns>
+    public static BigTernaryArray Parse(string value) => Parser.ParseBigTritArray(value);
     
     /// <summary>
-    /// Parses a string representation of a BigTritArray.
+    /// Parses a string representation of a BigTernaryArray.
     /// </summary>
     /// <param name="value">The string value to parse.</param>
     /// <param name="format">The format to use for parsing.</param>
-    /// <returns>A BigTritArray representing the parsed value.</returns>
-    public static BigTritArray Parse(string value, ITernaryFormat format) => Parser.ParseBigTritArray(value, format);
+    /// <returns>A BigTernaryArray representing the parsed value.</returns>
+    public static BigTernaryArray Parse(string value, ITernaryFormat format) => Parser.ParseBigTritArray(value, format);
     
     /// <summary>
-    /// Parses a string representation of a BigTritArray.
+    /// Parses a string representation of a BigTernaryArray.
     /// </summary>
     /// <param name="value">The string value to parse.</param>
     /// <param name="options">The options to use for parsing.</param>
-    /// <returns>A BigTritArray representing the parsed value.</returns>
-    public static BigTritArray Parse(string value, TritParseOptions options) => Parser.ParseBigTritArray(value, null, options);
+    /// <returns>A BigTernaryArray representing the parsed value.</returns>
+    public static BigTernaryArray Parse(string value, TritParseOptions options) => Parser.ParseBigTritArray(value, null, options);
     
     /// <summary>
-    /// Parses a string representation of a BigTritArray.
+    /// Parses a string representation of a BigTernaryArray.
     /// </summary>
     /// <param name="value">The string value to parse.</param>
     /// <param name="format">The format to use for parsing.</param>
     /// <param name="options">The options to use for parsing.</param>
-    /// <returns>A BigTritArray representing the parsed value.</returns>
-    public static BigTritArray Parse(string value, ITernaryFormat format, TritParseOptions options) => Parser.ParseBigTritArray(value, format, options);
+    /// <returns>A BigTernaryArray representing the parsed value.</returns>
+    public static BigTernaryArray Parse(string value, ITernaryFormat format, TritParseOptions options) => Parser.ParseBigTritArray(value, format, options);
 
     private void InitializeTritArray(ITritArray arr, int offset)
     {
         switch (arr)
         {
-            case TritArray27 value:
+            case TernaryArray27 value:
             {
                 CopyRange(value.Negative, value.Positive, offset, value.Length);
                 return;
             }
-            case TritArray9 value:
+            case TernaryArray9 value:
             {
                 CopyRange(value.Negative, value.Positive, offset, value.Length);
                 return;
             }
-            case TritArray3 value:
+            case TernaryArray3 value:
             {
                 CopyRange(value.Negative, value.Positive, offset, value.Length);
                 return;
             }
-            case TritArray value:
+            case TernaryArray value:
             {
                 CopyRange(value.Negative, value.Positive, offset, value.Length);
                 return;
@@ -248,27 +248,27 @@ public class BigTritArray : ITritArray<BigTritArray>
         get
         {
             Splicer.Splice(Negative, Positive, Length, range, out var negative, out var positive, out var length);
-            return new BigTritArray(negative, positive, length).ApplyLength();
+            return new BigTernaryArray(negative, positive, length).ApplyLength();
         }
     }
 
     /// <summary>
-    /// Returns a string representation of the TritArray.
+    /// Returns a string representation of the TernaryArray.
     /// </summary>
     public override string ToString() => Formatter.Format(this, null, null);
 
     /// <summary>
-    /// Returns a string representation of the TritArray.
+    /// Returns a string representation of the TernaryArray.
     /// </summary>
     public string ToString(string? format) => Formatter.Format(this, format, null);
 
     /// <summary>
-    /// Returns a string representation of the TritArray.
+    /// Returns a string representation of the TernaryArray.
     /// </summary>
     public string ToString(IFormatProvider? provider) => Formatter.Format(this, null, provider);
 
     /// <summary>
-    /// Returns a string representation of the TritArray.
+    /// Returns a string representation of the TernaryArray.
     /// </summary>
     public string ToString(string? format, IFormatProvider? provider) => Formatter.Format(this, format, provider);
 
@@ -277,7 +277,7 @@ public class BigTritArray : ITritArray<BigTritArray>
     /// </summary>
     public string ToString(ITernaryFormat format) => Formatter.Format(this, format);
 
-    internal BigTritArray ApplyLength()
+    internal BigTernaryArray ApplyLength()
     {
         if (Length > 0)
         {
@@ -289,11 +289,11 @@ public class BigTritArray : ITritArray<BigTritArray>
     }
 
     /// <summary>
-    /// Determines whether this instance and another BigTritArray are equal.
+    /// Determines whether this instance and another BigTernaryArray are equal.
     /// </summary>
-    /// <param name="other">The BigTritArray to compare with this instance.</param>
-    /// <returns>true if the specified BigTritArray is equal to this instance; otherwise, false.</returns>
-    public bool Equals(BigTritArray? other)
+    /// <param name="other">The BigTernaryArray to compare with this instance.</param>
+    /// <returns>true if the specified BigTernaryArray is equal to this instance; otherwise, false.</returns>
+    public bool Equals(BigTernaryArray? other)
     {
         if (ReferenceEquals(this, other)) return true;
         if (other is null) return false;
@@ -309,12 +309,12 @@ public class BigTritArray : ITritArray<BigTritArray>
     /// </summary>
     /// <param name="obj">The object to compare with this instance.</param>
     /// <returns>true if the specified object is equal to this instance; otherwise, false.</returns>
-    public override bool Equals(object? obj) => obj is BigTritArray other && Equals(other);
+    public override bool Equals(object? obj) => obj is BigTernaryArray other && Equals(other);
 
     /// <summary>
     /// Returns a hash code for this instance.
     /// </summary>
-    /// <returns>A hash code for the current BigTritArray.</returns>
+    /// <returns>A hash code for the current BigTernaryArray.</returns>
     /// <remarks>
     /// This type is mutable, but hash code calculation is allowed for equality checks.
     /// The hash code is computed based on the non-zero trits in the array.
@@ -337,21 +337,21 @@ public class BigTritArray : ITritArray<BigTritArray>
     /// </summary>
     /// <param name="array">The source array.</param>
     /// <param name="operation">The unary operation to apply to each trit.</param>
-    /// <returns>A new TritArray with the operation applied to each trit.</returns>
-    public static BigTritArray operator |(BigTritArray array, Func<Trit, Trit> operation) => array | new UnaryTritOperator(operation);
+    /// <returns>A new TernaryArray with the operation applied to each trit.</returns>
+    public static BigTernaryArray operator |(BigTernaryArray array, Func<Trit, Trit> operation) => array | new UnaryTritOperator(operation);
 
     /// <summary>
     /// Applies a lookup table operation to each trit in the array.
     /// </summary>
     /// <param name="array">The source array.</param>
     /// <param name="table">The lookup table containing the transformation values.</param>
-    /// <returns>A new TritArray with the lookup operation applied to each trit.</returns>
-    public static BigTritArray operator |(BigTritArray array, Trit[] table)
+    /// <returns>A new TernaryArray with the lookup operation applied to each trit.</returns>
+    public static BigTernaryArray operator |(BigTernaryArray array, Trit[] table)
     {
         if (table.Length != 3)
             throw new ArgumentException("Table must contain exactly three elements for Negative, Zero, and Positive inputs", nameof(table));
 
-        var result = new BigTritArray(array.Length);
+        var result = new BigTernaryArray(array.Length);
         for (var i = 0; i < array.Length; i++)
         {
             result[i] = array[i] | table;
@@ -366,7 +366,7 @@ public class BigTritArray : ITritArray<BigTritArray>
     /// <param name="array">The source array.</param>
     /// <param name="operation">The binary operation to be applied.</param>
     /// <returns>A binary operation context that can be used with another array.</returns>
-    public static LookupBigTritArrayOperator operator |(BigTritArray array, Func<Trit, Trit, Trit> operation) => new(array, new(operation));
+    public static LookupBigTritArrayOperator operator |(BigTernaryArray array, Func<Trit, Trit, Trit> operation) => new(array, new(operation));
 
     /// <summary>
     /// Creates a binary operation context for this array.
@@ -374,7 +374,7 @@ public class BigTritArray : ITritArray<BigTritArray>
     /// <param name="array">The source array.</param>
     /// <param name="table">The binary operation lookup table.</param>
     /// <returns>A binary operation context that can be used with another array.</returns>
-    public static LookupBigTritArrayOperator operator |(BigTritArray array, BinaryTritOperator table) => new(array, table);
+    public static LookupBigTritArrayOperator operator |(BigTernaryArray array, BinaryTritOperator table) => new(array, table);
 
     /// <summary>
     /// Creates a binary operation context for this array.
@@ -382,18 +382,18 @@ public class BigTritArray : ITritArray<BigTritArray>
     /// <param name="array">The source array.</param>
     /// <param name="table">The binary operation lookup table.</param>
     /// <returns>A binary operation context that can be used with another array.</returns>
-    public static LookupBigTritArrayOperator operator |(BigTritArray array, Trit[,] table) => new(array, new(table));
+    public static LookupBigTritArrayOperator operator |(BigTernaryArray array, Trit[,] table) => new(array, new(table));
 
     /// <summary>
     /// Performs a left bitwise shift on the trit array.
     /// </summary>
     /// <param name="array">The source array.</param>
     /// <param name="shift">The number of positions to shift.</param>
-    /// <returns>A new TritArray with the bits shifted to the left.</returns>
-    public static BigTritArray operator <<(BigTritArray array, int shift)
+    /// <returns>A new TernaryArray with the bits shifted to the left.</returns>
+    public static BigTernaryArray operator <<(BigTernaryArray array, int shift)
     {
         Calculator.ShiftLeft(array.Negative, array.Positive, shift, out var negativeResult, out var positiveResult);
-        return new BigTritArray(negativeResult, positiveResult, array.Length).ApplyLength();
+        return new BigTernaryArray(negativeResult, positiveResult, array.Length).ApplyLength();
     }
 
     /// <summary>
@@ -401,55 +401,55 @@ public class BigTritArray : ITritArray<BigTritArray>
     /// </summary>
     /// <param name="array">The source array.</param>
     /// <param name="shift">The number of positions to shift.</param>
-    /// <returns>A new TritArray with the bits shifted to the right.</returns>
-    public static BigTritArray operator >> (BigTritArray array, int shift)
+    /// <returns>A new TernaryArray with the bits shifted to the right.</returns>
+    public static BigTernaryArray operator >> (BigTernaryArray array, int shift)
     {
         Calculator.ShiftRight(array.Negative, array.Positive, shift, out var negativeResult, out var positiveResult);
-        return new BigTritArray(negativeResult, positiveResult, array.Length).ApplyLength();
+        return new BigTernaryArray(negativeResult, positiveResult, array.Length).ApplyLength();
     }
 
     /// <summary>
-    /// Adds two TritArray values together.
+    /// Adds two TernaryArray values together.
     /// </summary>
     /// <param name="value1">The first value to add.</param>
     /// <param name="value2">The second value to add.</param>
-    /// <returns>A new TritArray representing the sum of the two values.</returns>
-    public static BigTritArray operator +(BigTritArray value1, BigTritArray value2)
+    /// <returns>A new TernaryArray representing the sum of the two values.</returns>
+    public static BigTernaryArray operator +(BigTernaryArray value1, BigTernaryArray value2)
     {
         Calculator.AddBalancedTernary(value1.Negative, value1.Positive, value2.Negative, value2.Positive, out var negativeResult, out var positiveResult);
         var length = Calculator.TrimAndDetermineLength(negativeResult, positiveResult);
-        return new BigTritArray(negativeResult, positiveResult, length).ApplyLength();
+        return new BigTernaryArray(negativeResult, positiveResult, length).ApplyLength();
     }
 
     /// <summary>
-    /// Subtracts one TritArray value from another.
+    /// Subtracts one TernaryArray value from another.
     /// </summary>
     /// <param name="value1">The value to subtract from.</param>
     /// <param name="value2">The value to subtract.</param>
-    /// <returns>A new TritArray representing the difference between the two values.</returns>
-    public static BigTritArray operator -(BigTritArray value1, BigTritArray value2)
+    /// <returns>A new TernaryArray representing the difference between the two values.</returns>
+    public static BigTernaryArray operator -(BigTernaryArray value1, BigTernaryArray value2)
     {
         value1.ApplyLength();
         value2.ApplyLength();
         Calculator.AddBalancedTernary(value1.Negative, value1.Positive, value2.Positive, value2.Negative, out var negativeResult, out var positiveResult);
         var length = Calculator.TrimAndDetermineLength(negativeResult, positiveResult);
-        return new BigTritArray(negativeResult, positiveResult, length).ApplyLength();
+        return new BigTernaryArray(negativeResult, positiveResult, length).ApplyLength();
     }
 
     /// <summary>
-    /// Multiplies one TritArray value from another.
+    /// Multiplies one TernaryArray value from another.
     /// </summary>
     /// <param name="value1">The value to subtract from.</param>
     /// <param name="value2">The value to subtract.</param>
-    /// <returns>A new TritArray representing the product between the two values.</returns>
-    public static BigTritArray operator *(BigTritArray value1, BigTritArray value2)
+    /// <returns>A new TernaryArray representing the product between the two values.</returns>
+    public static BigTernaryArray operator *(BigTernaryArray value1, BigTernaryArray value2)
     {
         value1.ApplyLength();
         value2.ApplyLength();
         Calculator.MultiplyBalancedTernary(value1.Negative, value1.Positive, value2.Positive, value2.Negative,
             out var negativeResult, out var positiveResult);
         var length = Calculator.TrimAndDetermineLength(negativeResult, positiveResult);
-        return new BigTritArray(negativeResult, positiveResult, length).ApplyLength();
+        return new BigTernaryArray(negativeResult, positiveResult, length).ApplyLength();
     }
 
     #endregion
@@ -458,46 +458,46 @@ public class BigTritArray : ITritArray<BigTritArray>
     #region Conversion Operators
 
     /// <summary>
-    /// Implicit conversion from BigInteger to TritArray.
+    /// Implicit conversion from BigInteger to TernaryArray.
     /// </summary>
-    public static implicit operator BigTritArray(BigInteger value)
+    public static implicit operator BigTernaryArray(BigInteger value)
     {
         TritConverter.ToTrits(value, out var negative, out var positive, out var length);
         return new(negative, positive, length);
     }
 
     /// <summary>
-    /// Implicit conversion from long to TritArray.
+    /// Implicit conversion from long to TernaryArray.
     /// </summary>
-    public static implicit operator BigTritArray(long value)
+    public static implicit operator BigTernaryArray(long value)
     {
         TritConverter.ToTrits(value, out var negative, out var positive, out var length);
         return new(negative, positive, length);
     }
 
     /// <summary>
-    /// Implicit conversion from int to TritArray.
+    /// Implicit conversion from int to TernaryArray.
     /// </summary>
-    public static implicit operator BigTritArray(int value)
+    public static implicit operator BigTernaryArray(int value)
     {
         TritConverter.ToTrits(value, out var negative, out var positive, out var length);
         return new(negative, positive, length);
     }
 
     /// <summary>
-    /// Implicit conversion from TritArray to BigInteger.
+    /// Implicit conversion from TernaryArray to BigInteger.
     /// </summary>
-    public static implicit operator BigInteger(BigTritArray array) => TritConverter.ToBigInteger(array.Negative, array.Positive);
+    public static implicit operator BigInteger(BigTernaryArray array) => TritConverter.ToBigInteger(array.Negative, array.Positive);
 
     /// <summary>
-    /// Explicit conversion from TritArray to long.
+    /// Explicit conversion from TernaryArray to long.
     /// </summary>
-    public static explicit operator long(BigTritArray array) => TritConverter.ToInt64(array.Negative, array.Positive, array.Length);
+    public static explicit operator long(BigTernaryArray array) => TritConverter.ToInt64(array.Negative, array.Positive, array.Length);
 
     /// <summary>
-    /// Explicit conversion from TritArray to int.
+    /// Explicit conversion from TernaryArray to int.
     /// </summary>
-    public static explicit operator int(BigTritArray array) => TritConverter.ToInt32(array.Negative, array.Positive, array.Length);
+    public static explicit operator int(BigTernaryArray array) => TritConverter.ToInt32(array.Negative, array.Positive, array.Length);
 
     #endregion
 }

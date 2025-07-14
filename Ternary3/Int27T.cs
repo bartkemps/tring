@@ -1585,28 +1585,28 @@ public static Int27T operator >> (Int27T value, int shiftAmount) => Create(value
 public static Int27T operator >>> (Int27T value, int shiftAmount) => Create(value.value.Shift(shiftAmount));
 
 /// <summary>
-/// Applies a unary operation to each trit in this ternary number. This operation converts the number to a TritArray.
+/// Applies a unary operation to each trit in this ternary number. This operation converts the number to a TernaryArray.
 /// </summary>
 /// <param name="value">The ternary number to convert and operate on.</param>
 /// <param name="operation">The unary operation to apply to each trit.</param>
-/// <returns>A new TritArray containing the result of applying the operation.</returns>
-/// <remarks>This operation causes an implicit conversion to TritArray before applying the operation.</remarks>
-public static TritArray27 operator |(Int27T value, Func<Trit, Trit> operation)
+/// <returns>A new TernaryArray containing the result of applying the operation.</returns>
+/// <remarks>This operation causes an implicit conversion to TernaryArray before applying the operation.</remarks>
+public static TernaryArray27 operator |(Int27T value, Func<Trit, Trit> operation)
 {
-    TritArray27 array = value;
+    TernaryArray27 array = value;
     return array | operation;
 }
 
 /// <summary>
-/// Combines each trit in this ternary number with the corresponding trit in the provided array. This operation converts the number to a TritArray.
+/// Combines each trit in this ternary number with the corresponding trit in the provided array. This operation converts the number to a TernaryArray.
 /// </summary>
 /// <param name="value">The ternary number to convert and combine.</param>
 /// <param name="trits">The array of trits to combine with.</param>
-/// <returns>A new TritArray containing the result of the operation.</returns>
-/// <remarks>This operation causes an implicit conversion to TritArray before combining with the provided trits.</remarks>
-public static TritArray27 operator |(Int27T value, Trit[] trits)
+/// <returns>A new TernaryArray containing the result of the operation.</returns>
+/// <remarks>This operation causes an implicit conversion to TernaryArray before combining with the provided trits.</remarks>
+public static TernaryArray27 operator |(Int27T value, Trit[] trits)
 {
-    TritArray27 array = value;
+    TernaryArray27 array = value;
     return array | trits;
 }
 

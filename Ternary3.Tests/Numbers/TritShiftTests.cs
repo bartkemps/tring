@@ -71,7 +71,7 @@ public class TritShiftTests
 
     public void IntShift_ShouldWorkCorrectly(int value, int shift, int expected)
     {
-        var array = (TritArray)value;
+        var array = (TernaryArray)value;
         var shifted = array >> shift;
         var expectedArray = (int)shifted;
         value.Shift(shift).Should().Be(expected);

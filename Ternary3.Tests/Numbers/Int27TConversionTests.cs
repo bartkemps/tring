@@ -16,10 +16,10 @@ public class Int27TConversionTests
     {
         Int27T original = value;
             
-        TritArray27 array = original;
+        TernaryArray27 array = original;
         Int27T roundTrip = array;
             
-        roundTrip.Should().Be(original, $"because conversion of {value} to TritArray27 and back should preserve the original value");
+        roundTrip.Should().Be(original, $"because conversion of {value} to TernaryArray27 and back should preserve the original value");
     }
 
     [Theory]
@@ -30,7 +30,7 @@ public class Int27TConversionTests
     [InlineData(new sbyte[] { 1, -1, 0, 1, -1 })] // Mixed values
     public void ImplicitConversion_CalculatesCorrectValue_FromTritArray27(sbyte[] tritValues)
     {
-        var array = new TritArray27();
+        var array = new TernaryArray27();
         long expectedValue = 0;
         long power = 1;
             
@@ -43,7 +43,7 @@ public class Int27TConversionTests
             
         Int27T result = array;
             
-        ((long)result).Should().Be(expectedValue, $"because conversion from TritArray27 with specified trits should yield {expectedValue}");
+        ((long)result).Should().Be(expectedValue, $"because conversion from TernaryArray27 with specified ternaries should yield {expectedValue}");
     }
 
     [Theory]
@@ -55,7 +55,7 @@ public class Int27TConversionTests
     public void ShiftOperations_PreserveValue_WhenShiftingLeftThenRight(long value)
     {
         Int27T original = value;
-        TritArray27 array = original;
+        TernaryArray27 array = original;
             
         var shiftedArray = array << 1;
         var shiftedBack = shiftedArray >> 1;
@@ -74,8 +74,8 @@ public class Int27TConversionTests
         Int27T int2 = value2;
         var expectedSum = int1 + int2;
             
-        TritArray27 array1 = int1;
-        TritArray27 array2 = int2;
+        TernaryArray27 array1 = int1;
+        TernaryArray27 array2 = int2;
         var sumArray = array1 + array2;
         Int27T actualSum = sumArray;
             
@@ -92,8 +92,8 @@ public class Int27TConversionTests
         Int27T int2 = value2;
         var expectedDifference = int1 - int2;
             
-        TritArray27 array1 = int1;
-        TritArray27 array2 = int2;
+        TernaryArray27 array1 = int1;
+        TernaryArray27 array2 = int2;
         var differenceArray = array1 - array2;
         Int27T actualDifference = differenceArray;
             

@@ -3,44 +3,32 @@
 using Operators;
 
 /// <summary>
-/// Helper class to facilitate binary operations between two TritArray instances.
+/// Helper class to facilitate binary operations between two TernaryArray instances.
 /// </summary>
 public class LookupTritArrayOperator
 {
-    private readonly TritArray trits;
+    private readonly TernaryArray ternaries;
     private readonly BinaryTritOperator table;
 
-    internal LookupTritArrayOperator(TritArray trits, BinaryTritOperator table)
+    internal LookupTritArrayOperator(TernaryArray ternaries, BinaryTritOperator table)
     {
-        this.trits = trits;
+        this.ternaries = ternaries;
         this.table = table;
     }
 
-    internal LookupTritArrayOperator(TritArray trits, Trit[,] table)
-    : this(trits, new BinaryTritOperator(table))
+    internal LookupTritArrayOperator(TernaryArray ternaries, Trit[,] table)
+    : this(ternaries, new BinaryTritOperator(table))
     {
     }
 
-    internal LookupTritArrayOperator(TritArray trits, ReadOnlySpan<Trit> table)
-        : this(trits, new BinaryTritOperator(table))
+    internal LookupTritArrayOperator(TernaryArray ternaries, ReadOnlySpan<Trit> table)
+        : this(ternaries, new BinaryTritOperator(table))
     {
     }
 
-    internal LookupTritArrayOperator(TritArray trits, Func<Trit, Trit, Trit> operation)
-        : this(trits, new BinaryTritOperator(operation))
+    internal LookupTritArrayOperator(TernaryArray ternaries, Func<Trit, Trit, Trit> operation)
+        : this(ternaries, new BinaryTritOperator(operation))
     {
-    }
-
-    /// <summary>
-    /// Applies the binary operation to the left and right arrays.
-    /// </summary>
-    /// <param name="left">The binary operation context.</param>
-    /// <param name="right">The right-hand operand.</param>
-    /// <returns>A new TritArray with the operation applied.</returns>
-    public static TritArray operator |(LookupTritArrayOperator left, TritArray right)
-    {
-        left.table.Apply(left.trits.Negative, left.trits.Positive, right.Negative, right.Positive, out var negative, out var positive);
-        return new TritArray(negative, positive, Math.Max(left.trits.NumberOfTrits, right.NumberOfTrits));
     }
 
     /// <summary>
@@ -48,10 +36,22 @@ public class LookupTritArrayOperator
     /// </summary>
     /// <param name="left">The binary operation context.</param>
     /// <param name="right">The right-hand operand.</param>
-    /// <returns>A new BigTritArray with the operation applied.</returns>
-    public static BigTritArray operator |(LookupTritArrayOperator left, BigTritArray right)
+    /// <returns>A new TernaryArray with the operation applied.</returns>
+    public static TernaryArray operator |(LookupTritArrayOperator left, TernaryArray right)
     {
-        left.table.Apply([left.trits.Negative], [left.trits.Positive], right.Negative, right.Positive, out var negative, out var positive);
-        return new BigTritArray(negative, positive, Math.Max(left.trits.NumberOfTrits, right.Length)).ApplyLength();
+        left.table.Apply(left.ternaries.Negative, left.ternaries.Positive, right.Negative, right.Positive, out var negative, out var positive);
+        return new TernaryArray(negative, positive, Math.Max(left.ternaries.NumberOfTrits, right.NumberOfTrits));
+    }
+
+    /// <summary>
+    /// Applies the binary operation to the left and right arrays.
+    /// </summary>
+    /// <param name="left">The binary operation context.</param>
+    /// <param name="right">The right-hand operand.</param>
+    /// <returns>A new BigTernaryArray with the operation applied.</returns>
+    public static BigTernaryArray operator |(LookupTritArrayOperator left, BigTernaryArray right)
+    {
+        left.table.Apply([left.ternaries.Negative], [left.ternaries.Positive], right.Negative, right.Positive, out var negative, out var positive);
+        return new BigTernaryArray(negative, positive, Math.Max(left.ternaries.NumberOfTrits, right.Length)).ApplyLength();
     }
 }

@@ -21,7 +21,7 @@ public class TritFormattingTests
     {
         var result = TritConverter.FormatTrits(negative, positive, length);
             
-        result.Should().Be(expected, $"because the trits should be formatted as '{expected}'");
+        result.Should().Be(expected, $"because the ternaries should be formatted as '{expected}'");
     }
         
     [Theory]
@@ -33,7 +33,7 @@ public class TritFormattingTests
     {
         var result = TritConverter.FormatTrits(negative, positive, length);
             
-        result.Should().Be(expected, $"because spaces should be added every 9 trits");
+        result.Should().Be(expected, $"because spaces should be added every 9 ternaries");
     }
         
     [Theory]

@@ -12,7 +12,7 @@ public interface ITernaryInteger<TSelf>:
   ISignedNumber<TSelf>,
   INumber<TSelf>,
   IShiftOperators<TSelf, int, TSelf>,
-  ITritParsable<TSelf>
+  ITernaryParsable<TSelf>
   where TSelf : ITernaryInteger<TSelf>?
 {
   /// <summary>Computes the quotient and remainder of two values.</summary>

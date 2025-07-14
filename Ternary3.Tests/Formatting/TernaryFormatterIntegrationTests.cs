@@ -20,9 +20,9 @@ public class TernaryFormatterIntegrationTests
         sut.Format("ter", (Int27T)value, null).Should().EndWith(expectedTrits);
         sut.Format("ter", (Int9T)(short)value, null).Should().EndWith(expectedTrits);
         sut.Format("ter", (Int3T)(sbyte)value, null).Should().EndWith(expectedTrits);
-        sut.Format("ter", (TritArray27)value, null).Should().EndWith(expectedTrits);
-        sut.Format("ter", (TritArray9)(short)value, null).Should().EndWith(expectedTrits);
-        sut.Format("ter", (TritArray3)(sbyte)value, null).Should().EndWith(expectedTrits);
+        sut.Format("ter", (TernaryArray27)value, null).Should().EndWith(expectedTrits);
+        sut.Format("ter", (TernaryArray9)(short)value, null).Should().EndWith(expectedTrits);
+        sut.Format("ter", (TernaryArray3)(sbyte)value, null).Should().EndWith(expectedTrits);
     }
 
     [Theory]
@@ -58,9 +58,9 @@ public class TernaryFormatterIntegrationTests
     public void Formatter_Formats_TritArrays_AsTrits()
     {
         var sut = new TernaryFormatter();
-        var arr3 = (TritArray3)(Int3T)1;
-        var arr9 = (TritArray9)(Int9T)13;
-        var arr27 = (TritArray27)(Int27T)9841L;
+        var arr3 = (TernaryArray3)(Int3T)1;
+        var arr9 = (TernaryArray9)(Int9T)13;
+        var arr27 = (TernaryArray27)(Int27T)9841L;
         sut.Format("ter", arr3, null).Should().Contain("1");
         sut.Format("ter", arr9, null).Should().Contain("111");
         sut.Format("ter", arr27, null).Should().NotBeNull();

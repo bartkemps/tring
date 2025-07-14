@@ -1,15 +1,15 @@
-﻿// filepath: c:\Users\kempsb\source\repos\Ternary\Ternary3.Tests\TritArrayTests.Range.cs
+﻿// filepath: c:\Users\kempsb\source\repos\Ternary\Ternary3.Tests\TernaryArrayTests.Range.cs
 using FluentAssertions;
 
 namespace Ternary3.Tests;
 
-public partial class TritArrayTests
+public partial class TernaryArrayTests
 {
     [Fact]
     public void Range_ReturnsExpectedValues_ForFullRange()
     {
-        // Create a TritArray with known values
-        var source = new BigTritArray(10);
+        // Create a TernaryArray with known values
+        var source = new BigTernaryArray(10);
         for (var i = 0; i < source.Length; i++)
         {
             source[i] = (i % 3) switch
@@ -32,8 +32,8 @@ public partial class TritArrayTests
     [Fact]
     public void Range_ReturnsExpectedValues_ForPartialRange()
     {
-        // Create a TritArray with known values
-        var source = new BigTritArray(10);
+        // Create a TernaryArray with known values
+        var source = new BigTernaryArray(10);
         for (var i = 0; i < source.Length; i++)
         {
             source[i] = (i % 3) switch
@@ -57,7 +57,7 @@ public partial class TritArrayTests
     public void Range_ReturnsExpectedValues_WhenCrossingWordBoundary()
     {
         // Create a large array to ensure we cross 64-bit word boundaries
-        var source = new BigTritArray(100);
+        var source = new BigTernaryArray(100);
         for (var i = 0; i < source.Length; i++)
         {
             source[i] = (i % 3) switch
@@ -68,7 +68,7 @@ public partial class TritArrayTests
             };
         }
 
-        // Get a range that crosses a 64-bit boundary (64 trits per ulong)
+        // Get a range that crosses a 64-bit boundary (64 ternaries per ulong)
         var result = source[60..70];
 
         result.Length.Should().Be(10);
@@ -81,7 +81,7 @@ public partial class TritArrayTests
     [Fact]
     public void Range_WithEndIndexFromEnd_ReturnsExpectedValues()
     {
-        var source = new BigTritArray(10);
+        var source = new BigTernaryArray(10);
         for (var i = 0; i < source.Length; i++)
         {
             source[i] = (i % 3) switch
@@ -104,7 +104,7 @@ public partial class TritArrayTests
     [Fact]
     public void Range_WithStartAndEndIndexFromEnd_ReturnsExpectedValues()
     {
-        var source = new BigTritArray(10);
+        var source = new BigTernaryArray(10);
         for (var i = 0; i < source.Length; i++)
         {
             source[i] = (i % 3) switch
@@ -127,7 +127,7 @@ public partial class TritArrayTests
     [Fact]
     public void Range_WithImplicitStart_ReturnsExpectedValues()
     {
-        var source = new BigTritArray(10);
+        var source = new BigTernaryArray(10);
         for (var i = 0; i < source.Length; i++)
         {
             source[i] = (i % 3) switch
@@ -150,7 +150,7 @@ public partial class TritArrayTests
     [Fact]
     public void Range_WithImplicitEnd_ReturnsExpectedValues()
     {
-        var source = new BigTritArray(10);
+        var source = new BigTernaryArray(10);
         for (var i = 0; i < source.Length; i++)
         {
             source[i] = (i % 3) switch
@@ -173,7 +173,7 @@ public partial class TritArrayTests
     [Fact]
     public void Range_WithInvalidRange_ThrowsArgumentOutOfRangeException()
     {
-        var source = new BigTritArray(10);
+        var source = new BigTernaryArray(10);
 
         // Start index greater than end index
         Action act1 = () => _ = source[8..5];
@@ -195,7 +195,7 @@ public partial class TritArrayTests
     public void Range_WithNonZeroStartBit_HandlesAlignment()
     {
         // Create an array with a specific pattern
-        var source = new BigTritArray(20);
+        var source = new BigTernaryArray(20);
         for (var i = 0; i < source.Length; i++)
         {
             source[i] = i % 2 == 0 ? Trit.Negative : Trit.Positive;

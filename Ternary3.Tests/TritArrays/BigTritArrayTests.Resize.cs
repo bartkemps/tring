@@ -2,13 +2,13 @@
 
 using FluentAssertions;
 
-public partial class TritArrayTests
+public partial class TernaryArrayTests
 {
     [Fact]
     public void Resize_ToSameLength_MakesNoChanges()
     {
         // Arrange
-        var array = new BigTritArray(10);
+        var array = new BigTernaryArray(10);
         for (var i = 0; i < array.Length; i++)
         {
             array[i] = new((sbyte)((i % 3) - 1)); // Sets -1, 0, 1 pattern
@@ -38,7 +38,7 @@ public partial class TritArrayTests
     public void Resize_ToSmallerLength_TruncatesData(int initialLength, int newLength)
     {
         // Arrange
-        var array = new BigTritArray(initialLength);
+        var array = new BigTernaryArray(initialLength);
         for (var i = 0; i < array.Length; i++)
         {
             array[i] = new((sbyte)((i % 3) - 1)); // Sets -1, 0, 1 pattern
@@ -68,7 +68,7 @@ public partial class TritArrayTests
     public void Resize_ToLargerLength_ExtendsWithZeros(int initialLength, int newLength)
     {
         // Arrange
-        var array = new BigTritArray(initialLength);
+        var array = new BigTernaryArray(initialLength);
         for (var i = 0; i < array.Length; i++)
         {
             array[i] = new((sbyte)((i % 3) - 1)); // Sets -1, 0, 1 pattern
@@ -98,7 +98,7 @@ public partial class TritArrayTests
     public void Resize_ToZero_ClearsArray()
     {
         // Arrange
-        var array = new BigTritArray(100);
+        var array = new BigTernaryArray(100);
         for (var i = 0; i < array.Length; i++)
         {
             array[i] = Trit.Positive;
@@ -117,7 +117,7 @@ public partial class TritArrayTests
     public void Resize_WithNegativeLength_Throws()
     {
         // Arrange
-        var array = new BigTritArray(10);
+        var array = new BigTernaryArray(10);
 
         // Act
         var resizeAction = () => array.Resize(-1);
@@ -131,7 +131,7 @@ public partial class TritArrayTests
     public void Resize_PreservesDataWhenResizedUpAndBackDown()
     {
         // Arrange
-        var array = new BigTritArray(10);
+        var array = new BigTernaryArray(10);
         for (var i = 0; i < array.Length; i++)
         {
             array[i] = new((sbyte)((i % 3) - 1));

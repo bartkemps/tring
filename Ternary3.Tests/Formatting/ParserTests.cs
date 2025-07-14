@@ -66,7 +66,7 @@ public class ParserTests
         Exception? ex2 = null;
         try { val1 = Int3T.Parse(s, format, options); }
         catch (Exception ex) { ex1 = ex; }
-        try { val2 = TritArray3.Parse(s, format, options); }
+        try { val2 = TernaryArray3.Parse(s, format, options); }
         catch (Exception ex) { ex2 = ex; }
 
         val1.Should().Be(val2);
@@ -84,7 +84,7 @@ public class ParserTests
         Exception ex2 = null!;
         try { val1 = Int9T.Parse(s, format, options); }
         catch (Exception ex) { ex1 = ex; }
-        try { val2 = TritArray9.Parse(s, format, options); }
+        try { val2 = TernaryArray9.Parse(s, format, options); }
         catch (Exception ex) { ex2 = ex; }
 
         val1.Should().Be(val2);
@@ -102,7 +102,7 @@ public class ParserTests
         Exception ex2 = null!;
         try { val1 = Int27T.Parse(s, format, options); }
         catch (Exception ex) { ex1 = ex; }
-        try { val2 = TritArray27.Parse(s, format, options); }
+        try { val2 = TernaryArray27.Parse(s, format, options); }
         catch (Exception ex) { ex2 = ex; }
 
         val1.Should().Be(val2);
