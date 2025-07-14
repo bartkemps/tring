@@ -10,6 +10,10 @@
 
 Ternary3 is a specialized C# library that implements balanced ternary arithmetic. While most computer systems use binary (base-2) arithmetic, this library enables computation in balanced ternary (base-3) with digits {-1, 0, 1}, often represented as {T, 0, 1}.
 
+> Please let me know what you're using this library for.
+> I would love to hear about your projects and how Ternary3 is helping you.
+> You can reach me at b.kemps@betabit.nl
+
 ### Why Balanced Ternary?
 
 Balanced ternary has several interesting properties that make it unique among number systems:
