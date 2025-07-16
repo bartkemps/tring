@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ternary3.Benchmarks", "Tern
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ternary3.Generators", "Ternary3.Generators\Ternary3.Generators.csproj", "{55806586-B022-4D2F-8742-890B7FA1C658}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ternary3.Documentation", "Ternary3.Documentation\Ternary3.Documentation.csproj", "{FB781744-1356-419E-ACCC-D9DB54079DBA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -88,6 +90,18 @@ Global
 		{55806586-B022-4D2F-8742-890B7FA1C658}.Release|x64.Build.0 = Release|Any CPU
 		{55806586-B022-4D2F-8742-890B7FA1C658}.Release|x86.ActiveCfg = Release|Any CPU
 		{55806586-B022-4D2F-8742-890B7FA1C658}.Release|x86.Build.0 = Release|Any CPU
+		{FB781744-1356-419E-ACCC-D9DB54079DBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB781744-1356-419E-ACCC-D9DB54079DBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB781744-1356-419E-ACCC-D9DB54079DBA}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{FB781744-1356-419E-ACCC-D9DB54079DBA}.Debug|x64.Build.0 = Debug|Any CPU
+		{FB781744-1356-419E-ACCC-D9DB54079DBA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FB781744-1356-419E-ACCC-D9DB54079DBA}.Debug|x86.Build.0 = Debug|Any CPU
+		{FB781744-1356-419E-ACCC-D9DB54079DBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB781744-1356-419E-ACCC-D9DB54079DBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB781744-1356-419E-ACCC-D9DB54079DBA}.Release|x64.ActiveCfg = Release|Any CPU
+		{FB781744-1356-419E-ACCC-D9DB54079DBA}.Release|x64.Build.0 = Release|Any CPU
+		{FB781744-1356-419E-ACCC-D9DB54079DBA}.Release|x86.ActiveCfg = Release|Any CPU
+		{FB781744-1356-419E-ACCC-D9DB54079DBA}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

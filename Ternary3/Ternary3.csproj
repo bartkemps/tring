@@ -12,7 +12,7 @@
         
         <!-- NuGet Package Metadata -->
         <PackageId>Ternary</PackageId>
-        <Version>2.1.0-rc-1</Version>
+        <Version>2.1.0-rc-2</Version>
         <Authors>Bart Kemps</Authors>
         <Company></Company>
         <Description>Ternary3: A C# library for working with balanced ternary number system. Includes fixed-size ternary integers and trit arrays with various operations.</Description>
@@ -77,8 +77,6 @@
           <Generator>TextTemplatingFileGenerator</Generator>
           <LastGenOutput>TritConverter.cs</LastGenOutput>
         </None>
-        <None Remove="lib\libz3_x86.dll" />
-        <None Remove="lib\Microsoft.Z3.xml" />
         <None Update="T01.png">
           <Pack>True</Pack>
           <PackagePath></PackagePath>
@@ -126,10 +124,6 @@
         <DesignTime>True</DesignTime>
         <DependentUpon>TritConverter.tt</DependentUpon>
       </Compile>
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="lib\" />
     </ItemGroup>
 
     <ItemGroup>
