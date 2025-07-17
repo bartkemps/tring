@@ -19,14 +19,14 @@ public class Program
         );
         await using var stream = File.Open(OutputFilePath, FileMode.Create, FileAccess.Write);
         await using var writer = new StreamWriter(stream);
-        await generator.GenerateDocumentation(writer, "template.md");
+        await generator.GenerateDocumentation(writer);
     }
 }
 
 public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
 {
     /// <summary>
-    /// Concats all filesToInclude markdown files into a single markdown file,
+    /// Concats all filesToInclude Markdown files into a single Markdown file,
     /// then concats the documnentation
     /// </summary>
     public async Task GenerateDocumentation(StreamWriter file, params string[] filesToInclude)
@@ -39,7 +39,7 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
             await file.WriteAsync(md);
         }
 
-        var assemblyDocumentation = OutputAssembly();
+        var assemblyDocumentation = GenerateMarkdowDescribingAssembly();
         await file.WriteAsync(assemblyDocumentation);
     }
 
@@ -47,20 +47,20 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
     /// Generates a markdown string containing assembly documentation.
     /// For all public types (classes, interfaces, structs, and enums) in the assembly.
     /// </summary>
-    private string OutputAssembly()
+    private string GenerateMarkdowDescribingAssembly()
     {
-        var markdown = "## Assembly Documentation\n\n";
+        var markdown = "## Reference\n\n";
         var types = assembly.GetExportedTypes();
         foreach (var type in types.GroupBy(t => t.Namespace))
         {
-            markdown += $"\n### Namespace: {type.Key}\n";
+            markdown += $"\n### <code>**{type.Key}**</code> namespace\n";
             foreach (var t in type)
             {
-                markdown += $"- {GetFullTypeLink(t)}\n";
+                markdown += $"- <code>{GetFullTypeLink(t)}</code>\n";
             }
         }
 
-        return markdown + string.Concat(types.Select(t => OutputType(t.GetTypeInfo())));
+        return markdown + string.Concat(types.Select(t => GenerateMarkdowDescribingType(t.GetTypeInfo())));
     }
     
 
@@ -70,68 +70,96 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
     /// Outputs a class description and all its public and protected members.
     /// Searches for the corresponding XML element when calling other methods
     /// </summary>
-    private string OutputType(Type type)
+    private string GenerateMarkdowDescribingType(Type type)
     {
         var info = type.GetTypeInfo();
         var fullName = GetFullTypeName(info);
-        var element = FindElement(info);
+        var element = FindElement("T", info);
         var comment = CommentsAsMarkdown(element);
-        var markdown = $"### `{fullName}`\n\n{comment.md}\n\n";
-        markdown += OutputConstructors(true, info.DeclaredConstructors);
-        markdown += OutputMethods(true, info.DeclaredMethods);
-        markdown += OutputProperties(true, info.DeclaredProperties);
-        markdown += OutputFields(true, info.DeclaredFields);
-        markdown += OutputConstructors(false, info.DeclaredConstructors);
-        markdown += OutputMethods(false, info.DeclaredMethods);
-        markdown += OutputProperties(false, info.DeclaredProperties);
-        markdown += OutputFields(false, info.DeclaredFields);
-        markdown += OutputOperators(info.DeclaredMembers);
+        var markdown = $"## {fullName}\n\n{comment}\n\n";
+        markdown += GenerateMarkdowDescribingConstructors(true, info.DeclaredConstructors);
+        markdown += GenerateMarkdowDescribingMethods(true, info.DeclaredMethods);
+        markdown += GenerateMarkdowDescribingProperties(true, info.DeclaredProperties);
+        markdown += GenerateMarkdowDescribingFields(true, info.DeclaredFields);
+        markdown += GenerateMarkdowDescribingConstructors(false, info.DeclaredConstructors);
+        markdown += GenerateMarkdowDescribingMethods(false, info.DeclaredMethods);
+        markdown += GenerateMarkdowDescribingProperties(false, info.DeclaredProperties);
+        markdown += GenerateMarkdowDescribingFields(false, info.DeclaredFields);
+        markdown += GenerateMarkdowDescribingOperators(info.DeclaredMembers);
         return markdown;
     }
 
 
     
-
-
-    private string OutputOperators(IEnumerable<MemberInfo> infoDeclaredMembers)
+    private string GenerateMarkdowDescribingConstructors(bool isStatic, IEnumerable<ConstructorInfo> c)
     {
-        return "\n\n**OutputOperators**\n\n";
-    }
-
-    private string OutputConstructors(bool isStatic, IEnumerable<ConstructorInfo> infoDeclaredConstructors)
-    {
-        return "\n\n**OutputConstructors**\n\n";
-    }
-    
-
-    
-
-
-    private string OutputMethods(bool isStatic, IEnumerable<MethodInfo> infoDeclaredMethods)
-    {
-        return "\n\n**OutputMethods**\n\n";
-    }
-
-    private string OutputProperties(bool isStatic, IEnumerable<PropertyInfo> infoDeclaredProperties)
-    {
-        return "\n\n**OutputProperties**\n\n";
-    }
-
-    private string OutputFields(bool isStatic, IEnumerable<FieldInfo> f)
-    {
-        var fields = f.Where(f => isStatic == f.IsStatic && (f.IsPublic || f.IsFamily)).ToList();
-        if (fields.Count == 0) return "";
-        var markdown = isStatic ? "#### Static Fields\n\n" : "#### Fields\n\n";
-        foreach (var field in fields)
+        var constructors = c.Where(c => isStatic == c.IsStatic && (c.IsPublic || c.IsFamily)).ToList();
+        if (constructors.Count == 0) return "";
+        var markdown = isStatic ? "### Static Constructors\n\n" : "### Constructors\n\n";
+        foreach (var constructor in constructors)
         {
-            var element = FindElement(field);
+            var element = FindElement("M", constructor);
             var comments = CommentsAsMarkdown(element);
-            markdown += comments.multiline
-                ? $"- **{field.Name}**\n\n{comments.md}\n\n"
-                : $"- **{field.Name}** - {comments.md}\n\n";
+            var name = $"**{constructor.DeclaringType?.Name}**{FormatParameters(constructor)}";
+            markdown += $"#### <code>{name}</code>\n\n{comments}\n\n";
         }
 
         return markdown + "\n";
+    }
+
+    private string FormatParameters(MethodBase constructor)
+    {
+        var sb = new StringBuilder();
+        if (constructor.IsGenericMethod)
+        {
+            sb.Append("<");
+            sb.Append(string.Join(",", constructor.GetGenericArguments().Select(GetFullTypeLink)));
+            sb.Append(">");
+        }
+        sb.Append("(");
+        sb.Append(string.Join(", ", constructor.GetParameters().Select(p => $"{GetFullTypeLink(p.ParameterType)} {p.Name}")));
+        sb.Append(")");
+        return sb.ToString();
+    }
+    
+    private string GenerateMarkdowDescribingMethods(bool isStatic, IEnumerable<MethodInfo> infoDeclaredMethods)
+    {
+        return "\n\n**GenerateMarkdowDescribingMethods**\n\n";
+    }
+    
+    private string GenerateMarkdowDescribingProperties(bool isStatic, IEnumerable<PropertyInfo> p)
+    {
+        var properties = p.Where(p => isStatic == p.GetAccessors(true)[0].IsStatic && (p.GetMethod?.IsPublic == true || p.GetMethod?.IsFamily == true || p.SetMethod?.IsPublic == true || p.SetMethod?.IsFamily == true)).ToList();
+        if (properties.Count == 0) return "";
+        var markdown = isStatic ? "### Static Properties\n\n" : "### Properties\n\n";
+        foreach (var property in properties)
+        {
+            var element = FindElement("P", property);
+            var comments = CommentsAsMarkdown(element);
+            markdown += $"#### <code>{GetFullTypeLink(property.PropertyType)} **{property.Name}**</code>\n\n{comments}\n\n";
+        }
+    
+        return markdown + "\n";
+    }
+
+    private string GenerateMarkdowDescribingFields(bool isStatic, IEnumerable<FieldInfo> f)
+    {
+        var fields = f.Where(f => isStatic == f.IsStatic && (f.IsPublic || f.IsFamily)).ToList();
+        if (fields.Count == 0) return "";
+        var markdown = isStatic ? "### Static Fields\n\n" : "### Fields\n\n";
+        foreach (var field in fields)
+        {
+            var element = FindElement("F", field);
+            var comments = CommentsAsMarkdown(element);
+            markdown += $"#### <code>{GetFullTypeLink(field.FieldType)} **{field.Name}**</code>\n\n{comments}\n\n";
+        }
+
+        return markdown + "\n";
+    }
+    
+    private string GenerateMarkdowDescribingOperators(IEnumerable<MemberInfo> infoDeclaredMembers)
+    {
+        return "\n\n**GenerateMarkdowDescribingOperators**\n\n";
     }
 
     /// <summary>
@@ -143,89 +171,81 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
     /// - (if any remarks are present) a remarks section
     /// - (if any examples are present) an examples section
     /// </summary>
-    private (string md, bool multiline) CommentsAsMarkdown(XElement member)
+    private string CommentsAsMarkdown(XElement? xml)
     {
-        if (member == null)
+        if (xml == null)
         {
-            return ("No documentation available.", false);
+            return "No documentation available.";
         }
 
-        var markdownBuilder = new StringBuilder();
-        var multiline = false;
+        var sb = new StringBuilder();
 
         // Add summary
-        var summary = ToMarkdown(member.Element("summary"));
+        var summary = XmlElementTextToMarkdown(xml.Element("summary"));
         if (!string.IsNullOrWhiteSpace(summary))
         {
-            markdownBuilder.AppendLine(summary);
+            sb.AppendLine(summary);
             // if summary contains multiple lines, we will treat it as multiline
-            multiline = summary.Contains('\n');
         }
 
         // Add parameters
-        var parameters = member.Elements("param");
+        var parameters = xml.Elements("param").ToArray();
         if (parameters.Any())
         {
-            markdownBuilder.AppendLine("**Parameters:**");
+            sb.AppendLine("\n**Parameters:**");
             foreach (var param in parameters)
             {
                 var paramName = param.Attribute("name")?.Value;
-                var paramDescription = ToMarkdown(param);
-                markdownBuilder.AppendLine($"- `{paramName}`: {paramDescription}");
+                var paramDescription = XmlElementTextToMarkdown(param);
+                sb.AppendLine($"- `{paramName}`: {paramDescription}");
             }
 
-            markdownBuilder.AppendLine();
-            multiline = true;
+            sb.AppendLine();
         }
 
         // Add returns
-        var returns = member.Element("returns");
+        var returns = xml.Element("returns");
         if (returns != null)
         {
-            markdownBuilder.AppendLine("**Returns:**");
-            markdownBuilder.AppendLine(ToMarkdown(returns));
-            markdownBuilder.AppendLine();
-            multiline = true;
+            sb.AppendLine("**Returns:**");
+            sb.AppendLine(XmlElementTextToMarkdown(returns));
+            sb.AppendLine();
         }
 
         // Add exceptions
-        var exceptions = member.Elements("exception");
+        var exceptions = xml.Elements("exception");
         if (exceptions.Any())
         {
-            markdownBuilder.AppendLine("**Exceptions:**");
+            sb.AppendLine("**Exceptions:**");
             foreach (var exception in exceptions)
             {
                 var exceptionType = exception.Attribute("cref")?.Value;
-                var exceptionDescription = ToMarkdown(exception);
-                markdownBuilder.AppendLine($"- `{exceptionType}`: {exceptionDescription}");
+                var exceptionDescription = XmlElementTextToMarkdown(exception);
+                sb.AppendLine($"- `{exceptionType}`: {exceptionDescription}");
             }
 
-            markdownBuilder.AppendLine();
-            multiline = true;
+            sb.AppendLine();
         }
 
         // Add remarks
-        var remarks = member.Element("remarks");
+        var remarks = xml.Element("remarks");
         if (remarks != null)
         {
-            markdownBuilder.AppendLine("**Remarks:**");
-            markdownBuilder.AppendLine(ToMarkdown(remarks));
-            markdownBuilder.AppendLine();
-            multiline = true;
+            sb.AppendLine("**Remarks:**");
+            sb.AppendLine(XmlElementTextToMarkdown(remarks));
+            sb.AppendLine();
         }
 
         // Add examples
-        var examples = member.Element("example");
+        var examples = xml.Element("example");
         if (examples != null)
         {
-            markdownBuilder.AppendLine("**Examples:**");
-            markdownBuilder.AppendLine(ToMarkdown(examples));
-            markdownBuilder.AppendLine();
-            multiline = true;
+            sb.AppendLine("**Examples:**");
+            sb.AppendLine(XmlElementTextToMarkdown(examples));
+            sb.AppendLine();
         }
 
-        var markdown = markdownBuilder.ToString().Trim();
-        return (string.IsNullOrWhiteSpace(markdown) ? "No documentation available." : markdown, multiline);
+        return ">" + sb.ToString().Trim().Replace("\n", "\n>");
     }
 
 
@@ -234,22 +254,20 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
     /// replaces see and cref with correct links.
     /// replaces code tags with backticks.
     /// </summary>
-    private string ToMarkdown(XElement element)
+    private string XmlElementTextToMarkdown(XElement? element)
     {
-        if (element == null)
-            return string.Empty;
-
+        if (element == null) return "";
         return string.Join(" ", element.Nodes().Select(node =>
         {
             return node.NodeType switch
             {
                 XmlNodeType.Text => node.ToString().Trim(),
-                XmlNodeType.Element => ProcessElement((XElement)node),
+                XmlNodeType.Element => NotTextElelementToMarkdown((XElement)node),
                 _ => string.Empty
             };
         }));
 
-        string ProcessElement(XElement elem)
+        string NotTextElelementToMarkdown(XElement elem)
         {
             switch (elem.Name.LocalName)
             {
@@ -263,9 +281,9 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
                 case "code":
                     return $"\n```\n{elem.Value}\n```\n";
                 case "para":
-                    return $"{ToMarkdown(elem)}\n";
+                    return $"{XmlElementTextToMarkdown(elem)}\n";
                 default:
-                    return ToMarkdown(elem);
+                    return XmlElementTextToMarkdown(elem);
             }
         }
     }
@@ -275,48 +293,15 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
     /// Finds the corresponding XML element for a given member in the XML document.
     /// If the member uses inheritdoc, it will search for the base type's or interfaces' element.
     /// </summary>
-    public XElement FindElement(MemberInfo member)
+    private XElement? FindElement(string memberType, MemberInfo member)
     {
-        var memberType = member switch
-        {
-            Type _ => "T:",
-            MethodInfo _ => "M:",
-            PropertyInfo _ => "P:",
-            FieldInfo _ => "F:",
-            EventInfo _ => "E:",
-            _ => throw new ArgumentException("Unsupported member type", nameof(member))
-        };
-
         var declaringType = member.DeclaringType?.FullName?.Replace("+", ".") ?? (member as Type)?.Namespace;
-        var element = xmlDocument.Descendants("member").FirstOrDefault(e => e.Attribute("name")?.Value == $"{memberType}{declaringType}.{member.Name}");
-
-        while (element != null && element.Element("inheritdoc") != null)
+        var name = $"{memberType}:{declaringType}.{member.Name.Replace('.', '#')}";
+        if (member is MethodBase b)
         {
-            var baseMember = member.DeclaringType?.BaseType?.GetMember(member.Name).FirstOrDefault();
-            member = baseMember;
-
-            if (member == null)
-            {
-                // Search interfaces if base type has no documentation for the member
-                foreach (var iface in member.DeclaringType?.GetInterfaces() ?? Array.Empty<Type>())
-                {
-                    baseMember = iface.GetMember(member.Name).FirstOrDefault();
-                    if (baseMember != null)
-                    {
-                        declaringType = baseMember.DeclaringType?.FullName?.Replace("+", ".");
-                        element = xmlDocument.Descendants("member")
-                            .FirstOrDefault(e => e.Attribute("name")?.Value == $"M:{declaringType}.{baseMember.Name}");
-                        if (element != null) break;
-                    }
-                }
-
-                break;
-            }
-
-            declaringType = member?.DeclaringType?.FullName?.Replace("+", ".");
-            element = xmlDocument.Descendants("member").FirstOrDefault(e => e.Attribute("name")?.Value == $"{memberType}:{declaringType}.{member.Name}");
+            name += "(" + string.Join(", ", b.GetParameters().Select(t => t.ParameterType.FullName)) + ")";
         }
-
+        var element = xmlDocument.Descendants("member").FirstOrDefault(e => e.Attribute("name")?.Value == name);
         return element;
     }
     
@@ -326,19 +311,25 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
         return ToMarkdownLink(typeName, typeName);
     }
     
-    private string GetFullTypeName(Type info)
+    private string GetFullTypeName(Type type)
     {
-        var typeName = info.FullName!.Replace('+', '.').Split('`')[0]; // Remove any generic type parameters
-        if (info.IsGenericType)
+        if (type.FullName == null)
         {
-            var genericArgs = string.Join(", ", info.GenericTypeArguments.Select(t => t.Name));
-            typeName += $"<{genericArgs}>";
+            return type.Name;
         }
-        return typeName;
+        var sb = new StringBuilder();
+        sb.Append(type.FullName!.Replace('+', '.').Split('`')[0]);
+        if (type.IsGenericType)
+        {
+            sb.Append("<");
+            sb.Append(string.Join(", ", type.GetGenericArguments().Select(GetFullTypeName)));
+            sb.Append(">");
+        }
+        return sb.ToString();
     }
     
     private string ToMarkdownLink(string name, string target)
     {
-        return $"[{name}](#{Regex.Replace(target.ToLower().Replace(' ', '-'), @"[^\w-_]", "")})";
+        return name.StartsWith("Ternary3.") ? $"[{name}](#{Regex.Replace(target.ToLower().Replace(' ', '-'), @"[^\w-_]", "")})" : name;
     }
 }
