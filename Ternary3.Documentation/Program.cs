@@ -194,9 +194,64 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
         return markdown + "\n";
     }
     
-    private string GenerateMarkdowDescribingOperators(IEnumerable<MemberInfo> infoDeclaredMembers)
+    private string GenerateMarkdowDescribingOperators(IEnumerable<MemberInfo> members)
     {
-        return "\n\n**GenerateMarkdowDescribingOperators**\n\n";
+        var operatorMethods = members
+            .OfType<MethodInfo>()
+            .Where(m => m.IsSpecialName && m.Name.StartsWith("op_") && m.IsPublic)
+            .ToList();
+            
+        if (operatorMethods.Count == 0) return "";
+        
+        var markdown = "### Operators\n\n";
+        
+        foreach (var method in operatorMethods)
+        {
+            var element = FindElement("M", method);
+            var comments = CommentsAsMarkdown(element);
+            
+            // Get a friendly operator name
+            string operatorSymbol = GetOperatorSymbol(method.Name);
+            string operatorName = operatorSymbol != null ? $"operator {operatorSymbol}" : method.Name;
+            
+            // Format parameters
+            string parameters = FormatParameters(method);
+            
+            markdown += $"#### <code>{GetFullTypeLink(method.ReturnType)} **{operatorName}**{parameters}</code>\n\n{comments}\n\n";
+        }
+        
+        return markdown + "\n";
+    }
+
+    private string GetOperatorSymbol(string methodName)
+    {
+        return methodName switch
+        {
+            "op_Addition" => "+",
+            "op_Subtraction" => "-",
+            "op_Multiply" => "*",
+            "op_Division" => "/",
+            "op_Modulus" => "%",
+            "op_BitwiseAnd" => "&",
+            "op_BitwiseOr" => "|",
+            "op_ExclusiveOr" => "^",
+            "op_LeftShift" => "<<",
+            "op_RightShift" => ">>",
+            "op_Equality" => "==",
+            "op_Inequality" => "!=",
+            "op_LessThan" => "<",
+            "op_LessThanOrEqual" => "<=",
+            "op_GreaterThan" => ">",
+            "op_GreaterThanOrEqual" => ">=",
+            "op_UnaryNegation" => "-",
+            "op_UnaryPlus" => "+",
+            "op_OnesComplement" => "~",
+            "op_Increment" => "++",
+            "op_Decrement" => "--",
+            "op_Implicit" => "implicit",
+            "op_Explicit" => "explicit",
+            _ => null
+        };
     }
 
     /// <summary>
