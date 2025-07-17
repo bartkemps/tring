@@ -39,7 +39,7 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
             await file.WriteAsync(md);
         }
 
-        var assemblyDocumentation = GenerateMarkdowDescribingAssembly();
+        var assemblyDocumentation = GenerateMarkdownDescribingAssembly();
         await file.WriteAsync(assemblyDocumentation);
     }
 
@@ -47,7 +47,7 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
     /// Generates a markdown string containing assembly documentation.
     /// For all public types (classes, interfaces, structs, and enums) in the assembly.
     /// </summary>
-    private string GenerateMarkdowDescribingAssembly()
+    private string GenerateMarkdownDescribingAssembly()
     {
         var markdown = "## Reference\n\n";
         var types = assembly.GetExportedTypes();
@@ -60,7 +60,7 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
             }
         }
 
-        return markdown + string.Concat(types.Select(t => GenerateMarkdowDescribingType(t.GetTypeInfo())));
+        return markdown + string.Concat(types.Select(t => GenerateMarkdownDescribingType(t.GetTypeInfo())));
     }
     
 
@@ -70,7 +70,7 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
     /// Outputs a class description and all its public and protected members.
     /// Searches for the corresponding XML element when calling other methods
     /// </summary>
-    private string GenerateMarkdowDescribingType(Type type)
+    private string GenerateMarkdownDescribingType(Type type)
     {
         var info = type.GetTypeInfo();
         var fullName = GetFullTypeName(info);
@@ -106,6 +106,23 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
 
         return markdown + "\n";
     }
+    
+    private string GenerateMarkdowDescribingMethods(bool isStatic, IEnumerable<MethodInfo> methods)
+    {
+        var filteredMethods = methods
+            .Where(m => isStatic == m.IsStatic && (m.IsPublic || m.IsFamily) && !m.IsSpecialName && !m.IsConstructor)
+            .ToList();
+        if (filteredMethods.Count == 0) return "";
+        var markdown = isStatic ? "### Static Methods\n\n" : "### Methods\n\n";
+        foreach (var method in filteredMethods)
+        {
+            var element = FindElement("M", method);
+            var comments = CommentsAsMarkdown(element);
+            var name = $"{(method.IsGenericMethod ? $"**{method.Name}**<" + string.Join(", ", method.GetGenericArguments().Select(GetFullTypeLink)) + ">" : $"**{method.Name}**")}{FormatParameters(method)}";
+            markdown += $"#### <code>{GetFullTypeLink(method.ReturnType)} {name}</code>\n\n{comments}\n\n";
+        }
+        return markdown + "\n";
+    }
 
     private string FormatParameters(MethodBase constructor)
     {
@@ -120,11 +137,6 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
         sb.Append(string.Join(", ", constructor.GetParameters().Select(p => $"{GetFullTypeLink(p.ParameterType)} {p.Name}")));
         sb.Append(")");
         return sb.ToString();
-    }
-    
-    private string GenerateMarkdowDescribingMethods(bool isStatic, IEnumerable<MethodInfo> infoDeclaredMethods)
-    {
-        return "\n\n**GenerateMarkdowDescribingMethods**\n\n";
     }
     
     private string GenerateMarkdowDescribingProperties(bool isStatic, IEnumerable<PropertyInfo> p)
@@ -207,7 +219,7 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
         var returns = xml.Element("returns");
         if (returns != null)
         {
-            sb.AppendLine("**Returns:**");
+            sb.AppendLine("\n**Returns:**");
             sb.AppendLine(XmlElementTextToMarkdown(returns));
             sb.AppendLine();
         }
@@ -216,7 +228,7 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
         var exceptions = xml.Elements("exception");
         if (exceptions.Any())
         {
-            sb.AppendLine("**Exceptions:**");
+            sb.AppendLine("\n**Exceptions:**");
             foreach (var exception in exceptions)
             {
                 var exceptionType = exception.Attribute("cref")?.Value;
@@ -231,7 +243,7 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
         var remarks = xml.Element("remarks");
         if (remarks != null)
         {
-            sb.AppendLine("**Remarks:**");
+            sb.AppendLine("\n**Remarks:**");
             sb.AppendLine(XmlElementTextToMarkdown(remarks));
             sb.AppendLine();
         }
@@ -240,7 +252,7 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
         var examples = xml.Element("example");
         if (examples != null)
         {
-            sb.AppendLine("**Examples:**");
+            sb.AppendLine("\n**Examples:**");
             sb.AppendLine(XmlElementTextToMarkdown(examples));
             sb.AppendLine();
         }
@@ -295,11 +307,15 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
     /// </summary>
     private XElement? FindElement(string memberType, MemberInfo member)
     {
+        if (member.Name == "Parse")
+        {
+            
+        }
         var declaringType = member.DeclaringType?.FullName?.Replace("+", ".") ?? (member as Type)?.Namespace;
         var name = $"{memberType}:{declaringType}.{member.Name.Replace('.', '#')}";
         if (member is MethodBase b)
         {
-            name += "(" + string.Join(", ", b.GetParameters().Select(t => t.ParameterType.FullName)) + ")";
+            name += "(" + string.Join(",", b.GetParameters().Select(t => t.ParameterType.FullName)) + ")";
         }
         var element = xmlDocument.Descendants("member").FirstOrDefault(e => e.Attribute("name")?.Value == name);
         return element;
