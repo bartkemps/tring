@@ -584,7 +584,7 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
         }
 
         var parts = name.ToLower().Split('<', ',');
-        var link = parts.Length > 0 ? $"{parts[0]}-{parts.Length - 1}" : parts[0];
+        var link = parts.Length > 1 ? $"{parts[0]}-{parts.Length - 1}" : parts[0];
         return $"[{name}](https://learn.microsoft.com/en-us/dotnet/api/{link})";
     }
 }

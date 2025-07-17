@@ -762,7 +762,7 @@ This allows for flexible formatting and display of ternary numbers, including cu
 
 ### Static Methods
 
-#### <code>[Ternary3.BigTernaryArray](#ternary3bigternaryarray) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) value)</code>
+#### <code>[Ternary3.BigTernaryArray](#ternary3bigternaryarray) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) value)</code>
 
 >Parses a string representation of a BigTernaryArray.
 >
@@ -773,7 +773,7 @@ This allows for flexible formatting and display of ternary numbers, including cu
 >**Returns:**
 >A BigTernaryArray representing the parsed value.
 
-#### <code>[Ternary3.BigTernaryArray](#ternary3bigternaryarray) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) value, [Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format)</code>
+#### <code>[Ternary3.BigTernaryArray](#ternary3bigternaryarray) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) value, [Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format)</code>
 
 >Parses a string representation of a BigTernaryArray.
 >
@@ -785,7 +785,7 @@ This allows for flexible formatting and display of ternary numbers, including cu
 >**Returns:**
 >A BigTernaryArray representing the parsed value.
 
-#### <code>[Ternary3.BigTernaryArray](#ternary3bigternaryarray) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) value, [Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) options)</code>
+#### <code>[Ternary3.BigTernaryArray](#ternary3bigternaryarray) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) value, [Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) options)</code>
 
 >Parses a string representation of a BigTernaryArray.
 >
@@ -797,7 +797,7 @@ This allows for flexible formatting and display of ternary numbers, including cu
 >**Returns:**
 >A BigTernaryArray representing the parsed value.
 
-#### <code>[Ternary3.BigTernaryArray](#ternary3bigternaryarray) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) value, [Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format, [Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) options)</code>
+#### <code>[Ternary3.BigTernaryArray](#ternary3bigternaryarray) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) value, [Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format, [Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) options)</code>
 
 >Parses a string representation of a BigTernaryArray.
 >
@@ -824,7 +824,7 @@ This allows for flexible formatting and display of ternary numbers, including cu
 
 ### Constructors
 
-#### <code>**BigTernaryArray**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) length)</code>
+#### <code>**BigTernaryArray**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) length)</code>
 
 >Initializes a new instance of the BigTernaryArray class with a specified length.
 >
@@ -849,7 +849,7 @@ This allows for flexible formatting and display of ternary numbers, including cu
 
 ### Methods
 
-#### <code>[System.Void](https://learn.microsoft.com/en-us/dotnet/api/system.void-0) **Resize**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) length)</code>
+#### <code>[System.Void](https://learn.microsoft.com/en-us/dotnet/api/system.void) **Resize**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) length)</code>
 
 >Resizes the TernaryArray to the specified length.
 >
@@ -866,27 +866,27 @@ This allows for flexible formatting and display of ternary numbers, including cu
 >This method adjusts the underlying storage to accommodate the new length by either adding or removing
 >            elements from the internal storage lists. If the new length is the same as the current length, no operation is performed.
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **ToString**()</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**()</code>
 
 >Returns a string representation of the TernaryArray.
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **ToString**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) format)</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) format)</code>
 
 >Returns a string representation of the TernaryArray.
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **ToString**([System.IFormatProvider](https://learn.microsoft.com/en-us/dotnet/api/system.iformatprovider-0) provider)</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**([System.IFormatProvider](https://learn.microsoft.com/en-us/dotnet/api/system.iformatprovider) provider)</code>
 
 >Returns a string representation of the TernaryArray.
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **ToString**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) format, [System.IFormatProvider](https://learn.microsoft.com/en-us/dotnet/api/system.iformatprovider-0) provider)</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) format, [System.IFormatProvider](https://learn.microsoft.com/en-us/dotnet/api/system.iformatprovider) provider)</code>
 
 >Returns a string representation of the TernaryArray.
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **ToString**([Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format)</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**([Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format)</code>
 
 >Returns a string representation of this instance, formatted balanced ternarily according to the specified format.
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **Equals**([Ternary3.BigTernaryArray](#ternary3bigternaryarray) other)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **Equals**([Ternary3.BigTernaryArray](#ternary3bigternaryarray) other)</code>
 
 >Determines whether this instance and another BigTernaryArray are equal.
 >
@@ -897,7 +897,7 @@ This allows for flexible formatting and display of ternary numbers, including cu
 >**Returns:**
 >true if the specified BigTernaryArray is equal to this instance; otherwise, false.
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **Equals**([System.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object-0) obj)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **Equals**([System.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object) obj)</code>
 
 >Determines whether this instance and a specified object are equal.
 >
@@ -908,7 +908,7 @@ This allows for flexible formatting and display of ternary numbers, including cu
 >**Returns:**
 >true if the specified object is equal to this instance; otherwise, false.
 
-#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) **GetHashCode**()</code>
+#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **GetHashCode**()</code>
 
 >Returns a hash code for this instance.
 >
@@ -924,19 +924,19 @@ This allows for flexible formatting and display of ternary numbers, including cu
 
 ### Properties
 
-#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) **Length** { get; set; }</code>
+#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **Length** { get; set; }</code>
 
 >Gets or sets the number of trits in this array.
 
-#### <code>[Ternary3.Trit](#ternary3trit) **this[[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) index]** { get; set; }</code>
+#### <code>[Ternary3.Trit](#ternary3trit) **this[[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) index]** { get; set; }</code>
 
 No documentation available.
 
-#### <code>[Ternary3.Trit](#ternary3trit) **this[[System.Index](https://learn.microsoft.com/en-us/dotnet/api/system.index-0) index]** { get; set; }</code>
+#### <code>[Ternary3.Trit](#ternary3trit) **this[[System.Index](https://learn.microsoft.com/en-us/dotnet/api/system.index) index]** { get; set; }</code>
 
 No documentation available.
 
-#### <code>[Ternary3.ITritArray](#ternary3itritarray) **this[[System.Range](https://learn.microsoft.com/en-us/dotnet/api/system.range-0) range]** { get; }</code>
+#### <code>[Ternary3.ITritArray](#ternary3itritarray) **this[[System.Range](https://learn.microsoft.com/en-us/dotnet/api/system.range) range]** { get; }</code>
 
 No documentation available.
 
@@ -1003,7 +1003,7 @@ No documentation available.
 >**Returns:**
 >A new TernaryArray with the operation applied to each trit.
 
-#### <code>[Ternary3.BigTernaryArray](#ternary3bigternaryarray) **operator &lt;&lt;**([Ternary3.BigTernaryArray](#ternary3bigternaryarray) array, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) shift)</code>
+#### <code>[Ternary3.BigTernaryArray](#ternary3bigternaryarray) **operator &lt;&lt;**([Ternary3.BigTernaryArray](#ternary3bigternaryarray) array, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) shift)</code>
 
 >Performs a left bitwise shift on the trit array.
 >
@@ -1015,7 +1015,7 @@ No documentation available.
 >**Returns:**
 >A new TernaryArray with the bits shifted to the left.
 
-#### <code>[Ternary3.BigTernaryArray](#ternary3bigternaryarray) **operator &gt;&gt;**([Ternary3.BigTernaryArray](#ternary3bigternaryarray) array, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) shift)</code>
+#### <code>[Ternary3.BigTernaryArray](#ternary3bigternaryarray) **operator &gt;&gt;**([Ternary3.BigTernaryArray](#ternary3bigternaryarray) array, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) shift)</code>
 
 >Performs a right bitwise shift on the trit array.
 >
@@ -1063,27 +1063,27 @@ No documentation available.
 >**Returns:**
 >A new TernaryArray representing the product between the two values.
 
-#### <code>[Ternary3.BigTernaryArray](#ternary3bigternaryarray) **operator implicit**([System.Numerics.BigInteger](https://learn.microsoft.com/en-us/dotnet/api/system.numerics.biginteger-0) value)</code>
+#### <code>[Ternary3.BigTernaryArray](#ternary3bigternaryarray) **operator implicit**([System.Numerics.BigInteger](https://learn.microsoft.com/en-us/dotnet/api/system.numerics.biginteger) value)</code>
 
 >Implicit conversion from BigInteger to TernaryArray.
 
-#### <code>[Ternary3.BigTernaryArray](#ternary3bigternaryarray) **operator implicit**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) value)</code>
+#### <code>[Ternary3.BigTernaryArray](#ternary3bigternaryarray) **operator implicit**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) value)</code>
 
 >Implicit conversion from BigInteger to TernaryArray.
 
-#### <code>[Ternary3.BigTernaryArray](#ternary3bigternaryarray) **operator implicit**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) value)</code>
+#### <code>[Ternary3.BigTernaryArray](#ternary3bigternaryarray) **operator implicit**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) value)</code>
 
 >Implicit conversion from BigInteger to TernaryArray.
 
-#### <code>[System.Numerics.BigInteger](https://learn.microsoft.com/en-us/dotnet/api/system.numerics.biginteger-0) **operator implicit**([Ternary3.BigTernaryArray](#ternary3bigternaryarray) array)</code>
+#### <code>[System.Numerics.BigInteger](https://learn.microsoft.com/en-us/dotnet/api/system.numerics.biginteger) **operator implicit**([Ternary3.BigTernaryArray](#ternary3bigternaryarray) array)</code>
 
 >Implicit conversion from BigInteger to TernaryArray.
 
-#### <code>[System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) **operator explicit**([Ternary3.BigTernaryArray](#ternary3bigternaryarray) array)</code>
+#### <code>[System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) **operator explicit**([Ternary3.BigTernaryArray](#ternary3bigternaryarray) array)</code>
 
 >Explicit conversion from TernaryArray to long.
 
-#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) **operator explicit**([Ternary3.BigTernaryArray](#ternary3bigternaryarray) array)</code>
+#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **operator explicit**([Ternary3.BigTernaryArray](#ternary3bigternaryarray) array)</code>
 
 >Explicit conversion from TernaryArray to long.
 
@@ -1098,7 +1098,7 @@ No documentation available.
 
 ### Constructors
 
-#### <code>**GenerateTernaryConstantsAttribute**([System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) enabled)</code>
+#### <code>**GenerateTernaryConstantsAttribute**([System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) enabled)</code>
 
 >Attribute to indicate that ternary constants should be generated for the target type or member.
 >
@@ -1109,7 +1109,7 @@ No documentation available.
 
 ### Properties
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **Enabled** { get; }</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **Enabled** { get; }</code>
 
 >Gets whether ternary constant generation is enabled.
 
@@ -1120,7 +1120,7 @@ No documentation available.
 
 ### Static Methods
 
-#### <code>[Ternary3.Int27T](#ternary3int27t) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) value)</code>
+#### <code>[Ternary3.Int27T](#ternary3int27t) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) value)</code>
 
 >Parses a string representation of a Int27T.
 >
@@ -1131,7 +1131,7 @@ No documentation available.
 >**Returns:**
 >A Int27T representing the parsed value.
 
-#### <code>[Ternary3.Int27T](#ternary3int27t) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) value, [Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format)</code>
+#### <code>[Ternary3.Int27T](#ternary3int27t) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) value, [Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format)</code>
 
 >Parses a string representation of a Int27T.
 >
@@ -1143,7 +1143,7 @@ No documentation available.
 >**Returns:**
 >A Int27T representing the parsed value.
 
-#### <code>[Ternary3.Int27T](#ternary3int27t) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) value, [Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) options)</code>
+#### <code>[Ternary3.Int27T](#ternary3int27t) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) value, [Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) options)</code>
 
 >Parses a string representation of a Int27T.
 >
@@ -1155,7 +1155,7 @@ No documentation available.
 >**Returns:**
 >A Int27T representing the parsed value.
 
-#### <code>[Ternary3.Int27T](#ternary3int27t) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) value, [Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format, [Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) options)</code>
+#### <code>[Ternary3.Int27T](#ternary3int27t) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) value, [Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format, [Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) options)</code>
 
 >Parses a string representation of a Int27T.
 >
@@ -1168,7 +1168,7 @@ No documentation available.
 >**Returns:**
 >A Int27T representing the parsed value.
 
-#### <code>[Ternary3.Int27T](#ternary3int27t) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) s, [System.Globalization.NumberStyles](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.numberstyles-0) style)</code>
+#### <code>[Ternary3.Int27T](#ternary3int27t) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) s, [System.Globalization.NumberStyles](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.numberstyles) style)</code>
 
 >Converts the string representation of a number in a specified style to its [Int27T](#ternary3.int27t) equivalent.
 >
@@ -1187,7 +1187,7 @@ No documentation available.
 >- `System.FormatException`: `s` is not in a format compliant with `style` .
 >- `System.OverflowException`: `s` represents a number less than [MinValue](#f:ternary3.int27t.minvalue) or greater than [MaxValue](#f:ternary3.int27t.maxvalue) .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **TryParse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) s, [Ternary3.Int27T&](#ternary3int27t) result)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **TryParse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) s, [Ternary3.Int27T&](#ternary3int27t) result)</code>
 
 >Tries to convert the string representation of a number to its [Int27T](#ternary3.int27t) equivalent, and returns a value that indicates whether the conversion succeeded.
 >
@@ -1210,18 +1210,18 @@ No documentation available.
 
 >Represents the smallest possible value of a [Int27T](#ternary3.int27t) . This field is constant.
 
-#### <code>[System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) **MaxValueConstant**</code>
+#### <code>[System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) **MaxValueConstant**</code>
 
 >Represents the maximum value of a [Int27T](#ternary3.int27t) , expressed as a `Int64` This field is constant.
 
-#### <code>[System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) **MinValueConstant**</code>
+#### <code>[System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) **MinValueConstant**</code>
 
 >Represents the minimum value of a [Int27T](#ternary3.int27t) , expressed as a `Int64` This field is constant.
 
 
 ### Methods
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **Equals**([System.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object-0) obj)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **Equals**([System.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object) obj)</code>
 
 >Returns a value indicating whether this instance is equal to a specified object.
 >
@@ -1233,7 +1233,7 @@ No documentation available.
 >`true` if `obj` is an instance of [Int27T](#ternary3.int27t) or a compatible numeric type
 >            and equals the value of this instance; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **Equals**([Ternary3.Int27T](#ternary3int27t) other)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **Equals**([Ternary3.Int27T](#ternary3int27t) other)</code>
 
 >Returns a value indicating whether this instance is equal to a specified [Int27T](#ternary3.int27t) value.
 >
@@ -1244,7 +1244,7 @@ No documentation available.
 >**Returns:**
 >`true` if `other` has the same value as this instance; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **Equals**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) other)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **Equals**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) other)</code>
 
 >Returns a value indicating whether this instance is equal to a specified `Int64` value.
 >
@@ -1255,34 +1255,34 @@ No documentation available.
 >**Returns:**
 >`true` if `other` has the same value as this instance; otherwise, `false` .
 
-#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) **GetHashCode**()</code>
+#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **GetHashCode**()</code>
 
 >Returns the hash code for this instance.
 >
 >**Returns:**
 >A 32-bit signed integer hash code.
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **ToString**()</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**()</code>
 
 >Returns a string representation of this instance.
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **ToString**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) format)</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) format)</code>
 
 >Returns a string representation of this instance.
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **ToString**([System.IFormatProvider](https://learn.microsoft.com/en-us/dotnet/api/system.iformatprovider-0) provider)</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**([System.IFormatProvider](https://learn.microsoft.com/en-us/dotnet/api/system.iformatprovider) provider)</code>
 
 >Returns a string representation of this instance.
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **ToString**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) format, [System.IFormatProvider](https://learn.microsoft.com/en-us/dotnet/api/system.iformatprovider-0) provider)</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) format, [System.IFormatProvider](https://learn.microsoft.com/en-us/dotnet/api/system.iformatprovider) provider)</code>
 
 >Returns a string representation of this instance.
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **ToString**([Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format)</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**([Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format)</code>
 
 >Returns a string representation of this instance, formatted balanced ternarily according to the specified format.
 
-#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) **CompareTo**([System.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object-0) obj)</code>
+#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **CompareTo**([System.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object) obj)</code>
 
 >Compares this instance to a specified object and returns an indication of their relative values.
 >
@@ -1301,7 +1301,7 @@ No documentation available.
 >**Exceptions:**
 >- `System.ArgumentException`: `obj` is not a [Int27T](#ternary3.int27t) or a type that can be converted to an integer.
 
-#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) **CompareTo**([Ternary3.Int27T](#ternary3int27t) other)</code>
+#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **CompareTo**([Ternary3.Int27T](#ternary3int27t) other)</code>
 
 >Compares this instance to a specified [Int27T](#ternary3.int27t) object and returns an indication of their relative values.
 >
@@ -1316,7 +1316,7 @@ No documentation available.
 >            Zero: This instance is equal to `other` .
 >            Greater than zero: This instance is greater than `other` .
 
-#### <code>[System.TypeCode](https://learn.microsoft.com/en-us/dotnet/api/system.typecode-0) **GetTypeCode**()</code>
+#### <code>[System.TypeCode](https://learn.microsoft.com/en-us/dotnet/api/system.typecode) **GetTypeCode**()</code>
 
 >Gets the `TypeCode` for this instance.
 >
@@ -1326,18 +1326,18 @@ No documentation available.
 
 ### Properties
 
-#### <code>[Ternary3.Trit](#ternary3trit) **this[[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) index]** { get; }</code>
+#### <code>[Ternary3.Trit](#ternary3trit) **this[[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) index]** { get; }</code>
 
 No documentation available.
 
-#### <code>[Ternary3.Trit](#ternary3trit) **this[[System.Index](https://learn.microsoft.com/en-us/dotnet/api/system.index-0) index]** { get; }</code>
+#### <code>[Ternary3.Trit](#ternary3trit) **this[[System.Index](https://learn.microsoft.com/en-us/dotnet/api/system.index) index]** { get; }</code>
 
 No documentation available.
 
 
 ### Operators
 
-#### <code>[Ternary3.Int27T](#ternary3int27t) **operator implicit**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) value)</code>
+#### <code>[Ternary3.Int27T](#ternary3int27t) **operator implicit**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) value)</code>
 
 >Defines an implicit conversion of a Int64 to a [Int27T](#ternary3.int27t) .
 >
@@ -1348,7 +1348,7 @@ No documentation available.
 >**Returns:**
 >A [Int27T](#ternary3.int27t) that represents the converted value.
 
-#### <code>[System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) **operator implicit**([Ternary3.Int27T](#ternary3int27t) value)</code>
+#### <code>[System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) **operator implicit**([Ternary3.Int27T](#ternary3int27t) value)</code>
 
 >Defines an implicit conversion of a Int64 to a [Int27T](#ternary3.int27t) .
 >
@@ -1359,7 +1359,7 @@ No documentation available.
 >**Returns:**
 >A [Int27T](#ternary3.int27t) that represents the converted value.
 
-#### <code>[Ternary3.Int27T](#ternary3int27t) **operator implicit**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) value)</code>
+#### <code>[Ternary3.Int27T](#ternary3int27t) **operator implicit**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) value)</code>
 
 >Defines an implicit conversion of a Int64 to a [Int27T](#ternary3.int27t) .
 >
@@ -1370,7 +1370,7 @@ No documentation available.
 >**Returns:**
 >A [Int27T](#ternary3.int27t) that represents the converted value.
 
-#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) **operator explicit**([Ternary3.Int27T](#ternary3int27t) value)</code>
+#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **operator explicit**([Ternary3.Int27T](#ternary3int27t) value)</code>
 
 >Defines an explicit conversion of a Int27T to a `Int32` .
 >
@@ -1381,7 +1381,7 @@ No documentation available.
 >**Returns:**
 >A `Int32` that represents the converted value.
 
-#### <code>[Ternary3.Int27T](#ternary3int27t) **operator explicit**([System.Int128](https://learn.microsoft.com/en-us/dotnet/api/system.int128-0) value)</code>
+#### <code>[Ternary3.Int27T](#ternary3int27t) **operator explicit**([System.Int128](https://learn.microsoft.com/en-us/dotnet/api/system.int128) value)</code>
 
 >Defines an explicit conversion of a Int27T to a `Int32` .
 >
@@ -1392,7 +1392,7 @@ No documentation available.
 >**Returns:**
 >A `Int32` that represents the converted value.
 
-#### <code>[System.Int128](https://learn.microsoft.com/en-us/dotnet/api/system.int128-0) **operator implicit**([Ternary3.Int27T](#ternary3int27t) value)</code>
+#### <code>[System.Int128](https://learn.microsoft.com/en-us/dotnet/api/system.int128) **operator implicit**([Ternary3.Int27T](#ternary3int27t) value)</code>
 
 >Defines an implicit conversion of a Int64 to a [Int27T](#ternary3.int27t) .
 >
@@ -1403,7 +1403,7 @@ No documentation available.
 >**Returns:**
 >A [Int27T](#ternary3.int27t) that represents the converted value.
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator ==**([System.IConvertible](https://learn.microsoft.com/en-us/dotnet/api/system.iconvertible-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator ==**([System.IConvertible](https://learn.microsoft.com/en-us/dotnet/api/system.iconvertible) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether two [Int27T](#ternary3.int27t) instances are equal.
 >
@@ -1415,7 +1415,7 @@ No documentation available.
 >**Returns:**
 >`true` if the values of `left` and `right` are equal; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator !=**([System.IConvertible](https://learn.microsoft.com/en-us/dotnet/api/system.iconvertible-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator !=**([System.IConvertible](https://learn.microsoft.com/en-us/dotnet/api/system.iconvertible) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether two [Int27T](#ternary3.int27t) instances are not equal.
 >
@@ -1427,7 +1427,7 @@ No documentation available.
 >**Returns:**
 >`true` if the values of `left` and `right` are not equal; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator ==**([Ternary3.Int27T](#ternary3int27t) left, [System.IConvertible](https://learn.microsoft.com/en-us/dotnet/api/system.iconvertible-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator ==**([Ternary3.Int27T](#ternary3int27t) left, [System.IConvertible](https://learn.microsoft.com/en-us/dotnet/api/system.iconvertible) right)</code>
 
 >Returns a value indicating whether two [Int27T](#ternary3.int27t) instances are equal.
 >
@@ -1439,7 +1439,7 @@ No documentation available.
 >**Returns:**
 >`true` if the values of `left` and `right` are equal; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator !=**([Ternary3.Int27T](#ternary3int27t) left, [System.IConvertible](https://learn.microsoft.com/en-us/dotnet/api/system.iconvertible-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator !=**([Ternary3.Int27T](#ternary3int27t) left, [System.IConvertible](https://learn.microsoft.com/en-us/dotnet/api/system.iconvertible) right)</code>
 
 >Returns a value indicating whether two [Int27T](#ternary3.int27t) instances are not equal.
 >
@@ -1451,7 +1451,7 @@ No documentation available.
 >**Returns:**
 >`true` if the values of `left` and `right` are not equal; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator ==**([Ternary3.Int27T](#ternary3int27t) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator ==**([Ternary3.Int27T](#ternary3int27t) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether two [Int27T](#ternary3.int27t) instances are equal.
 >
@@ -1463,7 +1463,7 @@ No documentation available.
 >**Returns:**
 >`true` if the values of `left` and `right` are equal; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator !=**([Ternary3.Int27T](#ternary3int27t) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator !=**([Ternary3.Int27T](#ternary3int27t) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether two [Int27T](#ternary3.int27t) instances are not equal.
 >
@@ -1557,7 +1557,7 @@ No documentation available.
 >**Returns:**
 >The same ternary number.
 
-#### <code>[Ternary3.Int27T](#ternary3int27t) **operator +**([Ternary3.Int27T](#ternary3int27t) left, [System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) right)</code>
+#### <code>[Ternary3.Int27T](#ternary3int27t) **operator +**([Ternary3.Int27T](#ternary3int27t) left, [System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) right)</code>
 
 >Adds a ternary number and a native numeric value, maintaining the original ternary type.
 >
@@ -1569,7 +1569,7 @@ No documentation available.
 >**Returns:**
 >A new ternary number containing the sum.
 
-#### <code>[Ternary3.Int27T](#ternary3int27t) **operator +**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[Ternary3.Int27T](#ternary3int27t) **operator +**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Adds a native numeric value and a ternary number, maintaining the original ternary type.
 >
@@ -1581,7 +1581,7 @@ No documentation available.
 >**Returns:**
 >A new ternary number containing the sum.
 
-#### <code>[Ternary3.Int27T](#ternary3int27t) **operator -**([Ternary3.Int27T](#ternary3int27t) left, [System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) right)</code>
+#### <code>[Ternary3.Int27T](#ternary3int27t) **operator -**([Ternary3.Int27T](#ternary3int27t) left, [System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) right)</code>
 
 >Subtracts a native numeric value from a ternary number, maintaining the original ternary type.
 >
@@ -1593,7 +1593,7 @@ No documentation available.
 >**Returns:**
 >A new ternary number containing the difference.
 
-#### <code>[Ternary3.Int27T](#ternary3int27t) **operator -**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[Ternary3.Int27T](#ternary3int27t) **operator -**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Subtracts a ternary number from a native numeric value, maintaining the original ternary type.
 >
@@ -1605,7 +1605,7 @@ No documentation available.
 >**Returns:**
 >A new ternary number containing the difference.
 
-#### <code>[Ternary3.Int27T](#ternary3int27t) **operator &ast;**([Ternary3.Int27T](#ternary3int27t) left, [System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) right)</code>
+#### <code>[Ternary3.Int27T](#ternary3int27t) **operator &ast;**([Ternary3.Int27T](#ternary3int27t) left, [System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) right)</code>
 
 >Multiplies a ternary number by a native numeric value, maintaining the original ternary type.
 >
@@ -1617,7 +1617,7 @@ No documentation available.
 >**Returns:**
 >A new ternary number of the same type containing the product.
 
-#### <code>[Ternary3.Int27T](#ternary3int27t) **operator &ast;**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[Ternary3.Int27T](#ternary3int27t) **operator &ast;**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Multiplies a native numeric value by a ternary number, maintaining the original ternary type.
 >
@@ -1629,7 +1629,7 @@ No documentation available.
 >**Returns:**
 >A new ternary number containing the product.
 
-#### <code>[Ternary3.Int27T](#ternary3int27t) **operator /**([Ternary3.Int27T](#ternary3int27t) left, [System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) right)</code>
+#### <code>[Ternary3.Int27T](#ternary3int27t) **operator /**([Ternary3.Int27T](#ternary3int27t) left, [System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) right)</code>
 
 >Divides a ternary number by a native numeric value, maintaining the original ternary type.
 >
@@ -1641,7 +1641,7 @@ No documentation available.
 >**Returns:**
 >A new ternary number of the same type containing the quotient.
 
-#### <code>[Ternary3.Int27T](#ternary3int27t) **operator /**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[Ternary3.Int27T](#ternary3int27t) **operator /**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Divides a native numeric value by a ternary number, maintaining the original ternary type.
 >
@@ -1653,7 +1653,7 @@ No documentation available.
 >**Returns:**
 >A new ternary number containing the quotient.
 
-#### <code>[Ternary3.Int27T](#ternary3int27t) **operator %**([Ternary3.Int27T](#ternary3int27t) left, [System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) right)</code>
+#### <code>[Ternary3.Int27T](#ternary3int27t) **operator %**([Ternary3.Int27T](#ternary3int27t) left, [System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) right)</code>
 
 >Computes the remainder after dividing a ternary number by a native numeric value, maintaining the original ternary type.
 >
@@ -1665,7 +1665,7 @@ No documentation available.
 >**Returns:**
 >A new ternary number of the same type containing the remainder.
 
-#### <code>[Ternary3.Int27T](#ternary3int27t) **operator %**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[Ternary3.Int27T](#ternary3int27t) **operator %**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Computes the remainder after dividing a native numeric value by a ternary number, maintaining the original ternary type.
 >
@@ -1677,7 +1677,7 @@ No documentation available.
 >**Returns:**
 >A new ternary number containing the remainder.
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([Ternary3.Int27T](#ternary3int27t) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([Ternary3.Int27T](#ternary3int27t) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether one [Int27T](#ternary3.int27t) is greater than another.
 >
@@ -1689,7 +1689,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([Ternary3.Int27T](#ternary3int27t) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([Ternary3.Int27T](#ternary3int27t) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether one [Int27T](#ternary3.int27t) is less than another.
 >
@@ -1701,7 +1701,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([Ternary3.Int27T](#ternary3int27t) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([Ternary3.Int27T](#ternary3int27t) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether one [Int27T](#ternary3.int27t) is greater than or equal to another.
 >
@@ -1713,7 +1713,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([Ternary3.Int27T](#ternary3int27t) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([Ternary3.Int27T](#ternary3int27t) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether one [Int27T](#ternary3.int27t) is less than or equal to another.
 >
@@ -1725,7 +1725,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([Ternary3.Int27T](#ternary3int27t) left, [System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([Ternary3.Int27T](#ternary3int27t) left, [System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte) right)</code>
 
 >Returns a value indicating whether a [Int27T](#ternary3.int27t) value is greater than a `SByte` value.
 >
@@ -1737,7 +1737,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([Ternary3.Int27T](#ternary3int27t) left, [System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([Ternary3.Int27T](#ternary3int27t) left, [System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte) right)</code>
 
 >Returns a value indicating whether a [Int27T](#ternary3.int27t) value is less than a `SByte` value.
 >
@@ -1749,7 +1749,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([Ternary3.Int27T](#ternary3int27t) left, [System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([Ternary3.Int27T](#ternary3int27t) left, [System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte) right)</code>
 
 >Returns a value indicating whether a [Int27T](#ternary3.int27t) value is greater than or equal to a `SByte` value.
 >
@@ -1761,7 +1761,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([Ternary3.Int27T](#ternary3int27t) left, [System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([Ternary3.Int27T](#ternary3int27t) left, [System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte) right)</code>
 
 >Returns a value indicating whether a [Int27T](#ternary3.int27t) value is less than or equal to a `SByte` value.
 >
@@ -1773,7 +1773,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether a `SByte` value is greater than a [Int27T](#ternary3.int27t) value.
 >
@@ -1785,7 +1785,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether a `SByte` value is less than a [Int27T](#ternary3.int27t) value.
 >
@@ -1797,7 +1797,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether a `SByte` value is greater than or equal to a [Int27T](#ternary3.int27t) value.
 >
@@ -1809,7 +1809,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether a `SByte` value is less than or equal to a [Int27T](#ternary3.int27t) value.
 >
@@ -1821,7 +1821,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([Ternary3.Int27T](#ternary3int27t) left, [System.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([Ternary3.Int27T](#ternary3int27t) left, [System.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte) right)</code>
 
 >Returns a value indicating whether a [Int27T](#ternary3.int27t) value is greater than a `Byte` value.
 >
@@ -1833,7 +1833,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([Ternary3.Int27T](#ternary3int27t) left, [System.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([Ternary3.Int27T](#ternary3int27t) left, [System.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte) right)</code>
 
 >Returns a value indicating whether a [Int27T](#ternary3.int27t) value is less than a `Byte` value.
 >
@@ -1845,7 +1845,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([Ternary3.Int27T](#ternary3int27t) left, [System.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([Ternary3.Int27T](#ternary3int27t) left, [System.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte) right)</code>
 
 >Returns a value indicating whether a [Int27T](#ternary3.int27t) value is greater than or equal to a `Byte` value.
 >
@@ -1857,7 +1857,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([Ternary3.Int27T](#ternary3int27t) left, [System.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([Ternary3.Int27T](#ternary3int27t) left, [System.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte) right)</code>
 
 >Returns a value indicating whether a [Int27T](#ternary3.int27t) value is less than or equal to a `Byte` value.
 >
@@ -1869,7 +1869,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([System.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([System.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether a `Byte` value is greater than a [Int27T](#ternary3.int27t) value.
 >
@@ -1881,7 +1881,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([System.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([System.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether a `Byte` value is less than a [Int27T](#ternary3.int27t) value.
 >
@@ -1893,7 +1893,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([System.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([System.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether a `Byte` value is greater than or equal to a [Int27T](#ternary3.int27t) value.
 >
@@ -1905,7 +1905,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([System.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([System.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether a `Byte` value is less than or equal to a [Int27T](#ternary3.int27t) value.
 >
@@ -1917,7 +1917,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([Ternary3.Int27T](#ternary3int27t) left, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([Ternary3.Int27T](#ternary3int27t) left, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) right)</code>
 
 >Returns a value indicating whether a [Int27T](#ternary3.int27t) value is greater than a `Int32` value.
 >
@@ -1929,7 +1929,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([Ternary3.Int27T](#ternary3int27t) left, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([Ternary3.Int27T](#ternary3int27t) left, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) right)</code>
 
 >Returns a value indicating whether a [Int27T](#ternary3.int27t) value is less than a `Int32` value.
 >
@@ -1941,7 +1941,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([Ternary3.Int27T](#ternary3int27t) left, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([Ternary3.Int27T](#ternary3int27t) left, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) right)</code>
 
 >Returns a value indicating whether a [Int27T](#ternary3.int27t) value is greater than or equal to a `Int32` value.
 >
@@ -1953,7 +1953,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([Ternary3.Int27T](#ternary3int27t) left, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([Ternary3.Int27T](#ternary3int27t) left, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) right)</code>
 
 >Returns a value indicating whether a [Int27T](#ternary3.int27t) value is less than or equal to a `Int32` value.
 >
@@ -1965,7 +1965,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether a `Int32` value is greater than a [Int27T](#ternary3.int27t) value.
 >
@@ -1977,7 +1977,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether a `Int32` value is less than a [Int27T](#ternary3.int27t) value.
 >
@@ -1989,7 +1989,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether a `Int32` value is greater than or equal to a [Int27T](#ternary3.int27t) value.
 >
@@ -2001,7 +2001,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether a `Int32` value is less than or equal to a [Int27T](#ternary3.int27t) value.
 >
@@ -2013,7 +2013,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([Ternary3.Int27T](#ternary3int27t) left, [System.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([Ternary3.Int27T](#ternary3int27t) left, [System.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32) right)</code>
 
 >Returns a value indicating whether a [Int27T](#ternary3.int27t) value is greater than a `UInt32` value.
 >
@@ -2025,7 +2025,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([Ternary3.Int27T](#ternary3int27t) left, [System.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([Ternary3.Int27T](#ternary3int27t) left, [System.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32) right)</code>
 
 >Returns a value indicating whether a [Int27T](#ternary3.int27t) value is less than a `UInt32` value.
 >
@@ -2037,7 +2037,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([Ternary3.Int27T](#ternary3int27t) left, [System.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([Ternary3.Int27T](#ternary3int27t) left, [System.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32) right)</code>
 
 >Returns a value indicating whether a [Int27T](#ternary3.int27t) value is greater than or equal to a `UInt32` value.
 >
@@ -2049,7 +2049,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([Ternary3.Int27T](#ternary3int27t) left, [System.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([Ternary3.Int27T](#ternary3int27t) left, [System.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32) right)</code>
 
 >Returns a value indicating whether a [Int27T](#ternary3.int27t) value is less than or equal to a `UInt32` value.
 >
@@ -2061,7 +2061,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([System.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([System.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether a `UInt32` value is greater than a [Int27T](#ternary3.int27t) value.
 >
@@ -2073,7 +2073,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([System.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([System.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether a `UInt32` value is less than a [Int27T](#ternary3.int27t) value.
 >
@@ -2085,7 +2085,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([System.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([System.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether a `UInt32` value is greater than or equal to a [Int27T](#ternary3.int27t) value.
 >
@@ -2097,7 +2097,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([System.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([System.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether a `UInt32` value is less than or equal to a [Int27T](#ternary3.int27t) value.
 >
@@ -2109,7 +2109,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([Ternary3.Int27T](#ternary3int27t) left, [System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([Ternary3.Int27T](#ternary3int27t) left, [System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16) right)</code>
 
 >Returns a value indicating whether a [Int27T](#ternary3.int27t) value is greater than a `Int16` value.
 >
@@ -2121,7 +2121,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([Ternary3.Int27T](#ternary3int27t) left, [System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([Ternary3.Int27T](#ternary3int27t) left, [System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16) right)</code>
 
 >Returns a value indicating whether a [Int27T](#ternary3.int27t) value is less than a `Int16` value.
 >
@@ -2133,7 +2133,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([Ternary3.Int27T](#ternary3int27t) left, [System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([Ternary3.Int27T](#ternary3int27t) left, [System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16) right)</code>
 
 >Returns a value indicating whether a [Int27T](#ternary3.int27t) value is greater than or equal to a `Int16` value.
 >
@@ -2145,7 +2145,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([Ternary3.Int27T](#ternary3int27t) left, [System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([Ternary3.Int27T](#ternary3int27t) left, [System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16) right)</code>
 
 >Returns a value indicating whether a [Int27T](#ternary3.int27t) value is less than or equal to a `Int16` value.
 >
@@ -2157,7 +2157,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether a `Int16` value is greater than a [Int27T](#ternary3.int27t) value.
 >
@@ -2169,7 +2169,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether a `Int16` value is less than a [Int27T](#ternary3.int27t) value.
 >
@@ -2181,7 +2181,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether a `Int16` value is greater than or equal to a [Int27T](#ternary3.int27t) value.
 >
@@ -2193,7 +2193,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether a `Int16` value is less than or equal to a [Int27T](#ternary3.int27t) value.
 >
@@ -2205,7 +2205,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([Ternary3.Int27T](#ternary3int27t) left, [System.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([Ternary3.Int27T](#ternary3int27t) left, [System.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16) right)</code>
 
 >Returns a value indicating whether a [Int27T](#ternary3.int27t) value is greater than a `UInt16` value.
 >
@@ -2217,7 +2217,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([Ternary3.Int27T](#ternary3int27t) left, [System.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([Ternary3.Int27T](#ternary3int27t) left, [System.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16) right)</code>
 
 >Returns a value indicating whether a [Int27T](#ternary3.int27t) value is less than a `UInt16` value.
 >
@@ -2229,7 +2229,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([Ternary3.Int27T](#ternary3int27t) left, [System.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([Ternary3.Int27T](#ternary3int27t) left, [System.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16) right)</code>
 
 >Returns a value indicating whether a [Int27T](#ternary3.int27t) value is greater than or equal to a `UInt16` value.
 >
@@ -2241,7 +2241,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([Ternary3.Int27T](#ternary3int27t) left, [System.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([Ternary3.Int27T](#ternary3int27t) left, [System.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16) right)</code>
 
 >Returns a value indicating whether a [Int27T](#ternary3.int27t) value is less than or equal to a `UInt16` value.
 >
@@ -2253,7 +2253,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([System.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([System.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether a `UInt16` value is greater than a [Int27T](#ternary3.int27t) value.
 >
@@ -2265,7 +2265,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([System.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([System.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether a `UInt16` value is less than a [Int27T](#ternary3.int27t) value.
 >
@@ -2277,7 +2277,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([System.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([System.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether a `UInt16` value is greater than or equal to a [Int27T](#ternary3.int27t) value.
 >
@@ -2289,7 +2289,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([System.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([System.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether a `UInt16` value is less than or equal to a [Int27T](#ternary3.int27t) value.
 >
@@ -2301,7 +2301,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([Ternary3.Int27T](#ternary3int27t) left, [System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([Ternary3.Int27T](#ternary3int27t) left, [System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) right)</code>
 
 >Returns a value indicating whether a [Int27T](#ternary3.int27t) value is greater than a `Int64` value.
 >
@@ -2313,7 +2313,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([Ternary3.Int27T](#ternary3int27t) left, [System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([Ternary3.Int27T](#ternary3int27t) left, [System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) right)</code>
 
 >Returns a value indicating whether a [Int27T](#ternary3.int27t) value is less than a `Int64` value.
 >
@@ -2325,7 +2325,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([Ternary3.Int27T](#ternary3int27t) left, [System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([Ternary3.Int27T](#ternary3int27t) left, [System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) right)</code>
 
 >Returns a value indicating whether a [Int27T](#ternary3.int27t) value is greater than or equal to a `Int64` value.
 >
@@ -2337,7 +2337,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([Ternary3.Int27T](#ternary3int27t) left, [System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([Ternary3.Int27T](#ternary3int27t) left, [System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) right)</code>
 
 >Returns a value indicating whether a [Int27T](#ternary3.int27t) value is less than or equal to a `Int64` value.
 >
@@ -2349,7 +2349,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether a `Int64` value is greater than a [Int27T](#ternary3.int27t) value.
 >
@@ -2361,7 +2361,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether a `Int64` value is less than a [Int27T](#ternary3.int27t) value.
 >
@@ -2373,7 +2373,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether a `Int64` value is greater than or equal to a [Int27T](#ternary3.int27t) value.
 >
@@ -2385,7 +2385,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether a `Int64` value is less than or equal to a [Int27T](#ternary3.int27t) value.
 >
@@ -2397,7 +2397,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([Ternary3.Int27T](#ternary3int27t) left, [System.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([Ternary3.Int27T](#ternary3int27t) left, [System.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64) right)</code>
 
 >Returns a value indicating whether a [Int27T](#ternary3.int27t) value is greater than a `UInt64` value.
 >
@@ -2409,7 +2409,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([Ternary3.Int27T](#ternary3int27t) left, [System.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([Ternary3.Int27T](#ternary3int27t) left, [System.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64) right)</code>
 
 >Returns a value indicating whether a [Int27T](#ternary3.int27t) value is less than a `UInt64` value.
 >
@@ -2421,7 +2421,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([Ternary3.Int27T](#ternary3int27t) left, [System.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([Ternary3.Int27T](#ternary3int27t) left, [System.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64) right)</code>
 
 >Returns a value indicating whether a [Int27T](#ternary3.int27t) value is greater than or equal to a `UInt64` value.
 >
@@ -2433,7 +2433,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([Ternary3.Int27T](#ternary3int27t) left, [System.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([Ternary3.Int27T](#ternary3int27t) left, [System.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64) right)</code>
 
 >Returns a value indicating whether a [Int27T](#ternary3.int27t) value is less than or equal to a `UInt64` value.
 >
@@ -2445,7 +2445,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([System.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([System.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether a `UInt64` value is greater than a [Int27T](#ternary3.int27t) value.
 >
@@ -2457,7 +2457,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([System.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([System.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether a `UInt64` value is less than a [Int27T](#ternary3.int27t) value.
 >
@@ -2469,7 +2469,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([System.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([System.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether a `UInt64` value is greater than or equal to a [Int27T](#ternary3.int27t) value.
 >
@@ -2481,7 +2481,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([System.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([System.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether a `UInt64` value is less than or equal to a [Int27T](#ternary3.int27t) value.
 >
@@ -2493,7 +2493,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([Ternary3.Int27T](#ternary3int27t) left, [System.Single](https://learn.microsoft.com/en-us/dotnet/api/system.single-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([Ternary3.Int27T](#ternary3int27t) left, [System.Single](https://learn.microsoft.com/en-us/dotnet/api/system.single) right)</code>
 
 >Returns a value indicating whether a [Int27T](#ternary3.int27t) value is greater than a `Single` value.
 >
@@ -2505,7 +2505,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([Ternary3.Int27T](#ternary3int27t) left, [System.Single](https://learn.microsoft.com/en-us/dotnet/api/system.single-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([Ternary3.Int27T](#ternary3int27t) left, [System.Single](https://learn.microsoft.com/en-us/dotnet/api/system.single) right)</code>
 
 >Returns a value indicating whether a [Int27T](#ternary3.int27t) value is less than a `Single` value.
 >
@@ -2517,7 +2517,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([Ternary3.Int27T](#ternary3int27t) left, [System.Single](https://learn.microsoft.com/en-us/dotnet/api/system.single-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([Ternary3.Int27T](#ternary3int27t) left, [System.Single](https://learn.microsoft.com/en-us/dotnet/api/system.single) right)</code>
 
 >Returns a value indicating whether a [Int27T](#ternary3.int27t) value is greater than or equal to a `Single` value.
 >
@@ -2529,7 +2529,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([Ternary3.Int27T](#ternary3int27t) left, [System.Single](https://learn.microsoft.com/en-us/dotnet/api/system.single-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([Ternary3.Int27T](#ternary3int27t) left, [System.Single](https://learn.microsoft.com/en-us/dotnet/api/system.single) right)</code>
 
 >Returns a value indicating whether a [Int27T](#ternary3.int27t) value is less than or equal to a `Single` value.
 >
@@ -2541,7 +2541,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([System.Single](https://learn.microsoft.com/en-us/dotnet/api/system.single-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([System.Single](https://learn.microsoft.com/en-us/dotnet/api/system.single) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether a `Single` value is greater than a [Int27T](#ternary3.int27t) value.
 >
@@ -2553,7 +2553,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([System.Single](https://learn.microsoft.com/en-us/dotnet/api/system.single-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([System.Single](https://learn.microsoft.com/en-us/dotnet/api/system.single) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether a `Single` value is less than a [Int27T](#ternary3.int27t) value.
 >
@@ -2565,7 +2565,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([System.Single](https://learn.microsoft.com/en-us/dotnet/api/system.single-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([System.Single](https://learn.microsoft.com/en-us/dotnet/api/system.single) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether a `Single` value is greater than or equal to a [Int27T](#ternary3.int27t) value.
 >
@@ -2577,7 +2577,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([System.Single](https://learn.microsoft.com/en-us/dotnet/api/system.single-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([System.Single](https://learn.microsoft.com/en-us/dotnet/api/system.single) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether a `Single` value is less than or equal to a [Int27T](#ternary3.int27t) value.
 >
@@ -2589,7 +2589,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([Ternary3.Int27T](#ternary3int27t) left, [System.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([Ternary3.Int27T](#ternary3int27t) left, [System.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double) right)</code>
 
 >Returns a value indicating whether a [Int27T](#ternary3.int27t) value is greater than a `Double` value.
 >
@@ -2601,7 +2601,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([Ternary3.Int27T](#ternary3int27t) left, [System.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([Ternary3.Int27T](#ternary3int27t) left, [System.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double) right)</code>
 
 >Returns a value indicating whether a [Int27T](#ternary3.int27t) value is less than a `Double` value.
 >
@@ -2613,7 +2613,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([Ternary3.Int27T](#ternary3int27t) left, [System.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([Ternary3.Int27T](#ternary3int27t) left, [System.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double) right)</code>
 
 >Returns a value indicating whether a [Int27T](#ternary3.int27t) value is greater than or equal to a `Double` value.
 >
@@ -2625,7 +2625,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([Ternary3.Int27T](#ternary3int27t) left, [System.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([Ternary3.Int27T](#ternary3int27t) left, [System.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double) right)</code>
 
 >Returns a value indicating whether a [Int27T](#ternary3.int27t) value is less than or equal to a `Double` value.
 >
@@ -2637,7 +2637,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([System.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([System.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether a `Double` value is greater than a [Int27T](#ternary3.int27t) value.
 >
@@ -2649,7 +2649,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([System.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([System.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether a `Double` value is less than a [Int27T](#ternary3.int27t) value.
 >
@@ -2661,7 +2661,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([System.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([System.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether a `Double` value is greater than or equal to a [Int27T](#ternary3.int27t) value.
 >
@@ -2673,7 +2673,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([System.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([System.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether a `Double` value is less than or equal to a [Int27T](#ternary3.int27t) value.
 >
@@ -2685,7 +2685,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([Ternary3.Int27T](#ternary3int27t) left, [System.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([Ternary3.Int27T](#ternary3int27t) left, [System.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal) right)</code>
 
 >Returns a value indicating whether a [Int27T](#ternary3.int27t) value is greater than a `Decimal` value.
 >
@@ -2697,7 +2697,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([Ternary3.Int27T](#ternary3int27t) left, [System.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([Ternary3.Int27T](#ternary3int27t) left, [System.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal) right)</code>
 
 >Returns a value indicating whether a [Int27T](#ternary3.int27t) value is less than a `Decimal` value.
 >
@@ -2709,7 +2709,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([Ternary3.Int27T](#ternary3int27t) left, [System.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([Ternary3.Int27T](#ternary3int27t) left, [System.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal) right)</code>
 
 >Returns a value indicating whether a [Int27T](#ternary3.int27t) value is greater than or equal to a `Decimal` value.
 >
@@ -2721,7 +2721,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([Ternary3.Int27T](#ternary3int27t) left, [System.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([Ternary3.Int27T](#ternary3int27t) left, [System.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal) right)</code>
 
 >Returns a value indicating whether a [Int27T](#ternary3.int27t) value is less than or equal to a `Decimal` value.
 >
@@ -2733,7 +2733,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([System.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([System.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether a `Decimal` value is greater than a [Int27T](#ternary3.int27t) value.
 >
@@ -2745,7 +2745,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([System.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([System.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether a `Decimal` value is less than a [Int27T](#ternary3.int27t) value.
 >
@@ -2757,7 +2757,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([System.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([System.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether a `Decimal` value is greater than or equal to a [Int27T](#ternary3.int27t) value.
 >
@@ -2769,7 +2769,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([System.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([System.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether a `Decimal` value is less than or equal to a [Int27T](#ternary3.int27t) value.
 >
@@ -2781,7 +2781,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([Ternary3.Int27T](#ternary3int27t) left, [System.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([Ternary3.Int27T](#ternary3int27t) left, [System.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable) right)</code>
 
 >Returns a value indicating whether a [Int27T](#ternary3.int27t) value is greater than a `IComparable` value.
 >
@@ -2793,7 +2793,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([Ternary3.Int27T](#ternary3int27t) left, [System.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([Ternary3.Int27T](#ternary3int27t) left, [System.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable) right)</code>
 
 >Returns a value indicating whether a [Int27T](#ternary3.int27t) value is less than a `IComparable` value.
 >
@@ -2805,7 +2805,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([Ternary3.Int27T](#ternary3int27t) left, [System.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([Ternary3.Int27T](#ternary3int27t) left, [System.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable) right)</code>
 
 >Returns a value indicating whether a [Int27T](#ternary3.int27t) value is greater than or equal to a `IComparable` value.
 >
@@ -2817,7 +2817,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([Ternary3.Int27T](#ternary3int27t) left, [System.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([Ternary3.Int27T](#ternary3int27t) left, [System.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable) right)</code>
 
 >Returns a value indicating whether a [Int27T](#ternary3.int27t) value is less than or equal to a `IComparable` value.
 >
@@ -2829,7 +2829,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([System.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([System.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether a `IComparable` value is greater than a [Int27T](#ternary3.int27t) value.
 >
@@ -2841,7 +2841,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([System.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([System.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether a `IComparable` value is less than a [Int27T](#ternary3.int27t) value.
 >
@@ -2853,7 +2853,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([System.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([System.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether a `IComparable` value is greater than or equal to a [Int27T](#ternary3.int27t) value.
 >
@@ -2865,7 +2865,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([System.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable-0) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([System.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable) left, [Ternary3.Int27T](#ternary3int27t) right)</code>
 
 >Returns a value indicating whether a `IComparable` value is less than or equal to a [Int27T](#ternary3.int27t) value.
 >
@@ -2899,7 +2899,7 @@ No documentation available.
 >**Returns:**
 >A new ternary number with a value one less than `value` .
 
-#### <code>[Ternary3.Int27T](#ternary3int27t) **operator &lt;&lt;**([Ternary3.Int27T](#ternary3int27t) value, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) shiftAmount)</code>
+#### <code>[Ternary3.Int27T](#ternary3int27t) **operator &lt;&lt;**([Ternary3.Int27T](#ternary3int27t) value, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) shiftAmount)</code>
 
 >Performs a left shift operation on the ternary number, maintaining the original numeric type.
 >
@@ -2911,7 +2911,7 @@ No documentation available.
 >**Returns:**
 >A new ternary number of the same type containing the shifted value.
 
-#### <code>[Ternary3.Int27T](#ternary3int27t) **operator &gt;&gt;**([Ternary3.Int27T](#ternary3int27t) value, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) shiftAmount)</code>
+#### <code>[Ternary3.Int27T](#ternary3int27t) **operator &gt;&gt;**([Ternary3.Int27T](#ternary3int27t) value, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) shiftAmount)</code>
 
 >Performs a right shift operation on the ternary number, maintaining the original numeric type.
 >
@@ -2923,7 +2923,7 @@ No documentation available.
 >**Returns:**
 >A new ternary number of the same type containing the shifted value.
 
-#### <code>[Ternary3.Int27T](#ternary3int27t) **op_UnsignedRightShift**([Ternary3.Int27T](#ternary3int27t) value, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) shiftAmount)</code>
+#### <code>[Ternary3.Int27T](#ternary3int27t) **op_UnsignedRightShift**([Ternary3.Int27T](#ternary3int27t) value, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) shiftAmount)</code>
 
 >Performs an unsigned right shift operation on the ternary number, maintaining the original numeric type.
 >            In this implementation, it behaves the same as the signed right shift.
@@ -2977,7 +2977,7 @@ No documentation available.
 
 ### Static Methods
 
-#### <code>[Ternary3.Int3T](#ternary3int3t) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) value)</code>
+#### <code>[Ternary3.Int3T](#ternary3int3t) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) value)</code>
 
 >Parses a string representation of a Int3T.
 >
@@ -2988,7 +2988,7 @@ No documentation available.
 >**Returns:**
 >A Int3T representing the parsed value.
 
-#### <code>[Ternary3.Int3T](#ternary3int3t) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) value, [Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format)</code>
+#### <code>[Ternary3.Int3T](#ternary3int3t) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) value, [Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format)</code>
 
 >Parses a string representation of a Int3T.
 >
@@ -3000,7 +3000,7 @@ No documentation available.
 >**Returns:**
 >A Int3T representing the parsed value.
 
-#### <code>[Ternary3.Int3T](#ternary3int3t) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) value, [Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) options)</code>
+#### <code>[Ternary3.Int3T](#ternary3int3t) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) value, [Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) options)</code>
 
 >Parses a string representation of a Int3T.
 >
@@ -3012,7 +3012,7 @@ No documentation available.
 >**Returns:**
 >A Int3T representing the parsed value.
 
-#### <code>[Ternary3.Int3T](#ternary3int3t) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) value, [Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format, [Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) options)</code>
+#### <code>[Ternary3.Int3T](#ternary3int3t) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) value, [Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format, [Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) options)</code>
 
 >Parses a string representation of a Int3T.
 >
@@ -3025,7 +3025,7 @@ No documentation available.
 >**Returns:**
 >A Int3T representing the parsed value.
 
-#### <code>[Ternary3.Int3T](#ternary3int3t) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) s, [System.Globalization.NumberStyles](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.numberstyles-0) style)</code>
+#### <code>[Ternary3.Int3T](#ternary3int3t) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) s, [System.Globalization.NumberStyles](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.numberstyles) style)</code>
 
 >Converts the string representation of a number in a specified style to its [Int3T](#ternary3.int3t) equivalent.
 >
@@ -3044,7 +3044,7 @@ No documentation available.
 >- `System.FormatException`: `s` is not in a format compliant with `style` .
 >- `System.OverflowException`: `s` represents a number less than [MinValue](#f:ternary3.int3t.minvalue) or greater than [MaxValue](#f:ternary3.int3t.maxvalue) .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **TryParse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) s, [Ternary3.Int3T&](#ternary3int3t) result)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **TryParse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) s, [Ternary3.Int3T&](#ternary3int3t) result)</code>
 
 >Tries to convert the string representation of a number to its [Int3T](#ternary3.int3t) equivalent, and returns a value that indicates whether the conversion succeeded.
 >
@@ -3067,18 +3067,18 @@ No documentation available.
 
 >Represents the smallest possible value of a [Int3T](#ternary3.int3t) . This field is constant.
 
-#### <code>[System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte-0) **MaxValueConstant**</code>
+#### <code>[System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte) **MaxValueConstant**</code>
 
 >Represents the maximum value of a [Int3T](#ternary3.int3t) , expressed as a `SByte` This field is constant.
 
-#### <code>[System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte-0) **MinValueConstant**</code>
+#### <code>[System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte) **MinValueConstant**</code>
 
 >Represents the minimum value of a [Int3T](#ternary3.int3t) , expressed as a `SByte` This field is constant.
 
 
 ### Methods
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **Equals**([System.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object-0) obj)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **Equals**([System.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object) obj)</code>
 
 >Returns a value indicating whether this instance is equal to a specified object.
 >
@@ -3090,7 +3090,7 @@ No documentation available.
 >`true` if `obj` is an instance of [Int3T](#ternary3.int3t) or a compatible numeric type
 >            and equals the value of this instance; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **Equals**([Ternary3.Int3T](#ternary3int3t) other)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **Equals**([Ternary3.Int3T](#ternary3int3t) other)</code>
 
 >Returns a value indicating whether this instance is equal to a specified [Int3T](#ternary3.int3t) value.
 >
@@ -3101,7 +3101,7 @@ No documentation available.
 >**Returns:**
 >`true` if `other` has the same value as this instance; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **Equals**([System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte-0) other)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **Equals**([System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte) other)</code>
 
 >Returns a value indicating whether this instance is equal to a specified `SByte` value.
 >
@@ -3112,34 +3112,34 @@ No documentation available.
 >**Returns:**
 >`true` if `other` has the same value as this instance; otherwise, `false` .
 
-#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) **GetHashCode**()</code>
+#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **GetHashCode**()</code>
 
 >Returns the hash code for this instance.
 >
 >**Returns:**
 >A 32-bit signed integer hash code.
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **ToString**()</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**()</code>
 
 >Returns a string representation of this instance.
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **ToString**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) format)</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) format)</code>
 
 >Returns a string representation of this instance.
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **ToString**([System.IFormatProvider](https://learn.microsoft.com/en-us/dotnet/api/system.iformatprovider-0) provider)</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**([System.IFormatProvider](https://learn.microsoft.com/en-us/dotnet/api/system.iformatprovider) provider)</code>
 
 >Returns a string representation of this instance.
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **ToString**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) format, [System.IFormatProvider](https://learn.microsoft.com/en-us/dotnet/api/system.iformatprovider-0) provider)</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) format, [System.IFormatProvider](https://learn.microsoft.com/en-us/dotnet/api/system.iformatprovider) provider)</code>
 
 >Returns a string representation of this instance.
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **ToString**([Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format)</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**([Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format)</code>
 
 >Returns a string representation of this instance, formatted balanced ternarily according to the specified format.
 
-#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) **CompareTo**([System.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object-0) obj)</code>
+#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **CompareTo**([System.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object) obj)</code>
 
 >Compares this instance to a specified object and returns an indication of their relative values.
 >
@@ -3158,7 +3158,7 @@ No documentation available.
 >**Exceptions:**
 >- `System.ArgumentException`: `obj` is not a [Int3T](#ternary3.int3t) or a type that can be converted to an integer.
 
-#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) **CompareTo**([Ternary3.Int3T](#ternary3int3t) other)</code>
+#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **CompareTo**([Ternary3.Int3T](#ternary3int3t) other)</code>
 
 >Compares this instance to a specified [Int3T](#ternary3.int3t) object and returns an indication of their relative values.
 >
@@ -3173,7 +3173,7 @@ No documentation available.
 >            Zero: This instance is equal to `other` .
 >            Greater than zero: This instance is greater than `other` .
 
-#### <code>[System.TypeCode](https://learn.microsoft.com/en-us/dotnet/api/system.typecode-0) **GetTypeCode**()</code>
+#### <code>[System.TypeCode](https://learn.microsoft.com/en-us/dotnet/api/system.typecode) **GetTypeCode**()</code>
 
 >Gets the `TypeCode` for this instance.
 >
@@ -3183,18 +3183,18 @@ No documentation available.
 
 ### Properties
 
-#### <code>[Ternary3.Trit](#ternary3trit) **this[[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) index]** { get; }</code>
+#### <code>[Ternary3.Trit](#ternary3trit) **this[[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) index]** { get; }</code>
 
 No documentation available.
 
-#### <code>[Ternary3.Trit](#ternary3trit) **this[[System.Index](https://learn.microsoft.com/en-us/dotnet/api/system.index-0) index]** { get; }</code>
+#### <code>[Ternary3.Trit](#ternary3trit) **this[[System.Index](https://learn.microsoft.com/en-us/dotnet/api/system.index) index]** { get; }</code>
 
 No documentation available.
 
 
 ### Operators
 
-#### <code>[Ternary3.Int3T](#ternary3int3t) **operator implicit**([System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte-0) value)</code>
+#### <code>[Ternary3.Int3T](#ternary3int3t) **operator implicit**([System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte) value)</code>
 
 >Defines an implicit conversion of a SByte to a [Int3T](#ternary3.int3t) .
 >
@@ -3205,7 +3205,7 @@ No documentation available.
 >**Returns:**
 >A [Int3T](#ternary3.int3t) that represents the converted value.
 
-#### <code>[System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte-0) **operator implicit**([Ternary3.Int3T](#ternary3int3t) value)</code>
+#### <code>[System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte) **operator implicit**([Ternary3.Int3T](#ternary3int3t) value)</code>
 
 >Defines an implicit conversion of a SByte to a [Int3T](#ternary3.int3t) .
 >
@@ -3216,7 +3216,7 @@ No documentation available.
 >**Returns:**
 >A [Int3T](#ternary3.int3t) that represents the converted value.
 
-#### <code>[Ternary3.Int3T](#ternary3int3t) **operator explicit**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) value)</code>
+#### <code>[Ternary3.Int3T](#ternary3int3t) **operator explicit**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) value)</code>
 
 >Defines an explicit conversion of a Int32 to a [Int3T](#ternary3.int3t) .
 >
@@ -3227,7 +3227,7 @@ No documentation available.
 >**Returns:**
 >A [Int3T](#ternary3.int3t) that represents the converted value.
 
-#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) **operator implicit**([Ternary3.Int3T](#ternary3int3t) value)</code>
+#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **operator implicit**([Ternary3.Int3T](#ternary3int3t) value)</code>
 
 >Defines an implicit conversion of a SByte to a [Int3T](#ternary3.int3t) .
 >
@@ -3238,7 +3238,7 @@ No documentation available.
 >**Returns:**
 >A [Int3T](#ternary3.int3t) that represents the converted value.
 
-#### <code>[Ternary3.Int3T](#ternary3int3t) **operator explicit**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) value)</code>
+#### <code>[Ternary3.Int3T](#ternary3int3t) **operator explicit**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) value)</code>
 
 >Defines an explicit conversion of a Int32 to a [Int3T](#ternary3.int3t) .
 >
@@ -3249,7 +3249,7 @@ No documentation available.
 >**Returns:**
 >A [Int3T](#ternary3.int3t) that represents the converted value.
 
-#### <code>[System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) **operator implicit**([Ternary3.Int3T](#ternary3int3t) value)</code>
+#### <code>[System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) **operator implicit**([Ternary3.Int3T](#ternary3int3t) value)</code>
 
 >Defines an implicit conversion of a SByte to a [Int3T](#ternary3.int3t) .
 >
@@ -3260,7 +3260,7 @@ No documentation available.
 >**Returns:**
 >A [Int3T](#ternary3.int3t) that represents the converted value.
 
-#### <code>[Ternary3.Int3T](#ternary3int3t) **operator explicit**([System.Int128](https://learn.microsoft.com/en-us/dotnet/api/system.int128-0) value)</code>
+#### <code>[Ternary3.Int3T](#ternary3int3t) **operator explicit**([System.Int128](https://learn.microsoft.com/en-us/dotnet/api/system.int128) value)</code>
 
 >Defines an explicit conversion of a Int32 to a [Int3T](#ternary3.int3t) .
 >
@@ -3271,7 +3271,7 @@ No documentation available.
 >**Returns:**
 >A [Int3T](#ternary3.int3t) that represents the converted value.
 
-#### <code>[System.Int128](https://learn.microsoft.com/en-us/dotnet/api/system.int128-0) **operator implicit**([Ternary3.Int3T](#ternary3int3t) value)</code>
+#### <code>[System.Int128](https://learn.microsoft.com/en-us/dotnet/api/system.int128) **operator implicit**([Ternary3.Int3T](#ternary3int3t) value)</code>
 
 >Defines an implicit conversion of a SByte to a [Int3T](#ternary3.int3t) .
 >
@@ -3282,7 +3282,7 @@ No documentation available.
 >**Returns:**
 >A [Int3T](#ternary3.int3t) that represents the converted value.
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator ==**([System.IConvertible](https://learn.microsoft.com/en-us/dotnet/api/system.iconvertible-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator ==**([System.IConvertible](https://learn.microsoft.com/en-us/dotnet/api/system.iconvertible) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether two [Int3T](#ternary3.int3t) instances are equal.
 >
@@ -3294,7 +3294,7 @@ No documentation available.
 >**Returns:**
 >`true` if the values of `left` and `right` are equal; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator !=**([System.IConvertible](https://learn.microsoft.com/en-us/dotnet/api/system.iconvertible-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator !=**([System.IConvertible](https://learn.microsoft.com/en-us/dotnet/api/system.iconvertible) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether two [Int3T](#ternary3.int3t) instances are not equal.
 >
@@ -3306,7 +3306,7 @@ No documentation available.
 >**Returns:**
 >`true` if the values of `left` and `right` are not equal; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator ==**([Ternary3.Int3T](#ternary3int3t) left, [System.IConvertible](https://learn.microsoft.com/en-us/dotnet/api/system.iconvertible-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator ==**([Ternary3.Int3T](#ternary3int3t) left, [System.IConvertible](https://learn.microsoft.com/en-us/dotnet/api/system.iconvertible) right)</code>
 
 >Returns a value indicating whether two [Int3T](#ternary3.int3t) instances are equal.
 >
@@ -3318,7 +3318,7 @@ No documentation available.
 >**Returns:**
 >`true` if the values of `left` and `right` are equal; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator !=**([Ternary3.Int3T](#ternary3int3t) left, [System.IConvertible](https://learn.microsoft.com/en-us/dotnet/api/system.iconvertible-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator !=**([Ternary3.Int3T](#ternary3int3t) left, [System.IConvertible](https://learn.microsoft.com/en-us/dotnet/api/system.iconvertible) right)</code>
 
 >Returns a value indicating whether two [Int3T](#ternary3.int3t) instances are not equal.
 >
@@ -3330,7 +3330,7 @@ No documentation available.
 >**Returns:**
 >`true` if the values of `left` and `right` are not equal; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator ==**([Ternary3.Int3T](#ternary3int3t) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator ==**([Ternary3.Int3T](#ternary3int3t) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether two [Int3T](#ternary3.int3t) instances are equal.
 >
@@ -3342,7 +3342,7 @@ No documentation available.
 >**Returns:**
 >`true` if the values of `left` and `right` are equal; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator !=**([Ternary3.Int3T](#ternary3int3t) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator !=**([Ternary3.Int3T](#ternary3int3t) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether two [Int3T](#ternary3.int3t) instances are not equal.
 >
@@ -3436,7 +3436,7 @@ No documentation available.
 >**Returns:**
 >The same ternary number.
 
-#### <code>[Ternary3.Int3T](#ternary3int3t) **operator +**([Ternary3.Int3T](#ternary3int3t) left, [System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte-0) right)</code>
+#### <code>[Ternary3.Int3T](#ternary3int3t) **operator +**([Ternary3.Int3T](#ternary3int3t) left, [System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte) right)</code>
 
 >Adds a ternary number and a native numeric value, maintaining the original ternary type.
 >
@@ -3448,7 +3448,7 @@ No documentation available.
 >**Returns:**
 >A new ternary number containing the sum.
 
-#### <code>[Ternary3.Int3T](#ternary3int3t) **operator +**([System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[Ternary3.Int3T](#ternary3int3t) **operator +**([System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Adds a native numeric value and a ternary number, maintaining the original ternary type.
 >
@@ -3460,7 +3460,7 @@ No documentation available.
 >**Returns:**
 >A new ternary number containing the sum.
 
-#### <code>[Ternary3.Int3T](#ternary3int3t) **operator -**([Ternary3.Int3T](#ternary3int3t) left, [System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte-0) right)</code>
+#### <code>[Ternary3.Int3T](#ternary3int3t) **operator -**([Ternary3.Int3T](#ternary3int3t) left, [System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte) right)</code>
 
 >Subtracts a native numeric value from a ternary number, maintaining the original ternary type.
 >
@@ -3472,7 +3472,7 @@ No documentation available.
 >**Returns:**
 >A new ternary number containing the difference.
 
-#### <code>[Ternary3.Int3T](#ternary3int3t) **operator -**([System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[Ternary3.Int3T](#ternary3int3t) **operator -**([System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Subtracts a ternary number from a native numeric value, maintaining the original ternary type.
 >
@@ -3484,7 +3484,7 @@ No documentation available.
 >**Returns:**
 >A new ternary number containing the difference.
 
-#### <code>[Ternary3.Int3T](#ternary3int3t) **operator &ast;**([Ternary3.Int3T](#ternary3int3t) left, [System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte-0) right)</code>
+#### <code>[Ternary3.Int3T](#ternary3int3t) **operator &ast;**([Ternary3.Int3T](#ternary3int3t) left, [System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte) right)</code>
 
 >Multiplies a ternary number by a native numeric value, maintaining the original ternary type.
 >
@@ -3496,7 +3496,7 @@ No documentation available.
 >**Returns:**
 >A new ternary number of the same type containing the product.
 
-#### <code>[Ternary3.Int3T](#ternary3int3t) **operator &ast;**([System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[Ternary3.Int3T](#ternary3int3t) **operator &ast;**([System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Multiplies a native numeric value by a ternary number, maintaining the original ternary type.
 >
@@ -3508,7 +3508,7 @@ No documentation available.
 >**Returns:**
 >A new ternary number containing the product.
 
-#### <code>[Ternary3.Int3T](#ternary3int3t) **operator /**([Ternary3.Int3T](#ternary3int3t) left, [System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte-0) right)</code>
+#### <code>[Ternary3.Int3T](#ternary3int3t) **operator /**([Ternary3.Int3T](#ternary3int3t) left, [System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte) right)</code>
 
 >Divides a ternary number by a native numeric value, maintaining the original ternary type.
 >
@@ -3520,7 +3520,7 @@ No documentation available.
 >**Returns:**
 >A new ternary number of the same type containing the quotient.
 
-#### <code>[Ternary3.Int3T](#ternary3int3t) **operator /**([System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[Ternary3.Int3T](#ternary3int3t) **operator /**([System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Divides a native numeric value by a ternary number, maintaining the original ternary type.
 >
@@ -3532,7 +3532,7 @@ No documentation available.
 >**Returns:**
 >A new ternary number containing the quotient.
 
-#### <code>[Ternary3.Int3T](#ternary3int3t) **operator %**([Ternary3.Int3T](#ternary3int3t) left, [System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte-0) right)</code>
+#### <code>[Ternary3.Int3T](#ternary3int3t) **operator %**([Ternary3.Int3T](#ternary3int3t) left, [System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte) right)</code>
 
 >Computes the remainder after dividing a ternary number by a native numeric value, maintaining the original ternary type.
 >
@@ -3544,7 +3544,7 @@ No documentation available.
 >**Returns:**
 >A new ternary number of the same type containing the remainder.
 
-#### <code>[Ternary3.Int3T](#ternary3int3t) **operator %**([System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[Ternary3.Int3T](#ternary3int3t) **operator %**([System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Computes the remainder after dividing a native numeric value by a ternary number, maintaining the original ternary type.
 >
@@ -3556,7 +3556,7 @@ No documentation available.
 >**Returns:**
 >A new ternary number containing the remainder.
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([Ternary3.Int3T](#ternary3int3t) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([Ternary3.Int3T](#ternary3int3t) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether one [Int3T](#ternary3.int3t) is greater than another.
 >
@@ -3568,7 +3568,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([Ternary3.Int3T](#ternary3int3t) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([Ternary3.Int3T](#ternary3int3t) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether one [Int3T](#ternary3.int3t) is less than another.
 >
@@ -3580,7 +3580,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([Ternary3.Int3T](#ternary3int3t) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([Ternary3.Int3T](#ternary3int3t) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether one [Int3T](#ternary3.int3t) is greater than or equal to another.
 >
@@ -3592,7 +3592,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([Ternary3.Int3T](#ternary3int3t) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([Ternary3.Int3T](#ternary3int3t) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether one [Int3T](#ternary3.int3t) is less than or equal to another.
 >
@@ -3604,7 +3604,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([Ternary3.Int3T](#ternary3int3t) left, [System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([Ternary3.Int3T](#ternary3int3t) left, [System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte) right)</code>
 
 >Returns a value indicating whether a [Int3T](#ternary3.int3t) value is greater than a `SByte` value.
 >
@@ -3616,7 +3616,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([Ternary3.Int3T](#ternary3int3t) left, [System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([Ternary3.Int3T](#ternary3int3t) left, [System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte) right)</code>
 
 >Returns a value indicating whether a [Int3T](#ternary3.int3t) value is less than a `SByte` value.
 >
@@ -3628,7 +3628,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([Ternary3.Int3T](#ternary3int3t) left, [System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([Ternary3.Int3T](#ternary3int3t) left, [System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte) right)</code>
 
 >Returns a value indicating whether a [Int3T](#ternary3.int3t) value is greater than or equal to a `SByte` value.
 >
@@ -3640,7 +3640,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([Ternary3.Int3T](#ternary3int3t) left, [System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([Ternary3.Int3T](#ternary3int3t) left, [System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte) right)</code>
 
 >Returns a value indicating whether a [Int3T](#ternary3.int3t) value is less than or equal to a `SByte` value.
 >
@@ -3652,7 +3652,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether a `SByte` value is greater than a [Int3T](#ternary3.int3t) value.
 >
@@ -3664,7 +3664,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether a `SByte` value is less than a [Int3T](#ternary3.int3t) value.
 >
@@ -3676,7 +3676,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether a `SByte` value is greater than or equal to a [Int3T](#ternary3.int3t) value.
 >
@@ -3688,7 +3688,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether a `SByte` value is less than or equal to a [Int3T](#ternary3.int3t) value.
 >
@@ -3700,7 +3700,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([Ternary3.Int3T](#ternary3int3t) left, [System.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([Ternary3.Int3T](#ternary3int3t) left, [System.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte) right)</code>
 
 >Returns a value indicating whether a [Int3T](#ternary3.int3t) value is greater than a `Byte` value.
 >
@@ -3712,7 +3712,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([Ternary3.Int3T](#ternary3int3t) left, [System.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([Ternary3.Int3T](#ternary3int3t) left, [System.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte) right)</code>
 
 >Returns a value indicating whether a [Int3T](#ternary3.int3t) value is less than a `Byte` value.
 >
@@ -3724,7 +3724,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([Ternary3.Int3T](#ternary3int3t) left, [System.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([Ternary3.Int3T](#ternary3int3t) left, [System.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte) right)</code>
 
 >Returns a value indicating whether a [Int3T](#ternary3.int3t) value is greater than or equal to a `Byte` value.
 >
@@ -3736,7 +3736,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([Ternary3.Int3T](#ternary3int3t) left, [System.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([Ternary3.Int3T](#ternary3int3t) left, [System.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte) right)</code>
 
 >Returns a value indicating whether a [Int3T](#ternary3.int3t) value is less than or equal to a `Byte` value.
 >
@@ -3748,7 +3748,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([System.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([System.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether a `Byte` value is greater than a [Int3T](#ternary3.int3t) value.
 >
@@ -3760,7 +3760,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([System.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([System.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether a `Byte` value is less than a [Int3T](#ternary3.int3t) value.
 >
@@ -3772,7 +3772,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([System.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([System.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether a `Byte` value is greater than or equal to a [Int3T](#ternary3.int3t) value.
 >
@@ -3784,7 +3784,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([System.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([System.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether a `Byte` value is less than or equal to a [Int3T](#ternary3.int3t) value.
 >
@@ -3796,7 +3796,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([Ternary3.Int3T](#ternary3int3t) left, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([Ternary3.Int3T](#ternary3int3t) left, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) right)</code>
 
 >Returns a value indicating whether a [Int3T](#ternary3.int3t) value is greater than a `Int32` value.
 >
@@ -3808,7 +3808,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([Ternary3.Int3T](#ternary3int3t) left, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([Ternary3.Int3T](#ternary3int3t) left, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) right)</code>
 
 >Returns a value indicating whether a [Int3T](#ternary3.int3t) value is less than a `Int32` value.
 >
@@ -3820,7 +3820,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([Ternary3.Int3T](#ternary3int3t) left, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([Ternary3.Int3T](#ternary3int3t) left, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) right)</code>
 
 >Returns a value indicating whether a [Int3T](#ternary3.int3t) value is greater than or equal to a `Int32` value.
 >
@@ -3832,7 +3832,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([Ternary3.Int3T](#ternary3int3t) left, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([Ternary3.Int3T](#ternary3int3t) left, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) right)</code>
 
 >Returns a value indicating whether a [Int3T](#ternary3.int3t) value is less than or equal to a `Int32` value.
 >
@@ -3844,7 +3844,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether a `Int32` value is greater than a [Int3T](#ternary3.int3t) value.
 >
@@ -3856,7 +3856,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether a `Int32` value is less than a [Int3T](#ternary3.int3t) value.
 >
@@ -3868,7 +3868,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether a `Int32` value is greater than or equal to a [Int3T](#ternary3.int3t) value.
 >
@@ -3880,7 +3880,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether a `Int32` value is less than or equal to a [Int3T](#ternary3.int3t) value.
 >
@@ -3892,7 +3892,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([Ternary3.Int3T](#ternary3int3t) left, [System.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([Ternary3.Int3T](#ternary3int3t) left, [System.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32) right)</code>
 
 >Returns a value indicating whether a [Int3T](#ternary3.int3t) value is greater than a `UInt32` value.
 >
@@ -3904,7 +3904,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([Ternary3.Int3T](#ternary3int3t) left, [System.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([Ternary3.Int3T](#ternary3int3t) left, [System.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32) right)</code>
 
 >Returns a value indicating whether a [Int3T](#ternary3.int3t) value is less than a `UInt32` value.
 >
@@ -3916,7 +3916,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([Ternary3.Int3T](#ternary3int3t) left, [System.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([Ternary3.Int3T](#ternary3int3t) left, [System.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32) right)</code>
 
 >Returns a value indicating whether a [Int3T](#ternary3.int3t) value is greater than or equal to a `UInt32` value.
 >
@@ -3928,7 +3928,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([Ternary3.Int3T](#ternary3int3t) left, [System.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([Ternary3.Int3T](#ternary3int3t) left, [System.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32) right)</code>
 
 >Returns a value indicating whether a [Int3T](#ternary3.int3t) value is less than or equal to a `UInt32` value.
 >
@@ -3940,7 +3940,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([System.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([System.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether a `UInt32` value is greater than a [Int3T](#ternary3.int3t) value.
 >
@@ -3952,7 +3952,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([System.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([System.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether a `UInt32` value is less than a [Int3T](#ternary3.int3t) value.
 >
@@ -3964,7 +3964,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([System.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([System.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether a `UInt32` value is greater than or equal to a [Int3T](#ternary3.int3t) value.
 >
@@ -3976,7 +3976,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([System.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([System.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether a `UInt32` value is less than or equal to a [Int3T](#ternary3.int3t) value.
 >
@@ -3988,7 +3988,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([Ternary3.Int3T](#ternary3int3t) left, [System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([Ternary3.Int3T](#ternary3int3t) left, [System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16) right)</code>
 
 >Returns a value indicating whether a [Int3T](#ternary3.int3t) value is greater than a `Int16` value.
 >
@@ -4000,7 +4000,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([Ternary3.Int3T](#ternary3int3t) left, [System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([Ternary3.Int3T](#ternary3int3t) left, [System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16) right)</code>
 
 >Returns a value indicating whether a [Int3T](#ternary3.int3t) value is less than a `Int16` value.
 >
@@ -4012,7 +4012,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([Ternary3.Int3T](#ternary3int3t) left, [System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([Ternary3.Int3T](#ternary3int3t) left, [System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16) right)</code>
 
 >Returns a value indicating whether a [Int3T](#ternary3.int3t) value is greater than or equal to a `Int16` value.
 >
@@ -4024,7 +4024,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([Ternary3.Int3T](#ternary3int3t) left, [System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([Ternary3.Int3T](#ternary3int3t) left, [System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16) right)</code>
 
 >Returns a value indicating whether a [Int3T](#ternary3.int3t) value is less than or equal to a `Int16` value.
 >
@@ -4036,7 +4036,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether a `Int16` value is greater than a [Int3T](#ternary3.int3t) value.
 >
@@ -4048,7 +4048,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether a `Int16` value is less than a [Int3T](#ternary3.int3t) value.
 >
@@ -4060,7 +4060,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether a `Int16` value is greater than or equal to a [Int3T](#ternary3.int3t) value.
 >
@@ -4072,7 +4072,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether a `Int16` value is less than or equal to a [Int3T](#ternary3.int3t) value.
 >
@@ -4084,7 +4084,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([Ternary3.Int3T](#ternary3int3t) left, [System.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([Ternary3.Int3T](#ternary3int3t) left, [System.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16) right)</code>
 
 >Returns a value indicating whether a [Int3T](#ternary3.int3t) value is greater than a `UInt16` value.
 >
@@ -4096,7 +4096,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([Ternary3.Int3T](#ternary3int3t) left, [System.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([Ternary3.Int3T](#ternary3int3t) left, [System.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16) right)</code>
 
 >Returns a value indicating whether a [Int3T](#ternary3.int3t) value is less than a `UInt16` value.
 >
@@ -4108,7 +4108,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([Ternary3.Int3T](#ternary3int3t) left, [System.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([Ternary3.Int3T](#ternary3int3t) left, [System.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16) right)</code>
 
 >Returns a value indicating whether a [Int3T](#ternary3.int3t) value is greater than or equal to a `UInt16` value.
 >
@@ -4120,7 +4120,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([Ternary3.Int3T](#ternary3int3t) left, [System.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([Ternary3.Int3T](#ternary3int3t) left, [System.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16) right)</code>
 
 >Returns a value indicating whether a [Int3T](#ternary3.int3t) value is less than or equal to a `UInt16` value.
 >
@@ -4132,7 +4132,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([System.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([System.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether a `UInt16` value is greater than a [Int3T](#ternary3.int3t) value.
 >
@@ -4144,7 +4144,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([System.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([System.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether a `UInt16` value is less than a [Int3T](#ternary3.int3t) value.
 >
@@ -4156,7 +4156,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([System.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([System.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether a `UInt16` value is greater than or equal to a [Int3T](#ternary3.int3t) value.
 >
@@ -4168,7 +4168,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([System.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([System.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether a `UInt16` value is less than or equal to a [Int3T](#ternary3.int3t) value.
 >
@@ -4180,7 +4180,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([Ternary3.Int3T](#ternary3int3t) left, [System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([Ternary3.Int3T](#ternary3int3t) left, [System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) right)</code>
 
 >Returns a value indicating whether a [Int3T](#ternary3.int3t) value is greater than a `Int64` value.
 >
@@ -4192,7 +4192,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([Ternary3.Int3T](#ternary3int3t) left, [System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([Ternary3.Int3T](#ternary3int3t) left, [System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) right)</code>
 
 >Returns a value indicating whether a [Int3T](#ternary3.int3t) value is less than a `Int64` value.
 >
@@ -4204,7 +4204,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([Ternary3.Int3T](#ternary3int3t) left, [System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([Ternary3.Int3T](#ternary3int3t) left, [System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) right)</code>
 
 >Returns a value indicating whether a [Int3T](#ternary3.int3t) value is greater than or equal to a `Int64` value.
 >
@@ -4216,7 +4216,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([Ternary3.Int3T](#ternary3int3t) left, [System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([Ternary3.Int3T](#ternary3int3t) left, [System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) right)</code>
 
 >Returns a value indicating whether a [Int3T](#ternary3.int3t) value is less than or equal to a `Int64` value.
 >
@@ -4228,7 +4228,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether a `Int64` value is greater than a [Int3T](#ternary3.int3t) value.
 >
@@ -4240,7 +4240,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether a `Int64` value is less than a [Int3T](#ternary3.int3t) value.
 >
@@ -4252,7 +4252,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether a `Int64` value is greater than or equal to a [Int3T](#ternary3.int3t) value.
 >
@@ -4264,7 +4264,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether a `Int64` value is less than or equal to a [Int3T](#ternary3.int3t) value.
 >
@@ -4276,7 +4276,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([Ternary3.Int3T](#ternary3int3t) left, [System.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([Ternary3.Int3T](#ternary3int3t) left, [System.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64) right)</code>
 
 >Returns a value indicating whether a [Int3T](#ternary3.int3t) value is greater than a `UInt64` value.
 >
@@ -4288,7 +4288,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([Ternary3.Int3T](#ternary3int3t) left, [System.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([Ternary3.Int3T](#ternary3int3t) left, [System.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64) right)</code>
 
 >Returns a value indicating whether a [Int3T](#ternary3.int3t) value is less than a `UInt64` value.
 >
@@ -4300,7 +4300,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([Ternary3.Int3T](#ternary3int3t) left, [System.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([Ternary3.Int3T](#ternary3int3t) left, [System.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64) right)</code>
 
 >Returns a value indicating whether a [Int3T](#ternary3.int3t) value is greater than or equal to a `UInt64` value.
 >
@@ -4312,7 +4312,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([Ternary3.Int3T](#ternary3int3t) left, [System.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([Ternary3.Int3T](#ternary3int3t) left, [System.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64) right)</code>
 
 >Returns a value indicating whether a [Int3T](#ternary3.int3t) value is less than or equal to a `UInt64` value.
 >
@@ -4324,7 +4324,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([System.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([System.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether a `UInt64` value is greater than a [Int3T](#ternary3.int3t) value.
 >
@@ -4336,7 +4336,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([System.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([System.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether a `UInt64` value is less than a [Int3T](#ternary3.int3t) value.
 >
@@ -4348,7 +4348,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([System.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([System.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether a `UInt64` value is greater than or equal to a [Int3T](#ternary3.int3t) value.
 >
@@ -4360,7 +4360,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([System.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([System.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether a `UInt64` value is less than or equal to a [Int3T](#ternary3.int3t) value.
 >
@@ -4372,7 +4372,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([Ternary3.Int3T](#ternary3int3t) left, [System.Single](https://learn.microsoft.com/en-us/dotnet/api/system.single-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([Ternary3.Int3T](#ternary3int3t) left, [System.Single](https://learn.microsoft.com/en-us/dotnet/api/system.single) right)</code>
 
 >Returns a value indicating whether a [Int3T](#ternary3.int3t) value is greater than a `Single` value.
 >
@@ -4384,7 +4384,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([Ternary3.Int3T](#ternary3int3t) left, [System.Single](https://learn.microsoft.com/en-us/dotnet/api/system.single-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([Ternary3.Int3T](#ternary3int3t) left, [System.Single](https://learn.microsoft.com/en-us/dotnet/api/system.single) right)</code>
 
 >Returns a value indicating whether a [Int3T](#ternary3.int3t) value is less than a `Single` value.
 >
@@ -4396,7 +4396,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([Ternary3.Int3T](#ternary3int3t) left, [System.Single](https://learn.microsoft.com/en-us/dotnet/api/system.single-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([Ternary3.Int3T](#ternary3int3t) left, [System.Single](https://learn.microsoft.com/en-us/dotnet/api/system.single) right)</code>
 
 >Returns a value indicating whether a [Int3T](#ternary3.int3t) value is greater than or equal to a `Single` value.
 >
@@ -4408,7 +4408,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([Ternary3.Int3T](#ternary3int3t) left, [System.Single](https://learn.microsoft.com/en-us/dotnet/api/system.single-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([Ternary3.Int3T](#ternary3int3t) left, [System.Single](https://learn.microsoft.com/en-us/dotnet/api/system.single) right)</code>
 
 >Returns a value indicating whether a [Int3T](#ternary3.int3t) value is less than or equal to a `Single` value.
 >
@@ -4420,7 +4420,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([System.Single](https://learn.microsoft.com/en-us/dotnet/api/system.single-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([System.Single](https://learn.microsoft.com/en-us/dotnet/api/system.single) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether a `Single` value is greater than a [Int3T](#ternary3.int3t) value.
 >
@@ -4432,7 +4432,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([System.Single](https://learn.microsoft.com/en-us/dotnet/api/system.single-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([System.Single](https://learn.microsoft.com/en-us/dotnet/api/system.single) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether a `Single` value is less than a [Int3T](#ternary3.int3t) value.
 >
@@ -4444,7 +4444,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([System.Single](https://learn.microsoft.com/en-us/dotnet/api/system.single-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([System.Single](https://learn.microsoft.com/en-us/dotnet/api/system.single) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether a `Single` value is greater than or equal to a [Int3T](#ternary3.int3t) value.
 >
@@ -4456,7 +4456,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([System.Single](https://learn.microsoft.com/en-us/dotnet/api/system.single-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([System.Single](https://learn.microsoft.com/en-us/dotnet/api/system.single) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether a `Single` value is less than or equal to a [Int3T](#ternary3.int3t) value.
 >
@@ -4468,7 +4468,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([Ternary3.Int3T](#ternary3int3t) left, [System.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([Ternary3.Int3T](#ternary3int3t) left, [System.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double) right)</code>
 
 >Returns a value indicating whether a [Int3T](#ternary3.int3t) value is greater than a `Double` value.
 >
@@ -4480,7 +4480,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([Ternary3.Int3T](#ternary3int3t) left, [System.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([Ternary3.Int3T](#ternary3int3t) left, [System.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double) right)</code>
 
 >Returns a value indicating whether a [Int3T](#ternary3.int3t) value is less than a `Double` value.
 >
@@ -4492,7 +4492,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([Ternary3.Int3T](#ternary3int3t) left, [System.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([Ternary3.Int3T](#ternary3int3t) left, [System.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double) right)</code>
 
 >Returns a value indicating whether a [Int3T](#ternary3.int3t) value is greater than or equal to a `Double` value.
 >
@@ -4504,7 +4504,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([Ternary3.Int3T](#ternary3int3t) left, [System.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([Ternary3.Int3T](#ternary3int3t) left, [System.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double) right)</code>
 
 >Returns a value indicating whether a [Int3T](#ternary3.int3t) value is less than or equal to a `Double` value.
 >
@@ -4516,7 +4516,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([System.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([System.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether a `Double` value is greater than a [Int3T](#ternary3.int3t) value.
 >
@@ -4528,7 +4528,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([System.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([System.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether a `Double` value is less than a [Int3T](#ternary3.int3t) value.
 >
@@ -4540,7 +4540,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([System.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([System.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether a `Double` value is greater than or equal to a [Int3T](#ternary3.int3t) value.
 >
@@ -4552,7 +4552,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([System.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([System.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether a `Double` value is less than or equal to a [Int3T](#ternary3.int3t) value.
 >
@@ -4564,7 +4564,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([Ternary3.Int3T](#ternary3int3t) left, [System.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([Ternary3.Int3T](#ternary3int3t) left, [System.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal) right)</code>
 
 >Returns a value indicating whether a [Int3T](#ternary3.int3t) value is greater than a `Decimal` value.
 >
@@ -4576,7 +4576,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([Ternary3.Int3T](#ternary3int3t) left, [System.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([Ternary3.Int3T](#ternary3int3t) left, [System.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal) right)</code>
 
 >Returns a value indicating whether a [Int3T](#ternary3.int3t) value is less than a `Decimal` value.
 >
@@ -4588,7 +4588,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([Ternary3.Int3T](#ternary3int3t) left, [System.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([Ternary3.Int3T](#ternary3int3t) left, [System.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal) right)</code>
 
 >Returns a value indicating whether a [Int3T](#ternary3.int3t) value is greater than or equal to a `Decimal` value.
 >
@@ -4600,7 +4600,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([Ternary3.Int3T](#ternary3int3t) left, [System.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([Ternary3.Int3T](#ternary3int3t) left, [System.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal) right)</code>
 
 >Returns a value indicating whether a [Int3T](#ternary3.int3t) value is less than or equal to a `Decimal` value.
 >
@@ -4612,7 +4612,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([System.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([System.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether a `Decimal` value is greater than a [Int3T](#ternary3.int3t) value.
 >
@@ -4624,7 +4624,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([System.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([System.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether a `Decimal` value is less than a [Int3T](#ternary3.int3t) value.
 >
@@ -4636,7 +4636,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([System.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([System.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether a `Decimal` value is greater than or equal to a [Int3T](#ternary3.int3t) value.
 >
@@ -4648,7 +4648,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([System.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([System.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether a `Decimal` value is less than or equal to a [Int3T](#ternary3.int3t) value.
 >
@@ -4660,7 +4660,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([Ternary3.Int3T](#ternary3int3t) left, [System.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([Ternary3.Int3T](#ternary3int3t) left, [System.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable) right)</code>
 
 >Returns a value indicating whether a [Int3T](#ternary3.int3t) value is greater than a `IComparable` value.
 >
@@ -4672,7 +4672,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([Ternary3.Int3T](#ternary3int3t) left, [System.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([Ternary3.Int3T](#ternary3int3t) left, [System.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable) right)</code>
 
 >Returns a value indicating whether a [Int3T](#ternary3.int3t) value is less than a `IComparable` value.
 >
@@ -4684,7 +4684,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([Ternary3.Int3T](#ternary3int3t) left, [System.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([Ternary3.Int3T](#ternary3int3t) left, [System.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable) right)</code>
 
 >Returns a value indicating whether a [Int3T](#ternary3.int3t) value is greater than or equal to a `IComparable` value.
 >
@@ -4696,7 +4696,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([Ternary3.Int3T](#ternary3int3t) left, [System.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([Ternary3.Int3T](#ternary3int3t) left, [System.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable) right)</code>
 
 >Returns a value indicating whether a [Int3T](#ternary3.int3t) value is less than or equal to a `IComparable` value.
 >
@@ -4708,7 +4708,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([System.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([System.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether a `IComparable` value is greater than a [Int3T](#ternary3.int3t) value.
 >
@@ -4720,7 +4720,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([System.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([System.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether a `IComparable` value is less than a [Int3T](#ternary3.int3t) value.
 >
@@ -4732,7 +4732,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([System.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([System.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether a `IComparable` value is greater than or equal to a [Int3T](#ternary3.int3t) value.
 >
@@ -4744,7 +4744,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([System.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable-0) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([System.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable) left, [Ternary3.Int3T](#ternary3int3t) right)</code>
 
 >Returns a value indicating whether a `IComparable` value is less than or equal to a [Int3T](#ternary3.int3t) value.
 >
@@ -4778,7 +4778,7 @@ No documentation available.
 >**Returns:**
 >A new ternary number with a value one less than `value` .
 
-#### <code>[Ternary3.Int3T](#ternary3int3t) **operator &lt;&lt;**([Ternary3.Int3T](#ternary3int3t) value, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) shiftAmount)</code>
+#### <code>[Ternary3.Int3T](#ternary3int3t) **operator &lt;&lt;**([Ternary3.Int3T](#ternary3int3t) value, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) shiftAmount)</code>
 
 >Performs a left shift operation on the ternary number, maintaining the original numeric type.
 >
@@ -4790,7 +4790,7 @@ No documentation available.
 >**Returns:**
 >A new ternary number of the same type containing the shifted value.
 
-#### <code>[Ternary3.Int3T](#ternary3int3t) **operator &gt;&gt;**([Ternary3.Int3T](#ternary3int3t) value, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) shiftAmount)</code>
+#### <code>[Ternary3.Int3T](#ternary3int3t) **operator &gt;&gt;**([Ternary3.Int3T](#ternary3int3t) value, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) shiftAmount)</code>
 
 >Performs a right shift operation on the ternary number, maintaining the original numeric type.
 >
@@ -4802,7 +4802,7 @@ No documentation available.
 >**Returns:**
 >A new ternary number of the same type containing the shifted value.
 
-#### <code>[Ternary3.Int3T](#ternary3int3t) **op_UnsignedRightShift**([Ternary3.Int3T](#ternary3int3t) value, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) shiftAmount)</code>
+#### <code>[Ternary3.Int3T](#ternary3int3t) **op_UnsignedRightShift**([Ternary3.Int3T](#ternary3int3t) value, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) shiftAmount)</code>
 
 >Performs an unsigned right shift operation on the ternary number, maintaining the original numeric type.
 >            In this implementation, it behaves the same as the signed right shift.
@@ -4856,7 +4856,7 @@ No documentation available.
 
 ### Static Methods
 
-#### <code>[Ternary3.Int9T](#ternary3int9t) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) value)</code>
+#### <code>[Ternary3.Int9T](#ternary3int9t) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) value)</code>
 
 >Parses a string representation of a Int9T.
 >
@@ -4867,7 +4867,7 @@ No documentation available.
 >**Returns:**
 >A Int9T representing the parsed value.
 
-#### <code>[Ternary3.Int9T](#ternary3int9t) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) value, [Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format)</code>
+#### <code>[Ternary3.Int9T](#ternary3int9t) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) value, [Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format)</code>
 
 >Parses a string representation of a Int9T.
 >
@@ -4879,7 +4879,7 @@ No documentation available.
 >**Returns:**
 >A Int9T representing the parsed value.
 
-#### <code>[Ternary3.Int9T](#ternary3int9t) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) value, [Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) options)</code>
+#### <code>[Ternary3.Int9T](#ternary3int9t) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) value, [Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) options)</code>
 
 >Parses a string representation of a Int9T.
 >
@@ -4891,7 +4891,7 @@ No documentation available.
 >**Returns:**
 >A Int9T representing the parsed value.
 
-#### <code>[Ternary3.Int9T](#ternary3int9t) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) value, [Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format, [Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) options)</code>
+#### <code>[Ternary3.Int9T](#ternary3int9t) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) value, [Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format, [Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) options)</code>
 
 >Parses a string representation of a Int9T.
 >
@@ -4904,7 +4904,7 @@ No documentation available.
 >**Returns:**
 >A Int9T representing the parsed value.
 
-#### <code>[Ternary3.Int9T](#ternary3int9t) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) s, [System.Globalization.NumberStyles](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.numberstyles-0) style)</code>
+#### <code>[Ternary3.Int9T](#ternary3int9t) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) s, [System.Globalization.NumberStyles](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.numberstyles) style)</code>
 
 >Converts the string representation of a number in a specified style to its [Int9T](#ternary3.int9t) equivalent.
 >
@@ -4923,7 +4923,7 @@ No documentation available.
 >- `System.FormatException`: `s` is not in a format compliant with `style` .
 >- `System.OverflowException`: `s` represents a number less than [MinValue](#f:ternary3.int9t.minvalue) or greater than [MaxValue](#f:ternary3.int9t.maxvalue) .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **TryParse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) s, [Ternary3.Int9T&](#ternary3int9t) result)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **TryParse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) s, [Ternary3.Int9T&](#ternary3int9t) result)</code>
 
 >Tries to convert the string representation of a number to its [Int9T](#ternary3.int9t) equivalent, and returns a value that indicates whether the conversion succeeded.
 >
@@ -4946,18 +4946,18 @@ No documentation available.
 
 >Represents the smallest possible value of a [Int9T](#ternary3.int9t) . This field is constant.
 
-#### <code>[System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16-0) **MaxValueConstant**</code>
+#### <code>[System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16) **MaxValueConstant**</code>
 
 >Represents the maximum value of a [Int9T](#ternary3.int9t) , expressed as a `Int16` This field is constant.
 
-#### <code>[System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16-0) **MinValueConstant**</code>
+#### <code>[System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16) **MinValueConstant**</code>
 
 >Represents the minimum value of a [Int9T](#ternary3.int9t) , expressed as a `Int16` This field is constant.
 
 
 ### Methods
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **Equals**([System.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object-0) obj)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **Equals**([System.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object) obj)</code>
 
 >Returns a value indicating whether this instance is equal to a specified object.
 >
@@ -4969,7 +4969,7 @@ No documentation available.
 >`true` if `obj` is an instance of [Int9T](#ternary3.int9t) or a compatible numeric type
 >            and equals the value of this instance; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **Equals**([Ternary3.Int9T](#ternary3int9t) other)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **Equals**([Ternary3.Int9T](#ternary3int9t) other)</code>
 
 >Returns a value indicating whether this instance is equal to a specified [Int9T](#ternary3.int9t) value.
 >
@@ -4980,7 +4980,7 @@ No documentation available.
 >**Returns:**
 >`true` if `other` has the same value as this instance; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **Equals**([System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16-0) other)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **Equals**([System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16) other)</code>
 
 >Returns a value indicating whether this instance is equal to a specified `Int16` value.
 >
@@ -4991,34 +4991,34 @@ No documentation available.
 >**Returns:**
 >`true` if `other` has the same value as this instance; otherwise, `false` .
 
-#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) **GetHashCode**()</code>
+#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **GetHashCode**()</code>
 
 >Returns the hash code for this instance.
 >
 >**Returns:**
 >A 32-bit signed integer hash code.
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **ToString**()</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**()</code>
 
 >Returns a string representation of this instance.
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **ToString**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) format)</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) format)</code>
 
 >Returns a string representation of this instance.
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **ToString**([System.IFormatProvider](https://learn.microsoft.com/en-us/dotnet/api/system.iformatprovider-0) provider)</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**([System.IFormatProvider](https://learn.microsoft.com/en-us/dotnet/api/system.iformatprovider) provider)</code>
 
 >Returns a string representation of this instance.
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **ToString**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) format, [System.IFormatProvider](https://learn.microsoft.com/en-us/dotnet/api/system.iformatprovider-0) provider)</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) format, [System.IFormatProvider](https://learn.microsoft.com/en-us/dotnet/api/system.iformatprovider) provider)</code>
 
 >Returns a string representation of this instance.
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **ToString**([Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format)</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**([Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format)</code>
 
 >Returns a string representation of this instance, formatted balanced ternarily according to the specified format.
 
-#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) **CompareTo**([System.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object-0) obj)</code>
+#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **CompareTo**([System.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object) obj)</code>
 
 >Compares this instance to a specified object and returns an indication of their relative values.
 >
@@ -5037,7 +5037,7 @@ No documentation available.
 >**Exceptions:**
 >- `System.ArgumentException`: `obj` is not a [Int9T](#ternary3.int9t) or a type that can be converted to an integer.
 
-#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) **CompareTo**([Ternary3.Int9T](#ternary3int9t) other)</code>
+#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **CompareTo**([Ternary3.Int9T](#ternary3int9t) other)</code>
 
 >Compares this instance to a specified [Int9T](#ternary3.int9t) object and returns an indication of their relative values.
 >
@@ -5052,7 +5052,7 @@ No documentation available.
 >            Zero: This instance is equal to `other` .
 >            Greater than zero: This instance is greater than `other` .
 
-#### <code>[System.TypeCode](https://learn.microsoft.com/en-us/dotnet/api/system.typecode-0) **GetTypeCode**()</code>
+#### <code>[System.TypeCode](https://learn.microsoft.com/en-us/dotnet/api/system.typecode) **GetTypeCode**()</code>
 
 >Gets the `TypeCode` for this instance.
 >
@@ -5062,18 +5062,18 @@ No documentation available.
 
 ### Properties
 
-#### <code>[Ternary3.Trit](#ternary3trit) **this[[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) index]** { get; }</code>
+#### <code>[Ternary3.Trit](#ternary3trit) **this[[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) index]** { get; }</code>
 
 No documentation available.
 
-#### <code>[Ternary3.Trit](#ternary3trit) **this[[System.Index](https://learn.microsoft.com/en-us/dotnet/api/system.index-0) index]** { get; }</code>
+#### <code>[Ternary3.Trit](#ternary3trit) **this[[System.Index](https://learn.microsoft.com/en-us/dotnet/api/system.index) index]** { get; }</code>
 
 No documentation available.
 
 
 ### Operators
 
-#### <code>[Ternary3.Int9T](#ternary3int9t) **operator implicit**([System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16-0) value)</code>
+#### <code>[Ternary3.Int9T](#ternary3int9t) **operator implicit**([System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16) value)</code>
 
 >Defines an implicit conversion of a Int16 to a [Int9T](#ternary3.int9t) .
 >
@@ -5084,7 +5084,7 @@ No documentation available.
 >**Returns:**
 >A [Int9T](#ternary3.int9t) that represents the converted value.
 
-#### <code>[System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16-0) **operator implicit**([Ternary3.Int9T](#ternary3int9t) value)</code>
+#### <code>[System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16) **operator implicit**([Ternary3.Int9T](#ternary3int9t) value)</code>
 
 >Defines an implicit conversion of a Int16 to a [Int9T](#ternary3.int9t) .
 >
@@ -5095,7 +5095,7 @@ No documentation available.
 >**Returns:**
 >A [Int9T](#ternary3.int9t) that represents the converted value.
 
-#### <code>[Ternary3.Int9T](#ternary3int9t) **operator explicit**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) value)</code>
+#### <code>[Ternary3.Int9T](#ternary3int9t) **operator explicit**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) value)</code>
 
 >Defines an explicit conversion of a Int32 to a [Int9T](#ternary3.int9t) .
 >
@@ -5106,7 +5106,7 @@ No documentation available.
 >**Returns:**
 >A [Int9T](#ternary3.int9t) that represents the converted value.
 
-#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) **operator implicit**([Ternary3.Int9T](#ternary3int9t) value)</code>
+#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **operator implicit**([Ternary3.Int9T](#ternary3int9t) value)</code>
 
 >Defines an implicit conversion of a Int16 to a [Int9T](#ternary3.int9t) .
 >
@@ -5117,7 +5117,7 @@ No documentation available.
 >**Returns:**
 >A [Int9T](#ternary3.int9t) that represents the converted value.
 
-#### <code>[Ternary3.Int9T](#ternary3int9t) **operator explicit**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) value)</code>
+#### <code>[Ternary3.Int9T](#ternary3int9t) **operator explicit**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) value)</code>
 
 >Defines an explicit conversion of a Int32 to a [Int9T](#ternary3.int9t) .
 >
@@ -5128,7 +5128,7 @@ No documentation available.
 >**Returns:**
 >A [Int9T](#ternary3.int9t) that represents the converted value.
 
-#### <code>[System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) **operator implicit**([Ternary3.Int9T](#ternary3int9t) value)</code>
+#### <code>[System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) **operator implicit**([Ternary3.Int9T](#ternary3int9t) value)</code>
 
 >Defines an implicit conversion of a Int16 to a [Int9T](#ternary3.int9t) .
 >
@@ -5139,7 +5139,7 @@ No documentation available.
 >**Returns:**
 >A [Int9T](#ternary3.int9t) that represents the converted value.
 
-#### <code>[Ternary3.Int9T](#ternary3int9t) **operator explicit**([System.Int128](https://learn.microsoft.com/en-us/dotnet/api/system.int128-0) value)</code>
+#### <code>[Ternary3.Int9T](#ternary3int9t) **operator explicit**([System.Int128](https://learn.microsoft.com/en-us/dotnet/api/system.int128) value)</code>
 
 >Defines an explicit conversion of a Int32 to a [Int9T](#ternary3.int9t) .
 >
@@ -5150,7 +5150,7 @@ No documentation available.
 >**Returns:**
 >A [Int9T](#ternary3.int9t) that represents the converted value.
 
-#### <code>[System.Int128](https://learn.microsoft.com/en-us/dotnet/api/system.int128-0) **operator implicit**([Ternary3.Int9T](#ternary3int9t) value)</code>
+#### <code>[System.Int128](https://learn.microsoft.com/en-us/dotnet/api/system.int128) **operator implicit**([Ternary3.Int9T](#ternary3int9t) value)</code>
 
 >Defines an implicit conversion of a Int16 to a [Int9T](#ternary3.int9t) .
 >
@@ -5161,7 +5161,7 @@ No documentation available.
 >**Returns:**
 >A [Int9T](#ternary3.int9t) that represents the converted value.
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator ==**([System.IConvertible](https://learn.microsoft.com/en-us/dotnet/api/system.iconvertible-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator ==**([System.IConvertible](https://learn.microsoft.com/en-us/dotnet/api/system.iconvertible) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether two [Int9T](#ternary3.int9t) instances are equal.
 >
@@ -5173,7 +5173,7 @@ No documentation available.
 >**Returns:**
 >`true` if the values of `left` and `right` are equal; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator !=**([System.IConvertible](https://learn.microsoft.com/en-us/dotnet/api/system.iconvertible-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator !=**([System.IConvertible](https://learn.microsoft.com/en-us/dotnet/api/system.iconvertible) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether two [Int9T](#ternary3.int9t) instances are not equal.
 >
@@ -5185,7 +5185,7 @@ No documentation available.
 >**Returns:**
 >`true` if the values of `left` and `right` are not equal; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator ==**([Ternary3.Int9T](#ternary3int9t) left, [System.IConvertible](https://learn.microsoft.com/en-us/dotnet/api/system.iconvertible-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator ==**([Ternary3.Int9T](#ternary3int9t) left, [System.IConvertible](https://learn.microsoft.com/en-us/dotnet/api/system.iconvertible) right)</code>
 
 >Returns a value indicating whether two [Int9T](#ternary3.int9t) instances are equal.
 >
@@ -5197,7 +5197,7 @@ No documentation available.
 >**Returns:**
 >`true` if the values of `left` and `right` are equal; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator !=**([Ternary3.Int9T](#ternary3int9t) left, [System.IConvertible](https://learn.microsoft.com/en-us/dotnet/api/system.iconvertible-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator !=**([Ternary3.Int9T](#ternary3int9t) left, [System.IConvertible](https://learn.microsoft.com/en-us/dotnet/api/system.iconvertible) right)</code>
 
 >Returns a value indicating whether two [Int9T](#ternary3.int9t) instances are not equal.
 >
@@ -5209,7 +5209,7 @@ No documentation available.
 >**Returns:**
 >`true` if the values of `left` and `right` are not equal; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator ==**([Ternary3.Int9T](#ternary3int9t) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator ==**([Ternary3.Int9T](#ternary3int9t) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether two [Int9T](#ternary3.int9t) instances are equal.
 >
@@ -5221,7 +5221,7 @@ No documentation available.
 >**Returns:**
 >`true` if the values of `left` and `right` are equal; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator !=**([Ternary3.Int9T](#ternary3int9t) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator !=**([Ternary3.Int9T](#ternary3int9t) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether two [Int9T](#ternary3.int9t) instances are not equal.
 >
@@ -5315,7 +5315,7 @@ No documentation available.
 >**Returns:**
 >The same ternary number.
 
-#### <code>[Ternary3.Int9T](#ternary3int9t) **operator +**([Ternary3.Int9T](#ternary3int9t) left, [System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16-0) right)</code>
+#### <code>[Ternary3.Int9T](#ternary3int9t) **operator +**([Ternary3.Int9T](#ternary3int9t) left, [System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16) right)</code>
 
 >Adds a ternary number and a native numeric value, maintaining the original ternary type.
 >
@@ -5327,7 +5327,7 @@ No documentation available.
 >**Returns:**
 >A new ternary number containing the sum.
 
-#### <code>[Ternary3.Int9T](#ternary3int9t) **operator +**([System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[Ternary3.Int9T](#ternary3int9t) **operator +**([System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Adds a native numeric value and a ternary number, maintaining the original ternary type.
 >
@@ -5339,7 +5339,7 @@ No documentation available.
 >**Returns:**
 >A new ternary number containing the sum.
 
-#### <code>[Ternary3.Int9T](#ternary3int9t) **operator -**([Ternary3.Int9T](#ternary3int9t) left, [System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16-0) right)</code>
+#### <code>[Ternary3.Int9T](#ternary3int9t) **operator -**([Ternary3.Int9T](#ternary3int9t) left, [System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16) right)</code>
 
 >Subtracts a native numeric value from a ternary number, maintaining the original ternary type.
 >
@@ -5351,7 +5351,7 @@ No documentation available.
 >**Returns:**
 >A new ternary number containing the difference.
 
-#### <code>[Ternary3.Int9T](#ternary3int9t) **operator -**([System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[Ternary3.Int9T](#ternary3int9t) **operator -**([System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Subtracts a ternary number from a native numeric value, maintaining the original ternary type.
 >
@@ -5363,7 +5363,7 @@ No documentation available.
 >**Returns:**
 >A new ternary number containing the difference.
 
-#### <code>[Ternary3.Int9T](#ternary3int9t) **operator &ast;**([Ternary3.Int9T](#ternary3int9t) left, [System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16-0) right)</code>
+#### <code>[Ternary3.Int9T](#ternary3int9t) **operator &ast;**([Ternary3.Int9T](#ternary3int9t) left, [System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16) right)</code>
 
 >Multiplies a ternary number by a native numeric value, maintaining the original ternary type.
 >
@@ -5375,7 +5375,7 @@ No documentation available.
 >**Returns:**
 >A new ternary number of the same type containing the product.
 
-#### <code>[Ternary3.Int9T](#ternary3int9t) **operator &ast;**([System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[Ternary3.Int9T](#ternary3int9t) **operator &ast;**([System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Multiplies a native numeric value by a ternary number, maintaining the original ternary type.
 >
@@ -5387,7 +5387,7 @@ No documentation available.
 >**Returns:**
 >A new ternary number containing the product.
 
-#### <code>[Ternary3.Int9T](#ternary3int9t) **operator /**([Ternary3.Int9T](#ternary3int9t) left, [System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16-0) right)</code>
+#### <code>[Ternary3.Int9T](#ternary3int9t) **operator /**([Ternary3.Int9T](#ternary3int9t) left, [System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16) right)</code>
 
 >Divides a ternary number by a native numeric value, maintaining the original ternary type.
 >
@@ -5399,7 +5399,7 @@ No documentation available.
 >**Returns:**
 >A new ternary number of the same type containing the quotient.
 
-#### <code>[Ternary3.Int9T](#ternary3int9t) **operator /**([System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[Ternary3.Int9T](#ternary3int9t) **operator /**([System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Divides a native numeric value by a ternary number, maintaining the original ternary type.
 >
@@ -5411,7 +5411,7 @@ No documentation available.
 >**Returns:**
 >A new ternary number containing the quotient.
 
-#### <code>[Ternary3.Int9T](#ternary3int9t) **operator %**([Ternary3.Int9T](#ternary3int9t) left, [System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16-0) right)</code>
+#### <code>[Ternary3.Int9T](#ternary3int9t) **operator %**([Ternary3.Int9T](#ternary3int9t) left, [System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16) right)</code>
 
 >Computes the remainder after dividing a ternary number by a native numeric value, maintaining the original ternary type.
 >
@@ -5423,7 +5423,7 @@ No documentation available.
 >**Returns:**
 >A new ternary number of the same type containing the remainder.
 
-#### <code>[Ternary3.Int9T](#ternary3int9t) **operator %**([System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[Ternary3.Int9T](#ternary3int9t) **operator %**([System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Computes the remainder after dividing a native numeric value by a ternary number, maintaining the original ternary type.
 >
@@ -5435,7 +5435,7 @@ No documentation available.
 >**Returns:**
 >A new ternary number containing the remainder.
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([Ternary3.Int9T](#ternary3int9t) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([Ternary3.Int9T](#ternary3int9t) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether one [Int9T](#ternary3.int9t) is greater than another.
 >
@@ -5447,7 +5447,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([Ternary3.Int9T](#ternary3int9t) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([Ternary3.Int9T](#ternary3int9t) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether one [Int9T](#ternary3.int9t) is less than another.
 >
@@ -5459,7 +5459,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([Ternary3.Int9T](#ternary3int9t) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([Ternary3.Int9T](#ternary3int9t) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether one [Int9T](#ternary3.int9t) is greater than or equal to another.
 >
@@ -5471,7 +5471,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([Ternary3.Int9T](#ternary3int9t) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([Ternary3.Int9T](#ternary3int9t) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether one [Int9T](#ternary3.int9t) is less than or equal to another.
 >
@@ -5483,7 +5483,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([Ternary3.Int9T](#ternary3int9t) left, [System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([Ternary3.Int9T](#ternary3int9t) left, [System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte) right)</code>
 
 >Returns a value indicating whether a [Int9T](#ternary3.int9t) value is greater than a `SByte` value.
 >
@@ -5495,7 +5495,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([Ternary3.Int9T](#ternary3int9t) left, [System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([Ternary3.Int9T](#ternary3int9t) left, [System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte) right)</code>
 
 >Returns a value indicating whether a [Int9T](#ternary3.int9t) value is less than a `SByte` value.
 >
@@ -5507,7 +5507,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([Ternary3.Int9T](#ternary3int9t) left, [System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([Ternary3.Int9T](#ternary3int9t) left, [System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte) right)</code>
 
 >Returns a value indicating whether a [Int9T](#ternary3.int9t) value is greater than or equal to a `SByte` value.
 >
@@ -5519,7 +5519,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([Ternary3.Int9T](#ternary3int9t) left, [System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([Ternary3.Int9T](#ternary3int9t) left, [System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte) right)</code>
 
 >Returns a value indicating whether a [Int9T](#ternary3.int9t) value is less than or equal to a `SByte` value.
 >
@@ -5531,7 +5531,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether a `SByte` value is greater than a [Int9T](#ternary3.int9t) value.
 >
@@ -5543,7 +5543,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether a `SByte` value is less than a [Int9T](#ternary3.int9t) value.
 >
@@ -5555,7 +5555,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether a `SByte` value is greater than or equal to a [Int9T](#ternary3.int9t) value.
 >
@@ -5567,7 +5567,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether a `SByte` value is less than or equal to a [Int9T](#ternary3.int9t) value.
 >
@@ -5579,7 +5579,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([Ternary3.Int9T](#ternary3int9t) left, [System.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([Ternary3.Int9T](#ternary3int9t) left, [System.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte) right)</code>
 
 >Returns a value indicating whether a [Int9T](#ternary3.int9t) value is greater than a `Byte` value.
 >
@@ -5591,7 +5591,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([Ternary3.Int9T](#ternary3int9t) left, [System.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([Ternary3.Int9T](#ternary3int9t) left, [System.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte) right)</code>
 
 >Returns a value indicating whether a [Int9T](#ternary3.int9t) value is less than a `Byte` value.
 >
@@ -5603,7 +5603,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([Ternary3.Int9T](#ternary3int9t) left, [System.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([Ternary3.Int9T](#ternary3int9t) left, [System.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte) right)</code>
 
 >Returns a value indicating whether a [Int9T](#ternary3.int9t) value is greater than or equal to a `Byte` value.
 >
@@ -5615,7 +5615,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([Ternary3.Int9T](#ternary3int9t) left, [System.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([Ternary3.Int9T](#ternary3int9t) left, [System.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte) right)</code>
 
 >Returns a value indicating whether a [Int9T](#ternary3.int9t) value is less than or equal to a `Byte` value.
 >
@@ -5627,7 +5627,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([System.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([System.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether a `Byte` value is greater than a [Int9T](#ternary3.int9t) value.
 >
@@ -5639,7 +5639,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([System.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([System.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether a `Byte` value is less than a [Int9T](#ternary3.int9t) value.
 >
@@ -5651,7 +5651,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([System.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([System.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether a `Byte` value is greater than or equal to a [Int9T](#ternary3.int9t) value.
 >
@@ -5663,7 +5663,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([System.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([System.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether a `Byte` value is less than or equal to a [Int9T](#ternary3.int9t) value.
 >
@@ -5675,7 +5675,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([Ternary3.Int9T](#ternary3int9t) left, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([Ternary3.Int9T](#ternary3int9t) left, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) right)</code>
 
 >Returns a value indicating whether a [Int9T](#ternary3.int9t) value is greater than a `Int32` value.
 >
@@ -5687,7 +5687,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([Ternary3.Int9T](#ternary3int9t) left, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([Ternary3.Int9T](#ternary3int9t) left, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) right)</code>
 
 >Returns a value indicating whether a [Int9T](#ternary3.int9t) value is less than a `Int32` value.
 >
@@ -5699,7 +5699,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([Ternary3.Int9T](#ternary3int9t) left, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([Ternary3.Int9T](#ternary3int9t) left, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) right)</code>
 
 >Returns a value indicating whether a [Int9T](#ternary3.int9t) value is greater than or equal to a `Int32` value.
 >
@@ -5711,7 +5711,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([Ternary3.Int9T](#ternary3int9t) left, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([Ternary3.Int9T](#ternary3int9t) left, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) right)</code>
 
 >Returns a value indicating whether a [Int9T](#ternary3.int9t) value is less than or equal to a `Int32` value.
 >
@@ -5723,7 +5723,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether a `Int32` value is greater than a [Int9T](#ternary3.int9t) value.
 >
@@ -5735,7 +5735,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether a `Int32` value is less than a [Int9T](#ternary3.int9t) value.
 >
@@ -5747,7 +5747,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether a `Int32` value is greater than or equal to a [Int9T](#ternary3.int9t) value.
 >
@@ -5759,7 +5759,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether a `Int32` value is less than or equal to a [Int9T](#ternary3.int9t) value.
 >
@@ -5771,7 +5771,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([Ternary3.Int9T](#ternary3int9t) left, [System.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([Ternary3.Int9T](#ternary3int9t) left, [System.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32) right)</code>
 
 >Returns a value indicating whether a [Int9T](#ternary3.int9t) value is greater than a `UInt32` value.
 >
@@ -5783,7 +5783,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([Ternary3.Int9T](#ternary3int9t) left, [System.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([Ternary3.Int9T](#ternary3int9t) left, [System.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32) right)</code>
 
 >Returns a value indicating whether a [Int9T](#ternary3.int9t) value is less than a `UInt32` value.
 >
@@ -5795,7 +5795,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([Ternary3.Int9T](#ternary3int9t) left, [System.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([Ternary3.Int9T](#ternary3int9t) left, [System.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32) right)</code>
 
 >Returns a value indicating whether a [Int9T](#ternary3.int9t) value is greater than or equal to a `UInt32` value.
 >
@@ -5807,7 +5807,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([Ternary3.Int9T](#ternary3int9t) left, [System.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([Ternary3.Int9T](#ternary3int9t) left, [System.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32) right)</code>
 
 >Returns a value indicating whether a [Int9T](#ternary3.int9t) value is less than or equal to a `UInt32` value.
 >
@@ -5819,7 +5819,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([System.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([System.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether a `UInt32` value is greater than a [Int9T](#ternary3.int9t) value.
 >
@@ -5831,7 +5831,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([System.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([System.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether a `UInt32` value is less than a [Int9T](#ternary3.int9t) value.
 >
@@ -5843,7 +5843,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([System.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([System.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether a `UInt32` value is greater than or equal to a [Int9T](#ternary3.int9t) value.
 >
@@ -5855,7 +5855,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([System.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([System.UInt32](https://learn.microsoft.com/en-us/dotnet/api/system.uint32) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether a `UInt32` value is less than or equal to a [Int9T](#ternary3.int9t) value.
 >
@@ -5867,7 +5867,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([Ternary3.Int9T](#ternary3int9t) left, [System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([Ternary3.Int9T](#ternary3int9t) left, [System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16) right)</code>
 
 >Returns a value indicating whether a [Int9T](#ternary3.int9t) value is greater than a `Int16` value.
 >
@@ -5879,7 +5879,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([Ternary3.Int9T](#ternary3int9t) left, [System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([Ternary3.Int9T](#ternary3int9t) left, [System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16) right)</code>
 
 >Returns a value indicating whether a [Int9T](#ternary3.int9t) value is less than a `Int16` value.
 >
@@ -5891,7 +5891,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([Ternary3.Int9T](#ternary3int9t) left, [System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([Ternary3.Int9T](#ternary3int9t) left, [System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16) right)</code>
 
 >Returns a value indicating whether a [Int9T](#ternary3.int9t) value is greater than or equal to a `Int16` value.
 >
@@ -5903,7 +5903,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([Ternary3.Int9T](#ternary3int9t) left, [System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([Ternary3.Int9T](#ternary3int9t) left, [System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16) right)</code>
 
 >Returns a value indicating whether a [Int9T](#ternary3.int9t) value is less than or equal to a `Int16` value.
 >
@@ -5915,7 +5915,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether a `Int16` value is greater than a [Int9T](#ternary3.int9t) value.
 >
@@ -5927,7 +5927,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether a `Int16` value is less than a [Int9T](#ternary3.int9t) value.
 >
@@ -5939,7 +5939,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether a `Int16` value is greater than or equal to a [Int9T](#ternary3.int9t) value.
 >
@@ -5951,7 +5951,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether a `Int16` value is less than or equal to a [Int9T](#ternary3.int9t) value.
 >
@@ -5963,7 +5963,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([Ternary3.Int9T](#ternary3int9t) left, [System.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([Ternary3.Int9T](#ternary3int9t) left, [System.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16) right)</code>
 
 >Returns a value indicating whether a [Int9T](#ternary3.int9t) value is greater than a `UInt16` value.
 >
@@ -5975,7 +5975,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([Ternary3.Int9T](#ternary3int9t) left, [System.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([Ternary3.Int9T](#ternary3int9t) left, [System.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16) right)</code>
 
 >Returns a value indicating whether a [Int9T](#ternary3.int9t) value is less than a `UInt16` value.
 >
@@ -5987,7 +5987,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([Ternary3.Int9T](#ternary3int9t) left, [System.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([Ternary3.Int9T](#ternary3int9t) left, [System.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16) right)</code>
 
 >Returns a value indicating whether a [Int9T](#ternary3.int9t) value is greater than or equal to a `UInt16` value.
 >
@@ -5999,7 +5999,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([Ternary3.Int9T](#ternary3int9t) left, [System.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([Ternary3.Int9T](#ternary3int9t) left, [System.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16) right)</code>
 
 >Returns a value indicating whether a [Int9T](#ternary3.int9t) value is less than or equal to a `UInt16` value.
 >
@@ -6011,7 +6011,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([System.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([System.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether a `UInt16` value is greater than a [Int9T](#ternary3.int9t) value.
 >
@@ -6023,7 +6023,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([System.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([System.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether a `UInt16` value is less than a [Int9T](#ternary3.int9t) value.
 >
@@ -6035,7 +6035,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([System.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([System.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether a `UInt16` value is greater than or equal to a [Int9T](#ternary3.int9t) value.
 >
@@ -6047,7 +6047,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([System.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([System.UInt16](https://learn.microsoft.com/en-us/dotnet/api/system.uint16) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether a `UInt16` value is less than or equal to a [Int9T](#ternary3.int9t) value.
 >
@@ -6059,7 +6059,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([Ternary3.Int9T](#ternary3int9t) left, [System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([Ternary3.Int9T](#ternary3int9t) left, [System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) right)</code>
 
 >Returns a value indicating whether a [Int9T](#ternary3.int9t) value is greater than a `Int64` value.
 >
@@ -6071,7 +6071,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([Ternary3.Int9T](#ternary3int9t) left, [System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([Ternary3.Int9T](#ternary3int9t) left, [System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) right)</code>
 
 >Returns a value indicating whether a [Int9T](#ternary3.int9t) value is less than a `Int64` value.
 >
@@ -6083,7 +6083,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([Ternary3.Int9T](#ternary3int9t) left, [System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([Ternary3.Int9T](#ternary3int9t) left, [System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) right)</code>
 
 >Returns a value indicating whether a [Int9T](#ternary3.int9t) value is greater than or equal to a `Int64` value.
 >
@@ -6095,7 +6095,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([Ternary3.Int9T](#ternary3int9t) left, [System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([Ternary3.Int9T](#ternary3int9t) left, [System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) right)</code>
 
 >Returns a value indicating whether a [Int9T](#ternary3.int9t) value is less than or equal to a `Int64` value.
 >
@@ -6107,7 +6107,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether a `Int64` value is greater than a [Int9T](#ternary3.int9t) value.
 >
@@ -6119,7 +6119,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether a `Int64` value is less than a [Int9T](#ternary3.int9t) value.
 >
@@ -6131,7 +6131,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether a `Int64` value is greater than or equal to a [Int9T](#ternary3.int9t) value.
 >
@@ -6143,7 +6143,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether a `Int64` value is less than or equal to a [Int9T](#ternary3.int9t) value.
 >
@@ -6155,7 +6155,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([Ternary3.Int9T](#ternary3int9t) left, [System.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([Ternary3.Int9T](#ternary3int9t) left, [System.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64) right)</code>
 
 >Returns a value indicating whether a [Int9T](#ternary3.int9t) value is greater than a `UInt64` value.
 >
@@ -6167,7 +6167,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([Ternary3.Int9T](#ternary3int9t) left, [System.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([Ternary3.Int9T](#ternary3int9t) left, [System.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64) right)</code>
 
 >Returns a value indicating whether a [Int9T](#ternary3.int9t) value is less than a `UInt64` value.
 >
@@ -6179,7 +6179,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([Ternary3.Int9T](#ternary3int9t) left, [System.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([Ternary3.Int9T](#ternary3int9t) left, [System.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64) right)</code>
 
 >Returns a value indicating whether a [Int9T](#ternary3.int9t) value is greater than or equal to a `UInt64` value.
 >
@@ -6191,7 +6191,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([Ternary3.Int9T](#ternary3int9t) left, [System.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([Ternary3.Int9T](#ternary3int9t) left, [System.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64) right)</code>
 
 >Returns a value indicating whether a [Int9T](#ternary3.int9t) value is less than or equal to a `UInt64` value.
 >
@@ -6203,7 +6203,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([System.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([System.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether a `UInt64` value is greater than a [Int9T](#ternary3.int9t) value.
 >
@@ -6215,7 +6215,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([System.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([System.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether a `UInt64` value is less than a [Int9T](#ternary3.int9t) value.
 >
@@ -6227,7 +6227,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([System.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([System.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether a `UInt64` value is greater than or equal to a [Int9T](#ternary3.int9t) value.
 >
@@ -6239,7 +6239,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([System.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([System.UInt64](https://learn.microsoft.com/en-us/dotnet/api/system.uint64) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether a `UInt64` value is less than or equal to a [Int9T](#ternary3.int9t) value.
 >
@@ -6251,7 +6251,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([Ternary3.Int9T](#ternary3int9t) left, [System.Single](https://learn.microsoft.com/en-us/dotnet/api/system.single-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([Ternary3.Int9T](#ternary3int9t) left, [System.Single](https://learn.microsoft.com/en-us/dotnet/api/system.single) right)</code>
 
 >Returns a value indicating whether a [Int9T](#ternary3.int9t) value is greater than a `Single` value.
 >
@@ -6263,7 +6263,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([Ternary3.Int9T](#ternary3int9t) left, [System.Single](https://learn.microsoft.com/en-us/dotnet/api/system.single-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([Ternary3.Int9T](#ternary3int9t) left, [System.Single](https://learn.microsoft.com/en-us/dotnet/api/system.single) right)</code>
 
 >Returns a value indicating whether a [Int9T](#ternary3.int9t) value is less than a `Single` value.
 >
@@ -6275,7 +6275,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([Ternary3.Int9T](#ternary3int9t) left, [System.Single](https://learn.microsoft.com/en-us/dotnet/api/system.single-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([Ternary3.Int9T](#ternary3int9t) left, [System.Single](https://learn.microsoft.com/en-us/dotnet/api/system.single) right)</code>
 
 >Returns a value indicating whether a [Int9T](#ternary3.int9t) value is greater than or equal to a `Single` value.
 >
@@ -6287,7 +6287,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([Ternary3.Int9T](#ternary3int9t) left, [System.Single](https://learn.microsoft.com/en-us/dotnet/api/system.single-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([Ternary3.Int9T](#ternary3int9t) left, [System.Single](https://learn.microsoft.com/en-us/dotnet/api/system.single) right)</code>
 
 >Returns a value indicating whether a [Int9T](#ternary3.int9t) value is less than or equal to a `Single` value.
 >
@@ -6299,7 +6299,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([System.Single](https://learn.microsoft.com/en-us/dotnet/api/system.single-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([System.Single](https://learn.microsoft.com/en-us/dotnet/api/system.single) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether a `Single` value is greater than a [Int9T](#ternary3.int9t) value.
 >
@@ -6311,7 +6311,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([System.Single](https://learn.microsoft.com/en-us/dotnet/api/system.single-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([System.Single](https://learn.microsoft.com/en-us/dotnet/api/system.single) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether a `Single` value is less than a [Int9T](#ternary3.int9t) value.
 >
@@ -6323,7 +6323,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([System.Single](https://learn.microsoft.com/en-us/dotnet/api/system.single-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([System.Single](https://learn.microsoft.com/en-us/dotnet/api/system.single) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether a `Single` value is greater than or equal to a [Int9T](#ternary3.int9t) value.
 >
@@ -6335,7 +6335,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([System.Single](https://learn.microsoft.com/en-us/dotnet/api/system.single-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([System.Single](https://learn.microsoft.com/en-us/dotnet/api/system.single) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether a `Single` value is less than or equal to a [Int9T](#ternary3.int9t) value.
 >
@@ -6347,7 +6347,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([Ternary3.Int9T](#ternary3int9t) left, [System.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([Ternary3.Int9T](#ternary3int9t) left, [System.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double) right)</code>
 
 >Returns a value indicating whether a [Int9T](#ternary3.int9t) value is greater than a `Double` value.
 >
@@ -6359,7 +6359,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([Ternary3.Int9T](#ternary3int9t) left, [System.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([Ternary3.Int9T](#ternary3int9t) left, [System.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double) right)</code>
 
 >Returns a value indicating whether a [Int9T](#ternary3.int9t) value is less than a `Double` value.
 >
@@ -6371,7 +6371,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([Ternary3.Int9T](#ternary3int9t) left, [System.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([Ternary3.Int9T](#ternary3int9t) left, [System.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double) right)</code>
 
 >Returns a value indicating whether a [Int9T](#ternary3.int9t) value is greater than or equal to a `Double` value.
 >
@@ -6383,7 +6383,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([Ternary3.Int9T](#ternary3int9t) left, [System.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([Ternary3.Int9T](#ternary3int9t) left, [System.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double) right)</code>
 
 >Returns a value indicating whether a [Int9T](#ternary3.int9t) value is less than or equal to a `Double` value.
 >
@@ -6395,7 +6395,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([System.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([System.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether a `Double` value is greater than a [Int9T](#ternary3.int9t) value.
 >
@@ -6407,7 +6407,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([System.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([System.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether a `Double` value is less than a [Int9T](#ternary3.int9t) value.
 >
@@ -6419,7 +6419,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([System.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([System.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether a `Double` value is greater than or equal to a [Int9T](#ternary3.int9t) value.
 >
@@ -6431,7 +6431,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([System.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([System.Double](https://learn.microsoft.com/en-us/dotnet/api/system.double) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether a `Double` value is less than or equal to a [Int9T](#ternary3.int9t) value.
 >
@@ -6443,7 +6443,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([Ternary3.Int9T](#ternary3int9t) left, [System.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([Ternary3.Int9T](#ternary3int9t) left, [System.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal) right)</code>
 
 >Returns a value indicating whether a [Int9T](#ternary3.int9t) value is greater than a `Decimal` value.
 >
@@ -6455,7 +6455,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([Ternary3.Int9T](#ternary3int9t) left, [System.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([Ternary3.Int9T](#ternary3int9t) left, [System.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal) right)</code>
 
 >Returns a value indicating whether a [Int9T](#ternary3.int9t) value is less than a `Decimal` value.
 >
@@ -6467,7 +6467,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([Ternary3.Int9T](#ternary3int9t) left, [System.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([Ternary3.Int9T](#ternary3int9t) left, [System.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal) right)</code>
 
 >Returns a value indicating whether a [Int9T](#ternary3.int9t) value is greater than or equal to a `Decimal` value.
 >
@@ -6479,7 +6479,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([Ternary3.Int9T](#ternary3int9t) left, [System.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([Ternary3.Int9T](#ternary3int9t) left, [System.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal) right)</code>
 
 >Returns a value indicating whether a [Int9T](#ternary3.int9t) value is less than or equal to a `Decimal` value.
 >
@@ -6491,7 +6491,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([System.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([System.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether a `Decimal` value is greater than a [Int9T](#ternary3.int9t) value.
 >
@@ -6503,7 +6503,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([System.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([System.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether a `Decimal` value is less than a [Int9T](#ternary3.int9t) value.
 >
@@ -6515,7 +6515,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([System.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([System.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether a `Decimal` value is greater than or equal to a [Int9T](#ternary3.int9t) value.
 >
@@ -6527,7 +6527,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([System.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([System.Decimal](https://learn.microsoft.com/en-us/dotnet/api/system.decimal) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether a `Decimal` value is less than or equal to a [Int9T](#ternary3.int9t) value.
 >
@@ -6539,7 +6539,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([Ternary3.Int9T](#ternary3int9t) left, [System.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([Ternary3.Int9T](#ternary3int9t) left, [System.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable) right)</code>
 
 >Returns a value indicating whether a [Int9T](#ternary3.int9t) value is greater than a `IComparable` value.
 >
@@ -6551,7 +6551,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([Ternary3.Int9T](#ternary3int9t) left, [System.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([Ternary3.Int9T](#ternary3int9t) left, [System.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable) right)</code>
 
 >Returns a value indicating whether a [Int9T](#ternary3.int9t) value is less than a `IComparable` value.
 >
@@ -6563,7 +6563,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([Ternary3.Int9T](#ternary3int9t) left, [System.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([Ternary3.Int9T](#ternary3int9t) left, [System.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable) right)</code>
 
 >Returns a value indicating whether a [Int9T](#ternary3.int9t) value is greater than or equal to a `IComparable` value.
 >
@@ -6575,7 +6575,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([Ternary3.Int9T](#ternary3int9t) left, [System.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable-0) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([Ternary3.Int9T](#ternary3int9t) left, [System.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable) right)</code>
 
 >Returns a value indicating whether a [Int9T](#ternary3.int9t) value is less than or equal to a `IComparable` value.
 >
@@ -6587,7 +6587,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;**([System.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;**([System.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether a `IComparable` value is greater than a [Int9T](#ternary3.int9t) value.
 >
@@ -6599,7 +6599,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;**([System.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;**([System.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether a `IComparable` value is less than a [Int9T](#ternary3.int9t) value.
 >
@@ -6611,7 +6611,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is less than `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &gt;=**([System.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &gt;=**([System.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether a `IComparable` value is greater than or equal to a [Int9T](#ternary3.int9t) value.
 >
@@ -6623,7 +6623,7 @@ No documentation available.
 >**Returns:**
 >`true` if `left` is greater than or equal to `right` ; otherwise, `false` .
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator &lt;=**([System.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable-0) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator &lt;=**([System.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable) left, [Ternary3.Int9T](#ternary3int9t) right)</code>
 
 >Returns a value indicating whether a `IComparable` value is less than or equal to a [Int9T](#ternary3.int9t) value.
 >
@@ -6657,7 +6657,7 @@ No documentation available.
 >**Returns:**
 >A new ternary number with a value one less than `value` .
 
-#### <code>[Ternary3.Int9T](#ternary3int9t) **operator &lt;&lt;**([Ternary3.Int9T](#ternary3int9t) value, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) shiftAmount)</code>
+#### <code>[Ternary3.Int9T](#ternary3int9t) **operator &lt;&lt;**([Ternary3.Int9T](#ternary3int9t) value, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) shiftAmount)</code>
 
 >Performs a left shift operation on the ternary number, maintaining the original numeric type.
 >
@@ -6669,7 +6669,7 @@ No documentation available.
 >**Returns:**
 >A new ternary number of the same type containing the shifted value.
 
-#### <code>[Ternary3.Int9T](#ternary3int9t) **operator &gt;&gt;**([Ternary3.Int9T](#ternary3int9t) value, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) shiftAmount)</code>
+#### <code>[Ternary3.Int9T](#ternary3int9t) **operator &gt;&gt;**([Ternary3.Int9T](#ternary3int9t) value, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) shiftAmount)</code>
 
 >Performs a right shift operation on the ternary number, maintaining the original numeric type.
 >
@@ -6681,7 +6681,7 @@ No documentation available.
 >**Returns:**
 >A new ternary number of the same type containing the shifted value.
 
-#### <code>[Ternary3.Int9T](#ternary3int9t) **op_UnsignedRightShift**([Ternary3.Int9T](#ternary3int9t) value, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) shiftAmount)</code>
+#### <code>[Ternary3.Int9T](#ternary3int9t) **op_UnsignedRightShift**([Ternary3.Int9T](#ternary3int9t) value, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) shiftAmount)</code>
 
 >Performs an unsigned right shift operation on the ternary number, maintaining the original numeric type.
 >            In this implementation, it behaves the same as the signed right shift.
@@ -6736,19 +6736,19 @@ No documentation available.
 
 ### Properties
 
-#### <code>[Ternary3.Trit](#ternary3trit) **this[[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) index]** { get; }</code>
+#### <code>[Ternary3.Trit](#ternary3trit) **this[[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) index]** { get; }</code>
 
 No documentation available.
 
-#### <code>[Ternary3.Trit](#ternary3trit) **this[[System.Index](https://learn.microsoft.com/en-us/dotnet/api/system.index-0) index]** { get; }</code>
+#### <code>[Ternary3.Trit](#ternary3trit) **this[[System.Index](https://learn.microsoft.com/en-us/dotnet/api/system.index) index]** { get; }</code>
 
 No documentation available.
 
-#### <code>[Ternary3.ITritArray](#ternary3itritarray) **this[[System.Range](https://learn.microsoft.com/en-us/dotnet/api/system.range-0) range]** { get; }</code>
+#### <code>[Ternary3.ITritArray](#ternary3itritarray) **this[[System.Range](https://learn.microsoft.com/en-us/dotnet/api/system.range) range]** { get; }</code>
 
 No documentation available.
 
-#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) **Length** { get; }</code>
+#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **Length** { get; }</code>
 
 >Gets the length of the trit array.
 
@@ -6763,7 +6763,7 @@ No documentation available.
 
 ### Static Methods
 
-#### <code>[ValueTuple`2](https://learn.microsoft.com/en-us/dotnet/api/valuetuple`2-0) **DivRem**([TSelf](https://learn.microsoft.com/en-us/dotnet/api/tself-0) left, [TSelf](https://learn.microsoft.com/en-us/dotnet/api/tself-0) right)</code>
+#### <code>[ValueTuple`2](https://learn.microsoft.com/en-us/dotnet/api/valuetuple`2) **DivRem**([TSelf](https://learn.microsoft.com/en-us/dotnet/api/tself) left, [TSelf](https://learn.microsoft.com/en-us/dotnet/api/tself) right)</code>
 
 >Computes the quotient and remainder of two values.
 >
@@ -6782,7 +6782,7 @@ No documentation available.
 
 ### Static Methods
 
-#### <code>[TSelf](https://learn.microsoft.com/en-us/dotnet/api/tself-0) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) value)</code>
+#### <code>[TSelf](https://learn.microsoft.com/en-us/dotnet/api/tself) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) value)</code>
 
 >Parses a string representation
 >
@@ -6793,7 +6793,7 @@ No documentation available.
 >**Returns:**
 >A value representing the parsed value.
 
-#### <code>[TSelf](https://learn.microsoft.com/en-us/dotnet/api/tself-0) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) value, [Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format)</code>
+#### <code>[TSelf](https://learn.microsoft.com/en-us/dotnet/api/tself) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) value, [Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format)</code>
 
 >Parses a string representation
 >
@@ -6805,7 +6805,7 @@ No documentation available.
 >**Returns:**
 >A value representing the parsed value.
 
-#### <code>[TSelf](https://learn.microsoft.com/en-us/dotnet/api/tself-0) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) value, [Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) options)</code>
+#### <code>[TSelf](https://learn.microsoft.com/en-us/dotnet/api/tself) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) value, [Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) options)</code>
 
 >Parses a string representation
 >
@@ -6817,7 +6817,7 @@ No documentation available.
 >**Returns:**
 >A value representing the parsed value.
 
-#### <code>[TSelf](https://learn.microsoft.com/en-us/dotnet/api/tself-0) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) value, [Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format, [Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) options)</code>
+#### <code>[TSelf](https://learn.microsoft.com/en-us/dotnet/api/tself) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) value, [Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format, [Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) options)</code>
 
 >Parses a string representation
 >
@@ -6901,7 +6901,7 @@ No documentation available.
 >**Returns:**
 >A new TernaryArray27 representing the result of applying the binary operation to each corresponding pair of ternaries.
 
-#### <code>[Ternary3.TernaryArray27](#ternary3ternaryarray27) **operator |**([Ternary3.LookupTritArray27Operator](#ternary3lookuptritarray27operator) left, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) right)</code>
+#### <code>[Ternary3.TernaryArray27](#ternary3ternaryarray27) **operator |**([Ternary3.LookupTritArray27Operator](#ternary3lookuptritarray27operator) left, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) right)</code>
 
 >Performs a binary operation between the stored left operand (TernaryArray27) and a Int32 right operand using a lookup table.
 >
@@ -6913,7 +6913,7 @@ No documentation available.
 >**Returns:**
 >A new TernaryArray27 representing the result of applying the binary operation to each corresponding pair of ternaries.
 
-#### <code>[Ternary3.TernaryArray27](#ternary3ternaryarray27) **operator |**([Ternary3.LookupTritArray27Operator](#ternary3lookuptritarray27operator) left, [System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) right)</code>
+#### <code>[Ternary3.TernaryArray27](#ternary3ternaryarray27) **operator |**([Ternary3.LookupTritArray27Operator](#ternary3lookuptritarray27operator) left, [System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) right)</code>
 
 >Performs a binary operation between the stored left operand (TernaryArray27) and a Int64 right operand using a lookup table.
 >
@@ -6961,7 +6961,7 @@ No documentation available.
 >**Returns:**
 >A new TernaryArray3 representing the result of applying the binary operation to each corresponding pair of ternaries.
 
-#### <code>[Ternary3.TernaryArray3](#ternary3ternaryarray3) **operator |**([Ternary3.LookupTritArray3Operator](#ternary3lookuptritarray3operator) left, [System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte-0) right)</code>
+#### <code>[Ternary3.TernaryArray3](#ternary3ternaryarray3) **operator |**([Ternary3.LookupTritArray3Operator](#ternary3lookuptritarray3operator) left, [System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte) right)</code>
 
 >Performs a binary operation between the stored left operand (TernaryArray3) and a SByte right operand using a lookup table.
 >
@@ -7009,7 +7009,7 @@ No documentation available.
 >**Returns:**
 >A new TernaryArray9 representing the result of applying the binary operation to each corresponding pair of ternaries.
 
-#### <code>[Ternary3.TernaryArray9](#ternary3ternaryarray9) **operator |**([Ternary3.LookupTritArray9Operator](#ternary3lookuptritarray9operator) left, [System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16-0) right)</code>
+#### <code>[Ternary3.TernaryArray9](#ternary3ternaryarray9) **operator |**([Ternary3.LookupTritArray9Operator](#ternary3lookuptritarray9operator) left, [System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16) right)</code>
 
 >Performs a binary operation between the stored left operand (TernaryArray9) and a Int16 right operand using a lookup table.
 >
@@ -7059,7 +7059,7 @@ No documentation available.
 
 ### Static Methods
 
-#### <code>[Ternary3.TernaryArray](#ternary3ternaryarray) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) value)</code>
+#### <code>[Ternary3.TernaryArray](#ternary3ternaryarray) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) value)</code>
 
 >Parses a string representation of a TernaryArray.
 >
@@ -7070,7 +7070,7 @@ No documentation available.
 >**Returns:**
 >A TernaryArray representing the parsed value.
 
-#### <code>[Ternary3.TernaryArray](#ternary3ternaryarray) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) value, [Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format)</code>
+#### <code>[Ternary3.TernaryArray](#ternary3ternaryarray) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) value, [Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format)</code>
 
 >Parses a string representation of a TernaryArray.
 >
@@ -7082,7 +7082,7 @@ No documentation available.
 >**Returns:**
 >A TernaryArray representing the parsed value.
 
-#### <code>[Ternary3.TernaryArray](#ternary3ternaryarray) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) value, [Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) options)</code>
+#### <code>[Ternary3.TernaryArray](#ternary3ternaryarray) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) value, [Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) options)</code>
 
 >Parses a string representation of a TernaryArray.
 >
@@ -7094,7 +7094,7 @@ No documentation available.
 >**Returns:**
 >A TernaryArray representing the parsed value.
 
-#### <code>[Ternary3.TernaryArray](#ternary3ternaryarray) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) value, [Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format, [Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) options)</code>
+#### <code>[Ternary3.TernaryArray](#ternary3ternaryarray) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) value, [Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format, [Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) options)</code>
 
 >Parses a string representation of a TernaryArray.
 >
@@ -7124,35 +7124,35 @@ No documentation available.
 
 ### Methods
 
-#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) **GetHashCode**()</code>
+#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **GetHashCode**()</code>
 
 >
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **Equals**([System.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object-0) obj)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **Equals**([System.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object) obj)</code>
 
 >
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **Equals**([Ternary3.TernaryArray](#ternary3ternaryarray) other)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **Equals**([Ternary3.TernaryArray](#ternary3ternaryarray) other)</code>
 
 >
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **ToString**()</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**()</code>
 
 >Returns a string representation of the TernaryArray.
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **ToString**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) format)</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) format)</code>
 
 >Returns a string representation of the TernaryArray.
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **ToString**([System.IFormatProvider](https://learn.microsoft.com/en-us/dotnet/api/system.iformatprovider-0) provider)</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**([System.IFormatProvider](https://learn.microsoft.com/en-us/dotnet/api/system.iformatprovider) provider)</code>
 
 >Returns a string representation of the TernaryArray.
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **ToString**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) format, [System.IFormatProvider](https://learn.microsoft.com/en-us/dotnet/api/system.iformatprovider-0) provider)</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) format, [System.IFormatProvider](https://learn.microsoft.com/en-us/dotnet/api/system.iformatprovider) provider)</code>
 
 >Returns a string representation of the TernaryArray.
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **ToString**([Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format)</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**([Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format)</code>
 
 >Returns a string representation of this instance, formatted balanced ternarily according to the specified format.
 
@@ -7167,19 +7167,19 @@ No documentation available.
 
 >Represents the maximum value that a TernaryArray can have (all trits set to 1).
 
-#### <code>[Ternary3.Trit](#ternary3trit) **this[[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) index]** { get; set; }</code>
+#### <code>[Ternary3.Trit](#ternary3trit) **this[[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) index]** { get; set; }</code>
 
 No documentation available.
 
-#### <code>[Ternary3.ITritArray](#ternary3itritarray) **this[[System.Range](https://learn.microsoft.com/en-us/dotnet/api/system.range-0) range]** { get; }</code>
+#### <code>[Ternary3.ITritArray](#ternary3itritarray) **this[[System.Range](https://learn.microsoft.com/en-us/dotnet/api/system.range) range]** { get; }</code>
 
 No documentation available.
 
-#### <code>[Ternary3.Trit](#ternary3trit) **this[[System.Index](https://learn.microsoft.com/en-us/dotnet/api/system.index-0) index]** { get; set; }</code>
+#### <code>[Ternary3.Trit](#ternary3trit) **this[[System.Index](https://learn.microsoft.com/en-us/dotnet/api/system.index) index]** { get; set; }</code>
 
 No documentation available.
 
-#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) **Length** { get; }</code>
+#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **Length** { get; }</code>
 
 >Gets the length of the trit array
 
@@ -7246,7 +7246,7 @@ No documentation available.
 >**Returns:**
 >A new TernaryArray with the operation applied to each trit.
 
-#### <code>[Ternary3.TernaryArray](#ternary3ternaryarray) **operator &lt;&lt;**([Ternary3.TernaryArray](#ternary3ternaryarray) array, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) shift)</code>
+#### <code>[Ternary3.TernaryArray](#ternary3ternaryarray) **operator &lt;&lt;**([Ternary3.TernaryArray](#ternary3ternaryarray) array, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) shift)</code>
 
 >Performs a left bitwise shift on the trit array.
 >
@@ -7258,7 +7258,7 @@ No documentation available.
 >**Returns:**
 >A new TernaryArray with the bits shifted to the left.
 
-#### <code>[Ternary3.TernaryArray](#ternary3ternaryarray) **operator &gt;&gt;**([Ternary3.TernaryArray](#ternary3ternaryarray) array, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) shift)</code>
+#### <code>[Ternary3.TernaryArray](#ternary3ternaryarray) **operator &gt;&gt;**([Ternary3.TernaryArray](#ternary3ternaryarray) array, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) shift)</code>
 
 >Performs a right bitwise shift on the trit array.
 >
@@ -7316,7 +7316,7 @@ No documentation available.
 >**Returns:**
 >A TernaryArray representing the same value.
 
-#### <code>[Ternary3.TernaryArray](#ternary3ternaryarray) **operator implicit**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) value)</code>
+#### <code>[Ternary3.TernaryArray](#ternary3ternaryarray) **operator implicit**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) value)</code>
 
 >Defines an implicit conversion of an Int27T to a TernaryArray.
 >
@@ -7327,7 +7327,7 @@ No documentation available.
 >**Returns:**
 >A TernaryArray representing the same value.
 
-#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) **operator explicit**([Ternary3.TernaryArray](#ternary3ternaryarray) array)</code>
+#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **operator explicit**([Ternary3.TernaryArray](#ternary3ternaryarray) array)</code>
 
 >Defines an explicit conversion of a TernaryArray to an int.
 >
@@ -7338,7 +7338,7 @@ No documentation available.
 >**Returns:**
 >An int representing the same value.
 
-#### <code>[Ternary3.TernaryArray](#ternary3ternaryarray) **operator implicit**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) value)</code>
+#### <code>[Ternary3.TernaryArray](#ternary3ternaryarray) **operator implicit**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) value)</code>
 
 >Defines an implicit conversion of an Int27T to a TernaryArray.
 >
@@ -7349,7 +7349,7 @@ No documentation available.
 >**Returns:**
 >A TernaryArray representing the same value.
 
-#### <code>[System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) **operator explicit**([Ternary3.TernaryArray](#ternary3ternaryarray) array)</code>
+#### <code>[System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) **operator explicit**([Ternary3.TernaryArray](#ternary3ternaryarray) array)</code>
 
 >Defines an explicit conversion of a TernaryArray to an int.
 >
@@ -7360,7 +7360,7 @@ No documentation available.
 >**Returns:**
 >An int representing the same value.
 
-#### <code>[System.Int128](https://learn.microsoft.com/en-us/dotnet/api/system.int128-0) **operator explicit**([Ternary3.TernaryArray](#ternary3ternaryarray) array)</code>
+#### <code>[System.Int128](https://learn.microsoft.com/en-us/dotnet/api/system.int128) **operator explicit**([Ternary3.TernaryArray](#ternary3ternaryarray) array)</code>
 
 >Defines an explicit conversion of a TernaryArray to an int.
 >
@@ -7378,7 +7378,7 @@ No documentation available.
 
 ### Static Methods
 
-#### <code>[Ternary3.TernaryArray27](#ternary3ternaryarray27) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) value)</code>
+#### <code>[Ternary3.TernaryArray27](#ternary3ternaryarray27) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) value)</code>
 
 >Parses a string representation of a TernaryArray27.
 >
@@ -7389,7 +7389,7 @@ No documentation available.
 >**Returns:**
 >A TernaryArray27 representing the parsed value.
 
-#### <code>[Ternary3.TernaryArray27](#ternary3ternaryarray27) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) value, [Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format)</code>
+#### <code>[Ternary3.TernaryArray27](#ternary3ternaryarray27) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) value, [Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format)</code>
 
 >Parses a string representation of a TernaryArray27.
 >
@@ -7401,7 +7401,7 @@ No documentation available.
 >**Returns:**
 >A TernaryArray27 representing the parsed value.
 
-#### <code>[Ternary3.TernaryArray27](#ternary3ternaryarray27) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) value, [Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) options)</code>
+#### <code>[Ternary3.TernaryArray27](#ternary3ternaryarray27) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) value, [Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) options)</code>
 
 >Parses a string representation of a TernaryArray27.
 >
@@ -7413,7 +7413,7 @@ No documentation available.
 >**Returns:**
 >A TernaryArray27 representing the parsed value.
 
-#### <code>[Ternary3.TernaryArray27](#ternary3ternaryarray27) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) value, [Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format, [Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) options)</code>
+#### <code>[Ternary3.TernaryArray27](#ternary3ternaryarray27) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) value, [Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format, [Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) options)</code>
 
 >Parses a string representation of a TernaryArray27.
 >
@@ -7451,54 +7451,54 @@ No documentation available.
 
 ### Methods
 
-#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) **GetHashCode**()</code>
+#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **GetHashCode**()</code>
 
 >
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **Equals**([System.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object-0) obj)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **Equals**([System.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object) obj)</code>
 
 >
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **Equals**([Ternary3.TernaryArray27](#ternary3ternaryarray27) other)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **Equals**([Ternary3.TernaryArray27](#ternary3ternaryarray27) other)</code>
 
 >
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **ToString**()</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**()</code>
 
 >Returns a string representation of the TernaryArray27.
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **ToString**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) format)</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) format)</code>
 
 >Returns a string representation of the TernaryArray27.
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **ToString**([System.IFormatProvider](https://learn.microsoft.com/en-us/dotnet/api/system.iformatprovider-0) provider)</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**([System.IFormatProvider](https://learn.microsoft.com/en-us/dotnet/api/system.iformatprovider) provider)</code>
 
 >Returns a string representation of the TernaryArray27.
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **ToString**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) format, [System.IFormatProvider](https://learn.microsoft.com/en-us/dotnet/api/system.iformatprovider-0) provider)</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) format, [System.IFormatProvider](https://learn.microsoft.com/en-us/dotnet/api/system.iformatprovider) provider)</code>
 
 >Returns a string representation of the TernaryArray27.
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **ToString**([Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format)</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**([Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format)</code>
 
 >Returns a string representation of this instance, formatted balanced ternarily according to the specified format.
 
 
 ### Properties
 
-#### <code>[Ternary3.Trit](#ternary3trit) **this[[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) index]** { get; set; }</code>
+#### <code>[Ternary3.Trit](#ternary3trit) **this[[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) index]** { get; set; }</code>
 
 No documentation available.
 
-#### <code>[Ternary3.ITritArray](#ternary3itritarray) **this[[System.Range](https://learn.microsoft.com/en-us/dotnet/api/system.range-0) range]** { get; }</code>
+#### <code>[Ternary3.ITritArray](#ternary3itritarray) **this[[System.Range](https://learn.microsoft.com/en-us/dotnet/api/system.range) range]** { get; }</code>
 
 No documentation available.
 
-#### <code>[Ternary3.Trit](#ternary3trit) **this[[System.Index](https://learn.microsoft.com/en-us/dotnet/api/system.index-0) index]** { get; set; }</code>
+#### <code>[Ternary3.Trit](#ternary3trit) **this[[System.Index](https://learn.microsoft.com/en-us/dotnet/api/system.index) index]** { get; set; }</code>
 
 No documentation available.
 
-#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) **Length** { get; }</code>
+#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **Length** { get; }</code>
 
 >Gets the length of the trit array, which is always 27.
 
@@ -7565,7 +7565,7 @@ No documentation available.
 >**Returns:**
 >A new TernaryArray27 with the operation applied to each trit.
 
-#### <code>[Ternary3.TernaryArray27](#ternary3ternaryarray27) **operator &lt;&lt;**([Ternary3.TernaryArray27](#ternary3ternaryarray27) array, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) shift)</code>
+#### <code>[Ternary3.TernaryArray27](#ternary3ternaryarray27) **operator &lt;&lt;**([Ternary3.TernaryArray27](#ternary3ternaryarray27) array, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) shift)</code>
 
 >Performs a left bitwise shift on the trit array.
 >
@@ -7577,7 +7577,7 @@ No documentation available.
 >**Returns:**
 >A new TernaryArray27 with the bits shifted to the left.
 
-#### <code>[Ternary3.TernaryArray27](#ternary3ternaryarray27) **operator &gt;&gt;**([Ternary3.TernaryArray27](#ternary3ternaryarray27) array, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) shift)</code>
+#### <code>[Ternary3.TernaryArray27](#ternary3ternaryarray27) **operator &gt;&gt;**([Ternary3.TernaryArray27](#ternary3ternaryarray27) array, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) shift)</code>
 
 >Performs a right bitwise shift on the trit array.
 >
@@ -7635,7 +7635,7 @@ No documentation available.
 >**Returns:**
 >A TernaryArray27 representing the same value.
 
-#### <code>[Ternary3.TernaryArray27](#ternary3ternaryarray27) **operator implicit**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) value)</code>
+#### <code>[Ternary3.TernaryArray27](#ternary3ternaryarray27) **operator implicit**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) value)</code>
 
 >Defines an implicit conversion of an Int27T to a TernaryArray27.
 >
@@ -7646,7 +7646,7 @@ No documentation available.
 >**Returns:**
 >A TernaryArray27 representing the same value.
 
-#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) **operator explicit**([Ternary3.TernaryArray27](#ternary3ternaryarray27) array)</code>
+#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **operator explicit**([Ternary3.TernaryArray27](#ternary3ternaryarray27) array)</code>
 
 >Defines an explicit conversion of a TernaryArray27 to an int.
 >
@@ -7657,7 +7657,7 @@ No documentation available.
 >**Returns:**
 >An int representing the same value.
 
-#### <code>[Ternary3.TernaryArray27](#ternary3ternaryarray27) **operator implicit**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) value)</code>
+#### <code>[Ternary3.TernaryArray27](#ternary3ternaryarray27) **operator implicit**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) value)</code>
 
 >Defines an implicit conversion of an Int27T to a TernaryArray27.
 >
@@ -7668,7 +7668,7 @@ No documentation available.
 >**Returns:**
 >A TernaryArray27 representing the same value.
 
-#### <code>[System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) **operator implicit**([Ternary3.TernaryArray27](#ternary3ternaryarray27) array)</code>
+#### <code>[System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) **operator implicit**([Ternary3.TernaryArray27](#ternary3ternaryarray27) array)</code>
 
 >Defines an implicit conversion of an Int27T to a TernaryArray27.
 >
@@ -7686,7 +7686,7 @@ No documentation available.
 
 ### Static Methods
 
-#### <code>[Ternary3.TernaryArray3](#ternary3ternaryarray3) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) value)</code>
+#### <code>[Ternary3.TernaryArray3](#ternary3ternaryarray3) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) value)</code>
 
 >Parses a string representation of a TernaryArray3.
 >
@@ -7697,7 +7697,7 @@ No documentation available.
 >**Returns:**
 >A TernaryArray3 representing the parsed value.
 
-#### <code>[Ternary3.TernaryArray3](#ternary3ternaryarray3) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) value, [Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format)</code>
+#### <code>[Ternary3.TernaryArray3](#ternary3ternaryarray3) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) value, [Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format)</code>
 
 >Parses a string representation of a TernaryArray3.
 >
@@ -7709,7 +7709,7 @@ No documentation available.
 >**Returns:**
 >A TernaryArray3 representing the parsed value.
 
-#### <code>[Ternary3.TernaryArray3](#ternary3ternaryarray3) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) value, [Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) options)</code>
+#### <code>[Ternary3.TernaryArray3](#ternary3ternaryarray3) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) value, [Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) options)</code>
 
 >Parses a string representation of a TernaryArray3.
 >
@@ -7721,7 +7721,7 @@ No documentation available.
 >**Returns:**
 >A TernaryArray3 representing the parsed value.
 
-#### <code>[Ternary3.TernaryArray3](#ternary3ternaryarray3) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) value, [Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format, [Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) options)</code>
+#### <code>[Ternary3.TernaryArray3](#ternary3ternaryarray3) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) value, [Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format, [Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) options)</code>
 
 >Parses a string representation of a TernaryArray3.
 >
@@ -7759,54 +7759,54 @@ No documentation available.
 
 ### Methods
 
-#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) **GetHashCode**()</code>
+#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **GetHashCode**()</code>
 
 >
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **Equals**([System.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object-0) obj)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **Equals**([System.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object) obj)</code>
 
 >
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **Equals**([Ternary3.TernaryArray3](#ternary3ternaryarray3) other)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **Equals**([Ternary3.TernaryArray3](#ternary3ternaryarray3) other)</code>
 
 >
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **ToString**()</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**()</code>
 
 >Returns a string representation of the TernaryArray3.
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **ToString**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) format)</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) format)</code>
 
 >Returns a string representation of the TernaryArray3.
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **ToString**([System.IFormatProvider](https://learn.microsoft.com/en-us/dotnet/api/system.iformatprovider-0) provider)</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**([System.IFormatProvider](https://learn.microsoft.com/en-us/dotnet/api/system.iformatprovider) provider)</code>
 
 >Returns a string representation of the TernaryArray3.
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **ToString**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) format, [System.IFormatProvider](https://learn.microsoft.com/en-us/dotnet/api/system.iformatprovider-0) provider)</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) format, [System.IFormatProvider](https://learn.microsoft.com/en-us/dotnet/api/system.iformatprovider) provider)</code>
 
 >Returns a string representation of the TernaryArray3.
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **ToString**([Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format)</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**([Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format)</code>
 
 >Returns a string representation of this instance, formatted balanced ternarily according to the specified format.
 
 
 ### Properties
 
-#### <code>[Ternary3.Trit](#ternary3trit) **this[[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) index]** { get; set; }</code>
+#### <code>[Ternary3.Trit](#ternary3trit) **this[[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) index]** { get; set; }</code>
 
 No documentation available.
 
-#### <code>[Ternary3.ITritArray](#ternary3itritarray) **this[[System.Range](https://learn.microsoft.com/en-us/dotnet/api/system.range-0) range]** { get; }</code>
+#### <code>[Ternary3.ITritArray](#ternary3itritarray) **this[[System.Range](https://learn.microsoft.com/en-us/dotnet/api/system.range) range]** { get; }</code>
 
 No documentation available.
 
-#### <code>[Ternary3.Trit](#ternary3trit) **this[[System.Index](https://learn.microsoft.com/en-us/dotnet/api/system.index-0) index]** { get; set; }</code>
+#### <code>[Ternary3.Trit](#ternary3trit) **this[[System.Index](https://learn.microsoft.com/en-us/dotnet/api/system.index) index]** { get; set; }</code>
 
 No documentation available.
 
-#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) **Length** { get; }</code>
+#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **Length** { get; }</code>
 
 >Gets the length of the trit array, which is always 3.
 
@@ -7873,7 +7873,7 @@ No documentation available.
 >**Returns:**
 >A new TernaryArray3 with the operation applied to each trit.
 
-#### <code>[Ternary3.TernaryArray3](#ternary3ternaryarray3) **operator &lt;&lt;**([Ternary3.TernaryArray3](#ternary3ternaryarray3) array, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) shift)</code>
+#### <code>[Ternary3.TernaryArray3](#ternary3ternaryarray3) **operator &lt;&lt;**([Ternary3.TernaryArray3](#ternary3ternaryarray3) array, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) shift)</code>
 
 >Performs a left bitwise shift on the trit array.
 >
@@ -7885,7 +7885,7 @@ No documentation available.
 >**Returns:**
 >A new TernaryArray3 with the bits shifted to the left.
 
-#### <code>[Ternary3.TernaryArray3](#ternary3ternaryarray3) **operator &gt;&gt;**([Ternary3.TernaryArray3](#ternary3ternaryarray3) array, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) shift)</code>
+#### <code>[Ternary3.TernaryArray3](#ternary3ternaryarray3) **operator &gt;&gt;**([Ternary3.TernaryArray3](#ternary3ternaryarray3) array, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) shift)</code>
 
 >Performs a right bitwise shift on the trit array.
 >
@@ -7943,7 +7943,7 @@ No documentation available.
 >**Returns:**
 >A TernaryArray3 representing the same value.
 
-#### <code>[Ternary3.TernaryArray3](#ternary3ternaryarray3) **operator implicit**([System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte-0) value)</code>
+#### <code>[Ternary3.TernaryArray3](#ternary3ternaryarray3) **operator implicit**([System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte) value)</code>
 
 >Defines an implicit conversion of an Int3T to a TernaryArray3.
 >
@@ -7954,7 +7954,7 @@ No documentation available.
 >**Returns:**
 >A TernaryArray3 representing the same value.
 
-#### <code>[System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte-0) **operator implicit**([Ternary3.TernaryArray3](#ternary3ternaryarray3) array)</code>
+#### <code>[System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte) **operator implicit**([Ternary3.TernaryArray3](#ternary3ternaryarray3) array)</code>
 
 >Defines an implicit conversion of an Int3T to a TernaryArray3.
 >
@@ -7965,7 +7965,7 @@ No documentation available.
 >**Returns:**
 >A TernaryArray3 representing the same value.
 
-#### <code>[Ternary3.TernaryArray3](#ternary3ternaryarray3) **operator explicit**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) value)</code>
+#### <code>[Ternary3.TernaryArray3](#ternary3ternaryarray3) **operator explicit**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) value)</code>
 
 >Defines an explicit conversion of an int to a TernaryArray3.
 >
@@ -7976,7 +7976,7 @@ No documentation available.
 >**Returns:**
 >A TernaryArray3 representing the same value.
 
-#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) **operator implicit**([Ternary3.TernaryArray3](#ternary3ternaryarray3) array)</code>
+#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **operator implicit**([Ternary3.TernaryArray3](#ternary3ternaryarray3) array)</code>
 
 >Defines an implicit conversion of an Int3T to a TernaryArray3.
 >
@@ -7987,7 +7987,7 @@ No documentation available.
 >**Returns:**
 >A TernaryArray3 representing the same value.
 
-#### <code>[Ternary3.TernaryArray3](#ternary3ternaryarray3) **operator explicit**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) value)</code>
+#### <code>[Ternary3.TernaryArray3](#ternary3ternaryarray3) **operator explicit**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) value)</code>
 
 >Defines an explicit conversion of an int to a TernaryArray3.
 >
@@ -7998,7 +7998,7 @@ No documentation available.
 >**Returns:**
 >A TernaryArray3 representing the same value.
 
-#### <code>[System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) **operator implicit**([Ternary3.TernaryArray3](#ternary3ternaryarray3) array)</code>
+#### <code>[System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) **operator implicit**([Ternary3.TernaryArray3](#ternary3ternaryarray3) array)</code>
 
 >Defines an implicit conversion of an Int3T to a TernaryArray3.
 >
@@ -8016,7 +8016,7 @@ No documentation available.
 
 ### Static Methods
 
-#### <code>[Ternary3.TernaryArray9](#ternary3ternaryarray9) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) value)</code>
+#### <code>[Ternary3.TernaryArray9](#ternary3ternaryarray9) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) value)</code>
 
 >Parses a string representation of a TernaryArray9.
 >
@@ -8027,7 +8027,7 @@ No documentation available.
 >**Returns:**
 >A TernaryArray9 representing the parsed value.
 
-#### <code>[Ternary3.TernaryArray9](#ternary3ternaryarray9) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) value, [Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format)</code>
+#### <code>[Ternary3.TernaryArray9](#ternary3ternaryarray9) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) value, [Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format)</code>
 
 >Parses a string representation of a TernaryArray9.
 >
@@ -8039,7 +8039,7 @@ No documentation available.
 >**Returns:**
 >A TernaryArray9 representing the parsed value.
 
-#### <code>[Ternary3.TernaryArray9](#ternary3ternaryarray9) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) value, [Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) options)</code>
+#### <code>[Ternary3.TernaryArray9](#ternary3ternaryarray9) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) value, [Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) options)</code>
 
 >Parses a string representation of a TernaryArray9.
 >
@@ -8051,7 +8051,7 @@ No documentation available.
 >**Returns:**
 >A TernaryArray9 representing the parsed value.
 
-#### <code>[Ternary3.TernaryArray9](#ternary3ternaryarray9) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) value, [Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format, [Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) options)</code>
+#### <code>[Ternary3.TernaryArray9](#ternary3ternaryarray9) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) value, [Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format, [Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) options)</code>
 
 >Parses a string representation of a TernaryArray9.
 >
@@ -8089,54 +8089,54 @@ No documentation available.
 
 ### Methods
 
-#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) **GetHashCode**()</code>
+#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **GetHashCode**()</code>
 
 >
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **Equals**([System.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object-0) obj)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **Equals**([System.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object) obj)</code>
 
 >
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **Equals**([Ternary3.TernaryArray9](#ternary3ternaryarray9) other)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **Equals**([Ternary3.TernaryArray9](#ternary3ternaryarray9) other)</code>
 
 >
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **ToString**()</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**()</code>
 
 >Returns a string representation of the TernaryArray9.
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **ToString**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) format)</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) format)</code>
 
 >Returns a string representation of the TernaryArray9.
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **ToString**([System.IFormatProvider](https://learn.microsoft.com/en-us/dotnet/api/system.iformatprovider-0) provider)</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**([System.IFormatProvider](https://learn.microsoft.com/en-us/dotnet/api/system.iformatprovider) provider)</code>
 
 >Returns a string representation of the TernaryArray9.
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **ToString**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) format, [System.IFormatProvider](https://learn.microsoft.com/en-us/dotnet/api/system.iformatprovider-0) provider)</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) format, [System.IFormatProvider](https://learn.microsoft.com/en-us/dotnet/api/system.iformatprovider) provider)</code>
 
 >Returns a string representation of the TernaryArray9.
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **ToString**([Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format)</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**([Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format)</code>
 
 >Returns a string representation of this instance, formatted balanced ternarily according to the specified format.
 
 
 ### Properties
 
-#### <code>[Ternary3.Trit](#ternary3trit) **this[[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) index]** { get; set; }</code>
+#### <code>[Ternary3.Trit](#ternary3trit) **this[[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) index]** { get; set; }</code>
 
 No documentation available.
 
-#### <code>[Ternary3.ITritArray](#ternary3itritarray) **this[[System.Range](https://learn.microsoft.com/en-us/dotnet/api/system.range-0) range]** { get; }</code>
+#### <code>[Ternary3.ITritArray](#ternary3itritarray) **this[[System.Range](https://learn.microsoft.com/en-us/dotnet/api/system.range) range]** { get; }</code>
 
 No documentation available.
 
-#### <code>[Ternary3.Trit](#ternary3trit) **this[[System.Index](https://learn.microsoft.com/en-us/dotnet/api/system.index-0) index]** { get; set; }</code>
+#### <code>[Ternary3.Trit](#ternary3trit) **this[[System.Index](https://learn.microsoft.com/en-us/dotnet/api/system.index) index]** { get; set; }</code>
 
 No documentation available.
 
-#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) **Length** { get; }</code>
+#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **Length** { get; }</code>
 
 >Gets the length of the trit array, which is always 9.
 
@@ -8203,7 +8203,7 @@ No documentation available.
 >**Returns:**
 >A new TernaryArray9 with the operation applied to each trit.
 
-#### <code>[Ternary3.TernaryArray9](#ternary3ternaryarray9) **operator &lt;&lt;**([Ternary3.TernaryArray9](#ternary3ternaryarray9) array, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) shift)</code>
+#### <code>[Ternary3.TernaryArray9](#ternary3ternaryarray9) **operator &lt;&lt;**([Ternary3.TernaryArray9](#ternary3ternaryarray9) array, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) shift)</code>
 
 >Performs a left bitwise shift on the trit array.
 >
@@ -8215,7 +8215,7 @@ No documentation available.
 >**Returns:**
 >A new TernaryArray9 with the bits shifted to the left.
 
-#### <code>[Ternary3.TernaryArray9](#ternary3ternaryarray9) **operator &gt;&gt;**([Ternary3.TernaryArray9](#ternary3ternaryarray9) array, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) shift)</code>
+#### <code>[Ternary3.TernaryArray9](#ternary3ternaryarray9) **operator &gt;&gt;**([Ternary3.TernaryArray9](#ternary3ternaryarray9) array, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) shift)</code>
 
 >Performs a right bitwise shift on the trit array.
 >
@@ -8273,7 +8273,7 @@ No documentation available.
 >**Returns:**
 >A TernaryArray9 representing the same value.
 
-#### <code>[Ternary3.TernaryArray9](#ternary3ternaryarray9) **operator implicit**([System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16-0) value)</code>
+#### <code>[Ternary3.TernaryArray9](#ternary3ternaryarray9) **operator implicit**([System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16) value)</code>
 
 >Defines an implicit conversion of an Int9T to a TernaryArray9.
 >
@@ -8284,7 +8284,7 @@ No documentation available.
 >**Returns:**
 >A TernaryArray9 representing the same value.
 
-#### <code>[System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16-0) **operator implicit**([Ternary3.TernaryArray9](#ternary3ternaryarray9) array)</code>
+#### <code>[System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16) **operator implicit**([Ternary3.TernaryArray9](#ternary3ternaryarray9) array)</code>
 
 >Defines an implicit conversion of an Int9T to a TernaryArray9.
 >
@@ -8295,7 +8295,7 @@ No documentation available.
 >**Returns:**
 >A TernaryArray9 representing the same value.
 
-#### <code>[Ternary3.TernaryArray9](#ternary3ternaryarray9) **operator explicit**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) value)</code>
+#### <code>[Ternary3.TernaryArray9](#ternary3ternaryarray9) **operator explicit**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) value)</code>
 
 >Defines an explicit conversion of an int to a TernaryArray9.
 >
@@ -8306,7 +8306,7 @@ No documentation available.
 >**Returns:**
 >A TernaryArray9 representing the same value.
 
-#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) **operator implicit**([Ternary3.TernaryArray9](#ternary3ternaryarray9) array)</code>
+#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **operator implicit**([Ternary3.TernaryArray9](#ternary3ternaryarray9) array)</code>
 
 >Defines an implicit conversion of an Int9T to a TernaryArray9.
 >
@@ -8317,7 +8317,7 @@ No documentation available.
 >**Returns:**
 >A TernaryArray9 representing the same value.
 
-#### <code>[Ternary3.TernaryArray9](#ternary3ternaryarray9) **operator explicit**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) value)</code>
+#### <code>[Ternary3.TernaryArray9](#ternary3ternaryarray9) **operator explicit**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) value)</code>
 
 >Defines an explicit conversion of an int to a TernaryArray9.
 >
@@ -8328,7 +8328,7 @@ No documentation available.
 >**Returns:**
 >A TernaryArray9 representing the same value.
 
-#### <code>[System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) **operator implicit**([Ternary3.TernaryArray9](#ternary3ternaryarray9) array)</code>
+#### <code>[System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) **operator implicit**([Ternary3.TernaryArray9](#ternary3ternaryarray9) array)</code>
 
 >Defines an implicit conversion of an Int9T to a TernaryArray9.
 >
@@ -8361,7 +8361,7 @@ No documentation available.
 
 ### Fields
 
-#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) **value__**</code>
+#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **value__**</code>
 
 No documentation available.
 
@@ -8394,14 +8394,14 @@ No documentation available.
 
 ### Methods
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **ToString**()</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**()</code>
 
 >Returns a string representation of the current Trit value.
 >
 >**Returns:**
 >"Positive" for 1, "Zero" for 0, and "Negative" for -1.
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **Equals**([Ternary3.Trit](#ternary3trit) other)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **Equals**([Ternary3.Trit](#ternary3trit) other)</code>
 
 >Indicates whether the current Trit is equal to another Trit.
 >
@@ -8412,7 +8412,7 @@ No documentation available.
 >**Returns:**
 >True if the value of the current Trit is equal to the value of the other Trit; otherwise, false.
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **Equals**([System.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object-0) obj)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **Equals**([System.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object) obj)</code>
 
 >Returns a value indicating whether this instance is equal to a specified object.
 >
@@ -8423,7 +8423,7 @@ No documentation available.
 >**Returns:**
 >True if obj is a Trit and has the same value as this instance; otherwise, false.
 
-#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) **GetHashCode**()</code>
+#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **GetHashCode**()</code>
 
 >Returns the hash code for this instance.
 >
@@ -8447,7 +8447,7 @@ No documentation available.
 >            - false converts to Negative (-1)
 >            - null converts to Zero (0)
 
-#### <code>[Ternary3.Trit](#ternary3trit) **operator implicit**([System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) value)</code>
+#### <code>[Ternary3.Trit](#ternary3trit) **operator implicit**([System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) value)</code>
 
 >Converts the specified nullable Boolean value to a Trit value.
 >
@@ -8475,7 +8475,7 @@ No documentation available.
 >            - false converts to Negative (-1)
 >            - null converts to Zero (0)
 
-#### <code>[System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte-0) **operator implicit**([Ternary3.Trit](#ternary3trit) trit)</code>
+#### <code>[System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte) **operator implicit**([Ternary3.Trit](#ternary3trit) trit)</code>
 
 >Converts the specified nullable Boolean value to a Trit value.
 >
@@ -8489,7 +8489,7 @@ No documentation available.
 >            - false converts to Negative (-1)
 >            - null converts to Zero (0)
 
-#### <code>[Ternary3.Trit](#ternary3trit) **operator explicit**([System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte-0) value)</code>
+#### <code>[Ternary3.Trit](#ternary3trit) **operator explicit**([System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte) value)</code>
 
 >Converts the specified signed byte value to a Trit value.
 >
@@ -8504,7 +8504,7 @@ No documentation available.
 >**Exceptions:**
 >- `System.ArgumentOutOfRangeException`: Thrown when the value is not -1, 0, or 1.
 
-#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) **operator implicit**([Ternary3.Trit](#ternary3trit) trit)</code>
+#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **operator implicit**([Ternary3.Trit](#ternary3trit) trit)</code>
 
 >Converts the specified nullable Boolean value to a Trit value.
 >
@@ -8518,7 +8518,7 @@ No documentation available.
 >            - false converts to Negative (-1)
 >            - null converts to Zero (0)
 
-#### <code>[Ternary3.Trit](#ternary3trit) **operator explicit**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) value)</code>
+#### <code>[Ternary3.Trit](#ternary3trit) **operator explicit**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) value)</code>
 
 >Converts the specified signed byte value to a Trit value.
 >
@@ -8533,7 +8533,7 @@ No documentation available.
 >**Exceptions:**
 >- `System.ArgumentOutOfRangeException`: Thrown when the value is not -1, 0, or 1.
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **op_True**([Ternary3.Trit](#ternary3trit) trit)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **op_True**([Ternary3.Trit](#ternary3trit) trit)</code>
 
 >Returns true if the value is Positive (1), false otherwise.
 >
@@ -8544,7 +8544,7 @@ No documentation available.
 >**Returns:**
 >True if the value is Positive (1), false otherwise.
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **op_False**([Ternary3.Trit](#ternary3trit) trit)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **op_False**([Ternary3.Trit](#ternary3trit) trit)</code>
 
 >Returns true if the value is Negative (-1), false otherwise.
 >
@@ -8566,7 +8566,7 @@ No documentation available.
 >**Returns:**
 >The logical negation: Positive becomes Negative, Negative becomes Positive, Zero remains Zero.
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator ==**([Ternary3.Trit](#ternary3trit) left, [Ternary3.Trit](#ternary3trit) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator ==**([Ternary3.Trit](#ternary3trit) left, [Ternary3.Trit](#ternary3trit) right)</code>
 
 >Determines if two Trit values are equal.
 >
@@ -8578,7 +8578,7 @@ No documentation available.
 >**Returns:**
 >True if both Trits have the same value, false otherwise.
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator !=**([Ternary3.Trit](#ternary3trit) left, [Ternary3.Trit](#ternary3trit) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator !=**([Ternary3.Trit](#ternary3trit) left, [Ternary3.Trit](#ternary3trit) right)</code>
 
 >Determines if two Trit values are not equal.
 >
@@ -8671,7 +8671,7 @@ No documentation available.
 >This enables syntax like: trit1 | Operation.ApplyFunc | trit2 to perform custom operations.
 >            Provides a safe alternative to the function pointer approach that doesn't require unsafe code.
 
-#### <code>[Ternary3.Trit](#ternary3trit) **operator ^**([System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) left, [Ternary3.Trit](#ternary3trit) right)</code>
+#### <code>[Ternary3.Trit](#ternary3trit) **operator ^**([System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) left, [Ternary3.Trit](#ternary3trit) right)</code>
 
 >Performs a logical XOR operation between a Boolean and a Trit value.
 >
@@ -8683,7 +8683,7 @@ No documentation available.
 >**Returns:**
 >A Trit value representing the logical XOR operation.
 
-#### <code>[Ternary3.Trit](#ternary3trit) **operator ^**([Ternary3.Trit](#ternary3trit) left, [System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) right)</code>
+#### <code>[Ternary3.Trit](#ternary3trit) **operator ^**([Ternary3.Trit](#ternary3trit) left, [System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) right)</code>
 
 >Performs a logical XOR operation between a Trit value and a Boolean.
 >
@@ -9024,7 +9024,7 @@ No documentation available.
 
 >Creates a new instance of the [BinaryTritOperator](#ternary3.operators.binarytritoperator) structure with default values.
 
-#### <code>**BinaryTritOperator**([System.Int32[][]](https://learn.microsoft.com/en-us/dotnet/api/system.int32[][]-0) trits)</code>
+#### <code>**BinaryTritOperator**([System.Int32[][]](https://learn.microsoft.com/en-us/dotnet/api/system.int32[][]) trits)</code>
 
 >Creates a BinaryTritOperator from a jagged array of integer values.
 >
@@ -9038,7 +9038,7 @@ No documentation available.
 
 ### Methods
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **Equals**([System.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object-0) obj)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **Equals**([System.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object) obj)</code>
 
 >Determines whether the specified object is equal to the current BinaryTritOperator.
 >
@@ -9049,7 +9049,7 @@ No documentation available.
 >**Returns:**
 >true if the objects are equal; otherwise, false.
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **Equals**([Ternary3.Operators.BinaryTritOperator](#ternary3operatorsbinarytritoperator) other)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **Equals**([Ternary3.Operators.BinaryTritOperator](#ternary3operatorsbinarytritoperator) other)</code>
 
 >Determines whether the specified BinaryTritOperator is equal to the current BinaryTritOperator.
 >
@@ -9060,14 +9060,14 @@ No documentation available.
 >**Returns:**
 >true if the specified BinaryTritOperator is equal to the current BinaryTritOperator; otherwise, false.
 
-#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) **GetHashCode**()</code>
+#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **GetHashCode**()</code>
 
 >Returns the hash code for this BinaryTritOperator.
 >
 >**Returns:**
 >A 32-bit signed integer hash code.
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **ToString**()</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**()</code>
 
 >Returns a string representation of the lookup table in a grid format.
 >
@@ -9084,7 +9084,7 @@ No documentation available.
 
 ### Operators
 
-#### <code>[Ternary3.LookupTritArray27Operator](#ternary3lookuptritarray27operator) **operator |**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) value, [Ternary3.Operators.BinaryTritOperator](#ternary3operatorsbinarytritoperator) table)</code>
+#### <code>[Ternary3.LookupTritArray27Operator](#ternary3lookuptritarray27operator) **operator |**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) value, [Ternary3.Operators.BinaryTritOperator](#ternary3operatorsbinarytritoperator) table)</code>
 
 >Adds the pipe operator to `Int64` .
 >            Overflows if the value exceeds the range of Int27T.
@@ -9093,7 +9093,7 @@ No documentation available.
 >- `value`: The value to convert to trits
 >- `table`: The lookup table
 
-#### <code>[Ternary3.LookupTritArray27Operator](#ternary3lookuptritarray27operator) **operator |**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) value, [Ternary3.Operators.BinaryTritOperator](#ternary3operatorsbinarytritoperator) table)</code>
+#### <code>[Ternary3.LookupTritArray27Operator](#ternary3lookuptritarray27operator) **operator |**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) value, [Ternary3.Operators.BinaryTritOperator](#ternary3operatorsbinarytritoperator) table)</code>
 
 >Adds the pipe operator to `Int32` .
 >
@@ -9101,7 +9101,7 @@ No documentation available.
 >- `value`: The value to convert to trits
 >- `table`: The lookup table
 
-#### <code>[Ternary3.LookupTritArray9Operator](#ternary3lookuptritarray9operator) **operator |**([System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16-0) value, [Ternary3.Operators.BinaryTritOperator](#ternary3operatorsbinarytritoperator) table)</code>
+#### <code>[Ternary3.LookupTritArray9Operator](#ternary3lookuptritarray9operator) **operator |**([System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16) value, [Ternary3.Operators.BinaryTritOperator](#ternary3operatorsbinarytritoperator) table)</code>
 
 >Adds the pipe operator to `Int16` .
 >            Overflows if the value exceeds the range of Int27T.
@@ -9110,7 +9110,7 @@ No documentation available.
 >- `value`: The value to convert to trits
 >- `table`: The lookup table
 
-#### <code>[Ternary3.LookupTritArray3Operator](#ternary3lookuptritarray3operator) **operator |**([System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte-0) value, [Ternary3.Operators.BinaryTritOperator](#ternary3operatorsbinarytritoperator) table)</code>
+#### <code>[Ternary3.LookupTritArray3Operator](#ternary3lookuptritarray3operator) **operator |**([System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte) value, [Ternary3.Operators.BinaryTritOperator](#ternary3operatorsbinarytritoperator) table)</code>
 
 >Adds the pipe operator to `SByte` .
 >            Overflows if the value exceeds the range of Int27T.
@@ -9119,7 +9119,7 @@ No documentation available.
 >- `value`: The value to convert to trits
 >- `table`: The lookup table
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator ==**([Ternary3.Operators.BinaryTritOperator](#ternary3operatorsbinarytritoperator) left, [Ternary3.Operators.BinaryTritOperator](#ternary3operatorsbinarytritoperator) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator ==**([Ternary3.Operators.BinaryTritOperator](#ternary3operatorsbinarytritoperator) left, [Ternary3.Operators.BinaryTritOperator](#ternary3operatorsbinarytritoperator) right)</code>
 
 >Determines whether two specified BinaryTritOperator objects have the same value.
 >
@@ -9131,7 +9131,7 @@ No documentation available.
 >**Returns:**
 >true if the value of left is the same as the value of right; otherwise, false.
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **operator !=**([Ternary3.Operators.BinaryTritOperator](#ternary3operatorsbinarytritoperator) left, [Ternary3.Operators.BinaryTritOperator](#ternary3operatorsbinarytritoperator) right)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator !=**([Ternary3.Operators.BinaryTritOperator](#ternary3operatorsbinarytritoperator) left, [Ternary3.Operators.BinaryTritOperator](#ternary3operatorsbinarytritoperator) right)</code>
 
 >Determines whether two specified BinaryTritOperator objects have different values.
 >
@@ -9344,7 +9344,7 @@ No documentation available.
 >- `trit2`: The result for Trit.Zero input.
 >- `trit3`: The result for Trit.Positive input.
 
-#### <code>**UnaryTritOperator**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) value1, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) value2, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) value3)</code>
+#### <code>**UnaryTritOperator**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) value1, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) value2, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) value3)</code>
 
 >Initializes a new instance of the [UnaryTritOperator](#ternary3.operators.unarytritoperator) struct with three integers representing trit values.
 >
@@ -9374,7 +9374,7 @@ No documentation available.
 
 ### Methods
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **ToString**()</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**()</code>
 
 >Returns a string representation of the unary operation in a detailed format.
 >
@@ -9492,7 +9492,7 @@ No documentation available.
 >**Returns:**
 >A new TernaryArray27 with the results of applying the operation.
 
-#### <code>[Ternary3.TernaryArray3](#ternary3ternaryarray3) **operator |**([System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte-0) trits, [Ternary3.Operators.UnaryTritOperator](#ternary3operatorsunarytritoperator) unaryTritOperator)</code>
+#### <code>[Ternary3.TernaryArray3](#ternary3ternaryarray3) **operator |**([System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte) trits, [Ternary3.Operators.UnaryTritOperator](#ternary3operatorsunarytritoperator) unaryTritOperator)</code>
 
 >Applies the unary operation to an sbyte by converting it to a TernaryArray3 first.
 >
@@ -9504,7 +9504,7 @@ No documentation available.
 >**Returns:**
 >A new TernaryArray3 with the results of applying the operation.
 
-#### <code>[Ternary3.TernaryArray9](#ternary3ternaryarray9) **operator |**([System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16-0) trits, [Ternary3.Operators.UnaryTritOperator](#ternary3operatorsunarytritoperator) unaryTritOperator)</code>
+#### <code>[Ternary3.TernaryArray9](#ternary3ternaryarray9) **operator |**([System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16) trits, [Ternary3.Operators.UnaryTritOperator](#ternary3operatorsunarytritoperator) unaryTritOperator)</code>
 
 >Applies the unary operation to a short by converting it to a TernaryArray9 first.
 >
@@ -9516,7 +9516,7 @@ No documentation available.
 >**Returns:**
 >A new TernaryArray9 with the results of applying the operation.
 
-#### <code>[Ternary3.TernaryArray27](#ternary3ternaryarray27) **operator |**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) trits, [Ternary3.Operators.UnaryTritOperator](#ternary3operatorsunarytritoperator) unaryTritOperator)</code>
+#### <code>[Ternary3.TernaryArray27](#ternary3ternaryarray27) **operator |**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) trits, [Ternary3.Operators.UnaryTritOperator](#ternary3operatorsunarytritoperator) unaryTritOperator)</code>
 
 >Applies the unary operation to an int by converting it to a TernaryArray27 first.
 >
@@ -9528,7 +9528,7 @@ No documentation available.
 >**Returns:**
 >A new TernaryArray27 with the results of applying the operation.
 
-#### <code>[Ternary3.TernaryArray27](#ternary3ternaryarray27) **operator |**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) trits, [Ternary3.Operators.UnaryTritOperator](#ternary3operatorsunarytritoperator) unaryTritOperator)</code>
+#### <code>[Ternary3.TernaryArray27](#ternary3ternaryarray27) **operator |**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) trits, [Ternary3.Operators.UnaryTritOperator](#ternary3operatorsunarytritoperator) unaryTritOperator)</code>
 
 >Applies the unary operation to a long by converting it to a TernaryArray27 first.
 >
@@ -9553,7 +9553,7 @@ No documentation available.
 
 ### Constructors
 
-#### <code>**ByteToInt3TStream**([System.IO.Stream](https://learn.microsoft.com/en-us/dotnet/api/system.io.stream-0) source, [System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) mustWriteMagicNumber, [System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) leaveOpen)</code>
+#### <code>**ByteToInt3TStream**([System.IO.Stream](https://learn.microsoft.com/en-us/dotnet/api/system.io.stream) source, [System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) mustWriteMagicNumber, [System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) leaveOpen)</code>
 
 >A stream that converts a byte stream to an Int3T stream.
 >
@@ -9566,7 +9566,7 @@ No documentation available.
 
 ### Methods
 
-#### <code>[System.Threading.Tasks.Task<System.Int32>](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1) **ReadAsync**([Ternary3.Int3T[]](#ternary3int3t) buffer, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) offset, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) count, [System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken-0) cancellationToken)</code>
+#### <code>[System.Threading.Tasks.Task<System.Int32>](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1) **ReadAsync**([Ternary3.Int3T[]](#ternary3int3t) buffer, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) offset, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) count, [System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken) cancellationToken)</code>
 
 >Asynchronously reads a sequence of Int3T values from the stream.
 >
@@ -9588,7 +9588,7 @@ No documentation available.
 >- `System.NotSupportedException`: The stream does not support reading.
 >- `System.ObjectDisposedException`: The stream has been disposed.
 
-#### <code>[System.Threading.Tasks.Task](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-0) **WriteAsync**([Ternary3.Int3T[]](#ternary3int3t) buffer, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) offset, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) count, [System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken-0) cancellationToken)</code>
+#### <code>[System.Threading.Tasks.Task](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task) **WriteAsync**([Ternary3.Int3T[]](#ternary3int3t) buffer, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) offset, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) count, [System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken) cancellationToken)</code>
 
 >Asynchronously writes a sequence of Int3T values to the stream.
 >
@@ -9609,7 +9609,7 @@ No documentation available.
 >- `System.NotSupportedException`: The stream does not support writing.
 >- `System.ObjectDisposedException`: The stream has been disposed.
 
-#### <code>[System.Threading.Tasks.Task](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-0) **FlushAsync**([System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken-0) cancellationToken)</code>
+#### <code>[System.Threading.Tasks.Task](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task) **FlushAsync**([System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken) cancellationToken)</code>
 
 >Flushes the stream, writing any buffered data to the underlying stream.
 >            Warning: flushing will restart part of the encoding, making size optimization impossible.
@@ -9622,7 +9622,7 @@ No documentation available.
 >- `System.NotSupportedException`: 
 >- `System.ObjectDisposedException`: The stream has been disposed.
 
-#### <code>[System.Threading.Tasks.Task<System.Int64>](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1) **SeekAsync**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) offset, [System.IO.SeekOrigin](https://learn.microsoft.com/en-us/dotnet/api/system.io.seekorigin-0) origin, [System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken-0) cancellationToken)</code>
+#### <code>[System.Threading.Tasks.Task<System.Int64>](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1) **SeekAsync**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) offset, [System.IO.SeekOrigin](https://learn.microsoft.com/en-us/dotnet/api/system.io.seekorigin) origin, [System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken) cancellationToken)</code>
 
 >When overridden in a derived class, sets the position within the current stream.
 >
@@ -9642,7 +9642,7 @@ No documentation available.
 >- `System.ObjectDisposedException`: Methods were called after the stream was closed.
 >- `System.OperationCanceledException`: The operation was canceled.
 
-#### <code>[System.Threading.Tasks.Task](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-0) **SetLengthAsync**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) value, [System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken-0) cancellationToken)</code>
+#### <code>[System.Threading.Tasks.Task](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task) **SetLengthAsync**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) value, [System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken) cancellationToken)</code>
 
 >When overridden in a derived class, sets the length of the current stream.
 >
@@ -9657,7 +9657,7 @@ No documentation available.
 >- `System.ObjectDisposedException`: Methods were called after the stream was closed.
 >- `System.OperationCanceledException`: The operation was canceled.
 
-#### <code>[System.Threading.Tasks.ValueTask](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.valuetask-0) **DisposeAsyncCore**()</code>
+#### <code>[System.Threading.Tasks.ValueTask](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.valuetask) **DisposeAsyncCore**()</code>
 
 >Releases the unmanaged resources used by the stream and optionally releases the managed resources.
 >
@@ -9667,19 +9667,19 @@ No documentation available.
 
 ### Properties
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **CanRead** { get; }</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **CanRead** { get; }</code>
 
 >When overridden in a derived class, gets a value indicating whether the current stream supports reading.
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **CanWrite** { get; }</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **CanWrite** { get; }</code>
 
 >When overridden in a derived class, gets a value indicating whether the current stream supports writing.
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **CanSeek** { get; }</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **CanSeek** { get; }</code>
 
 >When overridden in a derived class, gets a value indicating whether the current stream supports seeking.
 
-#### <code>[System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) **Length** { get; }</code>
+#### <code>[System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) **Length** { get; }</code>
 
 >When overridden in a derived class, gets the length in Int3T units of the stream.
 >
@@ -9687,7 +9687,7 @@ No documentation available.
 >- `System.NotSupportedException`: A class derived from Int3TStream does not support seeking.
 >- `System.ObjectDisposedException`: Methods were called after the stream was closed.
 
-#### <code>[System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) **Position** { get; set; }</code>
+#### <code>[System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) **Position** { get; set; }</code>
 
 >When overridden in a derived class, gets or sets the position within the current stream.
 >
@@ -9715,7 +9715,7 @@ No documentation available.
 
 ### Methods
 
-#### <code>[System.Threading.Tasks.Task<System.Int32>](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1) **ReadAsync**([Ternary3.Int3T[]](#ternary3int3t) buffer, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) offset, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) count, [System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken-0) cancellationToken)</code>
+#### <code>[System.Threading.Tasks.Task<System.Int32>](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1) **ReadAsync**([Ternary3.Int3T[]](#ternary3int3t) buffer, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) offset, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) count, [System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken) cancellationToken)</code>
 
 >When overridden in a derived class, reads a sequence of Int3T values from the current stream and advances the position within the stream by the number of Int3T values read.
 >
@@ -9739,7 +9739,7 @@ No documentation available.
 >- `System.IO.IOException`: An I/O error occurs.
 >- `System.OperationCanceledException`: The operation was canceled.
 
-#### <code>[System.Threading.Tasks.Task](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-0) **WriteAsync**([Ternary3.Int3T[]](#ternary3int3t) buffer, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) offset, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) count, [System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken-0) cancellationToken)</code>
+#### <code>[System.Threading.Tasks.Task](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task) **WriteAsync**([Ternary3.Int3T[]](#ternary3int3t) buffer, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) offset, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) count, [System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken) cancellationToken)</code>
 
 >When overridden in a derived class, writes a sequence of Int3T values to the current stream and advances the current position within this stream by the number of Int3T values written.
 >
@@ -9759,7 +9759,7 @@ No documentation available.
 >- `System.IO.IOException`: An I/O error occurs.
 >- `System.OperationCanceledException`: The operation was canceled.
 
-#### <code>[System.Threading.Tasks.Task<System.Int64>](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1) **SeekAsync**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) offset, [System.IO.SeekOrigin](https://learn.microsoft.com/en-us/dotnet/api/system.io.seekorigin-0) origin, [System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken-0) cancellationToken)</code>
+#### <code>[System.Threading.Tasks.Task<System.Int64>](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1) **SeekAsync**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) offset, [System.IO.SeekOrigin](https://learn.microsoft.com/en-us/dotnet/api/system.io.seekorigin) origin, [System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken) cancellationToken)</code>
 
 >When overridden in a derived class, sets the position within the current stream.
 >
@@ -9779,7 +9779,7 @@ No documentation available.
 >- `System.ObjectDisposedException`: Methods were called after the stream was closed.
 >- `System.OperationCanceledException`: The operation was canceled.
 
-#### <code>[System.Threading.Tasks.Task](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-0) **SetLengthAsync**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) value, [System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken-0) cancellationToken)</code>
+#### <code>[System.Threading.Tasks.Task](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task) **SetLengthAsync**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) value, [System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken) cancellationToken)</code>
 
 >When overridden in a derived class, sets the length of the current stream.
 >
@@ -9794,14 +9794,14 @@ No documentation available.
 >- `System.ObjectDisposedException`: Methods were called after the stream was closed.
 >- `System.OperationCanceledException`: The operation was canceled.
 
-#### <code>[System.Threading.Tasks.Task](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-0) **FlushAsync**([System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken-0) cancellationToken)</code>
+#### <code>[System.Threading.Tasks.Task](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task) **FlushAsync**([System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken) cancellationToken)</code>
 
 >When overridden in a derived class, clears all buffers for this stream and causes any buffered data to be written to the underlying device.
 >
 >**Exceptions:**
 >- `System.IO.IOException`: An I/O error occurs.
 
-#### <code>[System.Threading.Tasks.Task<System.Int32>](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1) **ReadInt3TAsync**([System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken-0) cancellationToken)</code>
+#### <code>[System.Threading.Tasks.Task<System.Int32>](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1) **ReadInt3TAsync**([System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken) cancellationToken)</code>
 
 >Asynchronously reads a Int3T value from the stream and advances the position within the stream by one Int3T value, or returns -1 if at the end of the stream.
 >
@@ -9817,7 +9817,7 @@ No documentation available.
 >- `System.NotSupportedException`: The stream does not support reading.
 >- `System.ObjectDisposedException`: Methods were called after the stream was closed.
 
-#### <code>[System.Threading.Tasks.Task](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-0) **WriteInt3TAsync**([Ternary3.Int3T](#ternary3int3t) value, [System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken-0) cancellationToken)</code>
+#### <code>[System.Threading.Tasks.Task](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task) **WriteInt3TAsync**([Ternary3.Int3T](#ternary3int3t) value, [System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken) cancellationToken)</code>
 
 >Asynchronously writes a Int3T value to the current position in the stream and advances the position within the stream by one Int3T value.
 >
@@ -9834,7 +9834,7 @@ No documentation available.
 >- `System.NotSupportedException`: The stream does not support writing.
 >- `System.ObjectDisposedException`: Methods were called after the stream was closed.
 
-#### <code>[System.Threading.Tasks.Task<System.Int32>](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1) **ReadAsync**([Ternary3.Int3T[]](#ternary3int3t) buffer, [System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken-0) cancellationToken)</code>
+#### <code>[System.Threading.Tasks.Task<System.Int32>](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1) **ReadAsync**([Ternary3.Int3T[]](#ternary3int3t) buffer, [System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken) cancellationToken)</code>
 
 >Asynchronously reads a sequence of Int3T values from the current stream and writes them to the buffer.
 >
@@ -9852,7 +9852,7 @@ No documentation available.
 >- `System.NotSupportedException`: The stream does not support reading.
 >- `System.ObjectDisposedException`: Methods were called after the stream was closed.
 
-#### <code>[System.Threading.Tasks.Task](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-0) **WriteAsync**([Ternary3.Int3T[]](#ternary3int3t) buffer, [System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken-0) cancellationToken)</code>
+#### <code>[System.Threading.Tasks.Task](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task) **WriteAsync**([Ternary3.Int3T[]](#ternary3int3t) buffer, [System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken) cancellationToken)</code>
 
 >Asynchronously writes a sequence of Int3T values from the buffer to the current stream.
 >
@@ -9870,7 +9870,7 @@ No documentation available.
 >- `System.NotSupportedException`: The stream does not support writing.
 >- `System.ObjectDisposedException`: Methods were called after the stream was closed.
 
-#### <code>[System.Threading.Tasks.Task<Ternary3.Int3T[]>](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1) **ReadToEndAsync**([System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken-0) cancellationToken)</code>
+#### <code>[System.Threading.Tasks.Task<Ternary3.Int3T[]>](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1) **ReadToEndAsync**([System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken) cancellationToken)</code>
 
 >Asynchronously reads all Int3T values from the current position to the end of the stream.
 >
@@ -9888,14 +9888,14 @@ No documentation available.
 >- `System.OutOfMemoryException`: There is insufficient memory to allocate a buffer for the returned array.
 >- `System.IO.IOException`: An I/O error occurs.
 
-#### <code>[System.Void](https://learn.microsoft.com/en-us/dotnet/api/system.void-0) **Flush**()</code>
+#### <code>[System.Void](https://learn.microsoft.com/en-us/dotnet/api/system.void) **Flush**()</code>
 
 >When overridden in a derived class, clears all buffers for this stream and causes any buffered data to be written to the underlying device.
 >
 >**Exceptions:**
 >- `System.IO.IOException`: An I/O error occurs.
 
-#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) **Read**([Ternary3.Int3T[]](#ternary3int3t) buffer, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) offset, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) count)</code>
+#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **Read**([Ternary3.Int3T[]](#ternary3int3t) buffer, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) offset, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) count)</code>
 
 >Reads a sequence of Int3T values from the current stream and advances the position within the stream by the number of Int3T values read.
 >
@@ -9917,7 +9917,7 @@ No documentation available.
 >
 >This is a synchronous method. Consider using [CancellationToken)](#m:ternary3.io.int3tstream.readasync(ternary3.int3t[],system.int32,system.int32,system.threading.cancellationtoken)) instead for better performance.
 
-#### <code>[System.Void](https://learn.microsoft.com/en-us/dotnet/api/system.void-0) **Write**([Ternary3.Int3T[]](#ternary3int3t) buffer, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) offset, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) count)</code>
+#### <code>[System.Void](https://learn.microsoft.com/en-us/dotnet/api/system.void) **Write**([Ternary3.Int3T[]](#ternary3int3t) buffer, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) offset, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) count)</code>
 
 >Writes a sequence of Int3T values to the current stream and advances the current position within this stream by the number of Int3T values written.
 >
@@ -9935,7 +9935,7 @@ No documentation available.
 >
 >This is a synchronous method. Consider using [CancellationToken)](#m:ternary3.io.int3tstream.writeasync(ternary3.int3t[],system.int32,system.int32,system.threading.cancellationtoken)) instead for better performance.
 
-#### <code>[System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) **Seek**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) offset, [System.IO.SeekOrigin](https://learn.microsoft.com/en-us/dotnet/api/system.io.seekorigin-0) origin)</code>
+#### <code>[System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) **Seek**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) offset, [System.IO.SeekOrigin](https://learn.microsoft.com/en-us/dotnet/api/system.io.seekorigin) origin)</code>
 
 >Sets the position within the current stream.
 >
@@ -9956,21 +9956,21 @@ No documentation available.
 >
 >This is a synchronous method. Consider using [CancellationToken)](#m:ternary3.io.int3tstream.seekasync(system.int64,system.io.seekorigin,system.threading.cancellationtoken)) instead for better performance.
 
-#### <code>[System.Threading.Tasks.ValueTask](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.valuetask-0) **DisposeAsync**()</code>
+#### <code>[System.Threading.Tasks.ValueTask](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.valuetask) **DisposeAsync**()</code>
 
 >Asynchronously disposes the stream, releasing all resources used by it.
 >
 >**Returns:**
 >A task representing the asynchronous dispose operation.
 
-#### <code>[System.Threading.Tasks.ValueTask](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.valuetask-0) **DisposeAsyncCore**()</code>
+#### <code>[System.Threading.Tasks.ValueTask](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.valuetask) **DisposeAsyncCore**()</code>
 
 >Releases the unmanaged resources used by the Int3TStream and optionally releases the managed resources.
 >
 >**Returns:**
 >A task that represents the asynchronous dispose operation.
 
-#### <code>[System.Threading.Tasks.Task](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-0) **CopyToAsync**([Ternary3.IO.Int3TStream](#ternary3ioint3tstream) destination, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) count, [System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken-0) cancellationToken)</code>
+#### <code>[System.Threading.Tasks.Task](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task) **CopyToAsync**([Ternary3.IO.Int3TStream](#ternary3ioint3tstream) destination, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) count, [System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken) cancellationToken)</code>
 
 >Asynchronously copies a specific number of Int3T values from the current Int3TStream to another Int3TStream.
 >
@@ -9991,7 +9991,7 @@ No documentation available.
 >- `System.ObjectDisposedException`: Either the current stream or the destination stream is disposed.
 >- `System.IO.IOException`: An I/O error occurred.
 
-#### <code>[System.Threading.Tasks.Task](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-0) **CopyToAsync**([Ternary3.IO.Int3TStream](#ternary3ioint3tstream) destination, [System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken-0) cancellationToken)</code>
+#### <code>[System.Threading.Tasks.Task](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task) **CopyToAsync**([Ternary3.IO.Int3TStream](#ternary3ioint3tstream) destination, [System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken) cancellationToken)</code>
 
 >Asynchronously copies all Int3T values from the current Int3TStream to another Int3TStream.
 >
@@ -10013,23 +10013,23 @@ No documentation available.
 
 ### Properties
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **Disposed** { get; }</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **Disposed** { get; }</code>
 
 >Gets a value indicating whether the current stream has been disposed.
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **CanRead** { get; }</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **CanRead** { get; }</code>
 
 >When overridden in a derived class, gets a value indicating whether the current stream supports reading.
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **CanWrite** { get; }</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **CanWrite** { get; }</code>
 
 >When overridden in a derived class, gets a value indicating whether the current stream supports writing.
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **CanSeek** { get; }</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **CanSeek** { get; }</code>
 
 >When overridden in a derived class, gets a value indicating whether the current stream supports seeking.
 
-#### <code>[System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) **Length** { get; }</code>
+#### <code>[System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) **Length** { get; }</code>
 
 >When overridden in a derived class, gets the length in Int3T units of the stream.
 >
@@ -10037,7 +10037,7 @@ No documentation available.
 >- `System.NotSupportedException`: A class derived from Int3TStream does not support seeking.
 >- `System.ObjectDisposedException`: Methods were called after the stream was closed.
 
-#### <code>[System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) **Position** { get; set; }</code>
+#### <code>[System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) **Position** { get; set; }</code>
 
 >When overridden in a derived class, gets or sets the position within the current stream.
 >
@@ -10046,18 +10046,18 @@ No documentation available.
 >- `System.NotSupportedException`: The stream does not support seeking.
 >- `System.ObjectDisposedException`: Methods were called after the stream was closed.
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **CanTimeout** { get; }</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **CanTimeout** { get; }</code>
 
 >Gets a value that determines whether the current stream can timeout.
 
-#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) **ReadTimeout** { get; set; }</code>
+#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **ReadTimeout** { get; set; }</code>
 
 >Gets or sets a value, in milliseconds, that determines how long the stream will attempt to read before timing out.
 >
 >**Exceptions:**
 >- `System.InvalidOperationException`: The stream does not support timeouts.
 
-#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) **WriteTimeout** { get; set; }</code>
+#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **WriteTimeout** { get; set; }</code>
 
 >Gets or sets a value, in milliseconds, that determines how long the stream will attempt to write before timing out.
 >
@@ -10077,7 +10077,7 @@ No documentation available.
 
 ### Constructors
 
-#### <code>**Int3TToByteStream**([Ternary3.IO.Int3TStream](#ternary3ioint3tstream) source, [System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) mustWriteMagicNumber, [System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) leaveOpen)</code>
+#### <code>**Int3TToByteStream**([Ternary3.IO.Int3TStream](#ternary3ioint3tstream) source, [System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) mustWriteMagicNumber, [System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) leaveOpen)</code>
 
 >A stream that converts an Int3T stream to a byte stream.
 >
@@ -10090,7 +10090,7 @@ No documentation available.
 
 ### Methods
 
-#### <code>[System.Threading.Tasks.Task<System.Int32>](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1) **ReadAsync**([System.Byte[]](https://learn.microsoft.com/en-us/dotnet/api/system.byte[]-0) buffer, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) offset, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) count, [System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken-0) cancellationToken)</code>
+#### <code>[System.Threading.Tasks.Task<System.Int32>](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1) **ReadAsync**([System.Byte[]](https://learn.microsoft.com/en-us/dotnet/api/system.byte[]) buffer, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) offset, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) count, [System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken) cancellationToken)</code>
 
 >Asynchronously reads a sequence of bytes from the current stream and advances the position within the stream by the number of bytes read.
 >
@@ -10104,7 +10104,7 @@ No documentation available.
 >**Returns:**
 >A task that represents the asynchronous read operation. The value of the TResult parameter contains the total number of bytes read into the buffer.
 
-#### <code>[System.Threading.Tasks.Task](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-0) **WriteAsync**([System.Byte[]](https://learn.microsoft.com/en-us/dotnet/api/system.byte[]-0) buffer, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) offset, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) count, [System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken-0) cancellationToken)</code>
+#### <code>[System.Threading.Tasks.Task](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task) **WriteAsync**([System.Byte[]](https://learn.microsoft.com/en-us/dotnet/api/system.byte[]) buffer, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) offset, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) count, [System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken) cancellationToken)</code>
 
 >Asynchronously writes a sequence of bytes to the current stream and advances the current position within this stream by the number of bytes written.
 >
@@ -10118,42 +10118,42 @@ No documentation available.
 >**Returns:**
 >A task that represents the asynchronous write operation.
 
-#### <code>[System.Threading.Tasks.Task](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-0) **FlushAsync**([System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken-0) cancellationToken)</code>
+#### <code>[System.Threading.Tasks.Task](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task) **FlushAsync**([System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken) cancellationToken)</code>
 
 >
 
-#### <code>[System.Void](https://learn.microsoft.com/en-us/dotnet/api/system.void-0) **Flush**()</code>
+#### <code>[System.Void](https://learn.microsoft.com/en-us/dotnet/api/system.void) **Flush**()</code>
 
 >
 
-#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) **Read**([System.Byte[]](https://learn.microsoft.com/en-us/dotnet/api/system.byte[]-0) buffer, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) offset, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) count)</code>
+#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **Read**([System.Byte[]](https://learn.microsoft.com/en-us/dotnet/api/system.byte[]) buffer, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) offset, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) count)</code>
 
 >
 
-#### <code>[System.Void](https://learn.microsoft.com/en-us/dotnet/api/system.void-0) **Write**([System.Byte[]](https://learn.microsoft.com/en-us/dotnet/api/system.byte[]-0) buffer, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) offset, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) count)</code>
+#### <code>[System.Void](https://learn.microsoft.com/en-us/dotnet/api/system.void) **Write**([System.Byte[]](https://learn.microsoft.com/en-us/dotnet/api/system.byte[]) buffer, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) offset, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) count)</code>
 
 >
 
-#### <code>[System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) **Seek**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) offset, [System.IO.SeekOrigin](https://learn.microsoft.com/en-us/dotnet/api/system.io.seekorigin-0) origin)</code>
+#### <code>[System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) **Seek**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) offset, [System.IO.SeekOrigin](https://learn.microsoft.com/en-us/dotnet/api/system.io.seekorigin) origin)</code>
 
 >
 
-#### <code>[System.Void](https://learn.microsoft.com/en-us/dotnet/api/system.void-0) **SetLength**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) value)</code>
+#### <code>[System.Void](https://learn.microsoft.com/en-us/dotnet/api/system.void) **SetLength**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) value)</code>
 
 >
 
-#### <code>[System.Void](https://learn.microsoft.com/en-us/dotnet/api/system.void-0) **Finalize**()</code>
+#### <code>[System.Void](https://learn.microsoft.com/en-us/dotnet/api/system.void) **Finalize**()</code>
 
 >Finalizer to ensure resources are cleaned up if Dispose is not called.
 
-#### <code>[System.Void](https://learn.microsoft.com/en-us/dotnet/api/system.void-0) **Dispose**([System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) disposing)</code>
+#### <code>[System.Void](https://learn.microsoft.com/en-us/dotnet/api/system.void) **Dispose**([System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) disposing)</code>
 
 >Releases the resources used by the stream.
 >
 >**Parameters:**
 >- `disposing`: true to release both managed and unmanaged resources; false to release only unmanaged resources.
 
-#### <code>[System.Threading.Tasks.ValueTask](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.valuetask-0) **DisposeAsync**()</code>
+#### <code>[System.Threading.Tasks.ValueTask](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.valuetask) **DisposeAsync**()</code>
 
 >Asynchronously releases all resources used by the stream.
 >
@@ -10163,23 +10163,23 @@ No documentation available.
 
 ### Properties
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **CanRead** { get; }</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **CanRead** { get; }</code>
 
 >
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **CanWrite** { get; }</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **CanWrite** { get; }</code>
 
 >
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **CanSeek** { get; }</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **CanSeek** { get; }</code>
 
 >
 
-#### <code>[System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) **Length** { get; }</code>
+#### <code>[System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) **Length** { get; }</code>
 
 >
 
-#### <code>[System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) **Position** { get; set; }</code>
+#### <code>[System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) **Position** { get; set; }</code>
 
 >
 
@@ -10194,7 +10194,7 @@ No documentation available.
 
 >Initializes a new instance of the MemoryInt3TStream class with an expandable capacity initialized to zero.
 
-#### <code>**MemoryInt3TStream**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) capacity)</code>
+#### <code>**MemoryInt3TStream**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) capacity)</code>
 
 >Initializes a new instance of the MemoryInt3TStream class with an expandable capacity initialized to the specified value.
 >
@@ -10216,7 +10216,7 @@ No documentation available.
 >**Exceptions:**
 >- `System.ArgumentNullException`: buffer is null.
 
-#### <code>**MemoryInt3TStream**([Ternary3.Int3T[]](#ternary3int3t) buffer, [System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) writable)</code>
+#### <code>**MemoryInt3TStream**([Ternary3.Int3T[]](#ternary3int3t) buffer, [System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) writable)</code>
 
 >Initializes a new instance of the MemoryInt3TStream class with the specified Int3T array as a backing store and a Boolean value indicating whether the stream can be written to.
 >
@@ -10228,7 +10228,7 @@ No documentation available.
 >**Exceptions:**
 >- `System.ArgumentNullException`: buffer is null.
 
-#### <code>**MemoryInt3TStream**([Ternary3.Int3T[]](#ternary3int3t) buffer, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) index, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) count)</code>
+#### <code>**MemoryInt3TStream**([Ternary3.Int3T[]](#ternary3int3t) buffer, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) index, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) count)</code>
 
 >Initializes a new instance of the MemoryInt3TStream class with the specified Int3T array segment as a backing store.
 >
@@ -10243,7 +10243,7 @@ No documentation available.
 >- `System.ArgumentOutOfRangeException`: index or count is negative.
 >- `System.ArgumentException`: The buffer length minus index is less than count.
 
-#### <code>**MemoryInt3TStream**([Ternary3.Int3T[]](#ternary3int3t) buffer, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) index, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) count, [System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) writable)</code>
+#### <code>**MemoryInt3TStream**([Ternary3.Int3T[]](#ternary3int3t) buffer, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) index, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) count, [System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) writable)</code>
 
 >Initializes a new instance of the MemoryInt3TStream class with the specified Int3T array segment as a backing store and a Boolean value indicating whether the stream can be written to.
 >
@@ -10274,7 +10274,7 @@ No documentation available.
 >- `System.UnauthorizedAccessException`: The stream was not created with a publicly visible buffer.
 >- `System.ObjectDisposedException`: The stream is closed.
 
-#### <code>[System.Void](https://learn.microsoft.com/en-us/dotnet/api/system.void-0) **GetBuffer**([Ternary3.Int3T[]&](#ternary3int3t) buffer, [System.Int32&](https://learn.microsoft.com/en-us/dotnet/api/system.int32&-0) index, [System.Int32&](https://learn.microsoft.com/en-us/dotnet/api/system.int32&-0) count)</code>
+#### <code>[System.Void](https://learn.microsoft.com/en-us/dotnet/api/system.void) **GetBuffer**([Ternary3.Int3T[]&](#ternary3int3t) buffer, [System.Int32&](https://learn.microsoft.com/en-us/dotnet/api/system.int32&) index, [System.Int32&](https://learn.microsoft.com/en-us/dotnet/api/system.int32&) count)</code>
 
 >Gets the array of Int3T values from which this stream was created.
 >
@@ -10297,7 +10297,7 @@ No documentation available.
 >**Exceptions:**
 >- `System.ObjectDisposedException`: The stream is closed.
 
-#### <code>[System.Threading.Tasks.Task<System.Int32>](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1) **ReadAsync**([Ternary3.Int3T[]](#ternary3int3t) buffer, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) offset, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) count, [System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken-0) cancellationToken)</code>
+#### <code>[System.Threading.Tasks.Task<System.Int32>](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1) **ReadAsync**([Ternary3.Int3T[]](#ternary3int3t) buffer, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) offset, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) count, [System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken) cancellationToken)</code>
 
 >Overrides the abstract ReadAsync method to read from the memory buffer.
 >
@@ -10318,7 +10318,7 @@ No documentation available.
 >- `System.ArgumentException`: The sum of offset and count is larger than the buffer length.
 >- `System.ObjectDisposedException`: The stream is closed.
 
-#### <code>[System.Threading.Tasks.Task](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-0) **WriteAsync**([Ternary3.Int3T[]](#ternary3int3t) buffer, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) offset, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) count, [System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken-0) cancellationToken)</code>
+#### <code>[System.Threading.Tasks.Task](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task) **WriteAsync**([Ternary3.Int3T[]](#ternary3int3t) buffer, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) offset, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) count, [System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken) cancellationToken)</code>
 
 >Overrides the abstract WriteAsync method to write to the memory buffer.
 >
@@ -10340,7 +10340,7 @@ No documentation available.
 >- `System.NotSupportedException`: The stream does not support writing.
 >- `System.ObjectDisposedException`: The stream is closed.
 
-#### <code>[System.Threading.Tasks.Task<System.Int64>](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1) **SeekAsync**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) offset, [System.IO.SeekOrigin](https://learn.microsoft.com/en-us/dotnet/api/system.io.seekorigin-0) origin, [System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken-0) cancellationToken)</code>
+#### <code>[System.Threading.Tasks.Task<System.Int64>](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1) **SeekAsync**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) offset, [System.IO.SeekOrigin](https://learn.microsoft.com/en-us/dotnet/api/system.io.seekorigin) origin, [System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken) cancellationToken)</code>
 
 >Overrides the abstract SeekAsync method to set the position within the memory buffer.
 >
@@ -10359,7 +10359,7 @@ No documentation available.
 >- `System.ObjectDisposedException`: The stream is closed.
 >- `System.IO.IOException`: An I/O error occurs.
 
-#### <code>[System.Threading.Tasks.Task](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-0) **SetLengthAsync**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) value, [System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken-0) cancellationToken)</code>
+#### <code>[System.Threading.Tasks.Task](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task) **SetLengthAsync**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) value, [System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken) cancellationToken)</code>
 
 >Overrides the abstract SetLengthAsync method to set the length of the memory buffer.
 >
@@ -10377,7 +10377,7 @@ No documentation available.
 >- `System.NotSupportedException`: The stream does not support both writing and seeking.
 >- `System.ObjectDisposedException`: The stream is closed.
 
-#### <code>[System.Threading.Tasks.Task](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-0) **FlushAsync**([System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken-0) cancellationToken)</code>
+#### <code>[System.Threading.Tasks.Task](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task) **FlushAsync**([System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken) cancellationToken)</code>
 
 >Overrides the abstract FlushAsync method. For MemoryInt3TStream, this is a no-op since there is no buffer to flush.
 >
@@ -10388,7 +10388,7 @@ No documentation available.
 >**Returns:**
 >A task that represents the asynchronous flush operation.
 
-#### <code>[System.Void](https://learn.microsoft.com/en-us/dotnet/api/system.void-0) **SetCapacity**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) value)</code>
+#### <code>[System.Void](https://learn.microsoft.com/en-us/dotnet/api/system.void) **SetCapacity**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) value)</code>
 
 >Sets the capacity of the memory buffer underlying the MemoryInt3TStream to the specified value.
 >
@@ -10401,7 +10401,7 @@ No documentation available.
 >- `System.NotSupportedException`: The stream is not expandable.
 >- `System.ObjectDisposedException`: The stream is closed.
 
-#### <code>[System.Threading.Tasks.ValueTask](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.valuetask-0) **DisposeAsyncCore**()</code>
+#### <code>[System.Threading.Tasks.ValueTask](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.valuetask) **DisposeAsyncCore**()</code>
 
 >Releases the unmanaged resources used by the MemoryInt3TStream and optionally releases the managed resources.
 >
@@ -10411,26 +10411,26 @@ No documentation available.
 
 ### Properties
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **CanRead** { get; }</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **CanRead** { get; }</code>
 
 >Gets a value indicating whether the current stream supports reading.
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **CanWrite** { get; }</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **CanWrite** { get; }</code>
 
 >Gets a value indicating whether the current stream supports writing.
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **CanSeek** { get; }</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **CanSeek** { get; }</code>
 
 >Gets a value indicating whether the current stream supports seeking.
 
-#### <code>[System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) **Length** { get; }</code>
+#### <code>[System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) **Length** { get; }</code>
 
 >Gets the length in Int3T units of the stream.
 >
 >**Exceptions:**
 >- `System.ObjectDisposedException`: The stream is closed.
 
-#### <code>[System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64-0) **Position** { get; set; }</code>
+#### <code>[System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) **Position** { get; set; }</code>
 
 >Gets or sets the position within the current stream.
 >
@@ -10438,7 +10438,7 @@ No documentation available.
 >- `System.ArgumentOutOfRangeException`: The position is set to a negative value or a value greater than [MaxValue](#f:system.int32.maxvalue) .
 >- `System.ObjectDisposedException`: The stream is closed.
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean-0) **IsClosed** { get; }</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **IsClosed** { get; }</code>
 
 >Gets a Boolean value indicating whether the current stream has been closed or not.
 
@@ -10456,15 +10456,15 @@ No documentation available.
 
 ### Properties
 
-#### <code>[System.Char](https://learn.microsoft.com/en-us/dotnet/api/system.char-0) **NegativeTritDigit** { get; }</code>
+#### <code>[System.Char](https://learn.microsoft.com/en-us/dotnet/api/system.char) **NegativeTritDigit** { get; }</code>
 
 >Gets the character used to represent a negative trit (-1).
 
-#### <code>[System.Char](https://learn.microsoft.com/en-us/dotnet/api/system.char-0) **ZeroTritDigit** { get; }</code>
+#### <code>[System.Char](https://learn.microsoft.com/en-us/dotnet/api/system.char) **ZeroTritDigit** { get; }</code>
 
 >Gets the character used to represent a zero trit (0).
 
-#### <code>[System.Char](https://learn.microsoft.com/en-us/dotnet/api/system.char-0) **PositiveTritDigit** { get; }</code>
+#### <code>[System.Char](https://learn.microsoft.com/en-us/dotnet/api/system.char) **PositiveTritDigit** { get; }</code>
 
 >Gets the character used to represent a positive trit (+1).
 
@@ -10472,7 +10472,7 @@ No documentation available.
 
 >Gets the list of group definitions, each specifying a separator and group size for hierarchical grouping.
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **DecimalSeparator** { get; }</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **DecimalSeparator** { get; }</code>
 
 >Gets the string used as a decimal separator (for future floating-point trit support).
 
@@ -10487,15 +10487,15 @@ No documentation available.
 
 ### Properties
 
-#### <code>[System.Char](https://learn.microsoft.com/en-us/dotnet/api/system.char-0) **NegativeTritDigit** { get; }</code>
+#### <code>[System.Char](https://learn.microsoft.com/en-us/dotnet/api/system.char) **NegativeTritDigit** { get; }</code>
 
 >Gets the character used to represent a negative trit (-1).
 
-#### <code>[System.Char](https://learn.microsoft.com/en-us/dotnet/api/system.char-0) **ZeroTritDigit** { get; }</code>
+#### <code>[System.Char](https://learn.microsoft.com/en-us/dotnet/api/system.char) **ZeroTritDigit** { get; }</code>
 
 >Gets the character used to represent a zero trit (0).
 
-#### <code>[System.Char](https://learn.microsoft.com/en-us/dotnet/api/system.char-0) **PositiveTritDigit** { get; }</code>
+#### <code>[System.Char](https://learn.microsoft.com/en-us/dotnet/api/system.char) **PositiveTritDigit** { get; }</code>
 
 >Gets the character used to represent a positive trit (+1).
 
@@ -10503,7 +10503,7 @@ No documentation available.
 
 >Gets the list of group definitions, each specifying a separator and group size for hierarchical grouping.
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **DecimalSeparator** { get; }</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **DecimalSeparator** { get; }</code>
 
 >Gets the string used as a decimal separator (for future floating-point trit support).
 
@@ -10522,7 +10522,7 @@ No documentation available.
 
 ### Constructors
 
-#### <code>**TritGroupDefinition**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) separator, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) size)</code>
+#### <code>**TritGroupDefinition**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) separator, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) size)</code>
 
 >Defines a group for hierarchical trit formatting, specifying the separator and group size.
 >
@@ -10533,11 +10533,11 @@ No documentation available.
 
 ### Properties
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **Separator** { get; set; }</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **Separator** { get; set; }</code>
 
 >Gets or sets the separator string for this group level.
 
-#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) **Size** { get; set; }</code>
+#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **Size** { get; set; }</code>
 
 >Gets or sets the number of items in this group.
 
@@ -10559,15 +10559,15 @@ No documentation available.
 
 ### Properties
 
-#### <code>[System.Char](https://learn.microsoft.com/en-us/dotnet/api/system.char-0) **NegativeTritDigit** { get; }</code>
+#### <code>[System.Char](https://learn.microsoft.com/en-us/dotnet/api/system.char) **NegativeTritDigit** { get; }</code>
 
 >Gets the character used to represent a negative trit (-1).
 
-#### <code>[System.Char](https://learn.microsoft.com/en-us/dotnet/api/system.char-0) **ZeroTritDigit** { get; }</code>
+#### <code>[System.Char](https://learn.microsoft.com/en-us/dotnet/api/system.char) **ZeroTritDigit** { get; }</code>
 
 >Gets the character used to represent a zero trit (0).
 
-#### <code>[System.Char](https://learn.microsoft.com/en-us/dotnet/api/system.char-0) **PositiveTritDigit** { get; }</code>
+#### <code>[System.Char](https://learn.microsoft.com/en-us/dotnet/api/system.char) **PositiveTritDigit** { get; }</code>
 
 >Gets the character used to represent a positive trit (+1).
 
@@ -10575,7 +10575,7 @@ No documentation available.
 
 >Gets the list of group definitions, each specifying a separator and group size for hierarchical grouping.
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **DecimalSeparator** { get; }</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **DecimalSeparator** { get; }</code>
 
 >Gets the string used as a decimal separator (for future floating-point trit support).
 
@@ -10622,7 +10622,7 @@ No documentation available.
 
 ### Methods
 
-#### <code>[Ternary3.Formatting.TernaryFormat](#ternary3formattingternaryformat) **WithGroup**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) size, [System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) separator)</code>
+#### <code>[Ternary3.Formatting.TernaryFormat](#ternary3formattingternaryformat) **WithGroup**([System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) size, [System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) separator)</code>
 
 >Adds a group definition to the format.
 >
@@ -10641,14 +10641,14 @@ No documentation available.
 >**Returns:**
 >The current [TernaryFormat](#ternary3.formatting.ternaryformat) instance for chaining.
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **ToString**()</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**()</code>
 
 >Previews the format by creating a sample TernaryArray27 and formatting it.
 >
 >**Returns:**
 >A string representation of a sample formatted trit array.
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **ToString**([Ternary3.TernaryArray27](#ternary3ternaryarray27) ternaries)</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**([Ternary3.TernaryArray27](#ternary3ternaryarray27) ternaries)</code>
 
 >Previews the format by creating a sample TernaryArray27 and formatting it.
 >
@@ -10662,15 +10662,15 @@ No documentation available.
 
 ### Properties
 
-#### <code>[System.Char](https://learn.microsoft.com/en-us/dotnet/api/system.char-0) **NegativeTritDigit** { get; set; }</code>
+#### <code>[System.Char](https://learn.microsoft.com/en-us/dotnet/api/system.char) **NegativeTritDigit** { get; set; }</code>
 
 >Gets the character used to represent a negative trit (-1).
 
-#### <code>[System.Char](https://learn.microsoft.com/en-us/dotnet/api/system.char-0) **ZeroTritDigit** { get; set; }</code>
+#### <code>[System.Char](https://learn.microsoft.com/en-us/dotnet/api/system.char) **ZeroTritDigit** { get; set; }</code>
 
 >Gets the character used to represent a zero trit (0).
 
-#### <code>[System.Char](https://learn.microsoft.com/en-us/dotnet/api/system.char-0) **PositiveTritDigit** { get; set; }</code>
+#### <code>[System.Char](https://learn.microsoft.com/en-us/dotnet/api/system.char) **PositiveTritDigit** { get; set; }</code>
 
 >Gets the character used to represent a positive trit (+1).
 
@@ -10678,7 +10678,7 @@ No documentation available.
 
 >Gets the list of group definitions, each specifying a separator and group size for hierarchical grouping.
 
-#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string-0) **DecimalSeparator** { get; set; }</code>
+#### <code>[System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **DecimalSeparator** { get; set; }</code>
 
 >Gets the string used as a decimal separator (for future floating-point trit support).
 
@@ -10697,7 +10697,7 @@ No documentation available.
 
 ### Constructors
 
-#### <code>**TernaryFormatProvider**([Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format, [System.IFormatProvider](https://learn.microsoft.com/en-us/dotnet/api/system.iformatprovider-0) inner)</code>
+#### <code>**TernaryFormatProvider**([Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format, [System.IFormatProvider](https://learn.microsoft.com/en-us/dotnet/api/system.iformatprovider) inner)</code>
 
 >Provides formatting capabilities for ternary numbers by implementing IFormatProvider.
 >
@@ -10708,7 +10708,7 @@ No documentation available.
 
 ### Methods
 
-#### <code>[System.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object-0) **GetFormat**([System.Type](https://learn.microsoft.com/en-us/dotnet/api/system.type-0) formatType)</code>
+#### <code>[System.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object) **GetFormat**([System.Type](https://learn.microsoft.com/en-us/dotnet/api/system.type) formatType)</code>
 
 >Gets an object that provides formatting services for the specified type.
 >
@@ -10775,7 +10775,7 @@ No documentation available.
 
 ### Fields
 
-#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32-0) **value__**</code>
+#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **value__**</code>
 
 No documentation available.
 
