@@ -25,6 +25,8 @@ public class Program
 
 public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
 {
+    const string BaseNamespace = "Ternary3"; // the namespace of the assembly to document
+
     /// <summary>
     /// Concats all filesToInclude Markdown files into a single Markdown file,
     /// then concats the documnentation
@@ -148,9 +150,32 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
         {
             var element = FindElement("P", property);
             var comments = CommentsAsMarkdown(element);
-            markdown += $"#### <code>{GetFullTypeLink(property.PropertyType)} **{property.Name}**</code>\n\n{comments}\n\n";
+            
+            // Format property accessors
+            string accessors = "";
+            if (property.CanRead && property.CanWrite)
+                accessors = " { get; set; }";
+            else if (property.CanRead)
+                accessors = " { get; }";
+            else if (property.CanWrite)
+                accessors = " { set; }";
+            
+            // Handle indexers specially
+            string propertyDisplay;
+            if (property.Name == "Item" && property.GetIndexParameters().Length > 0)
+            {
+                var parameters = property.GetIndexParameters();
+                var paramList = string.Join(", ", parameters.Select(p => $"{GetFullTypeLink(p.ParameterType)} {p.Name}"));
+                propertyDisplay = $"**this[{paramList}]**{accessors}";
+            }
+            else
+            {
+                propertyDisplay = $"**{property.Name}**{accessors}";
+            }
+            
+            markdown += $"#### <code>{GetFullTypeLink(property.PropertyType)} {propertyDisplay}</code>\n\n{comments}\n\n";
         }
-    
+
         return markdown + "\n";
     }
 
@@ -231,9 +256,17 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
             sb.AppendLine("\n**Exceptions:**");
             foreach (var exception in exceptions)
             {
-                var exceptionType = exception.Attribute("cref")?.Value;
+                var crefAttribute = exception.Attribute("cref")?.Value;
+                string exceptionTypeName = crefAttribute ?? "Exception";
+                
+                // Convert from T:System.ArgumentException format to just the type name
+                if (exceptionTypeName.Contains(':'))
+                {
+                    exceptionTypeName = exceptionTypeName.Split(':')[1];
+                }
+                
                 var exceptionDescription = XmlElementTextToMarkdown(exception);
-                sb.AppendLine($"- `{exceptionType}`: {exceptionDescription}");
+                sb.AppendLine($"- `{exceptionTypeName}`: {exceptionDescription}");
             }
 
             sb.AppendLine();
@@ -243,7 +276,7 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
         var remarks = xml.Element("remarks");
         if (remarks != null)
         {
-            sb.AppendLine("\n**Remarks:**");
+            sb.AppendLine("\n**Remarks:**\n");
             sb.AppendLine(XmlElementTextToMarkdown(remarks));
             sb.AppendLine();
         }
@@ -307,17 +340,153 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
     /// </summary>
     private XElement? FindElement(string memberType, MemberInfo member)
     {
-        if (member.Name == "Parse")
-        {
-            
-        }
+        // Generate the XML documentation key for this member
         var declaringType = member.DeclaringType?.FullName?.Replace("+", ".") ?? (member as Type)?.Namespace;
-        var name = $"{memberType}:{declaringType}.{member.Name.Replace('.', '#')}";
-        if (member is MethodBase b)
+        
+        // Handle constructors differently - they have special naming in XML (#ctor)
+        string name;
+        if (member is ConstructorInfo)
         {
-            name += "(" + string.Join(",", b.GetParameters().Select(t => t.ParameterType.FullName)) + ")";
+            name = $"{memberType}:{declaringType}.#ctor";
+            
+            // Add parameter information for constructors with parameters
+            if (member is ConstructorInfo constructorInfo && constructorInfo.GetParameters().Length > 0)
+            {
+                name += "(" + string.Join(",", constructorInfo.GetParameters().Select(p => p.ParameterType.FullName ?? p.ParameterType.Name)) + ")";
+            }
         }
+        else
+        {
+            name = $"{memberType}:{declaringType}.{member.Name.Replace('.', '#')}";
+            
+            // Add parameter information for methods
+            if (member is MethodBase methodBase && !(member is ConstructorInfo))
+            {
+                var parameters = methodBase.GetParameters();
+                if (parameters.Length > 0)
+                {
+                    name += "(" + string.Join(",", parameters.Select(p => p.ParameterType.FullName ?? p.ParameterType.Name)) + ")";
+                }
+                else
+                {
+                    name += "()";
+                }
+            }
+        }
+        
+        // Find the element in the XML document
         var element = xmlDocument.Descendants("member").FirstOrDefault(e => e.Attribute("name")?.Value == name);
+        
+        // If we didn't find a match and this is a method or constructor with parameters,
+        // try without parameters as some XML doc generators handle this differently
+        if (element == null && member is MethodBase)
+        {
+            string baseNameWithoutParams = member is ConstructorInfo 
+                ? $"{memberType}:{declaringType}.#ctor" 
+                : $"{memberType}:{declaringType}.{member.Name.Replace('.', '#')}";
+                
+            element = xmlDocument.Descendants("member")
+                .FirstOrDefault(e => e.Attribute("name")?.Value?.StartsWith(baseNameWithoutParams) == true);
+        }
+        
+        // Handle inheritdoc tag
+        if (element?.Element("inheritdoc") != null)
+        {
+            // First, try to find documentation in the base type
+            if (member.DeclaringType?.BaseType != null && member.DeclaringType.BaseType.FullName?.StartsWith(BaseNamespace) == true)
+            {
+                var baseType = member.DeclaringType.BaseType;
+                MemberInfo? baseMember = null;
+                
+                // Find the equivalent member in the base type
+                if (member is PropertyInfo property)
+                {
+                    var parameters = property.GetIndexParameters();
+                    if (parameters.Length > 0)
+                    {
+                        // Handle indexers with parameters
+                        baseMember = baseType.GetProperties()
+                            .FirstOrDefault(p => p.Name == property.Name && 
+                                             p.GetIndexParameters().Length == parameters.Length &&
+                                             p.PropertyType == property.PropertyType);
+                    }
+                    else
+                    {
+                        // Handle regular properties
+                        baseMember = baseType.GetProperty(property.Name);
+                    }
+                }
+                else if (member is MethodInfo method)
+                {
+                    // Handle methods
+                    baseMember = baseType.GetMethod(method.Name, 
+                        method.GetParameters().Select(p => p.ParameterType).ToArray());
+                }
+                else if (member is ConstructorInfo)
+                {
+                    // Handle constructors
+                    var constructorParams = ((ConstructorInfo)member).GetParameters();
+                    baseMember = baseType.GetConstructor(constructorParams.Select(p => p.ParameterType).ToArray());
+                }
+                
+                // If we found the member in the base type, try to get its documentation
+                if (baseMember != null)
+                {
+                    var baseElement = FindElement(memberType, baseMember);
+                    if (baseElement != null)
+                    {
+                        return baseElement;
+                    }
+                }
+            }
+            
+            // If base type doesn't have documentation, search interfaces
+            if (member.DeclaringType != null)
+            {
+                foreach (var interfaceType in member.DeclaringType.GetInterfaces().Where(i => i.FullName?.StartsWith(BaseNamespace) == true))
+                {
+                    MemberInfo? interfaceMember = null;
+                    
+                    // Find the equivalent member in the interface
+                    if (member is PropertyInfo property)
+                    {
+                        var parameters = property.GetIndexParameters();
+                        if (parameters.Length > 0)
+                        {
+                            // Handle indexers with parameters
+                            interfaceMember = interfaceType.GetProperties()
+                                .FirstOrDefault(p => p.Name == property.Name && 
+                                                    p.GetIndexParameters().Length == parameters.Length &&
+                                                    p.PropertyType == property.PropertyType);
+                        }
+                        else
+                        {
+                            // Handle regular properties
+                            interfaceMember = interfaceType.GetProperty(property.Name);
+                        }
+                    }
+                    else if (member is MethodInfo method)
+                    {
+                        // Handle methods
+                        interfaceMember = interfaceType.GetMethod(method.Name, 
+                            method.GetParameters().Select(p => p.ParameterType).ToArray());
+                    }
+                    
+                    // If we found the member in the interface, try to get its documentation
+                    if (interfaceMember != null)
+                    {
+                        var interfaceElement = FindElement(memberType, interfaceMember);
+                        if (interfaceElement != null && interfaceElement.Element("inheritdoc") == null)
+                        {
+                            return interfaceElement;
+                        }
+                    }
+                }
+            }
+        }
+        
+        // If we couldn't find documentation through inheritance or the element doesn't have inheritdoc,
+        // return whatever we found originally (might be null)
         return element;
     }
     
@@ -346,6 +515,6 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
     
     private string ToMarkdownLink(string name, string target)
     {
-        return name.StartsWith("Ternary3.") ? $"[{name}](#{Regex.Replace(target.ToLower().Replace(' ', '-'), @"[^\w-_]", "")})" : name;
+        return name.StartsWith(BaseNamespace) ? $"[{name}](#{Regex.Replace(target.ToLower().Replace(' ', '-'), @"[^\w-_]", "")})" : name;
     }
 }
