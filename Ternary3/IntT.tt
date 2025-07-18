@@ -91,13 +91,20 @@ LastGenerated = <#= DateTime.Now.ToString() #>
                public const {{backingType}} MinValueConstant = {{-maxValueConstant}};
            
                /// <summary>
-               /// Represents the largest possible value of a <see cref="{{name}}"/>. This field is constant.
+               /// Represents the largest possible value of a <see cref="{{name}}"/>. This field is static readonly.
                /// </summary>
                public static readonly {{name}} MaxValue = new(MaxValueConstant);
            
                /// <summary>
-               /// Represents the smallest possible value of a <see cref="{{name}}"/>. This field is constant.
+               /// Represents the smallest possible value of a <see cref="{{name}}"/>. This field is static readonly.
                /// </summary>
+               /// <example>
+               /// <code>
+               /// // This code outputs {{new string('T', trits-1)}}1.
+               /// {{name}} value = {{name}}.MinValue + 2;
+               /// console.WriteLine($"The value is: {value:ter}");
+               /// </code>
+               /// </example>
                public static readonly {{name}} MinValue = new(MinValueConstant);
            
                private {{name}}({{backingType}} value) => this.value = value;
@@ -1398,7 +1405,7 @@ LastGenerated = <#= DateTime.Now.ToString() #>
 
     private string GenerateBinaryOperations(string name, string backingType)
     {
-        var tritArrayName = $"TritArray{name.Substring(3, name.Length - 4)}";
+        var tritArrayName = $"TernaryArray{name.Substring(3, name.Length - 4)}";
         
         return $$"""
 

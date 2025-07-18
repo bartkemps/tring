@@ -32,13 +32,20 @@ public readonly partial struct Int3T : ITernaryInteger<Int3T>
     public const SByte MinValueConstant = -13;
 
     /// <summary>
-    /// Represents the largest possible value of a <see cref="Int3T"/>. This field is constant.
+    /// Represents the largest possible value of a <see cref="Int3T"/>. This field is static readonly.
     /// </summary>
     public static readonly Int3T MaxValue = new(MaxValueConstant);
 
     /// <summary>
-    /// Represents the smallest possible value of a <see cref="Int3T"/>. This field is constant.
+    /// Represents the smallest possible value of a <see cref="Int3T"/>. This field is static readonly.
     /// </summary>
+    /// <example>
+    /// <code>
+    /// // This code outputs TT1.
+    /// Int3T value = Int3T.MinValue + 2;
+    /// console.WriteLine($"The value is: {value:ter}");
+    /// </code>
+    /// </example>
     public static readonly Int3T MinValue = new(MinValueConstant);
 
     private Int3T(SByte value) => this.value = value;
@@ -1598,12 +1605,12 @@ public static Int3T operator >> (Int3T value, int shiftAmount) => Create(value.v
 public static Int3T operator >>> (Int3T value, int shiftAmount) => Create(value.value.Shift(shiftAmount));
 
 /// <summary>
-/// Applies a unary operation to each trit in this ternary number. This operation converts the number to a TernaryArray.
+/// Applies a unary operation to each trit in this ternary number. This operation converts the number to a TritArray.
 /// </summary>
 /// <param name="value">The ternary number to convert and operate on.</param>
 /// <param name="operation">The unary operation to apply to each trit.</param>
-/// <returns>A new TernaryArray containing the result of applying the operation.</returns>
-/// <remarks>This operation causes an implicit conversion to TernaryArray before applying the operation.</remarks>
+/// <returns>A new TritArray containing the result of applying the operation.</returns>
+/// <remarks>This operation causes an implicit conversion to TritArray before applying the operation.</remarks>
 public static TernaryArray3 operator |(Int3T value, Func<Trit, Trit> operation)
 {
     TernaryArray3 array = value;
@@ -1611,12 +1618,12 @@ public static TernaryArray3 operator |(Int3T value, Func<Trit, Trit> operation)
 }
 
 /// <summary>
-/// Combines each trit in this ternary number with the corresponding trit in the provided array. This operation converts the number to a TernaryArray.
+/// Combines each trit in this ternary number with the corresponding trit in the provided array. This operation converts the number to a TritArray.
 /// </summary>
 /// <param name="value">The ternary number to convert and combine.</param>
 /// <param name="trits">The array of trits to combine with.</param>
-/// <returns>A new TernaryArray containing the result of the operation.</returns>
-/// <remarks>This operation causes an implicit conversion to TernaryArray before combining with the provided trits.</remarks>
+/// <returns>A new TritArray containing the result of the operation.</returns>
+/// <remarks>This operation causes an implicit conversion to TritArray before combining with the provided trits.</remarks>
 public static TernaryArray3 operator |(Int3T value, Trit[] trits)
 {
     TernaryArray3 array = value;

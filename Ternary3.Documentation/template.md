@@ -4,7 +4,30 @@
 
 # Ternary3 - C# Balanced Ternary Number Library
 
-## Basics
+### Table of Contents
+  - [Introdcution](#basics)
+    - [What is Ternary3?](#what-is-ternary3)
+    - [Features](#features)
+    - [Resources](#documentation)
+  - [Getting Started](#getting-started)
+  - [Ternary Literals](#ternary-literals)
+  - [Core Classes and Types](#core-classes-and-types)
+    - [TritArray](#tritarray)
+    - [Fixed-Size TritArrays](#fixed-size-tritarrays)
+    - [LookupTritArrayOperator](#lookuptritarrayoperator)
+  - [IO](#io)
+    - [Int3TStream](#int3tstream)
+    - [MemoryInt3TStream](#memoryint3tstream)
+    - [ByteToInt3TStream](#bytoint3tstream)
+    - [Int3TToByteStream](#int3ttobytestream)
+  - [Operators](#operators)
+    - [UnaryTritOperationDemo](#unarytritoperationdemo---using-unary-operators)
+    - [BinaryTritOperationDemo](#binarytritoperationdemo---operations-on-trit-pairs)
+    - [OverflowDemo](#overflowdemo---arithmetic-overflow-and-shifting)
+  - [Formatting and Display](#formatting-and-display)
+  - [Reference](#reference)
+
+## Introduction
 
 ### What is Ternary3?
 
@@ -14,8 +37,6 @@ Ternary3 is a specialized C# library that implements balanced ternary arithmetic
 > I would love to hear about your projects and how Ternary3 is helping you.
 > You can reach me at b.kemps@betabit.nl
 
-### Why Balanced Ternary?
-
 Balanced ternary has several interesting properties that make it unique among number systems:
 
 - It's the most efficient number system for representing numbers (using the minimum number of digits)
@@ -24,16 +45,24 @@ Balanced ternary has several interesting properties that make it unique among nu
 - It has elegant rounding properties - floor and ceiling operations are simple digit truncations
 - A balanced ternary computer was actually built in Russia in the 1950s (the Setun)
 
-### Documentation
+### Features
+- **Specialized Types**: Provides specialized types for 3, 9 and 27 trit numbers, as well as a variable-length `TritArray` type for arbitrary-length balanced ternary numbers.
+  The `BigTritArray` suports ternary numbers with millions of digits. 
+- **Parsing and Formatting**: Performant conversion between the balanced ternary types, strings and numbers.
+- **Ternary Literals**: Use ternary literals directly in your code with source generation for constants.
+- **Arithmetic Operations**: Supports addition, subtraction, multiplication, division, and modulo operations on ternary numbers.
+- **Logical Operations**: Supports trit shits, all 27 operations on a single ternary number, and all 19.683 operations on pairs of ternary numbers.
+  Operations are translated to binary operations using lookup tables for performance execution.
+- **IO Support**: Provides streams for reading and writing ternary numbers, and adapters to read from and write to any binary stream.
+
+### Resources
 
 For more detailed documentation and mathematical background:
-- [Library API Documentation](#Reference)
 - [Wikipedia: Balanced Ternary](https://en.wikipedia.org/wiki/Balanced_ternary)
-- [Source code repository](https://github.com/bartkemps/tring)
+- The [Source code repository](https://github.com/bartkemps/tring) for this library.
+- The [Referenece](#Reference) for this library.
 
 ## Getting Started
-
-### Installation
 
 Install the package from NuGet:
 
@@ -41,7 +70,7 @@ Install the package from NuGet:
 dotnet add package Ternary
 ```
 
-Or search for "Ternary" in the NuGet package manager in Visual Studio.
+Or search for "Ternary" in the NuGet package manager in Visual Studio or Rider.
 
 Package URL: https://www.nuget.org/packages/Ternary
 
@@ -207,9 +236,9 @@ using Ternary3.IO;
 var stream = new MemoryInt3TStream();
 
 // Write some Int3T values
-await stream.WriteInt3TAsync(new Int3T(1));
-await stream.WriteInt3TAsync(new Int3T(-1));
-await stream.WriteInt3TAsync(new Int3T(0));
+await stream.WriteInt3TAsync(1);
+await stream.WriteInt3TAsync(-1);
+await stream.WriteInt3TAsync(0);
 
 // Reset position to read from beginning
 stream.Position = 0;
@@ -244,8 +273,8 @@ using Ternary3.IO;
 
 // Create source ternary stream
 var memoryStream = new MemoryInt3TStream();
-await memoryStream.WriteInt3TAsync(new Int3T(1));
-await memoryStream.WriteInt3TAsync(new Int3T(-1));
+await memoryStream.WriteInt3TAsync(1);
+await memoryStream.WriteInt3TAsync(-1);
 
 // Convert to bytes
 memoryStream.Position = 0;
@@ -256,7 +285,7 @@ using var fileStream = File.Create("output.bin");
 await byteStream.CopyToAsync(fileStream);
 ```
 
-## Examples
+## Operators
 
 ### UnaryTritOperationDemo - Using Unary Operators
 
@@ -691,14 +720,14 @@ All Int* (Int3T, Int9T, Int27T) and TritArray* (TritArray3, TritArray9, TritArra
 For example:
 
 ```csharp
-var intVal = new Int27T(12345);
+Int27T intVal = 12345;
 Console.WriteLine(intVal.ToString());
 Console.WriteLine(intVal.ToString("G"));
 Console.WriteLine(intVal.ToString(CultureInfo.InvariantCulture));
 Console.WriteLine(intVal.ToString("G", CultureInfo.InvariantCulture));
 Console.WriteLine(intVal.ToString(new Ternary3.Formatting.TernaryFormat()));
 
-var arr = new TritArray9(42);
+TritArray9 arr = 42;
 Console.WriteLine(arr.ToString());
 Console.WriteLine(arr.ToString("G"));
 Console.WriteLine(arr.ToString(CultureInfo.InvariantCulture));

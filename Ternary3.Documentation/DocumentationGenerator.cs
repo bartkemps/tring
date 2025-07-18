@@ -56,25 +56,54 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
     /// </summary>
     private string GenerateMarkdownDescribingType(Type type)
     {
+        if (type.IsEnum)
+        {
+            return GenerateMarkdownDescribingEnum(type);
+        }
+
         var info = type.GetTypeInfo();
         var fullName = GetFullTypeName(info);
         var element = FindElement("T", info);
         var comment = CommentsAsMarkdown(element);
         var markdown = $"## {fullName}\n\n{comment}\n\n";
-        markdown += GenerateMarkdowDescribingConstructors(true, info.DeclaredConstructors);
-        markdown += GenerateMarkdowDescribingMethods(true, info.DeclaredMethods);
+        markdown += GenerateMarkdownDescribingConstructors(true, info.DeclaredConstructors);
+        markdown += GenerateMarkdownDescribingMethods(true, info.DeclaredMethods);
         markdown += GenerateMarkdowDescribingProperties(true, info.DeclaredProperties);
         markdown += GenerateMarkdowDescribingFields(true, info.DeclaredFields);
-        markdown += GenerateMarkdowDescribingConstructors(false, info.DeclaredConstructors);
-        markdown += GenerateMarkdowDescribingMethods(false, info.DeclaredMethods);
+        markdown += GenerateMarkdownDescribingConstructors(false, info.DeclaredConstructors);
+        markdown += GenerateMarkdownDescribingMethods(false, info.DeclaredMethods);
         markdown += GenerateMarkdowDescribingProperties(false, info.DeclaredProperties);
         markdown += GenerateMarkdowDescribingFields(false, info.DeclaredFields);
         markdown += GenerateMarkdowDescribingOperators(info.DeclaredMembers);
         return markdown;
     }
 
+    private string GenerateMarkdownDescribingEnum(Type type)
+    {
+        var info = type.GetTypeInfo();
+        var fullName = GetFullTypeName(info);
+        var element = FindElement("T", info);
+        var comment = CommentsAsMarkdown(element);
 
-    private string GenerateMarkdowDescribingConstructors(bool isStatic, IEnumerable<ConstructorInfo> c)
+        var markdown = $"## {fullName}\n\n{comment}\n\n";
+        markdown += "### Enum Values\n\n";
+
+        var fields = info.DeclaredFields
+            .Where(f => f.IsPublic && f.IsStatic)
+            .ToList();
+
+        foreach (var field in fields)
+        {
+            var fieldElement = FindElement("F", field);
+            var fieldComment = CommentsAsMarkdown(fieldElement);
+            var value = Convert.ChangeType(field.GetRawConstantValue(), Enum.GetUnderlyingType(type));
+            markdown += $"- **{field.Name}** = `{value}`\n{fieldComment}\n";
+        }
+
+        return markdown + "\n";
+    }
+
+    private string GenerateMarkdownDescribingConstructors(bool isStatic, IEnumerable<ConstructorInfo> c)
     {
         var constructors = c.Where(c => isStatic == c.IsStatic && (c.IsPublic || c.IsFamily)).ToList();
         if (constructors.Count == 0) return "";
@@ -90,7 +119,7 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
         return markdown + "\n";
     }
 
-    private string GenerateMarkdowDescribingMethods(bool isStatic, IEnumerable<MethodInfo> methods)
+    private string GenerateMarkdownDescribingMethods(bool isStatic, IEnumerable<MethodInfo> methods)
     {
         var filteredMethods = methods
             .Where(m => isStatic == m.IsStatic && (m.IsPublic || m.IsFamily) && !m.IsSpecialName && !m.IsConstructor)
@@ -259,8 +288,7 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
         var summary = XmlElementTextToMarkdown(xml.Element("summary"));
         if (!string.IsNullOrWhiteSpace(summary))
         {
-            sb.AppendLine(summary);
-            // if summary contains multiple lines, we will treat it as multiline
+            sb.AppendLine(UnIndent(summary));
         }
 
         // Add parameters
@@ -385,13 +413,31 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
                     var nameValue = elem.Attribute("name")?.Value;
                     return nameValue != null ? $"`{nameValue}`" : "[parameter]";
                 case "code":
-                    return $"\n```\n{elem.Value}\n```\n";
+                    return $"\n```csharp\n{UnIndentCode(elem.Value)}\n```\n";
                 case "para":
                     return $"{XmlElementTextToMarkdown(elem)}\n";
                 default:
                     return XmlElementTextToMarkdown(elem);
             }
         }
+    }
+
+    
+    
+    private string UnIndentCode(string text)
+    {
+        var lines = text.Trim('\n').TrimEnd('\n', ' ').Split('\n');
+        var minIndent = lines.Where(line => !string.IsNullOrWhiteSpace(line))
+            .Select(line => line.TakeWhile(char.IsWhiteSpace).Count())
+            .DefaultIfEmpty(0)
+            .Min();
+        return string.Join("\n", lines.Select(line => line.Substring(minIndent).TrimEnd()));
+    }
+    
+    private string UnIndent(string text)
+    {
+        var lines = text.Trim('\n').TrimEnd('\n', ' ','\t').Split('\n');
+        return string.Join("\n", lines.Select(line => line.Trim(' ', '\t')));
     }
 
 

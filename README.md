@@ -4,7 +4,30 @@
 
 # Ternary3 - C# Balanced Ternary Number Library
 
-## Basics
+### Table of Contents
+  - [Introdcution](#basics)
+    - [What is Ternary3?](#what-is-ternary3)
+    - [Features](#features)
+    - [Resources](#documentation)
+  - [Getting Started](#getting-started)
+  - [Ternary Literals](#ternary-literals)
+  - [Core Classes and Types](#core-classes-and-types)
+    - [TritArray](#tritarray)
+    - [Fixed-Size TritArrays](#fixed-size-tritarrays)
+    - [LookupTritArrayOperator](#lookuptritarrayoperator)
+  - [IO](#io)
+    - [Int3TStream](#int3tstream)
+    - [MemoryInt3TStream](#memoryint3tstream)
+    - [ByteToInt3TStream](#bytoint3tstream)
+    - [Int3TToByteStream](#int3ttobytestream)
+  - [Operators](#operators)
+    - [UnaryTritOperationDemo](#unarytritoperationdemo---using-unary-operators)
+    - [BinaryTritOperationDemo](#binarytritoperationdemo---operations-on-trit-pairs)
+    - [OverflowDemo](#overflowdemo---arithmetic-overflow-and-shifting)
+  - [Formatting and Display](#formatting-and-display)
+  - [Reference](#reference)
+
+## Introduction
 
 ### What is Ternary3?
 
@@ -14,8 +37,6 @@ Ternary3 is a specialized C# library that implements balanced ternary arithmetic
 > I would love to hear about your projects and how Ternary3 is helping you.
 > You can reach me at b.kemps@betabit.nl
 
-### Why Balanced Ternary?
-
 Balanced ternary has several interesting properties that make it unique among number systems:
 
 - It's the most efficient number system for representing numbers (using the minimum number of digits)
@@ -24,16 +45,24 @@ Balanced ternary has several interesting properties that make it unique among nu
 - It has elegant rounding properties - floor and ceiling operations are simple digit truncations
 - A balanced ternary computer was actually built in Russia in the 1950s (the Setun)
 
-### Documentation
+### Features
+- **Specialized Types**: Provides specialized types for 3, 9 and 27 trit numbers, as well as a variable-length `TritArray` type for arbitrary-length balanced ternary numbers.
+  The `BigTritArray` suports ternary numbers with millions of digits. 
+- **Parsing and Formatting**: Performant conversion between the balanced ternary types, strings and numbers.
+- **Ternary Literals**: Use ternary literals directly in your code with source generation for constants.
+- **Arithmetic Operations**: Supports addition, subtraction, multiplication, division, and modulo operations on ternary numbers.
+- **Logical Operations**: Supports trit shits, all 27 operations on a single ternary number, and all 19.683 operations on pairs of ternary numbers.
+  Operations are translated to binary operations using lookup tables for performance execution.
+- **IO Support**: Provides streams for reading and writing ternary numbers, and adapters to read from and write to any binary stream.
+
+### Resources
 
 For more detailed documentation and mathematical background:
-- [Library API Documentation](#Reference)
 - [Wikipedia: Balanced Ternary](https://en.wikipedia.org/wiki/Balanced_ternary)
-- [Source code repository](https://github.com/bartkemps/tring)
+- The [Source code repository](https://github.com/bartkemps/tring) for this library.
+- The [Referenece](#Reference) for this library.
 
 ## Getting Started
-
-### Installation
 
 Install the package from NuGet:
 
@@ -41,7 +70,7 @@ Install the package from NuGet:
 dotnet add package Ternary
 ```
 
-Or search for "Ternary" in the NuGet package manager in Visual Studio.
+Or search for "Ternary" in the NuGet package manager in Visual Studio or Rider.
 
 Package URL: https://www.nuget.org/packages/Ternary
 
@@ -207,9 +236,9 @@ using Ternary3.IO;
 var stream = new MemoryInt3TStream();
 
 // Write some Int3T values
-await stream.WriteInt3TAsync(new Int3T(1));
-await stream.WriteInt3TAsync(new Int3T(-1));
-await stream.WriteInt3TAsync(new Int3T(0));
+await stream.WriteInt3TAsync(1);
+await stream.WriteInt3TAsync(-1);
+await stream.WriteInt3TAsync(0);
 
 // Reset position to read from beginning
 stream.Position = 0;
@@ -244,8 +273,8 @@ using Ternary3.IO;
 
 // Create source ternary stream
 var memoryStream = new MemoryInt3TStream();
-await memoryStream.WriteInt3TAsync(new Int3T(1));
-await memoryStream.WriteInt3TAsync(new Int3T(-1));
+await memoryStream.WriteInt3TAsync(1);
+await memoryStream.WriteInt3TAsync(-1);
 
 // Convert to bytes
 memoryStream.Position = 0;
@@ -256,7 +285,7 @@ using var fileStream = File.Create("output.bin");
 await byteStream.CopyToAsync(fileStream);
 ```
 
-## Examples
+## Operators
 
 ### UnaryTritOperationDemo - Using Unary Operators
 
@@ -691,14 +720,14 @@ All Int* (Int3T, Int9T, Int27T) and TritArray* (TritArray3, TritArray9, TritArra
 For example:
 
 ```csharp
-var intVal = new Int27T(12345);
+Int27T intVal = 12345;
 Console.WriteLine(intVal.ToString());
 Console.WriteLine(intVal.ToString("G"));
 Console.WriteLine(intVal.ToString(CultureInfo.InvariantCulture));
 Console.WriteLine(intVal.ToString("G", CultureInfo.InvariantCulture));
 Console.WriteLine(intVal.ToString(new Ternary3.Formatting.TernaryFormat()));
 
-var arr = new TritArray9(42);
+TritArray9 arr = 42;
 Console.WriteLine(arr.ToString());
 Console.WriteLine(arr.ToString("G"));
 Console.WriteLine(arr.ToString(CultureInfo.InvariantCulture));
@@ -758,7 +787,7 @@ This allows for flexible formatting and display of ternary numbers, including cu
 ## Ternary3.BigTernaryArray
 
 >Represents a variable-length array of trits (ternary digits) backed by lists of ulongs.
->            This class provides support for arbitrary-length balanced ternary numbers and operations.
+>This class provides support for arbitrary-length balanced ternary numbers and operations.
 
 ### Static Methods
 
@@ -1204,11 +1233,19 @@ No documentation available.
 
 #### <code>[Ternary3.Int27T](#ternary3int27t) **MaxValue**</code>
 
->Represents the largest possible value of a [Int27T](#ternary3.int27t) . This field is constant.
+>Represents the largest possible value of a [Int27T](#ternary3.int27t) . This field is static readonly.
 
 #### <code>[Ternary3.Int27T](#ternary3int27t) **MinValue**</code>
 
->Represents the smallest possible value of a [Int27T](#ternary3.int27t) . This field is constant.
+>Represents the smallest possible value of a [Int27T](#ternary3.int27t) . This field is static readonly.
+>
+>**Examples:**
+>
+>```csharp
+>// This code outputs TTTTTTTTTTTTTTTTTTTTTTTTTT1.
+>Int27T value = Int27T.MinValue + 2;
+>console.WriteLine($"The value is: {value:ter}");
+>```
 
 #### <code>[System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) **MaxValueConstant**</code>
 
@@ -2926,7 +2963,7 @@ No documentation available.
 #### <code>[Ternary3.Int27T](#ternary3int27t) **op_UnsignedRightShift**([Ternary3.Int27T](#ternary3int27t) value, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) shiftAmount)</code>
 
 >Performs an unsigned right shift operation on the ternary number, maintaining the original numeric type.
->            In this implementation, it behaves the same as the signed right shift.
+>In this implementation, it behaves the same as the signed right shift.
 >
 >**Parameters:**
 >- `value`: The ternary number to shift.
@@ -2938,7 +2975,7 @@ No documentation available.
 
 #### <code>[Ternary3.TernaryArray27](#ternary3ternaryarray27) **operator |**([Ternary3.Int27T](#ternary3int27t) value, [System.Func<Ternary3.Trit, Ternary3.Trit>](https://learn.microsoft.com/en-us/dotnet/api/system.func-2) operation)</code>
 
->Applies a unary operation to each trit in this ternary number. This operation converts the number to a TernaryArray.
+>Applies a unary operation to each trit in this ternary number. This operation converts the number to a TritArray.
 >
 >**Parameters:**
 >- `value`: The ternary number to convert and operate on.
@@ -2946,16 +2983,16 @@ No documentation available.
 >
 >
 >**Returns:**
->A new TernaryArray containing the result of applying the operation.
+>A new TritArray containing the result of applying the operation.
 >
 >
 >**Remarks:**
 >
->This operation causes an implicit conversion to TernaryArray before applying the operation.
+>This operation causes an implicit conversion to TritArray before applying the operation.
 
 #### <code>[Ternary3.TernaryArray27](#ternary3ternaryarray27) **operator |**([Ternary3.Int27T](#ternary3int27t) value, [Ternary3.Trit[]](#ternary3trit) trits)</code>
 
->Combines each trit in this ternary number with the corresponding trit in the provided array. This operation converts the number to a TernaryArray.
+>Combines each trit in this ternary number with the corresponding trit in the provided array. This operation converts the number to a TritArray.
 >
 >**Parameters:**
 >- `value`: The ternary number to convert and combine.
@@ -2963,12 +3000,12 @@ No documentation available.
 >
 >
 >**Returns:**
->A new TernaryArray containing the result of the operation.
+>A new TritArray containing the result of the operation.
 >
 >
 >**Remarks:**
 >
->This operation causes an implicit conversion to TernaryArray before combining with the provided trits.
+>This operation causes an implicit conversion to TritArray before combining with the provided trits.
 
 
 ## Ternary3.Int3T
@@ -3061,11 +3098,19 @@ No documentation available.
 
 #### <code>[Ternary3.Int3T](#ternary3int3t) **MaxValue**</code>
 
->Represents the largest possible value of a [Int3T](#ternary3.int3t) . This field is constant.
+>Represents the largest possible value of a [Int3T](#ternary3.int3t) . This field is static readonly.
 
 #### <code>[Ternary3.Int3T](#ternary3int3t) **MinValue**</code>
 
->Represents the smallest possible value of a [Int3T](#ternary3.int3t) . This field is constant.
+>Represents the smallest possible value of a [Int3T](#ternary3.int3t) . This field is static readonly.
+>
+>**Examples:**
+>
+>```csharp
+>// This code outputs TT1.
+>Int3T value = Int3T.MinValue + 2;
+>console.WriteLine($"The value is: {value:ter}");
+>```
 
 #### <code>[System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte) **MaxValueConstant**</code>
 
@@ -4805,7 +4850,7 @@ No documentation available.
 #### <code>[Ternary3.Int3T](#ternary3int3t) **op_UnsignedRightShift**([Ternary3.Int3T](#ternary3int3t) value, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) shiftAmount)</code>
 
 >Performs an unsigned right shift operation on the ternary number, maintaining the original numeric type.
->            In this implementation, it behaves the same as the signed right shift.
+>In this implementation, it behaves the same as the signed right shift.
 >
 >**Parameters:**
 >- `value`: The ternary number to shift.
@@ -4817,7 +4862,7 @@ No documentation available.
 
 #### <code>[Ternary3.TernaryArray3](#ternary3ternaryarray3) **operator |**([Ternary3.Int3T](#ternary3int3t) value, [System.Func<Ternary3.Trit, Ternary3.Trit>](https://learn.microsoft.com/en-us/dotnet/api/system.func-2) operation)</code>
 
->Applies a unary operation to each trit in this ternary number. This operation converts the number to a TernaryArray.
+>Applies a unary operation to each trit in this ternary number. This operation converts the number to a TritArray.
 >
 >**Parameters:**
 >- `value`: The ternary number to convert and operate on.
@@ -4825,16 +4870,16 @@ No documentation available.
 >
 >
 >**Returns:**
->A new TernaryArray containing the result of applying the operation.
+>A new TritArray containing the result of applying the operation.
 >
 >
 >**Remarks:**
 >
->This operation causes an implicit conversion to TernaryArray before applying the operation.
+>This operation causes an implicit conversion to TritArray before applying the operation.
 
 #### <code>[Ternary3.TernaryArray3](#ternary3ternaryarray3) **operator |**([Ternary3.Int3T](#ternary3int3t) value, [Ternary3.Trit[]](#ternary3trit) trits)</code>
 
->Combines each trit in this ternary number with the corresponding trit in the provided array. This operation converts the number to a TernaryArray.
+>Combines each trit in this ternary number with the corresponding trit in the provided array. This operation converts the number to a TritArray.
 >
 >**Parameters:**
 >- `value`: The ternary number to convert and combine.
@@ -4842,12 +4887,12 @@ No documentation available.
 >
 >
 >**Returns:**
->A new TernaryArray containing the result of the operation.
+>A new TritArray containing the result of the operation.
 >
 >
 >**Remarks:**
 >
->This operation causes an implicit conversion to TernaryArray before combining with the provided trits.
+>This operation causes an implicit conversion to TritArray before combining with the provided trits.
 
 
 ## Ternary3.Int9T
@@ -4940,11 +4985,19 @@ No documentation available.
 
 #### <code>[Ternary3.Int9T](#ternary3int9t) **MaxValue**</code>
 
->Represents the largest possible value of a [Int9T](#ternary3.int9t) . This field is constant.
+>Represents the largest possible value of a [Int9T](#ternary3.int9t) . This field is static readonly.
 
 #### <code>[Ternary3.Int9T](#ternary3int9t) **MinValue**</code>
 
->Represents the smallest possible value of a [Int9T](#ternary3.int9t) . This field is constant.
+>Represents the smallest possible value of a [Int9T](#ternary3.int9t) . This field is static readonly.
+>
+>**Examples:**
+>
+>```csharp
+>// This code outputs TTTTTTTT1.
+>Int9T value = Int9T.MinValue + 2;
+>console.WriteLine($"The value is: {value:ter}");
+>```
 
 #### <code>[System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16) **MaxValueConstant**</code>
 
@@ -6684,7 +6737,7 @@ No documentation available.
 #### <code>[Ternary3.Int9T](#ternary3int9t) **op_UnsignedRightShift**([Ternary3.Int9T](#ternary3int9t) value, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) shiftAmount)</code>
 
 >Performs an unsigned right shift operation on the ternary number, maintaining the original numeric type.
->            In this implementation, it behaves the same as the signed right shift.
+>In this implementation, it behaves the same as the signed right shift.
 >
 >**Parameters:**
 >- `value`: The ternary number to shift.
@@ -6696,7 +6749,7 @@ No documentation available.
 
 #### <code>[Ternary3.TernaryArray9](#ternary3ternaryarray9) **operator |**([Ternary3.Int9T](#ternary3int9t) value, [System.Func<Ternary3.Trit, Ternary3.Trit>](https://learn.microsoft.com/en-us/dotnet/api/system.func-2) operation)</code>
 
->Applies a unary operation to each trit in this ternary number. This operation converts the number to a TernaryArray.
+>Applies a unary operation to each trit in this ternary number. This operation converts the number to a TritArray.
 >
 >**Parameters:**
 >- `value`: The ternary number to convert and operate on.
@@ -6704,16 +6757,16 @@ No documentation available.
 >
 >
 >**Returns:**
->A new TernaryArray containing the result of applying the operation.
+>A new TritArray containing the result of applying the operation.
 >
 >
 >**Remarks:**
 >
->This operation causes an implicit conversion to TernaryArray before applying the operation.
+>This operation causes an implicit conversion to TritArray before applying the operation.
 
 #### <code>[Ternary3.TernaryArray9](#ternary3ternaryarray9) **operator |**([Ternary3.Int9T](#ternary3int9t) value, [Ternary3.Trit[]](#ternary3trit) trits)</code>
 
->Combines each trit in this ternary number with the corresponding trit in the provided array. This operation converts the number to a TernaryArray.
+>Combines each trit in this ternary number with the corresponding trit in the provided array. This operation converts the number to a TritArray.
 >
 >**Parameters:**
 >- `value`: The ternary number to convert and combine.
@@ -6721,18 +6774,18 @@ No documentation available.
 >
 >
 >**Returns:**
->A new TernaryArray containing the result of the operation.
+>A new TritArray containing the result of the operation.
 >
 >
 >**Remarks:**
 >
->This operation causes an implicit conversion to TernaryArray before combining with the provided trits.
+>This operation causes an implicit conversion to TritArray before combining with the provided trits.
 
 
 ## Ternary3.ITritArray
 
 >Represents a basic interface for all trit array implementations, providing core functionality for working with ternary data.
->            This generic interface enables fluent, strongly-typed operations on trit arrays with proper return type preservation.
+>This generic interface enables fluent, strongly-typed operations on trit arrays with proper return type preservation.
 
 ### Properties
 
@@ -8344,27 +8397,14 @@ No documentation available.
 
 >Indicates how padding should be applied to the formatted ternary string.
 
-### Static Fields
+### Enum Values
 
-#### <code>[Ternary3.TernaryPadding](#ternary3ternarypadding) **None**</code>
-
+- **None** = `0`
 >No padding is applied.
-
-#### <code>[Ternary3.TernaryPadding](#ternary3ternarypadding) **Group**</code>
-
+- **Group** = `1`
 >Padding is applied to fill the last group.
-
-#### <code>[Ternary3.TernaryPadding](#ternary3ternarypadding) **Full**</code>
-
+- **Full** = `2`
 >Padding is applied to fill the entire formatted string to a fixed width.
-
-
-### Fields
-
-#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **value__**</code>
-
-No documentation available.
-
 
 ## Ternary3.Trit
 
@@ -8703,7 +8743,7 @@ No documentation available.
 >**Remarks:**
 >
 >Used exclusively with Trit's pipe operator overload to enable the syntax: 
->```
+>```csharp
 >trit1 | operationLookupTable | trit2
 >```
 > Optimizes performance by using direct table lookups instead of function calls.
@@ -8732,7 +8772,7 @@ No documentation available.
 >**Remarks:**
 >
 >Used exclusively with Trit's pipe operator overload to enable the syntax: 
->```
+>```csharp
 >trit1 | Operation.ApplyFunc | trit2
 >```
 > Provides a safe alternative to UnsafeTritOperator by using delegates instead of function pointers.
@@ -8774,14 +8814,12 @@ No documentation available.
 >**Remarks:**
 >
 >Truth table representation: 
->```
->
->             1 | T 0 1
->            ---+------
->             T | 1 1 1
->             0 | 1 1 1
->             1 | 1 1 1
->            
+>```csharp
+> 1 | T 0 1
+>---+------
+> T | 1 1 1
+> 0 | 1 1 1
+> 1 | 1 1 1
 >```
 
 #### <code>[Ternary3.Operators.BinaryTritOperator](#ternary3operatorsbinarytritoperator) **Zero**</code>
@@ -8791,14 +8829,12 @@ No documentation available.
 >**Remarks:**
 >
 >Truth table representation: 
->```
->
->             0 | T 0 1
->            ---+------
->             T | 0 0 0
->             0 | 0 0 0
->             1 | 0 0 0
->            
+>```csharp
+> 0 | T 0 1
+>---+------
+> T | 0 0 0
+> 0 | 0 0 0
+> 1 | 0 0 0
 >```
 
 #### <code>[Ternary3.Operators.BinaryTritOperator](#ternary3operatorsbinarytritoperator) **Negative**</code>
@@ -8808,14 +8844,12 @@ No documentation available.
 >**Remarks:**
 >
 >Truth table representation: 
->```
->
->            -1 | T 0 1
->            ---+------
->             T | T T T
->             0 | T T T
->             1 | T T T
->            
+>```csharp
+>-1 | T 0 1
+>---+------
+> T | T T T
+> 0 | T T T
+> 1 | T T T
 >```
 
 #### <code>[Ternary3.Operators.BinaryTritOperator](#ternary3operatorsbinarytritoperator) **And**</code>
@@ -8825,14 +8859,12 @@ No documentation available.
 >**Remarks:**
 >
 >Truth table representation: 
->```
->
->            AND| T 0 1
->            ---+------
->             T | T T T
->             0 | T 0 0
->             1 | T 0 1
->            
+>```csharp
+>AND| T 0 1
+>---+------
+> T | T T T
+> 0 | T 0 0
+> 1 | T 0 1
 >```
 
 #### <code>[Ternary3.Operators.BinaryTritOperator](#ternary3operatorsbinarytritoperator) **Or**</code>
@@ -8842,14 +8874,12 @@ No documentation available.
 >**Remarks:**
 >
 >Truth table representation: 
->```
->
->            OR | T 0 1
->            ---+------
->             T | T T 1
->             0 | T 0 1
->             1 | 1 1 1
->            
+>```csharp
+>OR | T 0 1
+>---+------
+> T | T T 1
+> 0 | T 0 1
+> 1 | 1 1 1
 >```
 
 #### <code>[Ternary3.Operators.BinaryTritOperator](#ternary3operatorsbinarytritoperator) **Xor**</code>
@@ -8859,14 +8889,12 @@ No documentation available.
 >**Remarks:**
 >
 >Truth table representation: 
->```
->
->            xor| T 0 1
->            ---+------
->             T | T 0 1
->             0 | 0 0 0
->             1 | 1 0 T
->            
+>```csharp
+>xor| T 0 1
+>---+------
+> T | T 0 1
+> 0 | 0 0 0
+> 1 | 1 0 T
 >```
 
 #### <code>[Ternary3.Operators.BinaryTritOperator](#ternary3operatorsbinarytritoperator) **Plus**</code>
@@ -8876,14 +8904,12 @@ No documentation available.
 >**Remarks:**
 >
 >Truth table representation: 
->```
->
->             + | T 0 1
->            ---+------
->             T | T T 0
->             0 | T 0 1
->             1 | 0 1 1
->            
+>```csharp
+> + | T 0 1
+>---+------
+> T | T T 0
+> 0 | T 0 1
+> 1 | 0 1 1
 >```
 
 #### <code>[Ternary3.Operators.BinaryTritOperator](#ternary3operatorsbinarytritoperator) **Minus**</code>
@@ -8893,14 +8919,12 @@ No documentation available.
 >**Remarks:**
 >
 >Truth table representation: 
->```
->
->             - | T 0 1
->            ---+------
->             T | 0 T T
->             0 | 1 0 T
->             1 | 1 1 0
->            
+>```csharp
+> - | T 0 1
+>---+------
+> T | 0 T T
+> 0 | 1 0 T
+> 1 | 1 1 0
 >```
 
 #### <code>[Ternary3.Operators.BinaryTritOperator](#ternary3operatorsbinarytritoperator) **Implicates**</code>
@@ -8910,14 +8934,12 @@ No documentation available.
 >**Remarks:**
 >
 >
->```
->
->            ==>| T 0 1
->            ---+------
->             T | 1 1 1
->             0 | 0 0 1
->             1 | T 0 1
->            
+>```csharp
+>==>| T 0 1
+>---+------
+> T | 1 1 1
+> 0 | 0 0 1
+> 1 | T 0 1
 >```
 
 #### <code>[Ternary3.Operators.BinaryTritOperator](#ternary3operatorsbinarytritoperator) **Is**</code>
@@ -8927,14 +8949,12 @@ No documentation available.
 >**Remarks:**
 >
 >
->```
->
->            ==>| T 0 1
->            ---+------
->             T | 1 T T
->             0 | T 1 T
->             1 | T T 1
->            
+>```csharp
+>==>| T 0 1
+>---+------
+> T | 1 T T
+> 0 | T 1 T
+> 1 | T T 1
 >```
 
 #### <code>[Ternary3.Operators.BinaryTritOperator](#ternary3operatorsbinarytritoperator) **GreaterThan**</code>
@@ -8944,14 +8964,12 @@ No documentation available.
 >**Remarks:**
 >
 >
->```
->
->            gt | T 0 1
->            ---+------
->             T | T 1 1
->             0 | T T 1
->             1 | T T T
->            
+>```csharp
+>gt | T 0 1
+>---+------
+> T | T 1 1
+> 0 | T T 1
+> 1 | T T T
 >```
 
 #### <code>[Ternary3.Operators.BinaryTritOperator](#ternary3operatorsbinarytritoperator) **LesserThan**</code>
@@ -8961,14 +8979,12 @@ No documentation available.
 >**Remarks:**
 >
 >
->```
->
->            gt | T 0 1
->            ---+------
->             T | 1 T T
->             0 | 1 1 T
->             1 | 1 1 1
->            
+>```csharp
+>gt | T 0 1
+>---+------
+> T | 1 T T
+> 0 | 1 1 T
+> 1 | 1 1 1
 >```
 
 
@@ -9087,7 +9103,7 @@ No documentation available.
 #### <code>[Ternary3.LookupTritArray27Operator](#ternary3lookuptritarray27operator) **operator |**([System.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64) value, [Ternary3.Operators.BinaryTritOperator](#ternary3operatorsbinarytritoperator) table)</code>
 
 >Adds the pipe operator to `Int64` .
->            Overflows if the value exceeds the range of Int27T.
+>Overflows if the value exceeds the range of Int27T.
 >
 >**Parameters:**
 >- `value`: The value to convert to trits
@@ -9104,7 +9120,7 @@ No documentation available.
 #### <code>[Ternary3.LookupTritArray9Operator](#ternary3lookuptritarray9operator) **operator |**([System.Int16](https://learn.microsoft.com/en-us/dotnet/api/system.int16) value, [Ternary3.Operators.BinaryTritOperator](#ternary3operatorsbinarytritoperator) table)</code>
 
 >Adds the pipe operator to `Int16` .
->            Overflows if the value exceeds the range of Int27T.
+>Overflows if the value exceeds the range of Int27T.
 >
 >**Parameters:**
 >- `value`: The value to convert to trits
@@ -9113,7 +9129,7 @@ No documentation available.
 #### <code>[Ternary3.LookupTritArray3Operator](#ternary3lookuptritarray3operator) **operator |**([System.SByte](https://learn.microsoft.com/en-us/dotnet/api/system.sbyte) value, [Ternary3.Operators.BinaryTritOperator](#ternary3operatorsbinarytritoperator) table)</code>
 
 >Adds the pipe operator to `SByte` .
->            Overflows if the value exceeds the range of Int27T.
+>Overflows if the value exceeds the range of Int27T.
 >
 >**Parameters:**
 >- `value`: The value to convert to trits
@@ -9153,170 +9169,170 @@ No documentation available.
 #### <code>[Ternary3.Operators.UnaryTritOperator](#ternary3operatorsunarytritoperator) **Negative**</code>
 
 >Negative value.
->            Negative for negative, zero and positive.
->            [T, T, T]
+>Negative for negative, zero and positive.
+>[T, T, T]
 
 #### <code>[Ternary3.Operators.UnaryTritOperator](#ternary3operatorsunarytritoperator) **Decrement**</code>
 
 >Decrement.
->            One less for every value greater than negative.
->            [T, T, 0]
+>One less for every value greater than negative.
+>[T, T, 0]
 
 #### <code>[Ternary3.Operators.UnaryTritOperator](#ternary3operatorsunarytritoperator) **IsPositive**</code>
 
 >Is the value positive?
->            Positive for positive, negative otherwise.
->            [T, T, 1]
+>Positive for positive, negative otherwise.
+>[T, T, 1]
 
 #### <code>[Ternary3.Operators.UnaryTritOperator](#ternary3operatorsunarytritoperator) **NegateAbsoluteValue**</code>
 
 >Negate the Absolute Value.
->            Zero for zero, negative otherwise.
->            [T, 0, T]
+>Zero for zero, negative otherwise.
+>[T, 0, T]
 
 #### <code>[Ternary3.Operators.UnaryTritOperator](#ternary3operatorsunarytritoperator) **Ceil**</code>
 
 >Ceiling Zero.
->            Negative for negative, zero otherwise.
->            [T, 0, 0]
+>Negative for negative, zero otherwise.
+>[T, 0, 0]
 
 #### <code>[Ternary3.Operators.UnaryTritOperator](#ternary3operatorsunarytritoperator) **Identity**</code>
 
 >Identity.
->            Negative for negative, zero for zero, positive for positive.
->            [T, 0, 1]
+>Negative for negative, zero for zero, positive for positive.
+>[T, 0, 1]
 
 #### <code>[Ternary3.Operators.UnaryTritOperator](#ternary3operatorsunarytritoperator) **IsZero**</code>
 
 >Is the value zero?
->            Positive for zero, negative otherwise.
->            [T, 1, T]
+>Positive for zero, negative otherwise.
+>[T, 1, T]
 
 #### <code>[Ternary3.Operators.UnaryTritOperator](#ternary3operatorsunarytritoperator) **KeepNegative**</code>
 
 >Keep the value unchanged if it is negative.
->            Zero for positive and vice versa.
->            [T, 1, 0]
+>Zero for positive and vice versa.
+>[T, 1, 0]
 
 #### <code>[Ternary3.Operators.UnaryTritOperator](#ternary3operatorsunarytritoperator) **IsNotNegative**</code>
 
 >Is the value not negative?
->            Negative for negative, positive otherwise.
->            [T, 1, 1]
+>Negative for negative, positive otherwise.
+>[T, 1, 1]
 
 #### <code>[Ternary3.Operators.UnaryTritOperator](#ternary3operatorsunarytritoperator) **CeilIsNegative**</code>
 
 >Ceiling Zero of Is Negative.
->            Zero for negative, negative otherwise.
->            [0, T, T]
+>Zero for negative, negative otherwise.
+>[0, T, T]
 
 #### <code>[Ternary3.Operators.UnaryTritOperator](#ternary3operatorsunarytritoperator) **CeilIsNotZero**</code>
 
 >Is Not Zero, Ceiling Zero.
->            Zero for positive, negative otherwise.
->            [0, T, 0]
+>Zero for positive, negative otherwise.
+>[0, T, 0]
 
 #### <code>[Ternary3.Operators.UnaryTritOperator](#ternary3operatorsunarytritoperator) **KeepPositive**</code>
 
 >Keep Positive.
->            Positive for positive, negative otherwise.
->            [0, T, 1]
+>Positive for positive, negative otherwise.
+>[0, T, 1]
 
 #### <code>[Ternary3.Operators.UnaryTritOperator](#ternary3operatorsunarytritoperator) **CeilIsNotPositive**</code>
 
 >Is Not Positive, Ceiling Zero.
->            Negative for positive, zero otherwise.
->            [0, 0, T]
+>Negative for positive, zero otherwise.
+>[0, 0, T]
 
 #### <code>[Ternary3.Operators.UnaryTritOperator](#ternary3operatorsunarytritoperator) **Zero**</code>
 
 >Zero.
->            Always zero.
->            [0, 0, 0]
+>Always zero.
+>[0, 0, 0]
 
 #### <code>[Ternary3.Operators.UnaryTritOperator](#ternary3operatorsunarytritoperator) **Floor**</code>
 
 >Floor.
->            Positive for positive, zero otherwise.
->            [0, 0, 1]
+>Positive for positive, zero otherwise.
+>[0, 0, 1]
 
 #### <code>[Ternary3.Operators.UnaryTritOperator](#ternary3operatorsunarytritoperator) **FloorIsPositive**</code>
 
 >Alias for [Floor](#f:ternary3.operators.unarytritoperator.floor) .
->            Positive for positive, zero otherwise.
->            [0, 0, 1]
+>Positive for positive, zero otherwise.
+>[0, 0, 1]
 
 #### <code>[Ternary3.Operators.UnaryTritOperator](#ternary3operatorsunarytritoperator) **CyclicIncrement**</code>
 
 >Cyclic Increment.
->            Positive for positive, negative otherwise.
->            [0, 1, T]
+>Positive for positive, negative otherwise.
+>[0, 1, T]
 
 #### <code>[Ternary3.Operators.UnaryTritOperator](#ternary3operatorsunarytritoperator) **FloorIsZero**</code>
 
 >Floor Is Zero.
->            Zero for zero, positive otherwise.
->            [0, 1, 0]
+>Zero for zero, positive otherwise.
+>[0, 1, 0]
 
 #### <code>[Ternary3.Operators.UnaryTritOperator](#ternary3operatorsunarytritoperator) **Increment**</code>
 
 >Increment.
->            Zero for negative, positive otherwise.
->            [0, 1, 1]
+>Zero for negative, positive otherwise.
+>[0, 1, 1]
 
 #### <code>[Ternary3.Operators.UnaryTritOperator](#ternary3operatorsunarytritoperator) **IsNegative**</code>
 
 >Is the value negative?
->            Negative for negative, positive otherwise.
->            [1, T, T]
+>Negative for negative, positive otherwise.
+>[1, T, T]
 
 #### <code>[Ternary3.Operators.UnaryTritOperator](#ternary3operatorsunarytritoperator) **CyclicDecrement**</code>
 
 >Cyclic Decrement.
->            Negative for positive, zero for zero, positive for negative.
->            [1, T, 0]
+>Negative for positive, zero for zero, positive for negative.
+>[1, T, 0]
 
 #### <code>[Ternary3.Operators.UnaryTritOperator](#ternary3operatorsunarytritoperator) **IsNotZero**</code>
 
 >Is Not Zero.
->            Positive for negative and positive, negative for zero.
->            [1, T, 1]
+>Positive for negative and positive, negative for zero.
+>[1, T, 1]
 
 #### <code>[Ternary3.Operators.UnaryTritOperator](#ternary3operatorsunarytritoperator) **Negate**</code>
 
 >Negate.
->            Positive for negative, negative for positive.
->            [1, 0, T]
+>Positive for negative, negative for positive.
+>[1, 0, T]
 
 #### <code>[Ternary3.Operators.UnaryTritOperator](#ternary3operatorsunarytritoperator) **FloorIsNegative**</code>
 
 >Floor Is Negative.
->            Zero for zero, positive otherwise.
->            [1, 0, 0]
+>Zero for zero, positive otherwise.
+>[1, 0, 0]
 
 #### <code>[Ternary3.Operators.UnaryTritOperator](#ternary3operatorsunarytritoperator) **AbsoluteValue**</code>
 
 >Absolute Value.
->            Always positive.
->            [1, 0, 1]
+>Always positive.
+>[1, 0, 1]
 
 #### <code>[Ternary3.Operators.UnaryTritOperator](#ternary3operatorsunarytritoperator) **IsNotPositive**</code>
 
 >Is Not Positive.
->            Positive for negative and zero, negative for positive.
->            [1, 1, T]
+>Positive for negative and zero, negative for positive.
+>[1, 1, T]
 
 #### <code>[Ternary3.Operators.UnaryTritOperator](#ternary3operatorsunarytritoperator) **FloorIsNotPositive**</code>
 
 >Floor Is Not Positive.
->            Zero for positive, positive otherwise.
->            [1, 1, 0]
+>Zero for positive, positive otherwise.
+>[1, 1, 0]
 
 #### <code>[Ternary3.Operators.UnaryTritOperator](#ternary3operatorsunarytritoperator) **Positive**</code>
 
 >Positive.
->            Always positive.
->            [1, 1, 1]
+>Always positive.
+>[1, 1, 1]
 
 
 ### Constructors
@@ -9612,7 +9628,7 @@ No documentation available.
 #### <code>[System.Threading.Tasks.Task](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task) **FlushAsync**([System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken) cancellationToken)</code>
 
 >Flushes the stream, writing any buffered data to the underlying stream.
->            Warning: flushing will restart part of the encoding, making size optimization impossible.
+>Warning: flushing will restart part of the encoding, making size optimization impossible.
 >
 >**Parameters:**
 >- `cancellationToken`: The cancellation token
@@ -10725,58 +10741,29 @@ No documentation available.
 
 >Specifies options for parsing ternary number strings.
 
-### Static Fields
+### Enum Values
 
-#### <code>[Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) **None**</code>
-
+- **None** = `0`
 >No special parsing options.
-
-#### <code>[Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) **AllowAbsenceOfDigits**</code>
-
+- **AllowAbsenceOfDigits** = `2`
 >Allows the input string to contain no digits. The result will be zero.
-
-#### <code>[Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) **AllowWhitespace**</code>
-
+- **AllowWhitespace** = `4`
 >Ignores whitespace characters in the input string.
-
-#### <code>[Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) **AllowDashes**</code>
-
+- **AllowDashes** = `8`
 >Ignores dash characters in the input string, unless they are defined as digits in the format.
-
-#### <code>[Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) **AllowUnderscores**</code>
-
+- **AllowUnderscores** = `16`
 >Ignores underscore characters in the input string, unless they are defined as digits in the format.
-
-#### <code>[Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) **AllowGroupSerparators**</code>
-
+- **AllowGroupSerparators** = `32`
 >Ignores group separator characters in the input string.
-
-#### <code>[Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) **AllowInvalidCharacters**</code>
-
+- **AllowInvalidCharacters** = `64`
 >Ignores invalid characters in the input string. This also allows for whitespace, dashes, underscores.
-
-#### <code>[Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) **AllowOverflow**</code>
-
+- **AllowOverflow** = `128`
 >If the parsed value exceeds the maximum number of trits, it will be truncated to fit the maximum size.
-
-#### <code>[Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) **AllowDecimal**</code>
-
+- **AllowDecimal** = `512`
 >Allows a decimal separator in the input string, which will be treated as a decimal point for floating-point trit values.
->            When parsing to an interger ternary value, the decimal separator will be ignored, and the value will be rounded down.
-
-#### <code>[Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) **CaseInsensitive**</code>
-
+>When parsing to an interger ternary value, the decimal separator will be ignored, and the value will be rounded down.
+- **CaseInsensitive** = `256`
 >Do not strictly enforce the case of characters in the input string. For example, 't' and 'T' will be treated as equivalent.
-
-#### <code>[Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) **Default**</code>
-
+- **Default** = `958`
 >Lax parsing options that allow for a wide range of input formats
-
-
-### Fields
-
-#### <code>[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **value__**</code>
-
-No documentation available.
-
 
