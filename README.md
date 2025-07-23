@@ -5,10 +5,10 @@
 # Ternary3 - C# Balanced Ternary Number Library
 
 ### Table of Contents
-  - [Introdcution](#basics)
+  - [Introduction](#introduction)
     - [What is Ternary3?](#what-is-ternary3)
     - [Features](#features)
-    - [Resources](#documentation)
+    - [Resources](#resources)
   - [Getting Started](#getting-started)
   - [Ternary Literals](#ternary-literals)
   - [Core Classes and Types](#core-classes-and-types)
@@ -18,7 +18,7 @@
   - [IO](#io)
     - [Int3TStream](#int3tstream)
     - [MemoryInt3TStream](#memoryint3tstream)
-    - [ByteToInt3TStream](#bytoint3tstream)
+    - [ByteToInt3TStream](#bytetoint3tstream)
     - [Int3TToByteStream](#int3ttobytestream)
   - [Operators](#operators)
     - [UnaryTritOperationDemo](#unarytritoperationdemo---using-unary-operators)
@@ -32,6 +32,9 @@
 ### What is Ternary3?
 
 Ternary3 is a specialized C# library that implements balanced ternary arithmetic. While most computer systems use binary (base-2) arithmetic, this library enables computation in balanced ternary (base-3) with digits {-1, 0, 1}, often represented as {T, 0, 1}.
+
+In balanced ternary, the digit 'T' represents -1, '0' represents 0, and '1' represents 1. For example, the balanced ternary number "1T01" represents: 
+1×3³ + (-1)×3² + 0×3¹ + 1×3⁰ = 27 - 9 + 0 + 1 = 19
 
 > Please let me know what you're using this library for.
 > I would love to hear about your projects and how Ternary3 is helping you.
@@ -47,11 +50,11 @@ Balanced ternary has several interesting properties that make it unique among nu
 
 ### Features
 - **Specialized Types**: Provides specialized types for 3, 9 and 27 trit numbers, as well as a variable-length `TritArray` type for arbitrary-length balanced ternary numbers.
-  The `BigTritArray` suports ternary numbers with millions of digits. 
+  The `BigTritArray` supports ternary numbers with millions of digits. 
 - **Parsing and Formatting**: Performant conversion between the balanced ternary types, strings and numbers.
 - **Ternary Literals**: Use ternary literals directly in your code with source generation for constants.
 - **Arithmetic Operations**: Supports addition, subtraction, multiplication, division, and modulo operations on ternary numbers.
-- **Logical Operations**: Supports trit shits, all 27 operations on a single ternary number, and all 19.683 operations on pairs of ternary numbers.
+- **Logical Operations**: Supports trit shifts, all 27 operations on a single ternary number, and all 19,683 operations on pairs of ternary numbers.
   Operations are translated to binary operations using lookup tables for performance execution.
 - **IO Support**: Provides streams for reading and writing ternary numbers, and adapters to read from and write to any binary stream.
 
@@ -698,44 +701,28 @@ This will output the balanced ternary representation of the values.
 You can now format any trit array (implementing `ITritArray`) using a custom or built-in ternary format. Use the new `ToString(ITernaryFormat format)` overload to control digit symbols, grouping, separators, and padding:
 
 ```csharp
-var trits = new TritArray27(...);
+var trits = (TritArray27)12345;
 var format = new Ternary3.Formatting.TernaryFormat()
     .WithGroup(3, " ")
     .WithGroup(3, "-");
-string formatted = trits.ToString(format); // e.g. "T01-T01-T01 - TTT-000-111"
+string formatted = trits.ToString(format); // Outputs: "00-000-010 T01-01T"
 ```
 
 This allows you to display ternary numbers in a way that matches your application's needs or user preferences.
 
-#### ToString Overloads for Int* and TritArray* Types
+### Available Format Specifiers
 
-All Int* (Int3T, Int9T, Int27T) and TritArray* (TritArray3, TritArray9, TritArray27) types support the following ToString overloads:
+When using the `ToString(string? format)` method, the following format specifier is available:
 
-- `ToString()` — Returns the default string representation.
-- `ToString(string? format)` — Returns a string representation using the specified format string.
-- `ToString(IFormatProvider? provider)` — Returns a string representation using the specified format provider.
-- `ToString(string? format, IFormatProvider? provider)` — Returns a string representation using both a format string and a format provider.
-- `ToString(ITernaryFormat format)` — Returns a string representation using a custom ternary format (for Int3T, Int27T, and all TritArray types).
+- `"ter"` - Ternary format: Formats the number as balanced ternary with 'T', '0', and '1' digits.
 
-For example:
-
+Examples:
 ```csharp
-Int27T intVal = 12345;
-Console.WriteLine(intVal.ToString());
-Console.WriteLine(intVal.ToString("G"));
-Console.WriteLine(intVal.ToString(CultureInfo.InvariantCulture));
-Console.WriteLine(intVal.ToString("G", CultureInfo.InvariantCulture));
-Console.WriteLine(intVal.ToString(new Ternary3.Formatting.TernaryFormat()));
-
-TritArray9 arr = 42;
-Console.WriteLine(arr.ToString());
-Console.WriteLine(arr.ToString("G"));
-Console.WriteLine(arr.ToString(CultureInfo.InvariantCulture));
-Console.WriteLine(arr.ToString("G", CultureInfo.InvariantCulture));
-Console.WriteLine(arr.ToString(new Ternary3.Formatting.TernaryFormat()));
+Int27T value = 42;
+Console.WriteLine(value.ToString());     // Outputs the decimal value: "42"
+Console.WriteLine($"{value:ter}");       // Outputs the ternary representation: "1111"
 ```
 
-This allows for flexible formatting and display of ternary numbers, including custom digit symbols, grouping, and separators.
 
 ## Reference
 
@@ -2960,7 +2947,7 @@ No documentation available.
 >**Returns:**
 >A new ternary number of the same type containing the shifted value.
 
-#### <code>[Ternary3.Int27T](#ternary3int27t) **op_UnsignedRightShift**([Ternary3.Int27T](#ternary3int27t) value, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) shiftAmount)</code>
+#### <code>[Ternary3.Int27T](#ternary3int27t) **operator &gt;&gt;&gt;**([Ternary3.Int27T](#ternary3int27t) value, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) shiftAmount)</code>
 
 >Performs an unsigned right shift operation on the ternary number, maintaining the original numeric type.
 >In this implementation, it behaves the same as the signed right shift.
@@ -4847,7 +4834,7 @@ No documentation available.
 >**Returns:**
 >A new ternary number of the same type containing the shifted value.
 
-#### <code>[Ternary3.Int3T](#ternary3int3t) **op_UnsignedRightShift**([Ternary3.Int3T](#ternary3int3t) value, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) shiftAmount)</code>
+#### <code>[Ternary3.Int3T](#ternary3int3t) **operator &gt;&gt;&gt;**([Ternary3.Int3T](#ternary3int3t) value, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) shiftAmount)</code>
 
 >Performs an unsigned right shift operation on the ternary number, maintaining the original numeric type.
 >In this implementation, it behaves the same as the signed right shift.
@@ -6734,7 +6721,7 @@ No documentation available.
 >**Returns:**
 >A new ternary number of the same type containing the shifted value.
 
-#### <code>[Ternary3.Int9T](#ternary3int9t) **op_UnsignedRightShift**([Ternary3.Int9T](#ternary3int9t) value, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) shiftAmount)</code>
+#### <code>[Ternary3.Int9T](#ternary3int9t) **operator &gt;&gt;&gt;**([Ternary3.Int9T](#ternary3int9t) value, [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) shiftAmount)</code>
 
 >Performs an unsigned right shift operation on the ternary number, maintaining the original numeric type.
 >In this implementation, it behaves the same as the signed right shift.
@@ -8573,7 +8560,7 @@ No documentation available.
 >**Exceptions:**
 >- `System.ArgumentOutOfRangeException`: Thrown when the value is not -1, 0, or 1.
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **op_True**([Ternary3.Trit](#ternary3trit) trit)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator true**([Ternary3.Trit](#ternary3trit) trit)</code>
 
 >Returns true if the value is Positive (1), false otherwise.
 >
@@ -8584,7 +8571,7 @@ No documentation available.
 >**Returns:**
 >True if the value is Positive (1), false otherwise.
 
-#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **op_False**([Ternary3.Trit](#ternary3trit) trit)</code>
+#### <code>[System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **operator false**([Ternary3.Trit](#ternary3trit) trit)</code>
 
 >Returns true if the value is Negative (-1), false otherwise.
 >
@@ -8595,7 +8582,7 @@ No documentation available.
 >**Returns:**
 >True if the value is Negative (-1), false otherwise.
 
-#### <code>[Ternary3.Trit](#ternary3trit) **op_LogicalNot**([Ternary3.Trit](#ternary3trit) trit)</code>
+#### <code>[Ternary3.Trit](#ternary3trit) **operator !**([Ternary3.Trit](#ternary3trit) trit)</code>
 
 >Performs a logical NOT operation on a Trit value.
 >

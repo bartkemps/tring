@@ -249,6 +249,7 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
             "op_ExclusiveOr" => "^",
             "op_LeftShift" => "&lt;&lt;",
             "op_RightShift" => "&gt;&gt;",
+            "op_UnsignedRightShift" => "&gt;&gt;&gt;",
             "op_Equality" => "==",
             "op_Inequality" => "!=",
             "op_LessThan" => "&lt;",
@@ -262,7 +263,10 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
             "op_Decrement" => "--",
             "op_Implicit" => "implicit",
             "op_Explicit" => "explicit",
-            _ => null
+            "op_True" => "true",
+            "op_False" => "false",
+            "op_LogicalNot" => "!",
+            _ => throw new NotSupportedException($"Operator '{methodName}' is not supported.")
         };
     }
 
