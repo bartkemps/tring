@@ -68,11 +68,11 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
         var markdown = $"## {fullName}\n\n{comment}\n\n";
         markdown += GenerateMarkdownDescribingConstructors(true, info.DeclaredConstructors);
         markdown += GenerateMarkdownDescribingMethods(true, info.DeclaredMethods);
-        markdown += GenerateMarkdowDescribingProperties(true, info.DeclaredProperties);
+        markdown += GenerateMarkdownDescribingProperties(true, info.DeclaredProperties);
         markdown += GenerateMarkdowDescribingFields(true, info.DeclaredFields);
         markdown += GenerateMarkdownDescribingConstructors(false, info.DeclaredConstructors);
         markdown += GenerateMarkdownDescribingMethods(false, info.DeclaredMethods);
-        markdown += GenerateMarkdowDescribingProperties(false, info.DeclaredProperties);
+        markdown += GenerateMarkdownDescribingProperties(false, info.DeclaredProperties);
         markdown += GenerateMarkdowDescribingFields(false, info.DeclaredFields);
         markdown += GenerateMarkdowDescribingOperators(info.DeclaredMembers);
         return markdown;
@@ -103,9 +103,9 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
         return markdown + "\n";
     }
 
-    private string GenerateMarkdownDescribingConstructors(bool isStatic, IEnumerable<ConstructorInfo> c)
+    private string GenerateMarkdownDescribingConstructors(bool isStatic, IEnumerable<ConstructorInfo> ci)
     {
-        var constructors = c.Where(c => isStatic == c.IsStatic && (c.IsPublic || c.IsFamily)).ToList();
+        var constructors = ci.Where(c => isStatic == c.IsStatic && (c.IsPublic || c.IsFamily)).ToList();
         if (constructors.Count == 0) return "";
         var markdown = isStatic ? "### Static Constructors\n\n" : "### Constructors\n\n";
         foreach (var constructor in constructors)
@@ -153,9 +153,9 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
         return sb.ToString();
     }
 
-    private string GenerateMarkdowDescribingProperties(bool isStatic, IEnumerable<PropertyInfo> p)
+    private string GenerateMarkdownDescribingProperties(bool isStatic, IEnumerable<PropertyInfo> pi)
     {
-        var properties = p.Where(p => isStatic == p.GetAccessors(true)[0].IsStatic && (p.GetMethod?.IsPublic == true || p.GetMethod?.IsFamily == true || p.SetMethod?.IsPublic == true || p.SetMethod?.IsFamily == true)).ToList();
+        var properties = pi.Where(p => isStatic == p.GetAccessors(true)[0].IsStatic && (p.GetMethod?.IsPublic == true || p.GetMethod?.IsFamily == true || p.SetMethod?.IsPublic == true || p.SetMethod?.IsFamily == true)).ToList();
         if (properties.Count == 0) return "";
         var markdown = isStatic ? "### Static Properties\n\n" : "### Properties\n\n";
         foreach (var property in properties)
@@ -164,7 +164,7 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
             var comments = CommentsAsMarkdown(element);
 
             // Format property accessors
-            string accessors = "";
+            var accessors = "";
             if (property.CanRead && property.CanWrite)
                 accessors = " { get; set; }";
             else if (property.CanRead)
@@ -191,9 +191,9 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
         return markdown + "\n";
     }
 
-    private string GenerateMarkdowDescribingFields(bool isStatic, IEnumerable<FieldInfo> f)
+    private string GenerateMarkdowDescribingFields(bool isStatic, IEnumerable<FieldInfo> fi)
     {
-        var fields = f.Where(f => isStatic == f.IsStatic && (f.IsPublic || f.IsFamily)).ToList();
+        var fields = fi.Where(f => isStatic == f.IsStatic && (f.IsPublic || f.IsFamily)).ToList();
         if (fields.Count == 0) return "";
         var markdown = isStatic ? "### Static Fields\n\n" : "### Fields\n\n";
         foreach (var field in fields)
@@ -223,11 +223,11 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
             var comments = CommentsAsMarkdown(element);
 
             // Get a friendly operator name
-            string operatorSymbol = GetOperatorSymbol(method.Name);
-            string operatorName = operatorSymbol != null ? $"operator {operatorSymbol}" : method.Name;
+            var operatorSymbol = GetOperatorSymbol(method.Name);
+            var operatorName = $"operator {operatorSymbol}";
 
             // Format parameters
-            string parameters = FormatParameters(method);
+            var parameters = FormatParameters(method);
 
             markdown += $"#### <code>{GetFullTypeLink(method.ReturnType)} **{operatorName}**{parameters}</code>\n\n{comments}\n\n";
         }
@@ -320,14 +320,14 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
         }
 
         // Add exceptions
-        var exceptions = xml.Elements("exception");
+        var exceptions = xml.Elements("exception").ToArray();
         if (exceptions.Any())
         {
             sb.AppendLine("\n**Exceptions:**");
             foreach (var exception in exceptions)
             {
                 var crefAttribute = exception.Attribute("cref")?.Value;
-                string exceptionTypeName = crefAttribute ?? "Exception";
+                var exceptionTypeName = crefAttribute ?? "Exception";
 
                 // Convert from T:System.ArgumentException format to just the type name
                 if (exceptionTypeName.Contains(':'))
@@ -492,12 +492,12 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
         // try without parameters as some XML doc generators handle this differently
         if (element == null && member is MethodBase)
         {
-            string baseNameWithoutParams = member is ConstructorInfo
+            var baseNameWithoutParams = member is ConstructorInfo
                 ? $"{memberType}:{declaringType}.#ctor"
                 : $"{memberType}:{declaringType}.{member.Name.Replace('.', '#')}";
 
             element = xmlDocument.Descendants("member")
-                .FirstOrDefault(e => e.Attribute("name")?.Value?.StartsWith(baseNameWithoutParams) == true);
+                .FirstOrDefault(e => e.Attribute("name")?.Value.StartsWith(baseNameWithoutParams) == true);
         }
 
         // Handle inheritdoc tag

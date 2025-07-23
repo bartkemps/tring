@@ -284,8 +284,8 @@ internal class Parser
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static T TritsToNumber<T>(sbyte[] trits) where T : IBinaryInteger<T>
     {
-        T result = T.Zero;
-        T power = T.One;
+        var result = T.Zero;
+        var power = T.One;
         foreach (var trit in trits)
         {
             if (trit != 0) result += T.CreateChecked(trit) * power;

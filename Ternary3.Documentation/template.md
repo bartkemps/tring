@@ -18,7 +18,7 @@
   - [IO](#io)
     - [Int3TStream](#int3tstream)
     - [MemoryInt3TStream](#memoryint3tstream)
-    - [ByteToInt3TStream](#bytoint3tstream)
+    - [ByteToInt3TStream](#bytetoint3tstream)
     - [Int3TToByteStream](#int3ttobytestream)
   - [Operators](#operators)
     - [UnaryTritOperationDemo](#unarytritoperationdemo---using-unary-operators)
