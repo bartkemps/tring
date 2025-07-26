@@ -9,6 +9,8 @@ using System.Xml.Linq;
 public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
 {
     const string BaseNamespace = "Ternary3"; // the namespace of the assembly to document
+    const string code = "";
+    const string _code = "";
 
     /// <summary>
     /// Concats all filesToInclude Markdown files into a single Markdown file,
@@ -38,10 +40,10 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
         var types = assembly.GetExportedTypes();
         foreach (var type in types.GroupBy(t => t.Namespace))
         {
-            markdown += $"\n### <code>**{type.Key}**</code> namespace\n";
+            markdown += $"\n### {code}**{type.Key}**{_code} namespace\n";
             foreach (var t in type)
             {
-                markdown += $"- <code>{GetFullTypeLink(t)}</code>\n";
+                markdown += $"- {code}{GetFullTypeLink(t)}{_code}\n";
             }
         }
 
@@ -113,7 +115,7 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
             var element = FindElement("M", constructor);
             var comments = CommentsAsMarkdown(element);
             var name = $"**{constructor.DeclaringType?.Name}**{FormatParameters(constructor)}";
-            markdown += $"#### <code>{name}</code>\n\n{comments}\n\n";
+            markdown += $"#### {code}{name}{_code}\n\n{comments}\n\n";
         }
 
         return markdown + "\n";
@@ -131,7 +133,7 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
             var element = FindElement("M", method);
             var comments = CommentsAsMarkdown(element);
             var name = $"{(method.IsGenericMethod ? $"**{method.Name}**<" + string.Join(", ", method.GetGenericArguments().Select(GetFullTypeLink)) + ">" : $"**{method.Name}**")}{FormatParameters(method)}";
-            markdown += $"#### <code>{GetFullTypeLink(method.ReturnType)} {name}</code>\n\n{comments}\n\n";
+            markdown += $"#### {code}{GetFullTypeLink(method.ReturnType)} {name}{_code}\n\n{comments}\n\n";
         }
 
         return markdown + "\n";
@@ -185,7 +187,7 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
                 propertyDisplay = $"**{property.Name}**{accessors}";
             }
 
-            markdown += $"#### <code>{GetFullTypeLink(property.PropertyType)} {propertyDisplay}</code>\n\n{comments}\n\n";
+            markdown += $"#### {code}{GetFullTypeLink(property.PropertyType)} {propertyDisplay}{_code}\n\n{comments}\n\n";
         }
 
         return markdown + "\n";
@@ -200,7 +202,7 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
         {
             var element = FindElement("F", field);
             var comments = CommentsAsMarkdown(element);
-            markdown += $"#### <code>{GetFullTypeLink(field.FieldType)} **{field.Name}**</code>\n\n{comments}\n\n";
+            markdown += $"#### {code}{GetFullTypeLink(field.FieldType)} **{field.Name}**{_code}\n\n{comments}\n\n";
         }
 
         return markdown + "\n";
@@ -229,7 +231,7 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
             // Format parameters
             var parameters = FormatParameters(method);
 
-            markdown += $"#### <code>{GetFullTypeLink(method.ReturnType)} **{operatorName}**{parameters}</code>\n\n{comments}\n\n";
+            markdown += $"#### {code}{GetFullTypeLink(method.ReturnType)} **{operatorName}**{parameters}{_code}\n\n{comments}\n\n";
         }
 
         return markdown + "\n";

@@ -101,6 +101,21 @@ public partial struct BinaryTritOperator
     /// </code>
     /// </remarks>
     public static readonly BinaryTritOperator Xor = new(0b100000001, 0b001000100);
+    
+    /// <summary>
+    /// Implements the standard MULTIPLY operation in three-valued logic (Kleene/Priest logic).
+    /// </summary>
+    /// <remarks>
+    /// Truth table representation:
+    /// <code>
+    ///  × | T 0 1
+    /// ---+------
+    ///  T | 1 0 T
+    ///  0 | 0 0 0
+    ///  1 | T 0 1
+    /// </code>
+    /// </remarks>
+    public static readonly BinaryTritOperator Multiply = new(0b001000100, 0b100000001);
 
     /// <summary>
     /// Implements the standard Plus operation in three-valued logic

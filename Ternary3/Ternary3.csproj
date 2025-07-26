@@ -12,7 +12,7 @@
         
         <!-- NuGet Package Metadata -->
         <PackageId>Ternary</PackageId>
-        <Version>2.1.1</Version>
+        <Version>2.1.2</Version>
         <Authors>Bart Kemps</Authors>
         <Description>Ternary3: A C# library for working with balanced ternary number system. Includes fixed-size ternary integers and trit arrays with various operations.</Description>
         <PackageTags>ternary;balanced-ternary;trits;numeric;base3</PackageTags>
