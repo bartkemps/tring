@@ -129,6 +129,15 @@
       <ProjectReference Include="..\Ternary3.Generators\Ternary3.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
     </ItemGroup>
 
+    <!-- Directly include the generator assembly in the package -->
+    <ItemGroup>
+        <None Include="..\Ternary3.Generators\bin\$(Configuration)\netstandard2.0\Ternary3.Generators.dll" 
+              Pack="true" 
+              PackagePath="analyzers\dotnet\cs\Ternary3.Generators.dll" 
+              Visible="false" 
+              Condition="Exists('..\Ternary3.Generators\bin\$(Configuration)\netstandard2.0\Ternary3.Generators.dll')" />
+    </ItemGroup>
+
     <ItemGroup>
       <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
     </ItemGroup>

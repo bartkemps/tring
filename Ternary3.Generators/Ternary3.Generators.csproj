@@ -9,15 +9,22 @@
         <!-- Ensure this is included as an analyzer -->
         <IncludeBuildOutput>false</IncludeBuildOutput>
         <DevelopmentDependency>true</DevelopmentDependency>
-        <Version>2.1.1-beta-2</Version>
+        <Version>2.1.1-beta-3</Version>
     </PropertyGroup>
     
     <ItemGroup>
         <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.10.0" PrivateAssets="all"/>
     </ItemGroup>
     
+    <!-- Ensure the generator is built and packaged correctly -->
+    <Target Name="GetAnalyzerAssemblies" DependsOnTargets="Build">
+        <ItemGroup>
+            <AnalyzerAssembly Include="$(OutputPath)$(AssemblyName).dll" />
+        </ItemGroup>
+    </Target>
+    
     <!-- Package the generator in the analyzer directory of the NuGet package -->
     <ItemGroup>
-        <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+        <None Include="$(OutputPath)$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs/$(AssemblyName).dll" Visible="false" />
     </ItemGroup>
 </Project>
