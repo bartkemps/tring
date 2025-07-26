@@ -8,7 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Ternary" Version="2.1.1" />
+      <PackageReference Include="Ternary" Version="2.1.1-beta-4" />
     </ItemGroup>
 
 <!--    <ItemGroup>-->
