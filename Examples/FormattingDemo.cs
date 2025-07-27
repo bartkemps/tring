@@ -7,7 +7,7 @@ using Ternary3.Formatting;
 /// Demonstrates formatting capabilities for ternary values using the Ternary3.Formatting namespace.
 /// Shows how to use TernaryFormatter, TernaryFormat, and TernaryFormatProvider for custom display of ternary numbers.
 /// </summary>
-public static partial class FormattingDemo
+public static class FormattingDemo
 {
     public static void Run()
     {

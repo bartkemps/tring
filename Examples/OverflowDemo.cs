@@ -7,7 +7,7 @@ public static class OverflowDemo
     public static void Run()
     {
         Console.WriteLine($"\r\n\r\n{nameof(OverflowDemo)}");
-        
+
         // Addition and substraction may overflow and do so in a ternary way.
         // (so instead of cutting of "binary" bits, it cuts off "ternary" trits)
         Int3T input1A = 12; // 110

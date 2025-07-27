@@ -5,4 +5,4 @@ UnaryTritOperationDemo.Run();
 BinaryTritOperationDemo.Run();
 OverflowDemo.Run();
 FormattingDemo.Run();
-await IODemo.Run();
+await IODemo.RunAsync();

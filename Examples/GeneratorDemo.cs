@@ -2,7 +2,7 @@
 
 using Ternary3;
 
-public partial class GeneratorDemo
+public class GeneratorDemo
 {
     private const int SimpleValue = ter111; // 13
     public static void Run()

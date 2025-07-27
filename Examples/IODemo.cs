@@ -1,5 +1,6 @@
 ﻿namespace Examples;
 
+using System.Diagnostics.CodeAnalysis;
 using Ternary3;
 using Ternary3.IO;
 
@@ -7,9 +8,10 @@ using Ternary3.IO;
 /// Demonstrates the Ternary3.IO namespace functionality for working with ternary streams.
 /// Shows how to use Int3TStream, MemoryInt3TStream, ByteToInt3TStream, and Int3TToByteStream.
 /// </summary>
-public static partial class IODemo
+[SuppressMessage("ReSharper", "InconsistentNaming")]
+public static class IODemo
 {
-    public static async Task Run()
+    public static async Task RunAsync()
     {
         Console.WriteLine($"\r\n\r\n{nameof(IODemo)}");
 

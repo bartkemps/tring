@@ -83,15 +83,9 @@ Write a simple C# program to test the library:
 using static Ternary3.Operators.BinaryTritOperator;
 using static System.Console;
 
-public partial class Program
-{
-    public static void Main()
-    {
-        // code generators will generate constants -24 and 4 for ternary literals
-        // Or is the ternary OR operator, which is defined in the library
-        WriteLine(terT010 | Or | ter11);
-    }
-}
+// code generators will generate constants -24 and 4 for ternary literals
+// Or is the ternary OR operator, which is defined in the library
+WriteLine(terT010 | Or | ter11);
 ```
 
 This will output a ternary number representing the result of the operation.
@@ -100,16 +94,10 @@ This will output a ternary number representing the result of the operation.
 
 Ternary3 supports the use of ternary literals in your code, making it easy to work with constants in balanced ternary notation.
 
-> **Note:** Ternary literals only work in partial classes. The source generator will only generate ternary constants for partial classes. If you want to use ternary literals, ensure your class is declared with the `partial` keyword.
-
 For example:
 
 ```csharp
-partial class MyClass {
-    void Example() {
-        Int3T x = ter01T + terT10; // x will be -4
-    }
-}
+Int3T x = ter01T + terT10; // x will be -4
 ```
 
 Ternary literals are identifiers of the form `ter010T`, `terT01`, etc., where each character after `ter` is either `0`, `1`, or `T` (for -1). Like other C# literals, underscores are allowed between digits for clarity (e.g., `ter_01_T`). For example:
@@ -122,7 +110,7 @@ ter0001  // equivalent to decimal 1
 ter000_000_01T // equivalent to decimal 2
 ```
 
-### How it works
+### Source Generator Implementation
 
 When you reference a ternary literal in your code, the Ternary3 source generator automatically generates a constant with the correct value for you. This means you can use ternary literals as if they were predefined constants:
 
@@ -130,36 +118,7 @@ When you reference a ternary literal in your code, the Ternary3 source generator
 int x = ter01T + terT10; // x will be -4
 ```
 
-### Enabling/Disabling Ternary Literal Generation
-
-By default, ternary literal generation is enabled for all partial classes in your project. You can control this behavior using the `[assembly: Ternary3.GenerateTernaryConstants]` attribute:
-
-- To enable for all classes (default):
-  ```csharp
-  [assembly: Ternary3.GenerateTernaryConstants]
-  ```
-- To disable for all classes:
-  ```csharp
-  [assembly: Ternary3.GenerateTernaryConstants(false)]
-  ```
-- To enable for a specific class:
-  ```csharp
-  [Ternary3.GenerateTernaryConstants]
-  partial class MyClass { /* ... */ }
-  ```
-- To disable for a specific class:
-  ```csharp
-  [Ternary3.GenerateTernaryConstants(false)]
-  partial class MyClass { /* ... */ }
-  ```
-- To disable for all classes but re-enable for a specific class:
-  ```csharp
-  [assembly: Ternary3.GenerateTernaryConstants(false)]
-  [Ternary3.GenerateTernaryConstants]
-  partial class MyClass { /* ... */ }
-  ```
-
-See the source generator documentation for more advanced usage.
+The generator creates a global `Literals` class in the `Ternary3` namespace with a `global using static` directive, making all ternary constants available throughout your project without any additional qualifiers.
 
 ## Core Classes and Types
 
