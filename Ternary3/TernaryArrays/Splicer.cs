@@ -1,4 +1,4 @@
-﻿namespace Ternary3.TritArrays;
+﻿namespace Ternary3.TernaryArrays;
 
 internal static class Splicer
 {

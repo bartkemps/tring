@@ -4,7 +4,7 @@ using System.Numerics;
 using System.Diagnostics.CodeAnalysis;
 using Formatting;
 using Operators;
-using TritArrays;
+using TernaryArrays;
 
 /// <summary>
 /// Represents a variable-length array of trits (ternary digits) backed by lists of ulongs.
@@ -99,12 +99,12 @@ public class BigTernaryArray : ITernaryArray<BigTernaryArray>
     /// </summary>
     /// <param name="arrays">The arrays to concatenate.</param>
     /// <exception cref="ArgumentNullException">Thrown when arrays is null.</exception>
-    public BigTernaryArray(params ITritArray[] arrays) : this((arrays ?? throw new ArgumentNullException(nameof(arrays))).Sum(a => a.Length))
+    public BigTernaryArray(params ITernaryArray[] arrays) : this((arrays ?? throw new ArgumentNullException(nameof(arrays))).Sum(a => a.Length))
     {
         var offset = 0;
         foreach (var arr in arrays)
         {
-            InitializeTritArray(arr, offset);
+            InitializeTernaryArray(arr, offset);
             offset += arr.Length;
         }
 
@@ -117,7 +117,7 @@ public class BigTernaryArray : ITernaryArray<BigTernaryArray>
     /// </summary>
     /// <param name="value">The string value to parse.</param>
     /// <returns>A BigTernaryArray representing the parsed value.</returns>
-    public static BigTernaryArray Parse(string value) => Parser.ParseBigTritArray(value);
+    public static BigTernaryArray Parse(string value) => Parser.ParseBigTernaryArray(value);
     
     /// <summary>
     /// Parses a string representation of a BigTernaryArray.
@@ -125,7 +125,7 @@ public class BigTernaryArray : ITernaryArray<BigTernaryArray>
     /// <param name="value">The string value to parse.</param>
     /// <param name="format">The format to use for parsing.</param>
     /// <returns>A BigTernaryArray representing the parsed value.</returns>
-    public static BigTernaryArray Parse(string value, ITernaryFormat format) => Parser.ParseBigTritArray(value, format);
+    public static BigTernaryArray Parse(string value, ITernaryFormat format) => Parser.ParseBigTernaryArray(value, format);
     
     /// <summary>
     /// Parses a string representation of a BigTernaryArray.
@@ -133,7 +133,7 @@ public class BigTernaryArray : ITernaryArray<BigTernaryArray>
     /// <param name="value">The string value to parse.</param>
     /// <param name="options">The options to use for parsing.</param>
     /// <returns>A BigTernaryArray representing the parsed value.</returns>
-    public static BigTernaryArray Parse(string value, TritParseOptions options) => Parser.ParseBigTritArray(value, null, options);
+    public static BigTernaryArray Parse(string value, TritParseOptions options) => Parser.ParseBigTernaryArray(value, null, options);
     
     /// <summary>
     /// Parses a string representation of a BigTernaryArray.
@@ -142,9 +142,9 @@ public class BigTernaryArray : ITernaryArray<BigTernaryArray>
     /// <param name="format">The format to use for parsing.</param>
     /// <param name="options">The options to use for parsing.</param>
     /// <returns>A BigTernaryArray representing the parsed value.</returns>
-    public static BigTernaryArray Parse(string value, ITernaryFormat format, TritParseOptions options) => Parser.ParseBigTritArray(value, format, options);
+    public static BigTernaryArray Parse(string value, ITernaryFormat format, TritParseOptions options) => Parser.ParseBigTernaryArray(value, format, options);
 
-    private void InitializeTritArray(ITritArray arr, int offset)
+    private void InitializeTernaryArray(ITernaryArray arr, int offset)
     {
         switch (arr)
         {
@@ -200,7 +200,7 @@ public class BigTernaryArray : ITernaryArray<BigTernaryArray>
         Positive[startLong + 1] |= valuePositive >> bitsInFirst;
     }
 
-    private void CopyRange(ITritArray arr, int offset)
+    private void CopyRange(ITernaryArray arr, int offset)
     {
         for (var i = 0; i < arr.Length; i++)
         {
@@ -243,7 +243,7 @@ public class BigTernaryArray : ITernaryArray<BigTernaryArray>
     }
 
     /// <inheritdoc/>
-    public ITritArray this[Range range]
+    public ITernaryArray this[Range range]
     {
         get
         {
@@ -366,7 +366,7 @@ public class BigTernaryArray : ITernaryArray<BigTernaryArray>
     /// <param name="array">The source array.</param>
     /// <param name="operation">The binary operation to be applied.</param>
     /// <returns>A binary operation context that can be used with another array.</returns>
-    public static LookupBigTritArrayOperator operator |(BigTernaryArray array, Func<Trit, Trit, Trit> operation) => new(array, new(operation));
+    public static LookupBigTernaryArrayOperator operator |(BigTernaryArray array, Func<Trit, Trit, Trit> operation) => new(array, new(operation));
 
     /// <summary>
     /// Creates a binary operation context for this array.
@@ -374,7 +374,7 @@ public class BigTernaryArray : ITernaryArray<BigTernaryArray>
     /// <param name="array">The source array.</param>
     /// <param name="table">The binary operation lookup table.</param>
     /// <returns>A binary operation context that can be used with another array.</returns>
-    public static LookupBigTritArrayOperator operator |(BigTernaryArray array, BinaryTritOperator table) => new(array, table);
+    public static LookupBigTernaryArrayOperator operator |(BigTernaryArray array, BinaryTritOperator table) => new(array, table);
 
     /// <summary>
     /// Creates a binary operation context for this array.
@@ -382,7 +382,7 @@ public class BigTernaryArray : ITernaryArray<BigTernaryArray>
     /// <param name="array">The source array.</param>
     /// <param name="table">The binary operation lookup table.</param>
     /// <returns>A binary operation context that can be used with another array.</returns>
-    public static LookupBigTritArrayOperator operator |(BigTernaryArray array, Trit[,] table) => new(array, new(table));
+    public static LookupBigTernaryArrayOperator operator |(BigTernaryArray array, Trit[,] table) => new(array, new(table));
 
     /// <summary>
     /// Performs a left bitwise shift on the trit array.

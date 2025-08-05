@@ -1,4 +1,4 @@
-﻿namespace Ternary3.TritArrays;
+﻿namespace Ternary3.TernaryArrays;
 
 using System.Numerics;
 

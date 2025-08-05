@@ -58,7 +58,7 @@ public class ParserTests
     
     [Theory]
     [MemberData(nameof(ParseTestData))]
-    public void Int3T_Parse_Equals_TritArray3_Parse(string s, ITernaryFormat? format, TritParseOptions options)
+    public void Int3T_Parse_Equals_TernaryArray3_Parse(string s, ITernaryFormat? format, TritParseOptions options)
     {
         Int3T val1 = default;
         Int3T val2 = default;
@@ -76,7 +76,7 @@ public class ParserTests
 
     [Theory]
     [MemberData(nameof(ParseTestData))]
-    public void Int9T_Parse_Equals_TritArray9_Parse(string s, ITernaryFormat format, TritParseOptions options)
+    public void Int9T_Parse_Equals_TernaryArray9_Parse(string s, ITernaryFormat format, TritParseOptions options)
     {
         Int9T val1 = default;
         Int9T val2 = default;
@@ -94,7 +94,7 @@ public class ParserTests
 
     [Theory]
     [MemberData(nameof(ParseTestData))]
-    public void Int27T_Parse_Equals_TritArray27_Parse(string s, ITernaryFormat format, TritParseOptions options)
+    public void Int27T_Parse_Equals_TernaryArray27_Parse(string s, ITernaryFormat format, TritParseOptions options)
     {
         Int27T val1 = default;
         Int27T val2 = default;

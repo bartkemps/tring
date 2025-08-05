@@ -31,7 +31,7 @@ public static class IODemo
         Console.WriteLine($"  Stream length: {memoryStream.Length} Int3T values");
         Console.WriteLine($"  Stream position: {memoryStream.Position}");
         
-        // Reset position to read from beginning
+        // Reset position to read from the beginning
         memoryStream.Position = 0;
         
         // Read values back one by one

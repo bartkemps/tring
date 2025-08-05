@@ -1,7 +1,7 @@
 ﻿namespace Ternary3.Benchmarks;
 
 using BenchmarkDotNet.Attributes;
-using TritArrays;
+using TernaryArrays;
 
 
 [MemoryDiagnoser]

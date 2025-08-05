@@ -1,6 +1,6 @@
 ﻿namespace Ternary3.Formatting;
 
-using TritArrays;
+using TernaryArrays;
 
 internal static class TernaryFormatValidator
 {

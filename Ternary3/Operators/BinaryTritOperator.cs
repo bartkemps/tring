@@ -220,14 +220,14 @@ public partial struct BinaryTritOperator : IEquatable<BinaryTritOperator>
     /// </summary>
     /// <param name="value">The value to convert to trits</param>
     /// <param name="table">The lookup table</param>
-    public static LookupTritArray27Operator operator |(long value, BinaryTritOperator table) => new((Int27T)value, table);
+    public static LookupTernaryArray27Operator operator |(long value, BinaryTritOperator table) => new((Int27T)value, table);
 
     /// <summary>
     /// Adds the pipe operator to <see cref="int"/>.
     /// </summary>
     /// <param name="value">The value to convert to trits</param>
     /// <param name="table">The lookup table</param>
-    public static LookupTritArray27Operator operator |(int value, BinaryTritOperator table) => new((Int27T)value, table);
+    public static LookupTernaryArray27Operator operator |(int value, BinaryTritOperator table) => new((Int27T)value, table);
 
     /// <summary>
     /// Adds the pipe operator to <see cref="short"/>.
@@ -235,7 +235,7 @@ public partial struct BinaryTritOperator : IEquatable<BinaryTritOperator>
     /// </summary>
     /// <param name="value">The value to convert to trits</param>
     /// <param name="table">The lookup table</param>
-    public static LookupTritArray9Operator operator |(short value, BinaryTritOperator table) => new((Int9T)value, table);
+    public static LookupTernaryArray9Operator operator |(short value, BinaryTritOperator table) => new((Int9T)value, table);
 
     /// <summary>
     /// Adds the pipe operator to <see cref="sbyte"/>.
@@ -243,7 +243,7 @@ public partial struct BinaryTritOperator : IEquatable<BinaryTritOperator>
     /// </summary>
     /// <param name="value">The value to convert to trits</param>
     /// <param name="table">The lookup table</param>
-    public static LookupTritArray3Operator operator |(sbyte value, BinaryTritOperator table) => new((Int3T)value, table);
+    public static LookupTernaryArray3Operator operator |(sbyte value, BinaryTritOperator table) => new((Int3T)value, table);
 
     /// <summary>
     /// Determines whether the specified object is equal to the current BinaryTritOperator.

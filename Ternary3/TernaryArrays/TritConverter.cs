@@ -1,4 +1,4 @@
-﻿namespace Ternary3.TritArrays;
+﻿namespace Ternary3.TernaryArrays;
 
 using System.Numerics;
 using System.Runtime.CompilerServices;
@@ -6,7 +6,11 @@ using System.Runtime.CompilerServices;
 internal static class TritConverter
 {
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static int GetLength(uint negative, uint positive) => 32 - BitOperations.LeadingZeroCount(negative | positive);
+    private static int GetLength(uint negative, uint positive)
+    {
+        var bits = negative | positive;
+        return bits == 0 ? 0 : BitOperations.Log2(bits) + 1;
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void ToTrits(BigInteger value, out List<ulong> negative, out List<ulong> positive, out int length)
@@ -98,7 +102,8 @@ internal static class TritConverter
         To64Trits(value, out var neg, out var pos);
         negative.Add(neg);
         positive.Add(pos);
-        length = 64 - BitOperations.LeadingZeroCount(neg | pos);
+        var bits = neg | pos;
+        length = bits == 0 ? 0 : BitOperations.Log2(bits) + 1;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -265,7 +270,7 @@ internal static class TritConverter
         var pos = (uint)positive[0];
         if (length < 32)
         {
-            var mask = (1U << length) - 1;
+            uint mask = (1U << length) - 1;
             neg &= mask;
             pos &= mask;
         }
@@ -280,7 +285,7 @@ internal static class TritConverter
         var pos = positive[0];
         if (length < 64)
         {
-            var mask = (1UL << length) - 1;
+            ulong mask = (1UL << length) - 1;
             neg &= mask;
             pos &= mask;
         }
@@ -290,8 +295,8 @@ internal static class TritConverter
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Int32 ToInt32(uint negative, uint positive)
     {
-        var result = 0;
-        var pow = 1;
+        Int32 result = 0;
+        Int32 pow = 1;
         while (negative != 0 || positive != 0)
         {
             result += (LookupValue[positive & 0xff] - LookupValue[negative & 0xff]) * pow;
@@ -304,8 +309,8 @@ internal static class TritConverter
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Int32 ToInt32(int negative, int positive)
     {
-        var result = 0;
-        var pow = 1;
+        Int32 result = 0;
+        Int32 pow = 1;
         while (negative != 0 || positive != 0)
         {
             result += (LookupValue[positive & 0xff] - LookupValue[negative & 0xff]) * pow;
@@ -318,8 +323,8 @@ internal static class TritConverter
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Int32 ToInt32(ushort negative, ushort positive)
     {
-        var result = 0;
-        var pow = 1;
+        Int32 result = 0;
+        Int32 pow = 1;
         while (negative != 0 || positive != 0)
         {
             result += (LookupValue[positive & 0xff] - LookupValue[negative & 0xff]) * pow;

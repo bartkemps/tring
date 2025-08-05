@@ -5,7 +5,7 @@ namespace Ternary3.Formatting;
 internal static class Formatter
 {
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static string Format(ITritArray value, ITernaryFormat format) 
+    public static string Format(ITernaryArray value, ITernaryFormat format) 
         => new TernaryFormatter(format).Format(value);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]

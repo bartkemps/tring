@@ -10,7 +10,7 @@
         if (index > 0) Increase(index - 1);
     }
 #>
-namespace Ternary3.TritArrays;
+namespace Ternary3.TernaryArrays;
 
 using System.Numerics;
 using System.Runtime.CompilerServices;

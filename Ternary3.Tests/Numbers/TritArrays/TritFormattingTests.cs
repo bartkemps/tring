@@ -1,8 +1,8 @@
 using FluentAssertions;
 
-namespace Ternary3.Tests.Numbers.TritArrays;
+namespace Ternary3.Tests.Numbers.TernaryArrays;
 
-using Ternary3.TritArrays;
+using Ternary3.TernaryArrays;
 
 public class TritFormattingTests
 {

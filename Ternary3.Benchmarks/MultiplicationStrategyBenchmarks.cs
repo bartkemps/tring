@@ -1,5 +1,5 @@
 ﻿using BenchmarkDotNet.Attributes;
-using Ternary3.TritArrays;
+using Ternary3.TernaryArrays;
 
 [MemoryDiagnoser]
 [WarmupCount(1)]

@@ -25,15 +25,15 @@ public partial class TernaryIntegerIndexerTests
     [InlineData(0, 2)]
     [InlineData(1, 2)]
     [InlineData(13, 2)]
-    public void Int3T_IndexerReturnsCorrectTrit_WhenComparedToTritArray3(sbyte value, int index)
+    public void Int3T_IndexerReturnsCorrectTrit_WhenComparedToTernaryArray3(sbyte value, int index)
     {
         // Arrange
         var intValue = (Int3T)value;
-        var tritArray = (TernaryArray3)value;
+        var TernaryArray = (TernaryArray3)value;
 
         // Act
         var tritFromInt = intValue[index];
-        var tritFromArray = tritArray[index];
+        var tritFromArray = TernaryArray[index];
 
         // Assert
         tritFromInt.Should().Be(tritFromArray, $"because Int3T({value})[{index}] should equal TernaryArray3({value})[{index}]");
@@ -45,12 +45,12 @@ public partial class TernaryIntegerIndexerTests
         // Arrange
         sbyte value = -13;
         var intValue = (Int3T)value;
-        var tritArray = (TernaryArray3)value;
+        var TernaryArray = (TernaryArray3)value;
         var index = ^1; // Last trit
 
         // Act
         var tritFromInt = intValue[index];
-        var tritFromArray = tritArray[index];
+        var tritFromArray = TernaryArray[index];
 
         // Assert
         tritFromInt.Should().Be(tritFromArray, $"because Int3T({value})[{index}] should equal TernaryArray3({value})[{index}]");
@@ -62,12 +62,12 @@ public partial class TernaryIntegerIndexerTests
         // Arrange
         sbyte value = -1;
         var intValue = (Int3T)value;
-        var tritArray = (TernaryArray3)value;
+        var TernaryArray = (TernaryArray3)value;
         var index = ^2; // Second-to-last trit
 
         // Act
         var tritFromInt = intValue[index];
-        var tritFromArray = tritArray[index];
+        var tritFromArray = TernaryArray[index];
 
         // Assert
         tritFromInt.Should().Be(tritFromArray, $"because Int3T({value})[{index}] should equal TernaryArray3({value})[{index}]");
@@ -79,12 +79,12 @@ public partial class TernaryIntegerIndexerTests
         // Arrange
         sbyte value = 0;
         var intValue = (Int3T)value;
-        var tritArray = (TernaryArray3)value;
+        var TernaryArray = (TernaryArray3)value;
         var index = ^3; // First trit (from end)
 
         // Act
         var tritFromInt = intValue[index];
-        var tritFromArray = tritArray[index];
+        var tritFromArray = TernaryArray[index];
 
         // Assert
         tritFromInt.Should().Be(tritFromArray, $"because Int3T({value})[{index}] should equal TernaryArray3({value})[{index}]");
@@ -96,12 +96,12 @@ public partial class TernaryIntegerIndexerTests
         // Arrange
         sbyte value = 13;
         var intValue = (Int3T)value;
-        var tritArray = (TernaryArray3)value;
+        var TernaryArray = (TernaryArray3)value;
         var index = ^1; // Last trit
 
         // Act
         var tritFromInt = intValue[index];
-        var tritFromArray = tritArray[index];
+        var tritFromArray = TernaryArray[index];
 
         // Assert
         tritFromInt.Should().Be(tritFromArray, $"because Int3T({value})[{index}] should equal TernaryArray3({value})[{index}]");
@@ -125,15 +125,15 @@ public partial class TernaryIntegerIndexerTests
     [InlineData(0, 8)]
     [InlineData(1, 8)]
     [InlineData(9841, 8)]
-    public void Int9T_IndexerReturnsCorrectTrit_WhenComparedToTritArray9(int value, int index)
+    public void Int9T_IndexerReturnsCorrectTrit_WhenComparedToTernaryArray9(int value, int index)
     {
         // Arrange
         var intValue = (Int9T)value;
-        var tritArray = (TernaryArray9)value;
+        var TernaryArray = (TernaryArray9)value;
 
         // Act
         var tritFromInt = intValue[index];
-        var tritFromArray = tritArray[index];
+        var tritFromArray = TernaryArray[index];
 
         // Assert
         tritFromInt.Should().Be(tritFromArray, $"because Int9T({value})[{index}] should equal TernaryArray9({value})[{index}]");
@@ -145,12 +145,12 @@ public partial class TernaryIntegerIndexerTests
         // Arrange
         var value = -9841;
         var intValue = (Int9T)value;
-        var tritArray = (TernaryArray9)value;
+        var TernaryArray = (TernaryArray9)value;
         var index = ^1; // Last trit
 
         // Act
         var tritFromInt = intValue[index];
-        var tritFromArray = tritArray[index];
+        var tritFromArray = TernaryArray[index];
 
         // Assert
         tritFromInt.Should().Be(tritFromArray, $"because Int9T({value})[{index}] should equal TernaryArray9({value})[{index}]");
@@ -162,12 +162,12 @@ public partial class TernaryIntegerIndexerTests
         // Arrange
         var value = 4000;
         var intValue = (Int9T)value;
-        var tritArray = (TernaryArray9)value;
+        var TernaryArray = (TernaryArray9)value;
         var index = ^5; // Fifth trit from end
 
         // Act
         var tritFromInt = intValue[index];
-        var tritFromArray = tritArray[index];
+        var tritFromArray = TernaryArray[index];
 
         // Assert
         tritFromInt.Should().Be(tritFromArray, $"because Int9T({value})[{index}] should equal TernaryArray9({value})[{index}]");
@@ -179,12 +179,12 @@ public partial class TernaryIntegerIndexerTests
         // Arrange
         var value = 9841; // Max value
         var intValue = (Int9T)value;
-        var tritArray = (TernaryArray9)value;
+        var TernaryArray = (TernaryArray9)value;
         var index = ^9; // First trit (from end)
 
         // Act
         var tritFromInt = intValue[index];
-        var tritFromArray = tritArray[index];
+        var tritFromArray = TernaryArray[index];
 
         // Assert
         tritFromInt.Should().Be(tritFromArray, $"because Int9T({value})[{index}] should equal TernaryArray9({value})[{index}]");
@@ -208,15 +208,15 @@ public partial class TernaryIntegerIndexerTests
     [InlineData(0, 26)]
     [InlineData(1, 26)]
     [InlineData(3812798742289, 26)]
-    public void Int27T_IndexerReturnsCorrectTrit_WhenComparedToTritArray27(long value, int index)
+    public void Int27T_IndexerReturnsCorrectTrit_WhenComparedToTernaryArray27(long value, int index)
     {
         // Arrange
         var intValue = (Int27T)value;
-        var tritArray = (TernaryArray27)value;
+        var TernaryArray = (TernaryArray27)value;
 
         // Act
         var tritFromInt = intValue[index];
-        var tritFromArray = tritArray[index];
+        var tritFromArray = TernaryArray[index];
 
         // Assert
         tritFromInt.Should().Be(tritFromArray, $"because Int27T({value})[{index}] should equal TernaryArray27({value})[{index}]");
@@ -228,12 +228,12 @@ public partial class TernaryIntegerIndexerTests
         // Arrange
         var value = -3812798742289;
         var intValue = (Int27T)value;
-        var tritArray = (TernaryArray27)value;
+        var TernaryArray = (TernaryArray27)value;
         var index = ^1; // Last trit
 
         // Act
         var tritFromInt = intValue[index];
-        var tritFromArray = tritArray[index];
+        var tritFromArray = TernaryArray[index];
 
         // Assert
         tritFromInt.Should().Be(tritFromArray, $"because Int27T({value})[{index}] should equal TernaryArray27({value})[{index}]");
@@ -245,12 +245,12 @@ public partial class TernaryIntegerIndexerTests
         // Arrange
         long value = 1000000000;
         var intValue = (Int27T)value;
-        var tritArray = (TernaryArray27)value;
+        var TernaryArray = (TernaryArray27)value;
         var index = ^14; // 14th trit from end
 
         // Act
         var tritFromInt = intValue[index];
-        var tritFromArray = tritArray[index];
+        var tritFromArray = TernaryArray[index];
 
         // Assert
         tritFromInt.Should().Be(tritFromArray, $"because Int27T({value})[{index}] should equal TernaryArray27({value})[{index}]");
@@ -262,12 +262,12 @@ public partial class TernaryIntegerIndexerTests
         // Arrange
         var value = 3812798742289; // Max value
         var intValue = (Int27T)value;
-        var tritArray = (TernaryArray27)value;
+        var TernaryArray = (TernaryArray27)value;
         var index = ^27; // First trit (from end)
 
         // Act
         var tritFromInt = intValue[index];
-        var tritFromArray = tritArray[index];
+        var tritFromArray = TernaryArray[index];
 
         // Assert
         tritFromInt.Should().Be(tritFromArray, $"because Int27T({value})[{index}] should equal TernaryArray27({value})[{index}]");

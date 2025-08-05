@@ -1,8 +1,8 @@
-﻿namespace Ternary3.Tests.Numbers.TritArrays;
+﻿namespace Ternary3.Tests.Numbers.TernaryArrays;
 
 using System.Numerics;
 using FluentAssertions;
-using Ternary3.TritArrays;
+using Ternary3.TernaryArrays;
 using Xunit;
 
 partial class TritConverterTests

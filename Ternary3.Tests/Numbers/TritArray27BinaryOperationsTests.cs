@@ -3,7 +3,7 @@ using Ternary3.Operators;
 
 namespace Ternary3.Tests.Numbers;
 
-public class TritArray27BinaryOperationsTests
+public class TernaryArray27BinaryOperationsTests
 {
     [Theory]
     [InlineData(-1, -1)]

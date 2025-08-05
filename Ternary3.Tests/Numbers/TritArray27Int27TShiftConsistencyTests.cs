@@ -3,7 +3,7 @@ using Xunit;
 
 namespace Ternary3.Tests.Numbers;
 
-public class TritArray27Int27TShiftConsistencyTests
+public class TernaryArray27Int27TShiftConsistencyTests
 {
     [Theory]
     [InlineData(3812798742493L, 0)] // Max value, no shift
@@ -14,7 +14,7 @@ public class TritArray27Int27TShiftConsistencyTests
     [InlineData(-3812798742493L, 5)] // Min value, shift by 5
     [InlineData(1234567890L, 7)] // Arbitrary big number, shift by 7
     [InlineData(-1234567890L, 7)] // Negative big number, shift by 7
-    public void RightShift_YieldsSameValue_ForTritArray27AndInt27T(long value, int shift)
+    public void RightShift_YieldsSameValue_ForTernaryArray27AndInt27T(long value, int shift)
     {
         Int27T intValue = value;
         TernaryArray27 ternaryArray = intValue;

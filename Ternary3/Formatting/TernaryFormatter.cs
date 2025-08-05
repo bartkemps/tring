@@ -18,7 +18,7 @@ internal class TernaryFormatter(ITernaryFormat? ternaryFormat = null, IFormatPro
                 TernaryArray3 value => Format(value),
                 TernaryArray value => Format(value),
                 BigTernaryArray value => Format(value),
-                ITritArray value => Format(value),
+                ITernaryArray value => Format(value),
                 Int27T value => Format((TernaryArray27)value),
                 Int9T value => Format((TernaryArray9)value),
                 Int3T value => Format((TernaryArray3)value),
@@ -50,7 +50,7 @@ internal class TernaryFormatter(ITernaryFormat? ternaryFormat = null, IFormatPro
     }
 
     // To do: optimized version for known trit types
-    public string Format(ITritArray trits)
+    public string Format(ITernaryArray trits)
     {
         if (!TernaryFormatValidator.Validate(ternaryFormat)) 
         {

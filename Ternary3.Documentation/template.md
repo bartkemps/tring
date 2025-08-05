@@ -12,9 +12,9 @@
   - [Getting Started](#getting-started)
   - [Ternary Literals](#ternary-literals)
   - [Core Classes and Types](#core-classes-and-types)
-    - [TritArray](#tritarray)
-    - [Fixed-Size TritArrays](#fixed-size-tritarrays)
-    - [LookupTritArrayOperator](#lookuptritarrayoperator)
+    - [TernaryArray](#TernaryArray)
+    - [Fixed-Size TernaryArrays](#fixed-size-TernaryArrays)
+    - [LookupTernaryArrayOperator](#lookupTernaryArrayoperator)
   - [IO](#io)
     - [Int3TStream](#int3tstream)
     - [MemoryInt3TStream](#memoryint3tstream)
@@ -49,8 +49,8 @@ Balanced ternary has several interesting properties that make it unique among nu
 - A balanced ternary computer was actually built in Russia in the 1950s (the Setun)
 
 ### Features
-- **Specialized Types**: Provides specialized types for 3, 9 and 27 trit numbers, as well as a variable-length `TritArray` type for arbitrary-length balanced ternary numbers.
-  The `BigTritArray` supports ternary numbers with millions of digits. 
+- **Specialized Types**: Provides specialized types for 3, 9 and 27 trit numbers, as well as a variable-length `TernaryArray` type for arbitrary-length balanced ternary numbers.
+  The `BigTernaryArray` supports ternary numbers with millions of digits. 
 - **Parsing and Formatting**: Performant conversion between the balanced ternary types, strings and numbers.
 - **Ternary Literals**: Use ternary literals directly in your code with source generation for constants.
 - **Arithmetic Operations**: Supports addition, subtraction, multiplication, division, and modulo operations on ternary numbers.
@@ -122,13 +122,13 @@ The generator creates a global `Literals` class in the `Ternary3` namespace with
 
 ## Core Classes and Types
 
-### TritArray
+### TernaryArray
 
-`TritArray` is a key type in the library that represents an arbitrary-length balanced ternary number. It provides various operations for working with ternary numbers:
+`TernaryArray` is a key type in the library that represents an arbitrary-length balanced ternary number. It provides various operations for working with ternary numbers:
 
 ```csharp
-// Create a TritArray with a specific length (all trits initialized to 0)
-var arr = new TritArray(10);
+// Create a TernaryArray with a specific length (all trits initialized to 0)
+var arr = new TernaryArray(10);
 
 // Get and set individual trits
 arr[3] = Trit.Positive;
@@ -139,38 +139,38 @@ arr[^1] = Trit.Negative; // Set the last trit to negative (-1)
 var lastTrit = arr[^1];  // Get the last trit
 
 // Use C# 8.0 Range syntax to get a slice
-var slice = arr[0..5];   // Get the first 5 trits as a new TritArray
+var slice = arr[0..5];   // Get the first 5 trits as a new TernaryArray
 
 // Resize the array
 arr.Resize(15);         // Resize to a larger array (preserving values)
 
 // Implicit casting from ternary literals
-TritArray arr2 = terT10_TTT_01T;  // Directly assign a ternary literal to TritArray
-TritArray3 arr3 = ter10T;         // Fixed-size array from literal
-TritArray9 arr4 = ter10T_101_T01; // 9-trit array from literal
-TritArray27 arr5 = ter10T_101_T01_11T_01T_T10_T11; // 27-trit array from literal
+TernaryArray arr2 = terT10_TTT_01T;  // Directly assign a ternary literal to TernaryArray
+TernaryArray3 arr3 = ter10T;         // Fixed-size array from literal
+TernaryArray9 arr4 = ter10T_101_T01; // 9-trit array from literal
+TernaryArray27 arr5 = ter10T_101_T01_11T_01T_T10_T11; // 27-trit array from literal
 ```
 
-### Fixed-Size TritArrays
+### Fixed-Size TernaryArrays
 
 The library includes specialized fixed-size implementations for common ternary number sizes:
 
-- `TritArray3` - A 3-trit number (equivalent range to a byte)
-- `TritArray9` - A 9-trit number (equivalent range to a short)
-- `TritArray27` - A 27-trit number (equivalent range to an int)
+- `TernaryArray3` - A 3-trit number (equivalent range to a byte)
+- `TernaryArray9` - A 9-trit number (equivalent range to a short)
+- `TernaryArray27` - A 27-trit number (equivalent range to an int)
 
-These offer better performance than the general-purpose `TritArray` when working with known sizes.
+These offer better performance than the general-purpose `TernaryArray` when working with known sizes.
 
-### LookupTritArrayOperator
+### LookupTernaryArrayOperator
 
-`LookupTritArrayOperator` provides optimized implementations of ternary operations for the TritArray types, using lookup tables for high-performance computation.
+`LookupTernaryArrayOperator` provides optimized implementations of ternary operations for the TernaryArray types, using lookup tables for high-performance computation.
 
 ```csharp
-// Create a TritArray
-var arr = new TritArray(10);
+// Create a TernaryArray
+var arr = new TernaryArray(10);
 
-// Apply an operation using a LookupTritArrayOperator
-var result = LookupTritArrayOperator.Negate(arr);
+// Apply an operation using a LookupTernaryArrayOperator
+var result = LookupTernaryArrayOperator.Negate(arr);
 ```
 
 ## IO
@@ -269,30 +269,30 @@ public static partial class UnaryTritOperationDemo
     {
         Console.WriteLine($"\r\n\r\n{nameof(UnaryTritOperationDemo)}");
 
-        // Operation on Int3T outputs TritArray3
+        // Operation on Int3T outputs TernaryArray3
         Int3T input1 = ter1TT; // 5 in decimal
-        var output1 = input1 | AbsoluteValue; // TritArray3 111
-        Console.WriteLine($"Absolute value of {input1} ({(TritArray3)input1}) = {(Int3T)output1} ({output1})"); // Absolute value of 5 (1TT) = 13 (111)
+        var output1 = input1 | AbsoluteValue; // TernaryArray3 111
+        Console.WriteLine($"Absolute value of {input1} ({(TernaryArray3)input1}) = {(Int3T)output1} ({output1})"); // Absolute value of 5 (1TT) = 13 (111)
 
-        // Custom operation on Int9T outputs TritArray9, which can be implicitly converted to Int9T
+        // Custom operation on Int9T outputs TernaryArray9, which can be implicitly converted to Int9T
         Trit EchoA(Trit trit) => trit; // Custom operation: Identity function for Trit
         Int9T input2A = terT0T; // -10 in decimal
         Int9T output2A = input2A | EchoA; // T0T. Gets implicitly converted to Int9T
         Console.WriteLine($"terT0T Echoed = {output2A}"); // Prints -10
 
-        // Custom operation on Int9T outputs TritArray9, which can be implicitly converted to Int9T
+        // Custom operation on Int9T outputs TernaryArray9, which can be implicitly converted to Int9T
         Trit[] echoB = [Trit.Negative, Trit.Zero, Trit.Positive];
         Int9T input2B = terT0T; // -10 in decimal
         Int9T output2B = input2B | echoB; // T0T. Gets implicitly converted to Int9T
         Console.WriteLine($"terT0T Echoed = {output2B}"); // Prints -10
 
-        // Custom operation on Int9T outputs TritArray9, which can be implicitly converted to Int9T
+        // Custom operation on Int9T outputs TernaryArray9, which can be implicitly converted to Int9T
         var echoC = new UnaryTritOperator(false, null, true);
         Int9T input2C = terT0T; // -10 in decimal
         Int9T output2C = input2C | echoC; // T0T. Gets implicitly converted to Int9T
         Console.WriteLine($"terT0T Echoed = {output2C}"); // Prints -10
 
-        // Custom operation on Int9T outputs TritArray9, which can be implicitly converted to Int9T
+        // Custom operation on Int9T outputs TernaryArray9, which can be implicitly converted to Int9T
         var echoD = new UnaryTritOperator(-1, 0, 1);
         Int9T input2D = terT0T; // -10 in decimal
         Int9T output2D = input2D | echoD; // T0T. Gets implicitly converted to Int9T
@@ -303,8 +303,8 @@ public static partial class UnaryTritOperationDemo
         long output3 = input3 | Ternary3.Operators.UnaryTritOperator.Negate; // TT1, using the full name for the operator. Result implicitly converted to long.
         Console.WriteLine($"ter11T Negated = {output3}"); // ter11T Negated = -11
 
-        //TritArray input with TritArray27. Output is also TritArray27, // which can be explicitly converted to long.
-        TritArray27 input4 = 123456789;
+        //TernaryArray input with TernaryArray27. Output is also TernaryArray27, // which can be explicitly converted to long.
+        TernaryArray27 input4 = 123456789;
         var output4 = input4 | Negate;
         Console.WriteLine($"123456789 Negated = {output4} ({(int)output4})"); // Prints 000000000 T0011TT01 T1T010100 (-123456789)
 
@@ -313,7 +313,7 @@ public static partial class UnaryTritOperationDemo
         var output5 = input5 | IsPositive; // No. It is not positive. No translates to T (negative)
         Console.WriteLine($"Is {input5} positive? {output5}"); // Is Negative positive? Negative
 
-        // integer input will be implicitly converted to the corresponding TritArray.
+        // integer input will be implicitly converted to the corresponding TernaryArray.
         short input6 = -16; // T11T
         var output6 = input6 | Floor; // All T become 0. 0110;
         Console.WriteLine($"{input6} | {nameof(Floor)} becomes {output6}"); // -22 Floor becomes 000000110
@@ -376,7 +376,7 @@ public partial class BinaryTritOperationDemo
             [0, 0, 1]   // Row for when first input is 1
         ]);
         var result2 = input2A | mask | input2B; // Apply the mask operation
-        Console.WriteLine($"Custom operation on short: {(TritArray9)input2A} {nameof(mask)} {(TritArray9)input2B} = {result2}");
+        Console.WriteLine($"Custom operation on short: {(TernaryArray9)input2A} {nameof(mask)} {(TernaryArray9)input2B} = {result2}");
         // Output: 000000010 - Only positions where both inputs have the same non-zero value are preserved
 
         // EXAMPLE 3: Complex custom operation on int and long
@@ -456,21 +456,21 @@ public static partial class OverflowDemo
         var result2 = input2A * input2B; // 110 * TT0 = 101T00 (144). Int3T only keeps 3 trits, so T00 = -9
         Console.WriteLine($"Overflow: {input2A} ({input2A:ter}) * {input2B} ({input2B:ter}) = {result2} ({result2:ter})"); // Overflow: 110 * TT0 = T00
 
-        // Addition and simple multiplication of TritArray3 also may overflow.
+        // Addition and simple multiplication of TernaryArray3 also may overflow.
         // (Under the hood, these are often performed without conversion to binary)
-        TritArray3 input3A = ter110; // 12 in decimal
-        TritArray3 input3B = ter010; // 3 in decimal
-        var result3 = input3A * input3B; // 110 * 010 = 11100 (36). TritArray3 only keeps 3 trits, so T00 = -9
+        TernaryArray3 input3A = ter110; // 12 in decimal
+        TernaryArray3 input3B = ter010; // 3 in decimal
+        var result3 = input3A * input3B; // 110 * 010 = 11100 (36). TernaryArray3 only keeps 3 trits, so T00 = -9
         Console.WriteLine($"Overflow: {input3A} ({input3A:ter}) * {input3B} ({input3B:ter}) = {result3} ({(int)result3})");
 
         Int3T input4 = 25; // 10T1. trimmed to 3 trits = 0T1 or -2
         Console.WriteLine($"Overflow: 25 => {input4} ({input4:ter})"); // Overflow: 25 => -2 (0T1)
 
-        TritArray3 input5 = 25; // 10T1. trimmed to 3 trits = 0T1 or -2
+        TernaryArray3 input5 = 25; // 10T1. trimmed to 3 trits = 0T1 or -2
         Console.WriteLine($"Overflow: 25 => {input5} ({input5:ter})"); // Overflow: 25 => (0T1)
 
         // Shifting trits two positions in essence multiplies or divides by 9 (3^2).
-        var input6 = TritArray9.MaxValue; // 111111111
+        var input6 = TernaryArray9.MaxValue; // 111111111
         var result6A = input5 << 6;
         Console.WriteLine($"Shift: {input6:ter} << 6 = {result6A} ({(int)result6A})"); // Shift: 111111111 << 6 = 111000000 (9477)
         var result6B = input5 >> -6;
@@ -482,13 +482,13 @@ public static partial class OverflowDemo
 
         var input7 = Int27T.MinValue; // TTTTTTTTT TTTTTTTTT TTTTTTTTT
         var result7A = input7 << 25;
-        Console.WriteLine($"Shift: {(TritArray27)input7} << 25 = {result7A} ({(TritArray27)result7A:ter})"); // Shift: TTTT..TT << 25 = TT00...00
+        Console.WriteLine($"Shift: {(TernaryArray27)input7} << 25 = {result7A} ({(TernaryArray27)result7A:ter})"); // Shift: TTTT..TT << 25 = TT00...00
         var result7B = input7 >> -25;
-        Console.WriteLine($"Shift: {(TritArray27)input7} >> -25 = {result7B} ({(TritArray27)result7B:ter})"); // Shift: TTTT..TT >> -25 = TT00...00
+        Console.WriteLine($"Shift: {(TernaryArray27)input7} >> -25 = {result7B} ({(TernaryArray27)result7B:ter})"); // Shift: TTTT..TT >> -25 = TT00...00
         var result7C = input7 << -25;
-        Console.WriteLine($"Shift: {(TritArray27)input7} << -25 = {result7C} ({(TritArray27)result7C:ter})"); // Shift: TTTT..TT << -25 = 0000...TT
+        Console.WriteLine($"Shift: {(TernaryArray27)input7} << -25 = {result7C} ({(TernaryArray27)result7C:ter})"); // Shift: TTTT..TT << -25 = 0000...TT
         var result7D = input7 >> 25;
-        Console.WriteLine($"Shift: {(TritArray27)input7} >> 25 = {result7D} ({(TritArray27)result7D:ter})"); // Shift: TTTT..TT >> 25 = 0000..TT
+        Console.WriteLine($"Shift: {(TernaryArray27)input7} >> 25 = {result7D} ({(TernaryArray27)result7D:ter})"); // Shift: TTTT..TT >> 25 = 0000..TT
     }
 }
 ```
@@ -618,11 +618,11 @@ public class ConversionExample
 }
 ```
 
-### Using TritArray Indexers
+### Using TernaryArray Indexers
 
 ```csharp
-// Create a TritArray
-var array = new TritArray(10);
+// Create a TernaryArray
+var array = new TernaryArray(10);
 
 // Set values using the regular indexer
 array[0] = Trit.Positive;
@@ -632,7 +632,7 @@ array[1] = Trit.Negative;
 array[^1] = Trit.Positive;  // Sets the last trit
 array[^2] = Trit.Negative;  // Sets the second-to-last trit
 
-// Get a range of trits (creates a new TritArray)
+// Get a range of trits (creates a new TernaryArray)
 var firstThree = array[0..3];  // Gets trits at positions 0, 1, and 2
 var lastFour = array[^4..];    // Gets the last 4 trits
 var middlePortion = array[2..^2]; // Gets all trits except the first 2 and last 2
@@ -643,7 +643,7 @@ var middlePortion = array[2..^2]; // Gets all trits except the first 2 and last 
 You can easily print the ternary representation of numbers using the `:ter` format specifier:
 
 ```csharp
-TritArray3 a = 7;
+TernaryArray3 a = 7;
 Int3T b = 7;
 Console.WriteLine($"The ternary representation of {a} is {a:ter}");
 Console.WriteLine($"The ternary representation of {b} is {b:ter}");
@@ -657,10 +657,10 @@ This will output the balanced ternary representation of the values.
 
 ### Custom Formatting with ToString(ITernaryFormat)
 
-You can now format any trit array (implementing `ITritArray`) using a custom or built-in ternary format. Use the new `ToString(ITernaryFormat format)` overload to control digit symbols, grouping, separators, and padding:
+You can now format any trit array (implementing `ITernaryArray`) using a custom or built-in ternary format. Use the new `ToString(ITernaryFormat format)` overload to control digit symbols, grouping, separators, and padding:
 
 ```csharp
-var trits = (TritArray27)12345;
+var trits = (TernaryArray27)12345;
 var format = new Ternary3.Formatting.TernaryFormat()
     .WithGroup(3, " ")
     .WithGroup(3, "-");

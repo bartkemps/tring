@@ -55,7 +55,7 @@ public class TernaryFormatterIntegrationTests
     }
 
     [Fact]
-    public void Formatter_Formats_TritArrays_AsTrits()
+    public void Formatter_Formats_TernaryArrays_AsTrits()
     {
         var sut = new TernaryFormatter();
         var arr3 = (TernaryArray3)(Int3T)1;

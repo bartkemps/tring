@@ -23,7 +23,7 @@ public partial class TernaryArrayTests
     }
 
     [Fact]
-    public void Ctor_ConcatenatesAll_TritArrays()
+    public void Ctor_ConcatenatesAll_TernaryArrays()
     {
         TernaryArray3 a = terT01;
         TernaryArray3 b = ter01T;
@@ -38,7 +38,7 @@ public partial class TernaryArrayTests
     }
 
     [Fact]
-    public void Ctor_FromTritArrays_ConcatenatesAllWhenOverflowing()
+    public void Ctor_FromTernaryArrays_ConcatenatesAllWhenOverflowing()
     {
         TernaryArray3 a = ter001;
         TernaryArray27 b = terT00000000_000000000_000000001;

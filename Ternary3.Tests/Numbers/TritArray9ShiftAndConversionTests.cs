@@ -2,7 +2,7 @@ using FluentAssertions;
 
 namespace Ternary3.Tests.Numbers;
 
-public class TritArray9ShiftAndConversionTests
+public class TernaryArray9ShiftAndConversionTests
 {
     [Theory]
     [InlineData(6, "111 000 000", 9477)]

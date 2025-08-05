@@ -1,7 +1,7 @@
 ﻿// using System.Collections.Generic;
 // using FluentAssertions;
 // using Ternary3;
-// using Ternary3.TritArrays;
+// using Ternary3.TernaryArrays;
 // using Xunit;
 //
 // namespace Ternary3.Tests;
@@ -10,10 +10,10 @@
 //
 // public class FormatterTests
 // {
-//     private class SimpleTritArray : ITernaryArray
+//     private class SimpleTernaryArray : ITernaryArray
 //     {
 //         private readonly Trit[] _trits;
-//         public SimpleTritArray(params sbyte[] values) => _trits = Array.ConvertAll(values, v => new Trit(v));
+//         public SimpleTernaryArray(params sbyte[] values) => _trits = Array.ConvertAll(values, v => new Trit(v));
 //         public Trit this[int index] => _trits[index];
 //         public int Length => _trits.Length;
 //         public string ToString(ITernaryFormat format) => Formatter.Format(this, format);
@@ -33,7 +33,7 @@
 //             Groups = new List<TritGroupDefinition> { new(" ", 1) },
 //             TernaryPadding = TernaryPadding.None
 //         };
-//         var arr = new SimpleTritArray(ternaries);
+//         var arr = new SimpleTernaryArray(ternaries);
 //         var actual = Formatter.Format(arr, format);
 //         actual.Should().Be(expected);
 //     }
@@ -49,7 +49,7 @@
 //             Groups = new List<TritGroupDefinition> { new(",", 4) },
 //             TernaryPadding = TernaryPadding.Full
 //         };
-//         var arr = new SimpleTritArray(-1, 0, 1, 0, 0);
+//         var arr = new SimpleTernaryArray(-1, 0, 1, 0, 0);
 //         var actual = Formatter.Format(arr, format);
 //         actual.Should().Be("0,010T".Replace(" ", string.Empty)); // padded left with 0
 //     }
@@ -58,7 +58,7 @@
 //     public void Format_EmptyArray_ReturnsEmptyString()
 //     {
 //         var format = new TernaryFormat();
-//         var arr = new SimpleTritArray();
+//         var arr = new SimpleTernaryArray();
 //         var actual = Formatter.Format(arr, format);
 //         actual.Should().Be("");
 //     }
@@ -78,7 +78,7 @@
 //             },
 //             TernaryPadding = TernaryPadding.None
 //         };
-//         var arr = new SimpleTritArray(0, -1, 1, 0, 1, -1, 0, 1);
+//         var arr = new SimpleTernaryArray(0, -1, 1, 0, 1, -1, 0, 1);
 //         var actual = Formatter.Format(arr, format);
 //         // Hierarchical grouping: (10-T1)-(01-T0)
 //         actual.Should().Be("10-T1:01-T0");

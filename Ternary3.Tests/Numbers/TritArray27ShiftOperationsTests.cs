@@ -2,7 +2,7 @@ using FluentAssertions;
 
 namespace Ternary3.Tests.Numbers;
 
-public class TritArray27ShiftOperationsTests
+public class TernaryArray27ShiftOperationsTests
 {
     [Theory]
     [InlineData(0)]   // No shift

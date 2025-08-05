@@ -6,7 +6,7 @@ using Formatting;
 using Operators;
 using System.Diagnostics;
 using System.Numerics;
-using TritArrays;
+using TernaryArrays;
 
 /// <summary>
 /// Represents a fixed-size array of 27 trits (ternary digits).
@@ -59,7 +59,7 @@ public struct TernaryArray : ITernaryArray<TernaryArray>
     /// </summary>
     /// <param name="value">The string value to parse.</param>
     /// <returns>A TernaryArray representing the parsed value.</returns>
-    public static TernaryArray Parse(string value) => Parser.ParseTritArray(value);
+    public static TernaryArray Parse(string value) => Parser.ParseTernaryArray(value);
     
     /// <summary>
     /// Parses a string representation of a TernaryArray.
@@ -67,7 +67,7 @@ public struct TernaryArray : ITernaryArray<TernaryArray>
     /// <param name="value">The string value to parse.</param>
     /// <param name="format">The format to use for parsing.</param>
     /// <returns>A TernaryArray representing the parsed value.</returns>
-    public static TernaryArray Parse(string value, ITernaryFormat format) => Parser.ParseTritArray(value, format);
+    public static TernaryArray Parse(string value, ITernaryFormat format) => Parser.ParseTernaryArray(value, format);
     
     /// <summary>
     /// Parses a string representation of a TernaryArray.
@@ -75,7 +75,7 @@ public struct TernaryArray : ITernaryArray<TernaryArray>
     /// <param name="value">The string value to parse.</param>
     /// <param name="options">The options to use for parsing.</param>
     /// <returns>A TernaryArray representing the parsed value.</returns>
-    public static TernaryArray Parse(string value, TritParseOptions options) => Parser.ParseTritArray(value, null, options);
+    public static TernaryArray Parse(string value, TritParseOptions options) => Parser.ParseTernaryArray(value, null, options);
     
     /// <summary>
     /// Parses a string representation of a TernaryArray.
@@ -84,7 +84,7 @@ public struct TernaryArray : ITernaryArray<TernaryArray>
     /// <param name="format">The format to use for parsing.</param>
     /// <param name="options">The options to use for parsing.</param>
     /// <returns>A TernaryArray representing the parsed value.</returns>
-    public static TernaryArray Parse(string value, ITernaryFormat format, TritParseOptions options) => Parser.ParseTritArray(value, format, options);
+    public static TernaryArray Parse(string value, ITernaryFormat format, TritParseOptions options) => Parser.ParseTernaryArray(value, format, options);
 
     /// <intheritdoc/>
     public Trit this[int index]
@@ -103,7 +103,7 @@ public struct TernaryArray : ITernaryArray<TernaryArray>
     }
 
     /// <intheritdoc/>
-    public ITritArray this[Range range]
+    public ITernaryArray this[Range range]
     {
         get
         {
@@ -162,27 +162,27 @@ public struct TernaryArray : ITernaryArray<TernaryArray>
     /// </summary>
     /// <param name="array">The source array.</param>
     /// <param name="operation">The binary operation to be applied.</param>
-    /// <returns>A LookupTritArrayOperator that can be used to apply the operation with another array.</returns>
-    public static LookupTritArrayOperator operator |(TernaryArray array, Func<Trit, Trit, Trit> operation)
-        => new LookupTritArrayOperator(array, operation);
+    /// <returns>A LookupTernaryArrayOperator that can be used to apply the operation with another array.</returns>
+    public static LookupTernaryArrayOperator operator |(TernaryArray array, Func<Trit, Trit, Trit> operation)
+        => new LookupTernaryArrayOperator(array, operation);
 
     /// <summary>
     /// Creates a binary operation context for this array using a lookup table.
     /// </summary>
     /// <param name="array">The source array.</param>
     /// <param name="table">The lookup table containing the transformation values.</param>
-    /// <returns>A LookupTritArrayOperator that can be used to apply the operation with another array.</returns>
-    public static LookupTritArrayOperator operator |(TernaryArray array, BinaryTritOperator table)
-        => new LookupTritArrayOperator(array, table);
+    /// <returns>A LookupTernaryArrayOperator that can be used to apply the operation with another array.</returns>
+    public static LookupTernaryArrayOperator operator |(TernaryArray array, BinaryTritOperator table)
+        => new LookupTernaryArrayOperator(array, table);
 
     /// <summary>
     /// Creates a binary operation context for this array using a 2D lookup table.
     /// </summary>
     /// <param name="array">The source array.</param>
     /// <param name="table">The 2D lookup table containing the transformation values.</param>
-    /// <returns>A LookupTritArrayOperator that can be used to apply the operation with another array.</returns>
-    public static LookupTritArrayOperator operator |(TernaryArray array, Trit[,] table)
-        => new LookupTritArrayOperator(array, table);
+    /// <returns>A LookupTernaryArrayOperator that can be used to apply the operation with another array.</returns>
+    public static LookupTernaryArrayOperator operator |(TernaryArray array, Trit[,] table)
+        => new LookupTernaryArrayOperator(array, table);
 
 
     /// <summary>
@@ -356,5 +356,5 @@ public struct TernaryArray : ITernaryArray<TernaryArray>
     /// <summary>
     /// Returns a string representation of this instance, formatted balanced ternarily according to the specified format.
     /// </summary>
-    public string ToString(ITernaryFormat format) => Formatter.Format((ITritArray)this, format);
+    public string ToString(ITernaryFormat format) => Formatter.Format((ITernaryArray)this, format);
 }

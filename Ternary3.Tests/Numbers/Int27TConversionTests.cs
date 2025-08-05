@@ -28,7 +28,7 @@ public class Int27TConversionTests
     [InlineData(new sbyte[] { -1, -1, -1 })] // All negatives
     [InlineData(new sbyte[] { 0, 0, 0 })]   // All zeros
     [InlineData(new sbyte[] { 1, -1, 0, 1, -1 })] // Mixed values
-    public void ImplicitConversion_CalculatesCorrectValue_FromTritArray27(sbyte[] tritValues)
+    public void ImplicitConversion_CalculatesCorrectValue_FromTernaryArray27(sbyte[] tritValues)
     {
         var array = new TernaryArray27();
         long expectedValue = 0;

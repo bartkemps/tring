@@ -3,7 +3,7 @@ using static Ternary3.Operators.BinaryTritOperator;
 
 namespace Ternary3.Tests.Operators;
 
-using TritArrays;
+using TernaryArrays;
 
 public class BinaryLookupTests
 {
