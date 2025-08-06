@@ -317,13 +317,17 @@ LastGenerated = <#= DateTime.Now.ToString() #>
                /// </summary>
                public string ToString(ITernaryFormat format) => Formatter.Format(this, format);
            
-               // Parsing methods
-           
                /// <summary>
                /// Parses a string representation of a {{name}}.
                /// </summary>
                /// <param name="value">The string value to parse.</param>
                /// <returns>A {{name}} representing the parsed value.</returns>
+               /// <example>
+               /// <code>
+               /// var number = {{name}}.Parse("-13");
+               /// Console.WriteLine($"{number:ter}"); // Outputs: TTT
+               /// </code>
+               /// </example>
                public static {{name}} Parse(string value) => Parser.Parse{{name}}(value);
                
                /// <summary>
@@ -332,6 +336,12 @@ LastGenerated = <#= DateTime.Now.ToString() #>
                /// <param name="value">The string value to parse.</param>
                /// <param name="format">The format to use for parsing.</param>
                /// <returns>A {{name}} representing the parsed value.</returns>
+               /// <example>
+               /// <code>
+               /// var number = {{name}}.Parse("TTT", TernaryFormat.Minimal);
+               /// Console.WriteLine(number); // Outputs: -13
+               /// </code>
+               /// </example>
                public static {{name}} Parse(string value, ITernaryFormat? format) => Parser.Parse{{name}}(value, format);
                
                /// <summary>
@@ -340,6 +350,12 @@ LastGenerated = <#= DateTime.Now.ToString() #>
                /// <param name="value">The string value to parse.</param>
                /// <param name="options">The options to use for parsing.</param>
                /// <returns>A {{name}} representing the parsed value.</returns>
+               /// <example>
+               /// <code>
+               /// var number = {{name}}.Parse("T_T_T", TritParseOptions.AllowUnderscores);
+               /// Console.WriteLine(number); // Outputs: -13
+               /// </code>
+               /// </example>
                public static {{name}} Parse(string value, TritParseOptions options) => Parser.Parse{{name}}(value, null, options);
                
                /// <summary>
@@ -349,6 +365,12 @@ LastGenerated = <#= DateTime.Now.ToString() #>
                /// <param name="format">The format to use for parsing.</param>
                /// <param name="options">The options to use for parsing.</param>
                /// <returns>A {{name}} representing the parsed value.</returns>
+               /// <example>
+               /// <code>
+               /// var number = {{name}}.Parse("  1_0_T  ", , TernaryFormat.Minimal, TritParseOptions.AllowWhitespace | TritParseOptions.AllowUnderscores);
+               /// Console.WriteLine(number); // Outputs: 8
+               /// </code>
+               /// </example>
                public static {{name}} Parse(string value, ITernaryFormat? format, TritParseOptions options) => Parser.Parse{{name}}(value, format, options);
            
                /// <summary>

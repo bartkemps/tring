@@ -1163,6 +1163,14 @@ Console.WriteLine($"{value:ter}");       // Outputs the ternary representation: 
 >
 >**Returns:**
 >A Int27T representing the parsed value.
+>
+>
+>**Examples:**
+>
+>```csharp
+>var number = Int27T.Parse("-13");
+>Console.WriteLine($"{number:ter}"); // Outputs: TTT
+>```
 
 #### [Ternary3.Int27T](#ternary3int27t) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) value, [Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format)
 
@@ -1175,6 +1183,14 @@ Console.WriteLine($"{value:ter}");       // Outputs the ternary representation: 
 >
 >**Returns:**
 >A Int27T representing the parsed value.
+>
+>
+>**Examples:**
+>
+>```csharp
+>var number = Int27T.Parse("TTT", TernaryFormat.Minimal);
+>Console.WriteLine(number); // Outputs: -13
+>```
 
 #### [Ternary3.Int27T](#ternary3int27t) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) value, [Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) options)
 
@@ -1187,6 +1203,14 @@ Console.WriteLine($"{value:ter}");       // Outputs the ternary representation: 
 >
 >**Returns:**
 >A Int27T representing the parsed value.
+>
+>
+>**Examples:**
+>
+>```csharp
+>var number = Int27T.Parse("T_T_T", TritParseOptions.AllowUnderscores);
+>Console.WriteLine(number); // Outputs: -13
+>```
 
 #### [Ternary3.Int27T](#ternary3int27t) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) value, [Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format, [Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) options)
 
@@ -1200,6 +1224,14 @@ Console.WriteLine($"{value:ter}");       // Outputs the ternary representation: 
 >
 >**Returns:**
 >A Int27T representing the parsed value.
+>
+>
+>**Examples:**
+>
+>```csharp
+>var number = Int27T.Parse("  1_0_T  ", , TernaryFormat.Minimal, TritParseOptions.AllowWhitespace | TritParseOptions.AllowUnderscores);
+>Console.WriteLine(number); // Outputs: 8
+>```
 
 #### [Ternary3.Int27T](#ternary3int27t) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) s, [System.Globalization.NumberStyles](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.numberstyles) style)
 
@@ -3028,6 +3060,14 @@ Console.WriteLine($"{value:ter}");       // Outputs the ternary representation: 
 >
 >**Returns:**
 >A Int3T representing the parsed value.
+>
+>
+>**Examples:**
+>
+>```csharp
+>var number = Int3T.Parse("-13");
+>Console.WriteLine($"{number:ter}"); // Outputs: TTT
+>```
 
 #### [Ternary3.Int3T](#ternary3int3t) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) value, [Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format)
 
@@ -3040,6 +3080,14 @@ Console.WriteLine($"{value:ter}");       // Outputs the ternary representation: 
 >
 >**Returns:**
 >A Int3T representing the parsed value.
+>
+>
+>**Examples:**
+>
+>```csharp
+>var number = Int3T.Parse("TTT", TernaryFormat.Minimal);
+>Console.WriteLine(number); // Outputs: -13
+>```
 
 #### [Ternary3.Int3T](#ternary3int3t) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) value, [Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) options)
 
@@ -3052,6 +3100,14 @@ Console.WriteLine($"{value:ter}");       // Outputs the ternary representation: 
 >
 >**Returns:**
 >A Int3T representing the parsed value.
+>
+>
+>**Examples:**
+>
+>```csharp
+>var number = Int3T.Parse("T_T_T", TritParseOptions.AllowUnderscores);
+>Console.WriteLine(number); // Outputs: -13
+>```
 
 #### [Ternary3.Int3T](#ternary3int3t) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) value, [Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format, [Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) options)
 
@@ -3065,6 +3121,14 @@ Console.WriteLine($"{value:ter}");       // Outputs the ternary representation: 
 >
 >**Returns:**
 >A Int3T representing the parsed value.
+>
+>
+>**Examples:**
+>
+>```csharp
+>var number = Int3T.Parse("  1_0_T  ", , TernaryFormat.Minimal, TritParseOptions.AllowWhitespace | TritParseOptions.AllowUnderscores);
+>Console.WriteLine(number); // Outputs: 8
+>```
 
 #### [Ternary3.Int3T](#ternary3int3t) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) s, [System.Globalization.NumberStyles](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.numberstyles) style)
 
@@ -4915,6 +4979,14 @@ Console.WriteLine($"{value:ter}");       // Outputs the ternary representation: 
 >
 >**Returns:**
 >A Int9T representing the parsed value.
+>
+>
+>**Examples:**
+>
+>```csharp
+>var number = Int9T.Parse("-13");
+>Console.WriteLine($"{number:ter}"); // Outputs: TTT
+>```
 
 #### [Ternary3.Int9T](#ternary3int9t) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) value, [Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format)
 
@@ -4927,6 +4999,14 @@ Console.WriteLine($"{value:ter}");       // Outputs the ternary representation: 
 >
 >**Returns:**
 >A Int9T representing the parsed value.
+>
+>
+>**Examples:**
+>
+>```csharp
+>var number = Int9T.Parse("TTT", TernaryFormat.Minimal);
+>Console.WriteLine(number); // Outputs: -13
+>```
 
 #### [Ternary3.Int9T](#ternary3int9t) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) value, [Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) options)
 
@@ -4939,6 +5019,14 @@ Console.WriteLine($"{value:ter}");       // Outputs the ternary representation: 
 >
 >**Returns:**
 >A Int9T representing the parsed value.
+>
+>
+>**Examples:**
+>
+>```csharp
+>var number = Int9T.Parse("T_T_T", TritParseOptions.AllowUnderscores);
+>Console.WriteLine(number); // Outputs: -13
+>```
 
 #### [Ternary3.Int9T](#ternary3int9t) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) value, [Ternary3.Formatting.ITernaryFormat](#ternary3formattingiternaryformat) format, [Ternary3.Formatting.TritParseOptions](#ternary3formattingtritparseoptions) options)
 
@@ -4952,6 +5040,14 @@ Console.WriteLine($"{value:ter}");       // Outputs the ternary representation: 
 >
 >**Returns:**
 >A Int9T representing the parsed value.
+>
+>
+>**Examples:**
+>
+>```csharp
+>var number = Int9T.Parse("  1_0_T  ", , TernaryFormat.Minimal, TritParseOptions.AllowWhitespace | TritParseOptions.AllowUnderscores);
+>Console.WriteLine(number); // Outputs: 8
+>```
 
 #### [Ternary3.Int9T](#ternary3int9t) **Parse**([System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) s, [System.Globalization.NumberStyles](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.numberstyles) style)
 
@@ -7250,15 +7346,32 @@ Console.WriteLine($"{value:ter}");       // Outputs the ternary representation: 
 
 #### [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **GetHashCode**()
 
+>Returns the hash code for this instance.
 >
+>**Returns:**
+>A 32-bit signed integer hash code.
 
 #### [System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **Equals**([System.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object) obj)
 
+>Determines whether the specified object is equal to the current object.
 >
+>**Parameters:**
+>- `obj`: The object to compare with the current object.
+>
+>
+>**Returns:**
+>true if the specified object is equal to the current object; otherwise, false.
 
 #### [System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **Equals**([Ternary3.TernaryArray](#ternary3ternaryarray) other)
 
+>Determines whether the specified object is equal to the current object.
 >
+>**Parameters:**
+>- `obj`: The object to compare with the current object.
+>
+>
+>**Returns:**
+>true if the specified object is equal to the current object; otherwise, false.
 
 #### [System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**()
 
@@ -7588,15 +7701,32 @@ Console.WriteLine($"{value:ter}");       // Outputs the ternary representation: 
 
 #### [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **GetHashCode**()
 
+>Returns the hash code for this instance.
 >
+>**Returns:**
+>A 32-bit signed integer hash code.
 
 #### [System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **Equals**([System.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object) obj)
 
+>Determines whether the specified object is equal to the current object.
 >
+>**Parameters:**
+>- `obj`: The object to compare with the current object.
+>
+>
+>**Returns:**
+>true if the specified object is equal to the current object; otherwise, false.
 
 #### [System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **Equals**([Ternary3.TernaryArray27](#ternary3ternaryarray27) other)
 
+>Determines whether the specified object is equal to the current object.
 >
+>**Parameters:**
+>- `obj`: The object to compare with the current object.
+>
+>
+>**Returns:**
+>true if the specified object is equal to the current object; otherwise, false.
 
 #### [System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**()
 
@@ -7907,15 +8037,32 @@ Console.WriteLine($"{value:ter}");       // Outputs the ternary representation: 
 
 #### [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **GetHashCode**()
 
+>Returns the hash code for this instance.
 >
+>**Returns:**
+>A 32-bit signed integer hash code.
 
 #### [System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **Equals**([System.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object) obj)
 
+>Determines whether the specified object is equal to the current object.
 >
+>**Parameters:**
+>- `obj`: The object to compare with the current object.
+>
+>
+>**Returns:**
+>true if the specified object is equal to the current object; otherwise, false.
 
 #### [System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **Equals**([Ternary3.TernaryArray3](#ternary3ternaryarray3) other)
 
+>Determines whether the specified object is equal to the current object.
 >
+>**Parameters:**
+>- `obj`: The object to compare with the current object.
+>
+>
+>**Returns:**
+>true if the specified object is equal to the current object; otherwise, false.
 
 #### [System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**()
 
@@ -8248,15 +8395,32 @@ Console.WriteLine($"{value:ter}");       // Outputs the ternary representation: 
 
 #### [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **GetHashCode**()
 
+>Returns the hash code for this instance.
 >
+>**Returns:**
+>A 32-bit signed integer hash code.
 
 #### [System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **Equals**([System.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object) obj)
 
+>Determines whether the specified object is equal to the current object.
 >
+>**Parameters:**
+>- `obj`: The object to compare with the current object.
+>
+>
+>**Returns:**
+>true if the specified object is equal to the current object; otherwise, false.
 
 #### [System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **Equals**([Ternary3.TernaryArray9](#ternary3ternaryarray9) other)
 
+>Determines whether the specified object is equal to the current object.
 >
+>**Parameters:**
+>- `obj`: The object to compare with the current object.
+>
+>
+>**Returns:**
+>true if the specified object is equal to the current object; otherwise, false.
 
 #### [System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**()
 

@@ -1199,13 +1199,17 @@ public static implicit operator Int128(Int27T value) => (Int128)value.value;
     /// </summary>
     public string ToString(ITernaryFormat format) => Formatter.Format(this, format);
 
-    // Parsing methods
-
     /// <summary>
     /// Parses a string representation of a Int27T.
     /// </summary>
     /// <param name="value">The string value to parse.</param>
     /// <returns>A Int27T representing the parsed value.</returns>
+    /// <example>
+    /// <code>
+    /// var number = Int27T.Parse("-13");
+    /// Console.WriteLine($"{number:ter}"); // Outputs: TTT
+    /// </code>
+    /// </example>
     public static Int27T Parse(string value) => Parser.ParseInt27T(value);
     
     /// <summary>
@@ -1214,6 +1218,12 @@ public static implicit operator Int128(Int27T value) => (Int128)value.value;
     /// <param name="value">The string value to parse.</param>
     /// <param name="format">The format to use for parsing.</param>
     /// <returns>A Int27T representing the parsed value.</returns>
+    /// <example>
+    /// <code>
+    /// var number = Int27T.Parse("TTT", TernaryFormat.Minimal);
+    /// Console.WriteLine(number); // Outputs: -13
+    /// </code>
+    /// </example>
     public static Int27T Parse(string value, ITernaryFormat? format) => Parser.ParseInt27T(value, format);
     
     /// <summary>
@@ -1222,6 +1232,12 @@ public static implicit operator Int128(Int27T value) => (Int128)value.value;
     /// <param name="value">The string value to parse.</param>
     /// <param name="options">The options to use for parsing.</param>
     /// <returns>A Int27T representing the parsed value.</returns>
+    /// <example>
+    /// <code>
+    /// var number = Int27T.Parse("T_T_T", TritParseOptions.AllowUnderscores);
+    /// Console.WriteLine(number); // Outputs: -13
+    /// </code>
+    /// </example>
     public static Int27T Parse(string value, TritParseOptions options) => Parser.ParseInt27T(value, null, options);
     
     /// <summary>
@@ -1231,6 +1247,12 @@ public static implicit operator Int128(Int27T value) => (Int128)value.value;
     /// <param name="format">The format to use for parsing.</param>
     /// <param name="options">The options to use for parsing.</param>
     /// <returns>A Int27T representing the parsed value.</returns>
+    /// <example>
+    /// <code>
+    /// var number = Int27T.Parse("  1_0_T  ", , TernaryFormat.Minimal, TritParseOptions.AllowWhitespace | TritParseOptions.AllowUnderscores);
+    /// Console.WriteLine(number); // Outputs: 8
+    /// </code>
+    /// </example>
     public static Int27T Parse(string value, ITernaryFormat? format, TritParseOptions options) => Parser.ParseInt27T(value, format, options);
 
     /// <summary>

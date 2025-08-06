@@ -12,6 +12,30 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
     const string code = "";
     const string _code = "";
 
+    // Add hardcoded documentation for standard object methods
+    private static readonly Dictionary<string, string> StandardMethodDocs = new()
+    {
+        { "ToString", """
+            <summary>
+            Returns a string representation of the current object.
+            </summary>
+            <returns>A string that represents the current object.</returns>
+            """ },
+        { "GetHashCode", """
+            <summary>
+            Returns the hash code for this instance.
+            </summary>
+            <returns>A 32-bit signed integer hash code.</returns>
+            """ },
+        { "Equals", """
+            <summary>
+            Determines whether the specified object is equal to the current object.
+            </summary>
+            <param name="obj">The object to compare with the current object.</param>
+            <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
+            """ }
+    };
+
     /// <summary>
     /// Concats all filesToInclude Markdown files into a single Markdown file,
     /// then concats the documnentation
@@ -450,9 +474,16 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
     /// <summary>
     /// Finds the corresponding XML element for a given member in the XML document.
     /// If the member uses inheritdoc, it will search for the base type's or interfaces' element.
+    /// For ToString, GetHashCode, and Equals methods, provides hardcoded documentation if they
+    /// don't have proper documentation or use inheritdoc from System.Object.
     /// </summary>
     private XElement? FindElement(string memberType, MemberInfo member)
     {
+        // Check if this is a standard method that might need hardcoded documentation
+        bool isStandardMethod = member is MethodInfo method && 
+            (method.Name == "ToString" || method.Name == "GetHashCode" || method.Name == "Equals") &&
+            method.DeclaringType?.Namespace?.StartsWith(BaseNamespace) == true;
+
         // Generate the XML documentation key for this member
         var declaringType = member.DeclaringType?.FullName?.Replace("+", ".") ?? (member as Type)?.Namespace;
 
@@ -510,98 +541,122 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
         }
 
         // Handle inheritdoc tag
+        var needsStandardDocs = false;
         if (element?.Element("inheritdoc") != null)
         {
-            // First, try to find documentation in the base type
-            if (member.DeclaringType?.BaseType != null && member.DeclaringType.BaseType.FullName?.StartsWith(BaseNamespace) == true)
+            // Check if this is a standard method inheriting from System.Object
+            if (isStandardMethod && 
+                (member.DeclaringType?.BaseType?.FullName == "System.Object" || 
+                 member.DeclaringType?.BaseType?.BaseType?.FullName == "System.Object"))
             {
-                var baseType = member.DeclaringType.BaseType;
-                MemberInfo? baseMember = null;
-
-                // Find the equivalent member in the base type
-                if (member is PropertyInfo property)
-                {
-                    var parameters = property.GetIndexParameters();
-                    if (parameters.Length > 0)
-                    {
-                        // Handle indexers with parameters
-                        baseMember = baseType.GetProperties()
-                            .FirstOrDefault(p => p.Name == property.Name &&
-                                                 p.GetIndexParameters().Length == parameters.Length &&
-                                                 p.PropertyType == property.PropertyType);
-                    }
-                    else
-                    {
-                        // Handle regular properties
-                        baseMember = baseType.GetProperty(property.Name);
-                    }
-                }
-                else if (member is MethodInfo method)
-                {
-                    // Handle methods
-                    baseMember = baseType.GetMethod(method.Name,
-                        method.GetParameters().Select(p => p.ParameterType).ToArray());
-                }
-                else if (member is ConstructorInfo)
-                {
-                    // Handle constructors
-                    var constructorParams = ((ConstructorInfo)member).GetParameters();
-                    baseMember = baseType.GetConstructor(constructorParams.Select(p => p.ParameterType).ToArray());
-                }
-
-                // If we found the member in the base type, try to get its documentation
-                if (baseMember != null)
-                {
-                    var baseElement = FindElement(memberType, baseMember);
-                    if (baseElement != null)
-                    {
-                        return baseElement;
-                    }
-                }
+                // This is inheriting from System.Object, use our hardcoded docs instead
+                needsStandardDocs = true;
             }
-
-            // If base type doesn't have documentation, search interfaces
-            if (member.DeclaringType != null)
+            else
             {
-                foreach (var interfaceType in member.DeclaringType.GetInterfaces().Where(i => i.FullName?.StartsWith(BaseNamespace) == true))
+                // First, try to find documentation in the base type
+                if (member.DeclaringType?.BaseType != null && member.DeclaringType.BaseType.FullName?.StartsWith(BaseNamespace) == true)
                 {
-                    MemberInfo? interfaceMember = null;
+                    var baseType = member.DeclaringType.BaseType;
+                    MemberInfo? baseMember = null;
 
-                    // Find the equivalent member in the interface
+                    // Find the equivalent member in the base type
                     if (member is PropertyInfo property)
                     {
                         var parameters = property.GetIndexParameters();
                         if (parameters.Length > 0)
                         {
                             // Handle indexers with parameters
-                            interfaceMember = interfaceType.GetProperties()
+                            baseMember = baseType.GetProperties()
                                 .FirstOrDefault(p => p.Name == property.Name &&
-                                                     p.GetIndexParameters().Length == parameters.Length &&
-                                                     p.PropertyType == property.PropertyType);
+                                                    p.GetIndexParameters().Length == parameters.Length &&
+                                                    p.PropertyType == property.PropertyType);
                         }
                         else
                         {
                             // Handle regular properties
-                            interfaceMember = interfaceType.GetProperty(property.Name);
+                            baseMember = baseType.GetProperty(property.Name);
                         }
                     }
-                    else if (member is MethodInfo method)
+                    else if (member is MethodInfo method2)
                     {
                         // Handle methods
-                        interfaceMember = interfaceType.GetMethod(method.Name,
-                            method.GetParameters().Select(p => p.ParameterType).ToArray());
+                        baseMember = baseType.GetMethod(method2.Name,
+                            method2.GetParameters().Select(p => p.ParameterType).ToArray());
+                    }
+                    else if (member is ConstructorInfo)
+                    {
+                        // Handle constructors
+                        var constructorParams = ((ConstructorInfo)member).GetParameters();
+                        baseMember = baseType.GetConstructor(constructorParams.Select(p => p.ParameterType).ToArray());
                     }
 
-                    // If we found the member in the interface, try to get its documentation
-                    if (interfaceMember != null)
+                    // If we found the member in the base type, try to get its documentation
+                    if (baseMember != null)
                     {
-                        var interfaceElement = FindElement(memberType, interfaceMember);
-                        if (interfaceElement != null && interfaceElement.Element("inheritdoc") == null)
+                        var baseElement = FindElement(memberType, baseMember);
+                        if (baseElement != null)
                         {
-                            return interfaceElement;
+                            return baseElement;
                         }
                     }
                 }
+
+                // If base type doesn't have documentation, search interfaces
+                if (member.DeclaringType != null)
+                {
+                    foreach (var interfaceType in member.DeclaringType.GetInterfaces().Where(i => i.FullName?.StartsWith(BaseNamespace) == true))
+                    {
+                        MemberInfo? interfaceMember = null;
+
+                        // Find the equivalent member in the interface
+                        if (member is PropertyInfo property)
+                        {
+                            var parameters = property.GetIndexParameters();
+                            if (parameters.Length > 0)
+                            {
+                                // Handle indexers with parameters
+                                interfaceMember = interfaceType.GetProperties()
+                                    .FirstOrDefault(p => p.Name == property.Name &&
+                                                        p.GetIndexParameters().Length == parameters.Length &&
+                                                        p.PropertyType == property.PropertyType);
+                            }
+                            else
+                            {
+                                // Handle regular properties
+                                interfaceMember = interfaceType.GetProperty(property.Name);
+                            }
+                        }
+                        else if (member is MethodInfo method3)
+                        {
+                            // Handle methods
+                            interfaceMember = interfaceType.GetMethod(method3.Name,
+                                method3.GetParameters().Select(p => p.ParameterType).ToArray());
+                        }
+
+                        // If we found the member in the interface, try to get its documentation
+                        if (interfaceMember != null)
+                        {
+                            var interfaceElement = FindElement(memberType, interfaceMember);
+                            if (interfaceElement != null && interfaceElement.Element("inheritdoc") == null)
+                            {
+                                return interfaceElement;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Handle standard methods (ToString, GetHashCode, Equals) with missing documentation
+        if (isStandardMethod && (element == null || needsStandardDocs))
+        {
+            var methodName = ((MethodInfo)member).Name;
+            if (StandardMethodDocs.TryGetValue(methodName, out var hardcodedDocs))
+            {
+                // Create and return a new XElement with hardcoded documentation
+                var xml = XElement.Parse("<member>" + hardcodedDocs + "</member>");
+                return xml;
             }
         }
 
