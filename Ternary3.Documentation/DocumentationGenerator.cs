@@ -468,6 +468,13 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
                 name += "(" + string.Join(",", constructorInfo.GetParameters().Select(p => p.ParameterType.FullName ?? p.ParameterType.Name)) + ")";
             }
         }
+        else if (member is PropertyInfo property && property.GetIndexParameters().Length > 0)
+        {
+            // Handle indexers (properties with parameters)
+            name = $"{memberType}:{declaringType}.{member.Name}";
+            var parameters = property.GetIndexParameters();
+            name += "(" + string.Join(",", parameters.Select(p => p.ParameterType.FullName ?? p.ParameterType.Name)) + ")";
+        }
         else
         {
             name = $"{memberType}:{declaringType}.{member.Name.Replace('.', '#')}";
@@ -640,3 +647,4 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
         return $"[{name}](https://learn.microsoft.com/en-us/dotnet/api/{link})";
     }
 }
+

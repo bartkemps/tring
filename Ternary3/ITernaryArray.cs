@@ -14,7 +14,7 @@ public interface ITernaryArray
     /// <exception cref="ArgumentOutOfRangeException">Thrown when the index is less than 0 or greater than {{trits - 1}}.</exception>
     /// <example>
     /// <code>
-    ///  TernaryArray trits = ter111000TTT;
+    /// TernaryArray trits = ter111000TTT;
     /// Console.WriteLine(trits[0]); // Outputs: Negative
     /// </code>
     /// </example>
@@ -43,12 +43,11 @@ public interface ITernaryArray
     /// <summary>
     /// Gets the value at the specified index from the end if index is from end.
     /// </summary>
-    /// <param name="index">The index of the value to get (supports from-end).</param>
     /// <returns>The trit value at the specified index.</returns>
     /// <exception cref="ArgumentOutOfRangeException">Thrown when index is less than 0 or greater than {{trits - 1}}.</exception>
     /// <example>
     /// <code>
-    ///  TernaryArray trits = ter111000TTT;
+    /// TernaryArray trits = ter111000TTT;
     /// Console.WriteLine($"{trits[2..^2]:ter}"); // Outputs: 1000T
     /// </code>
     /// </example>
@@ -59,9 +58,9 @@ public interface ITernaryArray
     /// </summary>
     /// <example>
     /// <code>
-    ///  TernaryArray trits1 = ter000111000TTT;
+    /// TernaryArray trits1 = ter000111000TTT;
     /// Console.WriteLine(trits1.Length); // Outputs: 9
-    ///  TernaryArray27 trits2 = ter000111000TTT;
+    /// TernaryArray27 trits2 = ter000111000TTT;
     /// Console.WriteLine(trits2.Length); // Outputs: 27 
     /// </code>
     /// </example>

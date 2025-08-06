@@ -905,15 +905,73 @@ Console.WriteLine($"{value:ter}");       // Outputs the ternary representation: 
 
 #### [Ternary3.Trit](#ternary3trit) **this[[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) index]** { get; set; }
 
-No documentation available.
+>Gets the value at the specified index.
+>
+>**Parameters:**
+>- `index`: The index of the value to get.
+>
+>
+>**Returns:**
+>The trit value at the specified index.
+>
+>
+>**Exceptions:**
+>- `System.ArgumentOutOfRangeException`: Thrown when the index is less than 0 or greater than {{trits - 1}}.
+>
+>
+>**Examples:**
+>
+>```csharp
+>TernaryArray trits = ter111000TTT;
+>Console.WriteLine(trits[0]); // Outputs: Negative
+>```
 
 #### [Ternary3.Trit](#ternary3trit) **this[[System.Index](https://learn.microsoft.com/en-us/dotnet/api/system.index) index]** { get; set; }
 
-No documentation available.
+>Gets the value at the specified index.
+>
+>**Parameters:**
+>- `index`: The index of the value to get.
+>
+>
+>**Returns:**
+>The trit value at the specified index.
+>
+>
+>**Exceptions:**
+>- `System.ArgumentOutOfRangeException`: Thrown when the index is less than 0 or greater than {{trits - 1}}.
+>
+>
+>**Examples:**
+>
+>```csharp
+>TernaryArray trits = ter111000TTT;
+>Console.WriteLine(trits[0]); // Outputs: Negative
+>```
 
 #### [Ternary3.ITernaryArray](#ternary3iternaryarray) **this[[System.Range](https://learn.microsoft.com/en-us/dotnet/api/system.range) range]** { get; }
 
-No documentation available.
+>Gets a sub-array of trits defined by the specified range.
+>
+>**Parameters:**
+>- `range`: The range of indices to get.
+>
+>
+>**Returns:**
+>The trit value at the specified index.
+>
+>
+>**Exceptions:**
+>- `System.ArgumentOutOfRangeException`: Thrown when index is less than 0 or greater than {{trits - 1}}.
+>- `System.ArgumentOutOfRangeException`: Thrown when index is less than 0 or greater than {{trits - 1}}.
+>
+>
+>**Examples:**
+>
+>```csharp
+>TernaryArray trits = ter111000TTT;
+>Console.WriteLine($"{trits[2..^2]:ter}"); // Outputs: 1000T
+>```
 
 
 ### Operators
@@ -1311,11 +1369,11 @@ No documentation available.
 
 #### [Ternary3.Trit](#ternary3trit) **this[[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) index]** { get; }
 
-No documentation available.
+>Gets the trit at the specified index in this [Int27T](#ternary3.int27t) .
 
 #### [Ternary3.Trit](#ternary3trit) **this[[System.Index](https://learn.microsoft.com/en-us/dotnet/api/system.index) index]** { get; }
 
-No documentation available.
+>Gets the trit at the specified index in this [Int27T](#ternary3.int27t) .
 
 
 ### Operators
@@ -3176,11 +3234,11 @@ No documentation available.
 
 #### [Ternary3.Trit](#ternary3trit) **this[[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) index]** { get; }
 
-No documentation available.
+>Gets the trit at the specified index in this [Int3T](#ternary3.int3t) .
 
 #### [Ternary3.Trit](#ternary3trit) **this[[System.Index](https://learn.microsoft.com/en-us/dotnet/api/system.index) index]** { get; }
 
-No documentation available.
+>Gets the trit at the specified index in this [Int3T](#ternary3.int3t) .
 
 
 ### Operators
@@ -5063,11 +5121,11 @@ No documentation available.
 
 #### [Ternary3.Trit](#ternary3trit) **this[[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) index]** { get; }
 
-No documentation available.
+>Gets the trit at the specified index in this [Int9T](#ternary3.int9t) .
 
 #### [Ternary3.Trit](#ternary3trit) **this[[System.Index](https://learn.microsoft.com/en-us/dotnet/api/system.index) index]** { get; }
 
-No documentation available.
+>Gets the trit at the specified index in this [Int9T](#ternary3.int9t) .
 
 
 ### Operators
@@ -6737,15 +6795,73 @@ No documentation available.
 
 #### [Ternary3.Trit](#ternary3trit) **this[[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) index]** { get; }
 
-No documentation available.
+>Gets the value at the specified index.
+>
+>**Parameters:**
+>- `index`: The index of the value to get.
+>
+>
+>**Returns:**
+>The trit value at the specified index.
+>
+>
+>**Exceptions:**
+>- `System.ArgumentOutOfRangeException`: Thrown when the index is less than 0 or greater than {{trits - 1}}.
+>
+>
+>**Examples:**
+>
+>```csharp
+>TernaryArray trits = ter111000TTT;
+>Console.WriteLine(trits[0]); // Outputs: Negative
+>```
 
 #### [Ternary3.Trit](#ternary3trit) **this[[System.Index](https://learn.microsoft.com/en-us/dotnet/api/system.index) index]** { get; }
 
-No documentation available.
+>Gets the value at the specified index from the end if index is from end.
+>
+>**Parameters:**
+>- `index`: The index of the value to get (supports from-end).
+>
+>
+>**Returns:**
+>The trit value at the specified index.
+>
+>
+>**Exceptions:**
+>- `System.ArgumentOutOfRangeException`: Thrown when index is less than 0 or greater than {{trits - 1}}.
+>
+>
+>**Examples:**
+>
+>```csharp
+> TernaryArray trits = ter111000TTT;
+>Console.WriteLine(trits[^1]); // Outputs: Positive
+>```
 
 #### [Ternary3.ITernaryArray](#ternary3iternaryarray) **this[[System.Range](https://learn.microsoft.com/en-us/dotnet/api/system.range) range]** { get; }
 
-No documentation available.
+>Gets a sub-array of trits defined by the specified range.
+>
+>**Parameters:**
+>- `range`: The range of indices to get.
+>
+>
+>**Returns:**
+>The trit value at the specified index.
+>
+>
+>**Exceptions:**
+>- `System.ArgumentOutOfRangeException`: Thrown when index is less than 0 or greater than {{trits - 1}}.
+>- `System.ArgumentOutOfRangeException`: Thrown when index is less than 0 or greater than {{trits - 1}}.
+>
+>
+>**Examples:**
+>
+>```csharp
+>TernaryArray trits = ter111000TTT;
+>Console.WriteLine($"{trits[2..^2]:ter}"); // Outputs: 1000T
+>```
 
 #### [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **Length** { get; }
 
@@ -6754,9 +6870,9 @@ No documentation available.
 >**Examples:**
 >
 >```csharp
-> TernaryArray trits1 = ter000111000TTT;
+>TernaryArray trits1 = ter000111000TTT;
 >Console.WriteLine(trits1.Length); // Outputs: 9
-> TernaryArray27 trits2 = ter000111000TTT;
+>TernaryArray27 trits2 = ter000111000TTT;
 >Console.WriteLine(trits2.Length); // Outputs: 27
 >```
 
@@ -7177,15 +7293,26 @@ No documentation available.
 
 #### [Ternary3.Trit](#ternary3trit) **this[[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) index]** { get; set; }
 
-No documentation available.
+>
 
 #### [Ternary3.ITernaryArray](#ternary3iternaryarray) **this[[System.Range](https://learn.microsoft.com/en-us/dotnet/api/system.range) range]** { get; }
 
-No documentation available.
+>
 
 #### [Ternary3.Trit](#ternary3trit) **this[[System.Index](https://learn.microsoft.com/en-us/dotnet/api/system.index) index]** { get; set; }
 
-No documentation available.
+>Gets or sets the trit at the specified index.
+>
+>**Parameters:**
+>- `index`: The zero-based index of the trit to get or set (must be between 0 and 26).
+>
+>
+>**Returns:**
+>The trit at the specified index.
+>
+>
+>**Exceptions:**
+>- `System.ArgumentOutOfRangeException`: Thrown when index is less than 0 or greater than 26.
 
 #### [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **Length** { get; }
 
@@ -7496,15 +7623,26 @@ No documentation available.
 
 #### [Ternary3.Trit](#ternary3trit) **this[[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) index]** { get; set; }
 
-No documentation available.
+>
 
 #### [Ternary3.ITernaryArray](#ternary3iternaryarray) **this[[System.Range](https://learn.microsoft.com/en-us/dotnet/api/system.range) range]** { get; }
 
-No documentation available.
+>
 
 #### [Ternary3.Trit](#ternary3trit) **this[[System.Index](https://learn.microsoft.com/en-us/dotnet/api/system.index) index]** { get; set; }
 
-No documentation available.
+>Gets or sets the trit at the specified index.
+>
+>**Parameters:**
+>- `index`: The zero-based index of the trit to get or set (must be between 0 and 26).
+>
+>
+>**Returns:**
+>The trit at the specified index.
+>
+>
+>**Exceptions:**
+>- `System.ArgumentOutOfRangeException`: Thrown when index is less than 0 or greater than 26.
 
 #### [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **Length** { get; }
 
@@ -7804,15 +7942,26 @@ No documentation available.
 
 #### [Ternary3.Trit](#ternary3trit) **this[[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) index]** { get; set; }
 
-No documentation available.
+>
 
 #### [Ternary3.ITernaryArray](#ternary3iternaryarray) **this[[System.Range](https://learn.microsoft.com/en-us/dotnet/api/system.range) range]** { get; }
 
-No documentation available.
+>
 
 #### [Ternary3.Trit](#ternary3trit) **this[[System.Index](https://learn.microsoft.com/en-us/dotnet/api/system.index) index]** { get; set; }
 
-No documentation available.
+>Gets or sets the trit at the specified index.
+>
+>**Parameters:**
+>- `index`: The zero-based index of the trit to get or set (must be between 0 and 26).
+>
+>
+>**Returns:**
+>The trit at the specified index.
+>
+>
+>**Exceptions:**
+>- `System.ArgumentOutOfRangeException`: Thrown when index is less than 0 or greater than 26.
 
 #### [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **Length** { get; }
 
@@ -8134,15 +8283,26 @@ No documentation available.
 
 #### [Ternary3.Trit](#ternary3trit) **this[[System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) index]** { get; set; }
 
-No documentation available.
+>
 
 #### [Ternary3.ITernaryArray](#ternary3iternaryarray) **this[[System.Range](https://learn.microsoft.com/en-us/dotnet/api/system.range) range]** { get; }
 
-No documentation available.
+>
 
 #### [Ternary3.Trit](#ternary3trit) **this[[System.Index](https://learn.microsoft.com/en-us/dotnet/api/system.index) index]** { get; set; }
 
-No documentation available.
+>Gets or sets the trit at the specified index.
+>
+>**Parameters:**
+>- `index`: The zero-based index of the trit to get or set (must be between 0 and 26).
+>
+>
+>**Returns:**
+>The trit at the specified index.
+>
+>
+>**Exceptions:**
+>- `System.ArgumentOutOfRangeException`: Thrown when index is less than 0 or greater than 26.
 
 #### [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **Length** { get; }
 
@@ -9065,7 +9225,7 @@ No documentation available.
 
 #### [Ternary3.Trit](#ternary3trit) **this[[Ternary3.Trit](#ternary3trit) left, [Ternary3.Trit](#ternary3trit) right]** { get; set; }
 
-No documentation available.
+>Accesses the lookup table to get the result for a pair of Trit values.
 
 
 ### Operators
