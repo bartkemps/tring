@@ -7,12 +7,12 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
-<!--    <ItemGroup>-->
-<!--        <ProjectReference Include="..\Ternary3\Ternary3.csproj"/>-->
-<!--        <ProjectReference Include="..\Ternary3.Generators\Ternary3.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>-->
-<!--    </ItemGroup>-->
-
     <ItemGroup>
-      <PackageReference Include="Ternary" Version="2.2.0-beta-1" />
+        <ProjectReference Include="..\Ternary3\Ternary3.csproj"/>
+        <ProjectReference Include="..\Ternary3.Generators\Ternary3.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
     </ItemGroup>
+
+<!--    <ItemGroup>-->
+<!--      <PackageReference Include="Ternary" Version="2.2.0-beta-1" />-->
+<!--    </ItemGroup>-->
 </Project>

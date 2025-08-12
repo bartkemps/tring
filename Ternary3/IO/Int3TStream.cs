@@ -118,25 +118,21 @@ public abstract class Int3TStream : IAsyncDisposable
     public abstract Task FlushAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Asynchronously reads a Int3T value from the stream and advances the position within the stream by one Int3T value, or returns -1 if at the end of the stream.
+    /// Asynchronously reads an Int3T value from the stream and advances the position within the stream by one Int3T value, or returns -1 if at the end of the stream.
     /// </summary>
     /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
     /// <returns>A task that represents the asynchronous read operation. The value of the TResult parameter contains the unsigned Int3T value cast to an Int32, or -1 if at the end of the stream.</returns>
     /// <exception cref="NotSupportedException">The stream does not support reading.</exception>
     /// <exception cref="ObjectDisposedException">Methods were called after the stream was closed.</exception>
-    public virtual async Task<int> ReadInt3TAsync(CancellationToken cancellationToken = default)
+    public virtual async Task<Int3T> ReadInt3TAsync(CancellationToken cancellationToken = default)
     {
         var singleInt3T = new Int3T[1];
         var result = await ReadAsync(singleInt3T, 0, 1, cancellationToken).ConfigureAwait(false);
-        if (result == 0)
-        {
-            return -1;
-        }
-        return Convert.ToInt32(singleInt3T[0]);
+        return result == 0 ? throw new EndOfStreamException() : singleInt3T[0];
     }
 
     /// <summary>
-    /// Asynchronously writes a Int3T value to the current position in the stream and advances the position within the stream by one Int3T value.
+    /// Asynchronously writes an Int3T value to the current position in the stream and advances the position within the stream by one Int3T value.
     /// </summary>
     /// <param name="value">The Int3T value to write to the stream.</param>
     /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>

@@ -480,9 +480,9 @@ public class DocumentationGenerator(XDocument xmlDocument, Assembly assembly)
     private XElement? FindElement(string memberType, MemberInfo member)
     {
         // Check if this is a standard method that might need hardcoded documentation
-        bool isStandardMethod = member is MethodInfo method && 
-            (method.Name == "ToString" || method.Name == "GetHashCode" || method.Name == "Equals") &&
-            method.DeclaringType?.Namespace?.StartsWith(BaseNamespace) == true;
+        var isStandardMethod = member is MethodInfo method && 
+                               (method.Name == "ToString" || method.Name == "GetHashCode" || method.Name == "Equals") &&
+                               method.DeclaringType?.Namespace?.StartsWith(BaseNamespace) == true;
 
         // Generate the XML documentation key for this member
         var declaringType = member.DeclaringType?.FullName?.Replace("+", ".") ?? (member as Type)?.Namespace;

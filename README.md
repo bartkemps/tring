@@ -720,6 +720,8 @@ Console.WriteLine($"{value:ter}");       // Outputs the ternary representation: 
 - [Ternary3.IO.Int3TStream](#ternary3ioint3tstream)
 - [Ternary3.IO.Int3TToByteStream](#ternary3ioint3ttobytestream)
 - [Ternary3.IO.MemoryInt3TStream](#ternary3iomemoryint3tstream)
+- [Ternary3.IO.TernaryReader](#ternary3ioternaryreader)
+- [Ternary3.IO.TernaryWriter](#ternary3ioternarywriter)
 
 ### **Ternary3.Formatting** namespace
 - [Ternary3.Formatting.InvariantTernaryFormat](#ternary3formattinginvariantternaryformat)
@@ -10111,9 +10113,9 @@ No documentation available.
 >**Exceptions:**
 >- `System.IO.IOException`: An I/O error occurs.
 
-#### [System.Threading.Tasks.Task<System.Int32>](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1) **ReadInt3TAsync**([System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken) cancellationToken)
+#### [System.Threading.Tasks.Task<Ternary3.Int3T>](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1) **ReadInt3TAsync**([System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken) cancellationToken)
 
->Asynchronously reads a Int3T value from the stream and advances the position within the stream by one Int3T value, or returns -1 if at the end of the stream.
+>Asynchronously reads an Int3T value from the stream and advances the position within the stream by one Int3T value, or returns -1 if at the end of the stream.
 >
 >**Parameters:**
 >- `cancellationToken`: The token to monitor for cancellation requests.
@@ -10129,7 +10131,7 @@ No documentation available.
 
 #### [System.Threading.Tasks.Task](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task) **WriteInt3TAsync**([Ternary3.Int3T](#ternary3int3t) value, [System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken) cancellationToken)
 
->Asynchronously writes a Int3T value to the current position in the stream and advances the position within the stream by one Int3T value.
+>Asynchronously writes an Int3T value to the current position in the stream and advances the position within the stream by one Int3T value.
 >
 >**Parameters:**
 >- `value`: The Int3T value to write to the stream.
@@ -10751,6 +10753,347 @@ No documentation available.
 #### [System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **IsClosed** { get; }
 
 >Gets a Boolean value indicating whether the current stream has been closed or not.
+
+
+## Ternary3.IO.TernaryReader
+
+>Provides a reader for reading ternary data types from an Int3TStream.
+>
+>**Remarks:**
+>
+>TernaryReader is designed to read ternary data types like Trit, Int3T, Int9T, Int27T, 
+>             and various TernaryArray types from an underlying Int3TStream.
+>
+>
+>**Examples:**
+>
+>```csharp
+>await using var stream = new MemoryInt3TStream();
+>await using var writer = new TernaryWriter(stream);
+>await using var reader = new TernaryReader(stream);
+>var int9TValue = (Int9T)ter1000T; // 81 - 1 = 80;;
+>await writer.WriteAsync(int9TValue);
+>
+>// Reset stream position
+>stream.Position = 0;
+>
+>// Read Int9TArray. This should be 80.
+>var readArray = await reader.ReadTernaryArray9Async();
+>var convertedArray = (Int9T)readArray;
+>
+>// Reset stream position
+>stream.Position = 0;
+>
+>// Read Int9T. This should also be 80.
+>var readInt9T = await reader.ReadInt9TAsync();
+>```
+
+### Constructors
+
+#### **TernaryReader**([Ternary3.IO.Int3TStream](#ternary3ioint3tstream) stream)
+
+>Initializes a new instance of the [TernaryReader](#ternary3.io.ternaryreader) class based on the specified stream.
+>
+>**Parameters:**
+>- `stream`: The Int3TStream to read from.
+>
+>
+>**Exceptions:**
+>- `System.ArgumentNullException`: stream is null.
+>- `System.ArgumentException`: stream does not support reading.
+
+
+### Methods
+
+#### [System.Threading.Tasks.Task<Ternary3.Trit>](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1) **ReadTritAsync**([System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken) cancellationToken)
+
+>Reads a Trit value from the stream.
+>
+>**Parameters:**
+>- `cancellationToken`: The token to monitor for cancellation requests.
+>
+>
+>**Returns:**
+>A task that represents the asynchronous read operation with the read Trit value.
+
+#### [System.Threading.Tasks.Task<System.Nullable<System.Boolean>>](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-2) **ReadNullableBooleanAsync**([System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken) cancellationToken)
+
+>Reads a Trit value from the stream as a nullable boolean.
+>
+>**Parameters:**
+>- `cancellationToken`: The token to monitor for cancellation requests.
+>
+>
+>**Returns:**
+>A task that represents the asynchronous read operation with the read Trit value as a nullable boolean.
+
+#### [System.Threading.Tasks.Task<Ternary3.Int3T>](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1) **ReadInt3TAsync**([System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken) cancellationToken)
+
+>Reads an Int3T value from the stream.
+>
+>**Parameters:**
+>- `cancellationToken`: The token to monitor for cancellation requests.
+>
+>
+>**Returns:**
+>A task that represents the asynchronous read operation with the read Int3T value.
+
+#### [System.Threading.Tasks.Task<Ternary3.Int9T>](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1) **ReadInt9TAsync**([System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken) cancellationToken)
+
+>Reads an Int9T value from the stream.
+>
+>**Parameters:**
+>- `cancellationToken`: The token to monitor for cancellation requests.
+>
+>
+>**Returns:**
+>A task that represents the asynchronous read operation with the read Int9T value.
+
+#### [System.Threading.Tasks.Task<Ternary3.Int27T>](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1) **ReadInt27TAsync**([System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken) cancellationToken)
+
+>Reads an Int27T value from the stream.
+>
+>**Parameters:**
+>- `cancellationToken`: The token to monitor for cancellation requests.
+>
+>
+>**Returns:**
+>A task that represents the asynchronous read operation with the read Int27T value.
+
+#### [System.Threading.Tasks.Task<Ternary3.TernaryArray3>](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1) **ReadTernaryArray3Async**([System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken) cancellationToken)
+
+>Reads a TernaryArray3 from the stream.
+>
+>**Parameters:**
+>- `cancellationToken`: The token to monitor for cancellation requests.
+>
+>
+>**Returns:**
+>A task that represents the asynchronous read operation with the read TernaryArray3 value.
+
+#### [System.Threading.Tasks.Task<Ternary3.TernaryArray9>](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1) **ReadTernaryArray9Async**([System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken) cancellationToken)
+
+>Reads a TernaryArray9 from the stream.
+>
+>**Parameters:**
+>- `cancellationToken`: The token to monitor for cancellation requests.
+>
+>
+>**Returns:**
+>A task that represents the asynchronous read operation with the read TernaryArray9 value.
+
+#### [System.Threading.Tasks.Task<Ternary3.TernaryArray27>](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1) **ReadTernaryArray27Async**([System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken) cancellationToken)
+
+>Reads a TernaryArray27 from the stream.
+>
+>**Parameters:**
+>- `cancellationToken`: The token to monitor for cancellation requests.
+>
+>
+>**Returns:**
+>A task that represents the asynchronous read operation with the read TernaryArray27 value.
+
+#### [System.Threading.Tasks.ValueTask](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.valuetask) **DisposeAsync**()
+
+>Asynchronously disposes of the current reader and the underlying stream.
+
+#### [System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**()
+
+>Returns a string that represents the current object.
+>
+>**Returns:**
+>A string that represents the current object.
+
+#### [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **GetHashCode**()
+
+>Returns the hash code for this instance.
+>
+>**Returns:**
+>A 32-bit signed integer hash code.
+
+#### [System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **Equals**([System.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object) obj)
+
+>Determines whether the specified object is equal to the current object.
+>
+>**Parameters:**
+>- `obj`: The object to compare with the current object.
+>
+>
+>**Returns:**
+>true if the specified object is equal to the current object; otherwise, false.
+
+
+### Properties
+
+#### [Ternary3.IO.Int3TStream](#ternary3ioint3tstream) **BaseStream** { get; }
+
+>Gets the underlying Int3TStream associated with the TernaryReader.
+
+
+## Ternary3.IO.TernaryWriter
+
+>Provides a writer for writing ternary data types to an Int3TStream.
+>
+>**Remarks:**
+>
+>TernaryWriter is designed to write ternary data types like Trit, Int3T, Int9T, Int27T, 
+>            and various TernaryArray types to an underlying Int3TStream.
+>
+>
+>**Examples:**
+>await using var fileStream = File.Create("MyNumber.data.t3");
+>            await using var ternaryFileStream = new ByteToInt3TStream(fileStream);
+>            await using var ternaryWriter = new TernaryWriter(ternaryFileStream);
+>            await ternaryWriter.WriteAsync((Int27T)ter111000111TTT000TTT111000111);
+
+### Constructors
+
+#### **TernaryWriter**([Ternary3.IO.Int3TStream](#ternary3ioint3tstream) stream)
+
+>Initializes a new instance of the [TernaryWriter](#ternary3.io.ternarywriter) class based on the specified stream.
+>
+>**Parameters:**
+>- `stream`: The Int3TStream to write to.
+>
+>
+>**Exceptions:**
+>- `System.ArgumentNullException`: stream is null.
+>- `System.ArgumentException`: stream does not support writing.
+
+
+### Methods
+
+#### [System.Threading.Tasks.Task](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task) **WriteAsync**([Ternary3.Trit](#ternary3trit) value, [System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken) cancellationToken)
+
+>Writes a Trit value to the stream.
+>
+>**Parameters:**
+>- `value`: The Trit value to write.
+>- `cancellationToken`: The token to monitor for cancellation requests.
+>
+>
+>**Returns:**
+>A task that represents the asynchronous write operation.
+
+#### [System.Threading.Tasks.Task](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task) **WriteAsync**([System.Nullable<System.Boolean>](https://learn.microsoft.com/en-us/dotnet/api/system.nullable-1) value, [System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken) cancellationToken)
+
+>Writes a Trit value to the stream.
+>
+>**Parameters:**
+>- `value`: The Trit value to write.
+>- `cancellationToken`: The token to monitor for cancellation requests.
+>
+>
+>**Returns:**
+>A task that represents the asynchronous write operation.
+
+#### [System.Threading.Tasks.Task](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task) **WriteAsync**([Ternary3.Int3T](#ternary3int3t) value, [System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken) cancellationToken)
+
+>Writes an Int3T value to the stream.
+>
+>**Parameters:**
+>- `value`: The Int3T value to write.
+>- `cancellationToken`: The token to monitor for cancellation requests.
+>
+>
+>**Returns:**
+>A task that represents the asynchronous write operation.
+
+#### [System.Threading.Tasks.Task](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task) **WriteAsync**([Ternary3.Int9T](#ternary3int9t) value, [System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken) cancellationToken)
+
+>Writes an Int9T value to the stream.
+>
+>**Parameters:**
+>- `value`: The Int9T value to write.
+>- `cancellationToken`: The token to monitor for cancellation requests.
+>
+>
+>**Returns:**
+>A task that represents the asynchronous write operation.
+
+#### [System.Threading.Tasks.Task](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task) **WriteAsync**([Ternary3.Int27T](#ternary3int27t) value, [System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken) cancellationToken)
+
+>Writes an Int27T value to the stream.
+>
+>**Parameters:**
+>- `value`: The Int27T value to write.
+>- `cancellationToken`: The token to monitor for cancellation requests.
+>
+>
+>**Returns:**
+>A task that represents the asynchronous write operation.
+
+#### [System.Threading.Tasks.Task](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task) **WriteAsync**([Ternary3.TernaryArray3](#ternary3ternaryarray3) array, [System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken) cancellationToken)
+
+>Writes a TernaryArray3 to the stream.
+>
+>**Parameters:**
+>- `array`: The TernaryArray3 to write.
+>- `cancellationToken`: The token to monitor for cancellation requests.
+>
+>
+>**Returns:**
+>A task that represents the asynchronous write operation.
+
+#### [System.Threading.Tasks.Task](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task) **WriteAsync**([Ternary3.TernaryArray9](#ternary3ternaryarray9) array, [System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken) cancellationToken)
+
+>Writes a TernaryArray9 to the stream.
+>
+>**Parameters:**
+>- `array`: The TernaryArray9 to write.
+>- `cancellationToken`: The token to monitor for cancellation requests.
+>
+>
+>**Returns:**
+>A task that represents the asynchronous write operation.
+
+#### [System.Threading.Tasks.Task](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task) **WriteAsync**([Ternary3.TernaryArray27](#ternary3ternaryarray27) array, [System.Threading.CancellationToken](https://learn.microsoft.com/en-us/dotnet/api/system.threading.cancellationtoken) cancellationToken)
+
+>Writes a TernaryArray27 to the stream.
+>
+>**Parameters:**
+>- `array`: The TernaryArray27 to write.
+>- `cancellationToken`: The token to monitor for cancellation requests.
+>
+>
+>**Returns:**
+>A task that represents the asynchronous write operation.
+
+#### [System.Threading.Tasks.ValueTask](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.valuetask) **DisposeAsync**()
+
+>Asynchronously disposes of the current writer and the underlying stream.
+
+#### [System.String](https://learn.microsoft.com/en-us/dotnet/api/system.string) **ToString**()
+
+>Returns a string that represents the current object.
+>
+>**Returns:**
+>A string that represents the current object.
+
+#### [System.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32) **GetHashCode**()
+
+>Returns the hash code for this instance.
+>
+>**Returns:**
+>A 32-bit signed integer hash code.
+
+#### [System.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean) **Equals**([System.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object) obj)
+
+>Determines whether the specified object is equal to the current object.
+>
+>**Parameters:**
+>- `obj`: The object to compare with the current object.
+>
+>
+>**Returns:**
+>true if the specified object is equal to the current object; otherwise, false.
+
+
+### Properties
+
+#### [Ternary3.IO.Int3TStream](#ternary3ioint3tstream) **BaseStream** { get; }
+
+>Gets the underlying Int3TStream associated with the TernaryWriter.
 
 
 ## Ternary3.Formatting.InvariantTernaryFormat

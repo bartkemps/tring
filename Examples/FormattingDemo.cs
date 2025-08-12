@@ -36,7 +36,8 @@ public static class FormattingDemo
         {
             NegativeTritDigit = '-',
             ZeroTritDigit = '0',
-            PositiveTritDigit = '+'
+            PositiveTritDigit = '+',
+            Groups = [new (" ", 9), new ("\r\n", 3)]
         };
         
         Console.WriteLine($"\nCustom digit symbols:");

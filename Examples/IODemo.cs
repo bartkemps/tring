@@ -81,10 +81,17 @@ public static class IODemo
         var middleValue = await bulkStream.ReadInt3TAsync();
         Console.WriteLine($"  Value at position 2: {middleValue} (Int3T: {((Int3T)middleValue):ter})");
         
-        // Seek to end and read (should return -1 for end of stream)
+        // Seek to end and read (expecting EndOfStreamException)
         await bulkStream.SeekAsync(0, SeekOrigin.End);
-        var endValue = await bulkStream.ReadInt3TAsync();
-        Console.WriteLine($"  Reading past end returns: {endValue}");
+        try
+        {
+            var endValue = await bulkStream.ReadInt3TAsync();
+            Console.WriteLine($"  Reading past end returns: {endValue}");
+        }
+        catch (EndOfStreamException ex)
+        {
+            Console.WriteLine($"  Reading past end throws: {ex.Message}");
+        }
 
         // EXAMPLE 4: Converting ternary to binary and back
         // ----------------------------------------------
@@ -132,39 +139,25 @@ public static class IODemo
         var tempFileName = Path.GetTempFileName();
         try
         {
-            // Write ternary data to file
-            var fileData = new Int3T[] 
-            { 
-                5,   // ter01T
-                -8,  // terT1T
-                12,  // ter110
-                -4   // terT11
-            };
-            
-            using (var fileStream = File.Create(tempFileName))
+            await using (var fileStream = File.Create(tempFileName))
             {
-                var ternaryFileStream = new MemoryInt3TStream();
-                await ternaryFileStream.WriteAsync(fileData, 0, fileData.Length);
-                ternaryFileStream.Position = 0;
-                
-                using var converter = new Int3TToByteStream(ternaryFileStream, true, true);
-                await converter.CopyToAsync(fileStream);
+                await using var ternaryFileStream = new ByteToInt3TStream(fileStream);
+                await using var ternaryWriter = new TernaryWriter(ternaryFileStream);
+                await ternaryWriter.WriteAsync((Int27T)ter111000111TTT000TTT111000111);
             }
             
-            Console.WriteLine($"  Written {fileData.Length} ternary values to file: {tempFileName}");
+            Console.WriteLine($"  Written ternary values to file: {tempFileName}");
             Console.WriteLine($"  File size: {new FileInfo(tempFileName).Length} bytes");
             
             // Read ternary data back from file
-            using (var fileStream = File.OpenRead(tempFileName))
+            await using (var fileStream = File.OpenRead(tempFileName))
             {
                 await using var converter = new ByteToInt3TStream(fileStream, true, true);
-                var readFileData = new Int3T[fileData.Length];
+                var readFileData = new Int3T[9];
                 var fileTritsRead = await converter.ReadAsync(readFileData, 0, readFileData.Length);
                 
                 Console.WriteLine($"  Read {fileTritsRead} ternary values from file");
-                Console.WriteLine($"  Original: [{string.Join(", ", fileData.Select(v => $"{(int)v}"))}]");
                 Console.WriteLine($"  Read:     [{string.Join(", ", readFileData.Select(v => $"{(int)v}"))}]");
-                Console.WriteLine($"  File round-trip successful: {fileData.SequenceEqual(readFileData)}");
             }
         }
         finally
@@ -214,14 +207,15 @@ public static class IODemo
         readOnlyStream.Position = 0;
         for (var i = 0; i < 4; i++) // Try to read 4 values from 2-value stream
         {
-            var value = await readOnlyStream.ReadInt3TAsync();
-            if (value == -1)
+            try
             {
-                Console.WriteLine($"  Position {i}: End of stream reached (returned -1)");
-            }
-            else
-            {
+                var value = await readOnlyStream.ReadInt3TAsync();
                 Console.WriteLine($"  Position {i}: {value}");
+            }
+            catch (EndOfStreamException)
+            {
+                Console.WriteLine($"  Position {i}: End of stream reached (EndOfStreamException)");
+                break; // Exit the loop once we hit the end of stream
             }
         }
         
