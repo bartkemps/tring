@@ -241,16 +241,16 @@ public class MemoryInt3TStreamTests
     }
 
     [Fact]
-    public async Task ReadInt3TAsync_AtEndOfStream_ReturnsNegativeOne()
+    public async Task ReadInt3TAsync_AtEndOfStream_ThrowsEndOfStreamException()
     {
         Int3T[] sourceData = [1, 0];
         var stream = new MemoryInt3TStream(sourceData);
         stream.Position = sourceData.Length;
 
-        var value = await stream.ReadInt3TAsync();
+        var act = async () => await stream.ReadInt3TAsync();
 
-        value.Should().Be(-1); // End of stream indicator
-        stream.Position.Should().Be(sourceData.Length);
+        await act.Should().ThrowAsync<EndOfStreamException>()
+            .WithMessage("Attempted to read past the end of the stream.");
     }
 
     #endregion
